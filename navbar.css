@@ -292,13 +292,14 @@ nav .nav-item.active a {
 /*===Projects Page===*/
 
 .nav-item-content {
-    background-color: white;
-    border-radius: 30px;
     width: calc(100% - 60px);
     height: calc(100% - 60px);
     margin: 20px;
 }
 
-
+#projects-content, #forums-content {
+    background-color: #ffffff;
+    border-radius: 30px;
+}
 
 
