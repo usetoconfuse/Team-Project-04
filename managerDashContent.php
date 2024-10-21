@@ -9,32 +9,32 @@
             <h1>Your Projects</h1>
         </div>
         <div id="projectList">
-            <div class="active">
+            <div class="projectListItem active">
                 <h3>Project #1</h3>
+                <i class="fa fa-solid fa-arrow-right"></i>
             </div>
-            <div>
+            <div class="projectListItem">
                 <h3>Project #2</h3>
             </div>
-            <div>
+            <div class="projectListItem">
                 <h3>Project #3</h3>
             </div>
-            <div>
+            <div class="projectListItem">
                 <h3>Project #4</h3>
             </div>
-            <div>
+            <div class="projectListItem">
                 <h3>Project #5</h3>
             </div>
         </div>
     </div>
-    <div id="projectDetails">
-        <div id="projectTitle">
-            <h1>Project #1</h1>
-        </div>
-        <div class="details" id="projectProgressBar">
-            <h1>Progress Bar</h1>
-        </div>
-        <div class="details" id="projectTeamMembers">
-            <h1>Team Members</h1>
+    <div id="right">
+        <div id="topright">
+            <div class="details" id="projectProgressBar">
+                <h1>Progress Bar</h1>
+            </div>
+            <div class="details" id="projectTeamMembers">
+                <h1>Team Members</h1>
+            </div>
         </div>
         <div class="details" id="projectContributionGraph">
             <h1>Project Contribution Graph</h1>
