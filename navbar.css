@@ -295,6 +295,7 @@ nav .nav-item.active a {
     width: calc(100% - 60px);
     height: calc(100% - 60px);
     margin: 20px;
+<<<<<<< HEAD
 }
 
 #projects-content, #forums-content {
@@ -303,3 +304,6 @@ nav .nav-item.active a {
 }
 
 
+=======
+}
+>>>>>>> 09ed68c02f5ed37e6662b4cbe8cb0f73fdb0b81d
