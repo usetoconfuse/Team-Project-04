@@ -1,3 +1,19 @@
+/*====Fonts====*/
+
+@font-face {
+    font-family: 'DIN Alternate Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DIN Alternate Bold'), url('DINAlternate-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir Next'), url('AvenirNextLTPro-Regular.otf') format('opentype');
+}
+
 /*====Base Styles====*/
 * {
     margin: 0;
@@ -63,7 +79,7 @@ img {
     padding: 1rem 2rem;
     margin: 1rem 1.5rem 1rem 0;
     border-radius: 10.5px;
-    font-family: 'avenir next';
+    font-family: 'Avenir Next';
     font-size: 1rem;
 }
 
@@ -173,12 +189,12 @@ nav .intro-txt {
 }
 
 nav .intro-txt h1 {
-    font-family: 'din alternate';
+    font-family: 'DIN Alternate Bold';
     font-size: 2rem;
 }
 
 nav .intro-txt p {
-    font-family: 'avenir next';
+    font-family: 'Avenir Next';
     font-size: 1rem;
 }
 
@@ -192,7 +208,7 @@ nav .nav-item {
     padding: 1rem 2rem;
     margin: 1rem 1.5rem 1rem 0;
     border-radius: 10.5px;
-    font-family: 'avenir next';
+    font-family: 'Avenir Next';
     font-size: 1rem;
     transition: background-color 0.2s ease-in-out;
 }

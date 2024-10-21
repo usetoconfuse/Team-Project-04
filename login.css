@@ -7,10 +7,10 @@
 }
 
 @font-face {
-    font-family: 'Avenir';
+    font-family: 'Avenir Next';
     font-style: normal;
     font-weight: normal;
-    src: local('Avenir'), url('AvenirNextLTPro-Regular.otf') format('opentype');
+    src: local('Avenir Next'), url('AvenirNextLTPro-Regular.otf') format('opentype');
 }
 
 body{
@@ -43,7 +43,7 @@ h1,h2,h3,h4{
 #left p{
     font-size: 14px;
     margin-top: 0;
-    font-family: "Avenir";
+    font-family: "Avenir Next";
 }
 
 #left h1{
@@ -94,7 +94,7 @@ h1,h2,h3,h4{
     width: 100%;
     border-radius: 10px;
     height: 1.7rem;
-    font-family: "Avenir";
+    font-family: "Avenir Next";
     font-size: 12px;
     border-width: thin;
     margin-bottom: 0;
@@ -112,7 +112,7 @@ h1,h2,h3,h4{
     background-color: #000000;
     color: #f5f5f5;
     border-radius: 10px;
-    font-family: "Avenir";
+    font-family: "Avenir Next";
     font-size: 16px;
     height: 1.7rem;
     transition: background-color 0.5s ease;
@@ -124,7 +124,7 @@ h1,h2,h3,h4{
 }
 
 .or{
-    font-family: "Avenir";
+    font-family: "Avenir Next";
     font-size: 12px;
     text-align: center;
 }
