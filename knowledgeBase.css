@@ -1,7 +1,120 @@
 .kb-createpost {
     display: flex;
-
-}
-.kb-createpost input {
+    flex-direction: row;
+    height: 3em;
+    background-color: #F5F5F5;
     width: 100%;
+    border-radius: 10px;
+    border: 0px;
+}
+
+.kb-createpost input {
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 1em;
+    padding: 5px;
+    width: 100%;
+    border: 0px;
+}
+
+.kb-createpost button {
+    background-color: transparent;
+    border-radius: 10px;
+    margin: 5px;
+    border: 0px;
+}
+
+.kb-listing {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.kb-posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+}
+
+.kb-post {
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    margin: 10px 0 10px 0;
+}
+
+.kb-post-content {
+    font-family: "Avenir Next";
+    padding: 10px;
+}
+
+.kb-post-divider {
+    background-color: #8E8E91;
+    height: 1px;
+    width: 100%;
+}
+
+.kb-post-avatar {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    border: 2px solid #8E8E91;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kb-post-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.kb-post-topic {
+    font-family: "Avenir Next";
+    font-size: small;
+}
+
+.kb-title {
+    font-family: "DIN Alternate Bold";
+    padding-bottom: 20px;
+}
+
+.kb-post-title {
+    font-family: "DIN Alternate Bold";
+}
+
+.kb-content {
+    padding: 30px;
+}
+
+.kb-main {
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.kb-sidebar {
+    width: 300px;
+    padding: 10px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.kb-topic {
+    font-family: "Avenir Next";
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
 }
