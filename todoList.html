@@ -1,8 +1,82 @@
 <body>
-    <div class="flex-container">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+    <div class = "toDoTitle">
+        <h2>Project Title</h2>
+        <p>View All Your Projects</p>
     </div>
-<link rel="stylesheet" href="todoList.css">
+    <div class="flex-container">
+        
+        <div class="kanbanBoard">
+            <div class="kanbanColumn">
+                <div class="kanbanColumnTitle">
+                    <span>To Do</span>
+                    <span>2</span>
+                </div>
+                <div class="kanbanColumnContent" id="todo"></div>
+            </div>
+            <div class="kanbanColumn">
+                <div class="kanbanColumnTitle">
+                    <span>In Progress</span>
+                    <span>5</span>
+                </div>
+                <div class="kanbanColumnContent" id="inProgress"></div>
+            </div>
+            <div class="kanbanColumn">
+                <div class="kanbanColumnTitle">
+                    <span>Done</span>
+                    <span>0</span>
+
+                </div>
+                <div class="kanbanColumnContent" id="done"></div>
+            </div>
+        </div>
+    </div>
+<style> 
+
+@font-face {
+    font-family: 'DIN Alternate Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DIN Alternate Bold'), url('DINAlternate-Bold.woff') format('woff');
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "DIN Alternate Bold";
+}
+
+.kanbanBoard {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+}
+.kanbanColumn {
+    width: 30%;
+    border-radius: 5px;
+    padding: 10px;
+}
+.kanbanColumnTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: black;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 10px;
+}
+.kanbanColumnContent {
+    min-height: 200px;
+    background-color: #f5f5f5;
+    border-radius: 0 0 1.2rem 1.2rem;
+    padding: 1rem;
+    overflow-y: auto;
+
+}
+
+</style>
 </body>
