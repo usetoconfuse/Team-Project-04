@@ -2,41 +2,71 @@
 #wrapper{
     width: 100%;
     height: 100%;
-    padding: 1%;
     display: flex;
-    flex-direction: row;
 }
 
 #wrapper div{
-    display: flex;
-    flex-direction: column;
     font-family: "DIN Alternate Bold";
 }
 
 #left{
-    width: 30%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 33%;
     background-color: #ffffff;
     border-radius: 30px;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
+#right{
+    width: 65%;
+    height: 100%;
+    margin-left: 2%;
+}
+
+#topright {
+    display: flex;
+    height: 50%;
+}
+
 #projectList{
     margin: 1rem;
+    height: 100%;
 }
 
 #projectListTitle{
     margin-left: 2rem;
 }
 
-#projectList div{
+.projectListItem{
     width: 100%;
     height: 3rem;
-    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #f5f5f5;
     border-radius: 10.5px;
     margin-top: 0.5rem; 
     padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#projectProgressBar{
+    width: 49%;
+    margin-right: 1%;
+}
+
+#projectTeamMembers{
+    width: 49%;
+    margin-left: 1%;
+}
+
+#projectContributionGraph{
+    width: 100%;
+    height: 48%;
+    margin-top: 2%; 
 }
 
 #projectList .active{
@@ -44,15 +74,8 @@
     color: white;
 }
 
-#projectDetails{
-    width: 65%;
-    padding-top: 2rem;
-    margin-left: 5%;
-}
-
 .details{
     background-color: #ffffff;
     border-radius: 30px;
     padding: 2rem;
-    margin-top: 1rem;
 }
