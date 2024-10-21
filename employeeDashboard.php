@@ -93,9 +93,7 @@
             </div>
 
             <div class="nav-item-content" id="forums-content">
-                <h2>Forums Content</h2>
-                <p>Develop this in a separate file and <br>use a PHP include statement<br>
-                    and then remove this text</p>
+                <?php include 'knowledgeBase.php'; ?>
             </div>
 
         </section>
