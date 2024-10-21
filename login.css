@@ -3,7 +3,14 @@
     font-family: 'DIN Alternate Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('DIN Alternate Bold'), url('DINAlternate-Bold.woff') format('woff');
+    src: local('DIN Alternate Bold'), url('DINAlternate-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir'), url('AvenirNextLTPro-Regular.otf') format('opentype');
 }
 
 body{
