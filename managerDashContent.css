@@ -1,5 +1,6 @@
 
 #wrapper{
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -8,13 +9,4 @@
     background-color: #ffffff;
     border-radius: 30px;
     font-family: "DIN Alternate Bold";
-}
-
-#projectList{
-    width: 20rem;
-}
-
-#projectDetails{
-    width: 40rem;
-    margin-left: 5rem;
 }
