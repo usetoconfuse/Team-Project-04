@@ -1,0 +1,7 @@
+.kb-createpost {
+    display: flex;
+
+}
+.kb-createpost input {
+    width: 100%;
+}
