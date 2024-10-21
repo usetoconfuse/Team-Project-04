@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="navbar.css"></link>
         <link rel="stylesheet" href="knowledgeBase.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
-        <link href="https://fonts.cdnfonts.com/css/din-alternate" rel="stylesheet">
-        <title>Navbar Template</title>
+
+        <title>Manager Dashboard</title>
     </head>
 
     <body>
@@ -83,9 +83,7 @@
         <section id="content">
 
             <div class="nav-item-content open" id="overview-content">
-                <h2>Overview Content</h2>
-                <p>Develop this in a separate file and <br>use a PHP include statement<br>
-                    and then remove this text</p>
+                <?php include 'managerDashContent.php' ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">
