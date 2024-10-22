@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="navbar.css"></link>
         <link rel="stylesheet" href="knowledgeBase.css"></link>
+        <link rel="stylesheet" href="kanban.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
         <link href="https://fonts.cdnfonts.com/css/din-alternate" rel="stylesheet">
         <title>Navbar Template</title>
@@ -90,6 +91,7 @@
 
             <div class="nav-item-content" id="projects-content">
 
+                <?php include 'kanban.php'; ?>
 
             </div>
 
@@ -100,6 +102,7 @@
         </section>
     
         <script src="navbar.js"></script>
+        <script src="kanban.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>

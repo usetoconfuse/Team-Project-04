@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    //====GSAP - Custom Cursor====//
+    /*====GSAP - Custom Cursor====
     let cursor = document.querySelector('.cursor'),
     mouseX = 0;
     mouseY = 0;
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener("mousemove", function (e) {
         mouseX = e.clientX;
         mouseY = e.clientY
-    });
+    });*/
 
 
 
