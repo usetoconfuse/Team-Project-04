@@ -1,17 +1,27 @@
 <div class="kb-content">
-    <h1 class="kb-title">Knowledge Base</h1>
-
+    
+    <div class="header-section">
+        <h1 class="kb-title">Knowledge Base</h1>
+            <div class="form-btns">
+                <button id="allBtn">Show All</button>
+                <button id="technicalBtn">Technical</button>
+                <button id="nonTechnicalBtn">Non-Technical</button>
+            </div>
+    </div>
     <div class="kb-main">
         <div class="kb-listing">
             <div class="kb-createpost">
                 <input type="text" placeholder="Create a post">
                 <button>+</button>
             </div>
+
             <div class="kb-posts">
                 <?php
-                for ($i = 0; $i < 3; $i++) {
-                    echo '<div class="kb-post">
-                <h1 class="kb-post-title">Post title ' . ($i + 1) . '</h1>
+                for ($i = 0; $i < 4; $i++) {
+                    //set id for each post
+                    $id = ($i % 2 ==0) ? "technical" : "nonTechnical";
+                    echo '<div class="kb-post" id="'.$id.'">
+                <h1 class="kb-post-title">Post title ' . ($i + 1)." ".$id.'</h1>
                 <div class="kb-post-info">
                     <div class="kb-post-avatar">
                         <i class="fa-solid fa-user"></i>
@@ -37,3 +47,4 @@
         </div>
     </div>
 </div>
+<script src="knowledgeBase.js"></script>
