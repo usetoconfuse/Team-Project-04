@@ -33,3 +33,13 @@ document.getElementById("allBtn").addEventListener("click", () => {
         }
     }
 });
+
+
+const allButtons = document.querySelectorAll('.form-btns button');
+
+allButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        allButtons.forEach(btn => btn.classList.remove('active'))
+        button.classList.add('active')
+    })
+})
