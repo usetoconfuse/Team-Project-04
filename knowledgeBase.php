@@ -2,11 +2,11 @@
     
     <div class="header-section">
         <h1 class="kb-title">Knowledge Base</h1>
-            <div class="form-btns">
-                <button id="allBtn">Show All</button>
-                <button id="technicalBtn">Technical</button>
-                <button id="nonTechnicalBtn">Non-Technical</button>
-            </div>
+        <div class="form-btns">
+            <button class="active" id="allBtn">Show All</button>
+            <button id="technicalBtn">Technical</button>
+            <button id="nonTechnicalBtn">Non-Technical</button>
+        </div>
     </div>
     <div class="kb-main">
         <div class="kb-listing">
