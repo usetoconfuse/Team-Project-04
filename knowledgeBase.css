@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     width: 75%;
-    margin-bottom: 0.8rem;
+    padding-bottom: 20px;
 }
 
 .form-btns {
@@ -44,23 +44,25 @@
     height: 3em;
     background-color: #F5F5F5;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 30px;
     border: 0px;
+    padding: 10px;
 }
 
 .kb-createpost input {
     background-color: transparent;
-    border-radius: 10px;
+    border-radius: 30px;
     font-size: 1em;
-    padding: 5px;
+    padding: 15px;
     width: 100%;
     border: 0px;
 }
 
 .kb-createpost button {
     background-color: transparent;
-    border-radius: 10px;
-    margin: 5px;
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
     border: 0px;
 }
 
@@ -68,11 +70,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
 }
 
 .kb-posts {
     width: 100%;
+    height: 100%;
     display: flex;
+    overflow: scroll;
     flex-direction: column;
     margin: 10px 0 10px 0;
 }
@@ -121,7 +126,6 @@
 
 .kb-title {
     font-family: "DIN Alternate Bold";
-    padding-bottom: 20px;
 }
 
 .kb-post-title {
@@ -129,25 +133,33 @@
 }
 
 .kb-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: 30px;
 }
 
 .kb-main {
-    background-color: white;
     border-radius: 10px;
     width: 100%;
+    min-height: 0;
     display: flex;
     justify-content: space-around;
-    flex-wrap: nowrap;
     flex-direction: row;
 }
 
 .kb-sidebar {
     width: 300px;
-    padding: 10px;
+    height: min-content;
+    padding: 15px;
     background-color: #F5F5F5;
-    border-radius: 10px;
+    border-radius: 30px;
     margin-left: 20px;
+}
+
+.kb-sidebar-title {
+    font-family: "DIN Alternate Bold";
+    text-align: center;
 }
 
 .kb-topic {
