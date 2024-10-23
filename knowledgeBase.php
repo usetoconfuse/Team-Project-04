@@ -22,14 +22,28 @@
                 for ($i = 0; $i < 4; $i++) {
                     //set id for each post
                     $id = ($i % 2 ==0) ? "technical" : "nonTechnical";
-                    echo '<div class="kb-post" id="'.$id.'">
+                    switch ($i) {
+                        case 0:
+                            $key = "coding-standards";
+                            break;
+                        case 1:
+                            $key = "printer-issues";
+                            break;
+                        case 2:
+                            $key = "cyber-security";
+                            break;
+                        case 3:
+                            $key = "workplace-hygiene";
+                            break;
+                    }                
+                    echo '<div class="kb-post" id="'.$id.'"  data-key="'.$key.'">
                 <h1 class="kb-post-title">Post title ' . ($i + 1)." ".$id.'</h1>
                 <div class="kb-post-info">
                     <div class="kb-post-avatar">
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="kb-post-topic">
-                        Post Topic
+                        '.$key.'
                     </div>
                 </div>
                 <div class="kb-post-divider"></div>
@@ -42,9 +56,10 @@
         <div class="kb-sidebar">
             <h3 class="kb-sidebar-title">Filter by Topic</h3>
             <ul>
-                <li class="kb-topic">Topic 1</li>
-                <li class="kb-topic">Topic 2</li>
-                <li class="kb-topic">Topic 3</li>
+                <li class="kb-topic" id="codingStandards">Coding Standards</li>
+                <li class="kb-topic" id="printerIssues" >Printer Issues</li>
+                <li class="kb-topic" id="cybersecurity" >Cybersecurity</li>
+                <li class="kb-topic" id="workplaceHygiene">Workplace Hygiene</li>
             </ul>
         </div>
     </div>
