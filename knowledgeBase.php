@@ -12,7 +12,9 @@
         <div class="kb-listing">
             <div class="kb-createpost">
                 <input type="text" placeholder="Create a post">
-                <button>+</button>
+                <button>
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
 
             <div class="kb-posts">
@@ -38,7 +40,7 @@
             </div>
         </div>
         <div class="kb-sidebar">
-            <h3 class="kb-post-title">Filter by Topic</h3>
+            <h3 class="kb-sidebar-title">Filter by Topic</h3>
             <ul>
                 <li class="kb-topic">Topic 1</li>
                 <li class="kb-topic">Topic 2</li>
