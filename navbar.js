@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hours = appendTime(hours)
         minutes = appendTime(minutes)
         seconds = appendTime(seconds)
-        document.querySelector('.time').innerHTML = hours + ':' + minutes + ':' + seconds
+        document.querySelector('.time').innerHTML = hours + ':' + minutes //':' + seconds
         setTimeout(time, 1000)
     }
 
