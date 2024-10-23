@@ -84,9 +84,10 @@
         <section id="content">
 
             <div class="nav-item-content open" id="overview-content">
-                <h2>Overview Content</h2>
+                <!-- <h2>Overview Content</h2>
                 <p>Develop this in a separate file and <br>use a PHP include statement<br>
-                    and then remove this text</p>
+                    and then remove this text</p> -->
+                    <?php include 'employeeView.html'; ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">
