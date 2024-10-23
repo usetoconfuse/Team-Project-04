@@ -173,27 +173,14 @@
     margin-bottom: 1rem;
 }
 
-.kanban-card-top i {
+.kanban-card-top i:nth-of-type(2) {
     display: none;
 }
 
-
-.badge {
-    text-decoration: none;
-    padding: 0.2rem 0.6rem;
-    border-radius: 15px;
-    font-size: 13px;
+.kanban-card-top i:nth-of-type(1) {
+    display: block;
 }
 
-.badge.overdue {
-    color: #820600;
-    background-color: #E38C88;
-}
-
-.badge.completed {
-    color: #426E32;
-    background-color: #ADDA9D;
-}
 
 .kanban-card-top p {
     font-size: 16px;
@@ -275,7 +262,7 @@
         border-radius: 15px;
     }
 
-    .kanban-card-body.open,.kanban-body.open, .kanban-header i, .kanban-card-top i {
+    .kanban-card-body.open,.kanban-body.open, .kanban-header i, .kanban-card-top i:nth-of-type(2) {
         display: block;
     }
 

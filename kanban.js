@@ -8,18 +8,18 @@ kanbanContainer.addEventListener('click', (e) => {
 
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-card-body');
-    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-card-top i');
+    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-card-top i:nth-of-type(2)');
 
     openCloseIcon.classList.toggle('fa-caret-down');
     openCloseIcon.classList.toggle('fa-caret-up');
-
+    
     kanbanCardBody.classList.toggle('open');
 
     const otherCards = kanbanContainer.querySelectorAll('.kanban-card');
     otherCards.forEach(otherCard => {
         if (otherCard != kanbanCardGroup) {
             const otherCardBody = otherCard.querySelector('.kanban-card-body')
-            const otherCardIcon = otherCard.querySelector('.kanban-card-top i')
+            const otherCardIcon = otherCard.querySelector('.kanban-card-top i:nth-of-type(2)')
             otherCardBody.classList.remove('open')
             otherCardIcon.classList.remove('fa-caret-up')
             otherCardIcon.classList.add('fa-caret-down')

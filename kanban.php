@@ -57,7 +57,7 @@
             <div class="kanban-card" draggable=true>
                 <div class="kanban-card-top">
                     <p>Task Title</p>
-                    <div class="badge overdue">Overdue</div>
+                    <i class="fa-solid fa-circle-exclamation"></i>
                     <i class="fa fa-solid fa-caret-down"></i>
                 </div>
                 <div class="kanban-card-body">
@@ -79,7 +79,7 @@
             <div class="kanban-card" draggable=true>
                 <div class="kanban-card-top">
                     <p>Task Title</p>
-                    <div class="badge overdue">Overdue</div>
+                    <i class="fa-solid fa-circle-exclamation"></i>
                     <i class="fa fa-solid fa-caret-down"></i>
                 </div>
                 <div class="kanban-card-body">
@@ -125,6 +125,28 @@
         </div>
         <!--Kanban Body-->
         <div class="kanban-body">
+            <!--Kanban Card 1-->
+            <div class="kanban-card" draggable=true>
+                <div class="kanban-card-top">
+                    <p>Task Title</p>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa fa-solid fa-caret-down"></i>
+                </div>
+                <div class="kanban-card-body">
+                    <p class="kanban-card-description">This is the task you have been set. 
+                                                    You have to develop a kanban board.</p>
+                    
+                    <div class="kanban-separator"></div>
+
+                    <div class="kanban-card-bottom">
+                        <a href="">View Task</a>
+                        <div class="due-date">
+                            <i class="fa fa-regular fa-calendar"></i>
+                            <p>21 Oct</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
         </div>
 
