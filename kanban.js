@@ -51,6 +51,68 @@ kanbanContainer.addEventListener('click', (e) => {
             otherColumnIcon.classList.add('fa-caret-down')
         }
     })
+});
+
+//====Dragging Features
+
+  const taskCard = document.querySelectorAll('.kanban-card')
+  const kanbanSection = document.querySelectorAll('.kanban-body')
+  
+  taskCard.forEach((task) => {
+    task.addEventListener("dragstart", () => {
+      task.classList.add("dragging");
+    });
+    task.addEventListener("dragend", () => {
+      task.classList.remove("dragging");
+    });
+  });
+  
+  kanbanSection.forEach((section) => {
+    section.addEventListener("dragover", (e) => {
+      e.preventDefault();
+  
+      const taskBelow = insertAbove(section, e.clientY);
+      const draggedTask = document.querySelector(".dragging");
+  
+      if (!taskBelow) {
+        section.appendChild(draggedTask);
+      } else {
+        section.insertBefore(draggedTask, taskBelow);
+      }
+    });
+  });
+  
+  const insertAbove = (section, mouseY) => {
+    const notDraggedTasks = section.querySelectorAll(".kanban-card:not(.dragging)");
+  
+    let closestTask = null;
+    let closestOffset = Number.NEGATIVE_INFINITY;
+  
+    notDraggedTasks.forEach((task) => {
+      const { top } = task.getBoundingClientRect();
+  
+      const offset = mouseY - top;
+  
+      if (offset < 0 && offset > closestOffset) {
+        closestOffset = offset;
+        closestTask = task;
+      }
+    });
+  
+    return closestTask;
+  };
 
 
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
