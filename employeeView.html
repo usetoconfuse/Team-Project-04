@@ -9,7 +9,7 @@
 </head>
 <style>
     .scrollable-div {
-         overflow: auto; /* Adds scrollbars when content overflows */
+         overflow: scroll; /* Adds scrollbars when content overflows */
     }
 </style>
 <body>
@@ -222,13 +222,14 @@
         }
 
         #training{
+            display: flex;
+            flex-direction: column;
             background-color: black;
             color:grey;
             flex-grow: 1;
         }
 
         #trainingButton{
-            align-self: flex-end;
             background-color: orange;
             color: black;
             border-radius: 30px;
@@ -300,11 +301,12 @@
     <script>
 
         function redirectToDo() {
-            window.location.href = 'todoList.html';    
+            alert("redirect to To-Do List");
+            // window.location.href = 'todoList.html';    
         }
 
         function redirectForum() {
-            alert("rediret to forum");
+            alert("redirect to forum");
             //window.location.href = '';    
         }
         
