@@ -54,13 +54,34 @@
         </div>
         <div class="kb-sidebar">
             <h3 class="kb-sidebar-title">Filter by Topic</h3>
-            <ul>
+            <ul id="topicsList">
                 <li class="kb-topic" id="codingStandards">Coding Standards</li>
                 <li class="kb-topic" id="printerIssues" >Printer Issues</li>
                 <li class="kb-topic" id="cybersecurity" >Cybersecurity</li>
                 <li class="kb-topic" id="workplaceHygiene">Workplace Hygiene</li>
             </ul>
+            <button id="new-topic-btn">Add Topic</button>
         </div>
     </div>
+
+    <div id="topic-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-topic-modal" class="close">&times;</span>
+            <h1 id="topic-modal-title">Nesw Topic</h1>
+            <form id="topic-modal-form">
+                <div>
+                    <label class="text">Topic:</label>
+                    <input type="text" class="text-input" id="topicInput" placeholder="Enter topic name">
+                </div>
+                <button type="submit" id="add-topic-btn">submit</button>
+            </form>
+        </div>
+    </div>
+    <!-- <div id="post-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+    </div> -->
+
 </div>
 <script src="knowledgeBase.js"></script>
