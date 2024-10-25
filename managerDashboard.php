@@ -27,56 +27,69 @@
         </div>
         -->
 
+        
+
         <nav id="navbar">
-            <div class="intro-txt">
-                <h1>Welcome back, John.</h1>
-                <p>View your daily overview here.</p>
-            </div>
 
-            <ul>
-                <li class="nav-item active" id="overview">
-                    <a href="#">
-                        <i class="fa fa-solid fa-table-columns fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+            <button type="button" class="hamburger" id="menu-btn">
+                    <span class="hamburger-top"></span>
+                    <span class="hamburger-middle"></span>
+                    <span class="hamburger-bottom"></span>
+            </button>
 
-                <li class="nav-item" id="projects">
-                    <a href="#">
-                        <i class="fa fa-solid fa-folder fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Projects</span>
-                    </a>
-                </li>
-
-                <li class="nav-item" id="forums">
-                    <a href="#">
-                        <i class="fa fa-solid fa-file fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Forums</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="bar"></div>
-
-    
-            <div class="date-item">
-                <div class="date-item-top">
-                    <div class="date-txt">
-                        <i class="fa fa-regular fa-calendar fa-lg"></i>
-                        <p>Today</p>
-                    </div>
+            <div class="menu">
+                <div class="intro-txt">
+                    <h1>Welcome back, John.</h1>
+                    <p>View your daily overview here.</p>
                 </div>
 
-                <div class="date-item-bottom">
-                    <div class="date-time">
-                        <div class="time"></div>
-                        <div class="date"></div>
+                <ul>
+                    <li class="nav-item active" id="overview">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="projects">
+                        <a href="#">
+                            <i class="fa fa-solid fa-folder fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="forums">
+                        <a href="#">
+                            <i class="fa fa-solid fa-file fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Forums</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="bar"></div>
+
+        
+                <div class="date-item">
+                    <div class="date-item-top">
+                        <div class="date-txt">
+                            <i class="fa fa-regular fa-calendar fa-lg"></i>
+                            <p>Today</p>
+                        </div>
                     </div>
-                </div>   
+
+                    <div class="date-item-bottom">
+                        <div class="date-time">
+                            <div class="time"></div>
+                            <div class="date"></div>
+                        </div>
+                    </div>   
+                </div>
             </div>
+
+           
         </nav>
 
 

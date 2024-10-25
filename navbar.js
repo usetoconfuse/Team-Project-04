@@ -121,5 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });*/
 
 
+    //====Hamburger Menu====//
+    const hamburgerMenuBtn = document.querySelector('.hamburger'); 
+    const hamburgerMenu = document.querySelector('.menu');
+    hamburgerMenuBtn.addEventListener('click', () => {
+        hamburgerMenuBtn.classList.toggle('openMobile'); //Change hamburger menu 
+        hamburgerMenu.classList.toggle('openMobileMenu');
+        document.querySelector('nav').classList.toggle('expandNav')
+        document.querySelector('#content').classList.toggle('minimiseContent')
+
+
+    })
+
 
 })

@@ -58,3 +58,13 @@
     background-color: black;
     color: white;
 }
+
+@media (max-width: 768px) {
+    #grid {
+        grid-template-areas:
+            'projects'
+            'progress'
+            'members'
+            'contribution';
+    }
+}

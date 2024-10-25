@@ -184,22 +184,27 @@ nav {
     margin-top: 7.5rem;
 }
 
-nav .intro-txt {
+.menu {
+    background-color: white;
+    z-index: 999;
+}
+
+.menu .intro-txt {
     margin-bottom: 3rem;
 }
 
-nav .intro-txt h1 {
+.menu .intro-txt h1 {
     font-family: 'DIN Alternate Bold';
     font-size: 2rem;
 }
 
-nav .intro-txt p {
+.menu .intro-txt p {
     font-family: 'Avenir Next';
     font-size: 1rem;
 }
 
 
-nav .nav-item {
+.menu .nav-item {
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -213,24 +218,22 @@ nav .nav-item {
     transition: background-color 0.2s ease-in-out;
 }
 
-nav .nav-item a {
+.menu .nav-item a {
     color: #A9A9AB;
     transition: color 0.2s ease-in-out;
     display: flex;
     align-items: center;
 }
 
-nav .nav-item:hover span, nav ul li:hover i{
+.menu .nav-item:hover span, nav ul li:hover i{
     color: white;
 }
 
-
-
-nav .nav-item a i {
+.menu .nav-item a i {
     padding-right: 0.6rem;
 }
 
-nav .nav-item .btn-animate {
+.menu .nav-item .btn-animate {
     position: absolute;
     top: 0;
     left: 0;
@@ -243,19 +246,17 @@ nav .nav-item .btn-animate {
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-nav .nav-item:hover .btn-animate {
+.menu .nav-item:hover .btn-animate {
     transform: translateY(0);
 }
 
 
-nav .nav-item.active {
+.menu .nav-item.active {
     background-color: black;
-    padding: 1rem 2rem;
-    margin: 1rem 1.5rem 1rem 0;
     border-radius: 10.5px;
 }
 
-nav .nav-item.active a {
+.menu .nav-item.active a {
     color: white;
 }
 
@@ -265,6 +266,71 @@ nav .nav-item.active a {
     background-color: #F5F5F5;
     margin-top: 3rem;
 }
+
+
+/*====Hamburger Menu====*/
+.hamburger {
+    cursor: pointer;
+    background: none;
+    z-index: 10;
+    transition: all 0.25s;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+    border: none;
+    background-color: black;
+    border-radius: 10px;
+    padding: 1.2rem;
+    position: relative;
+    top: 0;
+    left: 100%;
+    height: 24px;
+    width: 24px;
+    display: none;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+    position: absolute;
+    top: 11px;
+    left: 7px;
+    width: 24px;
+    height: 2px;
+    background: white;;
+    transform: rotate(0);
+    transition: all 0.5s;
+ }
+
+.hamburger-middle {
+    transform: translateY(7px);
+}
+  
+.hamburger-bottom {
+    transform: translateY(14px);
+}
+
+/*When opening hamburger menu, change icon*/
+.openMobile.hamburger {
+    height: 24px;
+    width: 24px;
+    left: 88%;
+}
+  
+.openMobile .hamburger-top {
+    transform: rotate(45deg) translateY(6px) translateX(6px);
+}
+  
+.openMobile .hamburger-middle {
+    display: none;
+}
+  
+.openMobile .hamburger-bottom {
+    transform: rotate(-45deg) translateY(6px) translateX(-6px);
+}
+
 
 
 /*====Nav Bar Section Content====*/
@@ -281,10 +347,9 @@ nav .nav-item.active a {
 
 #overview-content, #projects-content, #forums-content {
     display: none;
-
 }
 
-.open {
+.nav-item-content.open {
     display: block !important;
 }
 
@@ -300,4 +365,44 @@ nav .nav-item.active a {
 #projects-content, #forums-content{
     background-color: #ffffff;
     border-radius: 30px;
+}
+
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        width: 0%;
+        transition: width 0.4s ease;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    #content {
+        width: 100%;
+        transition: width 0.3s ease;
+    }
+
+    .menu.openMobileMenu {
+        display: block;
+    }
+
+    .expandNav {
+        width: 100%;
+    }
+
+    .minimiseContent {
+        width: 0% !important;
+        display: none !important;
+    }
+
+    
+
+
+
+
 }
