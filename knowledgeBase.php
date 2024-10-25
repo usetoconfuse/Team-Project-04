@@ -1,6 +1,4 @@
 <div class="kb-content">
-    <p>banana</p>
-    <p>test123</p>
     <div class="header-section">
         <h1 class="kb-title">Knowledge Base</h1>
         <div class="form-btns">
