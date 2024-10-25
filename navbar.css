@@ -384,7 +384,7 @@ nav {
 
     #content {
         width: 100%;
-        transition: width 0.3s ease;
+        transition: width 0.4s ease;
     }
 
     .menu.openMobileMenu {
@@ -397,7 +397,7 @@ nav {
 
     .minimiseContent {
         width: 0% !important;
-        display: none !important;
+        visibility: hidden;
     }
 
     
