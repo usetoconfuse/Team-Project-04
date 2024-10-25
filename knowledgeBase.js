@@ -95,13 +95,20 @@ window.onclick = function (event) {
 
 document.getElementById("topic-modal-form").addEventListener("submit", (e) => {
     e.preventDefault();
+    const topicInput = document.getElementById("topicInput");
 
-    addedTopic = document.getElementById("topicInput").value;
-    topicsList = document.getElementById("topicsList");
+        if (topicInput.value.trim() !==""){
+        const topicList = document.getElementById("topicsList");
+        const newTopic = document.createElement("li");
+        
+        //set class to list element
+        newTopic.classList.add("kb-topic");
 
-    const listItem = document.createElement("li");
+        newTopic.innerHTML = document.getElementById("topicInput").value;
+        topicList.appendChild(newTopic);
 
-    listItem.textContent = addedTopic;
-
-    topics.appendChild(listItem);
+        topicInput.value = "";
+        
+        topicModal.style.display = "none";
+        }
 });

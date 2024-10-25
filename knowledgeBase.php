@@ -67,7 +67,7 @@
     <div id="topic-modal" class="modal">
         <div class="modal-content">
             <span id="close-topic-modal" class="close">&times;</span>
-            <h1 id="topic-modal-title">Nesw Topic</h1>
+            <h1 id="topic-modal-title">New Topic</h1>
             <form id="topic-modal-form">
                 <div>
                     <label class="text">Topic:</label>
