@@ -16,7 +16,7 @@
     <div id="grid">
         
         <!--Kanban Board-->
-        <div id="kanban-board" class="kanban-board scrollable-div dashboardItem">
+        <div id="kanban-board" class="kanban-board scrollable-div dashboardItem" onClick="redirectToDo()">
 
             <!--Kanban Column-->
             <div class="kanban-section">
@@ -177,8 +177,6 @@
 
         #kanban-board{
             grid-area: kanban;
-            /* display: flex;
-            flex-direction: column; */
         }
 
         #forumGrid {
@@ -216,7 +214,7 @@
 
         .projectList {
             height: 3rem;
-            display: flex;
+            /* display: flex; */
             justify-content: space-between;
             align-items: center;
             background-color: #f5f5f5;
@@ -258,8 +256,6 @@
         }
 
         #training{
-            display: flex;
-            flex-direction: column;
             background-color: black;
             color:grey;
             flex-grow: 1;
@@ -293,12 +289,6 @@
             padding: 0.5rem;
         }
 
-        #flexProjTrain {
-            display: flex;
-            flex-direction: row;
-            background-color: grey;
-        }
-
         #forum {
             display: flex;
             border: solid;
@@ -314,16 +304,11 @@
             padding: 1rem;
         }
 
-        table {
-            border-radius: 5px;
-            color: gray;
-        }
-
-        button {
+        /* button {
             border-radius: 0 0 1.2rem 1.2rem;
             color: white;
             background-color: black;
-        }
+        } */
 
         .tag{
             border: solid;
