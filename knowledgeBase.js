@@ -3,12 +3,12 @@ const topics = document.querySelectorAll(".kb-topic");
 
 //when button click only display those with corresponding section
 document.getElementById("technicalBtn").addEventListener("click", () => {
-    
-    for(i = 0; i < formPosts.length; i++){
-        if (formPosts[i].id ==="technical"){
+
+    for (i = 0; i < formPosts.length; i++) {
+        if (formPosts[i].id === "technical") {
             formPosts[i].style.display = "block";
         }
-        else{
+        else {
             formPosts[i].style.display = "none";
         }
     }
@@ -16,11 +16,11 @@ document.getElementById("technicalBtn").addEventListener("click", () => {
 
 document.getElementById("nonTechnicalBtn").addEventListener("click", () => {
 
-    for(i = 0; i < formPosts.length; i++){
-        if (formPosts[i].id ==="technical"){
+    for (i = 0; i < formPosts.length; i++) {
+        if (formPosts[i].id === "technical") {
             formPosts[i].style.display = "none";
         }
-        else{
+        else {
             formPosts[i].style.display = "block";
         }
     }
@@ -28,9 +28,9 @@ document.getElementById("nonTechnicalBtn").addEventListener("click", () => {
 
 document.getElementById("allBtn").addEventListener("click", () => {
 
-    for(i=0 ; i < formPosts.length; i++){
-        if(formPosts[i].id === "technical" || formPosts[i].id === "nonTechnical"){
-            formPosts[i].style.display= "block";
+    for (i = 0; i < formPosts.length; i++) {
+        if (formPosts[i].id === "technical" || formPosts[i].id === "nonTechnical") {
+            formPosts[i].style.display = "block";
         }
     }
 });
@@ -67,3 +67,41 @@ allButtons.forEach(button => {
     })
 })
 
+
+
+//MODAL FUNCTIONALITY
+var topicModal = document.getElementById("topic-modal");
+var topicModalButton = document.getElementById("new-topic-btn");
+
+// Get the <span> element that closes the modal
+var closeTopicModalButton = document.getElementById("close-topic-modal");
+
+// When the user clicks on the button, open the modal
+topicModalButton.onclick = function () {
+    topicModal.style.display = "flex";
+}
+
+// When the user clicks on <span> (x), close the modal
+closeTopicModalButton.onclick = function () {
+    topicModal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == topicModal) {
+        topicModal.style.display = "none";
+    }
+} 
+
+document.getElementById("topic-modal-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    addedTopic = document.getElementById("topicInput").value;
+    topicsList = document.getElementById("topicsList");
+
+    const listItem = document.createElement("li");
+
+    listItem.textContent = addedTopic;
+
+    topics.appendChild(listItem);
+});
