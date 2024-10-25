@@ -5,7 +5,7 @@
 
 <div id="grid">
     <div id="projectList">
-        <h1>Your Managed Projects</h1>
+        <h1>All Projects</h1>
         <div id="projectListItems">
             <div class="projectListItem active">
                 <h3>Project #1</h3>
@@ -27,7 +27,10 @@
     </div>
 
     <div id="projectProgressBar">
-        <h1>Progress Bar</h1>
+        <h1>Project Progress</h1>
+        <div id="progressChartContainer">
+            <canvas id="progressBarChart"></canvas>
+        </div>
     </div>
     <div id="projectTeamMembers">
         <h1>Team Members</h1>
@@ -36,3 +39,6 @@
         <h1>Project Contribution Graph</h1>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="managerDashContent.js"></script>

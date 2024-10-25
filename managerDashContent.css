@@ -46,6 +46,13 @@
     grid-area: progress;
 }
 
+#progressChartContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 20rem;
+}
+
 #projectTeamMembers{
     grid-area: members;
 }
