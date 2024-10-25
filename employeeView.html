@@ -103,48 +103,47 @@
             </div>
         </div>
 
-        <div id="forum forumGrid" class="dashboardItem" onclick="redirectForum()">
+        <div id="forumGrid" onclick="redirectForum()">
             <div class="forumColumn">
 
-            <!--Item 1-->
-            <div class="forumListItem forumItemContainer">
-                <p>Topic: Printing</p>
-                <p class="forumTag">Technical</p>
-                <button class="forumButton">View</button>
-            </div>
-            <!--Item 2-->
-            <div class="forumListItem forumItemContainer">
-                <p>Topic: commenting code</p>
-                <p class="forumTag">Technical</p>
-                <button class="forumButton">View</button>
-            </div>
-            <!--Item 3-->
-            <div class="forumListItem forumItemContainer">
-                <p>Topic: A</p>
-                <p class="forumTag">Non-Technical</p>
-                <button class="forumButton">View</button>
-            </div>
-            <!--Item 4-->
-            <div class="forumListItem forumItemContainer">
-                <p>Topic: B</p>
-                <p class="forumTag">Technical</p>
-                <button class="forumButton">View</button>
-            </div>
-            
-            <div class="forumColumn">
-                <button class="forumButton">View All Topics</button> <button class="forumButtonCreate">Create A Topic</button>
-            </div>
-        </div>
-            
-        </div> <!--End of Forum container-->
-
-            <div id="projectProgress projectGrid" class="dashboardItem">
-                <div class="projectList">Project Name</div>
-                <div class="projectList">Project Name</div>
+                <!--Item 1-->
+                <div class="forumListItem forumItemContainer">
+                    <p>Topic: Printing</p>
+                    <p class="forumTag">Technical</p>
+                    <button class="employee-button forumButton">View</button>
+                </div>
+                <!--Item 2-->
+                <div class="forumListItem forumItemContainer">
+                    <p>Topic: commenting code</p>
+                    <p class="forumTag">Technical</p>
+                    <button class="employee-button forumButton">View</button>
+                </div>
+                <!--Item 3-->
+                <div class="forumListItem forumItemContainer">
+                    <p>Topic: A</p>
+                    <p class="forumTag">Non-Technical</p>
+                    <button class="employee-button forumButton">View</button>
+                </div>
+                <!--Item 4-->
+                <div class="forumListItem forumItemContainer">
+                    <p>Topic: B</p>
+                    <p class="forumTag">Technical</p>
+                    <button class="employee-button forumButton">View</button>
+                </div>
                 
+                <!-- <div class="forumColumn"> -->
+                    <button class="employee-button forumButton">View All Topics</button> <button class="forumButtonCreate">Create A Topic</button>
+                <!-- </div> -->
+            </div>
+            
+    </div> <!--End of Forum container-->
+
+            <div id="projectGrid">
+                <div class="projectList">Project Name</div>
+                <div class="projectList">Project Name</div>
             </div>
         
-            <div id="training trainingGrid" class="dashboardItem">
+            <div id="trainingGrid">
                 <div class="trainingSet">Training set by: Name</div>
                 <button id="trainingButton">View Training</button>
             </div>
@@ -224,16 +223,6 @@
             padding-left: 1rem;
             padding-right: 1rem;
         }
-        /* .dashboardItem{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f5f5f5;
-            border-radius: 10.5px;
-            margin-top: 0.5rem; 
-            padding-left: 1rem;
-            padding-right: 1rem;
-        } */
 
         .forumTag{
             border-radius: 30px;
@@ -259,26 +248,19 @@
         #training{
             background-color: black;
             color:grey;
-            flex-grow: 1;
         }
 
         #trainingButton{
             background-color: orange;
             color: black;
-            border-radius: 30px;
             cursor: pointer;
+            border-radius: 30px;
             font-size: 1rem;
             padding: 0.5rem;
             border: none;
             font-family: "Avenir Next";
         }
 
-        /* .flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: "DIN Alternate Bold";
-        } */
 
         .forumButtonCreate {
             border: none;
@@ -290,7 +272,7 @@
             padding: 0.5rem;
         }
 
-        #forum {
+        /* #forum {
             display: flex;
             border: solid;
             flex-direction: column;
@@ -299,17 +281,22 @@
             max-width: 800px;
             height: 50%;
             padding: 1rem;
-        }
+        } */
 
         .forumColumn {
             padding: 1rem;
         }
 
-        /* button {
-            border-radius: 0 0 1.2rem 1.2rem;
+        .employee-button {
             color: white;
             background-color: black;
-        } */
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 1rem;
+            padding: 0.5rem;
+            border: none;
+            font-family: "Avenir Next";
+        }
 
         .tag{
             border: solid;
