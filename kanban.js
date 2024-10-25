@@ -4,8 +4,8 @@ const kanbanContainer = document.querySelector('.kanban-board');
 kanbanContainer.addEventListener('click', (e) => {
     const kanbanCardHeader = e.target.closest('.kanban-card-top');
     if (!kanbanCardHeader) return;
-    
 
+  
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-card-body');
     const openCloseIcon = kanbanCardGroup.querySelector('.kanban-card-top i:nth-of-type(2)');
