@@ -1,4 +1,4 @@
-const progressBar = document.getElementById("progressBarChart");
+const progressBar = document.getElementById("mdProgressBarChart");
 
 new Chart(progressBar, {
     type: 'doughnut',
@@ -8,7 +8,7 @@ new Chart(progressBar, {
             'Overdue',
             'Not Started'],
         datasets: [{
-            data: [5,7,3,4],
+            data: [5,7,4,4],
             backgroundColor: [
                 '#adda9d',
                 '#e9b385',
@@ -22,7 +22,17 @@ new Chart(progressBar, {
             legend: {
                 display: false
             },
-        },  
-        responsive: true
+            tooltip: {
+                enabled: false
+            }
+        },
+        hover: {
+            mode: null
+        },
+        rotation: -90,
+        circumference: 180, 
+        cutout: '80%',
+        responsive: true,
+        aspectRatio: 2
     }
 });

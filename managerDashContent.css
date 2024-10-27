@@ -1,36 +1,50 @@
 
-#grid{
+/*------------Grid and grid cell styling------------*/
+#mdGrid{
     width: 100%;
     height: 100%;
     display: grid;
     grid-template-areas:
     'projects progress members'
     'projects contribution contribution';
-    gap: 1rem;
+    grid-template-columns: 32% 32% 32%;
+    grid-template-rows: 49% 49%;
+    gap: 2%;
 }
 
-#grid > div{
+#mdGrid > div{
     font-family: "DIN Alternate Bold";
     background-color: #ffffff;
     border-radius: 30px;
     padding: 2rem;
 }
 
-#projectList{
+#mdGrid p{
+    font-family: 'Avenir Next';
+}
+
+
+/*------------Project list styling------------*/
+#mdProjectListBox{
     grid-area: projects;
     display: flex;
     flex-direction: column;
 }
 
-#projectList h1{
+#mdProjectListBox > h1{
     padding-left: 1rem;
 }
 
-#projectListItems{
+#mdProjectListItems{
     margin-top: 1rem
 }
 
-.projectListItem{
+#mdProjectListItems .mdActive{
+    background-color: black;
+    color: white;
+}
+
+.mdProjectListItem{
     height: 3rem;
     display: flex;
     justify-content: space-between;
@@ -38,40 +52,97 @@
     background-color: #f5f5f5;
     border-radius: 10.5px;
     margin-top: 0.5rem; 
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-inline: 1rem;
 }
 
-#projectProgressBar{
+
+/*------------Project progress styling------------*/
+#mdProjectProgressBox{
     grid-area: progress;
+    position: relative;
 }
 
-#progressChartContainer{
+#mdProgressPercentageText{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -55%)
+}
+
+#mdProgressChartContainer{
     display: flex;
     justify-content: center;
-    align-items: center;
-    max-width: 20rem;
+    width: 100%;
+    height: 50%;
+    margin-top: 1rem;
 }
 
-#projectTeamMembers{
+#mdProgressChartLegend{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-inline: 1rem;
+}
+
+.mdLegendItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mdLegendItem p{
+    font-size: x-small;
+}
+
+.mdLegendCounter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+.mdLegendCounter h1{
+    margin-left: 0.2rem;
+}
+
+#mdDone i{
+    color: #adda9d;
+}
+
+#mdInProgress i{
+    color: #e9b385;
+}
+
+#mdOverdue i{
+    color: #e38c88;
+}
+
+#mdNotStarted i{
+    color: #c1c1c1;
+}
+
+/*------------Project members styling------------*/
+#mdProjectMembersBox{
     grid-area: members;
 }
 
-#projectContributionGraph{
+/*------------Member contribution styling------------*/
+#mdProjectContributionBox{
     grid-area: contribution;
 }
 
-#projectList .active{
-    background-color: black;
-    color: white;
-}
 
 @media (max-width: 768px) {
-    #grid {
+    #mdGrid {
         grid-template-areas:
             'projects'
             'progress'
             'members'
             'contribution';
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
     }
 }
