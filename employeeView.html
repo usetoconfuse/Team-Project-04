@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <div id="grid">
+    <div id="EDgrid">
         
         <!--Kanban Board-->
         <div id="kanban-board" class="kanban-board scrollable-div dashboardItem" onClick="redirectToDo()">
@@ -195,7 +195,7 @@
         /* -------------------------------------------------------------------------------------- */
 
 
-        #grid{
+        #EDgrid{
             width: 100%;
             height: 100%;
             display: grid;
@@ -205,7 +205,7 @@
             gap: 1rem;
         }
 
-        #grid > div{
+        #EDgrid > div{
             font-family: "DIN Alternate Bold";
             border-radius: 30px;
             padding: 2rem;
@@ -368,6 +368,18 @@
             display: flex;
             flex-direction: column;
         }
+
+        @media (max-width: 768px) {
+                #EDgrid {
+                    grid-template-areas:
+                        'kanban'
+                        'forum'
+                        'projects'
+                        'training';
+                    grid-template-columns: 100%;
+                    grid-template-rows: auto;
+                }
+            }
     </style>
 
     <script>
