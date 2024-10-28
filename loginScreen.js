@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // employee demo crednetials 
     const employeeUsername= "employee@email.com";
     const employeePassword = "wavytop69";
+    // team leader demo crednetials 
+    const teamLeaderUsername= "teamleader@email.com";
+    const teamLeaderPassword = "jamesfrance69";
 
     form.addEventListener('submit',(e) => {
         e.preventDefault();
@@ -23,14 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
          // Validate credentials
          if ((username === managerUsername && password === managerPassword) || 
-         (username === employeeUsername && password === employeePassword)) {
+         (username === employeeUsername && password === employeePassword) || 
+         (username === teamLeaderUsername && password === teamLeaderPassword)) {
             isValid = true; // Valid credentials
         } else {
             isValid = false; // Invalid credentials
-            if (username !== managerUsername && username !== employeeUsername) {
+            if (username !== managerUsername && username !== employeeUsername && username !== teamLeaderUsername) {
                 document.getElementById("username-error").innerHTML = "Incorrect username";
             }
-            if (password !== managerPassword && password !== employeePassword) {
+            if (password !== managerPassword && password !== employeePassword && password !== teamLeaderPassword) {
                 document.getElementById("password-error").innerHTML = "Incorrect password";
             }
         }
@@ -44,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = "employeeDashboard.php";
             } else if (username === managerUsername) {
                 window.location.href = "managerDashboard.php";
+            } else if (username === teamLeaderUsername){
+                window.location.href = "teamLeaderDashboard.php";
             }
         }
     });
