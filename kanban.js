@@ -61,9 +61,11 @@ kanbanContainer.addEventListener('click', (e) => {
   taskCard.forEach((task) => {
     task.addEventListener("dragstart", () => {
       task.classList.add("dragging");
+      setTimeout(() => {task.classList.add('overlay')}, 1)
     });
     task.addEventListener("dragend", () => {
       task.classList.remove("dragging");
+      task.classList.remove('overlay')
     });
   });
   
