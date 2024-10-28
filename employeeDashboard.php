@@ -100,7 +100,7 @@
                 <!-- <h2>Overview Content</h2>
                 <p>Develop this in a separate file and <br>use a PHP include statement<br>
                     and then remove this text</p> -->
-                    <?php include 'employeeView.html'; ?>
+                    <?php include 'employeeDashContent.php'; ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">

@@ -101,9 +101,7 @@
             </div>
 
             <div class="nav-item-content" id="projects-content">
-            <?php include 'projects.php' ?>
-
-
+                <?php include 'projects.php' ?>
             </div>
 
             <div class="nav-item-content" id="forums-content">
