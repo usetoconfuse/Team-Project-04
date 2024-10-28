@@ -41,6 +41,6 @@
             <img src="Demo.svg" alt="demo-image">
         </div>
     </div>
-    <script src="index.js"></script>
+    <script src="loginScreen.js"></script>
 </body>
 </html>
