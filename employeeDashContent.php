@@ -309,7 +309,37 @@
     color: black;
   }
 
+  @media (max-width: 768px) {
+    .emp-grid-container {
+      display: grid;
+      grid-template-columns: 1fr; 
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      gap: 10px;                         
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+    }
 
+/*Issue with NavBar background when responsive.*/
+
+      /* Grid items */
+      .tasks {
+        grid-row: 1 ;                   
+        grid-column: 1;      
+      }
+      .forums {
+        grid-row: 2;                   
+        grid-column: 1;                
+      }
+      .projects {
+        grid-row: 3;                 
+        grid-column:1;              
+      }
+      .extra {
+        grid-row: 4;              
+        grid-column: 1;            
+      }
+    }
 </style>
 
 
