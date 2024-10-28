@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="navbar.css"></link>
         <link rel="stylesheet" href="knowledgeBase.css"></link>
+        <link rel="stylesheet" href="projects.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
 
         <title>Manager Dashboard</title>
@@ -100,8 +101,7 @@
             </div>
 
             <div class="nav-item-content" id="projects-content">
-
-
+                <?php include 'projects.php' ?>
             </div>
 
             <div class="nav-item-content" id="forums-content">
@@ -111,6 +111,7 @@
         </section>
     
         <script src="navbar.js"></script>
+        <script src="projects.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>

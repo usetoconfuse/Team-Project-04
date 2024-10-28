@@ -231,6 +231,12 @@
     opacity: 0.9;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: move;
+    color: transparent;
+}
+/*====Design Overlay to be like a preview of them item do not display the text and add like a modern shadow like structure to it====*/
+.overlay {
+    background-color: grey;
+    text-indent: -9999px;
 }
 
 
