@@ -11,22 +11,10 @@
     <div id="mdProjectListBox">
         <h1>All Projects</h1>
 
-        <div id="mdProjectListItems">
-            <div class="mdProjectListItem mdActive">
+        <div class="mdListContainer" id="mdProjectList">
+            <div class="mdListItem mdActive">
                 <h3>Project #1</h3>
                 <i class="fa fa-solid fa-arrow-right"></i>
-            </div>
-            <div class="mdProjectListItem">
-                <h3>Project #2</h3>
-            </div>
-            <div class="mdProjectListItem">
-                <h3>Project #3</h3>
-            </div>
-            <div class="mdProjectListItem">
-                <h3>Project #4</h3>
-            </div>
-            <div class="mdProjectListItem">
-                <h3>Project #5</h3>
             </div>
         </div>
     </div>
@@ -36,7 +24,7 @@
      completed/in progress/overdue/not started -->
     <div id="mdProjectProgressBox">
 
-        <h1>Project Progress</h1>
+        <h1>Project #1</h1>
         <div id="mdProgressChartContainer">
             <canvas id="mdProgressBarChart"></canvas>
         </div>
@@ -46,33 +34,33 @@
         </div>
 
         <div id="mdProgressChartLegend">
-            <div class="mdLegendItem" id="mdDone">
+            <div class="mdLegendItem">
                 <div class="mdLegendCounter">
-                    <i class="fa-solid fa-circle fa-2xs"></i>
+                    <i class="fa-solid fa-circle fa-2xs mdGreen"></i>
                     <h1>5</h1>
                 </div>
                 <p>Done</p>
             </div>
 
-            <div class="mdLegendItem" id="mdInProgress">
+            <div class="mdLegendItem">
                 <div class="mdLegendCounter">
-                    <i class="fa-solid fa-circle fa-2xs"></i>
+                    <i class="fa-solid fa-circle fa-2xs mdYellow"></i>
                     <h1>7</h1>
                 </div>
                 <p>In Progress</p>
             </div>
 
-            <div class="mdLegendItem" id="mdOverdue">
+            <div class="mdLegendItem">
                 <div class="mdLegendCounter">
-                    <i class="fa-solid fa-circle fa-2xs"></i>
+                    <i class="fa-solid fa-circle fa-2xs mdRed"></i>
                     <h1>4</h1>
                 </div>
                 <p>Overdue</p>
             </div>
 
-            <div class="mdLegendItem" id="mdNotStarted">
+            <div class="mdLegendItem">
                 <div class="mdLegendCounter">
-                    <i class="fa-solid fa-circle fa-2xs"></i>
+                    <i class="fa-solid fa-circle fa-2xs mdGrey"></i>
                     <h1>4</h1>
                 </div>
                 <p>Not Started</p>
@@ -81,9 +69,21 @@
     </div>
 
 
-    <!-- List of team members with team leader highlighted -->
+    <!-- List of team members -->
     <div id="mdProjectMembersBox">
         <h1>Team Members</h1>
+        <div class="mdListContainer" id="mdMemberList">
+            <div class="mdListItem">
+                <div>
+                    <div class="user" style="background-color:#9F6464">
+                        <i class="fa fa-solid fa-user"></i>
+                    </div>
+                    <h3>John Little</h3>
+                    <i class="fa fa-solid fa-crown"></i>
+                </div>
+                <p>4 Tasks</p>
+            </div>
+        </div>
     </div>
 
 
