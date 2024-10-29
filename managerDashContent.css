@@ -73,14 +73,13 @@
     flex-direction: column;
 }
 
-
 /*------------Project progress styling------------*/
 #mdProjectProgressBox{
     grid-area: progress;
     position: relative;
 }
 
-#mdProgressPercentageText{
+#mdProgressPercentage{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -102,8 +101,8 @@
 #mdProgressChartLegend{
     display: flex;
     justify-content: space-between;
-    padding-top: 2rem;
-    padding-inline: 1rem;
+    width: 100%;
+    padding-top: 1rem;
 }
 
 .mdLegendItem{
@@ -155,7 +154,8 @@
 
 #mdContributionGraphContainer{
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    overflow-y: auto;
     width: 100%;
     height: 100%;
 }

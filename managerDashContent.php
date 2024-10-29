@@ -10,7 +10,6 @@
     <!-- List of all projects -->
     <div id="mdProjectListBox">
         <h1>All Projects</h1>
-
         <div class="mdListContainer" id="mdProjectList"></div>
     </div>
 
@@ -19,12 +18,12 @@
      completed/in progress/overdue/not started -->
     <div id="mdProjectProgressBox">
 
-        <h1>Project #1</h1>
+        <h1 id="mdSelectedProjectName">Project #1</h1>
         <div id="mdProgressChartContainer">
             <canvas id="mdProgressChart"></canvas>
         </div>
-        <div id="mdProgressPercentageText">
-            <h1>25%</h1>
+        <div id="mdProgressPercentage">
+            <h1 id="mdProgressPercentageText"></h1>
             <p>Completed</p>
         </div>
 
@@ -32,7 +31,7 @@
             <div class="mdLegendItem">
                 <div class="mdLegendCounter">
                     <i class="fa-solid fa-circle fa-2xs mdGreen"></i>
-                    <h1>5</h1>
+                    <h1 id="mdLegendDoneText"></h1>
                 </div>
                 <p>Done</p>
             </div>
@@ -40,7 +39,7 @@
             <div class="mdLegendItem">
                 <div class="mdLegendCounter">
                     <i class="fa-solid fa-circle fa-2xs mdYellow"></i>
-                    <h1>7</h1>
+                    <h1 id="mdLegendInProgressText"></h1>
                 </div>
                 <p>In Progress</p>
             </div>
@@ -48,7 +47,7 @@
             <div class="mdLegendItem">
                 <div class="mdLegendCounter">
                     <i class="fa-solid fa-circle fa-2xs mdRed"></i>
-                    <h1>4</h1>
+                    <h1 id="mdLegendOverdueText"></h1>
                 </div>
                 <p>Overdue</p>
             </div>
@@ -56,7 +55,7 @@
             <div class="mdLegendItem">
                 <div class="mdLegendCounter">
                     <i class="fa-solid fa-circle fa-2xs mdGrey"></i>
-                    <h1>4</h1>
+                    <h1 id="mdLegendNotStartedText"></h1>
                 </div>
                 <p>Not Started</p>
             </div>
