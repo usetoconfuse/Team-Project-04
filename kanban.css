@@ -96,6 +96,12 @@
     z-index: 5;
 }
 
+.projects-intro-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
 .all-projects-btn {
     padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
@@ -108,6 +114,20 @@
 
 .all-projects-btn i {
     color: white;
+    margin-right: 0.6rem;
+}
+
+.add-task-btn {
+    padding: 0.8rem 0.8rem;
+    border-radius: 10.5px;
+    color: white;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-task-btn i {
     margin-right: 0.6rem;
 }
 
@@ -211,6 +231,7 @@
     color: black;
     padding: 0.4rem 1rem;
     border-radius: 15px;
+    white-space: nowrap;
 }
 
 .due-date {
@@ -218,6 +239,10 @@
     align-items: center;
     justify-content: space-between;
     color: #BAB7B7;
+    background-color: transparent;
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    white-space: nowrap;
 }
 
 .due-date i {
@@ -233,7 +258,7 @@
     cursor: move;
     color: transparent;
 }
-/*====Design Overlay to be like a preview of them item do not display the text and add like a modern shadow like structure to it====*/
+
 .overlay {
     background-color: grey;
     text-indent: -9999px;

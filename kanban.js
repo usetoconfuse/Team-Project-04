@@ -69,17 +69,23 @@ kanbanContainer.addEventListener('click', (e) => {
       // GET THE ID OF WHERE TH EITEM IS DROPPED IN
       // DEPENDING ON THIS WE RUN SOME CODE
       const currentSectionId = task.parentElement.id;
-      console.log(`Task dropped in section: ${currentSectionId}`);
-      if (currentSectionId === 'kanban-to-do') {
-        task.style.backgroundColor = 'red';
-      } else if (currentSectionId === 'kanban-in-progress') {
-        task.style.backgroundColor = 'yellow';
-      } else if (currentSectionId === 'kanban-completed') {
-          task.style.backgroundColor = 'green';
-      }
+      const kanbanCardDueDate = task.querySelector('.due-date');
+
+      //Change the overdue tag depending on section it is in 
+      if (task.id === 'kanban-task-overdue') {
+        if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
+          kanbanCardDueDate.style.backgroundColor = '#E6757E';
+          kanbanCardDueDate.style.color = 'white';
+        } else if (currentSectionId === 'kanban-completed') {
+          kanbanCardDueDate.style.backgroundColor = '';
+          kanbanCardDueDate.style.color = '#BAB7B7';
+        }
+      } 
+      
     });
 
   });
+
   kanbanSection.forEach((section) => {
     section.addEventListener("dragover", (e) => {
       e.preventDefault();

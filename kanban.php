@@ -31,10 +31,17 @@
 
     <div class="vertical-bar"></div>
 
-    <div class="all-projects-btn">
-        <i class='fa fa-solid fa-arrow-left'></i>
-        All Projects
+    <div class="projects-intro-buttons">
+        <div class="add-task-btn">
+            <i class="fa fa-solid fa-plus"></i>
+            Add Task
+        </div>
+        <div class="all-projects-btn">
+            <i class='fa fa-solid fa-arrow-left'></i>
+            All Projects
+        </div>
     </div>
+    
 
     <div class="kanban-separator"></div>
 </div>
@@ -54,7 +61,7 @@
         <div class="kanban-body open" id = 'kanban-to-do'>
 
             <!--Kanban Card 1-->
-            <div class="kanban-card" draggable=true>
+            <div class="kanban-card" id="kanban-task-overdue" draggable=true>
                 <div class="kanban-card-top">
                     <p>Task Title</p>
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -76,7 +83,7 @@
                 </div>
             </div>
             <!--Kanban Card 2-->
-            <div class="kanban-card" draggable=true>
+            <div class="kanban-card" id="kanban-task-overdue" draggable=true>
                 <div class="kanban-card-top">
                     <p>Task Title</p>
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -126,7 +133,7 @@
         <!--Kanban Body-->
         <div class="kanban-body" id = 'kanban-completed'>
             <!--Kanban Card 1-->
-            <div class="kanban-card" draggable=true>
+            <div class="kanban-card" id="kanban-task-completed" draggable=true>
                 <div class="kanban-card-top">
                     <p>Task Title</p>
                     <i class="fa-solid fa-circle-check"></i>
