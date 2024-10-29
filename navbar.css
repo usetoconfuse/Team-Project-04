@@ -376,6 +376,7 @@ nav {
     nav {
         width: 0%;
         transition: width 0.4s ease;
+        
     }
 
     .menu {
@@ -400,9 +401,31 @@ nav {
         visibility: hidden;
     }
 
+    #content {
+        height: auto;
+        width: 100%;
+        border-radius: 0;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .nav-item-content {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border-radius: 0;
+    }
     
+    #overview-content, #projects-content, #forums-content {
+        width: 100%;
+        border-radius: 0;
+    }
 
+}
 
-
-
+@media (max-width: 500px) {
+    nav {
+        display: flex;
+        justify-content: center;
+    }
 }

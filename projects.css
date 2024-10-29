@@ -1,9 +1,9 @@
 /*====Project Information====*/
 .project-intro {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem 2rem 0.6rem 2rem;
     font-family: 'avenir next';
 }
 
@@ -16,95 +16,154 @@
     color: #9A9A9A;
 }
 
-/*====Grid Styling====*/
+.project-intro a {
+    background-color: black;
+    color: white; 
+    padding: 0.8rem 1rem;
+    border-radius: 30px;
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+/*====Project Cards====*/
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-gap: 20px;
-    max-width: 900px;
+    grid-gap: 30px;
     padding: 20px;
-    border-radius: 8px;
 }
 
-.grid-item {
-    background-color: white;
-    border-radius: 25px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+.project-card {
+    background-color: #F5F5F5;
+    border: 1px solid transparent;
+    padding: 0.8rem 1.2rem;
+    border-radius: 30px;
 }
 
-.grid-item:hover {
-    transform: scale(1.05);
+/*Fix filler card so it is the right size on mobile too*/
+.filler-project-card {
+    background-color: #F5F5F5;
+    border: 1px solid transparent;
+    padding: 0.8rem 1.2rem;
+    border-radius: 30px;
 }
 
-.grid-item-top {
+.project-card-top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
 }
 
-.grid-item-top .view-btn {
-    background-color: black;
+.project-card-top p {
+    font-size: 16px;
+}
+
+.project-card-top a {
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    text-align: center;
+    background-color: black;
+    padding: 0.6rem 1rem;
+    font-size: 12px;
+    border-radius: 15px;
 }
 
-.progress-bar {
+.project-card-progress {
+    margin-bottom: 1.4rem;
+}
+
+.project-card-progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #414141;
+    font-size: 13px;
+}
+
+.project-card-progress-bar {
     height: 8px;
     width: 100%;
-    background-color: #F5F5F5;
+    background-color: white;
     border-radius: 10px;
-    margin: 0.8rem 0;
 }
 
-.progress-bar-inner {
+.project-card-progress-bar-inner {
     height: 8px;
-    background-color: #ADDA9D;
     border-radius: 10px;
 }
 
-.grid-item-bottom {
+.project-card-bottom {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
+    justify-content: space-between;
 }
 
-.user {
+.project-card-team {
+    display: flex;
+    align-items: center;
+}
+
+.project-user {
     height: 30px;
     width: 30px;
     border-radius: 50%;
     background-color: #F5F5F5;
     border: 1px solid black;
-    margin-left: -8px;
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: -12px;
 }
 
-.due-date {
-    color: #BAB7B7;
+.project-user:nth-child(1) {
+    background-color: rgb(159, 100, 143);
+}
+
+.project-user:nth-child(2) {
+    z-index: 2;
+    background-color: rgb(100, 100, 159);
+}
+.project-user:nth-child(3) {
+    z-index: 3;
+    background-color: rgb(159, 100, 100);
+}
+
+.project-user:nth-child(4) {
+    z-index: 4;
+    background-color: rgb(134, 159, 100);
+}
+
+.project-user:nth-child(5) {
+    z-index: 5;
+}
+
+.project-card-due-date {
     display: flex;
     align-items: center;
+    justify-content: center;
+    color: #7C7C7C;
+    white-space: nowrap;
 }
 
-.due-date i {
+.project-card-due-date i {
     margin-right: 4px;
 }
 
+
 /*====Responsiveness====*/
-@media (max-width: 700px) {
+@media (max-width: 1300px) {
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
     .grid-container {
         grid-template-columns: 1fr;
+    }
+    .filler-project-card {
+        display: none;
     }
 }

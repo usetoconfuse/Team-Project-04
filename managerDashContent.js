@@ -90,13 +90,13 @@ new Chart(progressBar, {
             legend: {
                 display: false
             },
-            tooltip: {
+            /* tooltip: {
                 enabled: false
-            }
+            }*/
         },
-        hover: {
+        /* hover: {
             mode: null
-        },
+        }, */
         rotation: -90,
         circumference: 180, 
         cutout: '80%',

@@ -20,7 +20,7 @@
 
             <div class="emp-grid-item-content">
                 <!--Kanban Card 1-->
-                <div class="kanban-card" draggable=true>
+                <div class="kanban-card"> <!--draggable=true-->
                     <div class="kanban-card-top">
                         <p>Task Title</p>
                         <i class="fa-solid fa-circle-exclamation"></i>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <!--Kanban Card 2-->
-                <div class="kanban-card" draggable=true>
+                <div class="kanban-card"> <!--draggable=true-->
                     <div class="kanban-card-top">
                         <p>Task Title</p>
                         <i class="fa-solid fa-circle-exclamation"></i>
@@ -85,24 +85,7 @@
                     </div>
 
                     <div class="emp-forum-right">   
-                        <div class="emp-forum-tag">Tag</div>
-                        <div class="emp-forum-tag">Tag</div>
-                        <a href="#">View Post</a>
-                    </div>
-                </div>
-
-                <!--Forum Post-->
-                <div class="emp-forum-post">
-                    <div class="emp-forum-left">
-                        <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
-                        <div class="emp-forum-info">
-                            <div class="emp-forum-title">Forum Title</div>
-                            <div class="emp-forum-date">30th October</div>
-                        </div>  
-                    </div>
-
-                    <div class="emp-forum-right">   
-                        <div class="emp-forum-tag">Tag</div>
+                        <div class="emp-forum-tag">Non-Technical</div>
                         <div class="emp-forum-tag">Tag</div>
                         <a href="#">View Post</a>
                     </div>
@@ -119,7 +102,7 @@
                     </div>
 
                     <div class="emp-forum-right">   
-                        <div class="emp-forum-tag">Tag</div>
+                        <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag">Tag</div>
                         <a href="#">View Post</a>
                     </div>
@@ -136,7 +119,24 @@
                     </div>
 
                     <div class="emp-forum-right">   
+                        <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag">Tag</div>
+                        <a href="#">View Post</a>
+                    </div>
+                </div>
+
+                <!--Forum Post-->
+                <div class="emp-forum-post">
+                    <div class="emp-forum-left">
+                        <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
+                        <div class="emp-forum-info">
+                            <div class="emp-forum-title">Forum Title</div>
+                            <div class="emp-forum-date">30th October</div>
+                        </div>  
+                    </div>
+
+                    <div class="emp-forum-right">   
+                        <div class="emp-forum-tag">Non-Technical</div>
                         <div class="emp-forum-tag">Tag</div>
                         <a href="#">View Post</a>
                     </div>
@@ -157,8 +157,42 @@
             </div>
 
             <div class="emp-grid-item-content">
+              <div class="emp-project-card">
+                <p>Project A</p>
+                <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
+                  <!--Progress Bar-->
+                  <div class="emp-progressFlexBar">
+                    <div class="emp-projectProgressBarOut">
+                        <div class="emp-projectProgressBarInner"></div>
+                    </div>
+                    <div class="emp-projectProgress-txt">
+                        <p>Progress</p>
+                        <p>75%</p>
+                    </div>
+                  </div>
+                    
+                    <!-- ------------------------------------------------------- -->
 
-            </div>
+                    <button class="emp-view-project-button">View</button>                
+              </div>
+
+              <div class="emp-project-card">
+                <p>Project B</p>
+                <!-- <canvas id="myProgressBarB" width="400" height="100"></canvas> -->
+                  <!--Progress Bar-->
+                  <div class="emp-progressFlexBar">
+                    <div class="emp-projectProgressBarOut">
+                        <div class="emp-projectProgressBarInner"></div>
+                    </div>
+                    <div class="emp-projectProgress-txt">
+                        <p>Progress</p>
+                        <p>75%</p>
+                    </div>
+                  </div>
+                  <!-- ------------------------------------------------------- -->
+                  <button class="emp-view-project-button">View</button>     
+                  </div>
+              </div>
         </div>
 
         <div class="emp-grid-item extra">
@@ -212,10 +246,6 @@
     align-items: center;
     justify-content: space-between;
     margin: 0.4rem 1.2rem;
-  }
-
-  .emp-grid-item-top p {
-    font-weight: bold;
   }
 
   .emp-grid-item-top a {
@@ -310,6 +340,96 @@
   }
 
 
+  /*PROJECTS*/
+
+  .emp-project-card {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 10.5px;
+    margin-top: 0.5rem; 
+    padding: 0.4rem 0.6rem;
+  }
+
+
+  .emp-projectProgressBarOut {
+      height: 8px;
+      width: 10rem;
+      background-color: gray;
+      border-radius: 10px;
+      padding: 
+  }        
+
+  .emp-projectProgressBarInner {
+      height: 8px;
+      width: 75%;
+      background-color: #ADDA9D;
+      border-radius: 10px;
+  }
+
+  .emp-projectProgress-txt{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+  }
+
+  .emp-progressFlexBar { /*This makes the text go underneath the progress bar*/
+      display: flex;
+      flex-direction: column;
+  }
+
+  
+  .emp-view-project-button {
+    color: black;
+    background-color: white;
+    border: 1px solid #D0D0D0;
+    cursor: pointer;
+    border-radius: 11px;
+    font-size: 1rem;
+    padding: 0.8rem 0.6rem;
+    font-family: "Avenir Next";
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /*responsiveness*/
+
+
+  @media (max-width: 768px) {
+    .emp-grid-container {
+      display: grid;
+      grid-template-columns: 1fr; 
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      gap: 10px;                         
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+    }
+
+/*Issue with NavBar background when responsive.*/
+
+      /* Grid items */
+      .tasks {
+        grid-row: 1 ;                   
+        grid-column: 1;      
+      }
+      .forums {
+        grid-row: 2;                   
+        grid-column: 1;                
+      }
+      .projects {
+        grid-row: 3;                 
+        grid-column:1;              
+      }
+      .extra {
+        grid-row: 4;              
+        grid-column: 1;            
+      }
+    }
 </style>
 
 
