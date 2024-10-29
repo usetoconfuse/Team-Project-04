@@ -157,7 +157,7 @@
             </div>
 
             <div class="emp-grid-item-content">
-              <div class="emp-projectList">
+              <div class="emp-project-card">
                 <p>Project A</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
@@ -173,9 +173,10 @@
                     
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="emp-employee-button">View</button>                
+                    <button class="emp-view-project-button">View</button>                
               </div>
-              <div class="emp-projectList">
+
+              <div class="emp-project-card">
                 <p>Project B</p>
                 <!-- <canvas id="myProgressBarB" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
@@ -189,7 +190,7 @@
                     </div>
                   </div>
                   <!-- ------------------------------------------------------- -->
-                  <button class="emp-employee-button">View</button>     
+                  <button class="emp-view-project-button">View</button>     
                   </div>
               </div>
         </div>
@@ -245,10 +246,6 @@
     align-items: center;
     justify-content: space-between;
     margin: 0.4rem 1.2rem;
-  }
-
-  .emp-grid-item-top p {
-    font-weight: bold;
   }
 
   .emp-grid-item-top a {
@@ -345,8 +342,8 @@
 
   /*PROJECTS*/
 
-  .emp-projectList {
-    height: 3rem;
+  .emp-project-card {
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -354,8 +351,7 @@
     background-color: #f5f5f5;
     border-radius: 10.5px;
     margin-top: 0.5rem; 
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.4rem 0.6rem;
   }
 
 
@@ -364,6 +360,7 @@
       width: 10rem;
       background-color: gray;
       border-radius: 10px;
+      padding: 
   }        
 
   .emp-projectProgressBarInner {
@@ -377,6 +374,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 14px;
   }
 
   .emp-progressFlexBar { /*This makes the text go underneath the progress bar*/
@@ -385,14 +383,14 @@
   }
 
   
-  .emp-employee-button {
-    color: white;
-    background-color: black;
+  .emp-view-project-button {
+    color: black;
+    background-color: white;
+    border: 1px solid #D0D0D0;
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 11px;
     font-size: 1rem;
     padding: 0.8rem 0.6rem;
-    border: none;
     font-family: "Avenir Next";
     font-size: 14px;
     text-align: center;
