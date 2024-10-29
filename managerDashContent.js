@@ -1,26 +1,53 @@
 
+
+// Dummy employee task data ADD DATA FOR JOHN LITTLE
+let memberArr = ["John Little", "Harry Harrison","Greg McGregor","Ed Edwards","Jeff Jefferson","Tim Thompson"];
+let tasksArr = [[1,0,3,1],[1,1,1,1],[2,2,1,1],[1,0,1,1],[1,0,0,1],[1,1,1,2]];
+
 // Populate project list and member list on load
 document.addEventListener("DOMContentLoaded", function () {
 
     const projectList = document.getElementById("mdProjectList");
-    for (let i=2; i<8; i++) {
+    for (let i=1; i<memberArr.length; i++) {
+
+        let active = "";
+        let arrow = "";
+        if (i == 1) {
+            active = `mdActive`;
+            arrow = `<i class="fa fa-solid fa-arrow-right"></i>`;
+        }
+
         projectList.innerHTML += `
-        <div class="mdListItem">
+        <div class="mdListItem `+active+`">
             <h3>Project #`+i+`</h3>
+            `+arrow+`
         </div>
         `;
     };
 
+
+
     const memberList = document.getElementById("mdMemberList");
-    let memberArr = ["Harry Harrison","Greg McGregor","Ed Edwards","Jeff Jefferson","Tim Thompson"];
-    let tasksArr = [4,6,3,2,5];
+    // User colours
     let colourArr = ["#9F648F","#64649F","#9F6464","#869F64"];
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<memberArr.length; i++) {
 
         // Assign each user portrait a colour based on the first letter of their name
         let nameNum = memberArr[i].charCodeAt(0);
         nameNum %= 4;
         let colour = colourArr[nameNum];
+        let taskNum = 0;
+        
+        // Add up total tasks
+        for (let j=0; j<4; j++) {
+            taskNum += tasksArr[i][j];
+        }
+
+        // Display crown for team leader
+        let leaderIcon = "";
+        if (i == 0) {
+            leaderIcon = ` <i class="fa fa-solid fa-crown fa-sm"></i>`;
+        }
 
         memberList.innerHTML += `
             <div class="mdListItem">
@@ -28,9 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="user" style="background-color:`+colour+`;">
                         <i class="fa fa-solid fa-user"></i>
                     </div>
-                    <h3>`+memberArr[i]+`</h3>
+                    <h4>`+memberArr[i]+`</h4>
+                    `+leaderIcon+`
                 </div>
-                <p>`+tasksArr[i]+` Tasks</p>
+                <p>`+taskNum+` Tasks</p>
             </div>
         `
     };
@@ -38,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Project progress chart
-const progressBar = document.getElementById("mdProgressBarChart");
+const progressBar = document.getElementById("mdProgressChart");
 
 new Chart(progressBar, {
     type: 'doughnut',
@@ -74,5 +102,62 @@ new Chart(progressBar, {
         cutout: '80%',
         responsive: true,
         aspectRatio: 2
+    }
+});
+
+
+// Get dataset of each task type across all employees
+let doneTasks = [];
+let inProgressTasks = [];
+let overdueTasks = [];
+let notStartedTasks = [];
+for (let i=0; i<tasksArr.length; i++) {
+    doneTasks.push(tasksArr[i][0]);
+    inProgressTasks.push(tasksArr[i][1]);
+    overdueTasks.push(tasksArr[i][2]);
+    notStartedTasks.push(tasksArr[i][3]);
+}
+
+// Member contribution graph
+
+const contributionGraph = document.getElementById("mdContributionGraph");
+
+new Chart(contributionGraph, {
+    type: "bar",
+    data: {
+        labels: memberArr,
+        datasets: [
+            {
+                label: 'Done',
+                data: doneTasks,
+                backgroundColor: '#adda9d'
+            },
+            {
+                label: 'In Progress',
+                data: inProgressTasks,
+                backgroundColor: '#e9b385'
+            },
+            {
+                label: 'Overdue',
+                data: overdueTasks,
+                backgroundColor: '#e38c88'
+            },
+            {
+                label: 'Not Started',
+                data: notStartedTasks,
+                backgroundColor: '#c1c1c1'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        }
     }
 });

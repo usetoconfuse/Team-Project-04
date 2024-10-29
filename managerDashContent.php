@@ -11,12 +11,7 @@
     <div id="mdProjectListBox">
         <h1>All Projects</h1>
 
-        <div class="mdListContainer" id="mdProjectList">
-            <div class="mdListItem mdActive">
-                <h3>Project #1</h3>
-                <i class="fa fa-solid fa-arrow-right"></i>
-            </div>
-        </div>
+        <div class="mdListContainer" id="mdProjectList"></div>
     </div>
 
 
@@ -26,7 +21,7 @@
 
         <h1>Project #1</h1>
         <div id="mdProgressChartContainer">
-            <canvas id="mdProgressBarChart"></canvas>
+            <canvas id="mdProgressChart"></canvas>
         </div>
         <div id="mdProgressPercentageText">
             <h1>25%</h1>
@@ -72,24 +67,16 @@
     <!-- List of team members -->
     <div id="mdProjectMembersBox">
         <h1>Team Members</h1>
-        <div class="mdListContainer" id="mdMemberList">
-            <div class="mdListItem">
-                <div>
-                    <div class="user" style="background-color:#9F6464">
-                        <i class="fa fa-solid fa-user"></i>
-                    </div>
-                    <h3>John Little</h3>
-                    <i class="fa fa-solid fa-crown"></i>
-                </div>
-                <p>4 Tasks</p>
-            </div>
-        </div>
+        <div class="mdListContainer" id="mdMemberList"></div>
     </div>
 
 
     <!-- Graph showing how many tasks in each category are assigned to each member -->
     <div id="mdProjectContributionBox">
-        <h1>Project Contribution Graph</h1>
+        <h1>Tasks by Member</h1>
+        <div id="mdContributionGraphContainer">
+            <canvas id="mdContributionGraph"></canvas>
+        </div>
     </div>
 </div>
 

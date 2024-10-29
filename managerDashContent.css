@@ -6,7 +6,7 @@
     display: grid;
     grid-template-areas:
     'projects progress members'
-    'contribution contribution contribution';
+    'projects contribution contribution';
     grid-template-columns: 32% 32% 32%;
     grid-template-rows: 49% 49%;
     gap: 2%;
@@ -132,8 +132,8 @@
     grid-area: members;
 }
 
-#mdMemberList .mdListItem h3{
-    padding-inline: 0.5rem;
+#mdMemberList .mdListItem h4{
+    padding-inline: 0.3rem;
 }
 
 .user{
@@ -153,6 +153,12 @@
     grid-area: contribution;
 }
 
+#mdContributionGraphContainer{
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    height: 100%;
+}
 
 @media (max-width: 768px) {
     #mdGrid {
