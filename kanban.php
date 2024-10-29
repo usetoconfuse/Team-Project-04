@@ -51,7 +51,7 @@
             <i class="fa fa-solid fa-caret-up"></i>
         </div>
         <!--Kanban Body-->
-        <div class="kanban-body open">
+        <div class="kanban-body open" id = 'kanban-to-do'>
 
             <!--Kanban Card 1-->
             <div class="kanban-card" draggable=true>
@@ -110,7 +110,7 @@
             <i class="fa fa-solid fa-caret-down"></i>
         </div>
         <!--Kanban Body-->
-        <div class="kanban-body">
+        <div class="kanban-body" id = 'kanban-in-progress'>
 
         </div>
     </div>
@@ -124,7 +124,7 @@
             <i class="fa fa-solid fa-caret-down"></i>
         </div>
         <!--Kanban Body-->
-        <div class="kanban-body">
+        <div class="kanban-body" id = 'kanban-completed'>
             <!--Kanban Card 1-->
             <div class="kanban-card" draggable=true>
                 <div class="kanban-card-top">

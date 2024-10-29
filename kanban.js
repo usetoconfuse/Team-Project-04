@@ -66,9 +66,20 @@ kanbanContainer.addEventListener('click', (e) => {
     task.addEventListener("dragend", () => {
       task.classList.remove("dragging");
       task.classList.remove('overlay')
+      // GET THE ID OF WHERE TH EITEM IS DROPPED IN
+      // DEPENDING ON THIS WE RUN SOME CODE
+      const currentSectionId = task.parentElement.id;
+      console.log(`Task dropped in section: ${currentSectionId}`);
+      if (currentSectionId === 'kanban-to-do') {
+        task.style.backgroundColor = 'red';
+      } else if (currentSectionId === 'kanban-in-progress') {
+        task.style.backgroundColor = 'yellow';
+      } else if (currentSectionId === 'kanban-completed') {
+          task.style.backgroundColor = 'green';
+      }
     });
+
   });
-  
   kanbanSection.forEach((section) => {
     section.addEventListener("dragover", (e) => {
       e.preventDefault();
