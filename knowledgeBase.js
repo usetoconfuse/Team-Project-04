@@ -36,9 +36,24 @@ document.getElementById("allBtn").addEventListener("click", () => {
 });
 
 //when topics are click only display those topics
+let currentTopic = null;
 topics.forEach(topic => {
     topic.addEventListener("click", (e) => {
         const selectedTopic = e.target.id; // Get the clicked topic's ID
+
+        if (currentTopic !== null) {
+            document.getElementById(currentTopic).classList.remove("kb-active");
+        }
+
+        if (currentTopic === selectedTopic) {
+            currentTopic = null;
+            formPosts.forEach(post => {
+                post.style.display = "block";
+            });
+            return;
+        }
+        currentTopic = selectedTopic;
+        document.getElementById(currentTopic).classList.add("kb-active");
 
         formPosts.forEach(post => {
             const postKey = post.getAttribute("data-key"); // Get post's data-key
@@ -86,12 +101,12 @@ closeTopicModalButton.onclick = function () {
     topicModal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+
+window.addEventListener("onclick", (event) => {
     if (event.target == topicModal) {
         topicModal.style.display = "none";
     }
-} 
+});
 
 document.getElementById("topic-modal-form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -111,4 +126,31 @@ document.getElementById("topic-modal-form").addEventListener("submit", (e) => {
         
         topicModal.style.display = "none";
         }
+});
+
+
+var postModal = document.getElementById("post-modal");
+var postModalButton = document.getElementById("new-post-btn");
+
+// Get the <span> element that closes the modal
+var closePostModalButton = document.getElementById("close-post-modal");
+
+// When the user clicks on the button, open the modal
+postModalButton.onclick = function () {
+    postModal.style.display = "flex";
+}
+
+// When the user clicks on <span> (x), close the modal
+closePostModalButton.onclick = function () {
+    postModal.style.display = "none";
+}
+
+window.addEventListener("onclick", (event) => {
+    if (event.target == postModal) {
+        postModal.style.display = "none";
+    }
+});
+
+document.getElementById("post-modal-form").addEventListener("submit", (e) => {
+    e.preventDefault();
 });

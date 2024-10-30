@@ -1,5 +1,5 @@
 <div class="kb-content">
-    <div class="header-section">
+    <div class="kb-header-section">
         <h1 class="kb-title">Knowledge Base</h1>
         <div class="form-btns">
             <button class="active" id="allBtn">Show All</button>
@@ -9,82 +9,133 @@
     </div>
     <div class="kb-main">
         <div class="kb-listing">
-            <div class="kb-createpost">
-                <input type="text" placeholder="Create a post">
-                <button>
-                    <i class="fa-solid fa-plus"></i>
+            <div class="kb-listing-header">
+                <div class="kb-listing-search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search Post Content">
+                </div>
+                <button id="new-post-btn">
+                    New Post
                 </button>
             </div>
 
             <div class="kb-posts">
                 <?php
-                for ($i = 0; $i < 4; $i++) {
-                    //set id for each post
-                    $id = ($i % 2 == 0) ? "technical" : "nonTechnical";
-                    switch ($i) {
-                        case 0:
-                            $key = "coding-standards";
-                            break;
-                        case 1:
-                            $key = "printer-issues";
-                            break;
-                        case 2:
-                            $key = "cyber-security";
-                            break;
-                        case 3:
-                            $key = "workplace-hygiene";
-                            break;
-                    }
+                $posts = [
+                    [
+                        'id' => 'technical',
+                        'key' => 'coding-standards',
+                        'title' => 'How we format our code',
+                        'content' => 'All code should be indented with 4 spaces, and all functions should be declared in camel case.'
+                    ],
+                    [
+                        'id' => 'nonTechnical',
+                        'key' => 'printer-issues',
+                        'title' => 'How to replace paper in the printer',
+                        'content' => 'No need to call IT, just follow these simple steps to replace the paper in your printer. First, open the paper tray, then remove the empty paper, and finally insert the new paper. Simple!'
+                    ],
+                    [
+                        'id' => 'technical',
+                        'key' => 'cyber-security',
+                        'title' => 'How to stay safe from cyber attacks',
+                        'content' => 'Cybersecurity is a big deal, and we all need to do our part to stay safe. Make sure to use strong passwords, and never share your password with anyone. Also, be sure to keep your software up to date, and never click on suspicious links. If there is ever a security breach, be sure to report it to IT immediately.'
+                    ],
+                    [
+                        'id' => 'nonTechnical',
+                        'key' => 'workplace-hygiene',
+                        'title' => 'How to wash your hands',
+                        'content' => '
+                            1. Wet your hands with water.
+                            2. Apply enough soap to cover your hands.
+                            3. Rub your hands together.
+                            4. Use one hand to rub the back of the other hand and clean in between the fingers. Do the same with the other hand.
+                            5. Rub your hands together and clean in between your fingers.
+                            6. Grip the fingers of each hand together with the backs of your fingers against the palms of your other hand. Rub your fingertips together and rub the back of your fingers against your palms.
+                            7. Rub one thumb using your other hand. Do the same with the other thumb.
+                            8. Rub the tips of your fingers on the palm of your other hand. Do the same with other hand.
+                            9. Rinse your hands with water.
+                            10. Dry your hands completely with a disposable towel.
+                            11. Use the disposable towel to turn off the tap.
+                        '
+                    ]
+                ];
+                foreach ($posts as $post) {
+                    $post['content'] = nl2br($post['content']);
                     echo '
-                    <div class="kb-post" id="' . $id . '"  data-key="' . $key . '">
-                        <h1 class="kb-post-title">
-                            Post title ' . ($i + 1) . " " . $id . '
-                        </h1>
+                    <div class="kb-post" id="' . $post['id'] . '" data-key="' . $post['key'] . '">
+                        <h2>' . $post['title'] . '</h2>
                         <div class="kb-post-info">
                             <div class="kb-post-avatar">
                                 <i class="fa-solid fa-user"></i>
                             </div>
-                            <div class="kb-post-topic">
-                            ' . $key . '
+                            <div class="kb-text-sm">
+                                ' . $post['key'] . '
                             </div>
                         </div>
                         <div class="kb-post-divider"></div>
-                        <p class="kb-post-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ' . ($i + 1) . '</p>
+                        <p class="kb-post-content">' . $post['content'] . '</p>
                     </div>';
                 }
                 ?>
             </div>
         </div>
         <div class="kb-sidebar">
-            <h3 class="kb-sidebar-title">Filter by Topic</h3>
+            <h2>Filter by Topic</h2>
             <ul id="topicsList">
                 <li class="kb-topic" id="codingStandards">Coding Standards</li>
                 <li class="kb-topic" id="printerIssues">Printer Issues</li>
                 <li class="kb-topic" id="cybersecurity">Cybersecurity</li>
                 <li class="kb-topic" id="workplaceHygiene">Workplace Hygiene</li>
             </ul>
-            <button id="new-topic-btn">Add Topic</button>
+            <button id="new-topic-btn">New Topic</button>
+        </div>
+
+        <div id="topic-modal" class="kb-modal">
+            <div class="kb-modal-content">
+                <span id="close-topic-modal" class="kb-modal-close">&times;</span>
+                <h1 class="text-center">New Topic</h1>
+                <form id="topic-modal-form">
+                    <div>
+                        <label class="text">Topic Name:</label>
+                        <input type="text" id="topicInput" placeholder="Enter new topic name">
+                    </div>
+                    <button type="submit" id="add-topic-btn">Add Topic</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="post-modal" class="kb-modal">
+            <div class="kb-modal-content">
+                <span id="close-post-modal" class="kb-modal-close">&times;</span>
+                <h1 class="text-center">New Post</h1>
+                <form id="post-modal-form">
+                    <div>
+                        <label class="text">Post Title:</label>
+                        <input type="text" id="titleInput" placeholder="Enter post title">
+                    </div>
+                    <div>
+                        <label class="text">Post Content:</label>
+                        <textarea id="contentInput" placeholder="Enter post content"></textarea>
+                    </div>
+                    <div>
+                        <label class="text">Technical?</label>
+                        <select id="typeSelect">
+                            <option value="technical">Technical</option>
+                            <option value="nonTechnical">Non-Technical</option>
+                        </select>
+                    <div>
+                        <label class="text">Topic:</label>
+                        <select id="topicSelect">
+                            <option value="codingStandards">Coding Standards</option>
+                            <option value="printerIssues">Printer Issues</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="workplaceHygiene">Workplace Hygiene</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="add-post-btn">Send Post</button>
+                </form>
+            </div>
         </div>
     </div>
-
-    <div id="topic-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-topic-modal" class="close">&times;</span>
-            <h1 id="topic-modal-title">New Topic</h1>
-            <form id="topic-modal-form">
-                <div>
-                    <label class="text">Topic:</label>
-                    <input type="text" class="text-input" id="topicInput" placeholder="Enter topic name">
-                </div>
-                <button type="submit" id="add-topic-btn">submit</button>
-            </form>
-        </div>
-    </div>
-    <!-- <div id="post-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
-    </div> -->
-
 </div>
 <script src="knowledgeBase.js"></script>
