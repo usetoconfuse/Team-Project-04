@@ -53,7 +53,7 @@ kanbanContainer.addEventListener('click', (e) => {
     })
 });
 
-//====Add Task Modal 
+//====Add Task Modal  
 const addTaskModal = document.querySelector('.kanban-modal.add-task-modal')
 const addTaskBtn = document.querySelector('.add-task-btn')
 const closeAddTaskModal = document.querySelector('.kanban-modal.add-task-modal .kanban-close-modal-btn')

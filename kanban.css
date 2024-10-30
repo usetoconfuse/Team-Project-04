@@ -8,6 +8,11 @@
     font-family: 'avenir next';
 }
 
+.project-intro.personal-kanban-intro {
+    justify-content: space-between;
+    margin: 2rem 2rem;
+}
+
 .project-txt p:nth-of-type(1) {
     color:black;
     font-size: 22px;

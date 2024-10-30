@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee View</title>
-    <link rel="stylesheet" href="kanban.css"></link>
-
-</head>
-
-<body>
 
     <div class="emp-grid-container">
 
@@ -479,9 +468,4 @@
       }
     }
 </style>
-
-
-</body>
-</html>
-
 
