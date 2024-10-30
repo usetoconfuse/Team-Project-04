@@ -320,3 +320,28 @@
     gap: 10px;
     margin: 10px;
 }
+
+.kb-title-line {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.kb-title-header {
+    flex-grow: 1;
+}
+
+.kb-post-badges {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.kb-badge {
+    background-color: var(--primary-colour);
+    color: var(--bg-colour);
+    padding: 5px;
+    border-radius: var(--line-border-radius);
+}

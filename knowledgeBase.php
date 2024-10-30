@@ -61,14 +61,21 @@
                     $post['content'] = nl2br($post['content']);
                     echo '
                     <div class="kb-post" id="' . $post['id'] . '" data-key="' . $post['key'] . '">
-                        <h2>' . $post['title'] . '</h2>
+                        <div class="kb-title-line">
+                            <h2 class="kb-title-header">' . $post['title'] . '</h2>
+                            <div class="kb-post-badges">
+                                <div class="kb-badge">' . $post['id'] . '</div>
+                                <div class="kb-badge">' . $post['key'] . '</div>
+                            </div>
+                        </div>
                         <div class="kb-post-info">
                             <div class="kb-post-avatar">
                                 <i class="fa-solid fa-user"></i>
                             </div>
                             <div class="kb-text-sm">
-                                ' . $post['key'] . '
+                                Author Name
                             </div>
+
                         </div>
                         <div class="kb-post-divider"></div>
                         <p class="kb-post-content">' . $post['content'] . '</p>
