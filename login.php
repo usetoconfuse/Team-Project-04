@@ -34,8 +34,8 @@
                     <span>OR</span>
                     <hr class="bar" />
                 </div>
+                <a href="signUp.php" class="signup-btn">Register an account</a>
             </div>
-            <a href="#" class="signup-btn">Create an account</a>
         </div>
         <div id="right">
             <img src="Demo.svg" alt="demo-image">
