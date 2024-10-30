@@ -1,6 +1,47 @@
 
+//--------------------------FUNCTIONS-----------------------
 
-// Dummy employee task data
+// Function to make contribution graph vertical/horizontal based on viewport size
+function updateContributionGraphAxes() {
+    let width = document.documentElement.clientWidth;
+    if (width <= 768 && contributionGraph.options.indexAxis == 'x') {
+        contributionGraph.options.indexAxis = 'y';
+        contributionGraph.options.scales = {
+            x: {
+                stacked: true,
+                ticks: {
+                    stepSize: 1
+                }
+            },
+            y: {
+                stacked: true,
+            }
+        }
+        contributionGraph.update('none');
+    }
+
+    else if (width > 768 && contributionGraph.options.indexAxis == 'y') {
+        contributionGraph.options.indexAxis = 'x';
+        contributionGraph.options.scales = {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+        contributionGraph.update('none');
+    }
+};
+
+//----------------------------------DATA-----------------------------
+
+// Dummy project data
+let creator = "Larry Biggs";
+let projectDates = ["25/09/2024", "04/11/2024"];
 let memberArr = ["John Little", "Harry Harrison","Greg McGregor","Ed Edwards","Jeff Jefferson","Tim Thompson"];
 let tasksArr = [[1,0,2,1,0,1],[0,1,2,0,3,1],[2,0,0,1,0,1],[1,0,1,2,0,0]];
 let doneTotal = 0;
@@ -18,8 +59,113 @@ for (let i=0; i<memberArr.length; i++) {
 // User colours
 let colourArr = ["#9F648F","#64649F","#9F6464","#869F64"];
 
+
+//----------------------------CHARTS-----------------------------
+
+// Project progress chart
+const progressBar = document.getElementById("mdProgressChart");
+
+const progressBarChart = new Chart(progressBar, {
+    type: 'doughnut',
+    data: {
+        labels: ['Done',
+            'In Progress',
+            'Overdue',
+            'Not Started'],
+        datasets: [{
+            data: [doneTotal,inProgressTotal,overdueTotal,notStartedTotal],
+            backgroundColor: [
+                '#adda9d',
+                '#e9b385',
+                '#e38c88',
+                '#c1c1c1'
+            ]
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+            /* tooltip: {
+                enabled: false
+            }*/
+        },
+        /* hover: {
+            mode: null
+        }, */
+        rotation: -90,
+        circumference: 180, 
+        cutout: '80%',
+        responsive: true,
+        aspectRatio: 2
+    }
+});
+
+
+// Member contribution graph
+
+const contribution = document.getElementById("mdContributionGraph");
+
+const contributionGraph = new Chart(contribution, {
+    type: "bar",
+    data: {
+        labels: memberArr,
+        datasets: [
+            {
+                label: 'Done',
+                data: tasksArr[0],
+                backgroundColor: '#adda9d'
+            },
+            {
+                label: 'In Progress',
+                data: tasksArr[1],
+                backgroundColor: '#e9b385'
+            },
+            {
+                label: 'Overdue',
+                data: tasksArr[2],
+                backgroundColor: '#e38c88'
+            },
+            {
+                label: 'Not Started',
+                data: tasksArr[3],
+                backgroundColor: '#c1c1c1'
+            }
+        ]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+            ticks: {
+                font: {
+                    family: 'Avenir Next'
+                }
+            }
+        },
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        },
+        responsive: true,
+        indexAxis: 'x'
+    }
+});
+
+
+//----------------------EVENT LISTENERS-------------------------
+
 // On load
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
     // Populate project list
     const projectList = document.getElementById("mdProjectList");
@@ -30,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (i == 1) {
             active = `mdActive`;
             arrow = `<i id="mdArrow" class="fa fa-solid fa-arrow-right"></i>`;
+            document.getElementById("mdSelectedProjectName").innerText = "Project #" + i;
         }
 
         projectList.innerHTML += `
@@ -58,6 +205,16 @@ document.addEventListener("DOMContentLoaded", function () {
             projectNameText.innerText = projectSelected.innerText;
         });
     });
+
+    // Populate project info
+    document.getElementById("mdProjectCreationDateText").innerText = "Created: "+projectDates[0];
+    document.getElementById("mdProjectDeadlineDateText").innerText = "Deadline: "+projectDates[1];
+    document.getElementById("mdProjectCreatorText").innerText = "Created by: "+creator;
+    document.getElementById("mdTeamLeaderText").innerText = "Team Leader: "+memberArr[0];
+    document.getElementById("mdProjectMemberCountText").innerText = memberArr.length+" Members";
+
+    // Make team members box header show number of members
+    document.getElementById("mdProjectMembersBoxText").innerText = "Team Members ("+memberArr.length+")";
 
     // Calculate progress completion percentage
     const progressText = document.getElementById("mdProgressPercentageText");
@@ -107,101 +264,15 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
     };
+
+    // Make contribution bar chart start vertical/horizontal based on viewport
+    // We have to call update again afterwards to ensure correct rendering
+    updateContributionGraphAxes();
+    contributionGraph.update();
 });
 
-
-// Project progress chart
-const progressBar = document.getElementById("mdProgressChart");
-
-new Chart(progressBar, {
-    type: 'doughnut',
-    data: {
-        labels: ['Done',
-            'In Progress',
-            'Overdue',
-            'Not Started'],
-        datasets: [{
-            data: [doneTotal,inProgressTotal,overdueTotal,notStartedTotal],
-            backgroundColor: [
-                '#adda9d',
-                '#e9b385',
-                '#e38c88',
-                '#c1c1c1'
-            ]
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
-            },
-            /* tooltip: {
-                enabled: false
-            }*/
-        },
-        /* hover: {
-            mode: null
-        }, */
-        rotation: -90,
-        circumference: 180, 
-        cutout: '80%',
-        responsive: true,
-        aspectRatio: 2
-    }
-});
-
-
-// Member contribution graph
-
-const contributionGraph = document.getElementById("mdContributionGraph");
-
-new Chart(contributionGraph, {
-    type: "bar",
-    data: {
-        labels: memberArr,
-        datasets: [
-            {
-                label: 'Done',
-                data: tasksArr[0],
-                backgroundColor: '#adda9d'
-            },
-            {
-                label: 'In Progress',
-                data: tasksArr[1],
-                backgroundColor: '#e9b385'
-            },
-            {
-                label: 'Overdue',
-                data: tasksArr[2],
-                backgroundColor: '#e38c88'
-            },
-            {
-                label: 'Not Started',
-                data: tasksArr[3],
-                backgroundColor: '#c1c1c1'
-            }
-        ]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
-            },
-            ticks: {
-                font: {
-                    family: 'Avenir Next'
-                }
-            }
-        },
-        scales: {
-            x: {
-                stacked: true
-            },
-            y: {
-                stacked: true
-            }
-        },
-        responsive: true,
-        indexAxis: 'y'
-    }
-});
+// Make contribution bar chart stack vertically on small viewports
+// The resize event doesn't fire when a browser is maximised/minimised/restored
+// so the chart can be too big/too small when this happens
+// however the container overflows so this works
+window.addEventListener("resize", () => updateContributionGraphAxes());

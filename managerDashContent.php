@@ -14,11 +14,25 @@
     </div>
 
 
+    <!-- Overview information about the current project -->
+     <div i="mdProjectInfoBox">
+        <h1 id="mdSelectedProjectName"></h1>
+        <div id="mdInfoContainer">
+            <h3 id="mdProjectMemberCountText"></h3>
+            <h3 id="mdProjectCreationDateText"></h3>
+            <h3 id="mdProjectDeadlineDateText"></h3>
+            <br>
+            <h3 id="mdProjectCreatorText"></h3>
+            <h3 id="mdTeamLeaderText"></h3>
+        </div>
+     </div>
+
+
     <!-- Graph showing project progress with number of tasks
      completed/in progress/overdue/not started -->
     <div id="mdProjectProgressBox">
 
-        <h1 id="mdSelectedProjectName">Project #1</h1>
+        <h1>Progress</h1>
         <div id="mdProgressChartContainer">
             <canvas id="mdProgressChart"></canvas>
         </div>
@@ -65,7 +79,7 @@
 
     <!-- List of team members -->
     <div id="mdProjectMembersBox">
-        <h1>Team Members</h1>
+        <h1 id="mdProjectMembersBoxText"></h1>
         <div class="mdListContainer" id="mdMemberList"></div>
     </div>
 
