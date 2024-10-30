@@ -53,6 +53,23 @@ kanbanContainer.addEventListener('click', (e) => {
     })
 });
 
+//====Add Task Modal 
+const addTaskModal = document.querySelector('.kanban-add-task-modal')
+const addTaskBtn = document.querySelector('.add-task-btn')
+const closeAddTaskModal = document.querySelector('.kanban-close-modal-btn')
+
+addTaskBtn.addEventListener('click', () => {
+  addTaskModal.style.display = 'flex';
+})
+closeAddTaskModal.addEventListener('click', () => {
+  addTaskModal.style.display = 'none';
+})
+window.addEventListener('click', (e) => {
+  if (e.target == addTaskModal) {
+    addTaskModal.style.display = 'none';
+  }
+})
+
 //====Dragging Features
 
   const taskCard = document.querySelectorAll('.kanban-card')

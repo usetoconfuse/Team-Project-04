@@ -264,6 +264,167 @@
     text-indent: -9999px;
 }
 
+/*====Add Task Modal====*/
+.kanban-add-task-modal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background:  rgba(0,0,0,0.5);
+}
+
+.kanban-add-task-modal-box {
+    margin: 10% auto;
+    width: 40%;
+    background: white;
+    color: black;
+    position: relative;
+    animation: openmodal 0.4s;
+    border-radius: 30px;
+}
+
+@keyframes openmodal {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+/*modal header*/
+.kanban-add-task-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    background-color: #F5F5F5;
+    padding: 1.2rem 1rem 0.6rem 1rem;
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.kanban-add-task-modal-header i {
+    font-size: 16px;
+}
+
+.kanban-close-modal-btn {
+    color: white; 
+    background-color: black;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*modal body*/
+.kanban-add-task-modal form {
+    padding: 0 1rem 0.8rem 1rem;
+}
+
+label {
+    margin-bottom: 0.2rem;
+}
+
+/*each section is flexbox*/
+.task-title-form, .task-description-form, .task-upload-form, .task-dropdown {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1.4rem;
+    font-size: 14px;
+}
+
+.task-dropdowns-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*styles - text box and file*/
+.kanban-add-task-modal form input[type="text"], .kanban-add-task-modal form textarea, .kanban-add-task-modal input[type="file"] {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 2px solid #e1e1e1;
+    box-shadow: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.kanban-add-task-modal form textarea {
+    height: 6rem;
+    resize: none;
+}
+
+/*styles - custom file boxes*/
+.kanban-add-task-modal input[type="file"] {
+    height: 6rem;
+    border: 2px #e1e1e1 dashed;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    appearance: none; 
+    background-color: black; 
+    color: white;              
+    border: none;
+    padding: 0.4rem 0.4rem;          
+    border-radius: 4px;         
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/*styles - dropdowns and date*/
+.task-dropdown select, .task-dropdown input[type="date"]  {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 2px solid #e1e1e1;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0 5px 5px 0;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    height: 40px;
+}
+
+/*add icons next to dropdown*/
+.task-dropdown-select-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-dropdown-select-options i {
+    padding: 0.4rem 0;
+    width: 34px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px 0 0 5px;
+}
+
+/*Focus states*/
+.kanban-add-task-modal form input[type="text"]:focus, .kanban-add-task-modal form textarea:focus, .task-dropdown select:focus {
+    border: 2px solid black;
+}
+
+.kanban-add-task-modal form input[type="file"]:focus {
+    border: 2px dashed black;
+}
+
+
 
 /*====Responsiveness====*/
 @media  (max-width: 1280px) {
@@ -309,6 +470,10 @@
     .kanban-body.open .kanban-header {
         border-radius: 15px 15px 0 0;
     }
+
+    .kanban-add-task-modal-box {
+        width: 60%;
+    }
 }
 
 @media  (max-width: 700px) {
@@ -329,6 +494,10 @@
     
     .kanban-board {
         margin: 2.5rem auto;
+    }
+
+    .kanban-add-task-modal-box {
+        width: 95%;
     }
 }
 
