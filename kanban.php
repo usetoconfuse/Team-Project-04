@@ -121,7 +121,7 @@
                         <a href="">View Task</a>
                         <div class="due-date">
                             <i class="fa fa-regular fa-calendar"></i>
-                            <p>21 Oct</p>
+                            <p>8 Nov</p>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                         <a href="">View Task</a>
                         <div class="due-date">
                             <i class="fa fa-regular fa-calendar"></i>
-                            <p>21 Oct</p>
+                            <p>6 Nov</p>
                         </div>
                     </div>
                 </div>
