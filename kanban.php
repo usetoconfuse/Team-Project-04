@@ -32,6 +32,9 @@
     <div class="vertical-bar"></div>
 
     <div class="projects-intro-buttons">
+        <div class="filter-task-btn">
+            <i class="fa fa-solid fa-sliders"></i>
+        </div>
         <div class="add-task-btn">
             <i class="fa fa-solid fa-plus"></i>
             Add Task
@@ -182,10 +185,29 @@
     </div>
 </section>
 
+<!--View Task Modal-->
+<div class="kanban-modal view-task-modal" >
+    <div class="kanban-modal-box">
+        <!--Header-->
+        <div class="kanban-modal-header">
+            <p>Add Task</p>
+            <div class="kanban-close-modal-btn">
+                <i class="fa-solid fa-x"></i>
+            </div>
+        </div>
+        <!--Body-->
+        <div class="kanban-modal-body">
+
+        </div>
+        
+    </div>
+</div>
+
+
 
 
 <!--Add task modal-->
-<div class="kanban-modal" >
+<div class="kanban-modal add-task-modal" >
     <div class="kanban-modal-box">
         <!--Header-->
         <div class="kanban-modal-header">
