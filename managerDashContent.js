@@ -17,7 +17,6 @@ function updateContributionGraphAxes() {
                 stacked: true,
             }
         }
-        contributionGraph.update('none');
     }
 
     else if (width > 768 && contributionGraph.options.indexAxis == 'y') {
@@ -33,8 +32,8 @@ function updateContributionGraphAxes() {
                 }
             }
         }
-        contributionGraph.update('none');
     }
+    contributionGraph.update('none');
 };
 
 //----------------------------------DATA-----------------------------
@@ -275,4 +274,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // The resize event doesn't fire when a browser is maximised/minimised/restored
 // so the chart can be too big/too small when this happens
 // however the container overflows so this works
-window.addEventListener("resize", () => updateContributionGraphAxes());
+window.addEventListener("resize", () => {
+    updateContributionGraphAxes();
+});
