@@ -104,6 +104,28 @@
                     </div>
                 </div>
             </div>
+              <!--Kanban Card 3-->
+              <div class="kanban-card" draggable=true>
+                <div class="kanban-card-top">
+                    <p>Task Title</p>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <i class="fa fa-solid fa-caret-down"></i>
+                </div>
+                <div class="kanban-card-body">
+                    <p class="kanban-card-description">This is the task you have been set. 
+                                                    You have to develop a kanban board.</p>
+                    
+                    <div class="kanban-separator"></div>
+
+                    <div class="kanban-card-bottom">
+                        <a href="">View Task</a>
+                        <div class="due-date">
+                            <i class="fa fa-regular fa-calendar"></i>
+                            <p>21 Oct</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -133,7 +155,7 @@
         <!--Kanban Body-->
         <div class="kanban-body" id = 'kanban-completed'>
             <!--Kanban Card 1-->
-            <div class="kanban-card" id="kanban-task-completed" draggable=true>
+            <div class="kanban-card" draggable=true>
                 <div class="kanban-card-top">
                     <p>Task Title</p>
                     <i class="fa-solid fa-circle-check"></i>
@@ -160,11 +182,13 @@
     </div>
 </section>
 
+
+
 <!--Add task modal-->
-<div class="kanban-add-task-modal">
-    <div class="kanban-add-task-modal-box">
+<div class="kanban-modal" >
+    <div class="kanban-modal-box">
         <!--Header-->
-        <div class="kanban-add-task-modal-header">
+        <div class="kanban-modal-header">
             <p>Add Task</p>
             <div class="kanban-close-modal-btn">
                 <i class="fa-solid fa-x"></i>

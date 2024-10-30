@@ -265,7 +265,7 @@
 }
 
 /*====Add Task Modal====*/
-.kanban-add-task-modal {
+.kanban-modal {
     display: none;
     align-items: center;
     justify-content: center;
@@ -278,7 +278,7 @@
     background:  rgba(0,0,0,0.5);
 }
 
-.kanban-add-task-modal-box {
+.kanban-modal-box {
     margin: 10% auto;
     width: 40%;
     background: white;
@@ -297,7 +297,7 @@
 }
 
 /*modal header*/
-.kanban-add-task-modal-header {
+.kanban-modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -309,7 +309,7 @@
     border-bottom: 1px solid black;
 }
 
-.kanban-add-task-modal-header i {
+.kanban-modal-header i {
     font-size: 16px;
 }
 
@@ -325,7 +325,7 @@
 }
 
 /*modal body*/
-.kanban-add-task-modal form {
+.kanban-modal form {
     padding: 0 1rem 0.8rem 1rem;
 }
 
@@ -349,7 +349,7 @@ label {
 }
 
 /*styles - text box and file*/
-.kanban-add-task-modal form input[type="text"], .kanban-add-task-modal form textarea, .kanban-add-task-modal input[type="file"] {
+.kanban-modal form input[type="text"], .kanban-modal form textarea, .kanban-modal input[type="file"] {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -358,13 +358,13 @@ label {
     border-radius: 5px;
 }
 
-.kanban-add-task-modal form textarea {
+.kanban-modal  form textarea {
     height: 6rem;
     resize: none;
 }
 
 /*styles - custom file boxes*/
-.kanban-add-task-modal input[type="file"] {
+.kanban-modal  input[type="file"] {
     height: 6rem;
     border: 2px #e1e1e1 dashed;
 }
@@ -416,11 +416,11 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*Focus states*/
-.kanban-add-task-modal form input[type="text"]:focus, .kanban-add-task-modal form textarea:focus, .task-dropdown select:focus {
+.kanban-modal  form input[type="text"]:focus, .kanban-modal form textarea:focus, .task-dropdown select:focus {
     border: 2px solid black;
 }
 
-.kanban-add-task-modal form input[type="file"]:focus {
+.kanban-modal form input[type="file"]:focus {
     border: 2px dashed black;
 }
 
@@ -471,7 +471,7 @@ input[type="file"]::-webkit-file-upload-button {
         border-radius: 15px 15px 0 0;
     }
 
-    .kanban-add-task-modal-box {
+    .kanban-modal-box {
         width: 60%;
     }
 }
@@ -496,7 +496,7 @@ input[type="file"]::-webkit-file-upload-button {
         margin: 2.5rem auto;
     }
 
-    .kanban-add-task-modal-box {
+    .kanban-modal-box {
         width: 95%;
     }
 }

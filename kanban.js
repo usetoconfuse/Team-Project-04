@@ -54,7 +54,7 @@ kanbanContainer.addEventListener('click', (e) => {
 });
 
 //====Add Task Modal 
-const addTaskModal = document.querySelector('.kanban-add-task-modal')
+const addTaskModal = document.querySelector('.kanban-modal')
 const addTaskBtn = document.querySelector('.add-task-btn')
 const closeAddTaskModal = document.querySelector('.kanban-close-modal-btn')
 
@@ -89,15 +89,8 @@ window.addEventListener('click', (e) => {
       const kanbanCardDueDate = task.querySelector('.due-date');
 
       //Change the overdue tag depending on section it is in 
-      if (task.id === 'kanban-task-overdue') {
-        if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
-          kanbanCardDueDate.style.backgroundColor = '#E6757E';
-          kanbanCardDueDate.style.color = 'white';
-        } else if (currentSectionId === 'kanban-completed') {
-          kanbanCardDueDate.style.backgroundColor = '';
-          kanbanCardDueDate.style.color = '#BAB7B7';
-        }
-      } 
+      //TO-DO ADD BACK FUNCTION
+      validate_date_icon(task, kanbanCardDueDate, currentSectionId);
       
     });
 
@@ -138,17 +131,37 @@ window.addEventListener('click', (e) => {
     return closestTask;
   };
 
+function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
+  if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
+    if (task.id === 'kanban-task-overdue') {
+      kanbanCardDueDate.style.backgroundColor = '#E6757E';
+      kanbanCardDueDate.style.color = 'white';
+    } else {
+      kanbanCardDueDate.style.backgroundColor = '';
+      kanbanCardDueDate.style.color = '#BAB7B7';
+    }
+  
+  } else if (currentSectionId === 'kanban-completed') {
+    kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
+    kanbanCardDueDate.style.color = 'white';
+  }
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const taskCards = document.querySelectorAll('.kanban-board .kanban-card');
+  taskCards.forEach(task => {
+    const kanbanCardDueDate = task.querySelector('.due-date');
+    const currentSectionId = task.parentElement.id;
+    validate_date_icon(task, kanbanCardDueDate, currentSectionId);
+    if (currentSectionId === 'kanban-completed'){
+      kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
+      kanbanCardDueDate.style.color = 'white';
+    }
+  });
 
 
 
 
-
-
-
-
-
-
-
-
-
+});
 
