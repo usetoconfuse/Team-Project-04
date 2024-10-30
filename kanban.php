@@ -186,22 +186,7 @@
 </section>
 
 <!--View Task Modal-->
-<div class="kanban-modal view-task-modal" >
-    <div class="kanban-modal-box">
-        <!--Header-->
-        <div class="kanban-modal-header">
-            <p>Add Task</p>
-            <div class="kanban-close-modal-btn">
-                <i class="fa-solid fa-x"></i>
-            </div>
-        </div>
-        <!--Body-->
-        <div class="kanban-modal-body">
 
-        </div>
-        
-    </div>
-</div>
 
 
 

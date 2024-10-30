@@ -54,9 +54,9 @@ kanbanContainer.addEventListener('click', (e) => {
 });
 
 //====Add Task Modal 
-const addTaskModal = document.querySelector('.kanban-modal')
+const addTaskModal = document.querySelector('.kanban-modal.add-task-modal')
 const addTaskBtn = document.querySelector('.add-task-btn')
-const closeAddTaskModal = document.querySelector('.kanban-close-modal-btn')
+const closeAddTaskModal = document.querySelector('.kanban-modal.add-task-modal .kanban-close-modal-btn')
 
 addTaskBtn.addEventListener('click', () => {
   addTaskModal.style.display = 'flex';
@@ -70,9 +70,54 @@ window.addEventListener('click', (e) => {
   }
 })
 
-//====Dragging Features
+//====Add Task Modal 
+const taskCard = document.querySelectorAll('.kanban-card')
 
-  const taskCard = document.querySelectorAll('.kanban-card')
+document.addEventListener('DOMContentLoaded', () => {
+  taskCard.forEach((task) => {
+    const viewTaskModal = document.createElement('div');
+    viewTaskModal.classList.add('kanban-modal', 'view-task-modal')
+    const viewTaskBtn = task.querySelector('.kanban-card-bottom a')
+    viewTaskModal.innerHTML = `
+      <div class="kanban-modal-box">
+          <!--Header-->
+          <div class="kanban-modal-header">
+              <p>Task Title</p>
+              <div class="kanban-close-modal-btn">
+                  <i class="fa-solid fa-x"></i>
+              </div>
+          </div>
+          <!--Body-->
+          <div class="kanban-modal-body">
+            <p></p>
+          </div>
+      </div>
+  `
+  document.body.appendChild(viewTaskModal)
+  
+    const closeViewTaskModal = viewTaskModal.querySelector('.kanban-close-modal-btn')
+  
+    viewTaskBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      viewTaskModal.style.display = 'flex';
+    })
+    closeViewTaskModal.addEventListener('click', () => {
+      viewTaskModal.style.display = 'none';
+    })
+    window.addEventListener('click', (e) => {
+      if (e.target == viewTaskModal) {
+        viewTaskModal.style.display = 'none';
+      }
+    })
+
+    document.body.appendChild(viewTaskModal)
+    
+  })
+})
+
+
+
+//====Dragging Features
   const kanbanSection = document.querySelectorAll('.kanban-body')
   
   taskCard.forEach((task) => {
