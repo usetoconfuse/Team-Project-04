@@ -195,10 +195,27 @@
               </div>
         </div>
 
-        <div class="emp-grid-item extra">
+        <div class="emp-grid-item stats emp-stats">
             <div class="emp-grid-item-top">
-                <p>Extra</p>
+            <p>Stats</p>
             </div>
+            <div class="emp-grid-item-content">
+            <div id="emp-stat-flexbox">
+                  <div class="emp-stat-card">
+                  <div class="emp-stat-txt">Number of Posts Made</div>
+                  <p>3</p>
+                  </div>
+                  <div class="emp-stat-card">
+                  <div class="emp-stat-txt">Number of tasks completed</div>
+                  <p>5</p>
+                  </div>
+                  <div class="emp-stat-card">
+                  <div class="emp-stat-txt">Number of tasks ongoing</div>
+                  <p>1</p>
+                  </div>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 
@@ -226,7 +243,7 @@
     grid-row: 2 / 3;                 
     grid-column: 2 / 3;              
   }
-  .extra {
+  .stats {
     grid-row: 2 / 3;              
     grid-column: 3 / 4;            
   }
@@ -396,6 +413,37 @@
     text-align: center;
   }
 
+  /*Stats Section*/
+  .emp-stats {
+    background-color: black;
+    color: white;
+  }
+
+  #emp-stat-flexbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .emp-stat-card{
+    background-color: gray;
+    color: orange;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    height: auto;
+    border-radius: 10.5px;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .emp-stat-txt{
+    font-size: 1rem;
+  }
+
   /*responsiveness*/
 
 
@@ -425,7 +473,7 @@
         grid-row: 3;                 
         grid-column:1;              
       }
-      .extra {
+      .stats {
         grid-row: 4;              
         grid-column: 1;            
       }
