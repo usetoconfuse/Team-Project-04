@@ -44,8 +44,7 @@
                         'id' => 'nonTechnical',
                         'key' => 'workplace-hygiene',
                         'title' => 'How to wash your hands',
-                        'content' => '
-                            1. Wet your hands with water.
+                        'content' => '1. Wet your hands with water.
                             2. Apply enough soap to cover your hands.
                             3. Rub your hands together.
                             4. Use one hand to rub the back of the other hand and clean in between the fingers. Do the same with the other hand.
@@ -55,8 +54,7 @@
                             8. Rub the tips of your fingers on the palm of your other hand. Do the same with other hand.
                             9. Rinse your hands with water.
                             10. Dry your hands completely with a disposable towel.
-                            11. Use the disposable towel to turn off the tap.
-                        '
+                            11. Use the disposable towel to turn off the tap.'
                     ]
                 ];
                 foreach ($posts as $post) {
@@ -74,6 +72,7 @@
                         </div>
                         <div class="kb-post-divider"></div>
                         <p class="kb-post-content">' . $post['content'] . '</p>
+                        <button>Read Post</button>
                     </div>';
                 }
                 ?>

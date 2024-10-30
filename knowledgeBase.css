@@ -191,7 +191,7 @@
     gap: var(--section-gap);
     flex-grow: 1;
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .kb-post {
@@ -202,6 +202,10 @@
 
 .kb-post-content {
     padding: 10px;
+    max-height: 70px;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(var(--primary-colour) 0px 35px, transparent 66px);
 }
 
 .kb-post-divider {
@@ -312,7 +316,7 @@
     flex-direction: column;
     flex-grow: 1;
     min-height: fit-content;
-    overflow: scroll;
+    overflow: auto;
     gap: 10px;
     margin: 10px;
 }
