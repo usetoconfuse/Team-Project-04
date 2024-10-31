@@ -11,6 +11,11 @@
     --line-border-radius: 10px;
 
     --section-gap: 20px;
+
+    --pastel-colour-1: rgb(159, 100, 143);
+    --pastel-colour-2: rgb(100, 100, 159);
+    --pastel-colour-3: rgb(159, 100, 100);
+    --pastel-colour-4: rgb(134, 159, 100);
 }
 
 .kb-content button {
@@ -215,11 +220,12 @@
 }
 
 .kb-post-avatar {
-    background-color: var(--bg-colour);
+    /* background-color: var(--bg-colour); */
     border-radius: 50%;
-    border: 2px solid var(--tertiary-colour);
+    border: 1px solid var(--primary-colour);
     width: 30px;
     height: 30px;
+    aspect-ratio: 1/1;
     margin: 5px;
     display: flex;
     justify-content: center;
@@ -343,5 +349,6 @@
     background-color: var(--primary-colour);
     color: var(--bg-colour);
     padding: 5px;
+    font-size: 0.85rem;
     border-radius: var(--line-border-radius);
 }
