@@ -167,4 +167,3 @@
         </div>
     </div>
 </div>
-<script src="knowledgeBase.js"></script>

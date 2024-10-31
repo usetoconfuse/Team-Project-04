@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navItemContents.forEach(item => item.classList.remove('open'))
             const navItemContent = document.querySelector(`#${item.id}-content`)
             navItemContent.classList.add('open');
+            
             hamburgerMenuBtn.classList.remove('openMobile'); //Change hamburger menu 
             hamburgerMenu.classList.remove('openMobileMenu');
             document.querySelector('nav').classList.remove('expandNav')

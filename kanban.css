@@ -8,6 +8,11 @@
     font-family: 'avenir next';
 }
 
+.project-intro.personal-kanban-intro {
+    justify-content: space-between;
+    margin: 2rem 2rem;
+}
+
 .project-txt p:nth-of-type(1) {
     color:black;
     font-size: 22px;
@@ -102,7 +107,7 @@
     gap: 0.6rem;
 }
 
-.all-projects-btn {
+.all-projects-btn, .add-task-btn, .filter-task-btn {
     padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
     color: white;
@@ -112,22 +117,12 @@
     justify-content: center;
 }
 
-.all-projects-btn i {
-    color: white;
-    margin-right: 0.6rem;
+.filter-task-btn i {
+    margin: 0;
 }
 
-.add-task-btn {
-    padding: 0.8rem 0.8rem;
-    border-radius: 10.5px;
+.all-projects-btn i, .add-task-btn i  {
     color: white;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.add-task-btn i {
     margin-right: 0.6rem;
 }
 
@@ -176,6 +171,7 @@
     width: 85%;
     height: 64dvh;
     border-radius: 0 0 30px 30px;
+    overflow-y: scroll;
 }
 
 /*Task Card*/

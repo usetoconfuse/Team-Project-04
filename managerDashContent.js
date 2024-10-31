@@ -79,20 +79,17 @@ const progressBarChart = new Chart(progressBar, {
                 '#e38c88',
                 '#c1c1c1'
             ]
-        }]
+        }],
+        borderRadius: Number.MAX_VALUE,
+        borderSkipped: false
     },
     options: {
         plugins: {
             legend: {
                 display: false
             },
-            /* tooltip: {
-                enabled: false
-            }*/
         },
-        /* hover: {
-            mode: null
-        }, */
+        responsive: true,
         rotation: -90,
         circumference: 180, 
         cutout: '80%',
@@ -136,7 +133,7 @@ const contributionGraph = new Chart(contribution, {
     options: {
         plugins: {
             legend: {
-                display: false
+                display: true
             },
             ticks: {
                 font: {
