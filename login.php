@@ -1,3 +1,44 @@
+<?php
+session_start();
+$user_details = [
+    'admin@email.com' => [
+        'password' => 'manager',
+        'role' => 'manager'
+    ],
+    'leader@email.com' => [
+        'password' => 'leader',
+        'role' => 'leader'
+    ], 
+    'employee@email.com' => [
+        'password' => 'employee',
+        'role' => 'employee'
+    ]
+    ];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (isset($user_details[$email]) && $user_details[$email]['password'] === $password) {
+        $_SESSION['email'] = $email;
+        $_SESSION['role'] = $user_details[$email]['role'];
+        
+        if ($user_details[$email]['role'] === 'manager') {
+            header("Location: managerDashboard.php");
+            exit();
+        } elseif ($user_details[$email]['role'] === 'leader') {
+            header("Location: teamLeaderDashboard.php");
+            exit();
+        } elseif ($user_details[$email]['role'] === 'employee') {
+            header("Location: employeeDashboard.php");
+            exit();
+        }
+    } else {
+        echo "Invalid login credentials";
+    }
+};
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,15 +56,15 @@
                     <h1>Welcome Back</h1>
                     <p>Enter your credentials to sign in.</p>
                 </div>
-                <form id="loginForm">
+                <form id="loginForm" method="POST">
                     <div>
-                        <label>Email</label>
-                        <input type="text"  class="text-input" id="usernameInput" placeholder=" Enter your username">
+                        <label for="usernameInput">Email</label>
+                        <input type="email" name="email" class="text-input" id="usernameInput" placeholder=" Enter your email" required>
                         <p class="error-message" id="username-error"></p>
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="password"  class="text-input" id="passwordInput" placeholder=" Enter your password">
+                        <input type="password" name="password" class="text-input" id="passwordInput" placeholder=" Enter your password">
                         <p class="error-message" id="password-error"></p>
                     </div>
                     <button type="submit" class="login-btn">Continue</button>
@@ -41,6 +82,6 @@
             <img src="Demo.svg" alt="demo-image">
         </div>
     </div>
-    <script src="loginScreen.js"></script>
+
 </body>
 </html>
