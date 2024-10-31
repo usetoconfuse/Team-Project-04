@@ -96,7 +96,9 @@ const progressBarChart = new Chart(progressBar, {
                 '#e38c88',
                 '#c1c1c1'
             ]
-        }]
+        }],
+        borderRadius: Number.MAX_VALUE,
+        borderSkipped: false
     },
     options: {
         rotation: -90,
@@ -109,13 +111,12 @@ const progressBarChart = new Chart(progressBar, {
             legend: {
                 display: false
             },
-            /* tooltip: {
-                enabled: false
-            }*/
         },
-        /* hover: {
-            mode: null
-        } */
+        rotation: -90,
+        circumference: 180, 
+        cutout: '80%',
+        responsive: true,
+        aspectRatio: 2
     }
 });
 
@@ -157,7 +158,7 @@ const contributionGraph = new Chart(contribution, {
 
         plugins: {
             legend: {
-                display: false
+                display: true
             },
             ticks: {
                 font: {

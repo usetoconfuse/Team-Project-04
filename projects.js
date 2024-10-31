@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     taskCard.classList.add('project-card');
 
     taskCard.innerHTML = `
-                          <div class="project-card">
+                       
                               <div class="project-card-top">
                                   <p>${task.title}</p>
                                   <a href="#">View</a>
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                       <p>${task.dueDate}</p>
                                   </div>
                               </div>
-                          </div>
+                         
                           `;
 
     const progressBar = taskCard.querySelector('.project-card-progress-bar-inner');

@@ -1,3 +1,7 @@
+<?php
+session_start()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,6 +72,14 @@
                             <span>Forums</span>
                         </a>
                     </li>
+
+                    <li class="nav-item" id="personal">
+                        <a href="#">
+                            <i class="fa fa-solid fa-list-check"></i>
+                            <div class="btn-animate"></div>
+                            <span>Personal Board</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <div class="bar"></div>
@@ -95,7 +107,8 @@
 
 
         <section id="content">
-
+            
+            
             <div class="nav-item-content open" id="overview-content">
                 <!-- <h2>Overview Content</h2>
                 <p>Develop this in a separate file and <br>use a PHP include statement<br>
@@ -104,19 +117,26 @@
             </div>
 
             <div class="nav-item-content" id="projects-content">
-
-                <?php include 'kanban.php'; ?>
-
+                <?php include 'projectsKanban.php'; ?>
+            </div>
+            
+            <div class="nav-item-content" id="personal-content">
+                <?php include 'personalKanban.php'; ?>
             </div>
 
             <div class="nav-item-content" id="forums-content">
                 <?php include 'knowledgeBase.php'; ?>
             </div>
 
+          
+            
         </section>
-    
+
+        <script src="knowledgeBase.js"></script>
         <script src="navbar.js"></script>
         <script src="kanban.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>
+
+

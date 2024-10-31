@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee View</title>
-    <link rel="stylesheet" href="kanban.css"></link>
-
-</head>
-
-<body>
 
     <div class="emp-grid-container">
 
@@ -19,8 +8,9 @@
             </div>
 
             <div class="emp-grid-item-content">
-                <!--Kanban Card 1-->
-                <div class="kanban-card"> <!--draggable=true-->
+              <div class="kanban-board">
+                   <!--Kanban Card 1-->
+                   <div class="kanban-card"> <!--draggable=true-->
                     <div class="kanban-card-top">
                         <p>Task Title</p>
                         <i class="fa-solid fa-circle-exclamation"></i>
@@ -64,6 +54,8 @@
                     </div>
                 </div>
 
+              </div>
+             
             </div>
         </div>
 
@@ -237,7 +229,8 @@
   }
   .forums {
     grid-row: 1 / 2;                   
-    grid-column: 2 / 4;                
+    grid-column: 2 / 4;  
+    margin-bottom: 0;              
   }
   .projects {
     grid-row: 2 / 3;                 
@@ -256,6 +249,14 @@
     background-color: white;
     border-radius: 30px;
   }
+
+  .emp-grid-item-content .kanban-board {
+    flex-direction: column;
+    margin: 0 auto;
+    overflow-y: scroll;
+    width: 100%;
+  }
+
 
   /*Inner stylings*/
   .emp-grid-item-top {
@@ -278,6 +279,7 @@
     /*Kanban Cards*/
   .emp-grid-item-content .kanban-card {
     background-color: #F5F5F5;
+    width: 100%;
   }
 
 
@@ -458,6 +460,12 @@
       margin: 0 auto;
     }
 
+    .emp-grid-item-content .kanban-card {
+      background-color: #F5F5F5;
+      width: 80%;
+  }
+
+
 /*Issue with NavBar background when responsive.*/
 
       /* Grid items */
@@ -479,9 +487,4 @@
       }
     }
 </style>
-
-
-</body>
-</html>
-
 

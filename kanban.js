@@ -1,78 +1,213 @@
-const kanbanContainer = document.querySelector('.kanban-board');
+const kanbanContainers = document.querySelectorAll('.kanban-board');
 
+
+kanbanContainers.forEach(kanbanContainer => {
 //====Open and Close Task cards
 kanbanContainer.addEventListener('click', (e) => {
-    const kanbanCardHeader = e.target.closest('.kanban-card-top');
-    if (!kanbanCardHeader) return;
+  const kanbanCardHeader = e.target.closest('.kanban-card-top');
+  if (!kanbanCardHeader) return;
 
+
+  const kanbanCardGroup = kanbanCardHeader.parentElement;
+  const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
+  const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)');
+
+  openCloseIcon.classList.toggle('fa-caret-down');
+  openCloseIcon.classList.toggle('fa-caret-up');
   
-    const kanbanCardGroup = kanbanCardHeader.parentElement;
-    const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
-    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)');
+  kanbanCardBody.classList.toggle('open');
 
-    openCloseIcon.classList.toggle('fa-caret-down');
-    openCloseIcon.classList.toggle('fa-caret-up');
-    
-    kanbanCardBody.classList.toggle('open');
-
-    const otherCards = kanbanContainer.querySelectorAll('.kanban-board .kanban-card');
-    otherCards.forEach(otherCard => {
-        if (otherCard != kanbanCardGroup) {
-            const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
-            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)')
-            otherCardBody.classList.remove('open')
-            otherCardIcon.classList.remove('fa-caret-up')
-            otherCardIcon.classList.add('fa-caret-down')
-        }
-    })
+  const otherCards = kanbanContainer.querySelectorAll('.kanban-board .kanban-card');
+  otherCards.forEach(otherCard => {
+      if (otherCard != kanbanCardGroup) {
+          const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
+          const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)')
+          otherCardBody.classList.remove('open')
+          otherCardIcon.classList.remove('fa-caret-up')
+          otherCardIcon.classList.add('fa-caret-down')
+      }
+  })
 })
 
 //====Open and Close Kanban Columns
 kanbanContainer.addEventListener('click', (e) => {
-    const kanbanColumnHeader = e.target.closest('.kanban-board .kanban-header');
-    if (!kanbanColumnHeader) return;
+  const kanbanColumnHeader = e.target.closest('.kanban-board .kanban-header');
+  if (!kanbanColumnHeader) return;
 
-    const kanbanColumnGroup = kanbanColumnHeader.parentElement;
-    const kanbanColumnBody = kanbanColumnGroup.querySelector('.kanban-board .kanban-body');
-    const kanbanColumnIcon = kanbanColumnGroup.querySelector('.kanban-board .kanban-header i');
+  const kanbanColumnGroup = kanbanColumnHeader.parentElement;
+  const kanbanColumnBody = kanbanColumnGroup.querySelector('.kanban-board .kanban-body');
+  const kanbanColumnIcon = kanbanColumnGroup.querySelector('.kanban-board .kanban-header i');
 
-    kanbanColumnIcon.classList.toggle('fa-caret-down');
-    kanbanColumnIcon.classList.toggle('fa-caret-up');
+  kanbanColumnIcon.classList.toggle('fa-caret-down');
+  kanbanColumnIcon.classList.toggle('fa-caret-up');
 
-    kanbanColumnBody.classList.toggle('open');
+  kanbanColumnBody.classList.toggle('open');
 
-    const otherColumns = kanbanContainer.querySelectorAll('.kanban-board .kanban-section')
-    otherColumns.forEach(otherColumn => {
-        if (otherColumn != kanbanColumnGroup) {
-            const otherColumnBody = otherColumn.querySelector('.kanban-board .kanban-body');
-            const otherColumnIcon = otherColumn.querySelector('.kanban-board .kanban-header i');
-            otherColumnBody.classList.remove('open')
-            otherColumnIcon.classList.remove('fa-caret-up')
-            otherColumnIcon.classList.add('fa-caret-down')
-        }
-    })
+  const otherColumns = kanbanContainer.querySelectorAll('.kanban-board .kanban-section')
+  otherColumns.forEach(otherColumn => {
+      if (otherColumn != kanbanColumnGroup) {
+          const otherColumnBody = otherColumn.querySelector('.kanban-board .kanban-body');
+          const otherColumnIcon = otherColumn.querySelector('.kanban-board .kanban-header i');
+          otherColumnBody.classList.remove('open')
+          otherColumnIcon.classList.remove('fa-caret-up')
+          otherColumnIcon.classList.add('fa-caret-down')
+      }
+  })
 });
 
-//====Add Task Modal 
-const addTaskModal = document.querySelector('.kanban-add-task-modal')
-const addTaskBtn = document.querySelector('.add-task-btn')
-const closeAddTaskModal = document.querySelector('.kanban-close-modal-btn')
 
-addTaskBtn.addEventListener('click', () => {
-  addTaskModal.style.display = 'flex';
+
 })
-closeAddTaskModal.addEventListener('click', () => {
-  addTaskModal.style.display = 'none';
-})
-window.addEventListener('click', (e) => {
-  if (e.target == addTaskModal) {
+
+//====Add Task Modal  
+const addTaskBtn = document.querySelectorAll('.add-task-btn')
+
+addTaskBtn.forEach(btn => {
+
+  const addTaskModal = document.createElement('div');
+  addTaskModal.classList.add('kanban-modal', 'add-task-modal')
+  addTaskModal.innerHTML = `
+    <div class="kanban-modal-box">
+        <!--Header-->
+        <div class="kanban-modal-header">
+            <p>Add Task</p>
+            <div class="kanban-close-modal-btn">
+                <i class="fa-solid fa-x"></i>
+            </div>
+        </div>
+        <!--Body-->
+        <form>
+            <!--Title and Description-->
+            <div class="task-title-form">
+                <label for="task-title">Title</label>
+                <input type="text" id="task-title" name="task-title">
+            </div>
+            <div class="task-description-form">
+                <label for="task-description">Description</label>
+                <textarea type="text" id="task-description" name="task-description"></textarea>
+            </div>
+            <!--Dropdowns-->
+            <div class="task-dropdowns-form">
+                <!--Choose User-->
+                <div class="task-dropdown task-dropdown-user">
+                    <label for="user">Employee</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-user-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-user"></i>
+                        </div>
+                        <select name="user" id="user">
+                            <option value="" selected disabled hidden>Choose User</option>
+                            <option value="jlittle">John Little</option>
+                            <option value="slarkin">Sandra Larkin</option>
+                            <option value="ncage">Nick Cage</option>
+                            <option value="ssmith">Sally Smith</option>
+                        </select>
+                    </div>  
+                </div>
+                <!--Choose Priority-->
+                <div class="task-dropdown task-dropdown-priority">
+                    <label for="priority">Priority</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-priority-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-exclamation"></i>
+                        </div>
+                        <select name="priority" id="priority">
+                            <option value="" selected disabled hidden>Choose Priority</option>
+                            <option value="no priority">No Priority</option>
+                            <option value="low priority">Low Priority</option>
+                            <option value="medium priority">Medium Priority</option>
+                            <option value="high priority">High Priority</option>
+                        </select>
+                    </div>  
+                </div>
+                <!--Choose Due Date-->
+                <div class="task-dropdown task-dropdown-date">
+                    <label for="date">Due Date</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-date-icon task-dropdown-icon">
+                            <i class="fa fa-regular fa-calendar"></i>
+                        </div>
+                        <input type="date" name="date" id="date">
+                    </div>  
+                </div>
+            </div>
+            <!--Add Attachments-->
+            <div class="task-upload-form">
+                <label for="task-upload">Upload Attachments</label>
+                <input type="file" id="upload" name="upload" multiple>
+            </div>
+        </form>
+    </div>
+`
+
+  document.body.appendChild(addTaskModal);
+
+  const closeAddTaskModal = addTaskModal.querySelector('.kanban-close-modal-btn')
+
+  btn.addEventListener('click', () => {
+    addTaskModal.style.display = 'flex';
+  })
+  closeAddTaskModal.addEventListener('click', () => {
     addTaskModal.style.display = 'none';
-  }
+  })
+  window.addEventListener('click', (e) => {
+    if (e.target == addTaskModal) {
+      addTaskModal.style.display = 'none';
+    }
+  })
+
+
 })
+
+
+//====Add Task Modal 
+const taskCard = document.querySelectorAll('.kanban-card')
+
+document.addEventListener('DOMContentLoaded', () => {
+  taskCard.forEach((task) => {
+    const viewTaskModal = document.createElement('div');
+    viewTaskModal.classList.add('kanban-modal', 'view-task-modal')
+    const viewTaskBtn = task.querySelector('.kanban-card-bottom a')
+    viewTaskModal.innerHTML = `
+      <div class="kanban-modal-box">
+          <!--Header-->
+          <div class="kanban-modal-header">
+              <p>Task Title</p>
+              <div class="kanban-close-modal-btn">
+                  <i class="fa-solid fa-x"></i>
+              </div>
+          </div>
+          <!--Body-->
+          <div class="kanban-modal-body">
+            <p></p>
+          </div>
+      </div>
+  `
+  document.body.appendChild(viewTaskModal)
+  
+    const closeViewTaskModal = viewTaskModal.querySelector('.kanban-close-modal-btn')
+  
+    viewTaskBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      viewTaskModal.style.display = 'flex';
+    })
+    closeViewTaskModal.addEventListener('click', () => {
+      viewTaskModal.style.display = 'none';
+    })
+    window.addEventListener('click', (e) => {
+      if (e.target == viewTaskModal) {
+        viewTaskModal.style.display = 'none';
+      }
+    })
+
+    document.body.appendChild(viewTaskModal)
+    
+  })
+})
+
+
 
 //====Dragging Features
-
-  const taskCard = document.querySelectorAll('.kanban-card')
   const kanbanSection = document.querySelectorAll('.kanban-body')
   
   taskCard.forEach((task) => {
@@ -89,15 +224,8 @@ window.addEventListener('click', (e) => {
       const kanbanCardDueDate = task.querySelector('.due-date');
 
       //Change the overdue tag depending on section it is in 
-      if (task.id === 'kanban-task-overdue') {
-        if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
-          kanbanCardDueDate.style.backgroundColor = '#E6757E';
-          kanbanCardDueDate.style.color = 'white';
-        } else if (currentSectionId === 'kanban-completed') {
-          kanbanCardDueDate.style.backgroundColor = '';
-          kanbanCardDueDate.style.color = '#BAB7B7';
-        }
-      } 
+      //TO-DO ADD BACK FUNCTION
+      validate_date_icon(task, kanbanCardDueDate, currentSectionId);
       
     });
 
@@ -138,17 +266,37 @@ window.addEventListener('click', (e) => {
     return closestTask;
   };
 
+function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
+  if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
+    if (task.id === 'kanban-task-overdue') {
+      kanbanCardDueDate.style.backgroundColor = '#E6757E';
+      kanbanCardDueDate.style.color = 'white';
+    } else {
+      kanbanCardDueDate.style.backgroundColor = '';
+      kanbanCardDueDate.style.color = '#BAB7B7';
+    }
+  
+  } else if (currentSectionId === 'kanban-completed') {
+    kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
+    kanbanCardDueDate.style.color = 'white';
+  }
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const taskCards = document.querySelectorAll('.kanban-board .kanban-card');
+  taskCards.forEach(task => {
+    const kanbanCardDueDate = task.querySelector('.due-date');
+    const currentSectionId = task.parentElement.id;
+    validate_date_icon(task, kanbanCardDueDate, currentSectionId);
+    if (currentSectionId === 'kanban-completed'){
+      kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
+      kanbanCardDueDate.style.color = 'white';
+    }
+  });
 
 
 
 
-
-
-
-
-
-
-
-
-
+});
 

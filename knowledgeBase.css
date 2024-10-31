@@ -11,6 +11,11 @@
     --line-border-radius: 10px;
 
     --section-gap: 20px;
+
+    --pastel-colour-1: rgb(159, 100, 143);
+    --pastel-colour-2: rgb(100, 100, 159);
+    --pastel-colour-3: rgb(159, 100, 100);
+    --pastel-colour-4: rgb(134, 159, 100);
 }
 
 .kb-content button {
@@ -191,7 +196,7 @@
     gap: var(--section-gap);
     flex-grow: 1;
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .kb-post {
@@ -202,6 +207,10 @@
 
 .kb-post-content {
     padding: 10px;
+    max-height: 70px;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(var(--primary-colour) 0px 35px, transparent 66px);
 }
 
 .kb-post-divider {
@@ -211,11 +220,12 @@
 }
 
 .kb-post-avatar {
-    background-color: var(--bg-colour);
+    /* background-color: var(--bg-colour); */
     border-radius: 50%;
-    border: 2px solid var(--tertiary-colour);
+    border: 1px solid var(--primary-colour);
     width: 30px;
     height: 30px;
+    aspect-ratio: 1/1;
     margin: 5px;
     display: flex;
     justify-content: center;
@@ -312,7 +322,40 @@
     flex-direction: column;
     flex-grow: 1;
     min-height: fit-content;
-    overflow: scroll;
+    overflow: auto;
     gap: 10px;
     margin: 10px;
+}
+
+.kb-title-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.kb-title-header {
+    flex-grow: 1;
+}
+
+.kb-post-badges {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.kb-badge {
+    background-color: var(--primary-colour);
+    color: var(--bg-colour);
+    padding: 5px;
+    font-size: 0.85rem;
+    border-radius: var(--line-border-radius);
+}
+
+#kb-share-link {
+    color: var(--tertiary-colour);
+    font-size: 1.2rem;
+    cursor: pointer;
 }

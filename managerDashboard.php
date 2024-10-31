@@ -1,3 +1,7 @@
+<?php
+session_start()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -109,7 +113,8 @@
             </div>
 
         </section>
-    
+
+        <script src="knowledgeBase.js"></script>
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
