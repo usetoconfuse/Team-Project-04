@@ -26,19 +26,26 @@
                         'id' => 'technical',
                         'key' => 'coding-standards',
                         'title' => 'How we format our code',
-                        'content' => 'All code should be indented with 4 spaces, and all functions should be declared in camel case.'
+                        'content' => 'All code should be indented with 4 spaces, and all functions should be declared in camel case.',
+                        'posted' => '36 minutes ago',
+                        'author' => 'Valerio Wilky'
                     ],
                     [
                         'id' => 'nonTechnical',
                         'key' => 'printer-issues',
                         'title' => 'How to replace paper in the printer',
-                        'content' => 'No need to call IT, just follow these simple steps to replace the paper in your printer. First, open the paper tray, then remove the empty paper, and finally insert the new paper. Simple!'
+                        'content' => 'No need to call IT, just follow these simple steps to replace the paper in your printer. First, open the paper tray, then remove the empty paper, and finally insert the new paper. Simple!',
+                        'posted' => '2 hours ago',
+                        'author' => 'Bilal Akito'
+                        
                     ],
                     [
                         'id' => 'technical',
                         'key' => 'cyber-security',
                         'title' => 'How to stay safe from cyber attacks',
-                        'content' => 'Cybersecurity is a big deal, and we all need to do our part to stay safe. Make sure to use strong passwords, and never share your password with anyone. Also, be sure to keep your software up to date, and never click on suspicious links. If there is ever a security breach, be sure to report it to IT immediately.'
+                        'content' => 'Cybersecurity is a big deal, and we all need to do our part to stay safe. Make sure to use strong passwords, and never share your password with anyone. Also, be sure to keep your software up to date, and never click on suspicious links. If there is ever a security breach, be sure to report it to IT immediately.',
+                        'posted' => '5 hours ago',
+                        'author' => 'Bilal Akito'
                     ],
                     [
                         'id' => 'nonTechnical',
@@ -54,8 +61,25 @@
                             8. Rub the tips of your fingers on the palm of your other hand. Do the same with other hand.
                             9. Rinse your hands with water.
                             10. Dry your hands completely with a disposable towel.
-                            11. Use the disposable towel to turn off the tap.'
+                            11. Use the disposable towel to turn off the tap.',
+                        'posted' => '3 days ago',
+                        'author' => 'Haukea Fátima'
                     ]
+                ];
+                $idLookup = [
+                    'technical' => 'Technical',
+                    'nonTechnical' => 'Non-Technical'
+                ];
+                $topicLookup = [
+                    'coding-standards' => 'Coding Standards',
+                    'printer-issues' => 'Printer Issues',
+                    'cyber-security' => 'Cybersecurity',
+                    'workplace-hygiene' => 'Workplace Hygiene'
+                ];
+                $colorLookup = [
+                    'Valerio Wilky' => 'var(--pastel-colour-1)',
+                    'Bilal Akito' => 'var(--pastel-colour-2)',
+                    'Haukea Fátima' => 'var(--pastel-colour-3)'
                 ];
                 foreach ($posts as $post) {
                     $post['content'] = nl2br($post['content']);
@@ -64,18 +88,18 @@
                         <div class="kb-title-line">
                             <h2 class="kb-title-header">' . $post['title'] . '</h2>
                             <div class="kb-post-badges">
-                                <div class="kb-badge">' . $post['id'] . '</div>
-                                <div class="kb-badge">' . $post['key'] . '</div>
+                                <div class="kb-badge">' . $idLookup[$post['id']] . '</div>
+                                <div class="kb-badge">' . $topicLookup[$post['key']] . '</div>
                             </div>
+                            <i id="kb-share-link" class="fa-solid fa-link"></i>
                         </div>
                         <div class="kb-post-info">
-                            <div class="kb-post-avatar">
+                            <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
                                 <i class="fa-solid fa-user"></i>
                             </div>
                             <div class="kb-text-sm">
-                                Author Name
+                                ' . $post['author'] . ' | ' . $post['posted'] . '
                             </div>
-
                         </div>
                         <div class="kb-post-divider"></div>
                         <p class="kb-post-content">' . $post['content'] . '</p>
