@@ -36,13 +36,30 @@ function updateContributionGraphAxes() {
     contributionGraph.update('none');
 };
 
+// Function to get an array of employee initials for the contribution graph
+function getEmployeeInitials(arr) {
+    let initalArr = [];
+    for (let i=0; i<arr.length; i++) {
+        let firstInitial = arr[i][0];
+        let surnamePos = arr[i].indexOf(" ") + 1;
+        let secondInitial = arr[i][surnamePos];
+        initalArr.push(firstInitial+secondInitial);
+    }
+    return initalArr;
+}
+
+
 //----------------------------------DATA-----------------------------
 
 // Dummy project data
 let creator = "Larry Biggs";
 let projectDates = ["25/09/2024", "04/11/2024"];
-let memberArr = ["John Little", "Harry Harrison","Greg McGregor","Ed Edwards","Jeff Jefferson","Tim Thompson"];
-let tasksArr = [[1,0,2,1,0,1],[0,1,2,0,3,1],[2,0,0,1,0,1],[1,0,1,2,0,0]];
+let memberArr = ["John Little", "Harry Harrison","Greg McGregor","Ed Edwards",
+    "Jeff Jefferson","Tim Thompson", "Adam Adams", "William Williams", "Charlie Charles",
+    "Alice Alison", "Bob Bobbins", "Carol Caroline", "Chuck Chuckster",
+    "Craig Crumble", "Eve Evelyn", "Frank Francis"];
+let tasksArr = [[1,0,2,1,0,1,2,3,1,0,4,1,0,2,0,0],[0,1,2,0,3,1,2,3,1,0,3,1,2,1,0,1],
+[2,0,0,1,0,1,2,1,0,4,2,1,3,2,1,0],[1,0,1,2,0,0,1,2,0,1,0,1,3,2,1,4]];
 let doneTotal = 0;
 let inProgressTotal = 0;
 let overdueTotal = 0;
@@ -82,6 +99,12 @@ const progressBarChart = new Chart(progressBar, {
         }]
     },
     options: {
+        rotation: -90,
+        circumference: 180, 
+        cutout: '80%',
+        responsive: true,
+        aspectRatio: 2,
+
         plugins: {
             legend: {
                 display: false
@@ -92,12 +115,7 @@ const progressBarChart = new Chart(progressBar, {
         },
         /* hover: {
             mode: null
-        }, */
-        rotation: -90,
-        circumference: 180, 
-        cutout: '80%',
-        responsive: true,
-        aspectRatio: 2
+        } */
     }
 });
 
@@ -109,7 +127,7 @@ const contribution = document.getElementById("mdContributionGraph");
 const contributionGraph = new Chart(contribution, {
     type: "bar",
     data: {
-        labels: memberArr,
+        labels: getEmployeeInitials(memberArr),
         datasets: [
             {
                 label: 'Done',
@@ -134,6 +152,9 @@ const contributionGraph = new Chart(contribution, {
         ]
     },
     options: {
+        indexAxis: 'x',
+        maintainAspectRatio: false,
+
         plugins: {
             legend: {
                 display: false
@@ -142,21 +163,41 @@ const contributionGraph = new Chart(contribution, {
                 font: {
                     family: 'Avenir Next'
                 }
+            },
+            tooltip: {
+                callbacks: {
+                    title: (TooltipItem) => {
+                        let pos = TooltipItem[0].dataIndex;
+                        return memberArr[pos];
+                    }
+                }
             }
         },
+
         scales: {
             x: {
-                stacked: true
+                stacked: true,
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    minRotation: 0,
+                    maxRotation: 0,
+                    font: {
+                        family: 'Avenir Next'
+                    }
+                }
             },
             y: {
                 stacked: true,
                 ticks: {
-                    stepSize: 1
+                    stepSize: 1,
+                    font: {
+                        family: 'Avenir Next'
+                    }
                 }
             }
-        },
-        responsive: true,
-        indexAxis: 'x'
+        }
     }
 });
 

@@ -175,9 +175,14 @@
 #mdContributionGraphContainer{
     display: flex;
     align-self: center;
+    overflow-x: scroll;
     padding-top: 0.5rem;
-    width: fit-content;
+    width: 100%;
     height: 95%;
+}
+
+#mdContributionGraphArea{
+    width: 15000px;
 }
 
 @media (max-width: 768px) {

@@ -88,7 +88,9 @@
     <div id="mdProjectContributionBox">
         <h1>Tasks by Member</h1>
         <div id="mdContributionGraphContainer">
-            <canvas id="mdContributionGraph"></canvas>
+            <div id="mdContributionGraphArea">
+                <canvas id="mdContributionGraph"></canvas>
+            </div>
         </div>
     </div>
 </div>
