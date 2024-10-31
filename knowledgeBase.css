@@ -330,6 +330,7 @@
 .kb-title-line {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -351,4 +352,10 @@
     padding: 5px;
     font-size: 0.85rem;
     border-radius: var(--line-border-radius);
+}
+
+#kb-share-link {
+    color: var(--tertiary-colour);
+    font-size: 1.2rem;
+    cursor: pointer;
 }
