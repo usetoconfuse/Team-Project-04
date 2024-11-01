@@ -3,43 +3,52 @@
 
 // Function to make contribution graph vertical/horizontal based on viewport size
 function updateContributionGraphAxes() {
-    let width = document.documentElement.clientWidth;
-    if (width <= 768 && contributionGraph.options.indexAxis == 'x') {
-        contributionGraph.options.indexAxis = 'y';
-        contributionGraph.options.scales = {
-            x: {
-                stacked: true,
-                ticks: {
-                    stepSize: 1
-                }
-            },
-            y: {
-                stacked: true,
-                grid: {
-                    display: false
+    let clientWidth = document.documentElement.clientWidth;
+    let containerWidth = document.getElementById("mdContributionGraphContainer").clientWidth;
+    let containerHeight = document.getElementById("mdContributionGraphContainer").clientHeight;
+    let span = memberArr.length * 50;
+    if (clientWidth <= 992) {
+        contributionGraph.resize(containerWidth, span*0.8);
+        if (contributionGraph.options.indexAxis == 'x') {
+            contributionGraph.options.indexAxis = 'y';
+            contributionGraph.options.scales = {
+                x: {
+                    stacked: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                },
+                y: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    }
                 }
             }
         }
     }
 
-    else if (width > 768 && contributionGraph.options.indexAxis == 'y') {
-        contributionGraph.options.indexAxis = 'x';
-        contributionGraph.options.scales = {
-            x: {
-                stacked: true,
-                grid: {
-                    display: false
-                }
-            },
-            y: {
-                stacked: true,
-                ticks: {
-                    stepSize: 1
+    else if (clientWidth > 992) {
+        contributionGraph.resize(span, containerHeight*0.95);
+        if (contributionGraph.options.indexAxis == 'y') {
+            contributionGraph.options.indexAxis = 'x';
+            contributionGraph.options.scales = {
+                x: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    stacked: true,
+                    ticks: {
+                        stepSize: 1
+                    }
                 }
             }
         }
     }
-    contributionGraph.update('none');
+    contributionGraph.update();
 };
 
 // Function to get an array of employee initials for the contribution graph
@@ -103,8 +112,6 @@ const progressBarChart = new Chart(progressBar, {
                 '#c1c1c1'
             ]
         }],
-        borderRadius: Number.MAX_VALUE,
-        borderSkipped: false
     },
     options: {
         rotation: -90,
@@ -161,6 +168,7 @@ const contributionGraph = new Chart(contribution, {
     options: {
         indexAxis: 'x',
         maintainAspectRatio: false,
+        responsiveAnimationDuration: 0,
 
         plugins: {
             legend: {
@@ -222,30 +230,37 @@ document.addEventListener("DOMContentLoaded", () => {
         let arrow = "";
         if (i == 1) {
             active = `mdActive`;
-            arrow = `<i id="mdArrow" class="fa fa-solid fa-arrow-right"></i>`;
+            icon = `<i class="mdArrowIcon fa fa-solid fa-arrow-right"></i>`;
             document.getElementById("mdSelectedProjectName").innerText = "Project #" + i;
+        }
+        else {
+            icon = `<i class="mdArrowIcon mdHidden fa fa-solid fa-arrow-right"></i>`
         }
 
         projectList.innerHTML += `
         <div class="mdListItem mdProjectItem `+active+`">
             <h3>Project #`+i+`</h3>
-            `+arrow+`
+            `+icon+`
         </div>
         `;
     };
 
     // Make projects clickable
     const projects = document.querySelectorAll(".mdProjectItem");
+    const arrows = document.querySelectorAll(".mdArrowIcon");
     projects.forEach(project => {
         project.addEventListener("click", () => {
 
             projects.forEach(project => {
-                project.classList.remove('mdActive');
+                project.classList.remove("mdActive");
             })
-            document.getElementById("mdArrow").remove();
 
-            project.classList.add('mdActive');
-            project.innerHTML += `<i id="mdArrow" class="fa fa-solid fa-arrow-right"></i>`;
+            arrows.forEach(icon => {
+                icon.classList.add("mdHidden");
+            })
+
+            project.classList.add("mdActive");
+            project.querySelector(".mdArrowIcon").classList.remove("mdHidden");
 
             const projectNameText = document.getElementById("mdSelectedProjectName");
             const projectSelected = project.firstElementChild;
@@ -313,11 +328,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Make contribution bar chart start vertical/horizontal based on viewport
-    // We have to call update again afterwards to ensure correct rendering
     updateContributionGraphAxes();
-    contributionGraph.update();
 });
-
+    
 // Make contribution bar chart stack vertically on small viewports
 // The resize event doesn't fire when a browser is maximised/minimised/restored
 // so the chart can be too big/too small when this happens
