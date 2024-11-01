@@ -10,7 +10,7 @@ signUpform.addEventListener("submit", (e) =>{
     const password = document.getElementById("passwordInput").value;
     const confirmPassword = document.getElementById("confirmPasswordInput").value;
 
-    if(email.trim() !=="" && password.trim() !=="" && confirmPassword.trim() !==""){
+    if(email.trim() !=="" || password.trim() !=="" || confirmPassword.trim() !==""){
         window.location.href = "login.php";
     }
 });
