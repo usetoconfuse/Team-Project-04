@@ -7,7 +7,7 @@ function updateContributionGraphAxes() {
     let containerWidth = document.getElementById("mdContributionGraphContainer").clientWidth;
     let containerHeight = document.getElementById("mdContributionGraphContainer").clientHeight;
     let span = memberArr.length * 50;
-    if (clientWidth <= 1280) {
+    if (clientWidth <= 992) {
         contributionGraph.resize(containerWidth, span*0.8);
         if (contributionGraph.options.indexAxis == 'x') {
             contributionGraph.options.indexAxis = 'y';
@@ -28,7 +28,7 @@ function updateContributionGraphAxes() {
         }
     }
 
-    else if (clientWidth > 768) {
+    else if (clientWidth > 992) {
         contributionGraph.resize(span, containerHeight*0.95);
         if (contributionGraph.options.indexAxis == 'y') {
             contributionGraph.options.indexAxis = 'x';
@@ -230,30 +230,37 @@ document.addEventListener("DOMContentLoaded", () => {
         let arrow = "";
         if (i == 1) {
             active = `mdActive`;
-            arrow = `<i id="mdArrow" class="fa fa-solid fa-arrow-right"></i>`;
+            icon = `<i class="mdArrowIcon fa fa-solid fa-arrow-right"></i>`;
             document.getElementById("mdSelectedProjectName").innerText = "Project #" + i;
+        }
+        else {
+            icon = `<i class="mdArrowIcon mdHidden fa fa-solid fa-arrow-right"></i>`
         }
 
         projectList.innerHTML += `
         <div class="mdListItem mdProjectItem `+active+`">
             <h3>Project #`+i+`</h3>
-            `+arrow+`
+            `+icon+`
         </div>
         `;
     };
 
     // Make projects clickable
     const projects = document.querySelectorAll(".mdProjectItem");
+    const arrows = document.querySelectorAll(".mdArrowIcon");
     projects.forEach(project => {
         project.addEventListener("click", () => {
 
             projects.forEach(project => {
-                project.classList.remove('mdActive');
+                project.classList.remove("mdActive");
             })
-            document.getElementById("mdArrow").remove();
 
-            project.classList.add('mdActive');
-            project.innerHTML += `<i id="mdArrow" class="fa fa-solid fa-arrow-right"></i>`;
+            arrows.forEach(icon => {
+                icon.classList.add("mdHidden");
+            })
+
+            project.classList.add("mdActive");
+            project.querySelector(".mdArrowIcon").classList.remove("mdHidden");
 
             const projectNameText = document.getElementById("mdSelectedProjectName");
             const projectSelected = project.firstElementChild;
@@ -319,11 +326,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
     };
-});
 
-// Make contribution bar chart start vertical/horizontal based on viewport
-// We have to do this AFTER DOM loads to prevent glitchy animation
-window.addEventListener("load", () => {
+    // Make contribution bar chart start vertical/horizontal based on viewport
     updateContributionGraphAxes();
 });
     

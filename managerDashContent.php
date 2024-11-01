@@ -31,7 +31,6 @@
     <!-- Graph showing project progress with number of tasks
      completed/in progress/overdue/not started -->
     <div id="mdProjectProgressBox">
-
         <h1 class="mdTitle">Progress</h1>
         <div id="mdProgressChartContainer">
             <canvas id="mdProgressChart"></canvas>
