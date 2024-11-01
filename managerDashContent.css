@@ -12,7 +12,12 @@
     gap: 2%;
 }
 
-#mdGrid h1 h2 h3 h4 h5{
+/* Manually prevent bolding as Mac auto-bolds headers */
+#mdGrid h1, 
+#mdGrid h2, 
+#mdGrid h3, 
+#mdGrid h4, 
+#mdGrid h5{
     font-weight: normal;
 }
 
