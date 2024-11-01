@@ -319,13 +319,14 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
     };
-
-    // Make contribution bar chart start vertical/horizontal based on viewport
-    // We have to call update again afterwards to ensure correct rendering
-    updateContributionGraphAxes();
-    contributionGraph.update();
 });
 
+// Make contribution bar chart start vertical/horizontal based on viewport
+// We have to do this AFTER DOM loads to prevent glitchy animation
+window.addEventListener("load", () => {
+    updateContributionGraphAxes();
+});
+    
 // Make contribution bar chart stack vertically on small viewports
 // The resize event doesn't fire when a browser is maximised/minimised/restored
 // so the chart can be too big/too small when this happens
