@@ -119,6 +119,20 @@ session_start()
                 </div>
             </div>
 
+            <div class="user-profile">
+                <div class="user-profile-left">
+                    <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
+                    <div class="user-info">
+                        <p>John Little</p>
+                        <p>Manager</p>
+                    </div>
+                </div>
+                <div class="user-profile-right">
+                    <div class="user-profile-logout">Sign Out</div>
+                </div>
+             
+            </div>
+
            
         </nav>
 
