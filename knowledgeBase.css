@@ -284,7 +284,8 @@
 .kb-topic {
     border-radius: var(--line-border-radius);
     background-color: var(--bg-colour);
-    padding: 10px;
+    padding: 5px;
+    font-size: 0.9rem;
     text-align: center;
     min-width: fit-content;
     transition: 0.5s color ease, 0.5s background-color ease;
