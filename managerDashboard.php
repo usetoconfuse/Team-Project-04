@@ -65,14 +65,6 @@ session_start()
                         </a>
                     </li>
 
-                    <li class="nav-item" id="forums">
-                        <a href="#">
-                            <i class="fa fa-solid fa-file fa-lg"></i>
-                            <div class="btn-animate"></div>
-                            <span>Forums</span>
-                        </a>
-                    </li>
-
                     <li class="nav-item " id="current-project">
                         <a href="#">
                             <i class="fa fa-solid fa-table-columns fa-lg"></i>
@@ -81,7 +73,17 @@ session_start()
                         </a>
                     </li>
 
-                    <li class="nav-item active" id="personal">
+                    <li class="nav-item" id="forums">
+                        <a href="#">
+                            <i class="fa fa-solid fa-file fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Forums</span>
+                        </a>
+                    </li>
+
+                  
+
+                    <li class="nav-item" id="personal">
                         <a href="#">
                             <i class="fa fa-solid fa-table-columns fa-lg"></i>
                             <div class="btn-animate"></div>

@@ -219,6 +219,66 @@ nav {
     transition: background-color 0.2s ease-in-out;
 }
 
+.menu .nav-item .btn-animate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    z-index: -1;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+
+.menu .nav-item:hover .btn-animate {
+    transform: translateY(0);
+}
+
+
+/*For current project button*/
+.menu .nav-item#current-project {
+    margin-left: 10%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+}
+
+
+.menu .nav-item#current-project:hover .btn-animate{
+    transform: translateY(100%);
+}
+
+.menu .nav-item#current-project.active {
+    background-color: gray; /*if active*/
+    margin-left: 10%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+}
+
+.menu .nav-item#current-project:hover span, nav .nav-item#current-project:hover i{
+    color: white; /*if not active, on hover, change colour to gray*/
+}
+
+
+.menu .nav-item#current-project.active:hover span, nav .nav-item#current-project.active:hover i{
+    color: white; /*if active, on hover, change colour to white*/
+}
+
+.menu .nav-item#current-project:hover .btn-animate{
+    background-color: gray;
+    transform: translateY(0);
+}
+
+.menu .nav-item#current-project .btn-animate,/*change bg-colour animation to gray*/
+.menu .nav-item#current-project.active .btn-animate, /*If active, change bg-colour animation to gray*/
+.menu .nav-item#current-project.active:hover .btn-animate {  /*if active, on hover, change bg-colour animation to gray*/
+    background-color: gray; 
+}
+
+
+/*Normal nav item styling*/
 .menu .nav-item a {
     color: #A9A9AB;
     transition: color 0.2s ease-in-out;
@@ -233,24 +293,6 @@ nav {
 .menu .nav-item a i {
     padding-right: 0.6rem;
 }
-
-.menu .nav-item .btn-animate {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    color: white;
-    z-index: -1;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.menu .nav-item:hover .btn-animate {
-    transform: translateY(0);
-}
-
 
 .menu .nav-item.active {
     background-color: black;

@@ -91,9 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
             navItems.forEach(item => item.classList.remove('active'));
             item.classList.add('active');
 
+        
             navItemContents.forEach(item => item.classList.remove('open'))
             const navItemContent = document.querySelector(`#${item.id}-content`)
             navItemContent.classList.add('open');
+
+            if (item.id === 'current-project') {
+                document.querySelector('.nav-item#projects').classList.add('active');
+            }
             
             hamburgerMenuBtn.classList.remove('openMobile'); //Change hamburger menu 
             hamburgerMenu.classList.remove('openMobileMenu');
