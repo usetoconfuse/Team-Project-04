@@ -15,6 +15,9 @@ function updateContributionGraphAxes() {
             },
             y: {
                 stacked: true,
+                grid: {
+                    display: false
+                }
             }
         }
     }
@@ -23,7 +26,10 @@ function updateContributionGraphAxes() {
         contributionGraph.options.indexAxis = 'x';
         contributionGraph.options.scales = {
             x: {
-                stacked: true
+                stacked: true,
+                grid: {
+                    display: false
+                }
             },
             y: {
                 stacked: true,

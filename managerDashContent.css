@@ -12,6 +12,15 @@
     gap: 2%;
 }
 
+/* Manually prevent bolding as Mac auto-bolds headers */
+#mdGrid h1, 
+#mdGrid h2, 
+#mdGrid h3, 
+#mdGrid h4, 
+#mdGrid h5{
+    font-weight: normal;
+}
+
 #mdGrid > div{
     font-family: "DIN Alternate Bold";
     background-color: #ffffff;
