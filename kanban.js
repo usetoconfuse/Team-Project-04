@@ -79,18 +79,18 @@ const addTaskBtn = document.querySelectorAll('.add-task-btn')
 addTaskBtn.forEach(btn => {
 
   const addTaskModal = document.createElement('div');
-  addTaskModal.classList.add('kanban-modal', 'add-task-modal')
+  addTaskModal.classList.add('modal', 'add-task-modal')
   addTaskModal.innerHTML = `
-    <div class="kanban-modal-box">
+    <div class="modal-box">
         <!--Header-->
-        <div class="kanban-modal-header">
+        <div class="modal-header">
             <p>Add Task</p>
-            <div class="kanban-close-modal-btn">
+            <div class="close-modal-btn">
                 <i class="fa-solid fa-x"></i>
             </div>
         </div>
         <!--Body-->
-        <form>
+        <form class="modal-body">
             <!--Title and Description-->
             <div class="task-title-form">
                 <label for="task-title">Title</label>
@@ -162,7 +162,7 @@ addTaskBtn.forEach(btn => {
 
   document.body.appendChild(addTaskModal);
 
-  const closeAddTaskModal = addTaskModal.querySelector('.kanban-close-modal-btn')
+  const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
 
   btn.addEventListener('click', () => {
     addTaskModal.style.display = 'flex';
@@ -184,26 +184,26 @@ const taskCard = document.querySelectorAll('.kanban-card')
 document.addEventListener('DOMContentLoaded', () => {
   taskCard.forEach((task) => {
     const viewTaskModal = document.createElement('div');
-    viewTaskModal.classList.add('kanban-modal', 'view-task-modal')
+    viewTaskModal.classList.add('modal', 'view-task-modal')
     const viewTaskBtn = task.querySelector('.kanban-card-bottom a')
     viewTaskModal.innerHTML = `
-      <div class="kanban-modal-box">
+      <div class="modal-box">
           <!--Header-->
-          <div class="kanban-modal-header">
+          <div class="modal-header">
               <p>Task Title</p>
-              <div class="kanban-close-modal-btn">
+              <div class="close-modal-btn">
                   <i class="fa-solid fa-x"></i>
               </div>
           </div>
           <!--Body-->
-          <div class="kanban-modal-body">
+          <div class="modal-body">
             <p></p>
           </div>
       </div>
   `
   document.body.appendChild(viewTaskModal)
   
-    const closeViewTaskModal = viewTaskModal.querySelector('.kanban-close-modal-btn')
+    const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn')
   
     viewTaskBtn.addEventListener('click', (e) => {
       e.preventDefault();

@@ -29,6 +29,20 @@ session_start()
 
         <nav id="navbar">
 
+            <div class="user-profile">
+                <div class="user-profile-left">
+                    <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
+                    <div class="user-info">
+                        <p>John Little</p>
+                        <p>Manager</p>
+                    </div>
+                </div>
+                <div class="user-profile-right">
+                    <div class="user-profile-logout">Sign Out</div>
+                </div>
+             
+            </div>
+
             <button type="button" class="hamburger" id="menu-btn">
                     <span class="hamburger-top"></span>
                     <span class="hamburger-middle"></span>
@@ -70,7 +84,7 @@ session_start()
                         <a href="#">
                             <i class="fa fa-solid fa-file fa-lg"></i>
                             <div class="btn-animate"></div>
-                            <span>Forums</span>
+                            <span>Knowledge Base</span>
                         </a>
                     </li>
 
@@ -140,6 +154,7 @@ session_start()
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
         <script src="kanban.js"></script>
+        <script src="style.css"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>

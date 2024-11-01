@@ -120,4 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
+    const logoutBtn = document.querySelector('.user-profile .user-profile-logout');
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = "logout.php";
+    })
+
 })
+

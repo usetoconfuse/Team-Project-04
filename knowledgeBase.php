@@ -120,19 +120,35 @@
             <button id="new-topic-btn">New Topic</button>
         </div>
 
-        <div id="topic-modal" class="kb-modal">
-            <div class="kb-modal-content">
-                <span id="close-topic-modal" class="kb-modal-close">&times;</span>
-                <h1 class="text-center">New Topic</h1>
-                <form id="topic-modal-form">
-                    <div>
-                        <label class="text">Topic Name:</label>
-                        <input type="text" id="topicInput" placeholder="Enter new topic name">
+
+        <div id="topic-modal" class="modal">
+            <div class="modal-box">
+                <!--Header-->
+                <div class="modal-header">
+                    <p>Add Topic</p>
+                    <div class="close-modal-btn">
+                        <i class="fa-solid fa-x"></i>
                     </div>
-                    <button type="submit" id="add-topic-btn">Add Topic</button>
+                </div>
+                <!--Body-->
+                <form id="topic-modal-form" class="modal-body">
+                    <div class="topic-title-form">
+                        <label for="topic-title">Title</label>
+                        <input type="text" id="topicInput" name="topic-title" placeholder="Enter new topic name">
+                    </div>
                 </form>
+                <div class="task-submit-buttons">
+                    <div class="add-topic-btn" id="add-topic-btn">
+                        Add Topic
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                
             </div>
         </div>
+
+
 
         <div id="post-modal" class="kb-modal">
             <div class="kb-modal-content">

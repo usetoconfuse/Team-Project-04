@@ -84,73 +84,44 @@ allButtons.forEach(button => {
 
 
 
-//MODAL FUNCTIONALITY
-var topicModal = document.getElementById("topic-modal");
-var topicModalButton = document.getElementById("new-topic-btn");
+//Topic Modal Functionality
+const addTopicModal = document.querySelector("#topic-modal");
+const closeAddTopicModal = addTopicModal.querySelector('#topic-modal .close-modal-btn')
+const addTopicBtn = document.querySelector('#new-topic-btn');
 
-// Get the <span> element that closes the modal
-var closeTopicModalButton = document.getElementById("close-topic-modal");
-
-// When the user clicks on the button, open the modal
-topicModalButton.onclick = function () {
-    topicModal.style.display = "flex";
-}
-
-// When the user clicks on <span> (x), close the modal
-closeTopicModalButton.onclick = function () {
-    topicModal.style.display = "none";
-}
-
-
-window.addEventListener("onclick", (event) => {
-    if (event.target == topicModal) {
-        topicModal.style.display = "none";
+addTopicBtn.addEventListener('click', () => {
+    addTopicModal.style.display = 'flex';
+  })
+  closeAddTopicModal.addEventListener('click', () => {
+    addTopicModal.style.display = 'none';
+  })
+  window.addEventListener('click', (e) => {
+    if (e.target == addTopicModal) {
+        addTopicModal.style.display = 'none';
     }
-});
+  })
 
-document.getElementById("topic-modal-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const topicInput = document.getElementById("topicInput");
 
-        if (topicInput.value.trim() !==""){
-        const topicList = document.getElementById("topicsList");
-        const newTopic = document.createElement("li");
-        
-        //set class to list element
-        newTopic.classList.add("kb-topic");
+const submitTopicBtn = document.querySelector('#topic-modal .task-submit-buttons #add-topic-btn');
+submitTopicBtn.addEventListener('click', (e) => {
+    const topicInput = document.getElementById("topicInput").value.trim();
 
-        newTopic.innerHTML = document.getElementById("topicInput").value;
-        topicList.appendChild(newTopic);
+    const topicList = document.querySelector("#topicsList");
+    if (topicInput !== "") {
+        const newTopicItem = document.createElement("li");
+        newTopicItem.classList.add("kb-topic");
+        newTopicItem.innerHTML = topicInput;
+        topicList.appendChild(newTopicItem);
 
         topicInput.value = "";
-        
-        topicModal.style.display = "none";
-        }
-});
-
-
-var postModal = document.getElementById("post-modal");
-var postModalButton = document.getElementById("new-post-btn");
-
-// Get the <span> element that closes the modal
-var closePostModalButton = document.getElementById("close-post-modal");
-
-// When the user clicks on the button, open the modal
-postModalButton.onclick = function () {
-    postModal.style.display = "flex";
-}
-
-// When the user clicks on <span> (x), close the modal
-closePostModalButton.onclick = function () {
-    postModal.style.display = "none";
-}
-
-window.addEventListener("onclick", (event) => {
-    if (event.target == postModal) {
-        postModal.style.display = "none";
+        addTopicModal.style.display = "none";
     }
-});
 
-document.getElementById("post-modal-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-});
+})
+
+//Add Post Modal Functionality
+
+
+
+
+

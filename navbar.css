@@ -312,6 +312,44 @@ nav {
 }
 
 
+.user-profile {
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 2rem 1.2rem 0rem;
+    padding: 0.6rem;
+}
+
+.user-profile .user-profile-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8E8E91;
+}
+
+.user-profile .user-profile-left i {
+    font-size: 18px;
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    padding: 0.8rem;
+    margin-right: 0.4rem;
+}
+
+.user-profile .user-profile-left span {
+    color: black;
+}
+
+.user-profile-right .user-profile-logout {
+    color: white;
+    background-color: black;
+    padding: 0.4rem 0.8rem;
+    font-size: 16px;
+    border-radius: 30px;
+}
+
 /*====Hamburger Menu====*/
 .hamburger {
     cursor: pointer;

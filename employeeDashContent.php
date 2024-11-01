@@ -61,7 +61,7 @@
 
         <div class="emp-grid-item forums">
             <div class="emp-grid-item-top">
-                <p>Forums</p>
+                <p>Knowledge Base</p>
                 <a href="#">All posts</a>
             </div>
 
@@ -132,11 +132,6 @@
                         <div class="emp-forum-tag">Tag</div>
                         <a href="#">View Post</a>
                     </div>
-                </div>
-
-                <div class="emp-forum-buttons">
-                    <a href="#">View all posts</a>
-                    <a href="#">Create a post</a>
                 </div>
             </div>  
 

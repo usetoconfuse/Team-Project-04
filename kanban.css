@@ -261,7 +261,7 @@
 }
 
 /*====Add Task Modal====*/
-.kanban-modal {
+.modal {
     display: none;
     align-items: center;
     justify-content: center;
@@ -274,7 +274,7 @@
     background:  rgba(0,0,0,0.5);
 }
 
-.kanban-modal-box {
+.modal-box {
     margin: 10% auto;
     width: 40%;
     background: white;
@@ -293,7 +293,7 @@
 }
 
 /*modal header*/
-.kanban-modal-header {
+.modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -305,12 +305,12 @@
     border-bottom: 1px solid black;
 }
 
-.kanban-modal-header i {
+.modal-header i {
     font-size: 14px;
     cursor: pointer;
 }
 
-.kanban-close-modal-btn {
+.close-modal-btn {
     color: white; 
     background-color: black;
     border-radius: 50%;
@@ -322,7 +322,7 @@
 }
 
 /*modal body*/
-.kanban-modal form {
+.modal .modal-body {
     padding: 0.2rem 2rem 1rem 2rem;
 }
 
@@ -346,7 +346,7 @@ label {
 }
 
 /*styles - text box and file*/
-.kanban-modal form input[type="text"], .kanban-modal form textarea, .kanban-modal input[type="file"] {
+.modal .modal-body input[type="text"], .modal .modal-body textarea, .modal input[type="file"] {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -355,13 +355,13 @@ label {
     border-radius: 5px;
 }
 
-.kanban-modal  form textarea {
+.modal  .modal-body textarea {
     height: 6rem;
     resize: none;
 }
 
 /*styles - custom file boxes*/
-.kanban-modal  input[type="file"] {
+.modal  input[type="file"] {
     height: 6rem;
     border: 2px #e1e1e1 dashed;
 }
@@ -413,11 +413,11 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*Focus states*/
-.kanban-modal  form input[type="text"]:focus, .kanban-modal form textarea:focus, .task-dropdown select:focus {
+.modal  form input[type="text"]:focus, .modal form textarea:focus, .task-dropdown select:focus {
     border: 2px solid black;
 }
 
-.kanban-modal form input[type="file"]:focus {
+.modal form input[type="file"]:focus {
     border: 2px dashed black;
 }
 
@@ -477,7 +477,7 @@ input[type="file"]::-webkit-file-upload-button {
         border-radius: 15px 15px 0 0;
     }
 
-    .kanban-modal-box {
+    .modal-box {
         width: 60%;
     }
 }
@@ -502,7 +502,7 @@ input[type="file"]::-webkit-file-upload-button {
         margin: 2.5rem auto;
     }
 
-    .kanban-modal-box {
+    .modal-box {
         width: 95%;
     }
 }
