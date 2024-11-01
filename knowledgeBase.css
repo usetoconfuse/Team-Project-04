@@ -258,7 +258,7 @@
     flex-direction: row;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .kb-main {
         align-items: center;
         flex-direction: column-reverse;
