@@ -10,28 +10,21 @@ session_start()
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="navbar.css"></link>
         <link rel="stylesheet" href="knowledgeBase.css"></link>
-        <link rel="stylesheet" href="kanban.css"></link>
+        <link rel="stylesheet" href="projects.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
-        <link href="https://fonts.cdnfonts.com/css/din-alternate" rel="stylesheet">
-        <title>Navbar Template</title>
+        <link rel="stylesheet" href="kanban.css" />
+        <title>Employee Dashboard</title>
     </head>
 
     <body>
 
       
-        <!-- <div class="loading-screen">
+        <div class="loading-screen">
             <h2>LOGO</h2>
             <div class="loader">
                 <div class="loader-line"></div>
             </div>
-        </div>         -->
-
-        <!--
-        <div class="cursor">
-            <div class="cursor-dot"></div>
-        </div>
-        -->
-
+        </div>         
         
 
         <nav id="navbar">
@@ -65,6 +58,14 @@ session_start()
                         </a>
                     </li>
 
+                    <li class="nav-item " id="current-project">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Current Project</span>
+                        </a>
+                    </li>
+
                     <li class="nav-item" id="forums">
                         <a href="#">
                             <i class="fa fa-solid fa-file fa-lg"></i>
@@ -73,9 +74,11 @@ session_start()
                         </a>
                     </li>
 
+                  
+
                     <li class="nav-item" id="personal">
                         <a href="#">
-                            <i class="fa fa-solid fa-list-check"></i>
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
                             <div class="btn-animate"></div>
                             <span>Personal Board</span>
                         </a>
@@ -107,19 +110,19 @@ session_start()
 
 
         <section id="content">
-            
-            
+
             <div class="nav-item-content open" id="overview-content">
-                <!-- <h2>Overview Content</h2>
-                <p>Develop this in a separate file and <br>use a PHP include statement<br>
-                    and then remove this text</p> -->
-                    <?php include 'employeeDashContent.php'; ?>
+                <?php include 'employeeDashContent.php' ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">
+                <?php include 'projects.php' ?>
+            </div>
+
+            <div class="nav-item-content" id="current-project-content">
                 <?php include 'projectsKanban.php'; ?>
             </div>
-            
+
             <div class="nav-item-content" id="personal-content">
                 <?php include 'personalKanban.php'; ?>
             </div>
@@ -128,15 +131,15 @@ session_start()
                 <?php include 'knowledgeBase.php'; ?>
             </div>
 
-          
+           
             
+
         </section>
 
         <script src="knowledgeBase.js"></script>
         <script src="navbar.js"></script>
+        <script src="projects.js"></script>
         <script src="kanban.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>
-
-
