@@ -346,7 +346,7 @@ nav {
     position: relative;
 }
 
-#overview-content, #projects-content, #forums-content, #personal-content {
+#overview-content, #projects-content, #forums-content, #personal-content, #current-project-content {
     display: none;
 }
 
@@ -364,11 +364,14 @@ nav {
 
 }
 
-#projects-content, #forums-content, #personal-content {
+#projects-content, #forums-content, #personal-content, #current-project-content {
     background-color: #ffffff;
     border-radius: 30px;
 }
 
+#current-project {
+    display: none;
+}
 
 @media (max-width: 768px) {
     .hamburger {

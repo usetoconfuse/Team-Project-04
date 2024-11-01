@@ -12,7 +12,7 @@ session_start()
         <link rel="stylesheet" href="knowledgeBase.css"></link>
         <link rel="stylesheet" href="projects.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
-
+        <link rel="stylesheet" href="kanban.css" />
         <title>Manager Dashboard</title>
     </head>
 
@@ -72,6 +72,22 @@ session_start()
                             <span>Forums</span>
                         </a>
                     </li>
+
+                    <li class="nav-item " id="current-project">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Current Project</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active" id="personal">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Personal Board</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <div class="bar"></div>
@@ -108,15 +124,27 @@ session_start()
                 <?php include 'projects.php' ?>
             </div>
 
+            <div class="nav-item-content" id="current-project-content">
+                <?php include 'projectsKanban.php'; ?>
+            </div>
+
+            <div class="nav-item-content" id="personal-content">
+                <?php include 'personalKanban.php'; ?>
+            </div>
+
             <div class="nav-item-content" id="forums-content">
                 <?php include 'knowledgeBase.php'; ?>
             </div>
+
+           
+            
 
         </section>
 
         <script src="knowledgeBase.js"></script>
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
+        <script src="kanban.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>
