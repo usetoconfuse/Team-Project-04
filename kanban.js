@@ -151,6 +151,12 @@ addTaskBtn.forEach(btn => {
                 <input type="file" id="upload" name="upload" multiple>
             </div>
         </form>
+        <div class="task-submit-buttons">
+            <div class="add-task-btn">
+                Add Task
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        </div>
     </div>
 `
 

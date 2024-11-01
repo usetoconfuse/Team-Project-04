@@ -35,10 +35,13 @@
         <div class="filter-task-btn">
             <i class="fa fa-solid fa-sliders"></i>
         </div>
-        <div class="add-task-btn">
-            <i class="fa fa-solid fa-plus"></i>
-            Add Task
-        </div>
+   
+        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
+            <div class="add-task-btn">
+                <i class="fa fa-solid fa-plus"></i>
+                Add Task
+            </div>
+        <?php endif; ?>
         <div class="all-projects-btn">
             <i class='fa fa-solid fa-arrow-left'></i>
             All Projects
