@@ -3,43 +3,52 @@
 
 // Function to make contribution graph vertical/horizontal based on viewport size
 function updateContributionGraphAxes() {
-    let width = document.documentElement.clientWidth;
-    if (width <= 768 && contributionGraph.options.indexAxis == 'x') {
-        contributionGraph.options.indexAxis = 'y';
-        contributionGraph.options.scales = {
-            x: {
-                stacked: true,
-                ticks: {
-                    stepSize: 1
-                }
-            },
-            y: {
-                stacked: true,
-                grid: {
-                    display: false
+    let clientWidth = document.documentElement.clientWidth;
+    let containerWidth = document.getElementById("mdContributionGraphContainer").clientWidth;
+    let containerHeight = document.getElementById("mdContributionGraphContainer").clientHeight;
+    let span = memberArr.length * 50;
+    if (clientWidth <= 1280) {
+        contributionGraph.resize(containerWidth, span*0.8);
+        if (contributionGraph.options.indexAxis == 'x') {
+            contributionGraph.options.indexAxis = 'y';
+            contributionGraph.options.scales = {
+                x: {
+                    stacked: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                },
+                y: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    }
                 }
             }
         }
     }
 
-    else if (width > 768 && contributionGraph.options.indexAxis == 'y') {
-        contributionGraph.options.indexAxis = 'x';
-        contributionGraph.options.scales = {
-            x: {
-                stacked: true,
-                grid: {
-                    display: false
-                }
-            },
-            y: {
-                stacked: true,
-                ticks: {
-                    stepSize: 1
+    else if (clientWidth > 768) {
+        contributionGraph.resize(span, containerHeight*0.95);
+        if (contributionGraph.options.indexAxis == 'y') {
+            contributionGraph.options.indexAxis = 'x';
+            contributionGraph.options.scales = {
+                x: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    stacked: true,
+                    ticks: {
+                        stepSize: 1
+                    }
                 }
             }
         }
     }
-    contributionGraph.update('none');
+    contributionGraph.update();
 };
 
 // Function to get an array of employee initials for the contribution graph
@@ -103,8 +112,6 @@ const progressBarChart = new Chart(progressBar, {
                 '#c1c1c1'
             ]
         }],
-        borderRadius: Number.MAX_VALUE,
-        borderSkipped: false
     },
     options: {
         rotation: -90,
@@ -161,6 +168,7 @@ const contributionGraph = new Chart(contribution, {
     options: {
         indexAxis: 'x',
         maintainAspectRatio: false,
+        responsiveAnimationDuration: 0,
 
         plugins: {
             legend: {
