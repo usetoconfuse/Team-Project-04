@@ -89,7 +89,7 @@
         <h1>Tasks by Member</h1>
         <div id="mdContributionGraphContainer">
             <div id="mdContributionGraphArea">
-                <canvas id="mdContributionGraph"></canvas>
+                <canvas id="mdContributionGraph" width="800"></canvas>
             </div>
         </div>
     </div>
