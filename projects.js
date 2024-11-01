@@ -61,10 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     gridContainer.appendChild(taskCard);
+
+    //Links to project kanban
     taskCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
       e.preventDefault();
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => item.classList.remove('active'));
+
       const linkItem = document.querySelector('#current-project')
       linkItem.style.display = 'block';
       linkItem.classList.add('active');

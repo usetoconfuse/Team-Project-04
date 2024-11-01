@@ -107,28 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    /*====GSAP - Custom Cursor====
-    let cursor = document.querySelector('.cursor'),
-    mouseX = 0;
-    mouseY = 0;
-
-    gsap.to({}, 0.02, {
-        repeat: -1,
-
-        onRepeat: function () {
-            gsap.set(cursor, {
-                css: {
-                    left: mouseX,
-                    top: mouseY
-                }
-            })
-        }
-    });
-
-    window.addEventListener("mousemove", function (e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY
-    });*/
 
 
     //====Hamburger Menu====//

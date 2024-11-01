@@ -2,61 +2,75 @@ const kanbanContainers = document.querySelectorAll('.kanban-board');
 
 
 kanbanContainers.forEach(kanbanContainer => {
-//====Open and Close Task cards
-kanbanContainer.addEventListener('click', (e) => {
-  const kanbanCardHeader = e.target.closest('.kanban-card-top');
-  if (!kanbanCardHeader) return;
+  //====Open and Close Task cards
+  kanbanContainer.addEventListener('click', (e) => {
+    const kanbanCardHeader = e.target.closest('.kanban-card-top');
+    if (!kanbanCardHeader) return;
 
 
-  const kanbanCardGroup = kanbanCardHeader.parentElement;
-  const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
-  const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)');
+    const kanbanCardGroup = kanbanCardHeader.parentElement;
+    const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
+    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)');
 
-  openCloseIcon.classList.toggle('fa-caret-down');
-  openCloseIcon.classList.toggle('fa-caret-up');
-  
-  kanbanCardBody.classList.toggle('open');
+    openCloseIcon.classList.toggle('fa-caret-down');
+    openCloseIcon.classList.toggle('fa-caret-up');
+    
+    kanbanCardBody.classList.toggle('open');
 
-  const otherCards = kanbanContainer.querySelectorAll('.kanban-board .kanban-card');
-  otherCards.forEach(otherCard => {
-      if (otherCard != kanbanCardGroup) {
-          const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
-          const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)')
-          otherCardBody.classList.remove('open')
-          otherCardIcon.classList.remove('fa-caret-up')
-          otherCardIcon.classList.add('fa-caret-down')
-      }
+    const otherCards = kanbanContainer.querySelectorAll('.kanban-board .kanban-card');
+    otherCards.forEach(otherCard => {
+        if (otherCard != kanbanCardGroup) {
+            const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
+            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)')
+            otherCardBody.classList.remove('open')
+            otherCardIcon.classList.remove('fa-caret-up')
+            otherCardIcon.classList.add('fa-caret-down')
+        }
+    })
   })
+
+  //====Open and Close Kanban Columns
+  kanbanContainer.addEventListener('click', (e) => {
+    const kanbanColumnHeader = e.target.closest('.kanban-board .kanban-header');
+    if (!kanbanColumnHeader) return;
+
+    const kanbanColumnGroup = kanbanColumnHeader.parentElement;
+    const kanbanColumnBody = kanbanColumnGroup.querySelector('.kanban-board .kanban-body');
+    const kanbanColumnIcon = kanbanColumnGroup.querySelector('.kanban-board .kanban-header i');
+
+    kanbanColumnIcon.classList.toggle('fa-caret-down');
+    kanbanColumnIcon.classList.toggle('fa-caret-up');
+
+    kanbanColumnBody.classList.toggle('open');
+
+    const otherColumns = kanbanContainer.querySelectorAll('.kanban-board .kanban-section')
+    otherColumns.forEach(otherColumn => {
+        if (otherColumn != kanbanColumnGroup) {
+            const otherColumnBody = otherColumn.querySelector('.kanban-board .kanban-body');
+            const otherColumnIcon = otherColumn.querySelector('.kanban-board .kanban-header i');
+            otherColumnBody.classList.remove('open')
+            otherColumnIcon.classList.remove('fa-caret-up')
+            otherColumnIcon.classList.add('fa-caret-down')
+        }
+    })
+  });
 })
 
-//====Open and Close Kanban Columns
-kanbanContainer.addEventListener('click', (e) => {
-  const kanbanColumnHeader = e.target.closest('.kanban-board .kanban-header');
-  if (!kanbanColumnHeader) return;
+//====Back to Projects Page Button
+const backToProjectsBtn = document.querySelector('.project-intro .projects-intro-buttons .all-projects-btn');
+backToProjectsBtn.addEventListener('click', () => {
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(item => item.classList.remove('active'));
+  
+  const currentProjectLink = document.querySelector('#current-project')
+  currentProjectLink.style.display = 'none';
+  currentProjectLink.classList.remove('active');
+  document.querySelector('.nav-item#projects').classList.add('active');
 
-  const kanbanColumnGroup = kanbanColumnHeader.parentElement;
-  const kanbanColumnBody = kanbanColumnGroup.querySelector('.kanban-board .kanban-body');
-  const kanbanColumnIcon = kanbanColumnGroup.querySelector('.kanban-board .kanban-header i');
-
-  kanbanColumnIcon.classList.toggle('fa-caret-down');
-  kanbanColumnIcon.classList.toggle('fa-caret-up');
-
-  kanbanColumnBody.classList.toggle('open');
-
-  const otherColumns = kanbanContainer.querySelectorAll('.kanban-board .kanban-section')
-  otherColumns.forEach(otherColumn => {
-      if (otherColumn != kanbanColumnGroup) {
-          const otherColumnBody = otherColumn.querySelector('.kanban-board .kanban-body');
-          const otherColumnIcon = otherColumn.querySelector('.kanban-board .kanban-header i');
-          otherColumnBody.classList.remove('open')
-          otherColumnIcon.classList.remove('fa-caret-up')
-          otherColumnIcon.classList.add('fa-caret-down')
-      }
-  })
-});
-
-
-
+  const navItemContents = document.querySelectorAll('.nav-item-content')
+  navItemContents.forEach(item => item.classList.remove('open'))
+  const currentProjectContentArea = document.querySelector('#projects-content')
+  currentProjectContentArea.classList.add('open');
 })
 
 //====Add Task Modal  
@@ -155,8 +169,6 @@ addTaskBtn.forEach(btn => {
       addTaskModal.style.display = 'none';
     }
   })
-
-
 })
 
 
@@ -218,13 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
     task.addEventListener("dragend", () => {
       task.classList.remove("dragging");
       task.classList.remove('overlay')
-      // GET THE ID OF WHERE TH EITEM IS DROPPED IN
-      // DEPENDING ON THIS WE RUN SOME CODE
+
       const currentSectionId = task.parentElement.id;
       const kanbanCardDueDate = task.querySelector('.due-date');
 
       //Change the overdue tag depending on section it is in 
-      //TO-DO ADD BACK FUNCTION
       validate_date_icon(task, kanbanCardDueDate, currentSectionId);
       
     });
@@ -266,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return closestTask;
   };
 
+
+//Add colours to due dates when moved
 function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
   if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
     if (task.id === 'kanban-task-overdue') {
@@ -283,6 +295,7 @@ function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
 
 }
 
+//Add colours to due dates on load
 document.addEventListener('DOMContentLoaded', () => {
   const taskCards = document.querySelectorAll('.kanban-board .kanban-card');
   taskCards.forEach(task => {
