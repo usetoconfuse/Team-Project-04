@@ -115,13 +115,33 @@ submitTopicBtn.addEventListener('click', (e) => {
 
         topicInput.value = "";
         addTopicModal.style.display = "none";
+    } else {
+        document.querySelector('#topicModal .error-msg').style.display = "block";
     }
 
 })
 
 //Add Post Modal Functionality
+const addPostModal = document.querySelector("#post-modal");
+const closeAddPostModal = addPostModal.querySelector('#post-modal .close-modal-btn')
+const addPostBtn = document.querySelector('#new-post-btn');
 
+addPostBtn.addEventListener('click', () => {
+    addPostModal.style.display = 'flex';
+  })
+  closeAddPostModal.addEventListener('click', () => {
+    addPostModal.style.display = 'none';
+  })
+  window.addEventListener('click', (e) => {
+    if (e.target == addPostModal) {
+        addPostModal.style.display = 'none';
+    }
+  })
 
-
+//For now, it just closes the modal on click of submit btn
+const submitPostBtn = document.querySelector('#add-post-btn');
+submitPostBtn.addEventListener('click', () =>{
+    addPostModal.style.display = 'none';
+})
 
 

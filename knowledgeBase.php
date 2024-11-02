@@ -120,7 +120,7 @@
             <button id="new-topic-btn">New Topic</button>
         </div>
 
-
+        <!--Add Topic Modal-->
         <div id="topic-modal" class="modal">
             <div class="modal-box">
                 <!--Header-->
@@ -148,39 +148,71 @@
             </div>
         </div>
 
+        
 
-
-        <div id="post-modal" class="kb-modal">
-            <div class="kb-modal-content">
-                <span id="close-post-modal" class="kb-modal-close">&times;</span>
-                <h1 class="text-center">New Post</h1>
-                <form id="post-modal-form">
-                    <div>
-                        <label class="text">Post Title:</label>
-                        <input type="text" id="titleInput" placeholder="Enter post title">
+        <!--Add Post Modal-->
+        <div id="post-modal" class="modal">
+            <div class="modal-box">
+                <!--Header-->
+                <div class="modal-header">
+                    <p>Add Post</p>
+                    <div class="close-modal-btn">
+                        <i class="fa-solid fa-x"></i>
                     </div>
-                    <div>
-                        <label class="text">Post Content:</label>
-                        <textarea id="contentInput" placeholder="Enter post content"></textarea>
+                </div>
+                <!--Body-->
+                <form id="post-modal-form" class="modal-body">
+                    <div class="post-title-form">
+                        <label for="post-title">Title</label>
+                        <input type="text" id="postInput" name="post-title" placeholder="Enter post title">
                     </div>
-                    <div>
-                        <label class="text">Technical?</label>
-                        <select id="typeSelect">
-                            <option value="technical">Technical</option>
-                            <option value="nonTechnical">Non-Technical</option>
-                        </select>
-                    <div>
-                        <label class="text">Topic:</label>
-                        <select id="topicSelect">
-                            <option value="codingStandards">Coding Standards</option>
-                            <option value="printerIssues">Printer Issues</option>
-                            <option value="cybersecurity">Cybersecurity</option>
-                            <option value="workplaceHygiene">Workplace Hygiene</option>
-                        </select>
+                    <div class="post-content-form">
+                        <label for="post-content">Content</label>
+                        <textarea type="text" id="contentInput" name="post-content" placeholder="Enter post content"></textarea>
                     </div>
-                    <button type="submit" id="add-post-btn">Send Post</button>
+                    <div class="task-dropdowns-form" id="post-dropdowns-form">
+                        <!--technical or non technical-->
+                        <div class="task-dropdown task-dropdown-technical">
+                            <label for="technical">Technical?</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-technical-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="technical" id="technical">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="technical">Technical</option>
+                                    <option value="nontechnical">Non-technical</option>
+                                </select>
+                            </div>  
+                        </div>
+                        <!--topic-->
+                        <div class="task-dropdown task-dropdown-topic">
+                            <label for="topic">Topic</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-topic-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="topic" id="topic">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="coding-standards">Coding Standards</option>
+                                    <option value="Printer Issues">Printer Issues</option>
+                                    <option value="Printer Issues">Cybersecurity</option>
+                                    <option value="Printer Issues">Workplace Hygiene</option>
+                                </select>
+                            </div>  
+                        </div>
+                    </div>
                 </form>
+                <div class="task-submit-buttons">
+                    <div class="add-post-btn" id="add-post-btn">
+                        Add Post
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                </div>
             </div>
         </div>
+
+
+        
     </div>
 </div>
