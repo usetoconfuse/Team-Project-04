@@ -78,32 +78,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function getPageId() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("page");
+    }
+
+    const navItems = document.querySelectorAll('.nav-item');
+
+    function openPage(pageId) {
+        const params = new URLSearchParams(window.location.search);
+        params.set("page", pageId);
+        window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
+        const navItem = document.getElementById(pageId);
+
+        navItems.forEach(item => item.classList.remove('active'));
+        navItem.classList.add('active');
+
+    
+        navItemContents.forEach(item => item.classList.remove('open'))
+        const navItemContent = document.querySelector(`#${navItem.id}-content`)
+
+        navItemContent.classList.add('open');
+
+        if (navItem.id === 'current-project') {
+            document.querySelector('.nav-item#projects').classList.add('active');
+        }
+        
+        hamburgerMenuBtn.classList.remove('openMobile'); //Change hamburger menu 
+        hamburgerMenu.classList.remove('openMobileMenu');
+        document.querySelector('nav').classList.remove('expandNav')
+        document.querySelector('#content').classList.remove('minimiseContent')
+    }
 
  
     //====Nav Menu (Desktop)====//
-    const navItems = document.querySelectorAll('.nav-item');
     const navItemContents = document.querySelectorAll('.nav-item-content')
     //Adds Active class to make button black
     //Adds Open to the associated content
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            navItems.forEach(item => item.classList.remove('active'));
-            item.classList.add('active');
-
-        
-            navItemContents.forEach(item => item.classList.remove('open'))
-            const navItemContent = document.querySelector(`#${item.id}-content`)
-            navItemContent.classList.add('open');
-
-            if (item.id === 'current-project') {
-                document.querySelector('.nav-item#projects').classList.add('active');
-            }
-            
-            hamburgerMenuBtn.classList.remove('openMobile'); //Change hamburger menu 
-            hamburgerMenu.classList.remove('openMobileMenu');
-            document.querySelector('nav').classList.remove('expandNav')
-            document.querySelector('#content').classList.remove('minimiseContent')
+            openPage(item.id);
         })
     })
 
@@ -125,5 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "logout.php";
     })
 
+    const currentPage = getPageId();
+    if (currentPage) {
+        openPage(currentPage);
+    }
 })
 
