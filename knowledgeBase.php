@@ -91,7 +91,7 @@
                                 <div class="kb-badge">' . $idLookup[$post['id']] . '</div>
                                 <div class="kb-badge">' . $topicLookup[$post['key']] . '</div>
                             </div>
-                            <i id="kb-share-link" class="fa-solid fa-link"></i>
+                            <i id="kb-share-link" class="fa-solid fa-link" href="#"></i>
                         </div>
                         <div class="kb-post-info">
                             <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
