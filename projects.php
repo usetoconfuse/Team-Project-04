@@ -3,9 +3,10 @@
         <p>All Projects</p>
         <p>View all your assigned projects below. Statistics about these are within.</p>
     </div>
-    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'manager'): ?>
         <a href="#">Add Project</a>
     <?php endif; ?>
+    
 </div>
 
 <div class="grid-container" id="gridContainer">
