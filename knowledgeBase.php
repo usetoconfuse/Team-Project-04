@@ -1,7 +1,7 @@
-<div class="kb-content">
+<div class="kb-content" id="kb-all-view">
     <div class="kb-header-section">
         <h1 class="kb-title">Knowledge Base</h1>
-        <div class="form-btns">
+        <div class="post-type-btns">
             <button class="active" id="allBtn">Show All</button>
             <button id="technicalBtn">Technical</button>
             <button id="nonTechnicalBtn">Non-Technical</button>
@@ -19,20 +19,64 @@
                 </button>
             </div>
 
-            <div class="kb-posts">
+            <div id="kb-posts-list" class="kb-posts">
                 <?php
                 $posts = [
                     [
-                        'id' => 'technical',
-                        'key' => 'coding-standards',
+                        'type' => 'technical',
+                        'id' => '1',
+                        'topic' => 'coding-standards',
                         'title' => 'How we format our code',
-                        'content' => 'All code should be indented with 4 spaces, and all functions should be declared in camel case.',
+                        'content' => 'All code should be indented with 4 spaces, and all functions should be declared in camel case.
+                        
+                        The header of a PHP file may consist of a number of different blocks. If present, each of the blocks below MUST be separated by a single blank line, and MUST NOT contain a blank line. Each block MUST be in the order listed below, although blocks that are not relevant may be omitted.
+
+    Opening tag.
+    File-level docblock.
+    One or more declare statements.
+    The namespace declaration of the file.
+    One or more class-based use import statements.
+    One or more function-based use import statements.
+    One or more constant-based use import statements.
+    The remainder of the code in the file.
+
+When a file contains a mix of HTML and PHP, any of the above sections may still be used. If so, they MUST be present at the top of the file, even if the remainder of the code consists of a closing PHP tag and then a mixture of HTML and PHP.
+
+When the opening tag is on the first line of the file, it MUST be on its own line with no other statements unless it is a file containing markup outside of PHP opening and closing tags.
+                        
+The term "class" refers to all classes, interfaces, and traits.
+
+Any closing brace MUST NOT be followed by any comment or statement on the same line.
+
+When instantiating a new class, parentheses MUST always be present even when there are no arguments passed to the constructor.
+
+The extends and implements keywords MUST be declared on the same line as the class name.
+
+The opening brace for the class MUST go on its own line; the closing brace for the class MUST go on the next line after the body.
+
+Opening braces MUST be on their own line and MUST NOT be preceded or followed by a blank line.
+
+Closing braces MUST be on their own line and MUST NOT be preceded by a blank line.
+
+Visibility MUST be declared on all properties.
+
+Visibility MUST be declared on all constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later).
+
+The var keyword MUST NOT be used to declare a property.
+
+There MUST NOT be more than one property declared per statement.
+
+Property names MUST NOT be prefixed with a single underscore to indicate protected or private visibility. That is, an underscore prefix explicitly has no meaning.
+
+There MUST be a space between type declaration and property name.
+                        ',
                         'posted' => '36 minutes ago',
                         'author' => 'Valerio Wilky'
                     ],
                     [
-                        'id' => 'nonTechnical',
-                        'key' => 'printer-issues',
+                        'type' => 'nonTechnical',
+                        'id' => '2',
+                        'topic' => 'printer-issues',
                         'title' => 'How to replace paper in the printer',
                         'content' => 'No need to call IT, just follow these simple steps to replace the paper in your printer. First, open the paper tray, then remove the empty paper, and finally insert the new paper. Simple!',
                         'posted' => '2 hours ago',
@@ -40,16 +84,18 @@
                         
                     ],
                     [
-                        'id' => 'technical',
-                        'key' => 'cyber-security',
+                        'type' => 'technical',
+                        'id' => '3',
+                        'topic' => 'cybersecurity',
                         'title' => 'How to stay safe from cyber attacks',
                         'content' => 'Cybersecurity is a big deal, and we all need to do our part to stay safe. Make sure to use strong passwords, and never share your password with anyone. Also, be sure to keep your software up to date, and never click on suspicious links. If there is ever a security breach, be sure to report it to IT immediately.',
                         'posted' => '5 hours ago',
                         'author' => 'Bilal Akito'
                     ],
                     [
-                        'id' => 'nonTechnical',
-                        'key' => 'workplace-hygiene',
+                        'type' => 'nonTechnical',
+                        'id' => '4',
+                        'topic' => 'workplace-hygiene',
                         'title' => 'How to wash your hands',
                         'content' => '1. Wet your hands with water.
                             2. Apply enough soap to cover your hands.
@@ -66,14 +112,14 @@
                         'author' => 'Haukea Fátima'
                     ]
                 ];
-                $idLookup = [
+                $typeLookup = [
                     'technical' => 'Technical',
                     'nonTechnical' => 'Non-Technical'
                 ];
                 $topicLookup = [
                     'coding-standards' => 'Coding Standards',
                     'printer-issues' => 'Printer Issues',
-                    'cyber-security' => 'Cybersecurity',
+                    'cybersecurity' => 'Cybersecurity',
                     'workplace-hygiene' => 'Workplace Hygiene'
                 ];
                 $colorLookup = [
@@ -84,12 +130,12 @@
                 foreach ($posts as $post) {
                     $post['content'] = nl2br($post['content']);
                     echo '
-                    <div class="kb-post" id="' . $post['id'] . '" data-key="' . $post['key'] . '">
+                    <div class="kb-post" id="post-' . $post['id'] . '" data-topic="' . $post['topic'] . '" data-type="' . $post["type"] . '">
                         <div class="kb-title-line">
                             <h2 class="kb-title-header">' . $post['title'] . '</h2>
                             <div class="kb-post-badges">
-                                <div class="kb-badge">' . $idLookup[$post['id']] . '</div>
-                                <div class="kb-badge">' . $topicLookup[$post['key']] . '</div>
+                                <div class="kb-badge">' . $typeLookup[$post['type']] . '</div>
+                                <div class="kb-badge">' . $topicLookup[$post['topic']] . '</div>
                             </div>
                             <i id="kb-share-link" class="fa-solid fa-link" href="#"></i>
                         </div>
@@ -102,8 +148,8 @@
                             </div>
                         </div>
                         <div class="kb-post-divider"></div>
-                        <p class="kb-post-content">' . $post['content'] . '</p>
-                        <button>Read Post</button>
+                        <p class="kb-post-content kb-post-content-shortened">' . $post['content'] . '</p>
+                        <button class="read-post-btn">Read Post</button>
                     </div>';
                 }
                 ?>
@@ -112,10 +158,10 @@
         <div class="kb-sidebar">
             <h2>Filter by Topic</h2>
             <ul id="topicsList">
-                <li class="kb-topic" id="codingStandards">Coding Standards</li>
-                <li class="kb-topic" id="printerIssues">Printer Issues</li>
-                <li class="kb-topic" id="cybersecurity">Cybersecurity</li>
-                <li class="kb-topic" id="workplaceHygiene">Workplace Hygiene</li>
+                <li class="kb-topic" data-topic="coding-standards">Coding Standards</li>
+                <li class="kb-topic" data-topic="printer-issues">Printer Issues</li>
+                <li class="kb-topic" data-topic="cybersecurity">Cybersecurity</li>
+                <li class="kb-topic" data-topic="workplace-hygiene">Workplace Hygiene</li>
             </ul>
             <button id="new-topic-btn">New Topic</button>
         </div>
@@ -211,8 +257,36 @@
                 </div>
             </div>
         </div>
-
-
-        
+    </div>
+</div>
+<div class="kb-content" id="kb-post-view" style="display:none;">
+    <div class="kb-header-section">
+        <h1 class="kb-title">Knowledge Base<span id="kb-post-name"></span></h1>
+        <button id="kb-post-back">
+            <i class='fa fa-solid fa-arrow-left'></i>
+            All Posts
+        </button>
+    </div>
+    <div class="kb-main kb-full-height">
+    <div class="kb-post kb-full-height">
+        <div class="kb-title-line">
+            <h2 class="kb-title-header">How to replace paper in the printer</h2>
+            <div class="kb-post-badges">
+                <div class="kb-badge">Non-Technical</div>
+                <div class="kb-badge">Printer Issues</div>
+            </div>
+            <i id="kb-share-link" class="fa-solid fa-link"></i>
+        </div>
+        <div class="kb-post-info">
+            <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="kb-text-sm">
+                Bilal Akito | 2 hours ago
+            </div>
+        </div>
+        <div class="kb-post-divider"></div>
+        <p class="kb-post-content kb-scrollable"></p>
+    </div>
     </div>
 </div>

@@ -24,6 +24,7 @@
     cursor: pointer;
     min-height: fit-content;
     min-width: fit-content;
+    width: fit-content;
     transition: 0.5s color ease, 0.5s background-color ease;
     padding: 10px;
     background-color: var(--primary-colour);
@@ -111,7 +112,7 @@
     width: 100%;
 }
 
-.form-btns {
+.post-type-btns {
     background-color: var(--secondary-colour);
     padding: 0px;
     white-space: nowrap;
@@ -121,31 +122,31 @@
     justify-content: center;
 }
 
-.form-btns button {
+.post-type-btns button {
     border-radius: 0px;
 }
 
-.form-btns button:first-child {
+.post-type-btns button:first-child {
     border-top-left-radius: var(--line-border-radius);
     border-bottom-left-radius: var(--line-border-radius);
 }
 
-.form-btns button:last-child {
+.post-type-btns button:last-child {
     border-top-right-radius: var(--line-border-radius);
     border-bottom-right-radius: var(--line-border-radius);
 }
 
-.form-btns button {
+.post-type-btns button {
     background-color: transparent;
     color: var(--primary-colour);
 }
 
-.form-btns button:hover {
+.post-type-btns button:hover {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
 }
 
-.form-btns button.active {
+.post-type-btns button.active {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
 }
@@ -192,6 +193,8 @@
 }
 
 .kb-post {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     background-color: var(--secondary-colour);
     border-radius: var(--box-border-radius);
@@ -199,6 +202,9 @@
 
 .kb-post-content {
     padding: 10px;
+}
+
+.kb-post-content-shortened {
     max-height: 70px;
     overflow: hidden;
     position: relative;
@@ -208,6 +214,7 @@
 .kb-post-divider {
     background-color: var(--tertiary-colour);
     height: 1px;
+    min-height: 1px;
     width: 100%;
 }
 
@@ -332,4 +339,13 @@
     color: var(--tertiary-colour);
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+.kb-full-height {
+    height: 100%;
+    flex-grow: 1;
+}
+
+.kb-scrollable {
+    overflow-y: scroll;
 }

@@ -1,88 +1,63 @@
-const formPosts = document.querySelectorAll(".kb-post");
-const topics = document.querySelectorAll(".kb-topic");
+const getPosts = () => {
+    return document.querySelectorAll("#kb-posts-list .kb-post");
+};
 
-//when button click only display those with corresponding section
-document.getElementById("technicalBtn").addEventListener("click", () => {
+const getSelectedType = () => {
+    const technicalBtn = document.getElementById("technicalBtn");
+    const nonTechnicalBtn = document.getElementById("nonTechnicalBtn");
 
-    for (i = 0; i < formPosts.length; i++) {
-        if (formPosts[i].id === "technical") {
-            formPosts[i].style.display = "block";
-        }
-        else {
-            formPosts[i].style.display = "none";
-        }
+    if (technicalBtn.classList.contains("active")) {
+        return "technical";
+    } else if (nonTechnicalBtn.classList.contains("active")) {
+        return "nonTechnical";
+    } else {
+        return null;
     }
-});
+};
 
-document.getElementById("nonTechnicalBtn").addEventListener("click", () => {
+const getSelectedTopic = () => {
+    const selectedTopic = document.querySelector("#topicsList .kb-active");
+    return selectedTopic ? selectedTopic.getAttribute("data-topic") : null;
+};
 
-    for (i = 0; i < formPosts.length; i++) {
-        if (formPosts[i].id === "technical") {
-            formPosts[i].style.display = "none";
+const filterPosts = () => {
+    const selectedType = getSelectedType();
+    const selectedTopic = getSelectedTopic();
+
+    getPosts().forEach(post => {
+        const postType = post.getAttribute("data-type");
+        const postTopic = post.getAttribute("data-topic");
+
+        if ((!selectedType || postType === selectedType) && (!selectedTopic || postTopic === selectedTopic)) {
+            post.style.removeProperty("display");
+        } else {
+            post.style.display = "none";
         }
-        else {
-            formPosts[i].style.display = "block";
-        }
-    }
-});
-
-document.getElementById("allBtn").addEventListener("click", () => {
-
-    for (i = 0; i < formPosts.length; i++) {
-        if (formPosts[i].id === "technical" || formPosts[i].id === "nonTechnical") {
-            formPosts[i].style.display = "block";
-        }
-    }
-});
-
-//when topics are click only display those topics
-let currentTopic = null;
-topics.forEach(topic => {
-    topic.addEventListener("click", (e) => {
-        const selectedTopic = e.target.id; // Get the clicked topic's ID
-
-        if (currentTopic !== null) {
-            document.getElementById(currentTopic).classList.remove("kb-active");
-        }
-
-        if (currentTopic === selectedTopic) {
-            currentTopic = null;
-            formPosts.forEach(post => {
-                post.style.display = "block";
-            });
-            return;
-        }
-        currentTopic = selectedTopic;
-        document.getElementById(currentTopic).classList.add("kb-active");
-
-        formPosts.forEach(post => {
-            const postKey = post.getAttribute("data-key"); // Get post's data-key
-            if (selectedTopic === "codingStandards" && postKey === "coding-standards" && post.id === "technical") {
-                post.style.display = "block";
-            } else if (selectedTopic === "printerIssues" && postKey === "printer-issues" && post.id === "nonTechnical") {
-                post.style.display = "block";
-            } else if (selectedTopic === "cybersecurity" && postKey === "cyber-security" && post.id === "technical") {
-                post.style.display = "block";
-            } else if (selectedTopic === "workplaceHygiene" && postKey === "workplace-hygiene" && post.id === "nonTechnical") {
-                post.style.display = "block";
-            } else {
-                post.style.display = "none"; // Hide posts that don't match the selected topic
-            }
-        });
     });
-});
+}
 
 
-const allButtons = document.querySelectorAll('.form-btns button');
-
-allButtons.forEach(button => {
+const topicButtons = document.querySelectorAll('#topicsList li');
+topicButtons.forEach(button => {
     button.addEventListener("click", () => {
-        allButtons.forEach(btn => btn.classList.remove('active'))
-        button.classList.add('active')
+        if (button.classList.contains('kb-active')) {
+            button.classList.remove('kb-active')
+        } else {
+            topicButtons.forEach(btn => btn.classList.remove('kb-active'))
+            button.classList.add('kb-active')
+        }
+        filterPosts();
     })
 })
 
-
+const postTypeButtons = document.querySelectorAll('.post-type-btns button');
+postTypeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        postTypeButtons.forEach(btn => btn.classList.remove('active'))
+        button.classList.add('active')
+        filterPosts();
+    })
+})
 
 //Topic Modal Functionality
 const addTopicModal = document.querySelector("#topic-modal");
@@ -91,15 +66,15 @@ const addTopicBtn = document.querySelector('#new-topic-btn');
 
 addTopicBtn.addEventListener('click', () => {
     addTopicModal.style.display = 'flex';
-  })
-  closeAddTopicModal.addEventListener('click', () => {
+})
+closeAddTopicModal.addEventListener('click', () => {
     addTopicModal.style.display = 'none';
-  })
-  window.addEventListener('click', (e) => {
+})
+window.addEventListener('click', (e) => {
     if (e.target == addTopicModal) {
         addTopicModal.style.display = 'none';
     }
-  })
+})
 
 
 const submitTopicBtn = document.querySelector('#topic-modal .task-submit-buttons #add-topic-btn');
@@ -128,31 +103,79 @@ const addPostBtn = document.querySelector('#new-post-btn');
 
 addPostBtn.addEventListener('click', () => {
     addPostModal.style.display = 'flex';
-  })
-  closeAddPostModal.addEventListener('click', () => {
+})
+closeAddPostModal.addEventListener('click', () => {
     addPostModal.style.display = 'none';
-  })
-  window.addEventListener('click', (e) => {
+})
+window.addEventListener('click', (e) => {
     if (e.target == addPostModal) {
         addPostModal.style.display = 'none';
     }
-  })
+})
 
 //For now, it just closes the modal on click of submit btn
 const submitPostBtn = document.querySelector('#add-post-btn');
-submitPostBtn.addEventListener('click', () =>{
+submitPostBtn.addEventListener('click', () => {
     addPostModal.style.display = 'none';
 })
 
 
-const shareBtn = document.querySelectorAll('#kb-share-link');
-shareBtn.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const currentPostUrl = window.location.href;
-        const subject = encodeURIComponent("View this post");
-        const body = encodeURIComponent("Here's the link to the post in the Make-It-All Knowledge Base: \n" + currentPostUrl)
-    
-        window.location.href = `mailto:?subject=${subject}&body=${body}`;
-    })
+const allPostsView = document.getElementById("kb-all-view");
+const postView = document.getElementById("kb-post-view");
 
-})
+
+const backBtn = document.getElementById("kb-post-back");
+const posts = document.querySelectorAll(".kb-post");
+const readPostBtns = document.querySelectorAll(".read-post-btn");
+
+const setCurrentPost = (postId) => {
+    const params = new URLSearchParams(window.location.search);
+    if (postId === null) {
+        params.delete("post");
+    } else {
+        params.set("post", postId);
+    }
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+}
+
+const getCurrentPost = () => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("post");
+}
+
+const openPost = (postId) => {
+    setCurrentPost(postId);
+
+    allPostsView.style.display = "none";
+    postView.style.removeProperty("display");
+
+    const post = document.getElementById(postId);
+    const postDetail = document.getElementById("kb-post-view");
+
+    postDetail.querySelector(".kb-title-header").innerHTML = post.querySelector(".kb-title-header").innerHTML;
+    postDetail.querySelector(".kb-post-badges").innerHTML = post.querySelector(".kb-post-badges").innerHTML;
+    postDetail.querySelector(".kb-post-info").innerHTML = post.querySelector(".kb-post-info").innerHTML;
+    postDetail.querySelector(".kb-post-content").innerHTML = post.querySelector(".kb-post-content").innerHTML;
+}
+
+const closePost = () => {
+    setCurrentPost(null);
+
+    allPostsView.style.removeProperty("display");
+    postView.style.display = "none";
+}
+
+getPosts().forEach(post => {
+    post.querySelector(".read-post-btn").addEventListener("click", () => {
+        openPost(post.id);
+    });
+});
+
+const currentPost = new URLSearchParams(window.location.search).get("post");
+if (currentPost) {
+    openPost(currentPost);
+}
+
+backBtn.addEventListener("click", () => {
+    closePost();
+});
