@@ -8,9 +8,6 @@
  
 
     <div class="projects-intro-buttons">
-        <div class="filter-task-btn">
-            <i class="fa fa-solid fa-sliders"></i>
-        </div>
         <div class="add-task-btn">
             <i class="fa fa-solid fa-plus"></i>
             Add Task

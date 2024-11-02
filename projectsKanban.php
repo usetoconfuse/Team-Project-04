@@ -48,7 +48,7 @@
         </div>
     </div>
     
-
+    
     <div class="kanban-separator"></div>
 </section>
 
@@ -189,6 +189,97 @@
 </section>
 
 
+<!--Filter Posts -->
+<div id="filter-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+            <p>Filter Tasks</p>
+            <div class="close-modal-btn">
+                <i class="fa-solid fa-x"></i>
+            </div>
+        </div>
+        <!--Body-->
+        <form id="filter-modal-form" class="modal-body">
+            <div class="task-dropdowns-form" id="post-dropdowns-form">
+                <!--DropDown 1 - Mgr View-->
+                <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
+                <div class="task-dropdown task-dropdown-technical">
+                    <label for="user-filter">User</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-technical-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-user"></i>
+                        </div>
+                        <select name="user-filter" id="user-filter">
+                            <option value="" selected disabled hidden>Choose</option>
+                            <option value="jlittle">John Little</option>
+                            <option value="qlittle">Quinn Little</option>
+                            <option value="jganatra">Jeevan Ganatra</option>
+                            <option value="Dan Novetsky">Dan Novetsky</option>
+                            <option value="Zoran">Zoran</option>
+                        </select>
+                    </div>  
+                </div>
+
+                <!--DropDown 1 - Emp View-->
+                <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'employee'): ?>
+                <div class="task-dropdown task-dropdown-technical">
+                    <label for="user-filter">User</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-technical-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-user"></i>
+                        </div>
+                        <select name="user-filter" id="user-filter">
+                            <option value="" selected disabled hidden>Choose</option>
+                            <option value="me">Me</option>
+                            <option value="all-tasks">All Tasks</option>
+                        </select>
+                    </div>  
+                </div>
+                <?php endif; ?>
+                <!--DropDown 2-->
+                <div class="task-dropdown task-dropdown-priority">
+                    <label for="priority">Priority</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-priority-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-star"></i>
+                        </div>
+                        <select name="priority" id="priority">
+                            <option value="all">All</option>
+                            <option value="none">None</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>  
+                </div>
+                 <!--DropDown 3-->
+                 <div class="task-dropdown task-dropdown-date">
+                    <label for="date">Due Date</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-date-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-calendar-days"></i>
+                        </div>
+                        <select name="date" id="date">
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="this-week">This Week</option>
+                            <option value="next-week">Next Week</option>
+                            <option value="later">Later</option>
+                        </select>
+                    </div>  
+                </div>
+
+            </div>
+        </form>
+        <div class="task-submit-buttons">
+            <div class="add-filter-btn" id="add-filter-btn">
+                Filter Tasks
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
