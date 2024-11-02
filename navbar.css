@@ -183,7 +183,7 @@ img {
 /*====Nav Bar====*/
 nav {
     width: 25%;
-    margin-top: 2rem;
+    margin-top: 6rem;
 }
 
 .menu {
@@ -462,8 +462,9 @@ nav {
     nav {
         width: 0%;
         transition: width 0.4s ease;
-        
+        margin-top: 2rem;
     }
+    
 
     .menu {
         display: none;
