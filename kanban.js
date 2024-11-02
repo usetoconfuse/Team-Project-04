@@ -182,46 +182,63 @@ addTaskBtn.forEach(btn => {
 const taskCard = document.querySelectorAll('.kanban-card')
 
 document.addEventListener('DOMContentLoaded', () => {
-  taskCard.forEach((task) => {
+  const taskCards = document.querySelectorAll('.kanban-card');
+
+  taskCards.forEach((task) => {
     const viewTaskModal = document.createElement('div');
-    viewTaskModal.classList.add('modal', 'view-task-modal')
-    const viewTaskBtn = task.querySelector('.kanban-card-bottom a')
+    viewTaskModal.classList.add('modal', 'view-task-modal');
+    const viewTaskBtn = task.querySelector('.kanban-card-bottom a');
+
     viewTaskModal.innerHTML = `
       <div class="modal-box">
           <!--Header-->
           <div class="modal-header">
-              <p>Task Title</p>
+              <p class="modal-task-title"></p>
               <div class="close-modal-btn">
                   <i class="fa-solid fa-x"></i>
               </div>
           </div>
           <!--Body-->
           <div class="modal-body">
-            <p></p>
+            <p class="modal-task-description"></p>
+            <div class="modal-task-due-date">
+                <i class="fa fa-regular fa-calendar"></i>
+                <p></p>
+            </div>
           </div>
       </div>
-  `
-  document.body.appendChild(viewTaskModal)
-  
-    const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn')
-  
+    `;
+    document.body.appendChild(viewTaskModal);
+
+    const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn');
+
     viewTaskBtn.addEventListener('click', (e) => {
       e.preventDefault();
+
+      // Extract information from the card
+      const taskTitle = task.querySelector('.kanban-card-top p').innerText;
+      const taskDescription = task.querySelector('.kanban-card-description').innerText;
+      const taskDueDate = task.querySelector('.due-date p').innerText;
+
+      // Populate the modal with the extracted information
+      viewTaskModal.querySelector('.modal-task-title').innerText = taskTitle;
+      viewTaskModal.querySelector('.modal-task-description').innerText = taskDescription;
+      viewTaskModal.querySelector('.modal-task-due-date p').innerText = taskDueDate;
+
       viewTaskModal.style.display = 'flex';
-    })
+    });
+
     closeViewTaskModal.addEventListener('click', () => {
       viewTaskModal.style.display = 'none';
-    })
+    });
+
     window.addEventListener('click', (e) => {
-      if (e.target == viewTaskModal) {
+      if (e.target === viewTaskModal) {
         viewTaskModal.style.display = 'none';
       }
-    })
-
-    document.body.appendChild(viewTaskModal)
-    
-  })
-})
+    });
+  });
+});
 
 
 
