@@ -145,3 +145,14 @@ submitPostBtn.addEventListener('click', () =>{
 })
 
 
+const shareBtn = document.querySelectorAll('#kb-share-link');
+shareBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const currentPostUrl = window.location.href;
+        const subject = encodeURIComponent("View this post");
+        const body = encodeURIComponent("Here's the link to the post in the Make-It-All Knowledge Base: \n" + currentPostUrl)
+    
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    })
+
+})

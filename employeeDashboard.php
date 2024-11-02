@@ -110,8 +110,7 @@ session_start()
                 <div class="user-profile-left">
                     <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
                     <div class="user-info">
-                        <p>John Little</p>
-                        <p>Manager</p>
+                        <p><span>John Little</span> | Employee</p>
                     </div>
                 </div>
                 <div class="user-profile-right">
