@@ -335,7 +335,7 @@
     border-radius: var(--line-border-radius);
 }
 
-#kb-share-link {
+.kb-share-link {
     color: var(--tertiary-colour);
     font-size: 1.2rem;
     cursor: pointer;

@@ -137,7 +137,7 @@ There MUST be a space between type declaration and property name.
                                 <div class="kb-badge">' . $typeLookup[$post['type']] . '</div>
                                 <div class="kb-badge">' . $topicLookup[$post['topic']] . '</div>
                             </div>
-                            <i id="kb-share-link" class="fa-solid fa-link" href="#"></i>
+                            <i class="kb-share-link fa-solid fa-link" href="#"></i>
                         </div>
                         <div class="kb-post-info">
                             <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
@@ -270,19 +270,18 @@ There MUST be a space between type declaration and property name.
     <div class="kb-main kb-full-height">
     <div class="kb-post kb-full-height">
         <div class="kb-title-line">
-            <h2 class="kb-title-header">How to replace paper in the printer</h2>
+            <h2 class="kb-title-header"></h2>
             <div class="kb-post-badges">
-                <div class="kb-badge">Non-Technical</div>
-                <div class="kb-badge">Printer Issues</div>
+                <div class="kb-badge"></div>
+                <div class="kb-badge"></div>
             </div>
-            <i id="kb-share-link" class="fa-solid fa-link"></i>
+            <i class="kb-share-link fa-solid fa-link"></i>
         </div>
         <div class="kb-post-info">
             <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="kb-text-sm">
-                Bilal Akito | 2 hours ago
             </div>
         </div>
         <div class="kb-post-divider"></div>

@@ -179,3 +179,24 @@ if (currentPost) {
 backBtn.addEventListener("click", () => {
     closePost();
 });
+
+
+const sharePost = (postId) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("post", postId);
+    const shareData = {
+        title: document.getElementById(postId).querySelector(".kb-title-header").innerText,
+        url: `${window.location.origin}${window.location.pathname}?${params.toString()}`,
+    };
+    navigator.share(shareData);
+}
+
+getPosts().forEach(post => {
+    post.querySelector(".kb-share-link").addEventListener("click", () => {
+        sharePost(post.id);
+    });
+})
+
+document.querySelector("#kb-post-view .kb-share-link").addEventListener("click", () => {
+    sharePost(getCurrentPost())
+});
