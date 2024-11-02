@@ -319,3 +319,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+
+//Filter Modal Functionality
+const filterTaskModal = document.querySelector("#filter-modal");
+const filterTaskBtn = document.querySelector('.filter-task-btn');
+const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
+
+filterTaskBtn.addEventListener('click', () => {
+  filterTaskModal.style.display = 'flex';
+  })
+  closeFilterTaskModal.addEventListener('click', () => {
+    filterTaskModal.style.display = 'none';
+  })
+  window.addEventListener('click', (e) => {
+    if (e.target == filterTaskModal) {
+      filterTaskModal.style.display = 'none';
+    }
+  })
