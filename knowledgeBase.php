@@ -28,7 +28,6 @@
                         'topic' => 'coding-standards',
                         'title' => 'How we format our code',
                         'content' => 'All code should be indented with 4 spaces, and all functions should be declared in camel case.
-                        
                         The header of a PHP file may consist of a number of different blocks. If present, each of the blocks below MUST be separated by a single blank line, and MUST NOT contain a blank line. Each block MUST be in the order listed below, although blocks that are not relevant may be omitted.
 
     Opening tag.
@@ -71,7 +70,7 @@ Property names MUST NOT be prefixed with a single underscore to indicate protect
 There MUST be a space between type declaration and property name.
                         ',
                         'posted' => '36 minutes ago',
-                        'author' => 'Valerio Wilky'
+                        'author' => 'John Little',
                     ],
                     [
                         'type' => 'nonTechnical',
@@ -80,8 +79,7 @@ There MUST be a space between type declaration and property name.
                         'title' => 'How to replace paper in the printer',
                         'content' => 'No need to call IT, just follow these simple steps to replace the paper in your printer. First, open the paper tray, then remove the empty paper, and finally insert the new paper. Simple!',
                         'posted' => '2 hours ago',
-                        'author' => 'Bilal Akito'
-                        
+                        'author' => 'Bilal Akito',                        
                     ],
                     [
                         'type' => 'technical',
@@ -90,7 +88,7 @@ There MUST be a space between type declaration and property name.
                         'title' => 'How to stay safe from cyber attacks',
                         'content' => 'Cybersecurity is a big deal, and we all need to do our part to stay safe. Make sure to use strong passwords, and never share your password with anyone. Also, be sure to keep your software up to date, and never click on suspicious links. If there is ever a security breach, be sure to report it to IT immediately.',
                         'posted' => '5 hours ago',
-                        'author' => 'Bilal Akito'
+                        'author' => 'Bilal Akito',
                     ],
                     [
                         'type' => 'nonTechnical',
@@ -109,7 +107,7 @@ There MUST be a space between type declaration and property name.
                             10. Dry your hands completely with a disposable towel.
                             11. Use the disposable towel to turn off the tap.',
                         'posted' => '3 days ago',
-                        'author' => 'Haukea Fátima'
+                        'author' => 'Haukea Fátima',
                     ]
                 ];
                 $typeLookup = [
@@ -123,19 +121,32 @@ There MUST be a space between type declaration and property name.
                     'workplace-hygiene' => 'Workplace Hygiene'
                 ];
                 $colorLookup = [
-                    'Valerio Wilky' => 'var(--pastel-colour-1)',
+                    'John Little' => 'var(--pastel-colour-1)',
                     'Bilal Akito' => 'var(--pastel-colour-2)',
-                    'Haukea Fátima' => 'var(--pastel-colour-3)'
+                    'Haukea Fátima' => 'var(--pastel-colour-3)',
+                    'coding-standards' => 'var(--pastel-colour-1)',
+                    'printer-issues' => 'var(--pastel-colour-2)',
+                    'cybersecurity' => 'var(--pastel-colour-3)',
+                    'workplace-hygiene' => 'var(--pastel-colour-4)'
                 ];
+
+
                 foreach ($posts as $post) {
                     $post['content'] = nl2br($post['content']);
+                    $currentUserHtml = '';
+                    if ($post['author'] === 'John Little') {
+                        $currentUserHtml = '
+                            <button>Edit Post</button>
+                            <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
+                        ';
+                    };
                     echo '
                     <div class="kb-post" id="post-' . $post['id'] . '" data-topic="' . $post['topic'] . '" data-type="' . $post["type"] . '">
                         <div class="kb-title-line">
                             <h2 class="kb-title-header">' . $post['title'] . '</h2>
                             <div class="kb-post-badges">
-                                <div class="kb-badge">' . $typeLookup[$post['type']] . '</div>
-                                <div class="kb-badge">' . $topicLookup[$post['topic']] . '</div>
+                                <div class="kb-badge" style="background-color:var(--tertiary-colour);">' . $typeLookup[$post['type']] . '</div>
+                                <div class="kb-badge" style="background-color:' . $colorLookup[$post['topic']].'">' . $topicLookup[$post['topic']] . '</div>
                             </div>
                             <i class="kb-share-link fa-solid fa-link" href="#"></i>
                         </div>
@@ -149,7 +160,10 @@ There MUST be a space between type declaration and property name.
                         </div>
                         <div class="kb-post-divider"></div>
                         <p class="kb-post-content kb-post-content-shortened">' . $post['content'] . '</p>
-                        <button class="read-post-btn">Read Post</button>
+                        <div class="kb-post-buttons">
+                            <button class="read-post-btn">Read Post</button>
+                            ' . $currentUserHtml . '
+                        </div>
                     </div>';
                 }
                 ?>
@@ -158,10 +172,10 @@ There MUST be a space between type declaration and property name.
         <div class="kb-sidebar">
             <h2>Filter by Topic</h2>
             <ul id="topicsList">
-                <li class="kb-topic" data-topic="coding-standards">Coding Standards</li>
-                <li class="kb-topic" data-topic="printer-issues">Printer Issues</li>
-                <li class="kb-topic" data-topic="cybersecurity">Cybersecurity</li>
-                <li class="kb-topic" data-topic="workplace-hygiene">Workplace Hygiene</li>
+                <li class="kb-topic" data-topic="coding-standards"><span class="kb-topic-circle"></span>Coding Standards</li>
+                <li class="kb-topic" data-topic="printer-issues"><span class="kb-topic-circle"></span>Printer Issues</li>
+                <li class="kb-topic" data-topic="cybersecurity"><span class="kb-topic-circle"></span>Cybersecurity</li>
+                <li class="kb-topic" data-topic="workplace-hygiene"><span class="kb-topic-circle"></span>Workplace Hygiene</li>
             </ul>
             <button id="new-topic-btn">New Topic</button>
         </div>

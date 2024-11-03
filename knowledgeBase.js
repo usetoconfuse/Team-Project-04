@@ -85,7 +85,7 @@ submitTopicBtn.addEventListener('click', (e) => {
     if (topicInput !== "") {
         const newTopicItem = document.createElement("li");
         newTopicItem.classList.add("kb-topic");
-        newTopicItem.innerHTML = topicInput;
+        newTopicItem.innerHTML = `<span class="kb-topic-circle"></span>${topicInput}`;
         topicList.appendChild(newTopicItem);
 
         topicInput.value = "";
