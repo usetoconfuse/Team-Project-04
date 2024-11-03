@@ -664,7 +664,6 @@
       grid-template-columns: 1fr; 
       grid-template-rows: 1fr 1fr 1fr 1fr;
       gap: 10px;                         
-      width: 50%;
       height: 100%;
       margin: 0 auto;
     }
@@ -735,6 +734,11 @@
     grid-column: 1;              
   }
 
+
+  .emp-forum-post {
+    flex-direction: column;
+    
+  }
     }
 </style>
 
