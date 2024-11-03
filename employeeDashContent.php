@@ -94,6 +94,23 @@
                     </div>
 
                     <div class="emp-forum-right">   
+                        <div class="emp-forum-tag">Non-Technical</div>
+                        <div class="emp-forum-tag">Tag</div>
+                        <a href="#">View Post</a>
+                    </div>
+                </div>
+
+                <!--Forum Post-->
+                <div class="emp-forum-post">
+                    <div class="emp-forum-left">
+                        <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
+                        <div class="emp-forum-info">
+                            <div class="emp-forum-title">Forum Title</div>
+                            <div class="emp-forum-date">30th October</div>
+                        </div>  
+                    </div>
+
+                    <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag">Tag</div>
                         <a href="#">View Post</a>
@@ -139,13 +156,33 @@
 
         <div class="emp-grid-item projects">
             <div class="emp-grid-item-top">
-                <p>Projects</p>
+                <p>Priority Projects</p>
                 <a href="#">All projects</a>
             </div>
 
             <div class="emp-grid-item-content">
               <div class="emp-project-card">
                 <p>Project A</p>
+                <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
+                  <!--Progress Bar-->
+                  <div class="emp-progressFlexBar">
+                    <div class="emp-projectProgressBarOut">
+                        <div class="emp-projectProgressBarInner"></div>
+                    </div>
+                    <div class="emp-projectProgress-txt">
+                        <p>Progress</p>
+                        <p>75%</p>
+                    </div>
+                  </div>
+                    
+                    <!-- ------------------------------------------------------- -->
+
+                    <button class="emp-view-project-button">View</button>                
+              </div>
+
+
+              <div class="emp-project-card">
+                <p>Project D</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
                   <div class="emp-progressFlexBar">
@@ -184,33 +221,165 @@
 
         <div class="emp-grid-item stats emp-stats">
             <div class="emp-grid-item-top">
-            <p>Stats</p>
+              <p>Stats</p>
             </div>
-            <div class="emp-grid-item-content">
-            <div id="emp-stat-flexbox">
-                  <div class="emp-stat-card">
-                  <div class="emp-stat-txt">Number of Posts Made</div>
-                  <p>3</p>
-                  </div>
-                  <div class="emp-stat-card">
-                  <div class="emp-stat-txt">Number of tasks completed</div>
-                  <p>5</p>
-                  </div>
-                  <div class="emp-stat-card">
-                  <div class="emp-stat-txt">Number of tasks ongoing</div>
-                  <p>1</p>
-                  </div>
+            <div class="emp-grid-item-content emp-grid-stats-container">
+          
+              <div class="todoEmpGrid emp-stat-card">
+                <div style="background-color: red;" class="emp-stat-card-circle"></div> <!--Circle-->
+                <p class="emp-stats-nums">3</p>
+                <div class="emp-stat-txt">To Do</div>
               </div>
+
+              <div class="inProgressEmpGrid emp-stat-card">
+                <div style="background-color: orange;" class="emp-stat-card-circle"></div> <!--Circle-->
+                <p class="emp-stats-nums">5</p>
+                <div class="emp-stat-txt">In Progress</div>
+              </div>
+              <div class="completeEmpGrid emp-stat-card">
+                <div style="background-color: green;" class="emp-stat-card-circle"></div> <!--Circle-->
+                <p class="emp-stats-nums">1</p>
+                <div class="emp-stat-txt">Complete</div>
+              </div>
+              <!--bottom-->
+              <div id="statButtonEmpId" class="overdueEmpGrid emp-stat-card">
+                <div class="emp-stat-txt">Overdue Tasks</div>
+                <p class="emp-stats-nums">1</p>
+              </div>
+              <div onclick="empStatsButton()" class="buttonEmpGrid emp-stat-card">
+                <div class="emp-stat-txt">Personal Tasks -></div>
+                <p class="emp-stats-nums">1</p>
+              </div>
+              
+            
             </div>
-          </div>
+          
         </div>
     </div>
 
+
+
 <style>
+
+/*STATS GRID*/
+/* Grid container */
+.emp-grid-stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: 2fr 1fr;
+    gap: 10px;                         
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 0.6rem;
+  }
+
+
+  /* Grid items */
+  .todoEmpGrid {
+    grid-row: 1;                   
+    grid-column: 1;      
+  }
+  .inProgressEmpGrid {
+    grid-row: 1;                   
+    grid-column: 2;  
+  }
+  .completeEmpGrid {
+    grid-row: 1;                 
+    grid-column: 3;              
+  }
+
+  .overdueEmpGrid {
+    grid-row: 2;                 
+    grid-column: 1 / 3;
+  }
+
+  .buttonEmpGrid {
+    grid-row: 2;                 
+    grid-column: 3;              
+  }
+
+
+    /*Stats Section*/
+  .emp-stats {
+    background-color: black !important;
+    color: white !important; /*this gives it priority over the overarching styles where cards are white.*/
+
+  }
+
+  .emp-stat-card{
+    background-color: white;
+    color: black;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    /* height: auto; */
+    border-radius: 10.5px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid transparent;
+  }
+
+  .emp-stat-card-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    align-self: flex-start;
+  }
+  
+  .emp-stat-card:nth-of-type(1),   .emp-stat-card:nth-of-type(2), 
+.emp-stat-card:nth-of-type(3) {
+  justify-content: center;
+    flex-direction: column;
+}
+  .emp-stat-card:nth-of-type(4),   .emp-stat-card:nth-of-type(5) {
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0.6rem;
+  }
+
+  .emp-stat-card:nth-of-type(4){ /*styling for overdue card*/
+    background-color: #FF6666
+  }
+  
+  .emp-stat-card:nth-of-type(5) { /*styling for button card*/
+    background-color: #FF9966;
+    transition: background-color 0.5s ease, border 0.5s ease;
+  }
+
+  .emp-stat-card:nth-of-type(5):hover { /*styling for HOVER OVER button card*/
+    background-color: black;
+    color: white;
+    border-color: orange;
+    cursor: pointer;
+  }
+
+  .emp-stats-nums {
+    color: black;
+    font-size: 2rem;
+  }
+
+  .emp-stat-card:nth-of-type(5):hover .emp-stats-nums { /* change colour of num just for if btn card hovered over*/
+    color: white;
+  }
+
+  .emp-stat-txt{
+    font-size: 1rem;
+  }
+
+
+
+
+
+
+
   /* Grid container */
   .emp-grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: auto;
     gap: 10px;                         
     width: 100%;
     height: 100%;
@@ -219,20 +388,19 @@
 
   /* Grid items */
   .tasks {
-    grid-row: 1 / 3;                   
+    grid-row: 1 / 4;                   
     grid-column: 1 / 2;      
   }
   .forums {
-    grid-row: 1 / 2;                   
+    grid-row: 1 / 3;                   
     grid-column: 2 / 4;  
-    margin-bottom: 0;              
   }
   .projects {
-    grid-row: 2 / 3;                 
+    grid-row: 3 / 4;                 
     grid-column: 2 / 3;              
   }
   .stats {
-    grid-row: 2 / 3;              
+    grid-row: 3 / 4;              
     grid-column: 3 / 4;            
   }
 
@@ -410,36 +578,7 @@
     text-align: center;
   }
 
-  /*Stats Section*/
-  .emp-stats {
-    background-color: black;
-    color: white;
-  }
 
-  #emp-stat-flexbox{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .emp-stat-card{
-    background-color: gray;
-    color: orange;
-    font-size: 2rem;
-    text-align: center;
-    font-weight: bold;
-    height: auto;
-    border-radius: 10.5px;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-
-  .emp-stat-txt{
-    font-size: 1rem;
-  }
 
   /*responsiveness*/
 
@@ -483,3 +622,8 @@
     }
 </style>
 
+<script>
+    function empStatsButton() {
+      window.location.href = "employeeDashboard.php?page=personal";
+    }
+</script>
