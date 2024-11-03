@@ -753,6 +753,18 @@
   }
 }
  
+}
+ 
+
+/*forum responisveness*/
+  .emp-forum-post {
+    flex-direction: column;
+    
+  }
+/*Project responsiveness*/
+  .emp-project-card {
+    flex-direction: column;
+  }
 </style>
 
 <script>
