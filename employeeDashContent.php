@@ -122,19 +122,23 @@
             </div>
 
             <div class="emp-grid-item-content">
-                <!--Forum Post-->
-                <div class="emp-forum-post">
+               <!--Forum Post-->
+               <div class="emp-forum-post">
                     <div class="emp-forum-left">
                         <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                         <div class="emp-forum-info">
-                            <div class="emp-forum-title">How we format our code</div>
-                            <div class="emp-forum-date">36 minutes ago</div>
+                            <div class="emp-forum-title">Phishing Email Tests</div>
+                            <div class="emp-forum-info-bottom">
+                              <p>John Little | </p>
+                              <div class="emp-forum-date">5 days ago</div>
+                            </div>
+                            
                         </div>  
                     </div>
 
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
-                        <div class="emp-forum-tag" style="background-color: rgb(159, 100, 143);">Coding Standards</div>
+                        <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
                         <a class="emp-btn-hover btn" href="#">View Post</a>
                     </div>
                 </div>
@@ -145,7 +149,10 @@
                         <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                         <div class="emp-forum-info">
                             <div class="emp-forum-title">How to replace paper in the printer</div>
-                            <div class="emp-forum-date">2 hours ago</div>
+                            <div class="emp-forum-info-bottom">
+                              <p>John Little | </p>
+                              <div class="emp-forum-date">36 minutes ago</div>
+                            </div>
                         </div>  
                     </div>
 
@@ -161,8 +168,12 @@
                     <div class="emp-forum-left">
                         <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                         <div class="emp-forum-info">
-                            <div class="emp-forum-title">How to stay safe from cyber attacks</div>
-                            <div class="emp-forum-date">5 hours ago</div>
+                            <div class="emp-forum-title">Phishing Email Tests</div>
+                            <div class="emp-forum-info-bottom">
+                              <p>John Little | </p>
+                              <div class="emp-forum-date">5 days ago</div>
+                            </div>
+                            
                         </div>  
                     </div>
 
@@ -179,7 +190,10 @@
                         <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                         <div class="emp-forum-info">
                             <div class="emp-forum-title">How to wash your hands</div>
-                            <div class="emp-forum-date">3 days ago</div>
+                            <div class="emp-forum-info-bottom">
+                              <p>John Little | </p>
+                              <div class="emp-forum-date">12 days ago</div>
+                            </div>
                         </div>  
                     </div>
 
@@ -196,7 +210,11 @@
                         <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                         <div class="emp-forum-info">
                             <div class="emp-forum-title">Phishing Email Tests</div>
-                            <div class="emp-forum-date">5 days ago</div>
+                            <div class="emp-forum-info-bottom">
+                              <p>John Little | </p>
+                              <div class="emp-forum-date">5 days ago</div>
+                            </div>
+                            
                         </div>  
                     </div>
 
@@ -221,13 +239,13 @@
                 <p>Project A</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
+                  <i class="fa-solid fa-crown"></i>
                   <div class="emp-progressFlexBar">
                     <div class="emp-projectProgressBarOut">
                         <div class="emp-projectProgressBarInner"></div>
                     </div>
                     <div class="emp-projectProgress-txt">
-                        <p>Progress</p>
-                        <p>75%</p>
+               
                     </div>
                   </div>
                     
@@ -241,13 +259,13 @@
                 <p>Project D</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
+                  <i class="fa-solid fa-crown" style="color: transparent;"></i>
                   <div class="emp-progressFlexBar">
                     <div class="emp-projectProgressBarOut">
                         <div class="emp-projectProgressBarInner"></div>
                     </div>
                     <div class="emp-projectProgress-txt">
-                        <p>Progress</p>
-                        <p>75%</p>
+            
                     </div>
                   </div>
                     
@@ -260,13 +278,13 @@
                 <p>Project B</p>
                 <!-- <canvas id="myProgressBarB" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
+                  <i class="fa-solid fa-crown" style="color: transparent;"></i>
                   <div class="emp-progressFlexBar">
                     <div class="emp-projectProgressBarOut">
                         <div class="emp-projectProgressBarInner"></div>
                     </div>
                     <div class="emp-projectProgress-txt">
-                        <p>Progress</p>
-                        <p>75%</p>
+                   
                     </div>
                   </div>
                   <!-- ------------------------------------------------------- -->
@@ -282,18 +300,18 @@
             <div class="emp-grid-item-content emp-grid-stats-container">
           
               <div class="todoEmpGrid emp-stat-card">
-                <div style="background-color: red;" class="emp-stat-card-circle"></div> <!--Circle-->
+                <div style="background-color: #E6757E;" class="emp-stat-card-circle"></div> <!--Circle-->
                 <p class="emp-stats-nums">3</p>
                 <div class="emp-stat-txt">To Do</div>
               </div>
 
               <div class="inProgressEmpGrid emp-stat-card">
-                <div style="background-color: orange;" class="emp-stat-card-circle"></div> <!--Circle-->
+                <div style="background-color: #EAB385;" class="emp-stat-card-circle"></div> <!--Circle-->
                 <p class="emp-stats-nums">5</p>
                 <div class="emp-stat-txt">In Progress</div>
               </div>
               <div class="completeEmpGrid emp-stat-card">
-                <div style="background-color: green;" class="emp-stat-card-circle"></div> <!--Circle-->
+                <div style="background-color: #ADDA9D;" class="emp-stat-card-circle"></div> <!--Circle-->
                 <p class="emp-stats-nums">1</p>
                 <div class="emp-stat-txt">Complete</div>
               </div>
@@ -448,7 +466,19 @@
 
   .emp-forum-date {
     font-size: 14px;
-    color: #353535;
+
+  }
+
+  .emp-forum-info-bottom {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    color: gray !important;
+  }
+
+  .emp-forum-info p {
+    margin-right: 0.4rem;
   }
 
 
@@ -461,6 +491,7 @@
     margin-left: 6px;
     color: white;
     background-color: gray;
+    white-space: nowrap;
   }
 
 
@@ -469,11 +500,13 @@
     text-align: center;
     width: 100%;
     margin-top: 20px;
+  
   }
 
   .emp-forum-buttons a {
     width: 50%;
     padding: 0.6rem 1.2rem;
+    white-space: nowrap;
     border-radius: 10.5px;
   }
 
@@ -505,17 +538,30 @@
 
   .emp-projectProgressBarOut {
       height: 8px;
-      width: 10rem;
+      width: 6rem;
       background-color: gray;
       border-radius: 10px;
-      padding: 
+
   }        
 
   .emp-projectProgressBarInner {
       height: 8px;
-      width: 75%;
-      background-color: #ADDA9D;
       border-radius: 10px;
+  }
+
+  .emp-project-card:nth-of-type(1) .emp-projectProgressBarInner {
+    width: 25%;
+    background-color: #E6757E;
+  }
+
+  .emp-project-card:nth-of-type(2) .emp-projectProgressBarInner  {
+    width: 55%;
+    background-color: #EAB385;
+  }
+
+  .emp-project-card:nth-of-type(3) .emp-projectProgressBarInner  {
+    width: 80%;
+    background-color: #ADDA9D;
   }
 
   .emp-projectProgress-txt{
@@ -625,18 +671,18 @@
   }
 
   .emp-stat-card:nth-of-type(4){ /*styling for overdue card*/
-    background-color: #FF6666
+    background-color: #E6757E;
   }
   
   .emp-stat-card:nth-of-type(5) { /*styling for button card*/
-    background-color: #FF9966;
+    background-color: #EAB385;
     transition: background-color 0.5s ease, border 0.5s ease;
   }
 
   .emp-stat-card:nth-of-type(5):hover { /*styling for HOVER OVER button card*/
     background-color: black;
     color: white;
-    border-color: orange;
+    border-color:  white;
     cursor: pointer;
   }
 
@@ -656,62 +702,69 @@
 
   /*responsiveness*/
 
+  @media (max-width: 1380px) {
 
-  @media (max-width: 992px) {
-    .emp-grid-container {
-      display: grid;
-      grid-template-columns: 1fr; 
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+
+  .emp-grid-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       gap: 10px;                         
-      height: 100%;
+      height: auto;
       margin: 0 auto;
+      overflow-y: scroll;
     }
 
     .emp-grid-item-content .kanban-card {
       background-color: #F5F5F5;
-      width: 80%;
+      width: 100%;
   }
+
+
+
+
 
 
 /*Issue with NavBar background when responsive.*/
 
   /* Grid items */
   .tasks {
-    grid-row: 1 ;                   
-    grid-column: 1;      
+    width: 100%;   
   }
   .forums {
-    grid-row: 2;                   
-    grid-column: 1;                
+    width: 100%;            
   }
   .projects {
-    grid-row: 3;                 
-    grid-column:1;              
+    width: 100%;           
   }
   .stats {
-    grid-row: 4;              
-    grid-column: 1;            
+    width: 100%;          
   }
-
-
-
-
-
-
-  .emp-forum-post {
-    flex-direction: column;
-  }
-
-  .emp-forum-right {
 
   }
 
 
-  .emp-forum-left {
+  @media (max-width: 1100px) {
+    .emp-forum-right {
+   flex-direction: column;
+   gap: 10px;
+ }
+
+ .emp-forum-right .emp-forum-tag {
+  width: 8rem;
+  text-align: center;
+ }
+
+ .emp-forum-right a {
+  width: 8rem;
+  padding: 0.4rem;
+  text-align: center;
+ }
 
   }
 
-}
 
 @media (max-width: 400px) {
 
@@ -760,6 +813,7 @@
     flex-direction: column;
     
   }
+
 /*Project responsiveness*/
   .emp-project-card {
     flex-direction: column;
