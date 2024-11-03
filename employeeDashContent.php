@@ -4,26 +4,29 @@
         <div class="emp-grid-item tasks">
             <div class="emp-grid-item-top">
                 <p>Daily Tasks</p>
-                <a class="emp-btn-hover" href="employeeDashboard.php?page=personal">All tasks</a>
+                <a href="employeeDashboard.php?page=personal">All tasks</a>
             </div>
 
             <div class="emp-grid-item-content">
               <div class="kanban-board">
-                   <!--Kanban Card 1-->
-                   <div class="kanban-card"> <!--draggable=true-->
+                  <!--Kanban Card 1-->
+                <div class="kanban-card">
                     <div class="kanban-card-top">
                         <p>Task Title</p>
-                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <div class="kanban-card-priority low-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
                                                         You have to develop a kanban board.</p>
                         
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
-                            <a class="emp-btn-hover" href="">View Task</a>
+                            <a href="">View Task</a>
                             <div class="due-date">
                                 <i class="fa fa-regular fa-calendar"></i>
                                 <p>21 Oct</p>
@@ -31,21 +34,74 @@
                         </div>
                     </div>
                 </div>
-                <!--Kanban Card 2-->
-                <div class="kanban-card"> <!--draggable=true-->
+                 <!--Kanban Card 2-->
+                 <div class="kanban-card" id="kanban-task-overdue" >
                     <div class="kanban-card-top">
                         <p>Task Title</p>
-                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <div class="kanban-card-priority none-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
                                                         You have to develop a kanban board.</p>
                         
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
-                            <a class="emp-btn-hover" href="">View Task</a>
+                            <a href="">View Task</a>
+                            <div class="due-date">
+                                <i class="fa fa-regular fa-calendar"></i>
+                                <p>21 Oct</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!--Kanban Card 3-->
+                 <div class="kanban-card" >
+                    <div class="kanban-card-top">
+                        <p>Task Title</p>
+                        <div class="kanban-card-priority medium-priority"></div>
+                        <i class="fa fa-solid fa-caret-down"></i>
+                    </div>
+                    <div class="kanban-card-body">
+                        <p class="kanban-card-description">This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board.</p>
+                        
+                        <div class="kanban-separator"></div>
+
+                        <div class="kanban-card-bottom">
+                            <a href="">View Task</a>
+                            <div class="due-date">
+                                <i class="fa fa-regular fa-calendar"></i>
+                                <p>21 Oct</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!--Kanban Card 4-->
+                 <div class="kanban-card">
+                    <div class="kanban-card-top">
+                        <p>Task Title</p>
+                        <div class="kanban-card-priority high-priority"></div>
+                        <i class="fa fa-solid fa-caret-down"></i>
+                    </div>
+                    <div class="kanban-card-body">
+                        <p class="kanban-card-description">This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board. This is the task you have been set. 
+                                                        You have to develop a kanban board.</p>
+                        
+                        <div class="kanban-separator"></div>
+
+                        <div class="kanban-card-bottom">
+                            <a href="">View Task</a>
                             <div class="due-date">
                                 <i class="fa fa-regular fa-calendar"></i>
                                 <p>21 Oct</p>
@@ -62,7 +118,7 @@
         <div class="emp-grid-item forums">
             <div class="emp-grid-item-top">
                 <p>Knowledge Base</p>
-                <a class="emp-btn-hover" href="employeeDashboard.php?page=forums">All posts</a>
+                <a  href="employeeDashboard.php?page=forums">All posts</a>
             </div>
 
             <div class="emp-grid-item-content">
@@ -157,7 +213,7 @@
         <div class="emp-grid-item projects">
             <div class="emp-grid-item-top">
                 <p>Priority Projects</p>
-                <a class="emp-btn-hover" href="employeeDashboard.php?page=projects">All projects</a>
+                <a  href="employeeDashboard.php?page=projects">All projects</a>
             </div>
 
             <div class="emp-grid-item-content">
@@ -293,7 +349,7 @@
 
   .emp-grid-item {
     padding: 20px;
-    text-align: center;
+
     font-size: 1.2em;
     color: #333;
     background-color: white;
@@ -306,6 +362,21 @@
     overflow-y: scroll;
     width: 100%;
   }
+      /*Kanban Cards*/
+  .emp-grid-item-content .kanban-card {
+    background-color: #F5F5F5;
+    width: 100%;
+  }
+
+  .emp-grid-item-content .kanban-card .kanban-card-bottom a {
+    background-color: white;
+  }
+
+  .emp-grid-item-content .kanban-card#kanban-task-overdue .due-date {
+    background-color: #E6757E;
+    color: white;
+  }
+
 
 
   /*Inner stylings*/
@@ -326,11 +397,6 @@
     white-space: nowrap;
   }
 
-    /*Kanban Cards*/
-  .emp-grid-item-content .kanban-card {
-    background-color: #F5F5F5;
-    width: 100%;
-  }
 
 
 
@@ -338,7 +404,7 @@
   .emp-btn-hover {
     font-size: 14px;
     background-color: black;
-    color: white !important;
+    color: white ;
     padding: 0.8rem 0.6rem;
     border-radius: 30px;
     margin-left: 6px;
@@ -346,12 +412,7 @@
     transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
  }
   /* Emp Standard Button Hover styling*/
- .emp-btn-hover:hover {
-    background-color: white;
-    color: black !important;
-    border-color: orange;
- }
- 
+
   /*Forum Posts*/
   .emp-forum-post {
     width: 100%;
@@ -404,14 +465,6 @@
     background-color: gray;
   }
 
-  /* .emp-forum-right a {
-    font-size: 14px;
-    background-color: black;
-    color: white;
-    padding: 0.8rem 0.6rem;
-    border-radius: 30px;
-    margin-left: 6px;
-  } */
 
   .emp-forum-buttons {
     font-size: 16px;

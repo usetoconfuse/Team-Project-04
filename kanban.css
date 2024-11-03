@@ -189,12 +189,8 @@
     margin-bottom: 1rem;
 }
 
-.kanban-card-top i:nth-of-type(2) {
-    display: none;
-}
-
 .kanban-card-top i:nth-of-type(1) {
-    display: block;
+    display: none;
 }
 
 
@@ -243,6 +239,28 @@
 
 .due-date i {
     margin-right: 4px;
+}
+
+.kanban-card-priority {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.kanban-card-priority.high-priority {
+    background-color: #dd9592;
+}
+
+.kanban-card-priority.medium-priority {
+    background-color: #EAB385;
+}
+
+.kanban-card-priority.low-priority {
+    background-color: #ADDA9D;
+}
+
+.kanban-card-priority.none-priority {
+    background-color: #9A9A9A;
 }
 
 
@@ -441,6 +459,152 @@ input[type="file"]::-webkit-file-upload-button {
     cursor: pointer;
 }
 
+/*===View Task Modal ===*/
+
+
+.view-task-modal .modal-task-description {
+    margin-bottom: 1.2rem;
+}
+
+.modal-task-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.modal-task-info:nth-of-type(1) {
+    margin-bottom: 1rem;
+}
+
+.modal-task-info .modal-task-info-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modal-task-info .modal-task-info-section-top {
+    width: 85%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+
+.modal-task-info .modal-task-info-section-top .task-modal-title {
+    font-weight: 450;
+}
+
+.modal-task-info .modal-task-info-section-top .status-box,
+.modal-task-info .modal-task-info-section-top .priority-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    white-space: nowrap;
+}
+
+.status-box {
+    padding: 0.1rem 1rem;
+    border-radius: 4px;
+}
+
+.priority-box {
+    padding: 0.1rem 1rem;
+    border-radius: 4px;
+}
+
+
+.status-box .task-indicator-circle, .priority-box .task-indicator-circle {
+    margin-right: 0.8rem;
+}
+
+.modal-task-info .modal-task-info-section .modal-task-info-section-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 0.2rem;
+    gap: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 0.8rem 0.8rem 0 0;
+    border: 1px solid transparent;
+    width: 85%;
+    white-space: nowrap;
+}
+
+.modal-task-info .modal-task-info-section .modal-task-info-section-body {
+    padding: 0.3rem 0.2rem;
+    border: 1px solid black;
+    width: 85%;
+    text-align: center;
+    border-radius: 0 0 0.8rem 0.8rem;
+}
+
+.modal-task-due-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.task-indicator-circle {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+
+.modal-task-attachments {
+    margin-top: 1rem;
+}
+
+.modal-task-attachments-box {
+    width: 100%;
+    height: 4rem;
+    border: 1px dashed black;
+    border-radius: 4px;
+}
+
+.modal-task-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 0.4rem;
+    text-align: center;
+}
+
+.delete-task {
+    background-color: gray;
+    color: white; 
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    flex-grow: 1;
+}
+
+
+.save-task {
+    background-color: black;
+    color: white; 
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    flex-grow: 2;
+}
+
+.report-task {
+    background-color: #E6757E;
+    color: black; 
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    flex-grow: 1;
+}
+
+.right-arrow, .left-arrow {
+    background-color: black;
+    color: white; 
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+}
 
 
 /*====Responsiveness====*/
@@ -480,7 +644,7 @@ input[type="file"]::-webkit-file-upload-button {
         border-radius: 15px;
     }
 
-    .kanban-card-body.open,.kanban-body.open, .kanban-header i, .kanban-card-top i:nth-of-type(2) {
+    .kanban-card-body.open,.kanban-body.open, .kanban-header i, .kanban-card-top i:nth-of-type(1) {
         display: block;
     }
 

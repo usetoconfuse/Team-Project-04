@@ -10,7 +10,7 @@ kanbanContainers.forEach(kanbanContainer => {
 
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
-    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)');
+    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(1)');
 
     openCloseIcon.classList.toggle('fa-caret-down');
     openCloseIcon.classList.toggle('fa-caret-up');
@@ -21,7 +21,7 @@ kanbanContainers.forEach(kanbanContainer => {
     otherCards.forEach(otherCard => {
         if (otherCard != kanbanCardGroup) {
             const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
-            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(2)')
+            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(1)')
             otherCardBody.classList.remove('open')
             otherCardIcon.classList.remove('fa-caret-up')
             otherCardIcon.classList.add('fa-caret-down')
@@ -183,48 +183,213 @@ const taskCard = document.querySelectorAll('.kanban-card')
 
 document.addEventListener('DOMContentLoaded', () => {
   const taskCards = document.querySelectorAll('.kanban-card');
+  const userRole = document.getElementById('kanban-content').getAttribute('data-role');
 
   taskCards.forEach((task) => {
     const viewTaskModal = document.createElement('div');
-    viewTaskModal.classList.add('modal', 'view-task-modal');
+    viewTaskModal.classList.add('modal', 'view-task-modal'); 
     const viewTaskBtn = task.querySelector('.kanban-card-bottom a');
+    
+    //===Fields from the card:===
+    //Task Status, Task Title, Description, Due Date
+    let taskStatus = ""
+    if (task.parentElement.id === 'kanban-to-do') {
+      taskStatus = "To Do";
+    } else if (task.parentElement.id === "kanban-in-progress") {
+      taskStatus = "In Progress";
+    } else if (task.parentElement.id === "kanban-completed") {
+      taskStatus = "Completed";
+    }
 
+    const taskTitle = task.querySelector('.kanban-card-top p').innerText;
+    const taskDueDate = task.querySelector('.due-date p').innerText;
+
+    console.log(task.querySelector('.kanban-card-priority'))
+    
+    const priorityElement = task.querySelector('.kanban-card-priority');
+    let taskPriority = "";
+    if (priorityElement.classList.contains('high-priority')) {
+      taskPriority = "High Priority";
+    } else if (priorityElement.classList.contains('medium-priority')) {
+      taskPriority = "Medium Priority";
+    } else if (priorityElement.classList.contains('low-priority')) {
+      taskPriority = "Low Priority";
+    } else if (priorityElement.classList.contains('none-priority')) {
+      taskPriority = "No Priority";
+    }
+
+
+    const fullTaskDescription = task.querySelector('.kanban-card-description').innerText;
+    const taskDescriptionWords = fullTaskDescription.split(' ');
+    const previewTaskDescription = taskDescriptionWords.slice(0, 20).join(' ') + '...';
+  
+    //Set shorter description inside the card
+    const taskDescriptionElement = task.querySelector('.kanban-card .kanban-card-body .kanban-card-description');
+    if (taskDescriptionElement) {
+      taskDescriptionElement.innerText = previewTaskDescription;
+    }
+
+    //Role based content for buttons in modal 
+    let roleBasedBtns = '';
+    let roleBasedReassign =''
+    if (userRole === 'manager' || userRole === 'leader') {
+      roleBasedBtns = `<div class="delete-task">
+                            <p>Delete</p>
+                          </div>
+                          <div class="save-task">
+                              <p>Save Changes</p>
+                          </div>`
+      roleBasedReassign = `<div class="modal-task-info-section">
+                              <div class="modal-task-info-section-header">
+                                  <i class="fa fa-solid fa-user"></i>
+                                  <p>Reassign</p>
+                              </div>
+                              <div class="modal-task-info-section-body">
+                                  <p>Choose</p>
+                              </div>
+                          </div>`
+    } else if (userRole === 'employee') {
+      roleBasedBtns = ` <div class="report-task">
+                              <p>Report as stuck</p>
+                            </div>`
+      roleBasedReassign = `<div class="modal-task-info-section">
+                            </div>`
+    }
+
+    // View Task Modal content
     viewTaskModal.innerHTML = `
-      <div class="modal-box">
-          <!--Header-->
-          <div class="modal-header">
-              <p class="modal-task-title"></p>
-              <div class="close-modal-btn">
-                  <i class="fa-solid fa-x"></i>
-              </div>
-          </div>
-          <!--Body-->
-          <div class="modal-body">
-            <p class="modal-task-description"></p>
-            <div class="modal-task-due-date">
-                <i class="fa fa-regular fa-calendar"></i>
-                <p></p>
-            </div>
-          </div>
-      </div>
+                                  <div class="modal-box .view-task-modal-box">
+                                            <!--Header-->
+                                            <div class="modal-header">
+                                                <p class="modal-task-title">${taskTitle}</p>
+                                                <div class="close-modal-btn">
+                                                    <i class="fa-solid fa-x"></i>
+                                                </div>
+                                            </div>
+                                            <!--Body-->
+                                            <div class="modal-body">
+                                              <p class="modal-task-description">${fullTaskDescription}</p>
+
+
+
+                                              <div class="modal-task-info">
+                                                  <div class="modal-task-info-section-top">
+                                                      <p class="task-modal-title">Status</p>
+                                                      <div class="status-box">
+                                                          <div class="task-indicator-circle"></div>
+                                                          <p>${taskStatus}</p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="modal-task-info-section-top">
+                                                      <p class="task-modal-title">Priority</p>
+                                                      <div class="priority-box">
+                                                          <div class="task-indicator-circle"></div>
+                                                          <p>${taskPriority}</p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="modal-task-info-section-top">
+                                                      <p class="task-modal-title">Assigned to</p>
+                                                      <p>Quinn Little</p>
+                                                  </div>
+                                              </div>
+
+
+                                              <div class="modal-task-info">
+                                                  <div class="modal-task-info-section">
+                                                      <div class="modal-task-info-section-header">
+                                                          <i class="fa fa-solid fa-user"></i>
+                                                          <p>Created by</p>
+                                                      </div>
+                                                      <div class="modal-task-info-section-body">
+                                                          <p>John Little</p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="modal-task-info-section">
+                                                      <div class="modal-task-info-section-header">
+                                                          <i class="fa fa-regular fa-calendar"></i>
+                                                          <p>Due date</p>
+                                                      </div>
+                                                      <div class="modal-task-info-section-body modal-task-due-date">
+                                                          <div class="task-indicator-circle"></div>
+                                                          <p>${taskDueDate}</p>
+                                                      </div>
+                                                  </div>
+
+                                                  ${roleBasedReassign}
+                                              </div>
+
+                                              <div class="modal-task-attachments">
+                                                  <p class="task-modal-title">Attachments</p>
+                                                  <div class="modal-task-attachments-box"></div>
+                                              </div>
+
+                                              <div class="modal-task-btns">
+                                                  <div class="left-arrow">
+                                                      <i class="fa-solid fa-arrow-left"></i>
+                                                  </div>
+                                                  ${roleBasedBtns}
+                                                  <div class="right-arrow">
+                                                      <i class="fa-solid fa-arrow-right"></i>
+                                                  </div>
+                                              </div>
+                                            
+
+                                            
+
+                                              
+                                            </div>
+                                        </div>
     `;
+
+    //add modal to body of document
     document.body.appendChild(viewTaskModal);
 
+    //Priority Colours in modal 
+    const priorityBox = viewTaskModal.querySelector('.priority-box');
+    const priorityCircle = viewTaskModal.querySelector('.priority-box .task-indicator-circle');
+
+    if (priorityElement.classList.contains('high-priority')) {
+      priorityBox.style.backgroundColor = "#dd9592";
+      priorityCircle.style.backgroundColor = "red";
+    } else if (priorityElement.classList.contains('medium-priority')) {
+      priorityBox.style.backgroundColor = "#EAB385";
+      priorityCircle.style.backgroundColor = "orange";
+    } else if (priorityElement.classList.contains('low-priority')) {
+      priorityBox.style.backgroundColor = "#ADDA9D";
+      priorityCircle.style.backgroundColor = "green";
+    } else if (priorityElement.classList.contains('none-priority')) {
+      priorityBox.style.backgroundColor = "#F5F5F5";
+      priorityCircle.style.backgroundColor = "#8E8E91";
+    }
+
+     //Due Date dot colour 
+     const dueDateDot = viewTaskModal.querySelector('.modal-task-due-date .task-indicator-circle');
+     if (task.id === 'kanban-task-overdue') {
+       dueDateDot.style.backgroundColor = "#E6757E";
+     } else {
+       dueDateDot.style.backgroundColor = "#ADDA9D";
+     }
+
+    //Dynamically set task status when moving card to other columns
+    const statusBox = viewTaskModal.querySelector('.status-box');
+    const statusCircle = viewTaskModal.querySelector('.status-box .task-indicator-circle');
+    checkStatus(task, statusBox, statusCircle)
+
+    task.addEventListener('dragend', () => {
+      checkStatus(task, statusBox, statusCircle)
+    })
+    
+
+
+  
+    //Closing and opening modal
     const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn');
 
     viewTaskBtn.addEventListener('click', (e) => {
       e.preventDefault();
-
-      // Extract information from the card
-      const taskTitle = task.querySelector('.kanban-card-top p').innerText;
-      const taskDescription = task.querySelector('.kanban-card-description').innerText;
-      const taskDueDate = task.querySelector('.due-date p').innerText;
-
-      // Populate the modal with the extracted information
-      viewTaskModal.querySelector('.modal-task-title').innerText = taskTitle;
-      viewTaskModal.querySelector('.modal-task-description').innerText = taskDescription;
-      viewTaskModal.querySelector('.modal-task-due-date p').innerText = taskDueDate;
-
       viewTaskModal.style.display = 'flex';
     });
 
@@ -237,10 +402,29 @@ document.addEventListener('DOMContentLoaded', () => {
         viewTaskModal.style.display = 'none';
       }
     });
+
   });
 });
 
-
+function checkStatus(task, statusBox, statusCircle) {
+  let taskStatus;
+  if (task.parentElement.id === 'kanban-to-do') {
+    taskStatus = "To Do";
+    statusBox.style.backgroundColor = "#dd9592";
+    statusCircle.style.backgroundColor = "red";
+  } else if (task.parentElement.id === "kanban-in-progress") {
+    taskStatus = "In Progress";
+    statusBox.style.backgroundColor = "#EAB385";
+    statusCircle.style.backgroundColor = "orange";
+  } else if (task.parentElement.id === "kanban-completed") {
+    taskStatus = "Completed";
+    statusBox.style.backgroundColor = "#ADDA9D";
+    statusCircle.style.backgroundColor = "green";
+  }
+  
+  // Update the displayed task status text in the modal
+  statusBox.querySelector('p').textContent = taskStatus;
+}
 
 //====Dragging Features
   const kanbanSection = document.querySelectorAll('.kanban-body')
