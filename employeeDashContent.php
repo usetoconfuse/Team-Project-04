@@ -239,7 +239,9 @@
                 <p>Project A</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
-                  <i class="fa-solid fa-crown"></i>
+                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?> <!-- Only show crowns for Team Leaders-->
+                    <i class="fa-solid fa-crown"></i>
+                  <?php endif; ?>
                   <div class="emp-progressFlexBar">
                     <div class="emp-projectProgressBarOut">
                         <div class="emp-projectProgressBarInner"></div>
@@ -259,7 +261,9 @@
                 <p>Project D</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
-                  <i class="fa-solid fa-crown" style="color: transparent;"></i>
+                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?> <!-- Only show crowns for Team Leaders-->
+                    <i class="fa-solid fa-crown" style="color: transparent;"></i>
+                  <?php endif; ?>
                   <div class="emp-progressFlexBar">
                     <div class="emp-projectProgressBarOut">
                         <div class="emp-projectProgressBarInner"></div>
@@ -278,7 +282,9 @@
                 <p>Project B</p>
                 <!-- <canvas id="myProgressBarB" width="400" height="100"></canvas> -->
                   <!--Progress Bar-->
-                  <i class="fa-solid fa-crown" style="color: transparent;"></i>
+                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?> <!-- Only show crowns for Team Leaders-->
+                    <i class="fa-solid fa-crown" style="color: transparent;"></i>
+                  <?php endif; ?>
                   <div class="emp-progressFlexBar">
                     <div class="emp-projectProgressBarOut">
                         <div class="emp-projectProgressBarInner"></div>
