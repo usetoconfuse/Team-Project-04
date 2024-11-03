@@ -112,7 +112,7 @@
 
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
-                        <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cyber Security</div>
+                        <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
                         <a class="emp-btn-hover" href="#">View Post</a>
                     </div>
                 </div>
@@ -139,14 +139,14 @@
                     <div class="emp-forum-left">
                         <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                         <div class="emp-forum-info">
-                            <div class="emp-forum-title">How to Access the Server</div>
-                            <div class="emp-forum-date">1 week ago</div>
+                            <div class="emp-forum-title">Phishing Email Tests</div>
+                            <div class="emp-forum-date">5 days ago</div>
                         </div>  
                     </div>
 
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
-                        <div class="emp-forum-tag" style="background-color: rgb(159, 100, 143);">Coding Standards</div>
+                        <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
                         <a class="emp-btn-hover" href="#">View Post</a>
                     </div>
                 </div>
