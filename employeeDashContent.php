@@ -751,9 +751,8 @@
     grid-row: 4;                 
     grid-column: 2;              
   }
-}
  
-}
+
  
 
 /*forum responisveness*/
@@ -765,6 +764,7 @@
   .emp-project-card {
     flex-direction: column;
   }
+}
 </style>
 
 <script>
