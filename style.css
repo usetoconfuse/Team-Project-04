@@ -47,3 +47,14 @@ img {
     --dark-green: #04545E; 
 
 }
+
+.btn {
+    transition: all 0.4s ease;
+    background-color: black;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #414141;
+    color: white;
+}

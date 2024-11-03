@@ -135,7 +135,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(159, 100, 143);">Coding Standards</div>
-                        <a class="emp-btn-hover" href="#">View Post</a>
+                        <a class="emp-btn-hover btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -152,7 +152,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Non-Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(100, 100, 159);">Printer Issues</div>
-                        <a class="emp-btn-hover" href="#">View Post</a>
+                        <a class="emp-btn-hover btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -169,7 +169,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
-                        <a class="emp-btn-hover" href="#">View Post</a>
+                        <a class="emp-btn-hover btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -186,7 +186,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Non-Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(134, 159, 100);">Workplace Hygiene</div>
-                        <a class="emp-btn-hover" href="#">View Post</a>
+                        <a class="emp-btn-hover btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -203,7 +203,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
-                        <a class="emp-btn-hover" href="#">View Post</a>
+                        <a class="emp-btn-hover btn" href="#">View Post</a>
                     </div>
                 </div>
             </div>  
@@ -233,7 +233,7 @@
                     
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="emp-btn-hover">View</button>                
+                    <button class="emp-btn-hover btn">View</button>                
               </div>
 
 
@@ -253,7 +253,7 @@
                     
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="emp-btn-hover">View</button>                
+                    <button class="emp-btn-hover btn">View</button>                
               </div>
 
               <div class="emp-project-card">
@@ -270,7 +270,7 @@
                     </div>
                   </div>
                   <!-- ------------------------------------------------------- -->
-                  <button class="emp-btn-hover">View</button>     
+                  <button class="emp-btn-hover btn">View</button>     
                   </div>
               </div>
         </div>
@@ -348,7 +348,6 @@
 
   .emp-grid-item {
     padding: 20px;
-
     font-size: 1.2em;
     color: #333;
     background-color: white;
@@ -364,7 +363,7 @@
       /*Kanban Cards*/
   .emp-grid-item-content .kanban-card {
     background-color: #F5F5F5;
-    width: 100%;
+
   }
 
   .emp-grid-item-content .kanban-card .kanban-card-bottom a {
