@@ -695,12 +695,32 @@
 
 
 
-  /*STATS GRID*/
+
+
+
+  .emp-forum-post {
+    flex-direction: column;
+  }
+
+  .emp-forum-right {
+
+  }
+
+
+  .emp-forum-left {
+
+  }
+
+}
+
+@media (max-width: 400px) {
+
+ /*STATS GRID*/
   /* Grid container */
   .emp-grid-stats-container {
     display: grid;
-    grid-template-columns: 1fr; 
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 10px;                         
     width: 100%;
     height: auto;
@@ -708,19 +728,18 @@
     margin-top: 0.6rem;
   }
 
-
   /* Grid items */
   .todoEmpGrid {
     grid-row: 1;                   
-    grid-column: 1;      
+    grid-column: 1 /3;      
   }
   .inProgressEmpGrid {
     grid-row: 2;                   
-    grid-column: 1;  
+    grid-column: 1/3;  
   }
   .completeEmpGrid {
     grid-row: 3;                 
-    grid-column: 1;              
+    grid-column: 1/3;              
   }
 
   .overdueEmpGrid {
@@ -729,16 +748,11 @@
   }
 
   .buttonEmpGrid {
-    grid-row: 5;                 
-    grid-column: 1;              
+    grid-row: 4;                 
+    grid-column: 2;              
   }
-
-
-  .emp-forum-post {
-    flex-direction: column;
-    
-  }
-    }
+}
+ 
 </style>
 
 <script>
