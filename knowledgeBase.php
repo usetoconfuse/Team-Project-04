@@ -108,7 +108,16 @@ There MUST be a space between type declaration and property name.
                             11. Use the disposable towel to turn off the tap.',
                         'posted' => '3 days ago',
                         'author' => 'Haukea Fátima',
-                    ]
+                    ],
+                    [
+                        'type' => 'technical',
+                        'id' => '5',
+                        'topic' => 'cybersecurity',
+                        'title' => 'Phishing Email Tests',
+                        'content' => 'We will be sending out phishing emails to test your awareness of cybersecurity threats. If you receive an email that seems suspicious, do not click on any links, and report it to IT immediately.',
+                        'posted' => '5 days ago',
+                        'author' => 'John Little',
+                    ],
                 ];
                 $typeLookup = [
                     'technical' => 'Technical',
