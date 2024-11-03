@@ -304,7 +304,6 @@
               </div>
               <div onclick="empStatsButton()" class="buttonEmpGrid emp-stat-card">
                 <div class="emp-stat-txt">Personal Tasks -></div>
-                <p class="emp-stats-nums">1</p>
               </div>
               
             

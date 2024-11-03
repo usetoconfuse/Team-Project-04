@@ -67,12 +67,12 @@ function getEmployeeInitials(arr) {
 //----------------------------------DATA-----------------------------
 
 // Dummy project data
-let creator = "Larry Biggs";
+let creator = "Sunita Markey";
 let projectDates = ["25/09/2024", "04/11/2024"];
-let memberArr = ["John Little", "Harry Harrison","Greg McGregor","Ed Edwards",
-    "Jeff Jefferson","Tim Thompson", "Adam Adams", "William Williams", "Charlie Charles",
-    "Alice Alison", "Bob Bobbins", "Carol Caroline", "Chuck Chuckster",
-    "Craig Crumble", "Eve Evelyn", "Frank Francis"];
+let memberArr = ["Nediljko Saldis", "Reza Sigrid","Indra Vogel","Kristin Bellandini",
+    "Patricija Esser","Pryderi Holland", "Xoán Noel", "Mariann Bazzoli", "Moira Wirth",
+    "Dunstan Thorn", "Priscilla Sancho", "Eléonore Franke", "Aslanbek Ó Marcaigh",
+    "Billie Veres", "Alexandra Lozano", "Florinus Chilikov"];
 let tasksArr = [[1,0,2,1,0,1,2,3,1,0,4,1,0,2,0,0],[0,1,2,0,3,1,2,3,1,0,3,1,2,1,0,1],
 [2,0,0,1,0,1,2,1,0,4,2,1,3,2,1,0],[1,0,1,2,0,0,1,2,0,1,0,1,3,2,1,4]];
 let doneTotal = 0;
@@ -326,11 +326,13 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
     };
-
+});
+    
+window.addEventListener("load", () => {
     // Make contribution bar chart start vertical/horizontal based on viewport
     updateContributionGraphAxes();
 });
-    
+
 // Make contribution bar chart stack vertically on small viewports
 // The resize event doesn't fire when a browser is maximised/minimised/restored
 // so the chart can be too big/too small when this happens
