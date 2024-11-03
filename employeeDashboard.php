@@ -13,6 +13,7 @@ session_start()
         <link rel="stylesheet" href="projects.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
         <link rel="stylesheet" href="kanban.css" />
+        <link rel="stylesheet" href="style.css"></link>
         <title>Employee Dashboard</title>
     </head>
 
@@ -154,7 +155,6 @@ session_start()
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
         <script src="kanban.js"></script>
-        <script src="style.css"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
 </html>
