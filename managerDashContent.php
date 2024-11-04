@@ -20,7 +20,7 @@
             <h1 id="mdSelectedProjectName" class="mdTitle"></h1>
             <div id="mdViewProjectButton">
                 <i class="fa fa-solid fa-magnifying-glass"></i>
-                <p>View</p>
+                <a >View</a>
             </div>
         </div>
         <div id="mdInfoContainer">

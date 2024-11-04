@@ -48,13 +48,25 @@ img {
 
 }
 
-.btn {
+.black-btn {
     transition: all 0.4s ease;
     background-color: black;
     cursor: pointer;
 }
 
-.btn:hover {
+.black-btn:hover {
     background-color: #414141;
     color: white;
 }
+
+.white-btn {
+    transition: all 0.4s ease;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.white-btn:hover {
+    background-color: #F5F5F5;
+}
+

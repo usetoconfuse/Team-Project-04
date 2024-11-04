@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                        
                               <div class="project-card-top">
                                   <p>${task.title}</p>
-                                  <a href="#">View</a>
+                                  <a href="#" class="black-btn">View</a>
                               </div>
                               <div class="project-card-progress">
                                   <div class="project-card-progress-info">

@@ -12,6 +12,8 @@
     gap: 2%;
 }
 
+
+
 /* Manually prevent bolding in headers */
 #mdGrid h1, 
 #mdGrid h2, 
@@ -126,16 +128,30 @@
     align-items: start;
 }
 
-#mdViewProjectButton {
+#mdViewProjectButton, #mdMemberSortButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: white;
+    color: black;
+    padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
-    height: 30px;
-    width: 70px
+    border: 2px solid #F5F5F5;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 30px;
+    white-space: nowrap;
+    transition: all 0.4s ease;
 }
+
+
+
+#mdViewProjectButton:hover, #mdMemberSortButton:hover {
+    background-color: #F5F5F5;
+
+}
+
+
 
 #mdViewProjectButton i {
     padding-right: 5px;
@@ -220,17 +236,6 @@
     justify-content: space-between;
 }
 
-#mdMemberSortButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #000000;
-    color: #ffffff;
-    height: 30px;
-    width: 70px;
-    border-radius: 10.5px;
-    margin-right: 1rem;
-}
 
 #mdMemberSortButton i{
     padding-right: 10px;   

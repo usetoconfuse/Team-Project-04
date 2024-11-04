@@ -34,17 +34,17 @@
         <div class="vertical-bar"></div>
 
         <div class="projects-intro-buttons">
-            <div class="filter-task-btn">
+            <div class="filter-task-btn black-btn">
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
     
             <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
-                <div class="add-task-btn">
+                <div class="add-task-btn black-btn">
                     <i class="fa fa-solid fa-plus"></i>
                     Add Task
                 </div>
             <?php endif; ?>
-            <div class="all-projects-btn">
+            <div class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
                 All Projects
             </div>

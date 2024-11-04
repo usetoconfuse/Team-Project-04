@@ -2,7 +2,7 @@
     <div class="kb-header-section">
         <h1 class="kb-title">Knowledge Base</h1>
         <div class="post-type-btns">
-            <button class="active" id="allBtn">Show All</button>
+            <button class="active black-btn" id="allBtn">Show All</button>
             <button id="technicalBtn">Technical</button>
             <button id="nonTechnicalBtn">Non-Technical</button>
         </div>
@@ -14,7 +14,7 @@
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search Post Content">
                 </div>
-                <button id="new-post-btn">
+                <button id="new-post-btn" class="black-btn">
                     New Post
                 </button>
             </div>
@@ -145,7 +145,7 @@ There MUST be a space between type declaration and property name.
                     $currentUserHtml = '';
                     if ($post['author'] === 'John Little') {
                         $currentUserHtml = '
-                            <button>Edit Post</button>
+                            <button class="black-btn">Edit Post</button>
                             <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
                         ';
                     };
@@ -170,7 +170,7 @@ There MUST be a space between type declaration and property name.
                         <div class="kb-post-divider"></div>
                         <p class="kb-post-content kb-post-content-shortened">' . $post['content'] . '</p>
                         <div class="kb-post-buttons">
-                            <button class="read-post-btn">Read Post</button>
+                            <button class="read-post-btn black-btn">Read Post</button>
                             ' . $currentUserHtml . '
                         </div>
                     </div>';
@@ -186,7 +186,7 @@ There MUST be a space between type declaration and property name.
                 <li class="kb-topic" data-topic="cybersecurity"><span class="kb-topic-circle"></span>Cybersecurity</li>
                 <li class="kb-topic" data-topic="workplace-hygiene"><span class="kb-topic-circle"></span>Workplace Hygiene</li>
             </ul>
-            <button id="new-topic-btn">New Topic</button>
+            <button id="new-topic-btn" class="black-btn">New Topic</button>
         </div>
 
         <!--Add Topic Modal-->
@@ -207,7 +207,7 @@ There MUST be a space between type declaration and property name.
                     </div>
                 </form>
                 <div class="task-submit-buttons">
-                    <div class="add-topic-btn" id="add-topic-btn">
+                    <div class="add-topic-btn  black-btn" id="add-topic-btn">
                         Add Topic
                         <i class="fa fa-arrow-right"></i>
                     </div>
@@ -273,7 +273,7 @@ There MUST be a space between type declaration and property name.
                     </div>
                 </form>
                 <div class="task-submit-buttons">
-                    <div class="add-post-btn" id="add-post-btn">
+                    <div class="add-post-btn black-btn" id="add-post-btn">
                         Add Post
                         <i class="fa fa-arrow-right"></i>
                     </div>
