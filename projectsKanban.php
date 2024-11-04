@@ -302,6 +302,7 @@
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
+                                <option value="stuck">Stuck</option>
                             </select>
                         </div>  
                     </div>
