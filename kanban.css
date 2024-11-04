@@ -80,7 +80,7 @@
 }
 
 .user:nth-child(1) {
-    background-color: rgb(159, 100, 143);
+    background-color: var(--blue);
 }
 
 .user:nth-child(2) {
@@ -182,6 +182,7 @@
     padding: 1rem 1.2rem;
 }
 
+
 .kanban-card-top {
     display: flex;
     align-items:center;
@@ -189,13 +190,19 @@
     margin-bottom: 1rem;
 }
 
-.kanban-card-top i:nth-of-type(1) {
-    display: none;
-}
 
+.kanban-card-top-left {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
 
 .kanban-card-top p {
     font-size: 16px;
+}
+
+.kanban-card-top .fa-caret-down {
+    display: none;
 }
 
 .kanban-separator {
@@ -262,6 +269,7 @@
 .kanban-card-priority.none-priority {
     background-color: #9A9A9A;
 }
+
 
 
 /*====Draggable Cards==*/
@@ -441,6 +449,7 @@ input[type="file"]::-webkit-file-upload-button {
     border: 2px solid black;
     border-radius: 5px 0 0 5px;
 }
+
 
 /*Focus states*/
 .modal  form input[type="text"]:focus, .modal form textarea:focus, .task-dropdown select:focus {
@@ -641,6 +650,7 @@ input[type="file"]::-webkit-file-upload-button {
 
     .kanban-card-body, .kanban-body {
         display: none;
+        cursor: pointer;
     }
 
     .kanban-board {

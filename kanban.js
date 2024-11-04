@@ -10,10 +10,7 @@ kanbanContainers.forEach(kanbanContainer => {
 
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
-    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(1)');
-
-    openCloseIcon.classList.toggle('fa-caret-down');
-    openCloseIcon.classList.toggle('fa-caret-up');
+  
     
     kanbanCardBody.classList.toggle('open');
 
@@ -21,10 +18,8 @@ kanbanContainers.forEach(kanbanContainer => {
     otherCards.forEach(otherCard => {
         if (otherCard != kanbanCardGroup) {
             const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
-            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(1)')
+            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i')
             otherCardBody.classList.remove('open')
-            otherCardIcon.classList.remove('fa-caret-up')
-            otherCardIcon.classList.add('fa-caret-down')
         }
     })
   })

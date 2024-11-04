@@ -70,10 +70,14 @@
 
                 <!--Kanban Card 1-->
                 <div class="kanban-card" id="kanban-task-overdue" draggable=true>
+                    
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
-                        <div class="kanban-card-priority high-priority"></div>
-                        <i class="fa fa-solid fa-caret-down"></i>
+                        <div class = 'kanban-card-top-left'>
+                            <div class="kanban-card-priority high-priority"></div>
+                            <p>Task Title</p>
+                        </div>
+                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i></div>
+         
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
@@ -95,10 +99,15 @@
                 </div>
                 <!--Kanban Card 2-->
                 <div class="kanban-card" id="kanban-task-overdue" draggable=true>
+                    
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
-                        <div class="kanban-card-priority none-priority" ></div>
-                        <i class="fa fa-solid fa-caret-down"></i>
+                        <div class = 'kanban-card-top-left'>
+                            <div class="kanban-card-priority low-priority"></div>
+                            <p>Task Title</p>
+                        </div>
+                        <div class="user" style="background-color: var(--gree);"><i class="fa fa-solid fa-user"></i></div>
+
+         
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
@@ -116,11 +125,16 @@
                     </div>
                 </div>
                 <!--Kanban Card 3-->
-                <div class="kanban-card" draggable=true>
+                <div class="kanban-card" id="kanban-task" draggable=true>
+                    
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
-                        <div class="kanban-card-priority medium-priority"></div>
-                        <i class="fa fa-solid fa-caret-down"></i>
+                        <div class = 'kanban-card-top-left'>
+                            <div class="kanban-card-priority high-priority"></div>
+                            <p>Task Title</p>
+                        </div>
+                        <div class="user" style="background-color: var(--bright-gold);"><i class="fa fa-solid fa-user"></i></div>
+
+         
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
@@ -152,11 +166,15 @@
             <!--Kanban Body-->
             <div class="kanban-body" id = 'kanban-in-progress'>
                  <!--Kanban Card 5-->
-                 <div class="kanban-card" draggable=true>
+                 <div class="kanban-card" id="kanban-task" draggable=true>
+                    
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
-                        <div class="kanban-card-priority low-priority"></div>
-                        <i class="fa fa-solid fa-caret-down"></i>
+                        <div class = 'kanban-card-top-left'>
+                            <div class="kanban-card-priority low-priority"></div>
+                            <p>Task Title</p>
+                        </div>
+                        <div class="user" style="background-color: var(--purple);"><i class="fa fa-solid fa-user"></i></div>
+         
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
@@ -189,11 +207,15 @@
             <div class="kanban-body" id = 'kanban-completed'>
 
                 <!--Kanban Card 5-->
-                <div class="kanban-card" draggable=true>
+                <div class="kanban-card" id="kanban-task" draggable=true>
+                    
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
-                        <div class="kanban-card-priority high-priority" ></div>
-                        <i class="fa fa-solid fa-caret-down"></i>
+                        <div class = 'kanban-card-top-left'>
+                            <div class="kanban-card-priority medium-priority"></div>
+                            <p>Task Title</p>
+                        </div>
+                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i></div>
+         
                     </div>
                     <div class="kanban-card-body">
                         <p class="kanban-card-description">This is the task you have been set. 
