@@ -127,7 +127,7 @@ session_start()
         <section id="content">
 
             <div class="nav-item-content open" id="overview-content">
-                <?php include '' ?>
+                <?php include 'employeeDashContent.php' ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">
