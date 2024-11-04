@@ -102,6 +102,10 @@
     transition: 0.5s color ease, 0.5s background-color ease;
 }
 
+#mdProjectList .mdListItem{
+    cursor: pointer;
+}
+
 .mdArrowIcon, .mdHidden{
     transition: 0.5s opacity ease;
 }
@@ -241,6 +245,7 @@
 .mdStuck{
     color: #C8544F;
     transition: 0.5s all ease;
+    cursor: pointer;
 }
 
 .mdStuck:hover{
