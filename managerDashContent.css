@@ -293,11 +293,6 @@
     height: 95%;
 }
 
-#mdContributionGraphArea{
-    width: fit-content;
-    height: fit-content;
-}
-
 @media (max-width: 992px){
     #mdGrid {
         grid-template-areas:
@@ -319,6 +314,10 @@
         overflow-x: hidden;
         overflow-y: scroll;
         height: 15rem;
+    }
+
+    #mdContributionGraphArea{
+        height: fit-content;
     }
 
     .mdArrowIcon{
