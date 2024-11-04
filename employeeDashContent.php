@@ -433,6 +433,11 @@
     border: 2px solid transparent;
     transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
  }
+
+ .emp-btn-hover:hover {
+    background-color: white;
+    color: black;
+ }
   /* Emp Standard Button Hover styling*/
 
   /*Forum Posts*/
