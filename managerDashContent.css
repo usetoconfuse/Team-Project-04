@@ -116,6 +116,27 @@
     display: flex;
 }
 
+#mdProjectInfoTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+#mdViewProjectButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 10.5px;
+    height: 30px;
+    width: 70px
+}
+
+#mdViewProjectButton i {
+    padding-right: 5px;
+}
+
 #mdInfoContainer{
     display: flex;
     flex-direction: column;
@@ -190,6 +211,27 @@
     grid-area: members;
 }
 
+#mdProjectMembersTop {
+    display: flex;
+    justify-content: space-between;
+}
+
+#mdMemberSortButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #ffffff;
+    height: 30px;
+    width: 70px;
+    border-radius: 10.5px;
+    margin-right: 1rem;
+}
+
+#mdMemberSortButton i {
+    padding-right: 10px;   
+}
+
 #mdMemberList .mdListItem h4{
     padding-inline: 0.3rem;
 }
@@ -224,6 +266,11 @@
     height: 95%;
 }
 
+#mdContributionGraphArea {
+    width: fit-content;
+    height: fit-content;
+}
+
 @media (max-width: 992px) {
     #mdGrid {
         grid-template-areas:
@@ -245,10 +292,6 @@
         overflow-x: hidden;
         overflow-y: scroll;
         height: 15rem;
-    }
-
-    #mdContributionGraphArea {
-        height: fit-content;
     }
 
     .mdArrowIcon{

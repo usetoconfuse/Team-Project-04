@@ -16,7 +16,13 @@
 
     <!-- Overview information about the current project -->
      <div i="mdProjectInfoBox">
-        <h1 id="mdSelectedProjectName" class="mdTitle"></h1>
+        <div id="mdProjectInfoTop">
+            <h1 id="mdSelectedProjectName" class="mdTitle"></h1>
+            <div id="mdViewProjectButton">
+                <i class="fa-solid fa-circle-info"></i>
+                <p>View</p>
+            </div>
+        </div>
         <div id="mdInfoContainer">
             <h4 id="mdProjectMemberCountText"></h4>
             <h4 id="mdProjectCreationDateText"></h4>
@@ -78,7 +84,13 @@
 
     <!-- List of team members -->
     <div id="mdProjectMembersBox">
-        <h1 id="mdProjectMembersBoxText" class="mdTitle"></h1>
+        <div id="mdProjectMembersTop">
+            <h1 id="mdProjectMembersBoxText" class="mdTitle"></h1>
+            <div id="mdMemberSortButton">
+                <i class="fa fa-solid fa-sort"></i>
+                <p>Sort</p>
+            </div>
+        </div>
         <div class="mdListContainer" id="mdMemberList"></div>
     </div>
 
