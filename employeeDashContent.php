@@ -358,7 +358,8 @@
   }
   .forums {
     grid-row: 1 / 3;                   
-    grid-column: 2 / 4;  
+    grid-column: 2 / 4;
+    overflow: auto;
   }
   .projects {
     grid-row: 3 / 4;                 
@@ -380,10 +381,10 @@
   .emp-grid-item-content .kanban-board {
     flex-direction: column;
     margin: 0 auto;
-    overflow-y: scroll;
     width: 100%;
+    overflow-y: scroll;
+    max-height: 40rem;
   }
-  
   
       /*Kanban Cards*/
   .emp-grid-item-content .kanban-card {

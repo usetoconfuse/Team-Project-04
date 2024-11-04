@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: managerDashboard.php");
             exit();
         } elseif ($user_details[$email]['role'] === 'leader') {
-            header("Location: teamLeaderDashboard.php");
+            header("Location: employeeDashboard.php");
             exit();
         } elseif ($user_details[$email]['role'] === 'employee') {
             header("Location: employeeDashboard.php");

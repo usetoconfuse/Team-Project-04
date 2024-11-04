@@ -102,10 +102,10 @@
                     
                     <div class="kanban-card-top">
                         <div class = 'kanban-card-top-left'>
-                            <div class="kanban-card-priority low-priority"></div>
+                        <div class="kanban-card-priority low-priority"></div>
                             <p>Task Title</p>
                         </div>
-                        <div class="user" style="background-color: var(--gree);"><i class="fa fa-solid fa-user"></i></div>
+                        <div class="user" style="background-color: var(--green);"><i class="fa fa-solid fa-user"></i></div>
 
          
                     </div>
@@ -170,7 +170,9 @@
                     
                     <div class="kanban-card-top">
                         <div class = 'kanban-card-top-left'>
-                            <div class="kanban-card-priority low-priority"></div>
+                        <div class="kanban-card-priority low-priority tooltip">
+                            <span class="tooltiptext">Low Priority</span>
+                        </div>
                             <p>Task Title</p>
                         </div>
                         <div class="user" style="background-color: var(--purple);"><i class="fa fa-solid fa-user"></i></div>
