@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h4>`+memberArr[i]+`</h4>
                     `+leaderIcon+stuckIcon+`
                 </div>
-                <p>`+taskNum+`Tasks</p>
+                <p>`+taskNum+` Tasks</p>
             </div>
         `;
     };
