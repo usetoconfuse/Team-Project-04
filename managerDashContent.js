@@ -1,5 +1,101 @@
+const taskByMember = document.querySelector('#mdContributionGraphContainer');
+const progressOverTime = document.querySelector('#mdProgressTimeChartContainer');
+const graphDropdown = document.querySelector('#chooseGraph');
 
-//--------------------------FUNCTIONS-----------------------
+// Progress Time chart
+const progressTimeChartData = document.getElementById('mdProgressTimeChart').getContext('2d');
+const labels = ['2024-11-01', '2024-11-02', '2024-11-03', '2024-11-04', '2024-11-05', '2024-11-06', '2024-11-07'];
+const dailyCompletedTasks = [2, 2, 3, 3, 5]; //completed tasks
+const dailyRemainingTasks = [8, 6, 3, 0, 0]; //incompleted tasks
+const cumulativeCompletedTasks = [2, 4, 7, 10, 15]; //total cumulative completed
+const deadlineDate = '2024-11-07'; //deadline for red bar
+
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Cumulative Completed Tasks',
+      data: cumulativeCompletedTasks,
+      borderColor: 'rgb(54, 162, 235)',
+      fill: false,
+      type: 'line',
+      yAxisID: 'y',
+    },
+    {
+      label: 'Completed Tasks (Daily)',
+      data: dailyCompletedTasks,
+      backgroundColor: 'rgba(173, 218, 157, 0.8)',
+      stack: 'daily',
+      type: 'bar',
+    },
+    {
+      label: 'Remaining Tasks (Daily)',
+      data: dailyRemainingTasks,
+      backgroundColor: 'rgba(230, 117, 126, 0.8)',
+      stack: 'daily',
+      type: 'bar',
+    }
+  ]
+};
+
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      x: { stacked: true, title: { display: true, text: 'Date' } },
+      y: { stacked: true, title: { display: true, text: 'Tasks' }, beginAtZero: true }
+    },
+    responsive: true,
+    plugins: {
+      annotation: {
+        annotations: {
+          deadlineLine: {
+            type: 'line',
+            xMin: deadlineDate,
+            xMax: deadlineDate,
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 2,
+            label: {
+              content: 'Deadline',
+              enabled: true,
+              position: 'top',
+              backgroundColor: 'rgba(255, 99, 132, 0.8)',
+              color: '#fff',
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+const progressChart = new Chart(progressTimeChartData, config);
+
+graphDropdown.addEventListener('change', () => {
+    if (graphDropdown.value === 'task-by-member') {
+        taskByMember.style.display = 'block';
+        progressOverTime.style.display = 'none';
+        contributionGraph.resize(); 
+        progressChart.resize(); 
+    } else if (graphDropdown.value === 'progress-over-time') {
+        taskByMember.style.display = 'none';
+        progressOverTime.style.display = 'block';
+        progressChart.resize(); 
+        contributionGraph.resize(); 
+    }
+});
+
+window.addEventListener('resize', () => { //when window resizes, resize graphs
+    if (progressOverTime.style.display === 'block') {
+        progressChart.resize();
+    }
+    if (taskByMember.style.display === 'block') {
+        contributionGraph.resize();
+    }
+
+    
+});
 
 // Function to make contribution graph vertical/horizontal based on viewport size
 function updateContributionGraphAxes() {
