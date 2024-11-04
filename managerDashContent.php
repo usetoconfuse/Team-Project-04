@@ -19,7 +19,7 @@
         <div id="mdProjectInfoTop">
             <h1 id="mdSelectedProjectName" class="mdTitle"></h1>
             <div id="mdViewProjectButton">
-                <i class="fa-solid fa-circle-info"></i>
+                <i class="fa fa-solid fa-magnifying-glass"></i>
                 <p>View</p>
             </div>
         </div>

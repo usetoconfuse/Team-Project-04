@@ -227,7 +227,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i=1; i<10; i++) {
 
         let active = "";
-        let arrow = "";
+        let icon = "";
+        let stuck = "";
         if (i == 1) {
             active = `mdActive`;
             icon = `<i class="mdArrowIcon fa fa-solid fa-arrow-right"></i>`;
@@ -310,7 +311,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Display crown for team leader
         let leaderIcon = "";
         if (i == 0) {
-            leaderIcon = ` <i class="fa fa-solid fa-crown fa-sm"></i>`;
+            leaderIcon = `<i class="fa fa-solid fa-crown fa-sm"></i>`;
+        }
+
+        // Add some stuck indicators
+        let stuckIcon = "";
+        if ([0,3,5,8,14].includes(i)) {
+            stuckIcon = `<i class="mdStuck fa fa-solid fa-circle-exclamation"></i>`;
         }
 
         memberList.innerHTML += `
@@ -320,12 +327,133 @@ document.addEventListener("DOMContentLoaded", () => {
                         <i class="fa fa-solid fa-user"></i>
                     </div>
                     <h4>`+memberArr[i]+`</h4>
-                    `+leaderIcon+`
+                    `+leaderIcon+stuckIcon+`
                 </div>
-                <p>`+taskNum+` Tasks</p>
+                <p>`+taskNum+`Tasks</p>
             </div>
         `;
     };
+
+    // Add modal for viewing task to each stuck indicator
+    const stuckIcons = document.querySelectorAll(".mdStuck");
+    stuckIcons.forEach(btn => {
+
+        const viewStuckModal = document.createElement('div');
+        viewStuckModal.classList.add('modal', 'view-task-modal')
+        viewStuckModal.innerHTML = `
+            <div class="modal-box view-task-modal-box">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="modal-task-title">Stuck Task</p>
+                        <div class="close-modal-btn">
+                            <i class="fa-solid fa-x"></i>
+                        </div>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <p class="modal-task-description">This is the task description.
+                        It describes the task. This is the task description.
+                        It describes the task. This is the task description.
+                        It describes the task. This is the task description.
+                        It describes the task. This is the task description.
+                        It describes the task.</p>
+
+                        <div class="modal-task-info">
+                            <div class="modal-task-info-section-top">
+                                <p class="task-modal-title">Status</p>
+                                <div class="status-box">
+                                    <div class="task-indicator-circle"></div>
+                                    <p>To Do</p>
+                                </div>
+                            </div>
+
+                            <div class="modal-task-info-section-top">
+                                <p class="task-modal-title">Priority</p>
+                                <div class="priority-box">
+                                    <div class="task-indicator-circle"></div>
+                                    <p>High Priority</p>
+                                </div>
+                            </div>
+
+                            <div class="modal-task-info-section-top">
+                                <p class="task-modal-title">Assigned to</p>
+                                <p>A Project Member</p>
+                            </div>
+                        </div>
+
+
+                        <div class="modal-task-info">
+                            <div class="modal-task-info-section">
+                                <div class="modal-task-info-section-header">
+                                    <i class="fa fa-solid fa-user"></i>
+                                    <p>Created by</p>
+                                </div>
+                                <div class="modal-task-info-section-body">
+                                    <p>John Little</p>
+                                </div>
+                            </div>
+
+                            <div class="modal-task-info-section">
+                                <div class="modal-task-info-section-header">
+                                    <i class="fa fa-regular fa-calendar"></i>
+                                    <p>Due date</p>
+                                </div>
+                                <div class="modal-task-info-section-body modal-task-due-date">
+                                    <div class="task-indicator-circle"></div>
+                                    <p>03/11/2024</p>
+                                </div>
+                            </div>
+
+                            <div class="modal-task-info-section">
+                                <div class="modal-task-info-section-header">
+                                    <i class="fa fa-solid fa-user"></i>
+                                    <p>Reassign</p>
+                                </div>
+                                <div class="modal-task-info-section-body">
+                                    <p>Choose</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-task-attachments">
+                            <p class="task-modal-title">Attachments</p>
+                            <div class="modal-task-attachments-box"></div>
+                        </div>
+
+                        <div class="modal-task-btns">
+                            <div class="left-arrow">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </div>
+                            <div class="delete-task">
+                                <p>Delete</p>
+                            </div>
+                            <div class="save-task">
+                                <p>Save Changes</p>
+                            </div>
+                            <div class="right-arrow">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            `;
+
+        document.body.appendChild(viewStuckModal);
+
+        const closeviewStuckModal = viewStuckModal.querySelector('.close-modal-btn')
+
+        btn.addEventListener('click', () => {
+        viewStuckModal.style.display = 'flex';
+        })
+        closeviewStuckModal.addEventListener('click', () => {
+        viewStuckModal.style.display = 'none';
+        })
+        window.addEventListener('click', (e) => {
+        if (e.target == viewStuckModal) {
+            viewStuckModal.style.display = 'none';
+        }
+        })
+    });
 });
     
 window.addEventListener("load", () => {
