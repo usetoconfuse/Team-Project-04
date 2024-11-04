@@ -2,7 +2,7 @@
 /*====Project Information====*/
 .project-intro {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
     font-family: 'avenir next';
@@ -270,13 +270,25 @@
     opacity: 0.9;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: move;
-    color: transparent;
 }
 
 .overlay {
-    background-color: grey;
-    text-indent: -9999px;
+    border: 2px solid darkgrey;
+    background-color: grey; /* Set the background color to grey */
+    min-height: 10rem;
+    min-width: 6rem;
 }
+
+.overlay .button,
+.overlay .kanban-card-bottom,
+.overlay .kanban-card-top,
+.overlay .kanban-card-description,
+.overlay .kanban-card-priority,
+.overlay .kanban-card-body,
+.overlay p {
+    display: none;
+}
+
 
 /*====Add Task Modal====*/
 .modal {

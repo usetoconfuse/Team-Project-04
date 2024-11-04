@@ -220,8 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const fullTaskDescription = task.querySelector('.kanban-card-description').innerText;
-    const taskDescriptionWords = fullTaskDescription.split(' ');
-    const previewTaskDescription = taskDescriptionWords.slice(0, 20).join(' ') + '...';
+    //const taskDescriptionWords = fullTaskDescription.split(' ');
+    //const previewTaskDescription = taskDescriptionWords.slice(0, 20).join(' ') + '...';
+    const taskDescriptionWords = fullTaskDescription
+    const previewTaskDescription = taskDescriptionWords.substring(0, 40) + '...';
   
     //Set shorter description inside the card
     const taskDescriptionElement = task.querySelector('.kanban-card .kanban-card-body .kanban-card-description');

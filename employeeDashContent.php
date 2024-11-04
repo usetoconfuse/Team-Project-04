@@ -340,7 +340,6 @@
 
 <style>
 
-
   /* Grid container */
   .emp-grid-container {
     display: grid;
@@ -384,6 +383,8 @@
     overflow-y: scroll;
     width: 100%;
   }
+  
+  
       /*Kanban Cards*/
   .emp-grid-item-content .kanban-card {
     background-color: #F5F5F5;
