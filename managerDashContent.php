@@ -97,14 +97,87 @@
 
     <!-- Graph showing how many tasks in each category are assigned to each member -->
     <div id="mdProjectContributionBox">
-        <h1 class="mdTitle">Tasks by Member</h1>
+        <div id="mdProjectContributionTop">
+            <p id="mdProjectContributionBoxText" class="mdTitle">Tasks by Member</p>
+            <div id="mdContributionSortButton">
+                <i class="fa fa-solid fa-sort"></i>
+                <select name="chooseGraph" id="chooseGraph">
+                    <option value="task-by-member">Tasks by Member</option>
+                    <option value="progress-over-time">Progress over Time</option>
+                </select>
+            </div>
+        </div>
         <div id="mdContributionGraphContainer">
             <div id="mdContributionGraphArea">
                 <canvas id="mdContributionGraph"></canvas>
             </div>
         </div>
+        <div id="mdProgressTimeChartContainer" style="display: none;">
+            <div id="mdProgressTimeChartArea">
+                <canvas id="mdProgressTimeChart"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
+
+<style>
+    #mdProjectContributionTop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.2rem;
+        color: black;
+    }
+
+    #mdContributionSortButton select option {
+        font-weight: 600 !important;
+    }
+
+
+    #mdContributionSortButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #F5F5F5;
+        background-color: white;
+        border-radius: 30px;
+        padding: 0.2rem 0.4rem;
+        transition: all 0.4s ease;
+    }
+
+    #mdContributionSortButton:hover {
+        background-color: #F5F5F5;
+    }
+
+    #mdContributionSortButton:hover select {
+        background-color: #F5F5F5;
+    }
+
+    #mdContributionSortButton select {
+        width: 100%;
+        margin-left: 10px;
+        box-shadow: none;
+        outline: none;
+        border-radius: 30px;
+        border: none;
+        appearance: none; 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        height: 40px;
+        background-color: white;
+        transition: all 0.4s ease;
+    }
+
+</style>
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0"></script>
 <script src="managerDashContent.js"></script>
