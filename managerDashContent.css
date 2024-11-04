@@ -316,6 +316,7 @@
     width: 100%;
 }
 
+/*Contribution Sort Button*/
 #mdProjectContributionTop {
     display: flex;
     align-items: center;
@@ -324,7 +325,7 @@
     color: black;
 }
 
-/*Contribution Sort Button*/
+
 #mdContributionSortButton select option {
     font-weight: 600 !important;
 }

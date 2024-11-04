@@ -121,57 +121,6 @@
 </div>
 
 
-<style>
-    #mdProjectContributionTop {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 0.2rem;
-        color: black;
-    }
-
-    #mdContributionSortButton select option {
-        font-weight: 600 !important;
-    }
-
-
-    #mdContributionSortButton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #F5F5F5;
-        background-color: white;
-        border-radius: 30px;
-        padding: 0.2rem 0.4rem;
-        transition: all 0.4s ease;
-    }
-
-    #mdContributionSortButton:hover {
-        background-color: #F5F5F5;
-    }
-
-    #mdContributionSortButton:hover select {
-        background-color: #F5F5F5;
-    }
-
-    #mdContributionSortButton select {
-        width: 100%;
-        margin-left: 10px;
-        box-shadow: none;
-        outline: none;
-        border-radius: 30px;
-        border: none;
-        appearance: none; 
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        cursor: pointer;
-        height: 40px;
-        background-color: white;
-        transition: all 0.4s ease;
-    }
-
-</style>
-
 
 
 
