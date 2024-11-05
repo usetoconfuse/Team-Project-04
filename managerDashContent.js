@@ -29,7 +29,7 @@ const data = {
       type: 'bar',
     },
     {
-      label: 'Remaining Tasks (Daily)',
+      label: 'Overdue Tasks (Daily)',
       data: dailyRemainingTasks,
       backgroundColor: 'rgba(230, 117, 126, 0.8)',
       stack: 'daily',
