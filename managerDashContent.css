@@ -366,7 +366,7 @@
 
 @media (max-width: 1200px){
     .mdListItem{
-        width: 20rem;
+        min-width: 20rem;
     }
 
     .mdMemberListInfoWrapper{
