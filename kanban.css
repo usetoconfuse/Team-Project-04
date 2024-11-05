@@ -235,6 +235,7 @@
 
 .kanban-card-top p {
     font-size: 16px;
+    flex-grow: 1;
 }
 
 .kanban-card-top .fa-caret-down {
@@ -289,6 +290,10 @@
     height: 10px;
     border-radius: 50%;
     aspect-ratio: 1/1;
+}
+
+.emp-grid-item-content .kanban-card-priority {
+    margin-right: 10px;
 }
 
 .kanban-card-priority.high-priority {
