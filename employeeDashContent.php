@@ -383,8 +383,8 @@
     flex-direction: column;
     margin: 0 auto;
     width: 100%;
-    overflow-y: scroll;
-    max-height: 40rem;
+    overflow-y: auto;
+
   }
   
       /*Kanban Cards*/

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $user_details = [
-    'admin@email.com' => [
+    'manager@email.com' => [
         'password' => 'manager',
         'role' => 'manager'
     ],
