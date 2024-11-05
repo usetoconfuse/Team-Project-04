@@ -1,12 +1,104 @@
+const taskByMember = document.querySelector('#mdContributionGraphContainer');
+const progressOverTime = document.querySelector('#mdProgressTimeChartContainer');
+const graphDropdown = document.querySelector('#chooseGraph');
 
-//--------------------------FUNCTIONS-----------------------
+// Progress Time chart
+const progressTimeChartData = document.getElementById('mdProgressTimeChart').getContext('2d');
+const labels = ['2024-11-01', '2024-11-02', '2024-11-03', '2024-11-04', '2024-11-05', '2024-11-06', '2024-11-07'];
+const dailyCompletedTasks = [2, 2, 3, 3, 5]; //completed tasks
+const dailyRemainingTasks = [8, 6, 3, 0, 0]; //incompleted tasks
+const cumulativeCompletedTasks = [2, 4, 7, 10, 15]; //total cumulative completed
+const deadlineDate = '2024-11-07'; //deadline for red bar
+
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Cumulative Completed Tasks',
+      data: cumulativeCompletedTasks,
+      borderColor: 'rgb(54, 162, 235)',
+      fill: false,
+      type: 'line',
+      yAxisID: 'y',
+    },
+    {
+      label: 'Completed Tasks (Daily)',
+      data: dailyCompletedTasks,
+      backgroundColor: 'rgba(173, 218, 157, 0.8)',
+      stack: 'daily',
+      type: 'bar',
+    },
+    {
+      label: 'Remaining Tasks (Daily)',
+      data: dailyRemainingTasks,
+      backgroundColor: 'rgba(230, 117, 126, 0.8)',
+      stack: 'daily',
+      type: 'bar',
+    }
+  ]
+};
+
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    maintainAspectRatio: false,
+    responsiveAnimationDuration: 0,
+    scales: {
+      x: { stacked: true, title: { display: true, text: 'Date' }, ticks: { font: { family: 'Avenir Next' } } },
+      y: { stacked: true, title: { display: true, text: 'Tasks' }, ticks: { font: { family: 'Avenir Next' } }, beginAtZero: true }
+    },
+    plugins: {
+      annotation: {
+        annotations: {
+          deadlineLine: {
+            type: 'line',
+            xMin: deadlineDate,
+            xMax: deadlineDate,
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 2,
+            label: {
+              content: 'Deadline',
+              enabled: true,
+              position: 'top',
+              backgroundColor: 'rgba(255, 99, 132, 0.8)',
+              color: '#fff',
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+const progressChart = new Chart(progressTimeChartData, config);
+
+graphDropdown.addEventListener('change', () => {
+    if (graphDropdown.value === 'task-by-member') {
+        taskByMember.style.display = 'block';
+        progressOverTime.style.display = 'none';
+    } else if (graphDropdown.value === 'progress-over-time') {
+        taskByMember.style.display = 'none';
+        progressOverTime.style.display = 'block';
+    }
+    updateGraphAxes();
+});
 
 // Function to make contribution graph vertical/horizontal based on viewport size
-function updateContributionGraphAxes() {
+function updateGraphAxes() {
     let clientWidth = document.documentElement.clientWidth;
-    let containerWidth = document.getElementById("mdContributionGraphContainer").clientWidth;
-    let containerHeight = document.getElementById("mdContributionGraphContainer").clientHeight;
     let span = memberArr.length * 50;
+    let containerWidth = 0;
+    let containerHeight = 0;
+    
+    if (graphDropdown.value === 'task-by-member') {
+        containerWidth = document.getElementById("mdContributionGraphContainer").clientWidth;
+        containerHeight = document.getElementById("mdContributionGraphContainer").clientHeight;
+    }
+    else if (graphDropdown.value === 'progress-over-time') {
+        containerWidth = document.getElementById("mdProgressTimeChartContainer").clientWidth;
+        containerHeight = document.getElementById("mdProgressTimeChartContainer").clientHeight;
+    }
     if (clientWidth <= 992) {
         contributionGraph.resize(containerWidth, span*0.8);
         if (contributionGraph.options.indexAxis == 'x') {
@@ -48,7 +140,9 @@ function updateContributionGraphAxes() {
             }
         }
     }
+    progressChart.resize(containerWidth, containerHeight);
     contributionGraph.update();
+    progressChart.update();
 };
 
 // Function to get an array of employee initials for the contribution graph
@@ -458,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 window.addEventListener("load", () => {
     // Make contribution bar chart start vertical/horizontal based on viewport
-    updateContributionGraphAxes();
+    updateGraphAxes();
 });
 
 // Make contribution bar chart stack vertically on small viewports
@@ -466,5 +560,5 @@ window.addEventListener("load", () => {
 // so the chart can be too big/too small when this happens
 // however the container overflows so this works
 window.addEventListener("resize", () => {
-    updateContributionGraphAxes();
+    updateGraphAxes();
 });

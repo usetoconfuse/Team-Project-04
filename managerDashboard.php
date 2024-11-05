@@ -32,7 +32,7 @@ session_start()
 
            
 
-            <button type="button" class="hamburger" id="menu-btn">
+            <button type="button" class="hamburger black-btn" id="menu-btn">
                     <span class="hamburger-top"></span>
                     <span class="hamburger-middle"></span>
                     <span class="hamburger-bottom"></span>
@@ -117,7 +117,7 @@ session_start()
                     </div>
                 </div>
                 <div class="user-profile-right">
-                    <div class="user-profile-logout">Sign Out</div>
+                    <div class="user-profile-logout black-btn">Sign Out</div>
                 </div>
              
             </div>

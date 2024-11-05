@@ -10,10 +10,7 @@ kanbanContainers.forEach(kanbanContainer => {
 
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
-    const openCloseIcon = kanbanCardGroup.querySelector('.kanban-board .kanban-card-top i:nth-of-type(1)');
-
-    openCloseIcon.classList.toggle('fa-caret-down');
-    openCloseIcon.classList.toggle('fa-caret-up');
+  
     
     kanbanCardBody.classList.toggle('open');
 
@@ -21,10 +18,8 @@ kanbanContainers.forEach(kanbanContainer => {
     otherCards.forEach(otherCard => {
         if (otherCard != kanbanCardGroup) {
             const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
-            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i:nth-of-type(1)')
+            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i')
             otherCardBody.classList.remove('open')
-            otherCardIcon.classList.remove('fa-caret-up')
-            otherCardIcon.classList.add('fa-caret-down')
         }
     })
   })
@@ -220,8 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const fullTaskDescription = task.querySelector('.kanban-card-description').innerText;
-    const taskDescriptionWords = fullTaskDescription.split(' ');
-    const previewTaskDescription = taskDescriptionWords.slice(0, 20).join(' ') + '...';
+    //const taskDescriptionWords = fullTaskDescription.split(' ');
+    //const previewTaskDescription = taskDescriptionWords.slice(0, 20).join(' ') + '...';
+    const taskDescriptionWords = fullTaskDescription
+    const previewTaskDescription = taskDescriptionWords.substring(0, 40) + '...';
   
     //Set shorter description inside the card
     const taskDescriptionElement = task.querySelector('.kanban-card .kanban-card-body .kanban-card-description');

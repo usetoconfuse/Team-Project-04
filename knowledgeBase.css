@@ -43,10 +43,7 @@
     color: var(--primary-colour);
 }
 
-.kb-content button:hover {
-    background-color: var(--bg-colour);
-    color: var(--primary-colour);
-}
+
 
 .text-center {
     text-align: center;
@@ -142,8 +139,7 @@
 }
 
 .post-type-btns button:hover {
-    background-color: var(--primary-colour);
-    color: var(--bg-colour);
+    background-color: #9A9A9A;
 }
 
 .post-type-btns button.active {

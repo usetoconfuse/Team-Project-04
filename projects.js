@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gridContainer = document.getElementById("gridContainer");
 
   // Example task data
-  const tasks = [
+  const projects = [
     { title: "Task Title", progress: 25, dueDate: "21 Oct" },
     { title: "Task Title", progress: 50, dueDate: "22 Oct" },
     { title: "Task Title", progress: 75, dueDate: "23 Oct" },
@@ -13,20 +13,22 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
 
-  tasks.forEach((task) => {
-    const taskCard = document.createElement("div");
-    taskCard.classList.add('project-card');
+  projects.forEach((project) => {
+    const projectCard = document.createElement("div");
+    projectCard.classList.add('project-card');
 
-    taskCard.innerHTML = `
-                       
+
+    projectCard.innerHTML = `
                               <div class="project-card-top">
-                                  <p>${task.title}</p>
-                                  <a href="#">View</a>
+                                
+                                  <p>${project.title}</p>
+                                
+                                  <a href="#" class="black-btn">View</a>
                               </div>
                               <div class="project-card-progress">
                                   <div class="project-card-progress-info">
                                       <p>Progress</p>
-                                      <p>${task.progress}%</p>
+                                      <p>${project.progress}%</p>
                                   </div>
                                   <div class="project-card-progress-bar">
                                       <div class="project-card-progress-bar-inner"></div>
@@ -43,27 +45,27 @@ document.addEventListener("DOMContentLoaded", function () {
                                   </div>
                                   <div class="project-card-due-date">
                                       <i class="fa fa-regular fa-calendar"></i>
-                                      <p>${task.dueDate}</p>
+                                      <p>${project.dueDate}</p>
                                   </div>
                               </div>
                          
                           `;
 
-    const progressBar = taskCard.querySelector('.project-card-progress-bar-inner');
-    progressBar.style.width = `${task.progress}%`;
+    const progressBar = projectCard.querySelector('.project-card-progress-bar-inner');
+    progressBar.style.width = `${project.progress}%`;
 
-    if (task.progress <= 33) {
+    if (project.progress <= 33) {
       progressBar.style.backgroundColor = '#E6757E';
-    } else if (task.progress <= 66) {
+    } else if (project.progress <= 66) {
       progressBar.style.backgroundColor = '#EAB385';
-    } else if (task.progress <= 100) {
+    } else if (project.progress <= 100) {
       progressBar.style.backgroundColor = '#ADDA9D';
     }
 
-    gridContainer.appendChild(taskCard);
+    gridContainer.appendChild(projectCard);
 
     //Links to project kanban
-    taskCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
+    projectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
       e.preventDefault();
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => item.classList.remove('active'));
@@ -80,6 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
   });
+
+  const leaderProjectCard = document.querySelector('#leader-project-card');
+  leaderProjectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
+    e.preventDefault();
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => item.classList.remove('active'));
+
+      const linkItem = document.querySelector('#current-project')
+      linkItem.style.display = 'block';
+      linkItem.classList.add('active');
+      document.querySelector('.nav-item#projects').classList.add('active');
+
+      const navItemContents = document.querySelectorAll('.nav-item-content')
+      navItemContents.forEach(item => item.classList.remove('open'))
+      const contentArea = document.querySelector('#current-project-content')
+      contentArea.classList.add('open');
+  })
 
 
 
@@ -100,3 +119,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+//Projects Modal
+const addProjectBtn = document.querySelector('.project-intro .add-project')
+const addProjectModal = document.querySelector('#projects-modal')
+const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn')
+
+addProjectBtn.addEventListener('click', () => {
+  addProjectModal.style.display = 'flex';
+})
+closeAddProjectModal.addEventListener('click', () => {
+  addProjectModal.style.display = 'none';
+})
+window.addEventListener('click', (e) => {
+  if (e.target == addProjectModal) {
+    addProjectModal.style.display = 'none';
+  }
+})
+
+const submitAddProject = addProjectModal.querySelector('.task-submit-buttons #add-project-btn')
+submitAddProject.addEventListener('click', () => {
+  addProjectModal.style.display = 'none';
+})

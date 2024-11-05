@@ -2,7 +2,7 @@
 /*====Project Information====*/
 .project-intro {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
     font-family: 'avenir next';
@@ -80,7 +80,7 @@
 }
 
 .user:nth-child(1) {
-    background-color: rgb(159, 100, 143);
+    background-color: var(--blue);
 }
 
 .user:nth-child(2) {
@@ -149,6 +149,40 @@
     width: 50%;
 }
 
+/* Tooltip container */
+.tooltip {
+    position: relative; /* Required for positioning the tooltip */
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1000;
+    bottom: 150%; /* Position above the element */
+    left: 80%;
+    transform: translateX(-20%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when hovering over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
 
 .kanban-header {
     display: flex;
@@ -172,6 +206,7 @@
     height: 64dvh;
     border-radius: 0 0 30px 30px;
     overflow-y: scroll;
+ 
 }
 
 /*Task Card*/
@@ -182,6 +217,7 @@
     padding: 1rem 1.2rem;
 }
 
+
 .kanban-card-top {
     display: flex;
     align-items:center;
@@ -189,13 +225,19 @@
     margin-bottom: 1rem;
 }
 
-.kanban-card-top i:nth-of-type(1) {
-    display: none;
-}
 
+.kanban-card-top-left {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
 
 .kanban-card-top p {
     font-size: 16px;
+}
+
+.kanban-card-top .fa-caret-down {
+    display: none;
 }
 
 .kanban-separator {
@@ -264,19 +306,32 @@
 }
 
 
+
 /*====Draggable Cards==*/
 .dragging {
     border: 1px solid black;
     opacity: 0.9;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: move;
-    color: transparent;
 }
 
 .overlay {
-    background-color: grey;
-    text-indent: -9999px;
+    border: 2px solid darkgrey;
+    background-color: grey; /* Set the background color to grey */
+    min-height: 10rem;
+    min-width: 6rem;
 }
+
+.overlay .button,
+.overlay .kanban-card-bottom,
+.overlay .kanban-card-top,
+.overlay .kanban-card-description,
+.overlay .kanban-card-priority,
+.overlay .kanban-card-body,
+.overlay p {
+    display: none;
+}
+
 
 /*====Add Task Modal====*/
 .modal {
@@ -430,6 +485,9 @@ input[type="file"]::-webkit-file-upload-button {
     border-radius: 5px 0 0 5px;
 }
 
+
+
+
 /*Focus states*/
 .modal  form input[type="text"]:focus, .modal form textarea:focus, .task-dropdown select:focus {
     border: 2px solid black;
@@ -443,11 +501,11 @@ input[type="file"]::-webkit-file-upload-button {
     margin: 0.2rem 2rem 2rem 2rem;
 }
 
-.task-submit-buttons .add-task-btn i, .task-submit-buttons #add-filter-btn i {
+.task-submit-buttons .add-task-btn i, .task-submit-buttons #add-filter-btn i, .task-submit-buttons #add-project-btn i {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn {
     margin: 0.2rem 8rem 2rem 8rem;
     padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
@@ -629,6 +687,7 @@ input[type="file"]::-webkit-file-upload-button {
 
     .kanban-card-body, .kanban-body {
         display: none;
+        cursor: pointer;
     }
 
     .kanban-board {

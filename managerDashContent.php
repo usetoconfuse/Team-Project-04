@@ -20,7 +20,7 @@
             <h1 id="mdSelectedProjectName" class="mdTitle"></h1>
             <div id="mdViewProjectButton">
                 <i class="fa fa-solid fa-magnifying-glass"></i>
-                <p>View</p>
+                <a >View</a>
             </div>
         </div>
         <div id="mdInfoContainer">
@@ -97,14 +97,36 @@
 
     <!-- Graph showing how many tasks in each category are assigned to each member -->
     <div id="mdProjectContributionBox">
-        <h1 class="mdTitle">Tasks by Member</h1>
+        <div id="mdProjectContributionTop">
+            <p id="mdProjectContributionBoxText" class="mdTitle">Tasks by Member</p>
+            <div id="mdContributionSortButton">
+                <i class="fa fa-solid fa-sort"></i>
+                <select name="chooseGraph" id="chooseGraph">
+                    <option value="task-by-member">Tasks by Member</option>
+                    <option value="progress-over-time">Progress over Time</option>
+                </select>
+            </div>
+        </div>
         <div id="mdContributionGraphContainer">
             <div id="mdContributionGraphArea">
                 <canvas id="mdContributionGraph"></canvas>
             </div>
         </div>
+        <div id="mdProgressTimeChartContainer">
+            <div id="mdProgressTimeChartArea">
+                <canvas id="mdProgressTimeChart"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0"></script>
 <script src="managerDashContent.js"></script>

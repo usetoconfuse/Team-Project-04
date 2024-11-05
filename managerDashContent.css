@@ -12,6 +12,8 @@
     gap: 2%;
 }
 
+
+
 /* Manually prevent bolding in headers */
 #mdGrid h1, 
 #mdGrid h2, 
@@ -102,6 +104,10 @@
     transition: 0.5s color ease, 0.5s background-color ease;
 }
 
+#mdProjectList .mdListItem{
+    cursor: pointer;
+}
+
 .mdArrowIcon, .mdHidden{
     transition: 0.5s opacity ease;
 }
@@ -122,16 +128,30 @@
     align-items: start;
 }
 
-#mdViewProjectButton {
+#mdViewProjectButton, #mdMemberSortButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: white;
+    color: black;
+    padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
-    height: 30px;
-    width: 70px
+    border: 2px solid #F5F5F5;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 30px;
+    white-space: nowrap;
+    transition: all 0.4s ease;
 }
+
+
+
+#mdViewProjectButton:hover, #mdMemberSortButton:hover {
+    background-color: #F5F5F5;
+
+}
+
+
 
 #mdViewProjectButton i {
     padding-right: 5px;
@@ -216,17 +236,6 @@
     justify-content: space-between;
 }
 
-#mdMemberSortButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #000000;
-    color: #ffffff;
-    height: 30px;
-    width: 70px;
-    border-radius: 10.5px;
-    margin-right: 1rem;
-}
 
 #mdMemberSortButton i{
     padding-right: 10px;   
@@ -241,6 +250,7 @@
 .mdStuck{
     color: #C8544F;
     transition: 0.5s all ease;
+    cursor: pointer;
 }
 
 .mdStuck:hover{
@@ -290,8 +300,69 @@
     overflow-y: hidden;
     padding-top: 0.5rem;
     width: 100%;
-    height: 95%;
 }
+
+
+#mdProgressTimeChartContainer {
+    display: flex;
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+/*Contribution Sort Button*/
+#mdProjectContributionTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+    color: black;
+}
+
+
+#mdContributionSortButton select option {
+    font-weight: 600 !important;
+}
+
+
+#mdContributionSortButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #F5F5F5;
+    background-color: white;
+    border-radius: 30px;
+    padding: 0.2rem 0.4rem;
+    transition: all 0.4s ease;
+}
+
+#mdContributionSortButton:hover {
+    background-color: #F5F5F5;
+}
+
+#mdContributionSortButton:hover select {
+    background-color: #F5F5F5;
+}
+
+#mdContributionSortButton select {
+    width: 100%;
+    margin-left: 10px;
+    box-shadow: none;
+    outline: none;
+    border-radius: 30px;
+    border: none;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    height: 40px;
+    background-color: white;
+    transition: all 0.4s ease;
+}
+
 
 @media (max-width: 992px){
     #mdGrid {
@@ -312,11 +383,16 @@
 
     #mdContributionGraphContainer{
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         height: 15rem;
     }
 
-    #mdContributionGraphArea{
+    #mdProgressTimeChartContainer{
+        height: 15rem;
+    }
+
+    #mdContributionGraphArea,
+    #mdProgressTimeChartArea{
         height: fit-content;
     }
 

@@ -4,7 +4,7 @@
         <div class="emp-grid-item tasks">
             <div class="emp-grid-item-top">
                 <p>Daily Tasks</p>
-                <a href="employeeDashboard.php?page=personal">All tasks</a>
+                <a href="employeeDashboard.php?page=personal" class="white-btn">All tasks</a>
             </div>
 
             <div class="emp-grid-item-content">
@@ -118,7 +118,7 @@
         <div class="emp-grid-item forums">
             <div class="emp-grid-item-top">
                 <p>Knowledge Base</p>
-                <a  href="employeeDashboard.php?page=forums">All posts</a>
+                <a  href="employeeDashboard.php?page=forums" class="white-btn">All posts</a>
             </div>
 
             <div class="emp-grid-item-content">
@@ -139,7 +139,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
-                        <a class="emp-btn-hover btn" href="#">View Post</a>
+                        <a class="emp-btn-hover black-btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -159,7 +159,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Non-Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(100, 100, 159);">Printer Issues</div>
-                        <a class="emp-btn-hover btn" href="#">View Post</a>
+                        <a class="emp-btn-hover black-btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -180,7 +180,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
-                        <a class="emp-btn-hover btn" href="#">View Post</a>
+                        <a class="emp-btn-hover black-btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -200,7 +200,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Non-Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(134, 159, 100);">Workplace Hygiene</div>
-                        <a class="emp-btn-hover btn" href="#">View Post</a>
+                        <a class="emp-btn-hover black-btn" href="#">View Post</a>
                     </div>
                 </div>
 
@@ -221,7 +221,7 @@
                     <div class="emp-forum-right">   
                         <div class="emp-forum-tag">Technical</div>
                         <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
-                        <a class="emp-btn-hover btn" href="#">View Post</a>
+                        <a class="emp-btn-hover black-btn" href="#">View Post</a>
                     </div>
                 </div>
             </div>  
@@ -231,7 +231,7 @@
         <div class="emp-grid-item projects">
             <div class="emp-grid-item-top">
                 <p>Priority Projects</p>
-                <a  href="employeeDashboard.php?page=projects">All projects</a>
+                <a  href="employeeDashboard.php?page=projects" class="white-btn">All projects</a>
             </div>
 
             <div class="emp-grid-item-content">
@@ -253,7 +253,7 @@
                     
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="emp-btn-hover btn">View</button>                
+                    <button class="emp-btn-hover black-btn">View</button>                
               </div>
 
 
@@ -275,7 +275,7 @@
                     
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="emp-btn-hover btn">View</button>                
+                    <button class="emp-btn-hover black-btn">View</button>                
               </div>
 
               <div class="emp-project-card">
@@ -294,7 +294,7 @@
                     </div>
                   </div>
                   <!-- ------------------------------------------------------- -->
-                  <button class="emp-btn-hover btn">View</button>     
+                  <button class="emp-btn-hover black-btn">View</button>     
                   </div>
               </div>
         </div>
@@ -340,7 +340,6 @@
 
 <style>
 
-
   /* Grid container */
   .emp-grid-container {
     display: grid;
@@ -359,7 +358,8 @@
   }
   .forums {
     grid-row: 1 / 3;                   
-    grid-column: 2 / 4;  
+    grid-column: 2 / 4;
+    overflow: auto;
   }
   .projects {
     grid-row: 3 / 4;                 
@@ -381,9 +381,11 @@
   .emp-grid-item-content .kanban-board {
     flex-direction: column;
     margin: 0 auto;
-    overflow-y: scroll;
     width: 100%;
+    overflow-y: scroll;
+    max-height: 40rem;
   }
+  
       /*Kanban Cards*/
   .emp-grid-item-content .kanban-card {
     background-color: #F5F5F5;
@@ -434,10 +436,7 @@
     transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
  }
 
- .emp-btn-hover:hover {
-    background-color: white;
-    color: black;
- }
+
   /* Emp Standard Button Hover styling*/
 
   /*Forum Posts*/

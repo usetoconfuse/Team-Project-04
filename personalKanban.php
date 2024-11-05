@@ -9,7 +9,7 @@
     
 
         <div class="projects-intro-buttons">
-            <div class="add-task-btn">
+            <div class="add-task-btn black-btn">
                 <i class="fa fa-solid fa-plus"></i>
                 Add Task
             </div>
