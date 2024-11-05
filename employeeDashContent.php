@@ -230,7 +230,7 @@
 
         <div class="emp-grid-item projects">
             <div class="emp-grid-item-top">
-                <p>Priority Projects</p>
+                <p>Projects</p>
                 <a  href="employeeDashboard.php?page=projects" class="white-btn">All projects</a>
             </div>
 
@@ -327,7 +327,8 @@
                 <p class="emp-stats-nums">1</p>
               </div>
               <div onclick="empStatsButton()" class="buttonEmpGrid emp-stat-card">
-                <div class="emp-stat-txt">Personal Tasks -></div>
+                <div class="emp-stat-txt">Personal Tasks</div>
+                <i class="fa fa-regular fa-arrow-right"></i>
               </div>
               
             
@@ -409,6 +410,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 0.4rem 1.2rem;
+    font-weight: 500;
   }
 
   .emp-grid-item-top a {
@@ -540,11 +542,15 @@
     justify-content: space-between;
     align-items: center;
     background-color: #f5f5f5;
-    border-radius: 10.5px;
+    border-radius: 30px;
     margin-top: 0.5rem; 
-    padding: 0.4rem 0.6rem;
+    padding: 0.4rem 0.8rem;
   }
 
+
+  .emp-project-card p:nth-of-type(1) {
+    font-size: 17px;
+  }
 
   .emp-projectProgressBarOut {
       height: 8px;
@@ -618,7 +624,7 @@
   /* Grid items */
   .todoEmpGrid {
     grid-row: 1;                   
-    grid-column: 1;      
+    grid-column: 1;   
   }
   .inProgressEmpGrid {
     grid-row: 1;                   
@@ -626,7 +632,7 @@
   }
   .completeEmpGrid {
     grid-row: 1;                 
-    grid-column: 3;              
+    grid-column: 3;           
   }
 
   .overdueEmpGrid {
@@ -636,7 +642,14 @@
 
   .buttonEmpGrid {
     grid-row: 2;                 
-    grid-column: 3;              
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .buttonEmpGrid i {
+    font-size: 16px;
   }
 
 
@@ -685,7 +698,7 @@
   }
   
   .emp-stat-card:nth-of-type(5) { /*styling for button card*/
-    background-color: #EAB385;
+    background-color: #F5F5F5 !important;
     transition: background-color 0.5s ease, border 0.5s ease;
   }
 
@@ -698,7 +711,8 @@
 
   .emp-stats-nums {
     color: black;
-    font-size: 2rem;
+    font-size: 1.4rem;
+    font-weight: normal;
   }
 
   .emp-stat-card:nth-of-type(5):hover .emp-stats-nums { /* change colour of num just for if btn card hovered over*/
@@ -706,7 +720,8 @@
   }
 
   .emp-stat-txt{
-    font-size: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 
 
