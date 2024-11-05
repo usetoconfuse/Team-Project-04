@@ -68,6 +68,7 @@
 .user {
     height: 30px;
     width: 30px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
     background-color: #F5F5F5;
     border: 1px solid black;
@@ -287,6 +288,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
+    aspect-ratio: 1/1;
 }
 
 .kanban-card-priority.high-priority {

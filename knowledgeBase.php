@@ -79,7 +79,7 @@ There MUST be a space between type declaration and property name.
                         'title' => 'How to replace paper in the printer',
                         'content' => 'No need to call IT, just follow these simple steps to replace the paper in your printer. First, open the paper tray, then remove the empty paper, and finally insert the new paper. Simple!',
                         'posted' => '2 hours ago',
-                        'author' => 'Bilal Akito',                        
+                        'author' => 'Bilal Akito',
                     ],
                     [
                         'type' => 'technical',
@@ -148,19 +148,20 @@ There MUST be a space between type declaration and property name.
                             <button class="black-btn">Edit Post</button>
                             <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
                         ';
-                    };
+                    }
+                    ;
                     echo '
                     <div class="kb-post" id="post-' . $post['id'] . '" data-topic="' . $post['topic'] . '" data-type="' . $post["type"] . '">
                         <div class="kb-title-line">
                             <h2 class="kb-title-header">' . $post['title'] . '</h2>
                             <div class="kb-post-badges">
                                 <div class="kb-badge" style="background-color:var(--tertiary-colour);">' . $typeLookup[$post['type']] . '</div>
-                                <div class="kb-badge" style="background-color:' . $colorLookup[$post['topic']].'">' . $topicLookup[$post['topic']] . '</div>
+                                <div class="kb-badge" style="background-color:' . $colorLookup[$post['topic']] . '">' . $topicLookup[$post['topic']] . '</div>
                             </div>
                             <i class="kb-share-link fa-solid fa-link" href="#"></i>
                         </div>
                         <div class="kb-post-info">
-                            <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
+                            <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']] . '">
                                 <i class="fa-solid fa-user"></i>
                             </div>
                             <div class="kb-text-sm">
@@ -181,10 +182,13 @@ There MUST be a space between type declaration and property name.
         <div class="kb-sidebar">
             <h2>Filter by Topic</h2>
             <ul id="topicsList">
-                <li class="kb-topic" data-topic="coding-standards"><span class="kb-topic-circle"></span>Coding Standards</li>
-                <li class="kb-topic" data-topic="printer-issues"><span class="kb-topic-circle"></span>Printer Issues</li>
+                <li class="kb-topic" data-topic="coding-standards"><span class="kb-topic-circle"></span>Coding Standards
+                </li>
+                <li class="kb-topic" data-topic="printer-issues"><span class="kb-topic-circle"></span>Printer Issues
+                </li>
                 <li class="kb-topic" data-topic="cybersecurity"><span class="kb-topic-circle"></span>Cybersecurity</li>
-                <li class="kb-topic" data-topic="workplace-hygiene"><span class="kb-topic-circle"></span>Workplace Hygiene</li>
+                <li class="kb-topic" data-topic="workplace-hygiene"><span class="kb-topic-circle"></span>Workplace
+                    Hygiene</li>
             </ul>
             <button id="new-topic-btn" class="black-btn">New Topic</button>
         </div>
@@ -213,11 +217,11 @@ There MUST be a space between type declaration and property name.
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
 
-        
+
 
         <!--Add Post Modal-->
         <div id="post-modal" class="modal">
@@ -237,7 +241,8 @@ There MUST be a space between type declaration and property name.
                     </div>
                     <div class="post-content-form">
                         <label for="post-content">Content</label>
-                        <textarea type="text" id="contentInput" name="post-content" placeholder="Enter post content"></textarea>
+                        <textarea type="text" id="contentInput" name="post-content"
+                            placeholder="Enter post content"></textarea>
                     </div>
                     <div class="task-dropdowns-form" id="post-dropdowns-form">
                         <!--technical or non technical-->
@@ -252,7 +257,7 @@ There MUST be a space between type declaration and property name.
                                     <option value="technical">Technical</option>
                                     <option value="nontechnical">Non-technical</option>
                                 </select>
-                            </div>  
+                            </div>
                         </div>
                         <!--topic-->
                         <div class="task-dropdown task-dropdown-topic">
@@ -268,7 +273,20 @@ There MUST be a space between type declaration and property name.
                                     <option value="Printer Issues">Cybersecurity</option>
                                     <option value="Printer Issues">Workplace Hygiene</option>
                                 </select>
-                            </div>  
+                            </div>
+                        </div>
+                        <div class="task-dropdown task-dropdown-topic">
+                            <label for="topic">Permissions</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-topic-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="topic" id="topic">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="all-users">All Users</option>
+                                    <option value="manager-only" disabled>Manager only</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -291,24 +309,24 @@ There MUST be a space between type declaration and property name.
         </button>
     </div>
     <div class="kb-main kb-full-height">
-    <div class="kb-post kb-full-height">
-        <div class="kb-title-line">
-            <h2 class="kb-title-header"></h2>
-            <div class="kb-post-badges">
-                <div class="kb-badge"></div>
-                <div class="kb-badge"></div>
+        <div class="kb-post kb-full-height">
+            <div class="kb-title-line">
+                <h2 class="kb-title-header"></h2>
+                <div class="kb-post-badges">
+                    <div class="kb-badge"></div>
+                    <div class="kb-badge"></div>
+                </div>
+                <i class="kb-share-link fa-solid fa-link"></i>
             </div>
-            <i class="kb-share-link fa-solid fa-link"></i>
+            <div class="kb-post-info">
+                <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="kb-text-sm">
+                </div>
+            </div>
+            <div class="kb-post-divider"></div>
+            <p class="kb-post-content kb-scrollable"></p>
         </div>
-        <div class="kb-post-info">
-            <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="kb-text-sm">
-            </div>
-        </div>
-        <div class="kb-post-divider"></div>
-        <p class="kb-post-content kb-scrollable"></p>
-    </div>
     </div>
 </div>

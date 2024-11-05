@@ -3,7 +3,7 @@
     <!--Project Information-->
     <section class="project-intro">
         <div class="project-txt">
-            <p>Project Name</p>
+            <p>Python Project</p>
             <p>View all your tasks below for Project Name.</p>
         </div>
 
@@ -74,17 +74,13 @@
                     <div class="kanban-card-top">
                         <div class = 'kanban-card-top-left'>
                             <div class="kanban-card-priority high-priority"></div>
-                            <p>Task Title</p>
+                            <p>Refactor login code</p>
                         </div>
                         <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i></div>
          
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">Refactor the login code so it is using OOP. Make sure to follow necessary coding standards (documented in Knowledge Base).</p>
                         
                         <div class="kanban-separator"></div>
 
@@ -103,15 +99,17 @@
                     <div class="kanban-card-top">
                         <div class = 'kanban-card-top-left'>
                         <div class="kanban-card-priority low-priority"></div>
-                            <p>Task Title</p>
+                            <p>Make Report from user feedback</p>
                         </div>
                         <div class="user" style="background-color: var(--green);"><i class="fa fa-solid fa-user"></i></div>
 
          
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">Collate the data collected from the survey last month and write up a full report.
+                            It should include various data such as user satisfaction, user suggestions, and any bugs reported.
+                            It also needs to look nice so we can share it with stakeholders in the monthly meeting.
+                        </p>
                         
                         <div class="kanban-separator"></div>
 
@@ -130,15 +128,15 @@
                     <div class="kanban-card-top">
                         <div class = 'kanban-card-top-left'>
                             <div class="kanban-card-priority high-priority"></div>
-                            <p>Task Title</p>
+                            <p>Move from SQLite to MySQL
+                            </p>
                         </div>
                         <div class="user" style="background-color: var(--bright-gold);"><i class="fa fa-solid fa-user"></i></div>
 
          
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">It's much more scalable, and has better tooling for backups and management.</p>
                         
                         <div class="kanban-separator"></div>
 
@@ -173,14 +171,13 @@
                         <div class="kanban-card-priority low-priority tooltip">
                             <span class="tooltiptext">Low Priority</span>
                         </div>
-                            <p>Task Title</p>
+                            <p>Add comments to code</p>
                         </div>
                         <div class="user" style="background-color: var(--purple);"><i class="fa fa-solid fa-user"></i></div>
          
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. </p>
+                        <p class="kanban-card-description">Make sure to use docstrings for functions as well as normal comments to define the content.</p>
                         
                         <div class="kanban-separator"></div>
 
@@ -214,14 +211,13 @@
                     <div class="kanban-card-top">
                         <div class = 'kanban-card-top-left'>
                             <div class="kanban-card-priority medium-priority"></div>
-                            <p>Task Title</p>
+                            <p>Fix login bug</p>
                         </div>
                         <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i></div>
          
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. </p>
+                        <p class="kanban-card-description">There's a bug where the login breaks if two people log in at the same time.</p>
                         
                         <div class="kanban-separator"></div>
 
