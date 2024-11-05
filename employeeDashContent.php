@@ -123,7 +123,7 @@
                 <div class="emp-forum-left">
                     <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                     <div class="emp-forum-info">
-                        <div class="emp-forum-title">Phishing Email Tests</div>
+                        <div class="emp-forum-title">How to stay safe from cyber attacks</div>
                         <div class="emp-forum-info-bottom">
                             <p>John Little | </p>
                             <div class="emp-forum-date">5 days ago</div>
@@ -164,7 +164,7 @@
                 <div class="emp-forum-left">
                     <div class="emp-forum-post-user"><i class="fa-solid fa-user fa-lg"></i></div>
                     <div class="emp-forum-info">
-                        <div class="emp-forum-title">Phishing Email Tests</div>
+                        <div class="emp-forum-title">How we format our code</div>
                         <div class="emp-forum-info-bottom">
                             <p>John Little | </p>
                             <div class="emp-forum-date">5 days ago</div>
@@ -175,7 +175,7 @@
 
                 <div class="emp-forum-right">
                     <div class="emp-forum-tag">Technical</div>
-                    <div class="emp-forum-tag" style="background-color: rgb(159, 100, 100);">Cybersecurity</div>
+                    <div class="emp-forum-tag" style="background-color: rgb(159, 100, 143);">Cybersecurity</div>
                     <a class="emp-btn-hover black-btn" href="#">View Post</a>
                 </div>
             </div>
@@ -232,7 +232,7 @@
 
         <div class="emp-grid-item-content">
             <div class="emp-project-card">
-                <p>Project A</p>
+                <p>Python Project</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                 <!--Progress Bar-->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?>
@@ -255,7 +255,7 @@
 
 
             <div class="emp-project-card">
-                <p>Project D</p>
+                <p>Javascript ABc</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                 <!--Progress Bar-->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?>
@@ -277,7 +277,7 @@
             </div>
 
             <div class="emp-project-card">
-                <p>Project B</p>
+                <p>Smart Fridge1</p>
                 <!-- <canvas id="myProgressBarB" width="400" height="100"></canvas> -->
                 <!--Progress Bar-->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?>

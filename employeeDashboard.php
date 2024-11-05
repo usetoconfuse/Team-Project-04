@@ -20,13 +20,14 @@ session_start()
     <body>
 
       
-        <!--<div class="loading-screen">
+        <div class="loading-screen">
             <h2>LOGO</h2>
             <div class="loader">
                 <div class="loader-line"></div>
             </div>
-        </div>  -->       
+        </div>      
         
+       
 
         <nav id="navbar">
 
