@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="signUp.css"/>
 </head>
 <body>
-    <div id="main-wrapper">
+    <div id="wrapper">
             <div id="signUp-container">
                 <div>
                     <h1>Register Today</h1>

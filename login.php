@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="login.css"/>
 </head>
 <body id="sign-in-bg">
-    <div id="wrapper">
+    <div id="signin-wrapper">
         <div id="left">
             <div id="signIn">
                 <div>
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <div class="register-container">
       
-                    <p>Don't have an account. <a href="signUp.php" class="signup-btn">Register here</a></p>
+                    <p>Don't have an account. <a href="#" class="signup-btn">Register here</a></p>
             
                 </div>
             </div>
@@ -85,5 +85,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
+    <div id="signup-wrapper">
+        <div id="left">
+            <div id="signIn">
+                <div>
+                    <h1>Register Now</h1>
+                    <p>Enter your credentials to register.</p>
+                </div>
+                <form id="loginForm" method="POST">
+                    <div class="input-container">
+                        <label for="usernameInput">Email<span>*</span></label>
+                        <input type="email" name="email" class="text-input" id="usernameInput" placeholder=" Enter your email" required>
+                        <p class="error-message" id="username-error"></p>
+                    </div>
+                    <div class="input-container">
+                        <label>Password<span>*</span></label>
+                        <input type="password" name="password" class="text-input" id="passwordInput" placeholder=" Enter your password">
+                        <p class="error-message" id="password-error"></p>
+                    </div>
+                    <div class="input-container">
+                        <label>Confirm Password<span>*</span></label>
+                        <input type="password" name="password" class="text-input" id="passwordInput" placeholder=" Enter your password">
+                        <p class="error-message" id="password-error"></p>
+                    </div>
+                    <div class="signin-btn-container">
+                        <button type="submit" class="login-btn">Continue</button>
+                    </div>
+                    
+                </form>
+                
+                <div class="register-container">
+      
+                    <p>Already have an account. <a href="#" class="signup-btn" id="backtologin">Login here</a></p>
+            
+                </div>
+            </div>
+        </div>
+        <div id="right">
+            <img src="Demo.svg" alt="demo-image">
+        </div>
+    </div>
+
+
+    <script>
+        const registerBtn = document.querySelector('.register-container .signup-btn');
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#signin-wrapper').style.display = "none";
+            document.querySelector('#signup-wrapper').style.display = "flex";
+        })
+        document.querySelector('#backtologin').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#signin-wrapper').style.display = "flex";
+            document.querySelector('#signup-wrapper').style.display = "none";
+        })
+    </script>
 </body>
 </html>
