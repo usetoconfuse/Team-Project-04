@@ -302,18 +302,15 @@
     width: 100%;
 }
 
-#mdContributionGraphContainer {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: 100%;
-    width: 100%;
-}
 
 #mdProgressTimeChartContainer {
-    overflow-y: scroll;
+    display: flex;
+    flex-grow: 1;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
     width: 100%;
+    display: none;
 }
 
 /*Contribution Sort Button*/
@@ -384,12 +381,20 @@
         max-height: 15rem;
     }
 
-    #mdContributionGraphContainer, #mdProgressTimeChartContainer {
-
+    #mdContributionGraphContainer{
+        overflow-x: hidden;
+        overflow-y: auto;
         height: 15rem;
     }
 
+    #mdProgressTimeChartContainer{
+        height: 15rem;
+    }
 
+    #mdContributionGraphArea,
+    #mdProgressTimeChartArea{
+        height: fit-content;
+    }
 
     .mdArrowIcon{
         transform: rotate(90deg);

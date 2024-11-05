@@ -112,7 +112,7 @@
                 <canvas id="mdContributionGraph"></canvas>
             </div>
         </div>
-        <div id="mdProgressTimeChartContainer" style="display: none;">
+        <div id="mdProgressTimeChartContainer">
             <div id="mdProgressTimeChartArea">
                 <canvas id="mdProgressTimeChart"></canvas>
             </div>
