@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Example task data
   const projects = [
-    { title: "Task Title", progress: 25, dueDate: "21 Oct" },
-    { title: "Task Title", progress: 50, dueDate: "22 Oct" },
-    { title: "Task Title", progress: 75, dueDate: "23 Oct" },
-    { title: "Task Title", progress: 40, dueDate: "24 Oct" },
-    { title: "Task Title", progress: 90, dueDate: "25 Oct" },
-    { title: "Task Title", progress: 60, dueDate: "26 Oct" },
-    { title: "Task Title", progress: 10, dueDate: "27 Oct" },
+    { title: "Python Project", progress: 25, dueDate: "21 Oct" },
+    { title: "Project #1", progress: 50, dueDate: "22 Oct" },
+    { title: "Project #2", progress: 75, dueDate: "23 Oct" },
+    { title: "Project #3", progress: 40, dueDate: "24 Oct" },
+    { title: "Project #4", progress: 90, dueDate: "25 Oct" },
+    { title: "Project #5", progress: 60, dueDate: "26 Oct" },
+    { title: "Project #6", progress: 10, dueDate: "27 Oct" },
   ];
 
 

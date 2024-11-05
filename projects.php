@@ -18,7 +18,7 @@
             <div class="project-card-top">
                 <div class="project-card-top-left">
                     <i class="fa fa-solid fa-crown"></i>
-                    <p>Project Title</p>
+                    <p>Python Project</p>
                 </div>
                     <a href="#" class="black-btn">View</a>
                 </div>
