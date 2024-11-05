@@ -12,7 +12,7 @@
                   <!--Kanban Card 1-->
                 <div class="kanban-card">
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
+                        <p>Task A</p>
                         <div class="kanban-card-priority low-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
@@ -26,7 +26,7 @@
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
-                            <a href="">View Task</a>
+                            <a href="">View B</a>
                             <div class="due-date">
                                 <i class="fa fa-regular fa-calendar"></i>
                                 <p>21 Oct</p>
@@ -37,7 +37,7 @@
                  <!--Kanban Card 2-->
                  <div class="kanban-card" id="kanban-task-overdue" >
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
+                        <p>Task C</p>
                         <div class="kanban-card-priority none-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
@@ -62,7 +62,7 @@
                  <!--Kanban Card 3-->
                  <div class="kanban-card" >
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
+                        <p>Task C</p>
                         <div class="kanban-card-priority medium-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
@@ -87,7 +87,7 @@
                  <!--Kanban Card 4-->
                  <div class="kanban-card">
                     <div class="kanban-card-top">
-                        <p>Task Title</p>
+                        <p>Task D</p>
                         <div class="kanban-card-priority high-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
