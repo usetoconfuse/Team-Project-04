@@ -6,8 +6,6 @@
             <p>Add your personal to do list items here.</p>
         </div>
 
-    
-
         <div class="projects-intro-buttons">
             <div class="add-task-btn black-btn">
                 <i class="fa fa-solid fa-plus"></i>
@@ -15,7 +13,6 @@
             </div>
         </div>
         
-
         <div class="kanban-separator"></div>
     </section>
 
@@ -36,16 +33,12 @@
                 <!--Kanban Card 1-->
                 <div class="kanban-card" id="kanban-task-overdue" draggable=true>
                         <div class="kanban-card-top">
-                            <p>Task Title</p>
+                            <p>Talk with Bilal about promotion</p>
                             <div class="kanban-card-priority"></div>
                             <i class="fa fa-solid fa-caret-down"></i>
                         </div>
                         <div class="kanban-card-body">
-                            <p class="kanban-card-description">This is the task you have been set. 
-                                                            You have to develop a kanban board. This is the task you have been set. 
-                                                            You have to develop a kanban board. This is the task you have been set. 
-                                                            You have to develop a kanban board. This is the task you have been set. 
-                                                            You have to develop a kanban board.</p>
+                            <p class="kanban-card-description">Documentation on onboarding is in knowledgebase. He'll become new project leader for Python Project</p>
                             
                             <div class="kanban-separator"></div>
 
@@ -61,13 +54,12 @@
                     <!--Kanban Card 2-->
                     <div class="kanban-card" id="kanban-task-overdue" draggable=true>
                         <div class="kanban-card-top">
-                            <p>Task Title</p>
+                            <p>Talk with Samantha about moving roles</p>
                             <div class="kanban-card-priority"></div>
                             <i class="fa fa-solid fa-caret-down"></i>
                         </div>
                         <div class="kanban-card-body">
-                            <p class="kanban-card-description">This is the task you have been set. 
-                                                            You have to develop a kanban board.</p>
+                            <p class="kanban-card-description">She'll move from team leader for Python Project, to lead the marketing team.</p>
                             
                             <div class="kanban-separator"></div>
 
@@ -83,13 +75,12 @@
                     <!--Kanban Card 3-->
                     <div class="kanban-card" draggable=true>
                         <div class="kanban-card-top">
-                            <p>Task Title</p>
+                            <p>Try out the new login functionality</p>
                             <div class="kanban-card-priority"></div>
                             <i class="fa fa-solid fa-caret-down"></i>
                         </div>
                         <div class="kanban-card-body">
-                            <p class="kanban-card-description">This is the task you have been set. 
-                                                            You have to develop a kanban board.</p>
+                            <p class="kanban-card-description">Some bugs were reported, need to make sure there aren't more</p>
                             
                             <div class="kanban-separator"></div>
 
@@ -119,13 +110,12 @@
                     <!--Kanban Card 5-->
                     <div class="kanban-card" draggable=true>
                         <div class="kanban-card-top">
-                            <p>Task Title</p>
+                            <p>Meeting with Boss</p>
                             <div class="kanban-card-priority"></div>
                             <i class="fa fa-solid fa-caret-down"></i>
                         </div>
                         <div class="kanban-card-body">
-                            <p class="kanban-card-description">This is the task you have been set. 
-                                                            You have to develop a kanban board. </p>
+                            <p class="kanban-card-description">Need to schedule a time today to meet to discuss finances for the new project. </p>
                             
                             <div class="kanban-separator"></div>
 
@@ -155,13 +145,12 @@
                     <!--Kanban Card 5-->
                     <div class="kanban-card" draggable=true>
                         <div class="kanban-card-top">
-                            <p>Task Title</p>
+                            <p>Get help with writing requirements</p>
                             <div class="kanban-card-priority"></div>
                             <i class="fa fa-solid fa-caret-down"></i>
                         </div>
                         <div class="kanban-card-body">
-                            <p class="kanban-card-description">This is the task you have been set. 
-                                                            You have to develop a kanban board. </p>
+                            <p class="kanban-card-description">Need confirmation from billy as he was in the stakeholder meeting. </p>
                             
                             <div class="kanban-separator"></div>
 

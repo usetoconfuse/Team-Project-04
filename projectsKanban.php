@@ -4,7 +4,7 @@
     <section class="project-intro">
         <div class="project-txt">
             <p>Python Project</p>
-            <p>View all your tasks below for Project Name.</p>
+            <p>View all your tasks below for Python Project.</p>
         </div>
 
         <div class="vertical-bar"></div>
