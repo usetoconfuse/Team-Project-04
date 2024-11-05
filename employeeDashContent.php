@@ -12,21 +12,17 @@
                   <!--Kanban Card 1-->
                 <div class="kanban-card">
                     <div class="kanban-card-top">
-                        <p>Task A</p>
+                        <p>Refactor Login Code</p>
                         <div class="kanban-card-priority low-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">Refactor the login code so it is using OOP. Make sure to follow necessary coding standards (documented in Knowledge Base).</p>
                         
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
-                            <a href="">View B</a>
+                            <a href="">View Task</a>
                             <div class="due-date">
                                 <i class="fa fa-regular fa-calendar"></i>
                                 <p>21 Oct</p>
@@ -37,16 +33,12 @@
                  <!--Kanban Card 2-->
                  <div class="kanban-card" id="kanban-task-overdue" >
                     <div class="kanban-card-top">
-                        <p>Task C</p>
+                        <p>Get help with writing requirements</p>
                         <div class="kanban-card-priority none-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">Need confirmation from billy as he was in the stakeholder meeting.</p>
                         
                         <div class="kanban-separator"></div>
 
@@ -62,16 +54,14 @@
                  <!--Kanban Card 3-->
                  <div class="kanban-card" >
                     <div class="kanban-card-top">
-                        <p>Task C</p>
+                        <p>Make Report from user feedback</p>
                         <div class="kanban-card-priority medium-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">Collate the data collected from the survey last month and write up a full report.
+                            It should include various data such as user satisfaction, user suggestions, and any bugs reported.
+                            It also needs to look nice so we can share it with stakeholders in the monthly meeting.</p>
                         
                         <div class="kanban-separator"></div>
 
@@ -87,16 +77,12 @@
                  <!--Kanban Card 4-->
                  <div class="kanban-card">
                     <div class="kanban-card-top">
-                        <p>Task D</p>
+                        <p>Talk with Bilal about promotion</p>
                         <div class="kanban-card-priority high-priority"></div>
                         <i class="fa fa-solid fa-caret-down"></i>
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board. This is the task you have been set. 
-                                                        You have to develop a kanban board.</p>
+                        <p class="kanban-card-description">Documentation on onboarding is in knowledgebase. He'll become new project leader for Python Project</p>
                         
                         <div class="kanban-separator"></div>
 

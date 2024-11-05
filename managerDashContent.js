@@ -318,6 +318,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Populate project list
     const projectList = document.getElementById("mdProjectList");
+    const projectNames = [
+        "", // index from 1 later
+        "Python Project",
+        "JavaScript Todo Application",
+        "Smart Fridge",
+        "Book on Cheese",
+        "Government Assignment",
+        "Social Media Tasks",
+        "Test Project",
+        "Company Website",
+        "LHC Upgrade",
+        "SpaceX Launch"
+    ];
     for (let i=1; i<10; i++) {
 
         let active = "";
@@ -326,7 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (i == 1) {
             active = `mdActive`;
             icon = `<i class="mdArrowIcon fa fa-solid fa-arrow-right"></i>`;
-            document.getElementById("mdSelectedProjectName").innerText = "Project #" + i;
+            document.getElementById("mdSelectedProjectName").innerText = projectNames[i];
         }
         else {
             icon = `<i class="mdArrowIcon mdHidden fa fa-solid fa-arrow-right"></i>`
@@ -334,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         projectList.innerHTML += `
         <div class="mdListItem mdProjectItem `+active+`">
-            <h3>Project #`+i+`</h3>
+            <h3>`+projectNames[i]+`</h3>
             `+icon+`
         </div>
         `;
