@@ -434,9 +434,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         <i class="fa fa-solid fa-user"></i>
                     </div>
                     <h4>`+memberArr[i]+`</h4>
-                    `+leaderIcon+stuckIcon+`
                 </div>
-                <p>`+taskNum+` Tasks</p>
+                <div class="mdMemberListInfoWrapper">
+                    <div>`+leaderIcon+stuckIcon+`</div>
+                    <p>`+taskNum+` Tasks</p>
+                </div>
             </div>
         `;
     };
