@@ -83,6 +83,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   });
 
+  const leaderProjectCard = document.querySelector('#leader-project-card');
+  leaderProjectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
+    e.preventDefault();
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => item.classList.remove('active'));
+
+      const linkItem = document.querySelector('#current-project')
+      linkItem.style.display = 'block';
+      linkItem.classList.add('active');
+      document.querySelector('.nav-item#projects').classList.add('active');
+
+      const navItemContents = document.querySelectorAll('.nav-item-content')
+      navItemContents.forEach(item => item.classList.remove('open'))
+      const contentArea = document.querySelector('#current-project-content')
+      contentArea.classList.add('open');
+  })
+
 
 
   //Need to fix this so it gets the proper value on mobile
