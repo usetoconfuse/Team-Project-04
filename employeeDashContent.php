@@ -824,7 +824,9 @@
     flex-direction: column;
     
   }
+}
 
+@media (max-width: 360px) {
 /*Project responsiveness*/
   .emp-project-card {
     flex-direction: column;
