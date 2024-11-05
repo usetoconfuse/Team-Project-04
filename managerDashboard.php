@@ -21,7 +21,7 @@ session_start()
 
       
         <div class="loading-screen">
-            <h2>LOGO</h2>
+            <h2>Make-It-All</h2>
             <div class="loader">
                 <div class="loader-line"></div>
             </div>
