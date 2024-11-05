@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login Page</title>
     <link rel="stylesheet" href="login.css"/>
 </head>
-<body>
+<body id="sign-in-bg">
     <div id="wrapper">
         <div id="left">
             <div id="signIn">
@@ -57,25 +57,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p>Enter your credentials to sign in.</p>
                 </div>
                 <form id="loginForm" method="POST">
-                    <div>
-                        <label for="usernameInput">Email</label>
+                    <div class="input-container">
+                        <label for="usernameInput">Email<span>*</span></label>
                         <input type="email" name="email" class="text-input" id="usernameInput" placeholder=" Enter your email" required>
                         <p class="error-message" id="username-error"></p>
                     </div>
-                    <div>
-                        <label>Password</label>
+                    <div class="input-container">
+                        <label>Password<span>*</span></label>
                         <input type="password" name="password" class="text-input" id="passwordInput" placeholder=" Enter your password">
                         <p class="error-message" id="password-error"></p>
                     </div>
-                    <button type="submit" class="login-btn">Continue</button>
+                    <div class="signin-btn-container">
+                        <button type="submit" class="login-btn">Continue</button>
+                    </div>
+                    
                 </form>
                 
-                <div class="or">
-                    <hr class="bar" />
-                    <span>OR</span>
-                    <hr class="bar" />
+                <div class="register-container">
+      
+                    <p>Don't have an account. <a href="signUp.php" class="signup-btn">Register here</a></p>
+            
                 </div>
-                <a href="signUp.php" class="signup-btn">Register an account</a>
             </div>
         </div>
         <div id="right">
