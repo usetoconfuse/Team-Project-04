@@ -177,6 +177,7 @@
 #mdProjectProgressBox{
     grid-area: progress;
     position: relative;
+    overflow-y: auto;
 }
 
 #mdProgressPercentage{
@@ -370,6 +371,18 @@
 
     .mdMemberListInfoWrapper{
         flex-direction: column;
+    }
+
+    #mdProgressChartLegend{
+        flex-direction: column;
+    }
+
+    .mdLegendItem{
+        flex-direction: row;
+    }
+
+    .mdLegendCounter h3{
+        padding-right: 0.5rem;
     }
 }
 
