@@ -1,4 +1,4 @@
-/*====Loading Animation====
+
 window.addEventListener("load", () => {
     const loader = document.querySelector(".loading-screen");
 
@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
             document.body.removeChild(loader);
         });
     }, 2500);
-})*/
+})
 
 
 document.addEventListener('DOMContentLoaded', () => {
