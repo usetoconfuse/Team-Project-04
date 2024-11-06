@@ -39,6 +39,9 @@ session_start()
             </button>
 
             <div class="menu">
+                <div id="logo-container">
+                    <img src="logo.jpeg" alt="logo">
+                </div>
                 <div class="intro-txt">
                     <h1>Welcome back, John.</h1>
                     <p>View your daily overview here.</p>

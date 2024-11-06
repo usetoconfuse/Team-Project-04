@@ -510,3 +510,7 @@ nav {
 
 }
 
+#logo-container img{
+    border-radius: 10.5px;
+    padding: 0 1rem 0.5rem 0;
+}

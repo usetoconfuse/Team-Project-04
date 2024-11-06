@@ -27,7 +27,9 @@ session_start()
         </div>    -->    
 
         <nav id="navbar">
-
+            <div id="logo-container">
+                <img src="logo.jpeg" alt="logo">
+            </div>            
 
             <button type="button" class="hamburger" id="menu-btn">
                     <span class="hamburger-top"></span>
