@@ -1,0 +1,24 @@
+/* Grid container */
+#statGrid {
+    display: grid;
+    grid-template-columns: 1fr, 1fr, 1fr;
+    grid-template-rows: 1fr, 1fr, 1fr;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+/* Grid items */
+.filters {
+    grid-row: 1;
+    grid-column: 1 / 4;
+}
+
+.emp-grid-item {
+    padding: 20px;
+    font-size: 1.2em;
+    color: #333;
+    background-color: white;
+    border-radius: 30px;
+}
