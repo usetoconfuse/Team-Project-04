@@ -91,7 +91,7 @@ session_start()
                         </a>
                     </li>
 
-                    <li class="nav-item" id="statistics">
+                    <li class="nav-item" id="stats">
                         <a href="#">
                             <i class="fa fa-solid fa-table-columns fa-lg"></i>
                             <div class="btn-animate"></div>
