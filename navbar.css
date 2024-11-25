@@ -427,7 +427,7 @@ nav {
     position: relative;
 }
 
-#overview-content, #projects-content, #forums-content, #personal-content, #current-project-content {
+#overview-content, #projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
     display: none;
 }
 
@@ -445,7 +445,7 @@ nav {
 
 }
 
-#projects-content, #forums-content, #personal-content, #current-project-content {
+#projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
     background-color: #ffffff;
     border-radius: 30px;
 }
@@ -503,7 +503,7 @@ nav {
         border-radius: 0;
     }
     
-    #overview-content, #projects-content, #forums-content {
+    #overview-content, #projects-content, #forums-content, #stats-content {
         width: 100%;
         border-radius: 0;
     }
