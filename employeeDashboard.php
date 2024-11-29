@@ -93,7 +93,7 @@ session_start()
                     
                     <li class="nav-item" id="stats">
                         <a href="#">
-                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <i class="fa fa-solid fa-chart-simple"></i>
                             <div class="btn-animate"></div>
                             <span>Statistics</span>
                         </a>
