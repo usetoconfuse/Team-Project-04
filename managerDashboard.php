@@ -90,6 +90,14 @@ session_start()
                             <span>Personal Board</span>
                         </a>
                     </li>
+
+                    <li class="nav-item" id="stats">
+                        <a href="#">
+                            <i class="fa fa-solid fa-chart-simple"></i>
+                            <div class="btn-animate"></div>
+                            <span>Statistics</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <div class="bar"></div>
@@ -151,6 +159,9 @@ session_start()
                 <?php include 'knowledgeBase.php'; ?>
             </div>
 
+            <div class="nav-item-content" id="stats-content">
+                <?php include 'statisticsPage.php'; ?>
+            </div>
            
             
 
