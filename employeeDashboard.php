@@ -148,7 +148,7 @@ session_start()
             </div>
 
             <div class="nav-item-content" id="current-project-content">
-                <?php include 'projectsKanban.php'; ?>
+                <?php include 'Project-Kanban/projectsKanban.php'; ?>
             </div>
 
             <div class="nav-item-content" id="personal-content">

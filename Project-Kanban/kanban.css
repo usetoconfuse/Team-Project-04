@@ -403,7 +403,7 @@
 
 /*modal body*/
 .modal .modal-body {
-    padding: 0.2rem 2rem 1rem 2rem;
+    padding: 0.2rem 2rem 4rem 2rem;
 }
 
 label {
@@ -648,7 +648,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
-.save-task {
+.move-task {
     background-color: black;
     color: white; 
     border-radius: 4px;
@@ -749,3 +749,19 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
+
+.move-task-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.move-task-confirm {
+    background-color: black;
+    color: white; 
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-size: 15px;
+}
