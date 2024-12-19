@@ -105,14 +105,7 @@
     $venuesResult = mysqli_query($conn, $venuesSql);
    
 
-    //Add the results to an array 
-    $venuesArray = array();
-    while ($row = mysqli_fetch_array($venuesResult, MYSQLI_ASSOC)) {
-        $venuesArray[] = $row;
-    }
-
-    $allVenueData = array("venues" => $venuesArray); 
-
+ 
     //Close connection
     mysqli_close($conn);
     

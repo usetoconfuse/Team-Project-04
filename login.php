@@ -3,21 +3,25 @@ session_start();
 $user_details = [
     'manager@email.com' => [
         'password' => 'manager',
-        'role' => 'manager'
+        'role' => 'manager',
+        'id' => 1
     ],
     'leader@email.com' => [
         'password' => 'leader',
-        'role' => 'leader'
+        'role' => 'leader',
+        'id' => 2
     ], 
     'employee@email.com' => [
         'password' => 'employee',
-        'role' => 'employee'
+        'role' => 'employee',
+        'id' => 3
     ]
     ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $id = $_POST['id'];
 
     if (isset($user_details[$email]) && $user_details[$email]['password'] === $password) {
         $_SESSION['email'] = $email;

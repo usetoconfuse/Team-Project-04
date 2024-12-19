@@ -3,20 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Example task data
   const projects = [
-    { title: "Python Project", progress: 25, dueDate: "21 Oct" },
-    { title: "JavaScript Todo Application", progress: 50, dueDate: "22 Oct" },
-    { title: "Smart Fridge", progress: 75, dueDate: "23 Oct" },
-    { title: "Book on Cheese", progress: 40, dueDate: "24 Oct" },
-    { title: "Government Assignment", progress: 90, dueDate: "25 Oct" },
-    { title: "Social Media Tasks", progress: 60, dueDate: "26 Oct" },
-    { title: "Test Project", progress: 10, dueDate: "27 Oct" },
+    { title: "Python Project", progress: 25, dueDate: "21 Oct", id: 1 },
+    { title: "JavaScript Todo Application", progress: 50, dueDate: "22 Oct", id: 2 },
+    { title: "Smart Fridge", progress: 75, dueDate: "23 Oct", id: 3 },
+    { title: "Book on Cheese", progress: 40, dueDate: "24 Oct", id: 4 },
+    { title: "Government Assignment", progress: 90, dueDate: "25 Oct", id: 5 },
+    { title: "Social Media Tasks", progress: 60, dueDate: "26 Oct", id: 6 },
+    { title: "Test Project", progress: 10, dueDate: "27 Oct", id: 7 },
   ];
 
 
   projects.forEach((project) => {
     const projectCard = document.createElement("div");
     projectCard.classList.add('project-card');
-
+    projectCard.setAttribute('data-project-id', project.id);
+    
+    
 
     projectCard.innerHTML = `
                               <div class="project-card-top">
@@ -67,6 +69,15 @@ document.addEventListener("DOMContentLoaded", function () {
     //Links to project kanban
     projectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
       e.preventDefault();
+   
+      const projectIdAttribute = projectCard.getAttribute('data-project-id');
+      console.log(projectIdAttribute);
+      //Send Fetch Request with param as this ID and then 
+      //in Kanban DB file, we send a SQL with that Project ID to get 
+      //all tasks for that Project ID
+      fetchKanbanData(projectIdAttribute);
+
+      
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => item.classList.remove('active'));
 
@@ -141,3 +152,35 @@ const submitAddProject = addProjectModal.querySelector('.task-submit-buttons #ad
 submitAddProject.addEventListener('click', () => {
   addProjectModal.style.display = 'none';
 })
+
+
+
+async function fetchKanbanData(projectID) {
+  try {
+    let url = 'kanban-db.php';
+
+    url += `projectId=${encodeURIComponent(projectId)}`;
+    
+    console.log(url);
+
+    const params = {
+        method: "GET",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch venue data');
+    }
+
+    const kanbanData = await response.json();
+
+    console.log(kanbanData);
+
+    return kanbanData;
+
+  } catch(error) {
+    console.log("Fetch Issue",error);
+  }
+}
