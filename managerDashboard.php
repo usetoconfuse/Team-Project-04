@@ -12,7 +12,7 @@ session_start()
         <link rel="stylesheet" href="knowledgeBase.css"></link>
         <link rel="stylesheet" href="projects.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="kanban.css" />
+        <link rel="stylesheet" href="Project-Kanban/kanban.css" />
         <link rel="stylesheet" href="style.css"></link>
         <title>Manager Dashboard</title>
     </head>
@@ -148,7 +148,7 @@ session_start()
             </div>
 
             <div class="nav-item-content" id="current-project-content">
-                <?php include 'projectsKanban.php'; ?>
+                <?php include 'Project-Kanban/projectsKanban.php'; ?>
             </div>
 
             <div class="nav-item-content" id="personal-content">
@@ -170,7 +170,7 @@ session_start()
         <script src="knowledgeBase.js"></script>
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
-        <script src="kanban.js"></script>
+        <script src="Project-Kanban/kanban.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
