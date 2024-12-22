@@ -39,35 +39,6 @@
     One or more constant-based use import statements.
     The remainder of the code in the file.
 
-When a file contains a mix of HTML and PHP, any of the above sections may still be used. If so, they MUST be present at the top of the file, even if the remainder of the code consists of a closing PHP tag and then a mixture of HTML and PHP.
-
-When the opening tag is on the first line of the file, it MUST be on its own line with no other statements unless it is a file containing markup outside of PHP opening and closing tags.
-                        
-The term "class" refers to all classes, interfaces, and traits.
-
-Any closing brace MUST NOT be followed by any comment or statement on the same line.
-
-When instantiating a new class, parentheses MUST always be present even when there are no arguments passed to the constructor.
-
-The extends and implements keywords MUST be declared on the same line as the class name.
-
-The opening brace for the class MUST go on its own line; the closing brace for the class MUST go on the next line after the body.
-
-Opening braces MUST be on their own line and MUST NOT be preceded or followed by a blank line.
-
-Closing braces MUST be on their own line and MUST NOT be preceded by a blank line.
-
-Visibility MUST be declared on all properties.
-
-Visibility MUST be declared on all constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later).
-
-The var keyword MUST NOT be used to declare a property.
-
-There MUST NOT be more than one property declared per statement.
-
-Property names MUST NOT be prefixed with a single underscore to indicate protected or private visibility. That is, an underscore prefix explicitly has no meaning.
-
-There MUST be a space between type declaration and property name.
                         ',
                         'posted' => '36 minutes ago',
                         'author' => 'John Little',
@@ -332,3 +303,5 @@ There MUST be a space between type declaration and property name.
         </div>
     </div>
 </div>
+
+<script src="kbTest.js"></script>
