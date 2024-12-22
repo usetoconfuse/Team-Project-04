@@ -267,11 +267,12 @@ There MUST be a space between type declaration and property name.
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
                                 <select name="topic" id="topic">
+                                    <!--These topics will be retrieved via sql query-->
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="coding-standards">Coding Standards</option>
-                                    <option value="Printer Issues">Printer Issues</option>
-                                    <option value="Printer Issues">Cybersecurity</option>
-                                    <option value="Printer Issues">Workplace Hygiene</option>
+                                    <option value="printer-issues">Printer Issues</option>
+                                    <option value="cybersecurity">Cybersecurity</option>
+                                    <option value="workplace-hygiene">Workplace Hygiene</option>
                                 </select>
                             </div>
                         </div>
@@ -300,6 +301,7 @@ There MUST be a space between type declaration and property name.
         </div>
     </div>
 </div>
+
 <div class="kb-content" id="kb-post-view" style="display:none;">
     <div class="kb-header-section">
         <h1 class="kb-title">Knowledge Base<span id="kb-post-name"></span></h1>

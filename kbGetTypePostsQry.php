@@ -9,7 +9,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $type = "Technical"; // placeholder , will be fetched from button clicked
+    $type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     if($type == "Technical" || $type == "Non-Technical"){
         $sql = "SELECT kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
