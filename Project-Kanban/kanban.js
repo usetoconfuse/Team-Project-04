@@ -229,13 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //Role based content for buttons in modal 
     let roleBasedBtns = '';
     let roleBasedReassign =''
-    if (userRole === 'manager' || userRole === 'leader') {
+    if (userRole === 'manager') {
       roleBasedBtns = `<div class="delete-task">
                             <p>Delete</p>
                           </div>
-                          <div class="save-task">
-                              <p>Save Changes</p>
-                          </div>`
+                          `
       roleBasedReassign = `<div class="modal-task-info-section">
                               <div class="modal-task-info-section-header">
                                   <i class="fa fa-solid fa-user"></i>
@@ -245,9 +243,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                   <p>Choose</p>
                               </div>
                           </div>`
-    } else if (userRole === 'employee') {
+    } else if (userRole === 'employee' || userRole === 'leader') {
       roleBasedBtns = ` <div class="report-task">
                               <p>Report as stuck</p>
+                            </div>
+                            <div class="move-task-dropdown">
+                              <select>
+                                <option value="to-do">To Do</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                              </select>
+                              <div>
+                                <a href="#" class="move-task-confirm black-btn">Confirm Move</a>
+                              </div>
                             </div>`
       roleBasedReassign = `<div class="modal-task-info-section">
                             </div>`
@@ -323,20 +331,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                                   <div class="modal-task-attachments-box"></div>
                                               </div>
 
-                                              <div class="modal-task-btns">
-                                                  <div class="left-arrow">
-                                                      <i class="fa-solid fa-arrow-left"></i>
-                                                  </div>
-                                                  ${roleBasedBtns}
-                                                  <div class="right-arrow">
-                                                      <i class="fa-solid fa-arrow-right"></i>
-                                                  </div>
-                                              </div>
-                                            
-
-                                            
-
                                               
+
+                                              <div class="modal-task-btns">
+                                                  ${roleBasedBtns}
+                                              </div>
+                                              
+                                              
+
+                                            
+
                                             </div>
                                         </div>
     `;
@@ -344,6 +348,20 @@ document.addEventListener('DOMContentLoaded', () => {
     //add modal to body of document
     document.body.appendChild(viewTaskModal);
 
+    //Move Task Click
+    const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown');
+
+      
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //Priority Colours in modal 
     const priorityBox = viewTaskModal.querySelector('.priority-box');
     const priorityCircle = viewTaskModal.querySelector('.priority-box .task-indicator-circle');
