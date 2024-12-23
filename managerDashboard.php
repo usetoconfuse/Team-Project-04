@@ -11,6 +11,7 @@ session_start()
         <link rel="stylesheet" href="navbar.css"></link>
         <link rel="stylesheet" href="knowledgeBase.css"></link>
         <link rel="stylesheet" href="projects.css"></link>
+        <link rel="stylesheet" href="ManagerDash-Stats/statisticsContent.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
         <link rel="stylesheet" href="Project-Kanban/kanban.css" />
         <link rel="stylesheet" href="style.css"></link>
@@ -160,7 +161,7 @@ s
             </div>
 
             <div class="nav-item-content" id="stats-content">
-                <?php include 'statisticsPage.php'; ?>
+                <?php include 'ManagerDash-Stats/statisticsPage.php'; ?>
             </div>
            
             
@@ -171,6 +172,7 @@ s
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
         <script src="Project-Kanban/kanban.js"></script>
+        <script src="ManagerDash-Stats/Manager-Statistics.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
     </body>
