@@ -1,30 +1,23 @@
 <?php
 
-    include 'config.php';
+    include 'stats-db-setup.php';
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
+
+    $sql = "SELECT COUNT(projects.Project_ID) AS projectCount
+            FROM projects   
+            INNER JOIN tasks 
+            ON projects.Project_ID = tasks.Project_ID  
+            WHERE projects.Project_ID >= 1
+            ";
     
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+    // if ($type == "Technical"){
+	//     $sql .= " WHERE kb.Type = 'Technical' ";  
+    // }
 
-    $type = "Non-Technical"; // placeholder , will be fetched from button clicked
-
-    if($type == "Technical" || $type == "Non-Technical"){
-        $sql = "SELECT kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
-                FROM Knowledgebase_Posts kb  
-                INNER JOIN Post_Topic pt ON kb.Post_ID = pt.Post_ID  
-                INNER JOIN Topics t ON pt.Topic_ID = t.Topic_ID  
-                INNER JOIN Users usr ON kb.User_ID = usr.User_ID ";
-    }
-    
-    if ($type == "Technical"){
-	    $sql .= " WHERE kb.Type = 'Technical' ";  
-    }
-
-    if ($type == "Non-Technical"){
-        $sql .=  " WHERE kb.Type = 'Non-Technical' ";  
-    }
+    // if ($type == "Non-Technical"){
+    //     $sql .=  " WHERE kb.Type = 'Non-Technical' ";  
+    // }
 
 
     $result = mysqli_query($conn,$sql);
