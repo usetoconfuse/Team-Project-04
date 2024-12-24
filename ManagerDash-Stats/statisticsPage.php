@@ -34,7 +34,9 @@
         </form>
     </div>
 
-    <div id="dataContainer"></div> <!--Data from fetch goes here-->
+    <div id="dataContainer">
+        <p>Click the "Fetch Test" button</p>
+    </div> <!--Data from fetch goes here-->
 
     <button id='fetchDataTest'>Fetch Test</button> <!--Fetches data-->
 
