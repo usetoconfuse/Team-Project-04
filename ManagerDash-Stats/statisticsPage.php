@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="statisticsContent.css">
 
 <div id="statGrid">
     <!-- Filter 1 -->
@@ -35,7 +34,15 @@
         </form>
     </div>
 
+    <div id="dataContainer">
+        <p>Click the "Fetch Test" button</p>
+    </div> <!--Data from fetch goes here-->
+
+    <button id='fetchDataTest'>Fetch Test</button> <!--Fetches data-->
+
 
     <div class="statOutput stat-grid-item">
         <p style="text-align: center;">Graph Here</p>
-</div>
+    </div>
+
+
