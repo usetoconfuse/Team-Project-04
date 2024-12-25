@@ -9,7 +9,9 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $type = "Non-Technical"; // placeholder , will be fetched from button clicked
+    $type = isset($_GET['type']) ? $_GET['type'] : null; // placeholder , will be fetched from button clicked
+
+    error_log("Received type: " . $type);
 
     if($type == "Technical" || $type == "Non-Technical"){
         $sql = "SELECT kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
@@ -31,7 +33,10 @@
     $result = mysqli_query($conn,$sql);
 
     if(!$result){
-        die("Query failed ". mysqli_error($conn));
+        error_log("Query failed: " . mysqli_error($conn));
+        echo json_encode(["error" => "Database query failed"]);
+        http_response_code(500); // Send a proper HTTP response code
+        exit;
     }
 
     $allDataArray = array();

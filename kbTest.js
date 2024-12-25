@@ -1,5 +1,4 @@
-
-// fetch method for getting ALL posts
+// fetch method for getting ALL posts with no constraints 
 const fetchAllPosts = async () => {
     try{
         const response = await fetch('kbGetAllPostsQry.php');
@@ -15,7 +14,23 @@ const fetchAllPosts = async () => {
     }
 };
 
-//general method to renderAllposts REUSABLE
+// fetch method to get post of specific Type Technical or Non-Technical
+const fetchTypePosts = async (type) => {
+    try{
+        const response = await fetch(`kbGetTypePostsQry.php?type=${encodeURIComponent(type)}`);
+        if(!response.ok){
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    }
+    catch(error){
+        console.error("error fetching posts ", error);
+        return [];
+    }
+};
+
+//general method to renderAllposts to load them onto the page - REUSABLE
 const renderAllPosts = (posts) => {
   const postsContainer = document.getElementById('kb-posts-list'); 
   postsContainer.innerHTML = '';
@@ -80,7 +95,18 @@ const options = {
 return date.toLocaleString('en-GB', options);
 };
 
-//on show all post click will load all posts from db
+//on show all btn click will load all posts from db
 document.querySelector('#allBtn').addEventListener('click', () =>{
     fetchAllPosts().then(renderAllPosts);
 });
+
+//on techincal button clicked show all post with type of techincal
+document.querySelector('#technicalBtn').addEventListener('click', () =>{
+    fetchTypePosts('Technical').then(renderAllPosts);
+});
+
+//on techincal button clicked show all post with type of non-techincal
+document.querySelector('#nonTechnicalBtn').addEventListener('click', () =>{
+    fetchTypePosts('Non-Technical').then(renderAllPosts);
+});
+

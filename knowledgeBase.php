@@ -2,9 +2,9 @@
     <div class="kb-header-section">
         <h1 class="kb-title">Knowledge Base</h1>
         <div class="post-type-btns">
-            <button class="active black-btn" id="allBtn">Show All</button>
-            <button id="technicalBtn">Technical</button>
-            <button id="nonTechnicalBtn">Non-Technical</button>
+            <button class="active black-btn" id="allBtn" >Show All</button>
+            <button id="technicalBtn" value="Technical">Technical</button>
+            <button id="nonTechnicalBtn" value="Non-Technical">Non-Technical</button>
         </div>
     </div>
     <div class="kb-main">
