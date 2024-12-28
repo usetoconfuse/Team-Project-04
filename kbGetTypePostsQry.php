@@ -14,7 +14,7 @@
     error_log("Received type: " . $type);
 
     if($type == "Technical" || $type == "Non-Technical"){
-        $sql = "SELECT kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
+        $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
                 FROM Knowledgebase_Posts kb  
                 INNER JOIN Post_Topic pt ON kb.Post_ID = pt.Post_ID  
                 INNER JOIN Topics t ON pt.Topic_ID = t.Topic_ID  

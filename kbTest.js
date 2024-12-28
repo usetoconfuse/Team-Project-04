@@ -30,6 +30,41 @@ const fetchTypePosts = async (type) => {
     }
 };
 
+//method to get all the topics within the DB
+const fetchAllTopics = async () => {
+    try{
+        const response = await fetch('kbGetAllTopicsQry.php');
+        if(!response.ok){
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    }
+    catch(error){
+        console.error("error fetching posts ", error);
+        return [];
+    }
+};
+
+//method to render the Topic items and load them onto the right side of the page in the topic list
+const renderAllTopics = (topics) => {
+    const topicsContainer = document.getElementById('topicsList'); 
+    topicsContainer.innerHTML = '';
+  
+    topics.forEach(topic => {
+
+      // Create the HTML for the post
+      const topicHTML = `
+        <li class="kb-topic" data-topic="${formatTopicNameToTag(topic.Topic_Name)}" id="topic-${topic.Topic_ID}"> 
+        <span class="kb-topic-circle"></span> ${topic.Topic_Name}</li>
+      `;
+  
+      // Append the post HTML to the container
+      topicsContainer.insertAdjacentHTML('beforeend', topicHTML);
+    });
+  }
+
+
 //general method to renderAllposts to load them onto the page - REUSABLE
 const renderAllPosts = (posts) => {
   const postsContainer = document.getElementById('kb-posts-list'); 
@@ -83,6 +118,7 @@ const nl2br = (str) => {
     return str.replace(/\n/g, '<br>');
   };
 
+//helper function to convert the date time from database to a more readable form
 const formatDate = (dateString) => {
 const date = new Date(dateString);
 const options = {
@@ -93,6 +129,11 @@ const options = {
     minute: '2-digit',
 };
 return date.toLocaleString('en-GB', options);
+};
+
+//helper function to convert the topic name into a standardised form for the data-topic tag
+const formatTopicNameToTag = (topicName) => {
+    return topicName.trim().toLowerCase().replaceAll(/\s+/g, '-');
 };
 
 //on show all btn click will load all posts from db
@@ -110,3 +151,7 @@ document.querySelector('#nonTechnicalBtn').addEventListener('click', () =>{
     fetchTypePosts('Non-Technical').then(renderAllPosts);
 });
 
+// on test button clicked show all topics 
+document.querySelector('#testBtn1').addEventListener('click', () =>{
+    fetchAllTopics().then(renderAllTopics);
+});

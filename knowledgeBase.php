@@ -162,6 +162,8 @@
                     Hygiene</li>
             </ul>
             <button id="new-topic-btn" class="black-btn">New Topic</button>
+            <!--test to check if backend data loads-->
+            <button id="testBtn1" class="black-btn">test</button>
         </div>
 
         <!--Add Topic Modal-->
