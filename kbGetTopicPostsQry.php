@@ -12,6 +12,7 @@
     //the topic name provided when clicking on a topic item within the topic list
     $clicked_topic = isset($_GET['clicked_topic']) ?  $_GET['clicked_topic'] : null; 
 
+    // select all relevant field from KnowledgeBase table that have the topic which was clicked on, and that create array of json data
     $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
     FROM Knowledgebase_Posts kb  
     INNER JOIN Post_Topic pt ON kb.Post_ID = pt.Post_ID  

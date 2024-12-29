@@ -13,6 +13,7 @@
 
     error_log("Received type: " . $type);
 
+    // select all relevant field from KnowledgeBase table that have Type of Technical or Non-Technical depeding on user choice, and that create array of json data
     if($type == "Technical" || $type == "Non-Technical"){
         $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
                 FROM Knowledgebase_Posts kb  

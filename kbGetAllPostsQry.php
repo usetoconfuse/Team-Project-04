@@ -8,7 +8,7 @@
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
+    // select all relevant field from KnowledgeBase table and that create array of json data
     $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
             FROM Knowledgebase_Posts kb  
             INNER JOIN Post_Topic pt ON kb.Post_ID = pt.Post_ID  

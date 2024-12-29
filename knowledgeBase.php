@@ -179,8 +179,8 @@
                 <!--Body-->
                 <form id="topic-modal-form" class="modal-body">
                     <div class="topic-title-form">
-                        <label for="topic-title">Title</label>
-                        <input type="text" id="topicInput" name="topic-title" placeholder="Enter new topic name">
+                        <label for="topic-name">Topic Name: </label>
+                        <input type="text" id="topicInput" name="topic-name" placeholder="Enter new topic name">
                     </div>
                 </form>
                 <div class="task-submit-buttons">
@@ -209,23 +209,23 @@
                 <!--Body-->
                 <form id="post-modal-form" class="modal-body">
                     <div class="post-title-form">
-                        <label for="post-title">Title :</label>
-                        <input type="text" id="postInput" name="post-title" placeholder="Enter post title">
+                        <label for="postInput">Title :</label>
+                        <input type="text" id="postInput" name="title" placeholder="Enter post title">
                     </div>
                     <div class="post-content-form">
-                        <label for="post-content">Content :</label>
-                        <textarea type="text" id="contentInput" name="post-content"
+                        <label for="contentInput">Content :</label>
+                        <textarea type="text" id="contentInput" name="content"
                             placeholder="Enter post content"></textarea>
                     </div>
                     <div class="task-dropdowns-form" id="post-dropdowns-form">
                         <!--technical or non technical-->
                         <div class="task-dropdown task-dropdown-technical">
-                            <label for="technical">Type :</label>
+                            <label for="type-dropdown">Type :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
-                                <select name="technical" id="technical">
+                                <select name="type" id="type-dropdown">
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="Technical">Technical</option>
                                     <option value="Non-Technical">Non-technical</option>
@@ -234,7 +234,7 @@
                         </div>
                         <!--topic-->
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="topic">Topic :</label>
+                            <label for="topic-modal-dropdown">Topic :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
@@ -247,12 +247,12 @@
                             </div>
                         </div>
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="topic">Visibility :</label>
+                            <label for="visibility-dropdown">Visibility :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
-                                <select name="topic" id="topic">
+                                <select name="visibility" id="visibility-dropdown">
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="All Users">All Users</option>
                                     <!--disabled , will depend on if user or manager logged in-->

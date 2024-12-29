@@ -203,7 +203,71 @@ document.querySelector('#topic-modal-dropdown').addEventListener('click', () => 
     fetchAllTopics().then(renderAllTopicsModal);
 });
 
+// on submission of the add post form add the new post to the knowledgebase db
+document.getElementById('add-post-btn').addEventListener('click', (event) => {
+    event.preventDefault();
 
-document.getElementById('post-modal-form').addEventListener('submit', () => {
-    
+    //gather data from the form
+    const title = document.getElementById('postInput').value;
+    const content = document.getElementById('contentInput').value;
+    const type = document.getElementById('type-dropdown').value;
+    const topic = document.getElementById('topic-modal-dropdown').value;
+    const visibility = document.getElementById('visibility-dropdown').value;
+
+    //create a FormData object
+    const formData = new FormData();
+    formData.append('title',title);
+    formData.append('content', content);
+    formData.append('type', type);
+    formData.append('topic', topic);
+    formData.append('visibility', visibility);
+
+    //pass form data into addpost sql query
+    fetch('kbAddPostQry.php', {
+        method : 'POST',
+        body : formData 
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then((data) => {
+        //once form successfully submitted alert the user and reset the form
+        console.log('Post submitted:', data);
+        alert('Post added successfully!');
+        document.getElementById('post-modal-form').reset(); 
+    })
+    .catch((error) =>{
+        console.error(error);
+    })
+// need to add validation to the form ...
+});
+
+//on submission of add topic form add the new topic to the topics table
+document.getElementById('add-topic-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    //get topic name from form
+    const newTopic = document.getElementById('topicInput').value;
+
+    const formData = new FormData();
+    formData.append('topic-name', newTopic);
+
+    //pass data from form to addtopic sql query
+    fetch ('kbAddTopicQry.php', {
+        method: 'POST',
+        body: formData
+    }).then((response) => {
+        if(!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    }).then((data) => {
+        //once form successfully submitted alert user and reset form
+        console.log('Topic added:', data);
+        alert('Topic added successfully! ');
+        document.getElementById('topic-modal-form').reset();
+    }).catch((error) =>{
+        console.error(error);
+    })
 });

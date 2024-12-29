@@ -9,7 +9,8 @@
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
+    
+    // select all the topics from the Topics table
     $sql = "SELECT Topic_Name, Topic_ID
             FROM Topics ";
 
