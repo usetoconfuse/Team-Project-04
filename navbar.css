@@ -182,7 +182,7 @@ img {
 
 /*====Nav Bar====*/
 nav {
-    width: 25%;
+    width: 15%;
     margin-top: 6rem;
 }
 
@@ -218,6 +218,7 @@ nav {
     font-family: 'Avenir Next';
     font-size: 1rem;
     transition: background-color 0.2s ease-in-out;
+    
 }
 
 .menu .nav-item .btn-animate {
@@ -418,7 +419,7 @@ nav {
 /*====Nav Bar Section Content====*/
 #content {
     height: 94dvh;
-    width: 75%;
+    width: 85%;
     border-radius: 45px;
     background-color: #F5F5F5;
     display: flex;
@@ -452,6 +453,46 @@ nav {
 
 #current-project {
     display: none;
+}
+
+
+@media (max-width: 1280px) {
+    /*.nav-item a span {
+        display: none;
+    }
+
+    .nav-item a  {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-item {
+        height: 25px;
+    }*/
+    nav {
+        width: 20%;
+    }
+}
+
+
+@media (max-width: 940px) {
+    /*.nav-item a span {
+        display: none;
+    }
+
+    .nav-item a  {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-item {
+        height: 25px;
+    }*/
+    nav {
+        width: 25%;
+    }
 }
 
 @media (max-width: 768px) {
