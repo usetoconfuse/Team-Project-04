@@ -45,7 +45,7 @@ session_start()
                 <div class="intro-txt">
                     
                     <h1>Welcome back, John.</h1>
-                    <p>View your daily overview here.</p>
+                    <!--<p>View your daily overview here.</p>-->
                 </div>
 
                 <ul>

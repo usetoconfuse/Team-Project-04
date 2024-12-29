@@ -44,15 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function date() {
         const currentTime = new Date()
-        const dateOptions = { weekday: 'long',
-                              day: 'numeric',
-                              month: 'long'
-                            }
 
-        const suffix = getDateSuffix(currentTime.getDate())
-                            
-        const currentDate = currentTime.toLocaleDateString("en-GB", dateOptions).replace(currentTime.getDate(), currentTime.getDate() + suffix)
-        
+        const currentDate = currentTime.toLocaleDateString('en-GB'); 
 
         if (currentDate !== setDate) { //updates old date if needed
             setDate = currentDate
@@ -62,21 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(date, 1000)
     }
 
-    function getDateSuffix(date) {
-        if (date >= 11 && date <= 13) {
-            return "th";
-        }
-        switch (date[-1]) {
-            case 1:
-                return "st";
-            case 2:
-                return "nd";
-            case 3:
-                return "rd";
-            default:
-                return "th";
-        }
-    }
+ 
 
     function getPageId() {
         const params = new URLSearchParams(window.location.search);
