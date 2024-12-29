@@ -267,7 +267,12 @@ document.getElementById('add-topic-btn').addEventListener('click', (event) => {
         console.log('Topic added:', data);
         alert('Topic added successfully! ');
         document.getElementById('topic-modal-form').reset();
+
     }).catch((error) =>{
         console.error(error);
     })
+
+    //ensure that the new topic is in the right html form
+    fetchAllTopics().then(renderAllTopicsModal);
+    location.reload();
 });
