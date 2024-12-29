@@ -160,10 +160,10 @@
                 <li class="kb-topic" data-topic="cybersecurity"><span class="kb-topic-circle"></span>Cybersecurity</li>
                 <li class="kb-topic" data-topic="workplace-hygiene"><span class="kb-topic-circle"></span>Workplace
                     Hygiene</li>
+                <p class="kb-sidebar-content kb-scrollable"></p>
             </ul>
             <button id="new-topic-btn" class="black-btn">New Topic</button>
-            <!--test to check if backend data loads-->
-            <button id="testBtn1" class="black-btn">test</button>
+
         </div>
 
         <!--Add Topic Modal-->

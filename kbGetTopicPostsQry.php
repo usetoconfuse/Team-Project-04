@@ -9,7 +9,8 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $clicked_topic = "Database Management"; //placeholder for the clicked topic value 
+    //the topic name provided when clicking on a topic item within the topic list
+    $clicked_topic = isset($_GET['clicked_topic']) ?  $_GET['clicked_topic'] : null; 
 
     $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
     FROM Knowledgebase_Posts kb  

@@ -10,7 +10,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT Topic_Name
+    $sql = "SELECT Topic_Name, Topic_ID
             FROM Topics ";
 
     $result = mysqli_query($conn,$sql);

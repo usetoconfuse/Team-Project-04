@@ -30,6 +30,22 @@ const fetchTypePosts = async (type) => {
     }
 };
 
+// method to get all Posts from a specific topic that has been chosen
+const fetchAllTopicsPosts = async (clicked_topic) => {
+    try{
+        const response = await fetch(`kbGetTopicPostsQry.php?clicked_topic=${encodeURIComponent(clicked_topic)}`);
+        if(!response.ok){
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    }
+    catch(error){
+        console.error("error fetching posts ", error);
+        return [];
+    }
+};
+
 //method to get all the topics within the DB
 const fetchAllTopics = async () => {
     try{
@@ -55,7 +71,7 @@ const renderAllTopics = (topics) => {
 
       // Create the HTML for the post
       const topicHTML = `
-        <li class="kb-topic" data-topic="${formatTopicNameToTag(topic.Topic_Name)}" id="topic-${topic.Topic_ID}"> 
+        <li class="kb-topic" value ="${topic.Topic_Name}" id="topic-${topic.Topic_ID}"> 
         <span class="kb-topic-circle"></span> ${topic.Topic_Name}</li>
       `;
   
@@ -131,12 +147,13 @@ const options = {
 return date.toLocaleString('en-GB', options);
 };
 
-//helper function to convert the topic name into a standardised form for the data-topic tag
-const formatTopicNameToTag = (topicName) => {
-    return topicName.trim().toLowerCase().replaceAll(/\s+/g, '-');
+//when the webpage loads all the posts and topics will be loaded onto the webpage from db
+window.onload = () => {
+    fetchAllPosts().then(renderAllPosts);
+    fetchAllTopics().then(renderAllTopics);
 };
 
-//on show all btn click will load all posts from db
+//on showall btn click will load all posts from db
 document.querySelector('#allBtn').addEventListener('click', () =>{
     fetchAllPosts().then(renderAllPosts);
 });
@@ -151,7 +168,12 @@ document.querySelector('#nonTechnicalBtn').addEventListener('click', () =>{
     fetchTypePosts('Non-Technical').then(renderAllPosts);
 });
 
-// on test button clicked show all topics 
-document.querySelector('#testBtn1').addEventListener('click', () =>{
-    fetchAllTopics().then(renderAllTopics);
+//on topic item clicked it will show all posts of specified under that topic
+document.querySelector('#topicsList').addEventListener('click', (event) => {
+    clickedTopic = event.target; 
+    console.log(clickedTopic);
+    if (clickedTopic.classList.contains('kb-topic')) {
+        const chosenTopicName = clickedTopic.getAttribute('value');
+        fetchAllTopicsPosts(chosenTopicName).then(renderAllPosts);
+    }
 });
