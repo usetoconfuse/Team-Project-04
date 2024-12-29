@@ -80,6 +80,26 @@ const renderAllTopics = (topics) => {
     });
   }
 
+// method to render the Topics to be as items to choose from the dropdown within the add topic modal
+const renderAllTopicsModal = (topics) => {
+    const topicsDropdown = document.querySelector("#topic-modal-dropdown"); // Reference the select element directly
+    topicsDropdown.innerHTML = ''; 
+
+    // Add the default placeholder option
+    const placeholderOption = `<option value="" selected disabled hidden>Choose</option>`;
+    topicsDropdown.insertAdjacentHTML('beforeend', placeholderOption);
+
+    topics.forEach(topic => {
+
+      // Create the HTML for the post
+      const topicHTML = `
+        <option value="${topic.Topic_Name}" id="topic-${topic.Topic_ID}"> ${topic.Topic_Name} </option>
+      `;
+      // Append the post HTML to the container
+      topicsDropdown.insertAdjacentHTML('beforeend', topicHTML);
+    });
+};
+
 
 //general method to renderAllposts to load them onto the page - REUSABLE
 const renderAllPosts = (posts) => {
@@ -176,4 +196,14 @@ document.querySelector('#topicsList').addEventListener('click', (event) => {
         const chosenTopicName = clickedTopic.getAttribute('value');
         fetchAllTopicsPosts(chosenTopicName).then(renderAllPosts);
     }
+});
+
+// on the topic dropdown click load all topics from DB as values to select 
+document.querySelector('#topic-modal-dropdown').addEventListener('click', () => {
+    fetchAllTopics().then(renderAllTopicsModal);
+});
+
+
+document.getElementById('post-modal-form').addEventListener('submit', () => {
+    
 });

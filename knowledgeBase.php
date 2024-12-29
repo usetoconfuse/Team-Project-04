@@ -209,56 +209,54 @@
                 <!--Body-->
                 <form id="post-modal-form" class="modal-body">
                     <div class="post-title-form">
-                        <label for="post-title">Title</label>
+                        <label for="post-title">Title :</label>
                         <input type="text" id="postInput" name="post-title" placeholder="Enter post title">
                     </div>
                     <div class="post-content-form">
-                        <label for="post-content">Content</label>
+                        <label for="post-content">Content :</label>
                         <textarea type="text" id="contentInput" name="post-content"
                             placeholder="Enter post content"></textarea>
                     </div>
                     <div class="task-dropdowns-form" id="post-dropdowns-form">
                         <!--technical or non technical-->
                         <div class="task-dropdown task-dropdown-technical">
-                            <label for="technical">Technical?</label>
+                            <label for="technical">Type :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
                                 <select name="technical" id="technical">
                                     <option value="" selected disabled hidden>Choose</option>
-                                    <option value="technical">Technical</option>
-                                    <option value="nontechnical">Non-technical</option>
+                                    <option value="Technical">Technical</option>
+                                    <option value="Non-Technical">Non-technical</option>
                                 </select>
                             </div>
                         </div>
                         <!--topic-->
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="topic">Topic</label>
+                            <label for="topic">Topic :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
-                                <select name="topic" id="topic">
+                                <select name="topic" id="topic-modal-dropdown">
                                     <!--These topics will be retrieved via sql query-->
                                     <option value="" selected disabled hidden>Choose</option>
-                                    <option value="coding-standards">Coding Standards</option>
-                                    <option value="printer-issues">Printer Issues</option>
-                                    <option value="cybersecurity">Cybersecurity</option>
-                                    <option value="workplace-hygiene">Workplace Hygiene</option>
+                                    <option value="Coding Standards">Coding Standards</option>
                                 </select>
                             </div>
                         </div>
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="topic">Permissions</label>
+                            <label for="topic">Visibility :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
                                 <select name="topic" id="topic">
                                     <option value="" selected disabled hidden>Choose</option>
-                                    <option value="all-users">All Users</option>
-                                    <option value="manager-only" disabled>Manager only</option>
+                                    <option value="All Users">All Users</option>
+                                    <!--disabled , will depend on if user or manager logged in-->
+                                    <option value="Manager Only" disabled>Manager Only</option>
                                 </select>
                             </div>
                         </div>
