@@ -1,16 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const gridContainer = document.getElementById("gridContainer");
 
-  // Example task data
-  const projects = [
-    { title: "Python Projects", progress: 25, dueDate: "21 Oct", id: 1 },
-    { title: "JavaScript Todo Application", progress: 50, dueDate: "22 Oct", id: 2 },
-    { title: "Smart Fridge", progress: 75, dueDate: "23 Oct", id: 3 },
-    { title: "Book on Cheese", progress: 40, dueDate: "24 Oct", id: 4 },
-    { title: "Government Assignment", progress: 90, dueDate: "25 Oct", id: 5 },
-    { title: "Social Media Tasks", progress: 60, dueDate: "26 Oct", id: 6 },
-    { title: "Test Project", progress: 10, dueDate: "27 Oct", id: 7 },
-  ];
+
 
 //Hardcoded user ID but will change later when Login is made
 let userID = 4; //for this eg, we use userID 4 this belongs to 3 teams
@@ -37,7 +28,7 @@ async function fetchProjectsData(userID) {
     projectData.forEach((project) => {
       const projectCard = document.createElement("div");
       projectCard.classList.add('project-card');
-      projectCard.setAttribute('data-project-id', project.id);
+      projectCard.setAttribute('data-project-id', project.Project_ID);
       
       
   
@@ -68,7 +59,7 @@ async function fetchProjectsData(userID) {
                                     </div>
                                     <div class="project-card-due-date">
                                         <i class="fa fa-regular fa-calendar"></i>
-                                        <p>${project.Due_Date}</p>
+                                        <p>Due: ${project.Due_Date}</p>
                                     </div>
                                 </div>
                            
@@ -92,10 +83,10 @@ async function fetchProjectsData(userID) {
       //Links to project kanban
       projectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
         e.preventDefault();
-     
-        const projectIdAttribute = projectCard.getAttribute('data-project-id');
-        console.log(projectIdAttribute);
 
+        //Add to URL the project ID so it can be used in Kanban.js
+        const newUrl = `${window.location.pathname}?projectID=${project.Project_ID}`;
+        history.pushState({ projectID: project.Project_ID }, '', newUrl);
         
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => item.classList.remove('active'));

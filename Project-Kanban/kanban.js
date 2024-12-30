@@ -1,6 +1,17 @@
 const kanbanContainers = document.querySelectorAll('.kanban-board');
 
 
+//Wait for View button to be clicked and when it is, Project.js deals with opening the 
+//new kanban tab on the site, but the projectID is got here for use in the Fetch request
+window.addEventListener('popstate', (event) => {
+  const projectId = new URLSearchParams(window.location.search).get('projectID');
+  
+  if (projectId) {
+      console.log(projectId);
+  }
+});
+
+
 kanbanContainers.forEach(kanbanContainer => {
   //====Open and Close Task cards
   kanbanContainer.addEventListener('click', (e) => {
