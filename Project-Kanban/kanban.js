@@ -77,7 +77,14 @@ backToProjectsBtn.addEventListener('click', () => {
   navItemContents.forEach(item => item.classList.remove('open'))
   const currentProjectContentArea = document.querySelector('#projects-content')
   currentProjectContentArea.classList.add('open');
+
+  //Switch back to the normal URL
+  const currentURL = new URL(window.location.href);
+  currentURL.searchParams.delete('projectID');
+  history.pushState(null, '', currentURL.toString());
 })
+
+
 
 //====Add Task Modal  
 const addTaskBtn = document.querySelectorAll('.add-task-btn')
