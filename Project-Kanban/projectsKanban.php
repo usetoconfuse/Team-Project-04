@@ -1,4 +1,3 @@
-
 <div id="kanban-content" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro">
@@ -29,7 +28,7 @@
                 <div class="user">+3</div>
             </div>
         </div>
-    
+
 
         <div class="vertical-bar"></div>
 
@@ -37,7 +36,7 @@
             <div class="filter-task-btn black-btn">
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
-    
+
             <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
                 <div class="add-task-btn black-btn">
                     <i class="fa fa-solid fa-plus"></i>
@@ -49,8 +48,8 @@
                 All Projects
             </div>
         </div>
-        
-        
+
+
         <div class="kanban-separator"></div>
     </section>
 
@@ -66,22 +65,24 @@
                 <i class="fa fa-solid fa-caret-up"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body open" id = 'kanban-to-do'>
+            <div class="kanban-body open" id='kanban-to-do'>
 
                 <!--Kanban Card 1-->
                 <div class="kanban-card" id="kanban-task-overdue" draggable=true>
-                    
+
                     <div class="kanban-card-top">
-                        <div class = 'kanban-card-top-left'>
+                        <div class='kanban-card-top-left'>
                             <div class="kanban-card-priority high-priority"></div>
                             <p>Refactor login code</p>
                         </div>
-                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i></div>
-         
+                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i>
+                        </div>
+
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">Refactor the login code so it is using OOP. Make sure to follow necessary coding standards (documented in Knowledge Base).</p>
-                        
+                        <p class="kanban-card-description">Refactor the login code so it is using OOP. Make sure to
+                            follow necessary coding standards (documented in Knowledge Base).</p>
+
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
@@ -95,22 +96,25 @@
                 </div>
                 <!--Kanban Card 2-->
                 <div class="kanban-card" id="kanban-task-overdue" draggable=true>
-                    
+
                     <div class="kanban-card-top">
-                        <div class = 'kanban-card-top-left'>
-                        <div class="kanban-card-priority low-priority"></div>
+                        <div class='kanban-card-top-left'>
+                            <div class="kanban-card-priority low-priority"></div>
                             <p>Make Report from user feedback</p>
                         </div>
-                        <div class="user" style="background-color: var(--green);"><i class="fa fa-solid fa-user"></i></div>
+                        <div class="user" style="background-color: var(--green);"><i class="fa fa-solid fa-user"></i>
+                        </div>
 
-         
+
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">Collate the data collected from the survey last month and write up a full report.
-                            It should include various data such as user satisfaction, user suggestions, and any bugs reported.
+                        <p class="kanban-card-description">Collate the data collected from the survey last month and
+                            write up a full report.
+                            It should include various data such as user satisfaction, user suggestions, and any bugs
+                            reported.
                             It also needs to look nice so we can share it with stakeholders in the monthly meeting.
                         </p>
-                        
+
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
@@ -124,20 +128,22 @@
                 </div>
                 <!--Kanban Card 3-->
                 <div class="kanban-card" id="kanban-task" draggable=true>
-                    
+
                     <div class="kanban-card-top">
-                        <div class = 'kanban-card-top-left'>
+                        <div class='kanban-card-top-left'>
                             <div class="kanban-card-priority high-priority"></div>
                             <p>Move from SQLite to MySQL
                             </p>
                         </div>
-                        <div class="user" style="background-color: var(--bright-gold);"><i class="fa fa-solid fa-user"></i></div>
+                        <div class="user" style="background-color: var(--bright-gold);"><i
+                                class="fa fa-solid fa-user"></i></div>
 
-         
+
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">It's much more scalable, and has better tooling for backups and management.</p>
-                        
+                        <p class="kanban-card-description">It's much more scalable, and has better tooling for backups
+                            and management.</p>
+
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
@@ -162,23 +168,25 @@
                 <i class="fa fa-solid fa-caret-down"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body" id = 'kanban-in-progress'>
-                 <!--Kanban Card 5-->
-                 <div class="kanban-card" id="kanban-task" draggable=true>
-                    
+            <div class="kanban-body" id='kanban-in-progress'>
+                <!--Kanban Card 5-->
+                <div class="kanban-card" id="kanban-task" draggable=true>
+
                     <div class="kanban-card-top">
-                        <div class = 'kanban-card-top-left'>
-                        <div class="kanban-card-priority low-priority tooltip">
-                            <span class="tooltiptext">Low Priority</span>
-                        </div>
+                        <div class='kanban-card-top-left'>
+                            <div class="kanban-card-priority low-priority tooltip">
+                                <span class="tooltiptext">Low Priority</span>
+                            </div>
                             <p>Add comments to code</p>
                         </div>
-                        <div class="user" style="background-color: var(--purple);"><i class="fa fa-solid fa-user"></i></div>
-         
+                        <div class="user" style="background-color: var(--purple);"><i class="fa fa-solid fa-user"></i>
+                        </div>
+
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">Make sure to use docstrings for functions as well as normal comments to define the content.</p>
-                        
+                        <p class="kanban-card-description">Make sure to use docstrings for functions as well as normal
+                            comments to define the content.</p>
+
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
@@ -203,22 +211,24 @@
                 <i class="fa fa-solid fa-caret-down"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body" id = 'kanban-completed'>
+            <div class="kanban-body" id='kanban-completed'>
 
                 <!--Kanban Card 5-->
                 <div class="kanban-card" id="kanban-task" draggable=true>
-                    
+
                     <div class="kanban-card-top">
-                        <div class = 'kanban-card-top-left'>
+                        <div class='kanban-card-top-left'>
                             <div class="kanban-card-priority medium-priority"></div>
                             <p>Fix login bug</p>
                         </div>
-                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i></div>
-         
+                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i>
+                        </div>
+
                     </div>
                     <div class="kanban-card-body">
-                        <p class="kanban-card-description">There's a bug where the login breaks if two people log in at the same time.</p>
-                        
+                        <p class="kanban-card-description">There's a bug where the login breaks if two people log in at
+                            the same time.</p>
+
                         <div class="kanban-separator"></div>
 
                         <div class="kanban-card-bottom">
@@ -230,7 +240,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
         </div>
@@ -252,38 +262,38 @@
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
                     <!--DropDown 1 - Mgr View-->
                     <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
-                    <div class="task-dropdown task-dropdown-technical">
-                        <label for="user-filter">User</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-technical-icon task-dropdown-icon">
-                                <i class="fa fa-solid fa-user"></i>
+                        <div class="task-dropdown task-dropdown-technical">
+                            <label for="user-filter">User</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-technical-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="user-filter" id="user-filter">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="jlittle">John Little</option>
+                                    <option value="qlittle">Quinn Little</option>
+                                    <option value="jganatra">Jeevan Ganatra</option>
+                                    <option value="Dan Novetsky">Dan Novetsky</option>
+                                    <option value="Zoran">Zoran</option>
+                                </select>
                             </div>
-                            <select name="user-filter" id="user-filter">
-                                <option value="" selected disabled hidden>Choose</option>
-                                <option value="jlittle">John Little</option>
-                                <option value="qlittle">Quinn Little</option>
-                                <option value="jganatra">Jeevan Ganatra</option>
-                                <option value="Dan Novetsky">Dan Novetsky</option>
-                                <option value="Zoran">Zoran</option>
-                            </select>
-                        </div>  
-                    </div>
+                        </div>
 
-                    <!--DropDown 1 - Emp View-->
+                        <!--DropDown 1 - Emp View-->
                     <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'employee'): ?>
-                    <div class="task-dropdown task-dropdown-technical">
-                        <label for="user-filter">User</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-technical-icon task-dropdown-icon">
-                                <i class="fa fa-solid fa-user"></i>
+                        <div class="task-dropdown task-dropdown-technical">
+                            <label for="user-filter">User</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-technical-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="user-filter" id="user-filter">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="me">Me</option>
+                                    <option value="all-tasks">All Tasks</option>
+                                </select>
                             </div>
-                            <select name="user-filter" id="user-filter">
-                                <option value="" selected disabled hidden>Choose</option>
-                                <option value="me">Me</option>
-                                <option value="all-tasks">All Tasks</option>
-                            </select>
-                        </div>  
-                    </div>
+                        </div>
                     <?php endif; ?>
                     <!--DropDown 2-->
                     <div class="task-dropdown task-dropdown-priority">
@@ -300,7 +310,7 @@
                                 <option value="high">High</option>
                                 <option value="stuck">Stuck</option>
                             </select>
-                        </div>  
+                        </div>
                     </div>
                     <!--DropDown 3-->
                     <div class="task-dropdown task-dropdown-date">
@@ -318,7 +328,7 @@
                                 <option value="next-week">Next Week</option>
                                 <option value="later">Later</option>
                             </select>
-                        </div>  
+                        </div>
                     </div>
 
                 </div>
@@ -332,5 +342,3 @@
         </div>
     </div>
 </div>
-
-
