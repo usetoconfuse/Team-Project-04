@@ -1,7 +1,7 @@
 <?php
 // Made by Quinn Little 23/12/24
 
-    include 'config/db-setup.php';
+    include '../config/db-setup.php';
 
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
