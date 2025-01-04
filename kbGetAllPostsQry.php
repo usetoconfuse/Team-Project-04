@@ -1,13 +1,7 @@
 
 <?php
+    include 'config/db-setup.php';
 
-    include 'config.php';
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     // select all relevant field from KnowledgeBase table and that create array of json data
     $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
             FROM Knowledgebase_Posts kb  

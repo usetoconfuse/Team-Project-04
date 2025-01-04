@@ -1,12 +1,6 @@
 <?php
+    include 'config/db-setup.php';
 
-    include 'config.php';
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     //POST method to gather all data from Form as well as User data
     $title = $_POST['title'];
     $content = $_POST['content'];

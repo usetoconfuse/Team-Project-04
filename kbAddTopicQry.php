@@ -1,12 +1,6 @@
 <?php
+    include 'config/db-setup.php';
 
-    include 'config.php';
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     //POST method to gather all data from Form of topic name well as User data
     $newTopic = $_POST['topic-name'];
 

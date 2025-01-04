@@ -1,13 +1,6 @@
 
 <?php
-
-    include 'config.php';
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+    include 'config/db-setup.php';
 
     $type = isset($_GET['type']) ? $_GET['type'] : null; // placeholder , will be fetched from button clicked
 

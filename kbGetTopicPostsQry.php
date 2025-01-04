@@ -1,13 +1,6 @@
 
 <?php
-
-    include 'config.php';
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+    include 'config/db-setup.php';
 
     //the topic name provided when clicking on a topic item within the topic list
     $clicked_topic = isset($_GET['clicked_topic']) ?  $_GET['clicked_topic'] : null; 

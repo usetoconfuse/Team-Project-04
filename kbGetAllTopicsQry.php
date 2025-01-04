@@ -1,14 +1,8 @@
 
 
 <?php
+    include 'config/db-setup.php';
 
-    include 'config.php';
-
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     
     // select all the topics from the Topics table
     $sql = "SELECT Topic_Name, Topic_ID
