@@ -1,65 +1,47 @@
-// fetch method for getting ALL posts with no constraints 
-const fetchAllPosts = async () => {
-    try{
-        const response = await fetch('kbGetAllPostsQry.php');
-        if(!response.ok){
+const BASE_QUERY_PATH = 'knowledgeBase/query/';
+
+// Query is a object mapping query names to value
+const doRequest = async (method, endpoint, query, body) => {
+    const url = new URL(`${BASE_QUERY_PATH}${endpoint}.php`, window.location);
+    url.search = new URLSearchParams(query).toString();
+    try {
+        const response = await fetch(url,
+            {
+                method: method,
+                body: body,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
         const data = await response.json();
         return data;
+    } catch (error) {
+        console.error("Error processing request ", error);
     }
-    catch(error){
-        console.error("error fetching posts ", error);
-        return [];
-    }
+}
+
+// fetch method for getting ALL posts with no constraints 
+const fetchAllPosts = async () => {
+    return await doRequest("GET", 'getAllPosts');
 };
 
 // fetch method to get post of specific Type Technical or Non-Technical
 const fetchTypePosts = async (type) => {
-    try{
-        const response = await fetch(`kbGetTypePostsQry.php?type=${encodeURIComponent(type)}`);
-        if(!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-    }
-    catch(error){
-        console.error("error fetching posts ", error);
-        return [];
-    }
+    return await doRequest("GET", 'getTypePosts', { type: type });
 };
 
 // method to get all Posts from a specific topic that has been chosen
 const fetchAllTopicsPosts = async (clicked_topic) => {
-    try{
-        const response = await fetch(`kbGetTopicPostsQry.php?clicked_topic=${encodeURIComponent(clicked_topic)}`);
-        if(!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-    }
-    catch(error){
-        console.error("error fetching posts ", error);
-        return [];
-    }
+    return await doRequest("GET", 'getTopicPosts', { clicked_topic: clicked_topic });
 };
 
 //method to get all the topics within the DB
 const fetchAllTopics = async () => {
-    try{
-        const response = await fetch('kbGetAllTopicsQry.php');
-        if(!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-    }
-    catch(error){
-        console.error("error fetching posts ", error);
-        return [];
-    }
+    return await doRequest("GET", 'getAllTopics');
 };
 
 //method to render the Topic items and load them onto the right side of the page in the topic list
@@ -223,25 +205,13 @@ document.getElementById('add-post-btn').addEventListener('click', (event) => {
     formData.append('visibility', visibility);
 
     //pass form data into addpost sql query
-    fetch('kbAddPostQry.php', {
-        method : 'POST',
-        body : formData 
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.text();
-    })
-    .then((data) => {
-        //once form successfully submitted alert the user and reset the form
-        console.log('Post submitted:', data);
-        alert('Post added successfully!');
-        document.getElementById('post-modal-form').reset(); 
-    })
-    .catch((error) =>{
-        console.error(error);
-    })
+    doRequest("POST", "addPost", {}, formData)
+        .then((data) => {
+            //once form successfully submitted alert the user and reset the form
+            console.log('Post submitted:', data);
+            alert('Post added successfully!');
+            document.getElementById('post-modal-form').reset(); 
+        })
 // need to add validation to the form ...
 });
 
@@ -255,14 +225,8 @@ document.getElementById('add-topic-btn').addEventListener('click', (event) => {
     formData.append('topic-name', newTopic);
 
     //pass data from form to addtopic sql query
-    fetch ('kbAddTopicQry.php', {
-        method: 'POST',
-        body: formData
-    }).then((response) => {
-        if(!response.ok){
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-    }).then((data) => {
+    doRequest("POST", "addTopic", {}, formData)
+        .then((data) => {
         //once form successfully submitted alert user and reset form
         console.log('Topic added:', data);
         alert('Topic added successfully! ');
