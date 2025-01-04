@@ -11,7 +11,7 @@ session_start()
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="navbar.css">
     </link>
-    <link rel="stylesheet" href="knowledgeBase.css">
+    <link rel="stylesheet" href="knowledgeBase/knowledgeBase.css">
     </link>
     <link rel="stylesheet" href="Projects/projects.css">
     </link>
@@ -162,7 +162,7 @@ session_start()
         </div>
 
         <div class="nav-item-content" id="forums-content">
-            <?php include 'knowledgeBase.php'; ?>
+            <?php include 'knowledgeBase/knowledgeBase.php'; ?>
         </div>
 
         <div class="nav-item-content" id="stats-content">
@@ -173,7 +173,7 @@ session_start()
 
     </section>
 
-    <script src="knowledgeBase.js"></script>
+    <script src="knowledgeBase/knowledgeBase.js"></script>
     <script src="navbar.js"></script>
     <script src="Projects/projects.js"></script>
     <script src="Project-Kanban/kanban.js"></script>

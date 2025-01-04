@@ -1,5 +1,5 @@
 <?php
-    include 'config/db-setup.php';
+    include '../../config/db-setup.php';
 
     //POST method to gather all data from Form of topic name well as User data
     $newTopic = $_POST['topic-name'];

@@ -9,7 +9,7 @@ session_start()
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="navbar.css"></link>
-        <link rel="stylesheet" href="knowledgeBase.css"></link>
+        <link rel="stylesheet" href="knowledgeBase/knowledgeBase.css"></link>
         <link rel="stylesheet" href="projects.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
         <link rel="stylesheet" href="Project-Kanban/kanban.css" />
@@ -145,7 +145,7 @@ session_start()
             </div>
 
             <div class="nav-item-content" id="forums-content">
-                <?php include 'knowledgeBase.php'; ?>
+                <?php include 'knowledgeBase/knowledgeBase.php'; ?>
             </div>
 
            
@@ -153,7 +153,7 @@ session_start()
 
         </section>
 
-        <script src="knowledgeBase.js"></script>
+        <script src="knowledgeBase/knowledgeBase.js"></script>
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
         <script src="Project-Kanban/kanban.js"></script>

@@ -178,4 +178,4 @@
     </div>
 </div>
 
-<script src="kbTest.js"></script>
+<script src="knowledgeBase/queries.js"></script>

@@ -1,5 +1,5 @@
 <?php
-    include 'config/db-setup.php';
+    include '../../config/db-setup.php';
 
     //POST method to gather all data from Form as well as User data
     $title = $_POST['title'];

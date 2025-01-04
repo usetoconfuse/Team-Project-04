@@ -1,6 +1,6 @@
 
 <?php
-    include 'config/db-setup.php';
+    include '../../config/db-setup.php';
 
     $type = isset($_GET['type']) ? $_GET['type'] : null; // placeholder , will be fetched from button clicked
 

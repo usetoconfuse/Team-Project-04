@@ -1,6 +1,6 @@
 
 <?php
-    include 'config/db-setup.php';
+    include '../../config/db-setup.php';
 
     //the topic name provided when clicking on a topic item within the topic list
     $clicked_topic = isset($_GET['clicked_topic']) ?  $_GET['clicked_topic'] : null; 

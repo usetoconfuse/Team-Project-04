@@ -1,7 +1,7 @@
 
 
 <?php
-    include 'config/db-setup.php';
+    include '../../config/db-setup.php';
 
     
     // select all the topics from the Topics table

@@ -1,6 +1,6 @@
 
 <?php
-    include 'config/db-setup.php';
+    include '../../config/db-setup.php';
 
     // select all relevant field from KnowledgeBase table and that create array of json data
     $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
