@@ -77,13 +77,14 @@ session_start()
                 </div>
 
                 <ul>
-                    <li class="nav-item active" id="overview">
+                    <li class="nav-item active" id="personal">
                         <a href="#">
                             <i class="fa fa-solid fa-table-columns fa-lg"></i>
                             <div class="btn-animate"></div>
-                            <span>Dashboard</span>
+                            <span>Personal Board</span>
                         </a>
                     </li>
+
 
                     <li class="nav-item" id="projects">
                         <a href="#">
@@ -109,21 +110,19 @@ session_start()
                         </a>
                     </li>
 
-
-
-                    <li class="nav-item" id="personal">
-                        <a href="#">
-                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
-                            <div class="btn-animate"></div>
-                            <span>Personal Board</span>
-                        </a>
-                    </li>
-
                     <li class="nav-item" id="stats">
                         <a href="#">
                             <i class="fa fa-solid fa-chart-simple"></i>
                             <div class="btn-animate"></div>
                             <span>Statistics</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="overview">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Not Using</span>
                         </a>
                     </li>
                 </ul>
@@ -167,8 +166,8 @@ session_start()
 
         <section id="content">
 
-            <div class="nav-item-content open" id="overview-content">
-                <?php include 'managerDashContent.php' ?>
+            <div class="nav-item-content open" id="personal-content">
+                <?php include 'personalKanban.php'; ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">
@@ -179,16 +178,16 @@ session_start()
                 <?php include 'Project-Kanban/projectsKanban.php'; ?>
             </div>
 
-            <div class="nav-item-content" id="personal-content">
-                <?php include 'personalKanban.php'; ?>
-            </div>
-
             <div class="nav-item-content" id="forums-content">
                 <?php include 'knowledgeBase/knowledgeBase.php'; ?>
             </div>
 
             <div class="nav-item-content" id="stats-content">
                 <?php include 'ManagerDash-Stats/statisticsPage.php'; ?>
+            </div>
+
+            <div class="nav-item-content" id="overview-content">
+                <?php include 'managerDashContent.php' ?>
             </div>
 
 
