@@ -33,144 +33,144 @@ session_start()
             </div>
         </div>    -->
 
-
-
-    <nav id="navbar">
-
-
-        <button type="button" class="hamburger black-btn" id="menu-btn">
-            <span class="hamburger-top"></span>
-            <span class="hamburger-middle"></span>
-            <span class="hamburger-bottom"></span>
-        </button>
-
-        <div class="menu">
+    
+    <section class="top-navbar">
+        <div class="top-navbar-left">
             <div id="logo-container">
-                <img src="logo.jpeg" alt="logo">
+                    <img src="logo.jpeg" alt="logo">
             </div>
-            <div class="intro-txt">
-                <h1>Welcome back, John.</h1>
-                <p>View your daily overview here.</p>
-            </div>
+        </div>
 
-            <ul>
-                <li class="nav-item active" id="overview">
-                    <a href="#">
-                        <i class="fa fa-solid fa-table-columns fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="nav-item" id="projects">
-                    <a href="#">
-                        <i class="fa fa-solid fa-folder fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Projects</span>
-                    </a>
-                </li>
-
-                <li class="nav-item " id="current-project">
-                    <a href="#">
-                        <i class="fa fa-solid fa-table-columns fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Current Project</span>
-                    </a>
-                </li>
-
-                <li class="nav-item" id="forums">
-                    <a href="#">
-                        <i class="fa fa-solid fa-file fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Knowledge Base</span>
-                    </a>
-                </li>
-
-
-
-                <li class="nav-item" id="personal">
-                    <a href="#">
-                        <i class="fa fa-solid fa-table-columns fa-lg"></i>
-                        <div class="btn-animate"></div>
-                        <span>Personal Board</span>
-                    </a>
-                </li>
-
-
-                <li class="nav-item" id="stats">
-                    <a href="#">
-                        <i class="fa fa-solid fa-chart-simple"></i>
-                        <div class="btn-animate"></div>
-                        <span>Statistics</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="bar"></div>
-
-
-            <div class="date-item">
-                <div class="date-item-top">
-                    <div class="date-txt">
-                        <i class="fa fa-regular fa-calendar fa-lg"></i>
-                        <p>Today</p>
+        <div class="top-navbar-right">
+            <div class="user-profile">
+                <div class="user-profile-left">
+                    <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
+                    <div class="user-info">
+                        <p><span>John Little</span> | Employee</p>
                     </div>
                 </div>
 
-                <div class="date-item-bottom">
-                    <div class="date-time">
-                        <div class="time"></div>
-                        <div class="date"></div>
+                <div class="user-profile-right">
+                    <div class="user-profile-logout black-btn">Sign Out</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nav-content">
+        <nav id="navbar">
+
+
+            <button type="button" class="hamburger black-btn" id="menu-btn">
+                <span class="hamburger-top"></span>
+                <span class="hamburger-middle"></span>
+                <span class="hamburger-bottom"></span>
+            </button>
+
+            <div class="menu">
+            
+                <div class="intro-txt">
+                    <h1>Welcome back, John.</h1>
+                    <p>View your daily overview here.</p>
+                </div>
+
+                <ul>
+                    <li class="nav-item active" id="overview">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="projects">
+                        <a href="#">
+                            <i class="fa fa-solid fa-folder fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item " id="current-project">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Current Project</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="forums">
+                        <a href="#">
+                            <i class="fa fa-solid fa-file fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Knowledge Base</span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item" id="personal">
+                        <a href="#">
+                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
+                            <div class="btn-animate"></div>
+                            <span>Personal Board</span>
+                        </a>
+                    </li>
+
+
+                
+                </ul>
+
+                <div class="bar"></div>
+
+
+                <div class="date-item">
+                    <div class="date-item-top">
+                        <div class="date-txt">
+                            <i class="fa fa-regular fa-calendar fa-lg"></i>
+                            <p>Today</p>
+                        </div>
+                    </div>
+
+                    <div class="date-item-bottom">
+                        <div class="date-time">
+                            <div class="time"></div>
+                            <div class="date"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="user-profile">
-            <div class="user-profile-left">
-                <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
-                <div class="user-info">
-                    <p><span>John Little</span> | Employee</p>
-                </div>
+        
+
+
+        </nav>
+
+
+        <section id="content">
+
+            <div class="nav-item-content open" id="overview-content">
+                <?php include 'employeeDashContent.php' ?>
             </div>
-            <div class="user-profile-right">
-                <div class="user-profile-logout black-btn">Sign Out</div>
+
+            <div class="nav-item-content" id="projects-content">
+                <?php include 'Projects/projects.php' ?>
             </div>
 
-        </div>
+            <div class="nav-item-content" id="current-project-content">
+                <?php include 'Project-Kanban/projectsKanban.php'; ?>
+            </div>
+
+            <div class="nav-item-content" id="personal-content">
+                <?php include 'personalKanban.php'; ?>
+            </div>
+
+            <div class="nav-item-content" id="forums-content">
+                <?php include 'knowledgeBase/knowledgeBase.php'; ?>
+            </div>
 
 
-    </nav>
-
-
-    <section id="content">
-
-        <div class="nav-item-content open" id="overview-content">
-            <?php include 'employeeDashContent.php' ?>
-        </div>
-
-        <div class="nav-item-content" id="projects-content">
-            <?php include 'Projects/projects.php' ?>
-        </div>
-
-        <div class="nav-item-content" id="current-project-content">
-            <?php include 'Project-Kanban/projectsKanban.php'; ?>
-        </div>
-
-        <div class="nav-item-content" id="personal-content">
-            <?php include 'personalKanban.php'; ?>
-        </div>
-
-        <div class="nav-item-content" id="forums-content">
-            <?php include 'knowledgeBase/knowledgeBase.php'; ?>
-        </div>
-
-        <div class="nav-item-content" id="stats-content">
-            <?php include 'statisticsPage.php'; ?>
-        </div>
-
-
-
+        </section>
     </section>
 
     <script src="knowledgeBase/knowledgeBase.js"></script>
