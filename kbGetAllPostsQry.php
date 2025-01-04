@@ -1,5 +1,7 @@
 <?php
+    include 'config/db-setup.php';
 
+<<<<<<< HEAD
 include 'config/db-setup.php';
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -9,6 +11,10 @@ if (!$conn) {
 }
 // select all relevant field from KnowledgeBase table and that create array of json data
 $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
+=======
+    // select all relevant field from KnowledgeBase table and that create array of json data
+    $sql = "SELECT kb.Post_ID, kb.Title, kb.Description, kb.Type, t.Topic_Name, usr.Forename, usr.Surname, kb.Date_Created, kb.Is_Protected 
+>>>>>>> 9821264a5895177a8d926ad77e6c14e481c32c8f
             FROM Knowledgebase_Posts kb  
             INNER JOIN Post_Topic pt ON kb.Post_ID = pt.Post_ID  
             INNER JOIN Topics t ON pt.Topic_ID = t.Topic_ID  
