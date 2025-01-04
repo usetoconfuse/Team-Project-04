@@ -175,9 +175,9 @@ session_start()
 
     <script src="knowledgeBase.js"></script>
     <script src="navbar.js"></script>
-    <script src="Projects/projects.js"></script>
-    <script src="Project-Kanban/kanban.js"></script>
+    <script type="module" src="Project-Kanban/kanban.js"></script>
     <script src="ManagerDash-Stats/Manager-Statistics.js"></script>
+    <script src="Projects/projects.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
 </body>

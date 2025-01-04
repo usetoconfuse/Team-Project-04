@@ -1,14 +1,5 @@
 <?php
-include '../config.php';
-
-header('Content-Type: application/json');
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
+include '../config/db-setup.php';
 
 $userID = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 $sql = "SELECT Projects.* FROM `User_Teams`

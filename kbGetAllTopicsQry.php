@@ -1,24 +1,22 @@
-
-
 <?php
 
-    include 'config.php';
+include '/config/db-setup.php';
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    
-    // select all the topics from the Topics table
-    $sql = "SELECT Topic_Name, Topic_ID
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// select all the topics from the Topics table
+$sql = "SELECT Topic_Name, Topic_ID
             FROM Topics ";
 
-    $result = mysqli_query($conn,$sql);
-    $allDataArray = array();
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        $allDataArray[] = $row;
-    }
-    
-    echo json_encode($allDataArray);
+$result = mysqli_query($conn, $sql);
+$allDataArray = array();
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    $allDataArray[] = $row;
+}
+
+echo json_encode($allDataArray);
 ?>
