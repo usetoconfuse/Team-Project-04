@@ -37,7 +37,7 @@
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
 
-            <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
+            <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Team Leader')): ?>
                 <div class="add-task-btn black-btn">
                     <i class="fa fa-solid fa-plus"></i>
                     Add Task
@@ -261,7 +261,7 @@
             <form id="filter-modal-form" class="modal-body">
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
                     <!--DropDown 1 - Mgr View-->
-                    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'manager' || $_SESSION['role'] === 'leader')): ?>
+                    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Team Leader')): ?>
                         <div class="task-dropdown task-dropdown-technical">
                             <label for="user-filter">User</label>
                             <div class="task-dropdown-select-options">
@@ -280,7 +280,7 @@
                         </div>
 
                         <!--DropDown 1 - Emp View-->
-                    <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'employee'): ?>
+                    <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Employee'): ?>
                         <div class="task-dropdown task-dropdown-technical">
                             <label for="user-filter">User</label>
                             <div class="task-dropdown-select-options">

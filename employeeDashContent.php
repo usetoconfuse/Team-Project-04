@@ -235,7 +235,7 @@
                 <p>Python Project</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                 <!--Progress Bar-->
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Team Leader'): ?>
                     <!-- Only show crowns for Team Leaders-->
                     <i class="fa-solid fa-crown"></i>
                 <?php endif; ?>
@@ -258,7 +258,7 @@
                 <p>Javascript ABc</p>
                 <!-- <canvas id="myProgressBarA" width="400" height="100"></canvas> -->
                 <!--Progress Bar-->
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Team Leader'): ?>
                     <!-- Only show crowns for Team Leaders-->
                     <i class="fa-solid fa-crown" style="color: transparent;"></i>
                 <?php endif; ?>
@@ -280,7 +280,7 @@
                 <p>Smart Fridge1</p>
                 <!-- <canvas id="myProgressBarB" width="400" height="100"></canvas> -->
                 <!--Progress Bar-->
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'leader'): ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Team Leader'): ?>
                     <!-- Only show crowns for Team Leaders-->
                     <i class="fa-solid fa-crown" style="color: transparent;"></i>
                 <?php endif; ?>

@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Role based content for buttons in modal 
     let roleBasedBtns = '';
     let roleBasedReassign =''
-    if (userRole === 'manager') {
+    if (userRole === 'Admin') {
       roleBasedBtns = `<div class="delete-task">
                             <p>Delete</p>
                           </div>
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                   <p>Choose</p>
                               </div>
                           </div>`
-    } else if (userRole === 'employee' || userRole === 'leader') {
+    } else if (userRole === 'Employee' || userRole === 'Team Leader') {
       roleBasedBtns = ` <div class="report-task">
                               <p>Report as stuck</p>
                             </div>
@@ -391,15 +391,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Move Task Click
     const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown');
-
-      
-
-    
-    
-    
-    
-    
-    
     
     
     
