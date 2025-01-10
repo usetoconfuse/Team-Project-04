@@ -110,7 +110,8 @@ h1,h2,h3,h4{
     margin-top: 5px;
     border: 1px solid black;
     appearance: none;
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 0.6rem;
+
 }
 
 .error-message{
@@ -126,7 +127,6 @@ h1,h2,h3,h4{
 }
 
 .login-btn {
-    width: 100%;
     padding: 0.6rem 0.8rem;
     border: none;
     background-color: #000000;
@@ -137,6 +137,7 @@ h1,h2,h3,h4{
     transition: background-color 0.5s ease;
     cursor: pointer;
     width: 100%;
+    margin-left: 1.4rem;
 }
 .login-btn:hover{
     background-color: #2a2929;
@@ -163,6 +164,71 @@ h1,h2,h3,h4{
     white-space: nowrap;
 }
 
+.name-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+}
+
+.name-input-container .input-container {
+    flex: 1;
+}
+
+.password-criteria-container {
+    background-color: white;
+    padding: 0.6rem 0.6rem;
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 0.6rem;
+    white-space: nowrap;
+    margin-bottom: 0.8rem;
+    display: none;
+}
+
+.password-criteria-container.active {
+    display: block;
+}
+
+.password-criteria-container .password-criteria-label {
+    text-align: left;
+    font-weight: 550;
+    font-size: 12.6px !important;
+
+}
+
+.password-criteria-container .password-criteria {
+    list-style: none;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.password-criteria-container .password-criteria .criteria-item {
+    padding-left: 1rem;
+    color: rgb(201, 87, 87);
+}
+
+.password-criteria-container .password-criteria .criteria-item::before {
+    content: '\f00d';
+    font-family: FontAwesome;
+    display: inline-block;
+    margin: 8px 0;
+    margin-left: -30px;
+    width: 20px;
+    font-size: 12px;
+}
+
+.password-criteria-container .password-criteria .criteria-item.valid::before {
+    content: '\f00c';
+    color: green;
+}
+
+.password-criteria-container .password-criteria .criteria-item.valid {
+    color: rgb(70, 150, 70);
+}
+
+
 
 /* Right side */
 
@@ -174,7 +240,7 @@ h1,h2,h3,h4{
     margin-right: 0;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     #sign-in-bg{
         flex-direction: column;
         background-color: black;
