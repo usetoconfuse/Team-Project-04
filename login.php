@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
               
                 <!--Register was successful-->
                 <?php if (isset($_SESSION['success_register'])): ?>
-                    <p><?=htmlspecialchars($_SESSION['success_register'])?></p>
+                    <p class="register-success-msg"><?=htmlspecialchars($_SESSION['success_register'])?></p>
                     <?php 
                     unset($_SESSION['success_register']);
                 endif; ?>
@@ -186,19 +186,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                         <input type="password" name="login_password" class="text-input" id="passwordInput" placeholder=" Enter your password">
                         <p class="error-message" id="password-error"></p>
                     </div>
+
+                     <!--Login Error-->
+                    <?php if (isset($_SESSION['login_err'])): ?>
+                        <p  class="register-error-msg"><?=htmlspecialchars($_SESSION['login_err'])?></p>
+                        <?php 
+                        unset($_SESSION['login_err']);
+                    endif; ?>
+                    
+
                     <div class="signin-btn-container">
                         <button type="submit" class="login-btn" name="login">Continue</button>
                     </div>
                     
                 </form>
 
-                <!--Login Error-->
-                <?php if (isset($_SESSION['login_err'])): ?>
-                    <p><?=htmlspecialchars($_SESSION['login_err'])?></p>
-                    <?php 
-                    unset($_SESSION['login_err']);
-                endif; ?>
-                
+               
                 <div class="register-container">
       
                     <p>Don't have an account. <a href="#" class="signup-btn">Register here</a></p>
@@ -221,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
                 <!--Register was unsuccessful-->
                 <?php if (isset($_SESSION['reject'])): ?>
-                    <p><?=htmlspecialchars($_SESSION['reject'])?></p>
+                    <p class="register-error-msg"><?=htmlspecialchars($_SESSION['reject'])?></p>
                     <?php 
                     unset($_SESSION['reject']);
                 endif; ?>
@@ -274,17 +277,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                         <input type="password" name="register_password_confirm" class="text-input" id="passwordInputConfirm" placeholder=" Enter your password">
                         <p class="error-message" id="password-error"></p>
                     </div>
+
+                     <!--Register Error-->
+                    <?php if (isset($_SESSION['register_err'])): ?>
+                        <p class="register-error-msg"><?=htmlspecialchars($_SESSION['register_err'])?></p>
+                        <?php 
+                        unset($_SESSION['register_err']);
+                    endif; ?>
+
                     <div class="signin-btn-container">
                         <button type="submit" class="login-btn" name="register">Continue</button>
                     </div>
                     
                 </form>
-                <!--Register Error-->
-                <?php if (isset($_SESSION['register_err'])): ?>
-                    <p><?=htmlspecialchars($_SESSION['register_err'])?></p>
-                    <?php 
-                    unset($_SESSION['register_err']);
-                endif; ?>
+               
            
                 
                 <div class="register-container">

@@ -228,6 +228,18 @@ h1,h2,h3,h4{
     color: rgb(70, 150, 70);
 }
 
+.register-error-msg {
+    color: rgb(201, 87, 87);
+    font-weight: 550;
+    text-align: center;
+}
+
+.register-success-msg {
+    color: rgb(70, 150, 70);
+    font-weight: 550;
+    text-align: center;
+}
+
 
 
 /* Right side */
@@ -250,5 +262,12 @@ h1,h2,h3,h4{
     
     #right {
         display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .name-input-container {
+        flex-direction: column;
+        gap: 0;
     }
 }
