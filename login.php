@@ -92,6 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
             }
         }
     }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
