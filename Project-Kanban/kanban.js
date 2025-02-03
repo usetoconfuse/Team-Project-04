@@ -2,38 +2,17 @@ const kanbanContainers = document.querySelectorAll('.kanban-board');
 
 //Wait for View button to be clicked and when it is, Project.js deals with opening the 
 //new kanban tab on the site, but the projectID is got here for use in the Fetch request
-const projectId = new URLSearchParams(window.location.search).get('projectID');
-console.log(projectId);
-
-if (projectId) {
-    console.log(projectId);
-    let userID = 4; //for this eg, we use userID 4 this belongs to 3 teams
-    fetchKanbanData(userID, projectId);
-}
 
 
-export async function fetchKanbanData(userID, projectID) {
-  try {
 
-    let url = `Project-Kanban/kanban-db.php?userID=${encodeURIComponent(userID)}&projectID=${encodeURIComponent(projectID)}`; 
-    const params = { 
-      method: "GET" 
-    }
+// Listen for sessionStorage updates
+window.addEventListener("storage", function () {
+  const selectedProjectID = sessionStorage.getItem('clicked-project-id');
 
-    const response = await fetch(url, params);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch projects data');
-    }
-
-    const kanbanData = await response.json();
-
-    console.log(kanbanData);
-  } catch(e) {
-    console.log(e);
+  if (selectedProjectID) {
+    console.log("Selected Project:", selectedProjectID);
   }
-}
-
+});
 
 kanbanContainers.forEach(kanbanContainer => {
   //====Open and Close Task cards

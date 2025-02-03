@@ -86,12 +86,17 @@ async function fetchProjectsData(userID) {
         e.preventDefault();
 
         //Add to URL the project ID so it can be used in Kanban.js
-        const currentURL = new URL(window.location.href);
+        /*const currentURL = new URL(window.location.href);
         currentURL.searchParams.set('projectID', project.Project_ID);
         history.pushState({projectID: project.Project_ID}, '', currentURL);
+        */
+       
 
+        sessionStorage.setItem('clicked-project-id', project.Project_ID)
+        window.dispatchEvent(new Event("storage"))
+        
 
-
+        //console.log(sessionStorage.getItem('clicked-project-id'))
 
 
         const navItems = document.querySelectorAll('.nav-item');
@@ -115,6 +120,7 @@ async function fetchProjectsData(userID) {
     //Show Error Card
   }
 }
+
 
 
 
