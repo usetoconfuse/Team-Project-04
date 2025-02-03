@@ -63,12 +63,8 @@
                         <i class="fa fa-arrow-right"></i>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
 
         <!--Add Post Modal-->
         <div id="post-modal" class="modal">
