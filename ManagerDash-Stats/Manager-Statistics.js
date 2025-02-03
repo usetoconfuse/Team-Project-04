@@ -1,4 +1,52 @@
-// Made by Quinn Little 23/12/24
+// Made by F328049 23/12/24
+// Updated by F328049 03/02/24
+
+
+
+const mgrStatsProj = document.getElementById('mgrProjStats');
+const userStatsProj = document.getElementById('mgrUserStats');
+mgrStatsProj.addEventListener("click", () => {
+    if(mgrStatsProj.style.display == "block") {
+        mgrStatsProj.classList.add('mgrStats-active')
+        userStatsProj.classList.remove('mgrStats-active')
+        document.getElementById("tabGroupProjectStats").style.display = "none";
+        document.getElementById("tabGroupUserStats").style.display = "block";
+
+    } else {
+        mgrStatsProj.classList.remove('mgrStats-active')
+        userStatsProj.classList.add('mgrStats-active')
+        document.getElementById("tabGroupUserStats").style.display = "none";
+        document.getElementById("tabGroupProjectStats").style.display = "block";
+
+    }
+})
+
+userStatsProj.addEventListener("click", () => {
+    if(userStatsProj.style.display == "block") {
+        mgrStatsProj.classList.remove('mgrStats-active')
+        userStatsProj.classList.add('mgrStats-active')
+        document.getElementById("tabGroupProjectStats").style.display = "block";
+        document.getElementById("tabGroupUserStats").style.display = "none";
+
+    } else {
+        mgrStatsProj.classList.add('mgrStats-active')
+        userStatsProj.classList.remove('mgrStats-active')
+        document.getElementById("tabGroupUserStats").style.display = "block";
+        document.getElementById("tabGroupProjectStats").style.display = "none";
+
+    }
+})
+
+//
+const mgrStatsPostTypeButtons = document.querySelectorAll('.mgrStats-post-type-btns button');
+mgrStatsPostTypeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        mgrStatsPostTypeButtons.forEach(btn => btn.classList.remove('mgrStats-active'))
+        button.classList.add('mgrStats-active')
+        filterPosts();
+    })
+})
+   
 
 
 document.getElementById('fetchDataTest').addEventListener('click', async function() {
