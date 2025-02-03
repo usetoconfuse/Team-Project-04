@@ -1,4 +1,4 @@
-<div id="kanban-content" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="kanban-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro">
         <div class="project-txt">

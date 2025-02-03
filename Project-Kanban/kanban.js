@@ -11,8 +11,47 @@ window.addEventListener("storage", function () {
 
   if (selectedProjectID) {
     console.log("Selected Project:", selectedProjectID);
+    //document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = selectedProjectID;
+    const kanbanContainer = document.querySelector('#kanban-content')
+    const userID = kanbanContainer.getAttribute('data-user-id');
+    console.log(userID);
+    getKanbanData(userID, selectedProjectID);
+    
+
+    
+  
   }
+
 });
+
+
+async function getKanbanData(userID, projectID) {
+  try {
+
+    let url = `Project-Kanban/kanban-db.php?userID=${encodeURIComponent(userID)}&projectID=${encodeURIComponent(projectID)}`; 
+    const params = { 
+      method: "GET" 
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch projects data');
+    }
+
+    const kanbanData = await response.json();
+
+    console.log(kanbanData);
+
+    kanbanData.forEach((task) => {
+      console.log("do something")
+    })
+  } catch (error) {
+    console.log("Fetch Issue",error);
+  }
+}
+      
+      
 
 kanbanContainers.forEach(kanbanContainer => {
   //====Open and Close Task cards

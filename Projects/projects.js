@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-//Hardcoded user ID but will change later when Login is made
-let userID = 4; //for this eg, we use userID 4 this belongs to 3 teams
+const projectContainer = document.querySelector('#project-content')
+const userID = projectContainer.getAttribute('data-user-id');
 fetchProjectsData(userID);
 
 async function fetchProjectsData(userID) {
