@@ -17,8 +17,7 @@ window.addEventListener("storage", function () {
     console.log(userID);
     getKanbanData(userID, selectedProjectID);
     
-
-    
+  
   
   }
 
@@ -45,12 +44,12 @@ async function getKanbanData(userID, projectID) {
 
     kanbanData.forEach((task) => {
       console.log("do something")
+      
     })
   } catch (error) {
     console.log("Fetch Issue",error);
   }
 }
-      
       
 
 kanbanContainers.forEach(kanbanContainer => {
