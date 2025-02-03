@@ -189,6 +189,7 @@ document.querySelector('#topicsList').addEventListener('click', (event) => {
         clickedTopic.classList.remove('kb-active');
         selectedTopic = null;
     } else {
+        document.querySelectorAll('.kb-topic').forEach(topic => topic.classList.remove('kb-active'));
         clickedTopic.classList.add('kb-active');
         selectedTopic = clickedTopic.getAttribute('value');
     }
