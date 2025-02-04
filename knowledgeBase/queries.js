@@ -260,7 +260,7 @@ document.getElementById('add-topic-btn').addEventListener('click', (event) => {
 
     //ensure that the new topic is in the right html form
     fetchAllTopics().then(renderAllTopicsModal);
-    //location.reload();
+    location.reload();
 });
 
 //Add Post Modal Functionality
@@ -286,6 +286,54 @@ submitPostBtn.addEventListener('click', () => {
     addPostModal.style.display = 'none';
 })
 
+//Add topic Modal functionality
+const addTopicModal = document.querySelector('#topic-modal');
+const closeAddTopicModal = addTopicModal.querySelector('#topic-modal .close-modal-btn');
+const addTopicBtn = document.querySelector('#new-topic-btn');
+const submitTopicBtn = document.querySelector('#add-topic-btn');
+
+addTopicBtn.addEventListener('click', () => {
+    addTopicModal.style.display = 'flex';
+});
+closeAddTopicModal.addEventListener('click', () => {
+    addTopicModal.style.display = 'none';
+})
+window.addEventListener('click', (e) => {
+    if (e.target == addPostModal) {
+        addTopicModal.style.display = 'none';
+    }
+})
+submitTopicBtn.addEventListener('click', () => {
+    addTopicModal.style.display = 'none';
+})
+
+document.getElementById('searched-topic').addEventListener("input", async (e) =>{
+    const searchedTopic = e.target.value.trim();
+    console.log(searchedTopic);
+
+    if (searchedTopic.length === 0 ) {
+        //if the searchbar is empty load all topics
+        try {
+            const results = await doRequest("GET", "getSearchedTopic", {});
+            //testing in console
+            console.log("Search results:", results);
+            //load the relevant topics
+            renderAllTopics(results);
+        } catch (error) {
+            console.error("Error fetching searched topic:", error);
+        }
+    };
+
+    try {
+        const results = await doRequest("GET", "getSearchedTopic", {searchedTopic});
+        //testing in console
+        console.log("Search results:", results);
+        //load the relevant topics
+        renderAllTopics(results);
+    } catch (error) {
+        console.error("Error fetching searched topic:", error);
+    }
+});
 
 const allPostsView = document.getElementById("kb-all-view");
 const postView = document.getElementById("kb-post-view");

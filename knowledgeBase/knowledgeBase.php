@@ -26,6 +26,10 @@
         </div>
         <div class="kb-sidebar">
             <h2>Filter by Topic</h2>
+            <div class="kb-listing-search" id="topic-searchbar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search Topics" id="searched-topic">
+            </div>
             <ul id="topicsList">
                 <li class="kb-topic" data-topic="coding-standards"><span class="kb-topic-circle"></span>Coding Standards
                 </li>

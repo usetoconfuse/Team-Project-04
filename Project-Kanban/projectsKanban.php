@@ -75,7 +75,7 @@
         <div class="kanban-section">
             <!--Kanban Header-->
             <div class="kanban-header">
-                <div class="kanban-header-txt">Working On</div>
+                <div class="kanban-header-txt">In Progress</div>
                 <div class="kanban-header-no">3</div>
                 <i class="fa fa-solid fa-caret-down"></i>
             </div>

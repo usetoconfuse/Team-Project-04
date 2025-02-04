@@ -171,6 +171,11 @@
     width: 100%;
 }
 
+#topic-searchbar{
+    margin-top: 3%;
+    background-color: var(--bg-colour) ;
+}
+
 .kb-listing {
     display: flex;
     flex-direction: column;
