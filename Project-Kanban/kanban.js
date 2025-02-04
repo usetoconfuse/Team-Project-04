@@ -26,6 +26,9 @@ async function getKanbanData(userID, projectID) {
       throw new Error('Failed to fetch projects data');
     }
     const kanbanData = await response.json();
+
+    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = kanbanData.Name;
+
     generateCard(kanbanData);
 
   } catch (error) {
@@ -260,11 +263,7 @@ addTaskBtn.forEach(btn => {
   closeAddTaskModal.addEventListener('click', () => {
     addTaskModal.style.display = 'none';
   })
-  window.addEventListener('click', (e) => {
-    if (e.target == addTaskModal) {
-      addTaskModal.style.display = 'none';
-    }
-  })
+
 })
 
 
@@ -498,11 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
       viewTaskModal.style.display = 'none';
     });
 
-    window.addEventListener('click', (e) => {
-      if (e.target === viewTaskModal) {
-        viewTaskModal.style.display = 'none';
-      }
-    });
+
 
   });
 });
@@ -634,8 +629,4 @@ filterTaskBtn.addEventListener('click', () => {
   closeFilterTaskModal.addEventListener('click', () => {
     filterTaskModal.style.display = 'none';
   })
-  window.addEventListener('click', (e) => {
-    if (e.target == filterTaskModal) {
-      filterTaskModal.style.display = 'none';
-    }
-  })
+

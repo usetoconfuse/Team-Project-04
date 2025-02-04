@@ -178,11 +178,7 @@ addProjectBtn.addEventListener('click', () => {
 closeAddProjectModal.addEventListener('click', () => {
   addProjectModal.style.display = 'none';
 })
-window.addEventListener('click', (e) => {
-  if (e.target == addProjectModal) {
-    addProjectModal.style.display = 'none';
-  }
-})
+
 
 const submitAddProject = addProjectModal.querySelector('.task-submit-buttons #add-project-btn')
 submitAddProject.addEventListener('click', () => {
