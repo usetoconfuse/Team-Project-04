@@ -164,19 +164,25 @@ const updatePosts = async () => {
 }
 
 //on showall btn click will load all posts from db
-document.querySelector('#allBtn').addEventListener('click', () => {
+document.querySelector('#allBtn').addEventListener('click', (event) => {
+    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
     selectedType = null;
     updatePosts();
 });
 
 //on techincal button clicked show all post with type of techincal
-document.querySelector('#technicalBtn').addEventListener('click', () => {
+document.querySelector('#technicalBtn').addEventListener('click', (event) => {
+    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
     selectedType = 'Technical';
     updatePosts();
 });
 
 //on techincal button clicked show all post with type of non-techincal
-document.querySelector('#nonTechnicalBtn').addEventListener('click', () => {
+document.querySelector('#nonTechnicalBtn').addEventListener('click', (event) => {
+    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
     selectedType = 'Non-Technical';
     updatePosts();
 });
