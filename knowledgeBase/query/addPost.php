@@ -10,7 +10,7 @@ $visibility = $_POST['visibility'];
 $userId = 1;
 
 // using data from the Post modal form add a post to the knowledge base table
-$sql = "
+$sql1 = "
 INSERT INTO 
 Knowledgebase_Posts 
 (Title, Description, Type, User_ID, Visibility) 
@@ -21,15 +21,20 @@ VALUES (
      $userId,  
     '$visibility'
 );
+";
 
-INSERT INTO Post_Topic (Post_ID, Topic_ID) 
+$sql2 = "INSERT INTO Post_Topic (Post_ID, Topic_ID) 
 VALUES ( 
     (SELECT MAX(Post_ID) FROM Knowledgebase_Posts),  
     (SELECT Topic_ID FROM Topics WHERE Topic_Name = '$topic')
-)
-";
+)";
 
 if (!mysqli_query($conn, $sql1)) {
+    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
+    echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
+    exit();
+}
+if (!mysqli_query($conn, $sql2)) {
     //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
     echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
     exit();
