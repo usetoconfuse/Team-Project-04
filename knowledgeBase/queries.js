@@ -148,17 +148,20 @@ const formatDate = (dateString) => {
 var selectedTopic = null;
 var selectedType = null;
 
-const updatePosts = () => {
-    console.log('Updating posts', selectedTopic, selectedType);
-    fetchPosts(selectedTopic, selectedType).then(renderAllPosts);
+const updatePosts = async () => {
+    await fetchPosts(selectedTopic, selectedType).then(renderAllPosts);
+
+    for (post of document.querySelectorAll("#kb-posts-list .kb-post")) {
+        console.log("HELLO1");
+        post.querySelector(".read-post-btn").addEventListener("click", () => {
+            console.log("HELLO");
+            openPost(post.id);
+        });
+        post.querySelector(".kb-share-link").addEventListener("click", () => {
+            sharePost(post.id);
+        });
+    }
 }
-
-window.onload = () => {
-    updatePosts();
-    fetchAllTopics().then(renderAllTopics);
-};
-
-
 
 //on showall btn click will load all posts from db
 document.querySelector('#allBtn').addEventListener('click', () => {
@@ -253,3 +256,101 @@ document.getElementById('add-topic-btn').addEventListener('click', (event) => {
     fetchAllTopics().then(renderAllTopicsModal);
     //location.reload();
 });
+
+//Add Post Modal Functionality
+const addPostModal = document.querySelector("#post-modal");
+const closeAddPostModal = addPostModal.querySelector('#post-modal .close-modal-btn')
+const addPostBtn = document.querySelector('#new-post-btn');
+
+addPostBtn.addEventListener('click', () => {
+    addPostModal.style.display = 'flex';
+})
+closeAddPostModal.addEventListener('click', () => {
+    addPostModal.style.display = 'none';
+})
+window.addEventListener('click', (e) => {
+    if (e.target == addPostModal) {
+        addPostModal.style.display = 'none';
+    }
+})
+
+//For now, it just closes the modal on click of submit btn
+const submitPostBtn = document.querySelector('#add-post-btn');
+submitPostBtn.addEventListener('click', () => {
+    addPostModal.style.display = 'none';
+})
+
+
+const allPostsView = document.getElementById("kb-all-view");
+const postView = document.getElementById("kb-post-view");
+
+
+const backBtn = document.getElementById("kb-post-back");
+const posts = document.querySelectorAll(".kb-post");
+const readPostBtns = document.querySelectorAll(".read-post-btn");
+
+const setCurrentPost = (postId) => {
+    const params = new URLSearchParams(window.location.search);
+    if (postId === null) {
+        params.delete("post");
+    } else {
+        params.set("post", postId);
+    }
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+}
+
+const getCurrentPost = () => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("post");
+}
+
+const openPost = (postId) => {
+    setCurrentPost(postId);
+
+    allPostsView.style.display = "none";
+    postView.style.removeProperty("display");
+
+    const post = document.getElementById(postId);
+    const postDetail = document.getElementById("kb-post-view");
+
+    postDetail.querySelector(".kb-title-header").innerHTML = post.querySelector(".kb-title-header").innerHTML;
+    postDetail.querySelector(".kb-post-badges").innerHTML = post.querySelector(".kb-post-badges").innerHTML;
+    postDetail.querySelector(".kb-post-info").innerHTML = post.querySelector(".kb-post-info").innerHTML;
+    postDetail.querySelector(".kb-post-content").innerHTML = post.querySelector(".kb-post-content").innerHTML;
+}
+
+const closePost = () => {
+    setCurrentPost(null);
+
+    allPostsView.style.removeProperty("display");
+    postView.style.display = "none";
+}
+
+const currentPost = new URLSearchParams(window.location.search).get("post");
+if (currentPost) {
+    openPost(currentPost);
+}
+
+backBtn.addEventListener("click", () => {
+    closePost();
+});
+
+
+const sharePost = (postId) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("post", postId);
+    const shareData = {
+        title: document.getElementById(postId).querySelector(".kb-title-header").innerText,
+        url: `${window.location.origin}${window.location.pathname}?${params.toString()}`,
+    };
+    navigator.share(shareData);
+}
+
+document.querySelector("#kb-post-view .kb-share-link").addEventListener("click", () => {
+    sharePost(getCurrentPost())
+});
+
+window.onload = () => {
+    updatePosts();
+    fetchAllTopics().then(renderAllTopics);
+};
