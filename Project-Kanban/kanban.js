@@ -1,26 +1,14 @@
 const kanbanContainers = document.querySelectorAll('.kanban-board');
 
-//Wait for View button to be clicked and when it is, Project.js deals with opening the 
-//new kanban tab on the site, but the projectID is got here for use in the Fetch request
-
-
-
 // Listen for sessionStorage updates
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
 
   if (selectedProjectID) {
-    console.log("Selected Project:", selectedProjectID);
-    //document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = selectedProjectID;
     const kanbanContainer = document.querySelector('#kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
-    console.log(userID);
     getKanbanData(userID, selectedProjectID);
-    
-  
-  
   }
-
 });
 
 
@@ -37,20 +25,69 @@ async function getKanbanData(userID, projectID) {
     if (!response.ok) {
       throw new Error('Failed to fetch projects data');
     }
-
     const kanbanData = await response.json();
+    generateCard(kanbanData);
 
-    console.log(kanbanData);
-
-    kanbanData.forEach((task) => {
-      console.log("do something")
-      
-    })
   } catch (error) {
     console.log("Fetch Issue",error);
   }
 }
       
+
+function generateCard(kanbanData) {
+  const kanbanColumns = {
+    "To Do": document.querySelector("#kanban-to-do"),
+    "In Progress": document.querySelector("#kanban-in-progress"),
+    "Completed": document.querySelector("#kanban-completed")
+  };
+
+  Object.values(kanbanColumns).forEach(column => column.innerHTML = ""); //clear columns
+
+  kanbanData.forEach(task => {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("kanban-card");
+    taskCard.setAttribute("draggable", true);
+
+    if (taskIsOverdue(task.Due_Date)) {
+      taskCard.id = "kanban-task-overdue";
+    }
+
+    taskCard.innerHTML = `
+                    <div class="kanban-card-top">
+                      <div class='kanban-card-top-left'>
+                          <div class="kanban-card-priority ${task.Priority.toLowerCase()}-priority"></div>
+                          <p>${task.Name} <span>#${task.Task_ID}</span></p>
+                      </div>
+                      <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i>
+                      </div>
+
+                    </div>
+                    <div class="kanban-card-body">
+                      <p class="kanban-card-description">${task.Description}</p>
+
+                      <div class="kanban-separator"></div>
+
+                      <div class="kanban-card-bottom">
+                          <a href="">View Task</a>
+                          <div class="due-date">
+                              <i class="fa fa-regular fa-calendar"></i>
+                              <p>Due: ${task.Due_Date}</p>
+                          </div>
+                      </div>
+                    </div>`;
+    
+    kanbanColumns[task.Status]?.appendChild(taskCard);
+  })
+
+}
+
+function taskIsOverdue(dueDate) {
+  return new Date(dueDate) < new Date();
+}
+
+
+
+
 
 kanbanContainers.forEach(kanbanContainer => {
   //====Open and Close Task cards
@@ -231,7 +268,7 @@ addTaskBtn.forEach(btn => {
 })
 
 
-//====Add Task Modal 
+//====View Task Modal 
 const taskCard = document.querySelectorAll('.kanban-card')
 
 document.addEventListener('DOMContentLoaded', () => {
