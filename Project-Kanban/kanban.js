@@ -32,12 +32,9 @@ async function getKanbanData(userID, projectID) {
     }
     const allKanbanData = await response.json();
 
-    const taskData = allKanbanData.tasks;
-    const projectData = allKanbanData.project;
+    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData.Project_Title;
 
-    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = projectData[0].Project_Title;
-
-    generateCard(taskData);
+    generateCard(allKanbanData);
 
   } catch (error) {
     console.log("Fetch Issue",error);
@@ -203,7 +200,7 @@ function generateCard(kanbanData) {
 
                                                   <div class="modal-task-info-section-top">
                                                       <p class="task-modal-title">Assigned to</p>
-                                                      <p>Quinn Little</p>
+                                                      <p>${task.User_Forename} ${task.User_Surname}</p>
                                                   </div>
                                               </div>
 
@@ -215,7 +212,7 @@ function generateCard(kanbanData) {
                                                           <p>Created by</p>
                                                       </div>
                                                       <div class="modal-task-info-section-body">
-                                                          <p>John Little</p>
+                                                          <p>${task.Author_Forename} ${task.Author_Surname}</p>
                                                       </div>
                                                   </div>
 
