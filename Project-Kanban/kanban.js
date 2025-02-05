@@ -30,15 +30,10 @@ async function getKanbanData(userID, projectID) {
     if (!response.ok) {
       throw new Error('Failed to fetch projects data');
     }
-<<<<<<< HEAD
     const allKanbanData = await response.json();
     document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
 
     generateCard(allKanbanData);
-=======
-    const kanbanData = await response.json();
-    generateCard(kanbanData);
->>>>>>> e26bde6 (Added topic search functionality and fixed new post button issue)
 
   } catch (error) {
     console.log("Fetch Issue",error);
@@ -92,33 +87,6 @@ function generateCard(kanbanData) {
     
     const userRole = document.getElementById('kanban-content').getAttribute('data-role');
 
-<<<<<<< HEAD
-=======
-  const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
-
-  btn.addEventListener('click', () => {
-    addTaskModal.style.display = 'flex';
-  })
-  closeAddTaskModal.addEventListener('click', () => {
-    addTaskModal.style.display = 'none';
-  })
-  window.addEventListener('click', (e) => {
-    if (e.target == addTaskModal) {
-      addTaskModal.style.display = 'none';
-    }
-  })
-})
-
-
-//====View Task Modal 
-const taskCard = document.querySelectorAll('.kanban-card')
-
-document.addEventListener('DOMContentLoaded', () => {
-  const taskCards = document.querySelectorAll('.kanban-card');
-  const userRole = document.getElementById('kanban-content').getAttribute('data-role');
-
-  taskCards.forEach((task) => {
->>>>>>> e26bde6 (Added topic search functionality and fixed new post button issue)
     const viewTaskModal = document.createElement('div');
     viewTaskModal.classList.add('modal', 'view-task-modal'); 
     const viewTaskBtn = taskCard.querySelector('.kanban-card-bottom a');
@@ -339,40 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
       viewTaskModal.style.display = 'none';
     });
 
-<<<<<<< HEAD
 
     
-=======
-    window.addEventListener('click', (e) => {
-      if (e.target === viewTaskModal) {
-        viewTaskModal.style.display = 'none';
-      }
-    });
-
-  });
-});
-
-function checkStatus(task, statusBox, statusCircle) {
-  let taskStatus;
-  if (task.parentElement.id === 'kanban-to-do') {
-    taskStatus = "To Do";
-    statusBox.style.backgroundColor = "#dd9592";
-    statusCircle.style.backgroundColor = "red";
-  } else if (task.parentElement.id === "kanban-in-progress") {
-    taskStatus = "In Progress";
-    statusBox.style.backgroundColor = "#EAB385";
-    statusCircle.style.backgroundColor = "orange";
-  } else if (task.parentElement.id === "kanban-completed") {
-    taskStatus = "Completed";
-    statusBox.style.backgroundColor = "#ADDA9D";
-    statusCircle.style.backgroundColor = "green";
-  }
-  
-  // Update the displayed task status text in the modal
-  statusBox.querySelector('p').textContent = taskStatus;
-}
-
->>>>>>> e26bde6 (Added topic search functionality and fixed new post button issue)
 //====Dragging Features
   const kanbanSection = document.querySelectorAll('.kanban-body')
   
