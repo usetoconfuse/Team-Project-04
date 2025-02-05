@@ -51,13 +51,11 @@ async function fetchProjectsData(userID) {
                                 </div>
   
                                 <div class="project-card-bottom">
-                                    <div class="project-card-team">
-                                        <div class="project-user"><i class="fa fa-solid fa-user"></i></div>
-                                        <div class="project-user"><i class="fa fa-solid fa-user"></i></div>
-                                        <div class="project-user"><i class="fa fa-solid fa-user"></i></div>
-                                        <div class="project-user"><i class="fa fa-solid fa-user"></i></div>
-                                        <div class="project-user">+3</div>
+                                    <div class="project-card-task-count">
+                                      <i class="fa fa-solid fa-list-check"></i>
+                                      <p>${project.Task_Count} Tasks<p>
                                     </div>
+                                
                                     <div class="project-card-due-date">
                                         <i class="fa fa-regular fa-calendar"></i>
                                         <p>Due: ${project.Due_Date}</p>

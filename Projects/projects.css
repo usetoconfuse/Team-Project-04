@@ -150,17 +150,19 @@
     z-index: 5;
 }
 
-.project-card-due-date {
+.project-card-due-date, .project-card-task-count {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #7C7C7C;
+    color: #686868;
     white-space: nowrap;
 }
 
-.project-card-due-date i {
+.project-card-due-date i, .project-card-task-count i {
     margin-right: 4px;
 }
+
+
 
 
 /*====Responsiveness====*/
