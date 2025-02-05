@@ -45,7 +45,7 @@ session_start()
                 <div class="user-profile-left">
                     <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
                     <div class="user-info">
-                        <p><span>John Little</span> | Manager</p>
+                        <p><span><?=$_SESSION['user_name'];?></span> | <?=$_SESSION['role'];?></p>
                     </div>
                 </div>
 
@@ -72,7 +72,7 @@ session_start()
 
                 <div class="intro-txt">
 
-                    <h1>Welcome back, John.</h1>
+                    <h1>Welcome back, <?=$_SESSION['user_forename'];?>.</h1>
                     <!--<p>View your daily overview here.</p>-->
                 </div>
 

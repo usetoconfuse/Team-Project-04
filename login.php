@@ -131,6 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             if (password_verify($inputted_password, $hashed_password)) {
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['role'] = $user_type;
+                $_SESSION['user_forename'] = $fetched_forename;
+                $_SESSION['user_name'] = $fetched_forename . " " . $fetched_surname;
+
 
                 // Redirect based on user role
                 if ($_SESSION['role'] === 'Admin') {
