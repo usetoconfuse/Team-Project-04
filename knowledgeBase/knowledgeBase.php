@@ -12,7 +12,7 @@
             <div class="kb-listing-header">
                 <div class="kb-listing-search">
                     <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Post Content">
+                    <input type="text" placeholder="Search Post Content" id="searched-post">
                 </div>
                 <button id="new-post-btn" class="black-btn">
                     New Post

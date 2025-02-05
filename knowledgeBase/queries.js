@@ -307,7 +307,55 @@ submitTopicBtn.addEventListener('click', () => {
     addTopicModal.style.display = 'none';
 })
 
+//if no posts in search this function will prdouce an error message to display to the user
+const emptyPost = (res) =>{
+    if(res.length === 0){
+        const postsContainer = document.getElementById('kb-posts-list');
+        postsContainer.innerHTML = '<p>No Posts Available</p>';
+    }
+};
+
+//if no topics in search this function will prdouce an error message to display to the user
+const emptyTopic = (res) =>{
+    if(res.length === 0){
+        const postsContainer = document.getElementById('topicsList');
+        postsContainer.innerHTML = '<p>No Topics Available</p>';
+    }
+};
+
+//post search bar functionality
+document.getElementById('searched-post').addEventListener("input", async (e) =>{
+
+    const searchedPost = e.target.value.trim();
+    
+    console.log(searchedPost);
+
+    if(searchedPost.length === 0 ){
+        try{
+            const results = await doRequest("GET", "getSearchedPost", {});
+            console.log(results);
+            //render posts 
+            renderAllPosts(results);
+            //if results empty will produce  message for user
+            emptyPost(results);
+        }catch(error){
+            console.error("Error fetching searched post:", error);
+        }
+    }
+    try{
+        const results = await doRequest("GET", "getSearchedPost", {searchedPost});
+        console.log(results);
+        //render posts 
+        renderAllPosts(results);
+        emptyPost(results);
+    }catch(error){
+        console.error("Error fetching searched post:", error);
+    }
+});
+
+//topic search bar functionality
 document.getElementById('searched-topic').addEventListener("input", async (e) =>{
+    //while user is typing the topic get the input and clean it
     const searchedTopic = e.target.value.trim();
     console.log(searchedTopic);
 
@@ -319,6 +367,8 @@ document.getElementById('searched-topic').addEventListener("input", async (e) =>
             console.log("Search results:", results);
             //load the relevant topics
             renderAllTopics(results);
+            //if results empty will produce  message for user
+            emptyTopic(results);
         } catch (error) {
             console.error("Error fetching searched topic:", error);
         }
@@ -330,6 +380,7 @@ document.getElementById('searched-topic').addEventListener("input", async (e) =>
         console.log("Search results:", results);
         //load the relevant topics
         renderAllTopics(results);
+        emptyTopic(results);
     } catch (error) {
         console.error("Error fetching searched topic:", error);
     }
@@ -404,6 +455,7 @@ document.querySelector("#kb-post-view .kb-share-link").addEventListener("click",
     sharePost(getCurrentPost())
 });
 
+//when the page loads fetch all relevant posts and topic from the db onto the page
 window.onload = () => {
     updatePosts();
     fetchAllTopics().then(renderAllTopics);
