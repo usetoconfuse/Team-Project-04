@@ -37,7 +37,7 @@ session_start()
     <section class="top-navbar">
         <div class="top-navbar-left">
             <div id="logo-container">
-                    <img src="logo.jpeg" alt="logo">
+                    <img src="make-it-all-logo.jpg" alt="logo">
             </div>
         </div>
 

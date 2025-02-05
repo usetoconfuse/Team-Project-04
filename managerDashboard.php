@@ -36,9 +36,9 @@ session_start()
     <section class="top-navbar">
         <div class="top-navbar-left">
             <div id="logo-container">
-                        <img src="logo.jpeg" alt="logo">
-                    </div>
+                    <img src="make-it-all-logo.jpg" alt="logo">
             </div>
+        </div>
 
         <div class="top-navbar-right">
             <div class="user-profile">
