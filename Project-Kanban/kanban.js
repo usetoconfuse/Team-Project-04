@@ -31,8 +31,7 @@ async function getKanbanData(userID, projectID) {
       throw new Error('Failed to fetch projects data');
     }
     const allKanbanData = await response.json();
-
-    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData.Project_Title;
+    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
 
     generateCard(allKanbanData);
 
