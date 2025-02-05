@@ -2,8 +2,8 @@
     <!--Project Information-->
     <section class="project-intro">
         <div class="project-txt">
-            <p>Python Project</p>
-            <p>View all your tasks below for Python Project.</p>
+            <p></p>
+            <p>View all your tasks below.</p>
         </div>
 
         <div class="vertical-bar"></div>
@@ -67,95 +67,7 @@
             <!--Kanban Body-->
             <div class="kanban-body open" id='kanban-to-do'>
 
-                <!--Kanban Card 1-->
-                <div class="kanban-card" id="kanban-task-overdue" draggable=true>
-
-                    <div class="kanban-card-top">
-                        <div class='kanban-card-top-left'>
-                            <div class="kanban-card-priority high-priority"></div>
-                            <p>Refactor login code</p>
-                        </div>
-                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i>
-                        </div>
-
-                    </div>
-                    <div class="kanban-card-body">
-                        <p class="kanban-card-description">Refactor the login code so it is using OOP. Make sure to
-                            follow necessary coding standards (documented in Knowledge Base).</p>
-
-                        <div class="kanban-separator"></div>
-
-                        <div class="kanban-card-bottom">
-                            <a href="">View Task</a>
-                            <div class="due-date">
-                                <i class="fa fa-regular fa-calendar"></i>
-                                <p>Due: 6 Nov</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Kanban Card 2-->
-                <div class="kanban-card" id="kanban-task-overdue" draggable=true>
-
-                    <div class="kanban-card-top">
-                        <div class='kanban-card-top-left'>
-                            <div class="kanban-card-priority low-priority"></div>
-                            <p>Make Report from user feedback</p>
-                        </div>
-                        <div class="user" style="background-color: var(--green);"><i class="fa fa-solid fa-user"></i>
-                        </div>
-
-
-                    </div>
-                    <div class="kanban-card-body">
-                        <p class="kanban-card-description">Collate the data collected from the survey last month and
-                            write up a full report.
-                            It should include various data such as user satisfaction, user suggestions, and any bugs
-                            reported.
-                            It also needs to look nice so we can share it with stakeholders in the monthly meeting.
-                        </p>
-
-                        <div class="kanban-separator"></div>
-
-                        <div class="kanban-card-bottom">
-                            <a href="">View Task</a>
-                            <div class="due-date">
-                                <i class="fa fa-regular fa-calendar"></i>
-                                <p>Due: 6 Nov</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Kanban Card 3-->
-                <div class="kanban-card" id="kanban-task" draggable=true>
-
-                    <div class="kanban-card-top">
-                        <div class='kanban-card-top-left'>
-                            <div class="kanban-card-priority high-priority"></div>
-                            <p>Move from SQLite to MySQL
-                            </p>
-                        </div>
-                        <div class="user" style="background-color: var(--bright-gold);"><i
-                                class="fa fa-solid fa-user"></i></div>
-
-
-                    </div>
-                    <div class="kanban-card-body">
-                        <p class="kanban-card-description">It's much more scalable, and has better tooling for backups
-                            and management.</p>
-
-                        <div class="kanban-separator"></div>
-
-                        <div class="kanban-card-bottom">
-                            <a href="">View Task</a>
-                            <div class="due-date">
-                                <i class="fa fa-regular fa-calendar"></i>
-                                <p>Due: 6 Nov</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+               
             </div>
         </div>
 
@@ -169,36 +81,7 @@
             </div>
             <!--Kanban Body-->
             <div class="kanban-body" id='kanban-in-progress'>
-                <!--Kanban Card 5-->
-                <div class="kanban-card" id="kanban-task" draggable=true>
-
-                    <div class="kanban-card-top">
-                        <div class='kanban-card-top-left'>
-                            <div class="kanban-card-priority low-priority tooltip">
-                                <span class="tooltiptext">Low Priority</span>
-                            </div>
-                            <p>Add comments to code</p>
-                        </div>
-                        <div class="user" style="background-color: var(--purple);"><i class="fa fa-solid fa-user"></i>
-                        </div>
-
-                    </div>
-                    <div class="kanban-card-body">
-                        <p class="kanban-card-description">Make sure to use docstrings for functions as well as normal
-                            comments to define the content.</p>
-
-                        <div class="kanban-separator"></div>
-
-                        <div class="kanban-card-bottom">
-                            <a href="">View Task</a>
-                            <div class="due-date">
-                                <i class="fa fa-regular fa-calendar"></i>
-                                <p>Due: 6 Nov</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+               
             </div>
         </div>
 
@@ -212,34 +95,6 @@
             </div>
             <!--Kanban Body-->
             <div class="kanban-body" id='kanban-completed'>
-
-                <!--Kanban Card 5-->
-                <div class="kanban-card" id="kanban-task" draggable=true>
-
-                    <div class="kanban-card-top">
-                        <div class='kanban-card-top-left'>
-                            <div class="kanban-card-priority medium-priority"></div>
-                            <p>Fix login bug</p>
-                        </div>
-                        <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i>
-                        </div>
-
-                    </div>
-                    <div class="kanban-card-body">
-                        <p class="kanban-card-description">There's a bug where the login breaks if two people log in at
-                            the same time.</p>
-
-                        <div class="kanban-separator"></div>
-
-                        <div class="kanban-card-bottom">
-                            <a href="">View Task</a>
-                            <div class="due-date">
-                                <i class="fa fa-regular fa-calendar"></i>
-                                <p>Due: 6 Nov</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
