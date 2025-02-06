@@ -321,13 +321,13 @@ function generateCard(kanbanData) {
     const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown select');
     const moveTaskBtn = viewTaskModal.querySelector('.move-task-dropdown .move-task-confirm');
 
-    
+    //Moving Cards Using Dropdown
     moveTaskBtn.addEventListener('click', () => {
       const newSection = moveTaskDropDown.value;
       const newSectionElement = document.getElementById(newSection);
 
-      newSectionElement.appendChild(taskCard);
-      
+
+      newSectionElement.insertBefore(taskCard, newSectionElement.firstChild);
       viewTaskModal.style.display = 'none';
       validate_date_icon(taskCard, kanbanCardDueDate, newSection);
 
