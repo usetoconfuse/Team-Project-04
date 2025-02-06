@@ -143,9 +143,9 @@ function generateCard(kanbanData) {
                             </div>
                             <div class="move-task-dropdown">
                               <select>
-                                <option value="to-do">To Do</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="completed">Completed</option>
+                                <option value="kanban-to-do">To Do</option>
+                                <option value="kanban-in-progress">In Progress</option>
+                                <option value="kanban-completed">Completed</option>
                               </select>
                               <div>
                                 <a href="#" class="move-task-confirm black-btn">Confirm Move</a>
@@ -237,6 +237,7 @@ function generateCard(kanbanData) {
 
     //Add Card and Modal to body
     document.body.appendChild(viewTaskModal);
+    
     kanbanColumns[task.Status]?.appendChild(taskCard);
 
     //on load, set status in card
@@ -245,7 +246,7 @@ function generateCard(kanbanData) {
     checkStatus(taskCard, statusBox, statusCircle)
 
     //Move Task Click
-    const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown');
+
     
     
     //Priority Colours in modal 
@@ -296,7 +297,7 @@ function generateCard(kanbanData) {
     //====Dragging Features
     const kanbanSection = document.querySelectorAll('.kanban-body')
     
-
+    /*
     taskCard.addEventListener("dragstart", () => {
       taskCard.classList.add("dragging");
       setTimeout(() => {taskCard.classList.add('overlay')}, 1)
@@ -314,11 +315,36 @@ function generateCard(kanbanData) {
       //Change the overdue tag depending on section it is in 
       validate_date_icon(taskCard, kanbanCardDueDate, currentSectionId);
       
+    }); */
+
+    //1. For each task modal, when confirm btn click, get value of drop down
+    const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown select');
+    const moveTaskBtn = viewTaskModal.querySelector('.move-task-dropdown .move-task-confirm');
+
+    
+    moveTaskBtn.addEventListener('click', () => {
+      const newSection = moveTaskDropDown.value;
+      const newSectionElement = document.getElementById(newSection);
+
+      newSectionElement.appendChild(taskCard);
+      
+      viewTaskModal.style.display = 'none';
+      validate_date_icon(taskCard, kanbanCardDueDate, newSection);
+
+      
+
+      
+    
+      
     });
+    //2. On the actual click event, get section it's being moved from and to 
 
+    //3. Remove child from old section and append child to new section 
 
-
-    kanbanSection.forEach((section) => {
+    
+    
+  /*
+   kanbanSection.forEach((section) => {
       section.addEventListener("dragover", (e) => {
         e.preventDefault();
     
@@ -329,13 +355,16 @@ function generateCard(kanbanData) {
           section.appendChild(draggedTask);
         } else {
           section.insertBefore(draggedTask, taskBelow);
+          //We have a drop down list = lets use choose the section
+          // On button press = confirm pressed = we either appendChild = if nothing or we just insertBefore
+
         }
       });
     });
     
     const insertAbove = (section, mouseY) => {
       const notDraggedTasks = section.querySelectorAll(".kanban-card:not(.dragging)");
-    
+     
       let closestTask = null;
       let closestOffset = Number.NEGATIVE_INFINITY;
     
@@ -351,7 +380,7 @@ function generateCard(kanbanData) {
       });
     
       return closestTask;
-    };
+    };*/
 
 
     const kanbanCardDueDate = taskCard.querySelector('.due-date');
