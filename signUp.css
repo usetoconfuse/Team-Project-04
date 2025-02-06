@@ -3,14 +3,14 @@
     font-family: 'DIN Alternate Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('DIN Alternate Bold'), url('DINAlternate-Bold.ttf') format('truetype');
+    src: local('DIN Alternate Bold'), url('fonts/DINAlternate-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Avenir Next';
     font-style: normal;
     font-weight: normal;
-    src: local('Avenir Next'), url('AvenirNextLTPro-Regular.otf') format('opentype');
+    src: local('Avenir Next'), url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');
 }
 
 body{
