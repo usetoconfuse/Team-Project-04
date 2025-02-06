@@ -264,7 +264,7 @@
 
 .kanban-card-bottom a {
     background-color: #F5F5F5;
-    color: black;
+    color: #656565;
     padding: 0.4rem 1rem;
     border-radius: 15px;
     white-space: nowrap;
@@ -274,8 +274,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #BAB7B7;
-    background-color: transparent;
+
     padding: 0.4rem 1rem;
     border-radius: 15px;
     white-space: nowrap;

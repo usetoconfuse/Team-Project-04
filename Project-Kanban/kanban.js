@@ -360,8 +360,8 @@ function generateCard(kanbanData) {
         kanbanCardDueDate.style.backgroundColor = '#E6757E';
         kanbanCardDueDate.style.color = 'white';
       } else {
-        kanbanCardDueDate.style.backgroundColor = '';
-        kanbanCardDueDate.style.color = '#BAB7B7';
+        kanbanCardDueDate.style.backgroundColor = '#F5F5F5';
+        kanbanCardDueDate.style.color = '#656565';
       }
     } else if (task.Status === "Completed") {
       kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
