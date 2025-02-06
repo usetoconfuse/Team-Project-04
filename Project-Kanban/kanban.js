@@ -32,7 +32,7 @@ async function getKanbanData(userID, projectID) {
     }
     const allKanbanData = await response.json();
     document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
-
+    console.log(allKanbanData);
     generateCard(allKanbanData);
 
   } catch (error) {
@@ -91,16 +91,7 @@ function generateCard(kanbanData) {
     viewTaskModal.classList.add('modal', 'view-task-modal'); 
     const viewTaskBtn = taskCard.querySelector('.kanban-card-bottom a');
     
-    //===Fields from the card:===
-    //Task Status, Task Title, Description, Due Date
-    let taskStatus = "";
-    if (task.Status === 'To Do') {
-      taskStatus = "To Do";
-    } else if (task.Status === "In Progress") {
-      taskStatus = "In Progress";
-    } else if (task.Status === "Completed") {
-      taskStatus = "Completed";
-    }
+    //===Fields from database for View Modal
 
     const taskTitle = task.Name;
     const taskDueDate = task.Due_Date;
@@ -185,7 +176,7 @@ function generateCard(kanbanData) {
                                                       <p class="task-modal-title">Status</p>
                                                       <div class="status-box">
                                                           <div class="task-indicator-circle"></div>
-                                                          <p>${taskStatus}</p>
+                                                          <p>${task.Status}</p>
                                                       </div>
                                                   </div>
 
@@ -239,21 +230,22 @@ function generateCard(kanbanData) {
                                               <div class="modal-task-btns">
                                                   ${roleBasedBtns}
                                               </div>
-                                              
-                                              
-
-                                            
 
                                             </div>
                                         </div>
     `;
 
-    //add modal to body of document
+    //Add Card and Modal to body
     document.body.appendChild(viewTaskModal);
+    kanbanColumns[task.Status]?.appendChild(taskCard);
+
+    //on load, set status in card
+    const statusBox = viewTaskModal.querySelector('.status-box');
+    const statusCircle = viewTaskModal.querySelector('.status-box .task-indicator-circle');
+    checkStatus(taskCard, statusBox, statusCircle)
 
     //Move Task Click
     const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown');
-    
     
     
     //Priority Colours in modal 
@@ -283,15 +275,7 @@ function generateCard(kanbanData) {
        dueDateDot.style.backgroundColor = "#ADDA9D";
      }
 
-    //Dynamically set task status when moving card to other columns
-    const statusBox = viewTaskModal.querySelector('.status-box');
-    const statusCircle = viewTaskModal.querySelector('.status-box .task-indicator-circle');
-    checkStatus(taskCard, statusBox, statusCircle)
-
-    taskCard.addEventListener('dragend', () => {
-      checkStatus(taskCard, statusBox, statusCircle)
-    })
-    
+   
 
 
   
@@ -309,15 +293,18 @@ function generateCard(kanbanData) {
 
 
     
-//====Dragging Features
-  const kanbanSection = document.querySelectorAll('.kanban-body')
-  
+    //====Dragging Features
+    const kanbanSection = document.querySelectorAll('.kanban-body')
+    
 
     taskCard.addEventListener("dragstart", () => {
       taskCard.classList.add("dragging");
       setTimeout(() => {taskCard.classList.add('overlay')}, 1)
     });
     taskCard.addEventListener("dragend", () => {
+        //Dynamically set task status when moving card to other columns
+      checkStatus(taskCard, statusBox, statusCircle)
+
       taskCard.classList.remove("dragging");
       taskCard.classList.remove('overlay')
 
@@ -331,40 +318,40 @@ function generateCard(kanbanData) {
 
 
 
-  kanbanSection.forEach((section) => {
-    section.addEventListener("dragover", (e) => {
-      e.preventDefault();
-  
-      const taskBelow = insertAbove(section, e.clientY);
-      const draggedTask = document.querySelector(".dragging");
-  
-      if (!taskBelow) {
-        section.appendChild(draggedTask);
-      } else {
-        section.insertBefore(draggedTask, taskBelow);
-      }
+    kanbanSection.forEach((section) => {
+      section.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    
+        const taskBelow = insertAbove(section, e.clientY);
+        const draggedTask = document.querySelector(".dragging");
+    
+        if (!taskBelow) {
+          section.appendChild(draggedTask);
+        } else {
+          section.insertBefore(draggedTask, taskBelow);
+        }
+      });
     });
-  });
-  
-  const insertAbove = (section, mouseY) => {
-    const notDraggedTasks = section.querySelectorAll(".kanban-card:not(.dragging)");
-  
-    let closestTask = null;
-    let closestOffset = Number.NEGATIVE_INFINITY;
-  
-    notDraggedTasks.forEach((task) => {
-      const { top } = task.getBoundingClientRect();
-  
-      const offset = mouseY - top;
-  
-      if (offset < 0 && offset > closestOffset) {
-        closestOffset = offset;
-        closestTask = task;
-      }
-    });
-  
-    return closestTask;
-  };
+    
+    const insertAbove = (section, mouseY) => {
+      const notDraggedTasks = section.querySelectorAll(".kanban-card:not(.dragging)");
+    
+      let closestTask = null;
+      let closestOffset = Number.NEGATIVE_INFINITY;
+    
+      notDraggedTasks.forEach((task) => {
+        const { top } = task.getBoundingClientRect();
+    
+        const offset = mouseY - top;
+    
+        if (offset < 0 && offset > closestOffset) {
+          closestOffset = offset;
+          closestTask = task;
+        }
+      });
+    
+      return closestTask;
+    };
 
 
     const kanbanCardDueDate = taskCard.querySelector('.due-date');
@@ -376,14 +363,36 @@ function generateCard(kanbanData) {
         kanbanCardDueDate.style.backgroundColor = '';
         kanbanCardDueDate.style.color = '#BAB7B7';
       }
-    
     } else if (task.Status === "Completed") {
       kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
       kanbanCardDueDate.style.color = 'white';
     }
-    kanbanColumns[task.Status]?.appendChild(taskCard);
+
+
+
   })
 
+}
+
+
+function checkStatus(taskCard, statusBox, statusCircle) {
+  let taskStatus;
+  if (taskCard.parentElement.id === 'kanban-to-do') {
+    taskStatus = "To Do";
+    statusBox.style.backgroundColor = "#dd9592";
+    statusCircle.style.backgroundColor = "red";
+  } else if (taskCard.parentElement.id  === 'kanban-in-progress') {
+    taskStatus = "In Progress";
+    statusBox.style.backgroundColor = "#EAB385";
+    statusCircle.style.backgroundColor = "orange";
+  } else if (taskCard.parentElement.id  === 'kanban-completed') {
+    taskStatus = "Completed";
+    statusBox.style.backgroundColor = "#ADDA9D";
+    statusCircle.style.backgroundColor = "green";
+  }
+  
+  // Update the displayed task status text in the modal
+  statusBox.querySelector('p').innerText = taskStatus;
 }
 
 
@@ -391,7 +400,6 @@ function generateCard(kanbanData) {
 function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
   if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
     if (task.id === 'kanban-task-overdue') {
-      console.log(task.id);
       kanbanCardDueDate.style.backgroundColor = '#E6757E';
       kanbanCardDueDate.style.color = 'white';
     } else {
@@ -407,25 +415,7 @@ function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
 }
 
 
-function checkStatus(task, statusBox, statusCircle) {
-  let taskStatus;
-  if (task.Status === 'To Do') {
-    taskStatus = "To Do";
-    statusBox.style.backgroundColor = "#dd9592";
-    statusCircle.style.backgroundColor = "red";
-  } else if (task.Status === 'In Progress') {
-    taskStatus = "In Progress";
-    statusBox.style.backgroundColor = "#EAB385";
-    statusCircle.style.backgroundColor = "orange";
-  } else if (task.Status === 'Completed') {
-    taskStatus = "Completed";
-    statusBox.style.backgroundColor = "#ADDA9D";
-    statusCircle.style.backgroundColor = "green";
-  }
-  
-  // Update the displayed task status text in the modal
-  statusBox.querySelector('p').textContent = taskStatus;
-}
+
 
 
 function taskIsOverdue(dueDate) {
