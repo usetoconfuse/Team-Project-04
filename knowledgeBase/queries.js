@@ -37,8 +37,12 @@ const fetchPosts = async (topic, type, query) => {
 };
 
 //method to get all the topics within the DB
-const fetchAllTopics = async () => {
-    return await doRequest("GET", 'getTopics');
+const fetchTopics = async (query) => {
+    const params = {};
+    if (query) {
+        params.query = query;
+    }
+    return await doRequest("GET", 'getTopics', params);
 };
 
 //method to render the Topic items and load them onto the right side of the page in the topic list
@@ -214,9 +218,15 @@ document.querySelector('#topicsList').addEventListener('click', (event) => {
     updatePosts();
 });
 
+var selectedTopicQuery = null;
+
+const updateTopics = async () => {
+    await fetchTopics(selectedTopicQuery).then(renderAllTopics);
+}
+
 // on the topic dropdown click load all topics from DB as values to select 
 document.querySelector('#topic-modal-dropdown').addEventListener('click', () => {
-    fetchAllTopics().then(renderAllTopicsModal);
+    fetchTopics().then(renderAllTopicsModal);
 });
 
 // on submission of the add post form add the new post to the knowledgebase db
@@ -267,9 +277,7 @@ document.getElementById('add-topic-btn').addEventListener('click', (event) => {
             document.getElementById('topic-modal-form').reset();
         })
 
-    //ensure that the new topic is in the right html form
-    fetchAllTopics().then(renderAllTopicsModal);
-    location.reload();
+    updateTopics();
 });
 
 //Add Post Modal Functionality
@@ -334,35 +342,8 @@ const emptyTopic = (res) =>{
 
 //topic search bar functionality
 document.getElementById('searched-topic').addEventListener("input", async (e) =>{
-    //while user is typing the topic get the input and clean it
-    const searchedTopic = e.target.value.trim();
-    console.log(searchedTopic);
-
-    if (searchedTopic.length === 0 ) {
-        //if the searchbar is empty load all topics
-        try {
-            const results = await doRequest("GET", "getSearchedTopic", {});
-            //testing in console
-            console.log("Search results:", results);
-            //load the relevant topics
-            renderAllTopics(results);
-            //if results empty will produce  message for user
-            emptyTopic(results);
-        } catch (error) {
-            console.error("Error fetching searched topic:", error);
-        }
-    };
-
-    try {
-        const results = await doRequest("GET", "getSearchedTopic", {searchedTopic});
-        //testing in console
-        console.log("Search results:", results);
-        //load the relevant topics
-        renderAllTopics(results);
-        emptyTopic(results);
-    } catch (error) {
-        console.error("Error fetching searched topic:", error);
-    }
+    selectedTopicQuery = e.target.value.trim();
+    updateTopics();
 });
 
 const allPostsView = document.getElementById("kb-all-view");
@@ -437,5 +418,5 @@ document.querySelector("#kb-post-view .kb-share-link").addEventListener("click",
 //when the page loads fetch all relevant posts and topic from the db onto the page
 window.onload = () => {
     updatePosts();
-    fetchAllTopics().then(renderAllTopics);
+    fetchTopics().then(renderAllTopics);
 };

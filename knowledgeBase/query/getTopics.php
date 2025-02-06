@@ -1,7 +1,8 @@
 <?php
 include '../../config/db-setup.php';
 
-$searchedTopic = $_GET['searchedTopic'] ?? null;
+$query = $_GET['query'] ?? null;
+
 // select all the topics from the Topics table
 $sql = "
 SELECT
@@ -9,9 +10,12 @@ SELECT
     Topic_ID
 FROM 
     Topics
-WHERE
-    LOWER(Topic_Name) LIKE LOWER('%$searchedTopic%')
+WHERE 1=1
 ";
+
+if ($query) {
+    $sql .= " AND LOWER(Topic_Name) LIKE LOWER('%$query%')";
+}
 
 $result = mysqli_query($conn, $sql);
 $allDataArray = array();
