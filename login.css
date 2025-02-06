@@ -101,6 +101,16 @@ h1,h2,h3,h4{
     font-size: 14px;
 }
 
+.password-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.password-label i {
+    font-size: 12.6px;
+}
+
 
 #signIn .text-input{
     margin-bottom: 1rem;
@@ -240,6 +250,8 @@ h1,h2,h3,h4{
     font-weight: 550;
     text-align: center;
 }
+
+
 
 .top-navbar {
     width: 100%;

@@ -196,7 +196,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                         <p class="error-message" id="username-error"></p>
                     </div>
                     <div class="input-container">
-                        <label>Password<span>*</span></label>
+                        <div class="password-label">
+                            <label>Password<span>*</span></label>
+                            <i class="fa fa-solid fa-eye-slash"></i>
+                        </div>
+                        
                         <input type="password" name="login_password" class="text-input" id="passwordInput" placeholder=" Enter your password">
                         <p class="error-message" id="password-error"></p>
                     </div>
@@ -265,7 +269,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                         <p class="error-message" id="username-error"></p>
                     </div>
                     <div class="input-container">
-                        <label>Password<span>*</span></label>
+                        <div class="password-label">
+                            <label>Password<span>*</span></label>
+                            <i class="fa fa-solid fa-eye-slash"></i>
+                        </div>
                         <input type="password" name="register_password" class="text-input" id="passwordInput" placeholder=" Enter your password">
                         <p class="error-message" id="password-error"></p>
                     </div>
@@ -375,6 +382,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                 }
             })
         });
+
+        const signInShowPasswordBtn = document.querySelector('#signin-wrapper .password-label i');
+        const signInPasswordInput = document.querySelector('#signin-wrapper #passwordInput');
+        showPassword(signInShowPasswordBtn, signInPasswordInput);
+
+        const signUpShowPasswordBtn = document.querySelector('#signup-wrapper .password-label i');
+        showPassword(signUpShowPasswordBtn, passwordInput);
+
+        function showPassword(showBtn, passInput) {
+            showBtn.addEventListener('click', () => {
+                showBtn.classList.toggle('fa-eye');
+                showBtn.classList.toggle('fa-eye-slash');
+
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                } else {
+                    passInput.type = 'password';
+                }
+            })
+        }
+
+        
+
     </script>
 
     <?php
