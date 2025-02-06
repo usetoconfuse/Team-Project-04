@@ -22,20 +22,23 @@ const doRequest = async (method, endpoint, query, body) => {
 }
 
 // fetch method for getting ALL posts with no constraints 
-const fetchPosts = async (topic, type) => {
-    const query = {};
+const fetchPosts = async (topic, type, query) => {
+    const params = {};
     if (topic) {
-        query.topic = topic;
+        params.topic = topic;
     }
     if (type) {
-        query.type = type;
+        params.type = type;
     }
-    return await doRequest("GET", 'getPosts', query);
+    if (query) {
+        params.query = query;
+    }
+    return await doRequest("GET", 'getPosts', params);
 };
 
 //method to get all the topics within the DB
 const fetchAllTopics = async () => {
-    return await doRequest("GET", 'getAllTopics');
+    return await doRequest("GET", 'getTopics');
 };
 
 //method to render the Topic items and load them onto the right side of the page in the topic list
@@ -147,14 +150,13 @@ const formatDate = (dateString) => {
 
 var selectedTopic = null;
 var selectedType = null;
+var selectedQuery = null;
 
 const updatePosts = async () => {
-    await fetchPosts(selectedTopic, selectedType).then(renderAllPosts);
+    await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
 
     for (post of document.querySelectorAll("#kb-posts-list .kb-post")) {
-        console.log("HELLO1");
         post.querySelector(".read-post-btn").addEventListener("click", () => {
-            console.log("HELLO");
             openPost(post.id);
         });
         post.querySelector(".kb-share-link").addEventListener("click", () => {
@@ -186,6 +188,13 @@ document.querySelector('#nonTechnicalBtn').addEventListener('click', (event) => 
     selectedType = 'Non-Technical';
     updatePosts();
 });
+
+// Update selected posts when the search bar is used
+document.getElementById('searched-post').addEventListener("input", async (e) =>{
+    selectedQuery = e.target.value.trim();
+    updatePosts();
+});
+
 
 //on topic item clicked it will show all posts of specified under that topic
 document.querySelector('#topicsList').addEventListener('click', (event) => {
@@ -322,36 +331,6 @@ const emptyTopic = (res) =>{
         postsContainer.innerHTML = '<p>No Topics Available</p>';
     }
 };
-
-//post search bar functionality
-document.getElementById('searched-post').addEventListener("input", async (e) =>{
-
-    const searchedPost = e.target.value.trim();
-    
-    console.log(searchedPost);
-
-    if(searchedPost.length === 0 ){
-        try{
-            const results = await doRequest("GET", "getSearchedPost", {});
-            console.log(results);
-            //render posts 
-            renderAllPosts(results);
-            //if results empty will produce  message for user
-            emptyPost(results);
-        }catch(error){
-            console.error("Error fetching searched post:", error);
-        }
-    }
-    try{
-        const results = await doRequest("GET", "getSearchedPost", {searchedPost});
-        console.log(results);
-        //render posts 
-        renderAllPosts(results);
-        emptyPost(results);
-    }catch(error){
-        console.error("Error fetching searched post:", error);
-    }
-});
 
 //topic search bar functionality
 document.getElementById('searched-topic').addEventListener("input", async (e) =>{
