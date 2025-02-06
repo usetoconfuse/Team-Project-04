@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
       $parts = explode('@', $email);
       $domain = array_pop($parts);
 
-        if ($domain !== 'makeitall.com') {
+        if ($domain !== 'make-it-all.co.uk') {
             $_SESSION['register_err'] = "Enter a valid Make-It-All email address";
             $_SESSION['reject'] = "Registration unsuccessful. Please try again.";
 
@@ -163,9 +163,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     crossorigin="anonymous" />
 </head>
 <body id="sign-in-bg">
+    <section class="top-navbar">
+        <div class="top-navbar-left">
+            <div id="logo-container">
+                    <img src="make-it-all-logo.jpg" alt="logo">
+            </div>
+        </div>
+    </section>
     <div id="signin-wrapper">
+
         <div id="left">
             <div id="signIn">
+
                 <div>
                     <h1>Welcome Back</h1>
                     <p>Enter your credentials to sign in.</p>
