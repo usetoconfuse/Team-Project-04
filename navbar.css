@@ -186,7 +186,7 @@ img {
     width: 98%;
     margin: 0 auto;
     background-color: #ffc86c;
-    height: 5dvh;
+    height: 2.8rem;
     border-radius: 25px;
     margin-top: 10px;
     display: flex;
@@ -195,14 +195,14 @@ img {
 }
 
 .top-navbar .top-navbar-left #logo-container {
-    height: 4.1dvh;
-    padding: 1dvh;
+   
+   padding: 0.4rem;
     display: flex;
     align-items: center;
 }
 
 #logo-container img {
-    height: 180%;
+    height: 2.2rem;
     width: auto;
     border-radius: 18px;
 }
