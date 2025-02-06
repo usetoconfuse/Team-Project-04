@@ -195,8 +195,6 @@ session_start()
         </section>
     </section>
    
-
-    <script src="knowledgeBase/knowledgeBase.js"></script>
     <script src="navbar.js"></script>
     <script type="module" src="Project-Kanban/kanban.js"></script>
     <script src="ManagerDash-Stats/Manager-Statistics.js"></script>

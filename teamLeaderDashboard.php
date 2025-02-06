@@ -153,7 +153,6 @@ session_start()
 
         </section>
 
-        <script src="knowledgeBase/knowledgeBase.js"></script>
         <script src="navbar.js"></script>
         <script src="projects.js"></script>
         <script src="Project-Kanban/kanban.js"></script>
