@@ -7,20 +7,38 @@ window.addEventListener("storage", function () {
   if (selectedProjectID) {
     const kanbanContainer = document.querySelector('#kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
-    getKanbanData(userID, selectedProjectID);
+    getKanbanData(userID, selectedProjectID, {});
     
+    //Filters
+    const applyFilterBtn = document.querySelector('#add-filter-btn');
+    applyFilterBtn.addEventListener('click', () => {
+      const priorityValue = document.querySelector('.task-dropdown-priority #priority').value;
+      const filters = {priorityValue};
+
+      filterTaskModal.style.display = 'none';
+      getKanbanData(userID, selectedProjectID, filters);
+    })
+
+
   }
 
 });
 
 
 
-async function getKanbanData(userID, projectID) {
+async function getKanbanData(userID, projectID, filters={}) {
   try {
 
     let url = `Project-Kanban/kanban-db.php?userID=${encodeURIComponent(userID)}&projectID=${encodeURIComponent(projectID)}`; 
+
+    const filterQuery = new URLSearchParams(filters).toString();
+    url += filterQuery ? `&${filterQuery}` : '';
+
+    console.log(url);
+
     const params = { 
-      method: "GET" 
+      method: "GET",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     }
 
     const response = await fetch(url, params);
@@ -662,8 +680,4 @@ filterTaskBtn.addEventListener('click', () => {
   closeFilterTaskModal.addEventListener('click', () => {
     filterTaskModal.style.display = 'none';
   })
-  window.addEventListener('click', (e) => {
-    if (e.target == filterTaskModal) {
-      filterTaskModal.style.display = 'none';
-    }
-  })
+

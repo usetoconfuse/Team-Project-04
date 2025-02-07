@@ -125,12 +125,12 @@
                                 <i class="fa fa-solid fa-star"></i>
                             </div>
                             <select name="priority" id="priority">
-                                <option value="all">All</option>
-                                <option value="none">None</option>
-                                <option value="low">Low</option>
-                                <option value="medium">Medium</option>
-                                <option value="high">High</option>
-                                <option value="stuck">Stuck</option>
+                                <option value="All">All</option>
+                                <option value="None">None</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Stuck">Stuck</option>
                             </select>
                         </div>
                     </div>
@@ -156,10 +156,10 @@
                 </div>
             </form>
             <div class="task-submit-buttons">
-                <div class="add-filter-btn" id="add-filter-btn">
+                <a class="add-filter-btn" id="add-filter-btn">
                     Filter Tasks
                     <i class="fa fa-arrow-right"></i>
-                </div>
+                </a>
             </div>
         </div>
     </div>
