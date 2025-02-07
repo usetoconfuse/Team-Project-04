@@ -248,9 +248,8 @@ document.getElementById('add-post-btn').addEventListener('click', (event) => {
     doRequest("POST", "addPost", {}, formData)
         .then((data) => {
             //once form successfully submitted alert the user and reset the form
-            console.log('Post submitted:', data);
             alert('Post added successfully!');
-            document.getElementById('post-modal-form').reset();
+            updatePosts();
         })
     // need to add validation to the form ...
 });
@@ -291,12 +290,6 @@ window.addEventListener('click', (e) => {
     if (e.target == addPostModal) {
         addPostModal.style.display = 'none';
     }
-})
-
-//For now, it just closes the modal on click of submit btn
-const submitPostBtn = document.querySelector('#add-post-btn');
-submitPostBtn.addEventListener('click', () => {
-    addPostModal.style.display = 'none';
 })
 
 //Add topic Modal functionality

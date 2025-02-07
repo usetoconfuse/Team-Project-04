@@ -39,4 +39,6 @@ if (!mysqli_query($conn, $sql2)) {
     echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
     exit();
 }
+
+echo json_encode(["success" => "Topic added successfully"]);
 ?>
