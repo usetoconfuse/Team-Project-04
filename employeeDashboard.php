@@ -140,12 +140,7 @@ session_start()
                     </div>
                 </div>
             </div>
-
-        
-
-
         </nav>
-
 
         <section id="content">
 

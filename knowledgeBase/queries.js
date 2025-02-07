@@ -5,11 +5,20 @@ let user;
 const doRequest = async (method, endpoint, query, body) => {
     const url = new URL(`${BASE_QUERY_PATH}${endpoint}.php`, window.location);
     url.search = new URLSearchParams(query).toString();
+
+    let formData;
+    if (body) {
+        formData = new FormData();
+        for ([key, value] of Object.entries(body)) {
+            formData.append(key, value);
+        }
+    }
+
     try {
         const response = await fetch(url,
             {
                 method: method,
-                body: body,
+                body: formData,
             }
         );
         if (!response.ok) {
@@ -43,15 +52,14 @@ const fetchPosts = async (topic, type, query) => {
 };
 
 const editPost = async (postId, title, content, type, topic, visibility) => {
-    const formData = new FormData();
-    formData.append('postId', postId);
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('type', type);
-    formData.append('topic', topic);
-    formData.append('visibility', visibility);
-
-    return await doRequest("POST", 'editPost', {}, formData);
+    return await doRequest("POST", 'editPost', {}, {
+        'postId': postId,
+        'title': title,
+        'content': content,
+        'type': type,
+        'topic': topic,
+        'visibility': visibility
+    });
 };
 
 //method to get all the topics within the DB
@@ -124,7 +132,7 @@ const renderAllPosts = async (posts) => {
         // TODO: If the post is protected don't allow author either.
         if (post.User_ID == user.user_id || user.role == 'admin') {
             currentUserHtml = `
-            <button class="black-btn">Edit Post</button>
+            <button class="kb-edit-post-button black-btn">Edit Post</button>
             <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
             `;
         }
@@ -203,6 +211,21 @@ const updatePosts = async () => {
         post.querySelector(".read-post-btn").addEventListener("click", () => {
             openPost(postId);
         });
+
+        const editButton = post.querySelector(".kb-edit-post-button");
+        if (editButton) {
+            editButton.addEventListener("click", () => {
+                openEditPostModal(postId);
+            });
+        }
+
+        const deleteButton = post.querySelector(".kb-delete-post-button");
+        if (deleteButton) {
+            deleteButton.addEventListener("click", () => {
+                openDeletePostModal(postId);
+            });
+        }
+
         post.querySelector(".kb-share-link").addEventListener("click", () => {
             sharePost(postId);
         });
@@ -275,16 +298,14 @@ document.getElementById('add-post-btn').addEventListener('click', (event) => {
     const topic = document.getElementById('topic-modal-dropdown').value;
     const visibility = document.getElementById('visibility-dropdown').value;
 
-    //create a FormData object
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('type', type);
-    formData.append('topic', topic);
-    formData.append('visibility', visibility);
-
     //pass form data into addpost sql query
-    doRequest("POST", "addPost", {}, formData)
+    doRequest("POST", "addPost", {}, {
+        'title': title,
+        'content': content,
+        'type': type,
+        'topic': topic,
+        'visibility': visibility
+    })
         .then((data) => {
             //once form successfully submitted alert the user and reset the form
             alert('Post added successfully!');
@@ -293,64 +314,53 @@ document.getElementById('add-post-btn').addEventListener('click', (event) => {
     // need to add validation to the form ...
 });
 
-//on submission of add topic form add the new topic to the topics table
-document.getElementById('add-topic-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    //get topic name from form
-    const newTopic = document.getElementById('topicInput').value;
 
-    const formData = new FormData();
-    formData.append('name', newTopic);
+const makeModal = (modalId) => {
+    const modal = document.getElementById(modalId);
 
-    //pass data from form to addtopic sql query
-    doRequest("POST", "addTopic", {}, formData)
-        .then((data) => {
-            //once form successfully submitted alert user and reset form
-            console.log('Topic added:', data);
-            alert('Topic added successfully! ');
+    closeBtn = modal.querySelector('.close-modal-btn');
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 
-            updateTopics();
-            fetchTopics().then(renderTopicsInModal);
-        })
-});
+    const openModal = () => {
+        modal.style.display = 'flex';
+    }
+    const closeModal = () => {
+        modal.style.display = 'none';
+    }
+    return [closeModal, openModal];
+}
 
 //Add Post Modal Functionality
-const addPostModal = document.querySelector("#post-modal");
-const closeAddPostModal = addPostModal.querySelector('#post-modal .close-modal-btn')
-const addPostBtn = document.querySelector('#new-post-btn');
+const [closeAddPostModal, openAddPostModal] = makeModal('post-modal');
 
+const addPostBtn = document.querySelector('#new-post-btn');
 addPostBtn.addEventListener('click', () => {
-    addPostModal.style.display = 'flex';
-})
-closeAddPostModal.addEventListener('click', () => {
-    addPostModal.style.display = 'none';
-})
-window.addEventListener('click', (e) => {
-    if (e.target == addPostModal) {
-        addPostModal.style.display = 'none';
-    }
-})
+    openAddPostModal();
+});
 
 //Add topic Modal functionality
-const addTopicModal = document.querySelector('#topic-modal');
-const closeAddTopicModal = addTopicModal.querySelector('#topic-modal .close-modal-btn');
+const [closeAddTopicModal, openAddTopicModal] = makeModal('topic-modal');
+
 const addTopicBtn = document.querySelector('#new-topic-btn');
 const submitTopicBtn = document.querySelector('#add-topic-btn');
 
 addTopicBtn.addEventListener('click', () => {
-    addTopicModal.style.display = 'flex';
+    openAddTopicModal();
 });
-closeAddTopicModal.addEventListener('click', () => {
-    addTopicModal.style.display = 'none';
-})
-window.addEventListener('click', (e) => {
-    if (e.target == addPostModal) {
-        addTopicModal.style.display = 'none';
-    }
-})
-submitTopicBtn.addEventListener('click', () => {
-    addTopicModal.style.display = 'none';
-})
+
+submitTopicBtn.addEventListener('click', async (event) => {
+    //get topic name from form
+    const newTopic = document.getElementById('topicInput').value;
+
+    //pass data from form to addtopic sql query
+    await doRequest("POST", "addTopic", {}, {name: newTopic});
+    await updateTopics();
+    await fetchTopics().then(renderTopicsInModal);
+
+    alert('Topic added successfully! ');
+});
 
 //topic search bar functionality
 document.getElementById('searched-topic').addEventListener("input", async (e) =>{
