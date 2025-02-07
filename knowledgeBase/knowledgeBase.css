@@ -275,7 +275,6 @@
     width: 300px;
     min-height: min-content;
     height: fit-content;
-    max-height: 100%;
     padding: 15px;
     background-color: var(--secondary-colour);
     border-radius: var(--box-border-radius);
@@ -301,6 +300,7 @@
     margin-right: 10px;
 }
 
+/*
 .kb-topic:nth-child(4n-3) .kb-topic-circle {
     background-color: var(--pastel-colour-1);
 }
@@ -316,11 +316,11 @@
 .kb-topic:nth-child(4n) .kb-topic-circle {
     background-color: var(--pastel-colour-4);
 }
-
+*/
 .kb-topic.kb-active {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
-}
+} 
 
 #topicsList {
     display: flex;

@@ -20,6 +20,7 @@ SELECT
     kb.Description,
     kb.Type,
     t.Topic_Name,
+    t.Topic_ID,
     usr.User_ID,
     usr.Forename,
     usr.Surname,
