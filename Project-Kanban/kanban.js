@@ -287,9 +287,9 @@ function generateCard(kanbanData) {
     `;
 
     const reportStuckBtn = viewTaskModal.querySelector('.report-task');
-    reportStuckBtn.addEventListener('click', async () =>{
+    reportStuckBtn.addEventListener('click',  () =>{
 
-      await reportStuck(task.Task_ID);
+       reportStuck(task.Task_ID);
       viewTaskModal.style.display = 'none';
     });
 
