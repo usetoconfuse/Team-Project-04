@@ -11,9 +11,6 @@ window.addEventListener("storage", function () {
     
   }
 
-  
-
-
 });
 
 
@@ -62,9 +59,12 @@ function generateCard(kanbanData) {
 
     taskCard.innerHTML = `
                     <div class="kanban-card-top">
-                          <p>${task.Name} <span>#${task.Task_ID}</span></p>
-                          <div class="kanban-card-priority ${task.Priority.toLowerCase()}-priority">${task.Priority} Priority</div>
+                      <div class="kanban-card-top-details">
+                          <p>${task.Name}</p>
+                          <i class="fa fa-solid fa-caret-down"></i>
                       </div>
+                      <div class="kanban-card-priority ${task.Priority.toLowerCase()}-priority">${task.Priority} Priority</div>
+                    </div>
 
                     </div>
                     <div class="kanban-card-body">
@@ -473,9 +473,15 @@ kanbanContainers.forEach(kanbanContainer => {
     const kanbanCardHeader = e.target.closest('.kanban-card-top');
     if (!kanbanCardHeader) return;
 
+   
+
 
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
+    const kanbanCardIcon = kanbanCardHeader.querySelector('.kanban-card-top-details i');
+
+    kanbanCardIcon.classList.toggle('fa-caret-up');
+    kanbanCardIcon.classList.toggle('fa-caret-down');
   
     
     kanbanCardBody.classList.toggle('open');

@@ -226,12 +226,16 @@
     margin-bottom: 1rem;
 }
 
-
-.kanban-card-top-left {
+.kanban-card-top-details {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    justify-content: space-around;
 }
+
+.kanban-card-top-details i {
+    display: none;
+}
+
 
 .kanban-card-top p {
     font-size: 16px;
@@ -675,6 +679,8 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
+
+
 /*====Responsiveness====*/
 @media  (max-width: 1280px) {
     .project-intro {
@@ -690,6 +696,32 @@ input[type="file"]::-webkit-file-upload-button {
     .project-stats {
         margin-top: 1.4rem;
         margin-bottom: 1.4rem;
+    }
+
+    .kanban-card-top {
+        flex-direction: column-reverse;
+    }
+
+   
+    .kanban-card-top p {
+        align-self: flex-start;
+    }
+    
+
+    .kanban-card-top .kanban-card-priority {
+        align-self: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .kanban-card-bottom {
+        flex-direction: column-reverse;
+
+    }
+
+    .kanban-card-bottom a {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
     }
 }
 
@@ -723,6 +755,25 @@ input[type="file"]::-webkit-file-upload-button {
 
     .modal-box {
         width: 60%;
+    }
+
+    .kanban-card-bottom {
+        flex-direction: row;
+
+    }
+
+    .kanban-card-bottom a {
+        margin-top: 0;
+        width: inherit;
+        text-align: center;
+    }
+
+    .kanban-card-top-details {
+        width: 100%;
+    }
+    
+    .kanban-card-top-details i {
+        display: block;
     }
 }
 
