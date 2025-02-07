@@ -108,6 +108,15 @@ const renderAllPosts = (posts) => {
         <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
       `;
         }
+        
+        let currentTypeHtml = '';
+        if (post.Type === 'Technical'){
+            currentTypeHtml = ` class="kb-badge" style="background-color:hsl(351,67%, 56%);" `;
+        }
+        if (post.Type === 'Non-Technical'){
+            currentTypeHtml = `class="kb-badge" style="background-color:hsl(246,67%,56%);" `;
+        }
+
 
         // Create the HTML for the post
         const postHTML = `
@@ -115,7 +124,7 @@ const renderAllPosts = (posts) => {
         <div class="kb-title-line">
           <h2 class="kb-title-header">${post.Title}</h2>
           <div class="kb-post-badges">
-            <div class="kb-badge" style="background-color:var(--tertiary-colour);">${post.Type}</div>
+            <div ${currentTypeHtml} > ${post.Type} </div>
             <div class="kb-badge" style="background-color:${post.Topic_Name}">${post.Topic_Name}</div>
           </div>
           <i class="kb-share-link fa-solid fa-link" href="#"></i>
