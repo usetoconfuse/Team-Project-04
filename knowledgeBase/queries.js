@@ -160,11 +160,12 @@ const updatePosts = async () => {
     await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
 
     for (post of document.querySelectorAll("#kb-posts-list .kb-post")) {
+        const postId = post.id;
         post.querySelector(".read-post-btn").addEventListener("click", () => {
-            openPost(post.id);
+            openPost(postId);
         });
         post.querySelector(".kb-share-link").addEventListener("click", () => {
-            sharePost(post.id);
+            sharePost(postId);
         });
     }
 }
