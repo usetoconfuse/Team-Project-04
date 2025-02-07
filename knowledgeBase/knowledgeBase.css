@@ -273,11 +273,12 @@
     flex-direction: column;
     align-items: center;
     width: 300px;
-    min-height: min-content;
-    height: fit-content;
+    height: 100%;
+    max-height: 100%;
     padding: 15px;
     background-color: var(--secondary-colour);
     border-radius: var(--box-border-radius);
+    overflow: hidden;
 }
 
 .kb-topic {
@@ -300,27 +301,11 @@
     margin-right: 10px;
 }
 
-/*
-.kb-topic:nth-child(4n-3) .kb-topic-circle {
-    background-color: var(--pastel-colour-1);
-}
 
-.kb-topic:nth-child(4n-2) .kb-topic-circle {
-    background-color: var(--pastel-colour-2);
-}
-
-.kb-topic:nth-child(4n-1) .kb-topic-circle {
-    background-color: var(--pastel-colour-3);
-}
-
-.kb-topic:nth-child(4n) .kb-topic-circle {
-    background-color: var(--pastel-colour-4);
-}
-*/
 .kb-topic.kb-active {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
-} 
+}
 
 #topicsList {
     display: flex;
@@ -328,10 +313,11 @@
     text-wrap: nowrap;
     flex-direction: column;
     flex-grow: 1;
-    min-height: fit-content;
-    overflow: auto;
+    max-height: 90vh;
+    overflow-y: auto;
     gap: 10px;
     margin: 10px;
+    width: 100%;
 }
 
 .kb-title-line {
@@ -356,7 +342,7 @@
 .kb-badge {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
-    padding: 5px;
+    padding: 5px 9px;
     font-size: 0.85rem;
     border-radius: var(--line-border-radius);
 }
@@ -376,8 +362,9 @@
 }
 
 .kb-post-buttons button {
-    padding: 5px;
+    padding: 8px 12px;
     font-size: 0.95rem;
+    margin-top: 10px;
 }
 
 .kb-content button.kb-delete-post-button {

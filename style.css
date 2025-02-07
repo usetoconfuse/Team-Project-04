@@ -71,7 +71,7 @@ img {
 }
 
 
-/* Scrollbar styling - does not affect Firefox or Internet Explorer */
+/* Scrollbar styling - does not affect Firefox or Internet Explorer 
 
 ::-webkit-scrollbar {
     background-color: transparent;
@@ -89,4 +89,4 @@ img {
     border-radius: 1rem;
     border: 0.15rem solid transparent;
     background-clip: content-box;
-}
+} */
