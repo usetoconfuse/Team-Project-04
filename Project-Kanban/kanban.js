@@ -17,6 +17,7 @@ window.addEventListener("storage", function () {
 });
 
 
+
 async function getKanbanData(userID, projectID) {
   try {
 
@@ -317,32 +318,36 @@ function generateCard(kanbanData) {
       
     }); */
 
-    //1. For each task modal, when confirm btn click, get value of drop down
+    //Move button and Update Task Status in Database
     const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown select');
     const moveTaskBtn = viewTaskModal.querySelector('.move-task-dropdown .move-task-confirm');
 
     //Moving Cards Using Dropdown
-    moveTaskBtn.addEventListener('click', () => {
+    moveTaskBtn.addEventListener('click', async () => {
       const newSection = moveTaskDropDown.value;
+      console.log(newSection);
       const newSectionElement = document.getElementById(newSection);
-
 
       newSectionElement.insertBefore(taskCard, newSectionElement.firstChild);
       viewTaskModal.style.display = 'none';
+
       checkStatus(taskCard, statusBox, statusCircle)
       validate_date_icon(taskCard, kanbanCardDueDate, newSection);
 
-      
+      let newStatus = "";
+      if (newSection === 'kanban-to-do') {
+        newStatus = 'To Do';
+      } else if (newSection === 'kanban-in-progress') {
+        newStatus = 'In Progress';
+      } else if (newSection === 'kanban-completed') {
+        newStatus = 'Completed';
+      }
 
-      
-    
+      await updateTaskStatus(task.Task_ID, newStatus);
+
       
     });
-    //2. On the actual click event, get section it's being moved from and to 
 
-    //3. Remove child from old section and append child to new section 
-
-    
     
   /*
    kanbanSection.forEach((section) => {
@@ -403,6 +408,33 @@ function generateCard(kanbanData) {
   })
 
 }
+
+async function updateTaskStatus(taskID, newStatus) {
+  try {
+    const url = 'Project-Kanban/update-status-db.php';
+    
+    const data = {
+      Task_ID: taskID,
+      Status: newStatus
+    };
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(url, params);
+    if (!response.ok) {
+      throw new Error('Failed to update task status');
+    }
+
+    console.log("Updated task status");
+
+  } catch (error) {
+    console.log("Error updating the task status", error);
+  }
+}
+
 
 
 function checkStatus(taskCard, statusBox, statusCircle) {
