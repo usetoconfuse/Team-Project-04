@@ -71,6 +71,14 @@ const fetchTopics = async (query) => {
     return await doRequest("GET", 'getTopics', params);
 };
 
+//helped colour formula methdo
+const getTopicColour = (topicId) =>{
+    const hue = ((topicId * 137) + 47) % 360; 
+    const hsl = `hsl(${hue},44%,44%)`;
+
+    return hsl;
+};
+
 // Display the given topics in the sidebar on the page.
 const renderTopics = (topics) => {
     const topicsContainer = document.getElementById('topicsList');
@@ -82,11 +90,13 @@ const renderTopics = (topics) => {
 
     topicsContainer.innerHTML = '';
     topics.forEach(topic => {
+        const hue = ((topic.Topic_ID * 137) + 47) % 360; 
+        const hsl = `hsl(${hue},44%,44%)`;
 
         // Create the HTML for the post
         const topicHTML = `
         <li class="kb-topic" value ="${topic.Topic_Name}" id="topic-${topic.Topic_ID}"> 
-        <span class="kb-topic-circle"></span> ${topic.Topic_Name}</li>
+        <span class="kb-topic-circle" style="background-color:${getTopicColour(topic.Topic_ID)}"></span> ${topic.Topic_Name}</li>
       `;
 
         // Append the post HTML to the container
@@ -139,10 +149,10 @@ const renderAllPosts = async (posts) => {
         
         let currentTypeHtml = '';
         if (post.Type === 'Technical'){
-            currentTypeHtml = ` class="kb-badge" style="background-color:hsl(351,67%, 56%);" `;
+            currentTypeHtml = ` class="kb-badge" style="background-color:hsl(17 ,5% ,10%);" `;
         }
         if (post.Type === 'Non-Technical'){
-            currentTypeHtml = `class="kb-badge" style="background-color:hsl(246,67%,56%);" `;
+            currentTypeHtml = `class="kb-badge" style="background-color:hsl(17, 5% ,50%);" `;
         }
 
 
@@ -153,7 +163,7 @@ const renderAllPosts = async (posts) => {
           <h2 class="kb-title-header">${post.Title}</h2>
           <div class="kb-post-badges">
             <div ${currentTypeHtml} > ${post.Type} </div>
-            <div class="kb-badge" style="background-color:${post.Topic_Name}">${post.Topic_Name}</div>
+            <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>
           </div>
           <i class="kb-share-link fa-solid fa-link" href="#"></i>
         </div>
