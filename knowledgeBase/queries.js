@@ -45,8 +45,8 @@ const fetchTopics = async (query) => {
     return await doRequest("GET", 'getTopics', params);
 };
 
-//method to render the Topic items and load them onto the right side of the page in the topic list
-const renderAllTopics = (topics) => {
+// Display the given topics in the sidebar on the page.
+const renderTopics = (topics) => {
     const topicsContainer = document.getElementById('topicsList');
     topicsContainer.innerHTML = '';
 
@@ -64,7 +64,7 @@ const renderAllTopics = (topics) => {
 }
 
 // method to render the Topics to be as items to choose from the dropdown within the add topic modal
-const renderAllTopicsModal = (topics) => {
+const renderTopicsInModal = (topics) => {
     const topicsDropdown = document.querySelector("#topic-modal-dropdown"); // Reference the select element directly
     topicsDropdown.innerHTML = '';
 
@@ -221,13 +221,8 @@ document.querySelector('#topicsList').addEventListener('click', (event) => {
 var selectedTopicQuery = null;
 
 const updateTopics = async () => {
-    await fetchTopics(selectedTopicQuery).then(renderAllTopics);
+    await fetchTopics(selectedTopicQuery).then(renderTopics);
 }
-
-// on the topic dropdown click load all topics from DB as values to select 
-document.querySelector('#topic-modal-dropdown').addEventListener('click', () => {
-    fetchTopics().then(renderAllTopicsModal);
-});
 
 // on submission of the add post form add the new post to the knowledgebase db
 document.getElementById('add-post-btn').addEventListener('click', (event) => {
@@ -274,10 +269,10 @@ document.getElementById('add-topic-btn').addEventListener('click', (event) => {
             //once form successfully submitted alert user and reset form
             console.log('Topic added:', data);
             alert('Topic added successfully! ');
-            document.getElementById('topic-modal-form').reset();
-        })
 
-    updateTopics();
+            updateTopics();
+            fetchTopics().then(renderTopicsInModal);
+        })
 });
 
 //Add Post Modal Functionality
@@ -418,5 +413,6 @@ document.querySelector("#kb-post-view .kb-share-link").addEventListener("click",
 //when the page loads fetch all relevant posts and topic from the db onto the page
 window.onload = () => {
     updatePosts();
-    fetchTopics().then(renderAllTopics);
+    updateTopics();
+    fetchTopics().then(renderTopicsInModal);
 };
