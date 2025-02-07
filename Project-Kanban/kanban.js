@@ -8,6 +8,7 @@ window.addEventListener("storage", function () {
     const kanbanContainer = document.querySelector('#kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
     getKanbanData(userID, selectedProjectID, {});
+    getProjectName(selectedProjectID)
     
     //Filters
     const applyFilterBtn = document.querySelector('#add-filter-btn');
@@ -16,16 +17,47 @@ window.addEventListener("storage", function () {
       const dateValue = document.querySelector('.task-dropdown-date #date-task').value;
       console.log(document.querySelector('.task-dropdown-date #date-task'));
       
-      const filters = {dateValue};
+      const filters = {priorityValue,dateValue};
+
+      if (priorityValue === "All") {
+        delete filters.priorityValue;
+      }
+      if (dateValue === "All") {
+        delete filters.dateValue;
+      }
 
       filterTaskModal.style.display = 'none';
       getKanbanData(userID, selectedProjectID, filters);
     })
 
-
   }
 
 });
+
+async function getProjectName(selectedProjectID) {
+  try {
+
+    let url = `Project-Kanban/kanban-projectName-db.php?projectID=${encodeURIComponent(selectedProjectID)}`; 
+
+    const params = { 
+      method: "GET",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch projects data');
+    }
+    const projectNameData = await response.json();
+    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
+    console.log(projectNameData);
+
+
+  } catch (error) {
+    console.log("Fetch Issue",error);
+  }
+}
 
 
 
@@ -50,7 +82,7 @@ async function getKanbanData(userID, projectID, filters={}) {
       throw new Error('Failed to fetch projects data');
     }
     const allKanbanData = await response.json();
-    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
+    //document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
     console.log(allKanbanData);
     generateCard(allKanbanData);
 

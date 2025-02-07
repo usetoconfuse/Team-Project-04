@@ -7,7 +7,7 @@
 session_start();
 
 
-//Errors saved in session, and redirects to error or success page
+//Errors saved in session, and redirects to error or success page+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     //User is registering so currently loaded tab is register
     $_SESSION['current_tab'] = 'register';
