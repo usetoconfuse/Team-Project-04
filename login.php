@@ -63,21 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
                     $_SESSION['register_err']  = "Email already exists.";
                     $_SESSION['reject'] = "Registration unsuccessful. Please try again.";
                 } else {
-                    //get a new User ID - increment by 1 from the largest userID in the database
-                    $query = $conn->prepare("SELECT MAX(User_ID) FROM Users");
-                    $query->execute();
-                    $query->bind_result($max_id);
-                    $query->fetch();
-                    $query->close();
-
-                    $new_id = $max_id ? $max_id + 1 : 1; //if no users exist, start from 1, else increment by 1
-
+    
                     //resister the user
                     $password_hashed = password_hash($inputted_password, PASSWORD_DEFAULT);
                     $user_type = 'Employee';
                     $employee_status = 1;
-                    $query = $conn->prepare("INSERT INTO Users (User_ID, Email, Forename, Surname, Password, User_Type, Employee_Status) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    $query->bind_param("isssssi", $new_id, $email, $forename, $surname, $password_hashed, $user_type, $employee_status);
+                    $query = $conn->prepare("INSERT INTO Users (Email, Forename, Surname, Password, User_Type, Employee_Status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $query->bind_param("sssssi", $email, $forename, $surname, $password_hashed, $user_type, $employee_status);
                     
                     if ($query->execute()) {
                         $_SESSION['success_register'] = "Registration successful. Login below to access your account.";
