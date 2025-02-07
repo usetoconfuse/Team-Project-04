@@ -62,11 +62,8 @@ function generateCard(kanbanData) {
 
     taskCard.innerHTML = `
                     <div class="kanban-card-top">
-                      <div class='kanban-card-top-left'>
-                          <div class="kanban-card-priority ${task.Priority.toLowerCase()}-priority"></div>
                           <p>${task.Name} <span>#${task.Task_ID}</span></p>
-                      </div>
-                      <div class="user" style="background-color: var(--blue);"><i class="fa fa-solid fa-user"></i>
+                          <div class="kanban-card-priority ${task.Priority.toLowerCase()}-priority">${task.Priority} Priority</div>
                       </div>
 
                     </div>

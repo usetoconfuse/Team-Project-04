@@ -285,10 +285,10 @@
 }
 
 .kanban-card-priority {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
+    padding: 0.1rem 0.6rem;
+    border-radius: 0.8rem;
+    color: white;
+    font-size: 13.5px;
 }
 
 .emp-grid-item-content .kanban-card-priority {
