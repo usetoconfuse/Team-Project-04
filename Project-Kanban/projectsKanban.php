@@ -115,42 +115,9 @@
             <!--Body-->
             <form id="filter-modal-form" class="modal-body">
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
-                    <!--DropDown 1 - Mgr View-->
-                    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Team Leader')): ?>
-                        <div class="task-dropdown task-dropdown-technical">
-                            <label for="user-filter">User</label>
-                            <div class="task-dropdown-select-options">
-                                <div class="task-dropdown-technical-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
-                                </div>
-                                <select name="user-filter" id="user-filter">
-                                    <option value="" selected disabled hidden>Choose</option>
-                                    <option value="jlittle">John Little</option>
-                                    <option value="qlittle">Quinn Little</option>
-                                    <option value="jganatra">Jeevan Ganatra</option>
-                                    <option value="Dan Novetsky">Dan Novetsky</option>
-                                    <option value="Zoran">Zoran</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!--DropDown 1 - Emp View-->
-                    <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Employee'): ?>
-                        <div class="task-dropdown task-dropdown-technical">
-                            <label for="user-filter">User</label>
-                            <div class="task-dropdown-select-options">
-                                <div class="task-dropdown-technical-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
-                                </div>
-                                <select name="user-filter" id="user-filter">
-                                    <option value="" selected disabled hidden>Choose</option>
-                                    <option value="me">Me</option>
-                                    <option value="all-tasks">All Tasks</option>
-                                </select>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    <!--DropDown 2-->
+                   
+                
+                    <!--DropDown 1-->
                     <div class="task-dropdown task-dropdown-priority">
                         <label for="priority">Priority</label>
                         <div class="task-dropdown-select-options">
@@ -167,7 +134,7 @@
                             </select>
                         </div>
                     </div>
-                    <!--DropDown 3-->
+                    <!--DropDown 2-->
                     <div class="task-dropdown task-dropdown-date">
                         <label for="date">Due Date</label>
                         <div class="task-dropdown-select-options">
