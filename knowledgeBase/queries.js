@@ -1,4 +1,5 @@
 const BASE_QUERY_PATH = 'knowledgeBase/query/';
+let user;
 
 // Query is a object mapping query names to value
 const doRequest = async (method, endpoint, query, body) => {
@@ -21,6 +22,11 @@ const doRequest = async (method, endpoint, query, body) => {
     }
 }
 
+const getUser = async () => {
+    user = await doRequest("GET", 'getUser', {});
+    return user;
+};
+
 // fetch method for getting ALL posts with no constraints 
 const fetchPosts = async (topic, type, query) => {
     const params = {};
@@ -34,6 +40,18 @@ const fetchPosts = async (topic, type, query) => {
         params.query = query;
     }
     return await doRequest("GET", 'getPosts', params);
+};
+
+const editPost = async (postId, title, content, type, topic, visibility) => {
+    const formData = new FormData();
+    formData.append('postId', postId);
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('type', type);
+    formData.append('topic', topic);
+    formData.append('visibility', visibility);
+
+    return await doRequest("POST", 'editPost', {}, formData);
 };
 
 //method to get all the topics within the DB
@@ -90,7 +108,7 @@ const renderTopicsInModal = (topics) => {
 
 
 //general method to renderAllposts to load them onto the page - REUSABLE
-const renderAllPosts = (posts) => {
+const renderAllPosts = async (posts) => {
     const postsContainer = document.getElementById('kb-posts-list');
     postsContainer.innerHTML = '';
 
@@ -98,15 +116,17 @@ const renderAllPosts = (posts) => {
         postsContainer.innerHTML = '<p>No Posts Available</p>';
         return;
     };
+    for (post of posts) {
 
-    posts.forEach(post => {
-        const currentUserHtml = '';
-        // Check if the current user is the author (you may need to adjust this logic based on your actual user authentication)
-        if (post.Forename + ' ' + post.Surname === 'John Little') {
+        let currentUserHtml = '';
+
+        // Only allow editing/deleting of posts if the user is the author or an admin.
+        // TODO: If the post is protected don't allow author either.
+        if (post.User_ID == user.user_id || user.role == 'admin') {
             currentUserHtml = `
-        <button class="black-btn">Edit Post</button>
-        <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
-      `;
+            <button class="black-btn">Edit Post</button>
+            <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
+            `;
         }
         
         let currentTypeHtml = '';
@@ -148,7 +168,7 @@ const renderAllPosts = (posts) => {
 
         // Append the post HTML to the container
         postsContainer.insertAdjacentHTML('beforeend', postHTML);
-    });
+    }
 }
 
 // Helper function to convert newline characters to HTML line breaks
@@ -408,8 +428,9 @@ document.querySelector("#kb-post-view .kb-share-link").addEventListener("click",
 });
 
 //when the page loads fetch all relevant posts and topic from the db onto the page
-window.onload = () => {
-    updatePosts();
-    updateTopics();
-    fetchTopics().then(renderTopicsInModal);
+window.onload = async () => {
+    user = await getUser();
+    await updatePosts();
+    await updateTopics();
+    await fetchTopics().then(renderTopicsInModal);
 };

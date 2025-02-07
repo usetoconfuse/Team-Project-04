@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../../config/db-setup.php';
 
 //POST method to gather all data from Form as well as User data
@@ -7,7 +8,7 @@ $content = $_POST['content'];
 $type = $_POST['type'];
 $topic = $_POST['topic'];
 $visibility = $_POST['visibility'];
-$userId = 1;
+$userId = $_SESSION['user_id'];
 
 // using data from the Post modal form add a post to the knowledge base table
 $sql1 = "
