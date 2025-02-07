@@ -189,9 +189,9 @@ function generateCard(kanbanData) {
                               </div>
                           </div>`
     } else if (userRole === 'Employee' || userRole === 'Team Leader') {
-      roleBasedBtns = ` <div class="report-task">
-                              <p>Report as stuck</p>
-                            </div>
+      roleBasedBtns = ` <a class="report-task">
+                              Report as stuck
+                            </a>
                             <div class="move-task-dropdown">
                               <select>
                                 <option value="kanban-to-do">To Do</option>
@@ -286,11 +286,18 @@ function generateCard(kanbanData) {
                                         </div>
     `;
 
+    const reportStuckBtn = viewTaskModal.querySelector('.report-task');
+    reportStuckBtn.addEventListener('click', async () =>{
+
+      await reportStuck(task.Task_ID);
+      viewTaskModal.style.display = 'none';
+    });
+
     //Add Card and Modal to body
     document.body.appendChild(viewTaskModal);
     
     kanbanColumns[task.Status]?.appendChild(taskCard);
-
+    
     //on load, set status in card
     const statusBox = viewTaskModal.querySelector('.status-box');
     const statusCircle = viewTaskModal.querySelector('.status-box .task-indicator-circle');
@@ -443,6 +450,30 @@ function generateCard(kanbanData) {
 
 }
 
+async function reportStuck(taskID) {
+  try {
+    const url = 'Project-Kanban/confirmStuck.php';
+    const data = {
+      Task_ID: taskID
+    };
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(url, params);
+    if (!response.ok) {
+      throw new Error('Failed to update task status');
+    } else {
+      alert('Task Reported as Stuck');
+    }
+
+  } catch (error) {
+    console.log("Error reporting a task as stuck", error);
+  }
+}
+
 async function updateTaskStatus(taskID, newStatus) {
   try {
     const url = 'Project-Kanban/update-status-db.php';
@@ -462,7 +493,6 @@ async function updateTaskStatus(taskID, newStatus) {
       throw new Error('Failed to update task status');
     }
 
-    console.log("Updated task status");
 
   } catch (error) {
     console.log("Error updating the task status", error);
