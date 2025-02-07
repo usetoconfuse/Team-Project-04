@@ -70,3 +70,23 @@ img {
     background-color: #F5F5F5;
 }
 
+
+/* Scrollbar styling - does not affect Firefox or Internet Explorer */
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    border-radius: 1rem;
+    width: 0.7rem;
+    height: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+    padding: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9C9C9C;
+    border-radius: 1rem;
+    border: 0.15rem solid transparent;
+    background-clip: content-box;
+}
