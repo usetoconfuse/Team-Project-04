@@ -1,5 +1,5 @@
-// Made by F328049 23/12/24
-// Updated by F328049 03/02/24
+// Made by Quinn Little 23/12/24
+// Updated by Quinn Little 03/02/24 lines 6 to 48
 
 
 
@@ -43,7 +43,6 @@ mgrStatsPostTypeButtons.forEach(button => {
     button.addEventListener("click", () => {
         mgrStatsPostTypeButtons.forEach(btn => btn.classList.remove('mgrStats-active'))
         button.classList.add('mgrStats-active')
-        filterPosts();
     })
 })
    
@@ -76,4 +75,26 @@ document.getElementById('fetchDataTest').addEventListener('click', async functio
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
+});
+
+
+
+const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+weekhrs = document.getElementById('userStats-weekHrsContainerGraph')
+
+const weekhrsansd = new Chart(weekhrs, {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor:"rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options:{
+  responsive: true,
+  }
 });
