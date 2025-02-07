@@ -668,11 +668,17 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .report-task {
-    background-color: #E6757E;
+    background-color: #f98a93;
     color: black; 
     border-radius: 5px;
     padding: 0.6rem 0.8rem;
     flex-grow: 1;
+    cursor: pointer;
+}
+
+.report-task:hover {
+    background-color: #E6757E;
+    transition: all 0.2s ease-in-out; 
 }
 
 .right-arrow, .left-arrow {
