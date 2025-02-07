@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
                     $password_hashed = password_hash($inputted_password, PASSWORD_DEFAULT);
                     $user_type = 'Employee';
                     $employee_status = 1;
-                    $query = $conn->prepare("INSERT INTO Users (Email, Forename, Surname, Password, User_Type, Employee_Status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $query = $conn->prepare("INSERT INTO Users (Email, Forename, Surname, Password, User_Type, Employee_Status) VALUES (?, ?, ?, ?, ?, ?)");
                     $query->bind_param("sssssi", $email, $forename, $surname, $password_hashed, $user_type, $employee_status);
                     
                     if ($query->execute()) {
