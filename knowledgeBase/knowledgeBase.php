@@ -71,11 +71,83 @@
         </div>
 
         <!--Add Post Modal-->
-        <div id="post-modal" class="modal">
+        <div id="add-post-modal" class="modal">
             <div class="modal-box">
                 <!--Header-->
                 <div class="modal-header">
                     <p>Add Post</p>
+                    <div class="close-modal-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </div>
+                </div>
+                <!--Body-->
+                <form id="post-modal-form" class="modal-body">
+                    <div class="post-title-form">
+                        <label for="postInput">Title :</label>
+                        <input type="text" id="postInput" name="title" placeholder="Enter post title">
+                    </div>
+                    <div class="post-content-form">
+                        <label for="contentInput">Content :</label>
+                        <textarea type="text" id="contentInput" name="content"
+                            placeholder="Enter post content"></textarea>
+                    </div>
+                    <div class="task-dropdowns-form" id="post-dropdowns-form">
+                        <!--technical or non technical-->
+                        <div class="task-dropdown task-dropdown-technical">
+                            <label for="type-dropdown">Type :</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-technical-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="type" id="type-dropdown">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="Technical">Technical</option>
+                                    <option value="Non-Technical">Non-technical</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--topic-->
+                        <div class="task-dropdown task-dropdown-topic">
+                            <label for="topic-modal-dropdown">Topic :</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-topic-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="topic" id="topic-modal-dropdown">
+                                    <!--These topics will be retrieved via sql query-->
+                                    <option value="" selected disabled hidden>Choose</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="task-dropdown task-dropdown-topic">
+                            <label for="visibility-dropdown">Visibility :</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-topic-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-user"></i>
+                                </div>
+                                <select name="visibility" id="visibility-dropdown">
+                                    <option value="" selected disabled hidden>Choose</option>
+                                    <option value="All Users">All Users</option>
+                                    <!--disabled , will depend on if user or manager logged in-->
+                                    <option value="Manager Only" disabled>Manager Only</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="task-submit-buttons">
+                    <div class="add-post-btn black-btn" id="add-post-btn">
+                        Add Post
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="edit-post-modal" class="modal">
+            <div class="modal-box">
+                <!--Header-->
+                <div class="modal-header">
+                    <p>Edit Post</p>
                     <div class="close-modal-btn">
                         <i class="fa-solid fa-x"></i>
                     </div>
@@ -138,7 +210,7 @@
                 </form>
                 <div class="task-submit-buttons">
                     <div class="add-post-btn black-btn" id="add-post-btn">
-                        Add Post
+                        Edit Post
                         <i class="fa fa-arrow-right"></i>
                     </div>
                 </div>

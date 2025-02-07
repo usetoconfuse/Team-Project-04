@@ -297,37 +297,7 @@ const updateTopics = async () => {
     await fetchTopics(selectedTopicQuery).then(renderTopics);
 }
 
-// on submission of the add post form add the new post to the knowledgebase db
-document.getElementById('add-post-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-
-    //gather data from the form
-    const title = document.getElementById('postInput').value;
-    const content = document.getElementById('contentInput').value;
-    const type = document.getElementById('type-dropdown').value;
-    const topic = document.getElementById('topic-modal-dropdown').value;
-    const visibility = document.getElementById('visibility-dropdown').value;
-
-    //pass form data into addpost sql query
-    doRequest("POST", "addPost", {}, {
-        'title': title,
-        'content': content,
-        'type': type,
-        'topic': topic,
-        'visibility': visibility
-    })
-        .then((data) => {
-            //once form successfully submitted alert the user and reset the form
-            alert('Post added successfully!');
-            updatePosts();
-        })
-    // need to add validation to the form ...
-});
-
-
-const makeModal = (modalId) => {
-    const modal = document.getElementById(modalId);
-
+const makeModal = (modal) => {
     closeBtn = modal.querySelector('.close-modal-btn');
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -343,15 +313,46 @@ const makeModal = (modalId) => {
 }
 
 //Add Post Modal Functionality
-const [closeAddPostModal, openAddPostModal] = makeModal('post-modal');
+const addPostModal = document.getElementById('add-post-modal');
+const [closeAddPostModal, openAddPostModal] = makeModal(addPostModal);
 
 const addPostBtn = document.querySelector('#new-post-btn');
 addPostBtn.addEventListener('click', () => {
     openAddPostModal();
 });
 
+const submitAddPostModalBtn = document.getElementById('add-post-btn');
+// on submission of the add post form add the new post to the knowledgebase db
+submitAddPostModalBtn.addEventListener('click', async (event) => {
+    // Helper function to get the value of an input field.
+    const getValue = (id) => { addPostModal.getElementById(id).value; }
+
+    // Send post creation request to the server.
+    const data = await doRequest("POST", "addPost", {}, {
+        'title': getValue('postInput'),
+        'content': getValue('contentInput'),
+        'type': getValue('type-dropdown'),
+        'topic': getValue('topic'),
+        'visibility': getValue('visibility-dropdown')
+    });
+
+    alert('Post added successfully!');
+    await updatePosts();
+    closeAddPostModal();
+});
+
+// Edit Post Modal
+const editPostModal = document.getElementById('edit-post-modal');
+const [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
+
+const editPostBtn = document.querySelector('#new-post-btn');
+editPostBtn.addEventListener('click', () => {
+    openEditPostModal();
+});
+
 //Add topic Modal functionality
-const [closeAddTopicModal, openAddTopicModal] = makeModal('topic-modal');
+const addTopicModal = document.getElementById('topic-modal');
+const [closeAddTopicModal, openAddTopicModal] = makeModal(addTopicModal);
 
 const addTopicBtn = document.querySelector('#new-topic-btn');
 const submitTopicBtn = document.querySelector('#add-topic-btn');
@@ -370,6 +371,7 @@ submitTopicBtn.addEventListener('click', async (event) => {
     await fetchTopics().then(renderTopicsInModal);
 
     alert('Topic added successfully! ');
+    closeAddTopicModal();
 });
 
 //topic search bar functionality
