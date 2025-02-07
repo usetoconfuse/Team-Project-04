@@ -130,7 +130,6 @@
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
-                                <option value="Stuck">Stuck</option>
                             </select>
                         </div>
                     </div>
@@ -141,14 +140,13 @@
                             <div class="task-dropdown-date-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-calendar-days"></i>
                             </div>
-                            <select name="date" id="date">
-                                <option value="all">All</option>
-                                <option value="overdue">Overdue</option>
-                                <option value="today">Today</option>
-                                <option value="tomorrow">Tomorrow</option>
-                                <option value="this-week">This Week</option>
-                                <option value="next-week">Next Week</option>
-                                <option value="later">Later</option>
+                            <select name="date" id="date-task">
+                                <option value="All">All</option>
+                                <option value="Today">Today</option>
+                                <option value="Tomorrow">Tomorrow</option>
+                                <option value="This Week">This Week</option>
+                                <option value="Next Week">Next Week</option>
+                                <option value="Later">Later</option>
                             </select>
                         </div>
                     </div>

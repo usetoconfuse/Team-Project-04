@@ -66,7 +66,7 @@
                                 <div class="task-dropdown-date-icon task-dropdown-icon">
                                     <i class="fa fa-regular fa-calendar"></i>
                                 </div>
-                                <input type="date" name="date" id="date">
+                                <input type="date" name="date" id="date-project">
                             </div>  
                         </div>
                     </div>

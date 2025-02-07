@@ -13,7 +13,10 @@ window.addEventListener("storage", function () {
     const applyFilterBtn = document.querySelector('#add-filter-btn');
     applyFilterBtn.addEventListener('click', () => {
       const priorityValue = document.querySelector('.task-dropdown-priority #priority').value;
-      const filters = {priorityValue};
+      const dateValue = document.querySelector('.task-dropdown-date #date-task').value;
+      console.log(document.querySelector('.task-dropdown-date #date-task'));
+      
+      const filters = {dateValue};
 
       filterTaskModal.style.display = 'none';
       getKanbanData(userID, selectedProjectID, filters);
@@ -631,7 +634,7 @@ addTaskBtn.forEach(btn => {
                         <div class="task-dropdown-date-icon task-dropdown-icon">
                             <i class="fa fa-regular fa-calendar"></i>
                         </div>
-                        <input type="date" name="date" id="date">
+                        <input type="date" name="date" id="date-input">
                     </div>  
                 </div>
             </div>

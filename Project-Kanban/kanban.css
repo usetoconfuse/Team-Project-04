@@ -1,5 +1,9 @@
 
 /*====Project Information====*/
+#kanban-content {
+    height: 100dvh;
+}
+
 .project-intro {
     display: flex;
     justify-content: space-between;

@@ -7,6 +7,7 @@ $projectId = isset($_GET['projectID']) ? intval($_GET['projectID']) : null;
 $userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 
 $priority = isset($_GET['priorityValue']) ? $_GET['priorityValue'] : null;
+$date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
 
 $taskSQL = "SELECT t.Task_ID, t.Name, t.Description, t.Status, t.Due_Date, t.Priority, t.Author_ID, t.Stuck, t.Project_ID,
             t.Assignee_ID, p.Project_Title, u1.Forename AS User_Forename, u1.Surname AS User_Surname, u2.Forename AS Author_Forename, u2.Surname AS Author_Surname
@@ -18,6 +19,28 @@ $taskSQL = "SELECT t.Task_ID, t.Name, t.Description, t.Status, t.Due_Date, t.Pri
 
 if (!empty($priority)) {
     $taskSQL .= " AND t.Priority = '$priority'";  
+}
+
+if (!empty($date)) {
+    switch ($date) {
+        case 'Today':
+            $taskSQL .= " AND t.Due_Date = CURDATE()";
+            break;
+        case 'Tomorrow':
+            $taskSQL .= " AND t.Due_Date = DATE_ADD(CURDATE(), INTERVAL 1 DAY)";
+            break;
+        case 'This Week':
+            $taskSQL .= " AND YEARWEEK(t.Due_Date, 1) = YEARWEEK(CURDATE(), 1)";
+            break;
+        case 'Next Week':
+            $taskSQL .= " AND t.Due_Date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 WEEK)";
+            break;
+        case 'Later':
+            $taskSQL .= " AND t.Due_Date > CURDATE()";
+            break;
+        default:
+            break;
+    }
 }
 
 $taskResult = mysqli_query($conn, $taskSQL);
