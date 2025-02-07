@@ -180,7 +180,7 @@ session_start()
             </div>
 
             <div class="nav-item-content" id="stats-content">
-                <?php include 'ManagerDash-Stats/statisticsPage.php'; ?>
+                <?php include 'ManagerDash-Stats/statisticsHomePage.php'; ?>
             </div>
 
             <div class="nav-item-content" id="overview-content">
