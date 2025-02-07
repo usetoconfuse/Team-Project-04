@@ -54,7 +54,7 @@ function generateCard(kanbanData) {
   kanbanData.forEach(task => {
     const taskCard = document.createElement("div");
     taskCard.classList.add("kanban-card");
-    taskCard.setAttribute("draggable", true);
+    //taskCard.setAttribute("draggable", true);
 
     if (taskIsOverdue(task.Due_Date)) {
       taskCard.id = "kanban-task-overdue";
@@ -110,7 +110,7 @@ function generateCard(kanbanData) {
 
     const fullTaskDescription = task.Description;
     const taskDescriptionWords = fullTaskDescription;
-    const previewTaskDescription = taskDescriptionWords.substring(0, 40) + '...';
+    const previewTaskDescription = taskDescriptionWords.substring(0, 60) + '...';
   
     //Set shorter description inside the card
     const taskDescriptionElement = taskCard.querySelector('.kanban-card .kanban-card-body .kanban-card-description');
@@ -315,6 +315,10 @@ function generateCard(kanbanData) {
       
     }); */
 
+    const kanbanCardDueDate = taskCard.querySelector('.due-date');
+    const currentSectionId = taskCard.parentElement.id;
+    validate_date_icon(taskCard, kanbanCardDueDate, currentSectionId);
+ 
     //Move button and Update Task Status in Database
     const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown select');
     const moveTaskBtn = viewTaskModal.querySelector('.move-task-dropdown .move-task-confirm');
@@ -322,7 +326,6 @@ function generateCard(kanbanData) {
     //Moving Cards Using Dropdown
     moveTaskBtn.addEventListener('click', async () => {
       const newSection = moveTaskDropDown.value;
-      console.log(newSection);
       const newSectionElement = document.getElementById(newSection);
 
       newSectionElement.insertBefore(taskCard, newSectionElement.firstChild);
@@ -331,15 +334,12 @@ function generateCard(kanbanData) {
       checkStatus(taskCard, statusBox, statusCircle)
       validate_date_icon(taskCard, kanbanCardDueDate, newSection);
 
-      let newStatus = "";
-      if (newSection === 'kanban-to-do') {
-        newStatus = 'To Do';
-      } else if (newSection === 'kanban-in-progress') {
-        newStatus = 'In Progress';
-      } else if (newSection === 'kanban-completed') {
-        newStatus = 'Completed';
-      }
-
+      let newStatus = {
+        'kanban-to-do': 'To Do',
+        'kanban-in-progress': 'In Progress',
+        'kanban-completed': 'Completed'
+      }[newSection];
+      
       await updateTaskStatus(task.Task_ID, newStatus);
 
       
@@ -384,22 +384,6 @@ function generateCard(kanbanData) {
     
       return closestTask;
     };*/
-
-
-    const kanbanCardDueDate = taskCard.querySelector('.due-date');
-    if (task.Status === "To Do" || task.Status === "In Progress") {
-      if (taskCard.id === 'kanban-task-overdue') {
-        kanbanCardDueDate.style.backgroundColor = '#E6757E';
-        kanbanCardDueDate.style.color = 'white';
-      } else {
-        kanbanCardDueDate.style.backgroundColor = '#F5F5F5';
-        kanbanCardDueDate.style.color = '#656565';
-      }
-    } else if (task.Status === "Completed") {
-      kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
-      kanbanCardDueDate.style.color = 'white';
-    }
-
 
 
   })
@@ -462,10 +446,9 @@ function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
       kanbanCardDueDate.style.backgroundColor = '#E6757E';
       kanbanCardDueDate.style.color = 'white';
     } else {
-      kanbanCardDueDate.style.backgroundColor = '';
-      kanbanCardDueDate.style.color = '#BAB7B7';
+      kanbanCardDueDate.style.backgroundColor = '#F5F5F5';
+      kanbanCardDueDate.style.color = '#656565';
     }
-  
   } else if (currentSectionId === 'kanban-completed') {
     kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
     kanbanCardDueDate.style.color = 'white';
