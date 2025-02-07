@@ -48,8 +48,13 @@ const fetchTopics = async (query) => {
 // Display the given topics in the sidebar on the page.
 const renderTopics = (topics) => {
     const topicsContainer = document.getElementById('topicsList');
-    topicsContainer.innerHTML = '';
 
+    if (topics.length === 0){
+        topicsContainer.innerHTML = '<p>No Topics Available</p>';
+        return;
+    }
+
+    topicsContainer.innerHTML = '';
     topics.forEach(topic => {
 
         // Create the HTML for the post
@@ -88,6 +93,11 @@ const renderTopicsInModal = (topics) => {
 const renderAllPosts = (posts) => {
     const postsContainer = document.getElementById('kb-posts-list');
     postsContainer.innerHTML = '';
+
+    if (posts.length === 0) {
+        postsContainer.innerHTML = '<p>No Posts Available</p>';
+        return;
+    };
 
     posts.forEach(post => {
         const currentUserHtml = '';
@@ -157,7 +167,7 @@ var selectedType = null;
 var selectedQuery = null;
 
 const updatePosts = async () => {
-    await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
+    const posts = await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
 
     for (post of document.querySelectorAll("#kb-posts-list .kb-post")) {
         const postId = post.id;
@@ -312,22 +322,6 @@ window.addEventListener('click', (e) => {
 submitTopicBtn.addEventListener('click', () => {
     addTopicModal.style.display = 'none';
 })
-
-//if no posts in search this function will prdouce an error message to display to the user
-const emptyPost = (res) =>{
-    if(res.length === 0){
-        const postsContainer = document.getElementById('kb-posts-list');
-        postsContainer.innerHTML = '<p>No Posts Available</p>';
-    }
-};
-
-//if no topics in search this function will prdouce an error message to display to the user
-const emptyTopic = (res) =>{
-    if(res.length === 0){
-        const postsContainer = document.getElementById('topicsList');
-        postsContainer.innerHTML = '<p>No Topics Available</p>';
-    }
-};
 
 //topic search bar functionality
 document.getElementById('searched-topic').addEventListener("input", async (e) =>{
