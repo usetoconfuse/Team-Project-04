@@ -329,6 +329,7 @@ function generateCard(kanbanData) {
 
       newSectionElement.insertBefore(taskCard, newSectionElement.firstChild);
       viewTaskModal.style.display = 'none';
+      checkStatus(taskCard, statusBox, statusCircle)
       validate_date_icon(taskCard, kanbanCardDueDate, newSection);
 
       
