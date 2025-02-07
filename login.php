@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     <section class="top-navbar">
         <div class="top-navbar-left">
             <div id="logo-container">
-                    <img src="make-it-all-logo.jpg" alt="logo">
+                    <img src="assets/make-it-all-logo.jpg" alt="logo">
             </div>
         </div>
     </section>
@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             </div>
         </div>
         <div id="right">
-            <img src="Demo.svg" alt="demo-image">
+            <img src="assets/Demo.svg" alt="demo-image">
         </div>
     </div>
 
@@ -322,7 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             </div>
         </div>
         <div id="right">
-            <img src="Demo.svg" alt="demo-image">
+            <img src="assets/Demo.svg" alt="demo-image">
         </div>
     </div>
 

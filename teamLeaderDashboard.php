@@ -28,7 +28,7 @@ session_start()
 
         <nav id="navbar">
             <div id="logo-container">
-                <img src="logo.jpeg" alt="logo">
+                <img src="assets/make-it-all-logo.jpg" alt="logo">
             </div>            
 
             <button type="button" class="hamburger" id="menu-btn">

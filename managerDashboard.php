@@ -36,7 +36,7 @@ session_start()
     <section class="top-navbar">
         <div class="top-navbar-left">
             <div id="logo-container">
-                    <img src="make-it-all-logo.jpg" alt="logo">
+                    <img src="assets/make-it-all-logo.jpg" alt="logo">
             </div>
         </div>
 
@@ -66,9 +66,6 @@ session_start()
             </button>
 
             <div class="menu">
-                <!--<div id="logo-container">
-                    <img src="logo.jpeg" alt="logo">
-                </div>-->
 
                 <div class="intro-txt">
 
