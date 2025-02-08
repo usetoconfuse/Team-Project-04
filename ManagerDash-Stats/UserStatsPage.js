@@ -184,14 +184,21 @@ async function fetchUserProjHrsTable() {
                 container.innerHTML = ''; // Clear any existing content
 
                 container.innerHTML  += "<table class='statsHome-table'>"
-                container.innerHTML  += '<thead><tr><th>Task ID</th><th>Task Name</th><th>Description</th><th>Status</th><th>Due Date</th><th>Priority</th><th>Start Date</th><th>Project Name</th></tr></thead>'
+                container.innerHTML  += '<thead><tr><th>Task ID</th><th>Task Name</th><th>Description</th><th>Status</th><th>Stuck?</th><th>Due Date</th><th>Priority</th><th>Start Date</th><th>Project Name</th></tr></thead>'
                 container.innerHTML  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
-                container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" + item.Task_ID + "</td><td>" + item.Name + "</td><td>" + item.Description + "</td><td>" + item.Status + "</td><td>" + item.Due_Date + "</td><td>" + item.Priority + "</td><td>" + item.Start_Date+ "</td><td>" + item.Project_Title+ "</td></tr>"
-                });     
-                container.innerHTML  += '</tbody>'
-                container.innerHTML  += '</table>';
+                    if (item.Stuck === "1") { // Make the "stuck" field readable for user.
+                        var stuck = "Yes";
+                        var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
+                    } else {
+                        var stuck = "No";
+                        var stuckStyles = "color:black";
+                    }
+                    container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" + item.Task_ID + "</td><td>" + item.Name + "</td><td>" + item.Description + "</td><td>" + item.Status + "</td><td style=" + stuckStyles + ";>" + stuck + "</td><td>" + item.Due_Date + "</td><td>" + item.Priority + "</td><td>" + item.Start_Date+ "</td><td>" + item.Project_Title+ "</td></tr>"
+                    });     
+                    container.innerHTML  += '</tbody>'
+                    container.innerHTML  += '</table>';
             } else {
                 var container = document.getElementById('allTaskTable-userStats');
                 container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
