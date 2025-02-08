@@ -1,124 +1,149 @@
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const gridContainer = document.getElementById("gridContainer");
 
+  const projectContainer = document.querySelector('#project-content')
+  const userID = projectContainer.getAttribute('data-user-id');
+  fetchProjectsData(userID);
 
+  async function fetchProjectsData(userID) {
+    try {
 
-const projectContainer = document.querySelector('#project-content')
-const userID = projectContainer.getAttribute('data-user-id');
-fetchProjectsData(userID);
-
-async function fetchProjectsData(userID) {
-  try {
-
-    let url = `Projects/projects-db.php?userID=${encodeURIComponent(userID)}`; 
-    const params = { 
-      method: "GET" 
-    }
-
-    const response = await fetch(url, params);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch projects data');
-    }
-
-    const projectData = await response.json();
-
-    console.log(projectData);
-
-    projectData.forEach((project) => {
-      const projectCard = document.createElement("div");
-      projectCard.classList.add('project-card');
-      projectCard.setAttribute('data-project-id', project.Project_ID);
-      
-      
-  
-      projectCard.innerHTML = `
-                                <div class="project-card-top">
-                                  
-                                    <p>${project.Project_Title}</p>
-                                  
-                                    <a href="#" class="black-btn">View</a>
-                                </div>
-                                <div class="project-card-progress">
-                                    <div class="project-card-progress-info">
-                                        <p>Progress</p>
-                                        <p>75%</p>
-                                    </div>
-                                    <div class="project-card-progress-bar">
-                                        <div class="project-card-progress-bar-inner"></div>
-                                    </div>
-                                </div>
-  
-                                <div class="project-card-bottom">
-                                    <div class="project-card-task-count">
-                                      <i class="fa fa-solid fa-list-check"></i>
-                                      <p>${project.Task_Count} Tasks<p>
-                                    </div>
-                                
-                                    <div class="project-card-due-date">
-                                        <i class="fa fa-regular fa-calendar"></i>
-                                        <p>Due: ${project.Due_Date}</p>
-                                    </div>
-                                </div>
-                           
-                            `;
-  
-      const progressBar = projectCard.querySelector('.project-card-progress-bar-inner');
-      let progressString = "75%";
-      progressBar.style.width = progressString;
-      
-      let projectInt = 75;
-      if (projectInt <= 33) {
-        progressBar.style.backgroundColor = '#E6757E';
-      } else if (projectInt <= 66) {
-        progressBar.style.backgroundColor = '#EAB385';
-      } else if (projectInt <= 100) {
-        progressBar.style.backgroundColor = '#ADDA9D';
+      let url = `Projects/projects-db.php?userID=${encodeURIComponent(userID)}`; 
+      const params = { 
+        method: "GET" 
       }
-  
-      gridContainer.appendChild(projectCard);
-  
-      //Links to project kanban
-      projectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
-        e.preventDefault();
 
-        //Add to URL the project ID so it can be used in Kanban.js
-        /*const currentURL = new URL(window.location.href);
-        currentURL.searchParams.set('projectID', project.Project_ID);
-        history.pushState({projectID: project.Project_ID}, '', currentURL);
-        */
-       
+      const response = await fetch(url, params);
 
-        sessionStorage.setItem('clicked-project-id', project.Project_ID)
-        window.dispatchEvent(new Event("storage"))
+      if (!response.ok) {
+          throw new Error('Failed to fetch projects data');
+      }
+
+      const projectData = await response.json();
+
+      console.log(projectData);
+
+      projectData.forEach((project) => {
+        const projectCard = document.createElement("div");
+        projectCard.classList.add('project-card');
+        projectCard.setAttribute('data-project-id', project.Project_ID);
+        projectCard.setAttribute('data-project-title', project.Project_Title);
+        
+        
+    
+        projectCard.innerHTML = `
+                                  <div class="project-card-top">
+                                    
+                                      <p>${project.Project_Title}</p>
+                                    
+                                      <a href="#" class="black-btn">View</a>
+                                  </div>
+                                  <div class="project-card-progress">
+                                      <div class="project-card-progress-info">
+                                          <p>Progress</p>
+                                          <p>75%</p>
+                                      </div>
+                                      <div class="project-card-progress-bar">
+                                          <div class="project-card-progress-bar-inner"></div>
+                                      </div>
+                                  </div>
+    
+                                  <div class="project-card-bottom">
+                                      <div class="project-card-task-count">
+                                        <i class="fa fa-solid fa-list-check"></i>
+                                        <p>${project.Task_Count} Tasks<p>
+                                      </div>
+                                  
+                                      <div class="project-card-due-date">
+                                          <i class="fa fa-regular fa-calendar"></i>
+                                          <p>Due: ${project.Due_Date}</p>
+                                      </div>
+                                  </div>
+                            
+                              `;
+    
+        const progressBar = projectCard.querySelector('.project-card-progress-bar-inner');
+        let progressString = "75%";
+        progressBar.style.width = progressString;
+        
+        let projectInt = 75;
+        if (projectInt <= 33) {
+          progressBar.style.backgroundColor = '#E6757E';
+        } else if (projectInt <= 66) {
+          progressBar.style.backgroundColor = '#EAB385';
+        } else if (projectInt <= 100) {
+          progressBar.style.backgroundColor = '#ADDA9D';
+        }
+    
+        gridContainer.appendChild(projectCard);
+    
+        //Links to project kanban
+        projectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
+          e.preventDefault();
+
+          //Add to URL the project ID so it can be used in Kanban.js
+          /*const currentURL = new URL(window.location.href);
+          currentURL.searchParams.set('projectID', project.Project_ID);
+          history.pushState({projectID: project.Project_ID}, '', currentURL);
+          */
         
 
-        //console.log(sessionStorage.getItem('clicked-project-id'))
+          sessionStorage.setItem('clicked-project-id', project.Project_ID)
+          window.dispatchEvent(new Event("storage"))
+          
+
+          //console.log(sessionStorage.getItem('clicked-project-id'))
 
 
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => item.classList.remove('active'));
-  
-        const linkItem = document.querySelector('#current-project')
-        linkItem.style.display = 'block';
-        linkItem.classList.add('active');
-        document.querySelector('.nav-item#projects').classList.add('active');
-  
-        const navItemContents = document.querySelectorAll('.nav-item-content')
-        navItemContents.forEach(item => item.classList.remove('open'))
-        const contentArea = document.querySelector('#current-project-content')
-        contentArea.classList.add('open');
-      })
-  
-    });
+          const navItems = document.querySelectorAll('.nav-item');
+          navItems.forEach(item => item.classList.remove('active'));
+    
+          const linkItem = document.querySelector('#current-project')
+          linkItem.style.display = 'block';
+          linkItem.classList.add('active');
+          document.querySelector('.nav-item#projects').classList.add('active');
+    
+          const navItemContents = document.querySelectorAll('.nav-item-content')
+          navItemContents.forEach(item => item.classList.remove('open'))
+          const contentArea = document.querySelector('#current-project-content')
+          contentArea.classList.add('open');
+        })
+    
+      });
 
-  } catch(error) {
-    console.log("Fetch Issue",error);
-    //Show Error Card
-  }
+    } catch(error) {
+      console.log("Fetch Issue",error);
+      //Show Error Card
+    }
 }
 
+
+const searchBar = document.querySelector('.project-search #searched-project');
+
+searchBar.addEventListener('input', ()=>{
+
+  const searchValue = searchBar.value.toLowerCase();
+  const allProjects = document.querySelectorAll('.project-card');
+  let foundProjects = 0;
+  allProjects.forEach(project => {
+    const projectTitle = project.getAttribute('data-project-title').toLowerCase();
+
+    if (projectTitle.includes(searchValue)) {
+      foundProjects++;
+      project.style.display = 'block';
+    } else {
+      project.style.display = 'none';
+    }
+  })
+  if (foundProjects === 0) {
+    document.querySelector('.search-error-msg').style.display = 'block';
+  } else {
+    document.querySelector('.search-error-msg').style.display = 'none';
+  }
+})
 
 
 
