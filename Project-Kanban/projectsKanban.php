@@ -45,7 +45,7 @@
             <?php endif; ?>
             <div class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
-                All Projects
+                Close Project
             </div>
         </div>
 

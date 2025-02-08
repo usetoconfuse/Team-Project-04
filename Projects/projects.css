@@ -250,8 +250,7 @@
     outline: none;
     border-radius: var(--line-border-radius);
     cursor: pointer;
-    height: fit-content;
-    width: fit-content;
+
     padding: 10px;
     background-color: var(--bg-colour);
     color: var(--primary-colour);

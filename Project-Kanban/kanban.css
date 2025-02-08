@@ -737,6 +737,9 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 @media  (max-width: 1120px) {
+    #kanban-content {
+        min-height: 100dvh;
+    }
 
     .kanban-card-body, .kanban-body {
         display: none;
