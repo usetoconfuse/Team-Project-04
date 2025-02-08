@@ -1,4 +1,4 @@
-<div id="kanban-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="kanban-content" class="kanban-content-personal" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro">
         <div class="project-txt">
@@ -66,6 +66,18 @@
 
         <div class="kanban-separator"></div>
     </section>
+
+    <div class="task-search-container">
+        <div class="task-search">
+            <i class="fa fa-solid fa-search"></i>
+            <input type="text" placeholder="Search Tasks" id="searched-task">
+        </div>
+        <div>
+            <p class="search-task-error-msg">No Tasks Found</p>
+        </div>
+
+    </div>
+
 
     <!--Kanban Board-->
     <section class="kanban-board">

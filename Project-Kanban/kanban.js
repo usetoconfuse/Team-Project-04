@@ -151,6 +151,7 @@ function generateCard(kanbanData) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("kanban-card");
     //taskCard.setAttribute("draggable", true);
+    taskCard.setAttribute('data-task-title', task.Name);
 
     if (taskIsOverdue(task.Due_Date)) {
       taskCard.id = "kanban-task-overdue";
@@ -774,12 +775,6 @@ addTaskBtn.forEach(btn => {
 
 })
 
-
-//====View Task Modal 
-
-
-
-
 //Filter Modal Functionality
 const filterTaskModal = document.querySelector("#kanban-content #filter-modal");
 const filterTaskBtn = document.querySelector('#kanban-content  .filter-task-btn');
@@ -791,4 +786,34 @@ filterTaskBtn.addEventListener('click', () => {
   closeFilterTaskModal.addEventListener('click', () => {
     filterTaskModal.style.display = 'none';
   })
+
+
+//Keyword Search
+const searchBar = document.querySelector('.task-search #searched-task');
+
+searchBar.addEventListener('input', ()=>{
+  const searchValue = searchBar.value.toLowerCase();
+  const allTasks = document.querySelectorAll('.kanban-content-personal .kanban-card');
+  console.log(allTasks);
+  let foundTasks = 0;
+
+  allTasks.forEach(task => {
+    const taskTitle = task.getAttribute('data-task-title').toLowerCase();
+
+
+    if (taskTitle.includes(searchValue)) {
+      foundTasks++;
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  })
+  if (foundTasks === 0) {
+    document.querySelector('.search-task-error-msg').style.display = 'block';
+  } else {
+    document.querySelector('.search-task-error-msg').style.display = 'none';
+  }
+})
+
+
 
