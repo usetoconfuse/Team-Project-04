@@ -18,7 +18,7 @@ if (isset($_GET['ID'])) {
     WHERE tasks.Assignee_ID = '$userID'
     AND tasks.Status = 'Completed'
     GROUP BY tasks.Project_ID;
-            ";
+    ";
     
     // if ($type == "Technical"){
 	//     $sql .= " WHERE kb.Type = 'Technical' ";  
