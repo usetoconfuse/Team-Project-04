@@ -33,7 +33,7 @@
         <div class="vertical-bar"></div>
 
         <div class="projects-intro-buttons">
-            <div class="filter-task-btn black-btn">
+            <div class="filter-task-btn black-btn">Filter
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
 

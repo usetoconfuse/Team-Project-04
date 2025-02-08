@@ -124,6 +124,7 @@
 
 .filter-task-btn i {
     margin: 0;
+    margin-left: 0.4rem;
 }
 
 .all-projects-btn i, .add-task-btn i  {

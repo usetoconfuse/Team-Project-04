@@ -735,8 +735,8 @@ addTaskBtn.forEach(btn => {
 
 
 //Filter Modal Functionality
-const filterTaskModal = document.querySelector("#filter-modal");
-const filterTaskBtn = document.querySelector('.filter-task-btn');
+const filterTaskModal = document.querySelector("#kanban-content #filter-modal");
+const filterTaskBtn = document.querySelector('#kanban-content  .filter-task-btn');
 const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
 
 filterTaskBtn.addEventListener('click', () => {
