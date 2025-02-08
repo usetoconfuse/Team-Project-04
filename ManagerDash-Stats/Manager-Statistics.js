@@ -56,7 +56,9 @@ mgrStatsPostTypeButtons.forEach(button => {
    
 
 //Get all Projects query
-document.addEventListener('DOMContentLoaded', async function() {
+
+
+async function fetchProjectTable() {
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/projectStatsPage-Queries/projectStatsHomePageQuery.php');
@@ -87,9 +89,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
-});
+    };
 
-
+// Get all projects Event Listeners
+document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
+document.addEventListener('DOMContentLoaded', fetchProjectTable());
 
 
 
