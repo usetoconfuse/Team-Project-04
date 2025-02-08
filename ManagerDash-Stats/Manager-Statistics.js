@@ -61,7 +61,7 @@ mgrStatsPostTypeButtons.forEach(button => {
 document.getElementById('mgrUserStats').addEventListener('click', async function() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('userStatsPage-Queries/userStatsHomePageQuery.php');
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsHomePageQuery.php');
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
@@ -72,16 +72,20 @@ document.getElementById('mgrUserStats').addEventListener('click', async function
         const data = await response.json();
         console.log("2: ", data[0].Forename);
 
-        // Find the container to display the data
-        // const container = document.getElementById('dataContainer');
-        // container.innerHTML = ''; // Clear any existing content
+        // Find the container/table to display the data
+        var container = document.getElementById('userStatsHomeTbl');
+        container.innerHTML = ''; // Clear any existing content
 
-        // // Loop through the data and create a new element for each item
-        // data.forEach(function(item) {
-        //     const div = document.createElement('div');
-        //     div.textContent = 'Number of projects which have tasks (starting from Project_ID 1): ' + item.projectCount;
-        //     container.appendChild(div); // Add the new element to the container
-        // });     
+        container.innerHTML  += "<table class='statsHome-table'>"
+        container.innerHTML  += '<thead><tr><th>User ID</th><th>Forename</th><th>Surname</th><th>Job Position</th></tr></thead>'
+        container.innerHTML  += '<tbody>'
+        // Loop through the data and create a new element for each item
+        data.forEach(function(item) {
+           container.innerHTML  += "<tr onclick=redirectToPage('ManagerDash-Stats/userStatsPage.php?ID=" + item.User_ID + "')><td>" + item.User_ID + "</td><td>" + item.Forename + "</td><td>" + item.Surname + "</td><td>" + item.User_Type + "</td></tr>"
+        });     
+        container.innerHTML  += '</tbody>'
+        container.innerHTML  += '</table>';
+
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
