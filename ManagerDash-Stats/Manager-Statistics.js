@@ -121,7 +121,7 @@ document.getElementById('mgrUserStats').addEventListener('click', async function
         container.innerHTML  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           container.innerHTML  += "<tr onclick=redirectToPage('ManagerDash-Stats/userStatsPage.php?ID=" + item.User_ID + "')><td>" + item.User_ID + "</td><td>" + item.Forename + "</td><td>" + item.Surname + "</td><td>" + item.User_Type + "</td></tr>"
+           container.innerHTML  += "<tr onclick=redirectToPage('ManagerDash-Stats/userStatsPage.php?ID=" + item.User_ID + "&" + item.Forename + "&" + item.Surname + "')><td>" + item.User_ID + "</td><td>" + item.Forename + "</td><td>" + item.Surname + "</td><td>" + item.User_Type + "</td></tr>"
         });     
         container.innerHTML  += '</tbody>'
         container.innerHTML  += '</table>';

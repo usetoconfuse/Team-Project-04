@@ -12,11 +12,48 @@ const urlObj = new URL(url);
 const params = new URLSearchParams(urlObj.search);
 
 const userID = params.get('ID');
+const forename = params.get('forename'); 
+const surname = params.get('surname');
 
 //console.log(userID);
 
+//Function to fetch overall manhours per project of a user
+async function fetchUserProjHrsTable() {
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch('userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userID);
+        console.log("1: ", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        console.log("2: ", data[0].Project_ID);
+
+        // Find the container/table to display the data
+        var container = document.getElementById('userStats-projHrsTable');
+        container.innerHTML = ''; // Clear any existing content
+
+        container.innerHTML  += "<table class='statsHome-table'>"
+        container.innerHTML  += '<thead><tr><th>Project ID</th><th>Project Name</th><th>Total Man Hours Spent by' + forename + ' ' + surname + '(' + userID + ')' + '</th></tr></thead>'
+        container.innerHTML  += '<tbody>'
+        // Loop through the data and create a new element for each item
+        data.forEach(function(item) {
+           container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" + item.Project_ID + "</td><td>" + item.Project_Title + "</td><td>" + item.TotalHrs + "</td></tr>"
+        });     
+        container.innerHTML  += '</tbody>'
+        container.innerHTML  += '</table>';
+
+    } catch (error) {
+        console.error('Error:', error); // Log any errors that occur
+    }
+    };
 
 
+
+//Function to fetch all tasks of a user
 async function fetchUserTaskTable() {
     try {
         // Make an HTTP request to the PHP file
@@ -51,8 +88,11 @@ async function fetchUserTaskTable() {
     };
 
 // Event Listeners
+//Fetch all tasks of a user
 document.addEventListener('DOMContentLoaded', fetchUserTaskTable());
 
+//Fetch overall project hours of a user
+document.addEventListener('DOMContentLoaded', fetchUserProjHrsTable());
 
 
 

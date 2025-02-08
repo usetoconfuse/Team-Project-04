@@ -23,13 +23,13 @@
                 <!-- <canvas id="weeklyManHrsChart" width="400" height="200"></canvas> -->
                 <!-- Graph showing how many tasks in each category are assigned to each member -->
                 <div id="userStats-weeklyGraph" class="mgrStatsUser-grid-item">
-                <div id="userStats-weekHrsContainer">
+                <div id="userStats-weekHrsContainer"> <!--GRAPH OVERALL MAN HOURS LAST 7 DAYS-->
                     <canvas id="userStats-weekHrsContainerGraph"></canvas>
                 </div>
                 </div>
-
-                <div id='userStats-taskTable' class='mgrStatsUser-grid-item'>
-                    <table id="allTaskTable-userStats">
+<!-- //TABLE OF EVERY PROJECT FOR THAT USER, AND MAN HOURS -->
+                <div id='userStats-projHrs' class='mgrStatsUser-grid-item'>
+                    <table id="userStats-projHrsTable">
                 <!-- Fetch Data Here -->
                     </table>
             <!-- </div> -->
@@ -37,11 +37,10 @@
 
 
 <!-- test -->
-
+<!-- Table of all tasks for specific user -->
         <div id="userStats-allTasksUser" class="mgrStatsUser-grid-item">
-        <table>
-                <th>ID</th><th>Project</th><th>Task</th><th>Man Hours</th>
-            <tr><td>1</td><td>Proj A</td><td>make python</td><td>5</td></tr>    
+        <table id="allTaskTable-userStats">
+            
             </table>
         </div>
    
