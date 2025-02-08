@@ -22,11 +22,11 @@ if (isset($_GET['ID'])) {
 
     LEFT JOIN 
         tasks ON tasks.Project_ID = projects.Project_ID 
-        AND tasks.Assignee_ID = '41' 
+        AND tasks.Assignee_ID = '$userID' 
         AND tasks.Status = 'Completed'
         INNER JOIN 
         user_teams ON projects.Project_ID = user_teams.Project_ID
-        AND user_teams.User_ID='41'
+        AND user_teams.User_ID='$userID'
 
     GROUP BY 
         projects.Project_ID;
