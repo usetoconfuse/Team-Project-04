@@ -130,11 +130,22 @@ async function fetchUserProjHrsTable() {
             container.innerHTML = ''; // Clear any existing content
 
             container.innerHTML  += "<table class='statsHome-table'>"
-            container.innerHTML  += '<thead><tr><th>Project ID</th><th>Project Name</th><th>Total Man Hours Spent by' + forename + ' ' + surname + '(' + userID + ')' + '</th></tr></thead>'
+
+            //Approx man-hrs as tasks could be shorter/longer than expected
+            container.innerHTML  += '<thead><tr><th>Project ID</th><th>Project Name</th><th>Approx Man-Hours Spent by ' 
+            + forename + ' ' + surname + ' (' + userID + ')' 
+            + '</th><th>Number of Tasks Completed</th></tr></thead>'
+
             container.innerHTML  += '<tbody>'
+
             // Loop through the data and create a new element for each item
             data.forEach(function(item) {
-            container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" + item.Project_ID + "</td><td>" + item.Project_Title + "</td><td>" + item.TotalHrs + "</td></tr>"
+            container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" 
+            + item.Project_ID + "</td><td>" 
+            + item.Project_Title + "</td><td>" 
+            + item.totalHrs + "</td><td>" 
+            + item.totalTasksCompleted 
+            + "</td></tr>"
             });     
             container.innerHTML  += '</tbody>'
             container.innerHTML  += '</table>';
@@ -217,18 +228,32 @@ function createTaskStatusGraph(currentTaskStatus) {
         data: {
             labels: daysOfWeek,
             datasets: [{
-            backgroundColor:"rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
+                label:['To Do', 'In Progress', 'Completed', 'Stuck'],
+            backgroundColor:["rgba(255, 85, 0, 0.5)", "rgba(255, 225, 0, 0.5)", "rgba(111, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"],
+            borderColor: ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
             data: currentTaskStatus
             }]
         },
         options:{
             responsive: true,
+          
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color:  ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
+                    }
+                }
+            },    
             scales: {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true // Make y-axis start at zero.
                     }}]
+            },
+            title: {
+                display: true,
+                text: `Task Status Graph for user ${userID} - ${forename} ${surname}`
                 }
         }
         });

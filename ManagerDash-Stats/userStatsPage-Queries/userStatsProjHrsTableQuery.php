@@ -12,12 +12,24 @@ if (isset($_GET['ID'])) {
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select the first 20 tasks for the given UserID
-    $sql = "SELECT projects.Project_ID, projects.Project_Title, SUM(tasks.Man_Hours) AS 'TotalHrs'
-    FROM tasks INNER JOIN projects 
-    ON tasks.Project_ID = projects.Project_ID 
-    WHERE tasks.Assignee_ID = '$userID'
-    AND tasks.Status = 'Completed'
-    GROUP BY tasks.Project_ID;
+    $sql = "SELECT 
+    projects.Project_ID, 
+    projects.Project_Title, 
+    COALESCE(SUM(tasks.Man_Hours), 0) AS 'totalHrs', 
+    COALESCE(COUNT(tasks.Task_ID), 0) AS 'totalTasksCompleted'
+    FROM 
+        projects
+
+    LEFT JOIN 
+        tasks ON tasks.Project_ID = projects.Project_ID 
+        AND tasks.Assignee_ID = '41' 
+        AND tasks.Status = 'Completed'
+        INNER JOIN 
+        user_teams ON projects.Project_ID = user_teams.Project_ID
+        AND user_teams.User_ID='41'
+
+    GROUP BY 
+        projects.Project_ID;
     ";
     
     // if ($type == "Technical"){
