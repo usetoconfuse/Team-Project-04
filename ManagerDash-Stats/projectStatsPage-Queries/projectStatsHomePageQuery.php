@@ -5,8 +5,11 @@
 
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
-    //Select the first 45 users
-    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM users LIMIT 45;
+    //Select the first 20 Projects, and select project leader name
+    $sql = "SELECT projects.Project_ID, projects.Project_Title, projects.Start_Date, projects.Due_Date, projects.Project_Leader, Users.Forename, Users.Surname
+FROM projects INNER JOIN users
+ON users.User_ID = projects.Project_Leader
+LIMIT 20;
             ";
     
     // if ($type == "Technical"){

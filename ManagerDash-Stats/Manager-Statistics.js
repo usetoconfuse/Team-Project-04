@@ -55,6 +55,42 @@ mgrStatsPostTypeButtons.forEach(button => {
 })
    
 
+//Get all Projects query
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch('ManagerDash-Stats/projectStatsPage-Queries/projectStatsHomePageQuery.php');
+        console.log("1: ", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        console.log("2: ", data[0].Forename);
+
+        // Find the container/table to display the data
+        var container = document.getElementById('projectStatsHomeTbl');
+        container.innerHTML = ''; // Clear any existing content
+
+        container.innerHTML  += "<table class='statsHome-table'>"
+        container.innerHTML  += '<thead><tr><th>Project ID</th><th>Project title</th><th>Project Start Date</th><th>Project Due Date</th><th>Project Leader</th><th>Project Leader Forename</th><th>Project Leader Surname</th></tr></thead>'
+        container.innerHTML  += '<tbody>'
+        // Loop through the data and create a new element for each item
+        data.forEach(function(item) {
+           container.innerHTML  += "<tr onclick=redirectToPage('ManagerDash-Stats/projectStatsPage.php?ID=" + item.Project_ID + "')><td>" + item.Project_ID + "</td><td>" + item.Project_Title + "</td><td>" + item.Start_Date + "</td><td>" + item.Due_Date + "</td><td>" + item.Project_Leader + "</td><td>" + item.Forename + "</td><td>" + item.Surname+ "</td></tr>"
+        });     
+        container.innerHTML  += '</tbody>'
+        container.innerHTML  += '</table>';
+
+    } catch (error) {
+        console.error('Error:', error); // Log any errors that occur
+    }
+});
+
+
+
 
 
 //Get all Users query
