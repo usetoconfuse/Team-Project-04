@@ -466,7 +466,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, .task-dropdown input[type="date"], .move-task-dropdown select  {
+.task-dropdown select, input[type="date"], .move-task-dropdown select  {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;

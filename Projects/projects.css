@@ -258,3 +258,6 @@
     font-size: 14px;
 }
 
+#project-filter-modal .modal-box{
+    padding-bottom: 0.4rem;
+}

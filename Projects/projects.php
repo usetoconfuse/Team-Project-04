@@ -27,6 +27,67 @@
       
     </div>
 
+      <!--Filter Projects -->
+      <div id="project-filter-modal" class="modal">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+                <p>Filter Projects</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <!--Body-->
+            <form id="filter-modal-form" class="modal-body">
+                <div class="task-dropdowns-form" id="post-dropdowns-form">
+                   
+                
+                    <!--DropDown 1-->
+                    <div class="task-dropdown task-dropdown-priority">
+                        <label for="priority">Priority</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-priority-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-star"></i>
+                            </div>
+                            <select name="priority" id="priority">
+                                <option value="All">All</option>
+                                <option value="None">None</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--DropDown 2-->
+                    <div class="task-dropdown task-dropdown-date">
+                        <label for="date">Due Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-calendar-days"></i>
+                            </div>
+                            <select name="date" id="date-task">
+                                <option value="All">All</option>
+                                <option value="Today">Today</option>
+                                <option value="Tomorrow">Tomorrow</option>
+                                <option value="This Week">This Week</option>
+                                <option value="Next Week">Next Week</option>
+                                <option value="Later">Later</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <div class="task-submit-buttons">
+                <a class="add-filter-btn" id="add-filter-btn">
+                    Filter Projects
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 
         <!--Filter Posts -->
         <div id="projects-modal" class="modal">
@@ -93,64 +154,5 @@
     </div>
 
     
-    <!--Filter Projects -->
-    <div id="filter-modal" class="modal">
-        <div class="modal-box">
-            <!--Header-->
-            <div class="modal-header">
-                <p>Filter Tasks</p>
-                <div class="close-modal-btn">
-                    <i class="fa-solid fa-x"></i>
-                </div>
-            </div>
-            <!--Body-->
-            <form id="filter-modal-form" class="modal-body">
-                <div class="task-dropdowns-form" id="post-dropdowns-form">
-                   
-                
-                    <!--DropDown 1-->
-                    <div class="task-dropdown task-dropdown-priority">
-                        <label for="priority">Priority</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-priority-icon task-dropdown-icon">
-                                <i class="fa fa-solid fa-star"></i>
-                            </div>
-                            <select name="priority" id="priority">
-                                <option value="All">All</option>
-                                <option value="None">None</option>
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--DropDown 2-->
-                    <div class="task-dropdown task-dropdown-date">
-                        <label for="date">Due Date</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-date-icon task-dropdown-icon">
-                                <i class="fa fa-solid fa-calendar-days"></i>
-                            </div>
-                            <select name="date" id="date-task">
-                                <option value="All">All</option>
-                                <option value="Today">Today</option>
-                                <option value="Tomorrow">Tomorrow</option>
-                                <option value="This Week">This Week</option>
-                                <option value="Next Week">Next Week</option>
-                                <option value="Later">Later</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-            </form>
-            <div class="task-submit-buttons">
-                <a class="add-filter-btn" id="add-filter-btn">
-                    Filter Tasks
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
+  
 </div>

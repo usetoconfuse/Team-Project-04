@@ -11,11 +11,11 @@ window.addEventListener("storage", function () {
     getProjectName(selectedProjectID)
     
     //Filters
-    const applyFilterBtn = document.querySelector('#add-filter-btn');
+    const filterKanbanModal = document.querySelector('#kanban-content #filter-modal')
+    const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
     applyFilterBtn.addEventListener('click', () => {
-      const priorityValue = document.querySelector('.task-dropdown-priority #priority').value;
-      const dateValue = document.querySelector('.task-dropdown-date #date-task').value;
-      console.log(document.querySelector('.task-dropdown-date #date-task'));
+      const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
+      const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
       
       const filters = {priorityValue,dateValue};
 

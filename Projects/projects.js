@@ -190,7 +190,22 @@ searchBar.addEventListener('input', ()=>{
   }
 });
 
-//Projects Modal
+
+
+const projectsFilterBtn = document.querySelector('#project-content .project-filter-container .filter-project-btn');
+const projectsFilterModal = document.querySelector('#project-content #project-filter-modal');
+
+projectsFilterBtn.addEventListener('click', () => {
+  projectsFilterModal.style.display = 'block';
+})
+const closeProjectFilterModal = projectsFilterModal.querySelector('.modal-box .modal-header .close-modal-btn');
+closeProjectFilterModal.addEventListener('click', () => {
+  projectsFilterModal.style.display = 'none';
+})
+
+
+
+//Add Projects Modal
 const addProjectBtn = document.querySelector('.project-intro .add-project')
 const addProjectModal = document.querySelector('#projects-modal')
 const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn')
@@ -201,15 +216,9 @@ addProjectBtn.addEventListener('click', () => {
 closeAddProjectModal.addEventListener('click', () => {
   addProjectModal.style.display = 'none';
 })
-window.addEventListener('click', (e) => {
-  if (e.target == addProjectModal) {
-    addProjectModal.style.display = 'none';
-  }
-})
 
 const submitAddProject = addProjectModal.querySelector('.task-submit-buttons #add-project-btn')
 submitAddProject.addEventListener('click', () => {
   addProjectModal.style.display = 'none';
 })
-
 
