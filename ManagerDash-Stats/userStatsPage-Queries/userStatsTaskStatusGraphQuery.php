@@ -26,6 +26,11 @@ if (isset($_GET['ID'])) {
     FROM tasks 
     WHERE tasks.Assignee_ID = '$userID'
     AND tasks.Status = 'Completed'
+    ", 
+    "SELECT SUM(Task_ID) AS 'tasks'
+    FROM tasks 
+    WHERE tasks.Assignee_ID = '$userID'
+    AND tasks.Stuck = 1
     "];
 
 

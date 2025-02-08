@@ -73,16 +73,21 @@ const surname = params.get('surname');
                 i = 0;
                 console.log(data[0][0].tasks);
                 if (data[0][0] != null) {
-                    statusTaskArr.push(parseInt(data[0][0].tasks));
+                    statusTaskArr.push(parseInt(data[0][0].tasks)); // To Do
                 }
                 if (data[1][0] != null) {
-                    statusTaskArr.push(parseInt(data[1][0].tasks));
+                    statusTaskArr.push(parseInt(data[1][0].tasks)); // In Progress
 
                 }
                 if (data[2][0] != null) {
-                    statusTaskArr.push(parseInt(data[2][0].tasks));
+                    statusTaskArr.push(parseInt(data[2][0].tasks)); // Completed
 
                 }
+                if (data[3][0] != null) {
+                    statusTaskArr.push(parseInt(data[3][0].tasks)); // Stuck
+
+                }
+
 
 
 
@@ -95,7 +100,7 @@ const surname = params.get('surname');
                 createTaskStatusGraph(statusTaskArr);
 
             } else {
-                createTaskStatusGraph([0,0,0]); // I.e. no tasks for that employee
+                createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
             }
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
@@ -203,7 +208,7 @@ document.addEventListener('DOMContentLoaded', fetchTaskStatusGraph());
 
 
 function createTaskStatusGraph(currentTaskStatus) {
-        const daysOfWeek = ['To Do', 'In Progress', 'Completed'];
+        const daysOfWeek = ['To Do', 'In Progress', 'Completed', 'Stuck'];
     
         weekhrs = document.getElementById('userStats-weekHrsContainerGraph');
     
