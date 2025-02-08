@@ -30,9 +30,38 @@ window.addEventListener("storage", function () {
       getKanbanData(userID, selectedProjectID, filters);
     })
 
+    //Order By Filters
+    const orderByBtn = document.querySelector('.projects-intro-buttons .order-by-confirm');
+    orderByBtn.addEventListener('click', () => {
+      const orderByDropdownValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
+      const orderByParam = { orderByValue: orderByDropdownValue};
+
+      const currentFilters = getCurrentFilters();
+      const allFilters = { ...currentFilters, ...orderByParam};
+      getKanbanData(userID, selectedProjectID, allFilters);
+
+    })
+
+  }
+});
+
+function getCurrentFilters() {
+  const filterKanbanModal = document.querySelector('#kanban-content #filter-modal');
+  const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
+  const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+  
+  const filters = {priorityValue,dateValue};
+
+  if (priorityValue === "All") {
+    delete filters.priorityValue;
+  }
+  if (dateValue === "All") {
+    delete filters.dateValue;
   }
 
-});
+  return filters;
+}
+
 
 async function getProjectName(selectedProjectID) {
   try {

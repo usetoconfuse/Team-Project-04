@@ -33,6 +33,19 @@
         <div class="vertical-bar"></div>
 
         <div class="projects-intro-buttons">
+            <div class="order-by-dropdown">
+                <select>
+                    <option value="p-h-l">Priority High to Low</option>
+                    <option value="p-l-h">Priority Low to High</option>
+                    <option value="due-first">Due First</option>
+                    <option value="due-last">Due Last</option>
+                    <option value="most-overdue">Most Overdue</option>
+                </select>
+                <div>
+                    <a href="#" class="order-by-confirm black-btn">Order By</a>
+                </div>
+            </div>
+
             <div class="filter-task-btn black-btn">Filter
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
@@ -45,7 +58,7 @@
             <?php endif; ?>
             <div class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
-                Close Project
+                Close
             </div>
         </div>
 

@@ -466,7 +466,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, input[type="date"], .move-task-dropdown select  {
+.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select  {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -480,12 +480,17 @@ input[type="file"]::-webkit-file-upload-button {
     height: 40px;
 }
 
+.order-by-dropdown select {
+    border-radius: 10.5px 0 0 10.5px;
+    height: 45px;
+}
+
 .move-task-dropdown select {
     border-radius: 5px 0 0 5px;
 }
 
 /*add icons next to dropdown*/
-.task-dropdown-select-options, .move-task-dropdown select option {
+.task-dropdown-select-options, .move-task-dropdown select option, .order-by-dropdown select option{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -818,18 +823,26 @@ input[type="file"]::-webkit-file-upload-button {
 
 
 
-.move-task-dropdown {
+.move-task-dropdown, .order-by-dropdown {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 
-.move-task-confirm {
+.move-task-confirm, .order-by-confirm  {
     background-color: black;
     color: white; 
-    padding: 0.6rem 0.8rem;
-    border-radius: 0 5px 5px 0;
     white-space: nowrap;
     font-size: 15px;
+}
+
+.move-task-confirm {
+    padding: 0.6rem 0.8rem;
+    border-radius: 0 5px 5px 0;
+}
+
+.projects-intro-buttons .order-by-confirm {
+    padding: 0.8rem 0.8rem;
+    border-radius: 0 10.5px 10.5px 0;
 }
