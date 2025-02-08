@@ -3,10 +3,19 @@
 
     include '../../config/db-setup.php';
 
+// Check if ID parameter exists in the URL
+if (isset($_GET['ID'])) {
+    // Retrieve parameter
+    $userID = htmlspecialchars($_GET['ID']); // Sanitize input
+}
+
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
-    //Select the first 45 users
-    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM users LIMIT 45;
+    //Select the first 20 tasks for the given UserID
+    $sql = "SELECT * 
+    FROM tasks INNER JOIN projects 
+    ON tasks.Project_ID = projects.Project_ID 
+    WHERE Assignee_ID = '$userID';
             ";
     
     // if ($type == "Technical"){

@@ -28,40 +28,9 @@
                 </div>
                 </div>
 
-                <div id='userStats-projectHrsTable' class='mgrStatsUser-grid-item'>
-                    <table>
-                    <thead>
-                        <tr>
-                        <th>Header 1</th>
-                        <th>Header 2</th>
-                        <th>Header 3</th>
-                        <th>Header 4</th>
-                        <th>Header 5</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>Row 1, Cell 1</td>
-                        <td>Row 1, Cell 2</td>
-                        <td>Row 1, Cell 3</td>
-                        <td>Row 1, Cell 4</td>
-                        <td>Row 1, Cell 5</td>
-                        </tr>
-                        <tr>
-                        <td>Row 2, Cell 1</td>
-                        <td>Row 2, Cell 2</td>
-                        <td>Row 2, Cell 3</td>
-                        <td>Row 2, Cell 4</td>
-                        <td>Row 2, Cell 5</td>
-                        </tr>
-                        <!-- Continue adding rows up to Row 20 -->
-                        <tr>
-                        <td>Row 20, Cell 1</td>
-                        <td>Row 20, Cell 2</td>
-                        <td>Row 20, Cell 3</td>
-                        <td>Row 20, Cell 4</td>
-                        <td>Row 20, Cell 5</td>
-                    </tbody>
+                <div id='userStats-taskTable' class='mgrStatsUser-grid-item'>
+                    <table id="allTaskTable-userStats">
+                <!-- Fetch Data Here -->
                     </table>
             <!-- </div> -->
                 </div>
