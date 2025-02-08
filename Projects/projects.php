@@ -42,7 +42,7 @@
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
                    
                 
-                    <!--DropDown 1-->
+                    <!--DropDown 1--><!--
                     <div class="task-dropdown task-dropdown-priority">
                         <label for="priority">Priority</label>
                         <div class="task-dropdown-select-options">
@@ -57,22 +57,15 @@
                                 <option value="High">High</option>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <!--DropDown 2-->
                     <div class="task-dropdown task-dropdown-date">
-                        <label for="date">Due Date</label>
+                        <label for="date">Due Date Before</label>
                         <div class="task-dropdown-select-options">
                             <div class="task-dropdown-date-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-calendar-days"></i>
                             </div>
-                            <select name="date" id="date-task">
-                                <option value="All">All</option>
-                                <option value="Today">Today</option>
-                                <option value="Tomorrow">Tomorrow</option>
-                                <option value="This Week">This Week</option>
-                                <option value="Next Week">Next Week</option>
-                                <option value="Later">Later</option>
-                            </select>
+                            <input name="date" id="date-task" type="date"></input>
                         </div>
                     </div>
 

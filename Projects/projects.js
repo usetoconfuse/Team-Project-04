@@ -8,13 +8,37 @@ document.addEventListener("DOMContentLoaded", function () {
   const userID = projectContainer.getAttribute('data-user-id');
   fetchProjectsData(userID);
 
-  async function fetchProjectsData(userID) {
+
+
+  //Filter Projects Functionality
+  const filterProjectsBtn = projectsFilterModal.querySelector('.add-filter-btn');
+  filterProjectsBtn.addEventListener('click', () => {
+    const dateValue = projectsFilterModal.querySelector('.task-dropdown-date #date-task').value;
+    const filters = {dateValue};
+    if (dateValue === "") {
+      delete filters.dateValue;
+    }
+    projectsFilterModal.style.display = 'none';
+    fetchProjectsData(userID, filters);
+  })
+
+
+
+  //Fetch all project data for this user and display on page
+  async function fetchProjectsData(userID, filters={}) {
     try {
 
-      let url = `Projects/projects-db.php?userID=${encodeURIComponent(userID)}`; 
-      const params = { 
-        method: "GET" 
-      }
+      let url = `Projects/projects-db.php?userID=${encodeURIComponent(userID)}`;
+      
+      const filterQuery = new URLSearchParams(filters).toString();
+      url += filterQuery ? `&${filterQuery}` : '';
+
+    const params = { 
+      method: "GET",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }
+
+    document.querySelector('#project-content #gridContainer').innerHTML = "";
 
       const response = await fetch(url, params);
 
@@ -191,11 +215,11 @@ searchBar.addEventListener('input', ()=>{
 });
 
 
-
-const projectsFilterBtn = document.querySelector('#project-content .project-filter-container .filter-project-btn');
+//Filter Projects Modal
+const openProjectsFilterBtn = document.querySelector('#project-content .project-filter-container .filter-project-btn');
 const projectsFilterModal = document.querySelector('#project-content #project-filter-modal');
 
-projectsFilterBtn.addEventListener('click', () => {
+openProjectsFilterBtn.addEventListener('click', () => {
   projectsFilterModal.style.display = 'block';
 })
 const closeProjectFilterModal = projectsFilterModal.querySelector('.modal-box .modal-header .close-modal-btn');
