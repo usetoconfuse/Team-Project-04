@@ -35,6 +35,7 @@
         <div class="projects-intro-buttons">
             <div class="order-by-dropdown">
                 <select>
+                    <option value="none" selected>None</option>
                     <option value="p-h-l">Priority High to Low</option>
                     <option value="p-l-h">Priority Low to High</option>
                     <option value="due-first">Due First</option>
@@ -138,7 +139,7 @@
                                 <i class="fa fa-solid fa-star"></i>
                             </div>
                             <select name="priority" id="priority">
-                                <option value="All">All</option>
+                                <option value="All" selected>All</option>
                                 <option value="None">None</option>
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
@@ -154,7 +155,7 @@
                                 <i class="fa fa-solid fa-calendar-days"></i>
                             </div>
                             <select name="date" id="date-task">
-                                <option value="All">All</option>
+                                <option value="All" selected>All</option>
                                 <option value="Today">Today</option>
                                 <option value="Tomorrow">Tomorrow</option>
                                 <option value="This Week">This Week</option>

@@ -4,14 +4,23 @@ const kanbanContainers = document.querySelectorAll('.kanban-board');
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
 
+
+
   if (selectedProjectID) {
     const kanbanContainer = document.querySelector('#kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
     getKanbanData(userID, selectedProjectID, {});
     getProjectName(selectedProjectID)
+
+    const filterKanbanModal = document.querySelector('#kanban-content #filter-modal')
+    document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = 'none';
+    filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
+    filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
+      
+  
     
     //Filters
-    const filterKanbanModal = document.querySelector('#kanban-content #filter-modal')
+
     const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
     applyFilterBtn.addEventListener('click', () => {
       const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
@@ -44,6 +53,14 @@ window.addEventListener("storage", function () {
 
   }
 });
+
+function formatDate(date) {
+  const dateSplit = date.split('-');
+  const year = dateSplit[0]
+  const month = dateSplit[1];
+  const day = dateSplit[2];
+  return `${day}-${month}-${year}`;
+}
 
 function getCurrentFilters() {
   const filterKanbanModal = document.querySelector('#kanban-content #filter-modal');
@@ -158,7 +175,7 @@ function generateCard(kanbanData) {
                           <a href="">View Task</a>
                           <div class="due-date">
                               <i class="fa fa-regular fa-calendar"></i>
-                              <p>Due: ${task.Due_Date}</p>
+                              <p>Due: ${formatDate(task.Due_Date)}</p>
                           </div>
                       </div>
                     </div>`;
@@ -174,7 +191,7 @@ function generateCard(kanbanData) {
     //===Fields from database for View Modal
 
     const taskTitle = task.Name;
-    const taskDueDate = task.Due_Date;
+
 
     
     const priorityElement = taskCard.querySelector('.kanban-card-priority');
@@ -293,7 +310,7 @@ function generateCard(kanbanData) {
                                                       </div>
                                                       <div class="modal-task-info-section-body modal-task-due-date">
                                                           <div class="task-indicator-circle"></div>
-                                                          <p>${taskDueDate}</p>
+                                                          <p>${formatDate(task.Due_Date)}</p>
                                                       </div>
                                                   </div>
 

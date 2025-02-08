@@ -44,27 +44,30 @@ if (!empty($date)) {
     }
 }
 
-if (!empty($orderBy)) {
-    switch ($orderBy) {
-        case 'p-h-l':
-            $taskSQL .= " ORDER BY t.Priority DESC";
-            break;
-        case 'p-l-h':
-            $taskSQL .= " ORDER BY t.Priority ASC";
-            break;
-        case 'due-first':
-            $taskSQL .= " ORDER BY t.Due_Date ASC";
-            break;
-        case 'due-last':
-            $taskSQL .= " ORDER BY t.Due_Date DESC";
-            break;
-        case 'most-overdue':
-            $taskSQL .= " ORDER BY t.Due_Date ASC";
-            break;
-        default: 
-            break;
+if ($orderBy !== 'None') {
+    if (!empty($orderBy)) {
+        switch ($orderBy) {
+            case 'p-h-l':
+                $taskSQL .= " ORDER BY t.Priority DESC";
+                break;
+            case 'p-l-h':
+                $taskSQL .= " ORDER BY t.Priority ASC";
+                break;
+            case 'due-first':
+                $taskSQL .= " ORDER BY t.Due_Date ASC";
+                break;
+            case 'due-last':
+                $taskSQL .= " ORDER BY t.Due_Date DESC";
+                break;
+            case 'most-overdue':
+                $taskSQL .= " ORDER BY t.Due_Date ASC";
+                break;
+            default: 
+                break;
+        }
     }
 }
+
 
 $taskResult = mysqli_query($conn, $taskSQL);
 
