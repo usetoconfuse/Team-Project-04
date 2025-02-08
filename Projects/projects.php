@@ -5,7 +5,7 @@
             <p>View all your assigned projects below. Statistics about these are within.</p>
         </div>
      
-        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'manager'): ?>
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
             <a href="#" class="add-project black-btn">Add Project</a>
         <?php endif; ?>
         
