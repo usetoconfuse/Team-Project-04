@@ -19,80 +19,19 @@
 
 <!-- Tab for Project Statistics -->
 <div id='tabGroupProjectStats'>
-    
-    <table class="userStatsHome-table">
-    <thead>
-        <tr>
-        <th>Project ID</th>
-        <th>Project Name</th>
-        <th>Header 3</th>
-        <th>Header 4</th>
-        <th>Header 5</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr onclick="redirectToPage('ManagerDash-Stats/projectStatsPage.php')">
-        <td>Row 1, Cell 1</td>
-        <td>Row 1, Cell 2</td>
-        <td>Row 1, Cell 3</td>
-        <td>Row 1, Cell 4</td>
-        <td>Row 1, Cell 5</td>
-        </tr>
-        <tr onclick="redirectToPage('ManagerDash-Stats/projectStatsPage.php')">
-        <td>Row 2, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-        <td>Row 2, Cell 3</td>
-        <td>Row 2, Cell 4</td>
-        <td>Row 2, Cell 5</td>
-        </tr>
-        <!-- Continue adding rows up to Row 20 -->
-        <tr onclick="redirectToPage('ManagerDash-Stats/projectStatsPage.php')">
-        <td>Row 20, Cell 1</td>
-        <td>Row 20, Cell 2</td>
-        <td>Row 20, Cell 3</td>
-        <td>Row 20, Cell 4</td>
-        <td>Row 20, Cell 5</td>
-    </tbody>
-    </table>
 
+    <table id='projectStatsHomeTbl' class="statsHome-table"> <!--Fetch Project Data Here-->
+    </table>
 
 </div>
 
+
+<!-- Tab for User Statistics -->
 <div id='tabGroupUserStats'>
-<table class="userStatsHome-table">
-    <thead>
-        <tr>
-        <th>User ID</th>
-        <th>User Name</th>
-        <th>Header 3</th>
-        <th>Header 4</th>
-        <th>Header 5</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr onclick="redirectToPage('ManagerDash-Stats/userStatsPage.php')">
-        <td>TEST</td>
-        <td>Row 1, Cell 2</td>
-        <td>Row 1, Cell 3</td>
-        <td>Row 1, Cell 4</td>
-        <td>Row 1, Cell 5</td>
-        </tr>
-        <tr onclick="redirectToPage('ManagerDash-Stats/userStatsPage.php')">
-        <td>Row 2, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-        <td>Row 2, Cell 3</td>
-        <td>Row 2, Cell 4</td>
-        <td>Row 2, Cell 5</td>
-        </tr>
-        <!-- Continue adding rows up to Row 20 -->
-        <tr onclick="redirectToPage('ManagerDash-Stats/userStatsPage.php')">
-        <td>Row 20, Cell 1</td>
-        <td>Row 20, Cell 2</td>
-        <td>Row 20, Cell 3</td>
-        <td>Row 20, Cell 4</td>
-        <td>Row 20, Cell 5</td>
-    </tbody>
-    </table>
+
+<table id='userStatsHomeTbl' class="statsHome-table"> <!--Fetch User Data Here-->
+</table>
+
 </div>
 
 
