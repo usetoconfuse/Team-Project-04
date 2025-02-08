@@ -163,6 +163,11 @@ session_start()
 
         <section id="content">
 
+         <div class="nav-item-content" id="overview-content">
+                <?php include 'managerDashContent.php' ?>
+            </div>
+
+
             <div class="nav-item-content open" id="personal-content">
                 <?php include 'personalKanban.php'; ?>
             </div>
@@ -183,10 +188,7 @@ session_start()
                 <?php include 'ManagerDash-Stats/statisticsHomePage.php'; ?>
             </div>
 
-            <div class="nav-item-content" id="overview-content">
-                <?php include 'managerDashContent.php' ?>
-            </div>
-
+      
 
 
         </section>
