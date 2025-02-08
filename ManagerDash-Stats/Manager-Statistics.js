@@ -2,63 +2,60 @@
 // Updated by Quinn Little 03/02/25 lines 6 to 48
 // Updated by Quinn Little 07/02/2025 
 
-/* Updated by Toby Tischler 08/02/2025: renamed mgrStatsUser to mgrStatsUser
-   and wrapped long HTML insertion lines to improve readability */
+// Updated by Toby Tischler 08/02/2025
 
 
-//User Statistics Home Page
-
-function redirectToPage(url) {
-    window.location.href = url;
-}
+// Statistics Home Page
 
 // =============================================================
-const mgrStatsProj = document.getElementById('mgrProjStats');
-const mgrStatsUser = document.getElementById('mgrUserStats');
-mgrStatsProj.addEventListener("click", () => {
-    if(mgrStatsProj.style.display == "block") {
-        mgrStatsProj.classList.add('mgrStats-active')
-        mgrStatsUser.classList.remove('mgrStats-active')
-        document.getElementById("tabGroupProjectStats").style.display = "none";
-        document.getElementById("tabGroupUserStats").style.display = "block";
 
-    } else {
-        mgrStatsProj.classList.remove('mgrStats-active')
-        mgrStatsUser.classList.add('mgrStats-active')
-        document.getElementById("tabGroupUserStats").style.display = "none";
-        document.getElementById("tabGroupProjectStats").style.display = "block";
+// Switch project/user tab
 
-    }
-})
-
-mgrStatsUser.addEventListener("click", () => {
-    if(mgrStatsUser.style.display == "block") {
-        mgrStatsProj.classList.remove('mgrStats-active')
-        mgrStatsUser.classList.add('mgrStats-active')
-        document.getElementById("tabGroupProjectStats").style.display = "block";
-        document.getElementById("tabGroupUserStats").style.display = "none";
-
-    } else {
-        mgrStatsProj.classList.add('mgrStats-active')
-        mgrStatsUser.classList.remove('mgrStats-active')
-        document.getElementById("tabGroupUserStats").style.display = "block";
-        document.getElementById("tabGroupProjectStats").style.display = "none";
-
-    }
-})
-
-//
 const mgrStatsPostTypeButtons = document.querySelectorAll('.mgrStats-post-type-btns button');
 mgrStatsPostTypeButtons.forEach(button => {
     button.addEventListener("click", () => {
-        mgrStatsPostTypeButtons.forEach(btn => btn.classList.remove('mgrStats-active'))
-        button.classList.add('mgrStats-active')
-    })
-})
-   
+        mgrStatsPostTypeButtons.forEach(btn => {
+            btn.classList.remove('mgrStats-activeTab')
+            document.getElementById(btn.getAttribute("value")).style.display = "none";
+        });
+ 
+        button.classList.add('mgrStats-activeTab')
+        document.getElementById(button.getAttribute("value")).style.display = "block";
+    });
+});
 
-//Get all Projects query
 
+// Switch from table to stats view
+// Fires the "selected" event on the div made visible to simulate DOMContentLoaded for subpage
+
+const selected = new Event("selected");
+
+function viewSelectedProject(id) {
+    const params = new URLSearchParams(window.location.search);
+    params.set("project", id);
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
+    document.getElementById("projectStatsHomeTbl").style.display = "none";
+    const container = document.getElementById("projectViewStats");
+    container.style.display = "block";
+    container.dispatchEvent(selected);
+}
+
+function viewSelectedUser(id, forename, surname) {
+    const params = new URLSearchParams(window.location.search);
+    params.set("user", id);
+    params.set("forename", forename);
+    params.set("surname", surname);
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
+    document.getElementById("userStatsHomeTbl").style.display = "none";
+    const container = document.getElementById("userViewStats");
+    container.style.display = "block";
+    container.dispatchEvent(selected);
+}
+
+
+//Get all projects query and generate project table - do this on DOM load as well since projects is the default tab
 
 async function fetchProjectTable() {
     try {
@@ -81,26 +78,20 @@ async function fetchProjectTable() {
         container.innerHTML  += "<table class='statsHome-table'>"
         container.innerHTML  += `<thead>
                                     <tr>
-                                        <th>Project ID</th>
-                                        <th>Project title</th>
-                                        <th>Project Start Date</th>
-                                        <th>Project Due Date</th>
-                                        <th>Project Leader</th>
-                                        <th>Project Leader Forename</th>
-                                        <th>Project Leader Surname</th>
+                                        <th>Title</th>
+                                        <th>Start Date</th>
+                                        <th>Due Date</th>
+                                        <th>Leader</th>
                                     </tr>
                                 </thead>`
         container.innerHTML  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           container.innerHTML  += `<tr onclick=redirectToPage('ManagerDash-Stats/projectStatsPage.php?ID=` + item.Project_ID + `')>
-                                        <td>` + item.Project_ID + `</td>
+           container.innerHTML  += `<tr onclick=viewSelectedProject(` + item.Project_ID + `)>
                                         <td>` + item.Project_Title + `</td>
                                         <td>` + item.Start_Date + `</td>
                                         <td>` + item.Due_Date + `</td>
-                                        <td>` + item.Project_Leader + `</td>
-                                        <td>` + item.Forename + `</td>
-                                        <td>` + item.Surname+ `</td>
+                                        <td>` + item.Forename + ` ` + item.Surname + `</td>
                                     </tr>`
         });     
         container.innerHTML  += '</tbody>'
@@ -109,16 +100,16 @@ async function fetchProjectTable() {
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
-    };
+};
 
-// Get all projects Event Listeners
+// Projects table event handlers
+// Populate on load as project is the default tab
 document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
 document.addEventListener('DOMContentLoaded', fetchProjectTable());
 
+//Get all users query and generate user table
 
-
-//Get all Users query
-document.getElementById('mgrUserStats').addEventListener('click', async function() {
+document.getElementById('mgrUserStats').addEventListener('click', async () => {
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsHomePageQuery.php');
@@ -140,18 +131,16 @@ document.getElementById('mgrUserStats').addEventListener('click', async function
         container.innerHTML  += `<thead>
                                     <tr>
                                         <th>User ID</th>
-                                        <th>Forename</th>
-                                        <th>Surname</th>
+                                        <th>Name</th>
                                         <th>Job Position</th>
                                     </tr>
                                 </thead>`
         container.innerHTML  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           container.innerHTML  += `<tr onclick=redirectToPage('ManagerDash-Stats/userStatsPage.php?ID=` + item.User_ID + `&` + item.Forename + `&` + item.Surname + `')>
+           container.innerHTML  += `<tr onclick=viewSelectedUser(` + item.User_ID + `,'` + item.Forename + `','` + item.Surname + `')>
                                         <td>` + item.User_ID + `</td>
-                                        <td>` + item.Forename + `</td>
-                                        <td>` + item.Surname + `</td>
+                                        <td>` + item.Forename + ` ` + item.Surname + `</td>
                                         <td>` + item.User_Type + `</td>
                                     </tr>`
         });     
@@ -162,6 +151,3 @@ document.getElementById('mgrUserStats').addEventListener('click', async function
         console.error('Error:', error); // Log any errors that occur
     }
 });
-
-
-
