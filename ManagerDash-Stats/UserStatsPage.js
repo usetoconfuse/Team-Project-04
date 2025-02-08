@@ -68,16 +68,21 @@ const surname = params.get('surname');
                 i = 0;
                 console.log(data[0][0].tasks);
                 if (data[0][0] != null) {
-                    statusTaskArr.push(parseInt(data[0][0].tasks));
+                    statusTaskArr.push(parseInt(data[0][0].tasks)); // To Do
                 }
                 if (data[1][0] != null) {
-                    statusTaskArr.push(parseInt(data[1][0].tasks));
+                    statusTaskArr.push(parseInt(data[1][0].tasks)); // In Progress
 
                 }
                 if (data[2][0] != null) {
-                    statusTaskArr.push(parseInt(data[2][0].tasks));
+                    statusTaskArr.push(parseInt(data[2][0].tasks)); // Completed
 
                 }
+                if (data[3][0] != null) {
+                    statusTaskArr.push(parseInt(data[3][0].tasks)); // Stuck
+
+                }
+
 
 
 
@@ -90,7 +95,7 @@ const surname = params.get('surname');
                 createTaskStatusGraph(statusTaskArr);
 
             } else {
-                createTaskStatusGraph([0,0,0]); // I.e. no tasks for that employee
+                createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
             }
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
@@ -120,6 +125,7 @@ async function fetchUserProjHrsTable() {
             container.innerHTML = ''; // Clear any existing content
 
             container.innerHTML  += "<table class='statsHome-table'>"
+            //Approx man-hrs as tasks could be shorter/longer than expected
             container.innerHTML  += `<thead>
                                         <tr>
                                             <th>Project ID</th>
@@ -128,6 +134,7 @@ async function fetchUserProjHrsTable() {
                                         </tr>
                                     </thead>`
             container.innerHTML  += '<tbody>'
+
             // Loop through the data and create a new element for each item
             data.forEach(function(item) {
             container.innerHTML  += `<tr>
@@ -234,7 +241,7 @@ document.getElementById("userViewStats").addEventListener('selected', () => {
 
 
 function createTaskStatusGraph(currentTaskStatus) {
-        const daysOfWeek = ['To Do', 'In Progress', 'Completed'];
+        const daysOfWeek = ['To Do', 'In Progress', 'Completed', 'Stuck'];
     
         weekhrs = document.getElementById('userStats-weekHrsContainerGraph');
     
@@ -243,18 +250,32 @@ function createTaskStatusGraph(currentTaskStatus) {
         data: {
             labels: daysOfWeek,
             datasets: [{
-            backgroundColor:"rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
+                label:['To Do', 'In Progress', 'Completed', 'Stuck'],
+            backgroundColor:["rgba(255, 85, 0, 0.5)", "rgba(255, 225, 0, 0.5)", "rgba(111, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"],
+            borderColor: ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
             data: currentTaskStatus
             }]
         },
         options:{
             responsive: true,
+          
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color:  ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
+                    }
+                }
+            },    
             scales: {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true // Make y-axis start at zero.
                     }}]
+            },
+            title: {
+                display: true,
+                text: `Task Status Graph for user ${userID} - ${forename} ${surname}`
                 }
         }
         });
