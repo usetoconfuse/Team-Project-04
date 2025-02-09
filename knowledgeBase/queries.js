@@ -1,3 +1,4 @@
+"use strict";
 const BASE_QUERY_PATH = 'knowledgeBase/query/';
 let user;
 
@@ -81,7 +82,7 @@ const getTopicColour = (topicId) =>{
 
 // Display the given topics in the sidebar on the page.
 const renderTopics = (topics) => {
-    const topicsContainer = document.getElementById('topicsList');
+    const topicsContainer = document.getElementById('kb-topics-list');
 
     if (topics.length === 0){
         topicsContainer.innerHTML = '<p>No Topics Available</p>';
@@ -134,8 +135,7 @@ const renderAllPosts = async (posts) => {
         postsContainer.innerHTML = '<p>No Posts Available</p>';
         return;
     };
-    for (post of posts) {
-
+    for (const post of posts) {
         let currentUserHtml = '';
 
         // Only allow editing/deleting of posts if the user is the author or an admin.
@@ -143,7 +143,7 @@ const renderAllPosts = async (posts) => {
         if (post.User_ID == user.user_id || user.role == 'admin') {
             currentUserHtml = `
             <button class="kb-edit-post-button black-btn">Edit Post</button>
-            <button class="kb-delete-post-button">Delete Post <i class="fa-solid fa-trash"></i></button>
+            <button class="kb-delete-post-button red-btn">Delete Post <i class="fa-solid fa-trash"></i></button>
             `;
         }
         
@@ -158,16 +158,16 @@ const renderAllPosts = async (posts) => {
 
         // Create the HTML for the post
         const postHTML = `
-      <div class="kb-post" id="post-${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
-        <div class="kb-title-line">
+      <div class="kb-post kb-flex-col" id="post-${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
+        <div class="kb-flex-row kb-flex-wrap">
           <h2 class="kb-title-header">${post.Title}</h2>
-          <div class="kb-post-badges">
+          <div class="kb-flex-row kb-flex-wrap">
             <div ${currentTypeHtml} > ${post.Type} </div>
             <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>
           </div>
           <i class="kb-share-link fa-solid fa-link" href="#"></i>
         </div>
-        <div class="kb-post-info">
+        <div class="kb-post-info kb-flex-row">
           <div class="kb-post-avatar" style="background-color:${post.Forename + ' ' + post.Surname}">
             <i class="fa-solid fa-user"></i>
           </div>
@@ -177,7 +177,7 @@ const renderAllPosts = async (posts) => {
         </div>
         <div class="kb-post-divider"></div>
         <p class="kb-post-content kb-post-content-shortened">${nl2br(post.Description)}</p>
-        <div class="kb-post-buttons">
+        <div class="kb-flex-row kb-post-buttons">
           <button class="read-post-btn black-btn">Read Post</button>
           ${currentUserHtml}
         </div>
@@ -216,7 +216,7 @@ var selectedQuery = null;
 const updatePosts = async () => {
     const posts = await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
 
-    for (post of document.querySelectorAll("#kb-posts-list .kb-post")) {
+    for (const post of document.querySelectorAll("#kb-posts-list .kb-post")) {
         const postId = post.id;
         post.querySelector(".read-post-btn").addEventListener("click", () => {
             openPost(postId);
@@ -243,7 +243,7 @@ const updatePosts = async () => {
 }
 
 //on showall btn click will load all posts from db
-document.querySelector('#allBtn').addEventListener('click', (event) => {
+document.getElementById("kb-type-showall-btn").addEventListener('click', (event) => {
     document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
     event.target.classList.add('active');
     selectedType = null;
@@ -251,7 +251,7 @@ document.querySelector('#allBtn').addEventListener('click', (event) => {
 });
 
 //on techincal button clicked show all post with type of techincal
-document.querySelector('#technicalBtn').addEventListener('click', (event) => {
+document.getElementById('kb-type-technical-btn').addEventListener('click', (event) => {
     document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
     event.target.classList.add('active');
     selectedType = 'Technical';
@@ -259,7 +259,7 @@ document.querySelector('#technicalBtn').addEventListener('click', (event) => {
 });
 
 //on techincal button clicked show all post with type of non-techincal
-document.querySelector('#nonTechnicalBtn').addEventListener('click', (event) => {
+document.getElementById('kb-type-nontechnical-btn').addEventListener('click', (event) => {
     document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
     event.target.classList.add('active');
     selectedType = 'Non-Technical';
@@ -274,7 +274,7 @@ document.getElementById('searched-post').addEventListener("input", async (e) =>{
 
 
 //on topic item clicked it will show all posts of specified under that topic
-document.querySelector('#topicsList').addEventListener('click', (event) => {
+document.querySelector('#kb-topics-list').addEventListener('click', (event) => {
     clickedTopic = event.target;
     if (!clickedTopic.classList.contains('kb-topic')) {
         return;
@@ -298,7 +298,7 @@ const updateTopics = async () => {
 }
 
 const makeModal = (modal) => {
-    closeBtn = modal.querySelector('.close-modal-btn');
+    const closeBtn = modal.querySelector('.close-modal-btn');
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
@@ -343,19 +343,20 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
 
 // Edit Post Modal
 const editPostModal = document.getElementById('edit-post-modal');
-const [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
+var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 
-const editPostBtn = document.querySelector('#new-post-btn');
-editPostBtn.addEventListener('click', () => {
-    openEditPostModal();
-});
+
+// Delete Post Modal
+const deletePostModal = document.getElementById('delete-post-modal');
+var [closeDeletePostModal, openDeletePostModal] = makeModal(deletePostModal);
+
 
 //Add topic Modal functionality
-const addTopicModal = document.getElementById('topic-modal');
+const addTopicModal = document.getElementById('add-topic-modal');
 const [closeAddTopicModal, openAddTopicModal] = makeModal(addTopicModal);
 
 const addTopicBtn = document.querySelector('#new-topic-btn');
-const submitTopicBtn = document.querySelector('#add-topic-btn');
+const submitTopicBtn = document.getElementById('kb-add-topic-modal-submit');
 
 addTopicBtn.addEventListener('click', () => {
     openAddTopicModal();
@@ -363,7 +364,7 @@ addTopicBtn.addEventListener('click', () => {
 
 submitTopicBtn.addEventListener('click', async (event) => {
     //get topic name from form
-    const newTopic = document.getElementById('topicInput').value;
+    const newTopic = document.getElementById('kb-add-topic-modal-name-input').value;
 
     //pass data from form to addtopic sql query
     await doRequest("POST", "addTopic", {}, {name: newTopic});

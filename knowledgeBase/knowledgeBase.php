@@ -2,70 +2,62 @@
     <div class="kb-header-section">
         <h1 class="kb-title">Knowledge Base</h1>
         <div class="post-type-btns">
-            <button class="active black-btn" id="allBtn" >Show All</button>
-            <button id="technicalBtn" value="Technical">Technical</button>
-            <button id="nonTechnicalBtn" value="Non-Technical">Non-Technical</button>
+            <button id="kb-type-showall-btn" class="active">Show All</button>
+            <button id="kb-type-technical-btn" value="Technical">Technical</button>
+            <button id="kb-type-nontechnical-btn" value="Non-Technical">Non-Technical</button>
         </div>
     </div>
     <div class="kb-main">
-        <div class="kb-listing">
-            <div class="kb-listing-header">
+        <div class="kb-listing kb-flex-col">
+            <div class="kb-listing-header kb-flex-row">
                 <div class="kb-listing-search">
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search Post Content" id="searched-post">
                 </div>
-                <button id="new-post-btn" class="black-btn">
+                <button id="new-post-btn">
                     New Post
                 </button>
             </div>
 
-            <div id="kb-posts-list" class="kb-posts">
-                <?php
-                ?>
+            <div id="kb-posts-list" class="kb-posts kb-flex-col">
+                <!-- Posts are dynamically loaded with JS -->
             </div>
         </div>
         <div class="kb-sidebar">
             <h2>Filter by Topic</h2>
             <div class="kb-listing-search" id="topic-searchbar">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Topics" id="searched-topic">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Topics" id="searched-topic">
             </div>
-            <ul id="topicsList">
-                <li class="kb-topic" data-topic="coding-standards"><span class="kb-topic-circle"></span>Coding Standards
-                </li>
-                <li class="kb-topic" data-topic="printer-issues"><span class="kb-topic-circle"></span>Printer Issues
-                </li>
-                <li class="kb-topic" data-topic="cybersecurity"><span class="kb-topic-circle"></span>Cybersecurity</li>
-                <li class="kb-topic" data-topic="workplace-hygiene"><span class="kb-topic-circle"></span>Workplace
-                    Hygiene</li>
-                <p class="kb-sidebar-content kb-scrollable"></p>
+            <ul id="kb-topics-list" class="kb-flex-col kb-scrollable">
+                <!-- Topics are dynamically loaded with JS -->
             </ul>
-            <button id="new-topic-btn" class="black-btn">New Topic</button>
-
+            <button id="new-topic-btn">New Topic</button>
         </div>
 
         <!--Add Topic Modal-->
-        <div id="topic-modal" class="modal">
+        <div id="add-topic-modal" class="modal">
             <div class="modal-box">
                 <!--Header-->
                 <div class="modal-header">
-                    <p>Add Topic</p>
+                    Add Topic
                     <div class="close-modal-btn">
                         <i class="fa-solid fa-x"></i>
                     </div>
                 </div>
                 <!--Body-->
                 <form id="topic-modal-form" class="modal-body">
-                    <div class="topic-title-form">
+                    <div>
                         <label for="topic-name">Topic Name: </label>
-                        <input type="text" id="topicInput" name="topic-name" placeholder="Enter new topic name">
+                        <input type="text" id="kb-add-topic-modal-name-input" name="topic-name"
+                            placeholder="Enter new topic name">
                     </div>
                 </form>
-                <div class="task-submit-buttons">
-                    <div class="add-topic-btn  black-btn" id="add-topic-btn">
+                <div class="kb-modal-submission-btns">
+                    <button id="kb-add-topic-modal-submit">
                         Add Topic
                         <i class="fa fa-arrow-right"></i>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -75,23 +67,23 @@
             <div class="modal-box">
                 <!--Header-->
                 <div class="modal-header">
-                    <p>Add Post</p>
+                    Add Post
                     <div class="close-modal-btn">
                         <i class="fa-solid fa-x"></i>
                     </div>
                 </div>
                 <!--Body-->
                 <form id="post-modal-form" class="modal-body">
-                    <div class="post-title-form">
+                    <div>
                         <label for="postInput">Title :</label>
                         <input type="text" id="postInput" name="title" placeholder="Enter post title">
                     </div>
-                    <div class="post-content-form">
+                    <div>
                         <label for="contentInput">Content :</label>
                         <textarea type="text" id="contentInput" name="content"
                             placeholder="Enter post content"></textarea>
                     </div>
-                    <div class="task-dropdowns-form" id="post-dropdowns-form">
+                    <div class="kb-flex-row">
                         <!--technical or non technical-->
                         <div class="task-dropdown task-dropdown-technical">
                             <label for="type-dropdown">Type :</label>
@@ -135,11 +127,11 @@
                         </div>
                     </div>
                 </form>
-                <div class="task-submit-buttons">
-                    <div class="add-post-btn black-btn" id="add-post-btn">
+                <div class="kb-modal-submission-btns">
+                    <button class="add-post-btn" id="add-post-btn">
                         Add Post
                         <i class="fa fa-arrow-right"></i>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -147,23 +139,23 @@
             <div class="modal-box">
                 <!--Header-->
                 <div class="modal-header">
-                    <p>Edit Post</p>
+                    Edit Post
                     <div class="close-modal-btn">
                         <i class="fa-solid fa-x"></i>
                     </div>
                 </div>
                 <!--Body-->
                 <form id="post-modal-form" class="modal-body">
-                    <div class="post-title-form">
+                    <div>
                         <label for="postInput">Title :</label>
                         <input type="text" id="postInput" name="title" placeholder="Enter post title">
                     </div>
-                    <div class="post-content-form">
+                    <div>
                         <label for="contentInput">Content :</label>
                         <textarea type="text" id="contentInput" name="content"
                             placeholder="Enter post content"></textarea>
                     </div>
-                    <div class="task-dropdowns-form" id="post-dropdowns-form">
+                    <div class="kb-flex-row">
                         <!--technical or non technical-->
                         <div class="task-dropdown task-dropdown-technical">
                             <label for="type-dropdown">Type :</label>
@@ -216,6 +208,31 @@
                 </div>
             </div>
         </div>
+        <div id="delete-post-modal" class="modal">
+            <div class="modal-box">
+                <!--Header-->
+                <div class="modal-header">
+                    Delete Post
+                    <div class="close-modal-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </div>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    Are you sure you want to delete this post?
+                </div>
+                <div class="kb-modal-submission-btns">
+                    <button class="red-btn" id="kb-delete-post-modal-confirm">
+                        Delete
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="cancel-delete-post-btn" id="cancel-delete-post-btn">
+                        Cancel
+                        <i class="fa fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -229,19 +246,17 @@
     </div>
     <div class="kb-main kb-full-height">
         <div class="kb-post kb-full-height">
-            <div class="kb-title-line">
+            <div class="kb-flex-row kb-flex-wrap">
                 <h2 class="kb-title-header"></h2>
-                <div class="kb-post-badges">
+                <div class="kb-flex-row kb-flex-wrap">
                     <div class="kb-badge"></div>
                     <div class="kb-badge"></div>
                 </div>
                 <i class="kb-share-link fa-solid fa-link"></i>
             </div>
-            <div class="kb-post-info">
+            <div class="kb-post-info kb-flex-row">
                 <div class="kb-post-avatar" style="background-color:' . $colorLookup[$post['author']].'">
                     <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="kb-text-sm">
                 </div>
             </div>
             <div class="kb-post-divider"></div>
