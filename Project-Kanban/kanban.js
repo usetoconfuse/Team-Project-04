@@ -13,13 +13,16 @@ window.addEventListener("storage", function () {
     getProjectName(selectedProjectID)
 
     const filterKanbanModal = document.querySelector('#kanban-content #filter-modal')
-    document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = 'none';
+    document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = 'None';
     filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
     filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
+    filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
       
   
     
     //Filters
+    const filterAppliedMsg = document.querySelector('.filter-applied-msg');
+    const filterRemoveBtn = document.querySelector('.remove-filters-btn');
 
     const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
     applyFilterBtn.addEventListener('click', () => {
@@ -45,11 +48,13 @@ window.addEventListener("storage", function () {
         filters.orderByValue = null;
       }
 
-      const filterAppliedMsg = document.querySelector('.filter-applied-msg');
+      
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(filters);
-
+      filterRemoveBtn.style.display = 'flex';
       filterTaskModal.style.display = 'none';
+      searchBar.value = "";
+
       getKanbanData(userID, selectedProjectID, filters);
     })
 
@@ -62,12 +67,28 @@ window.addEventListener("storage", function () {
       const currentFilters = getCurrentFilters();
       const allFilters = { ...currentFilters, ...orderByParam};
 
-      const filterAppliedMsg = document.querySelector('.filter-applied-msg');
+
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
-      getKanbanData(userID, selectedProjectID, allFilters);
+      filterRemoveBtn.style.display = 'flex';
+      searchBar.value = "";
 
+      getKanbanData(userID, selectedProjectID, allFilters);
     })
+
+    filterRemoveBtn.addEventListener('click', () => {
+      filterAppliedMsg.innerHTML = "";
+      filterAppliedMsg.style.display = 'none';
+      filterRemoveBtn.style.display = 'none';
+      searchBar.value = "";
+      document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = "None";
+      filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
+      filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
+      filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
+
+      getKanbanData(userID, selectedProjectID, {})
+    })
+
 
   }
 });
@@ -76,13 +97,17 @@ window.addEventListener("storage", function () {
 function createFiltersMsg(filters) {
   let applied = [];
   if (filters.priorityValue && filters.priorityValue !== "All") {
-    applied.push("Priority " + filters.priorityValue)
+    applied.push(filters.priorityValue + " Priority");
   }
   if (filters.dateValue && filters.dateValue !== "All") {
-    applied.push("Due Date " + filters.dateValue)
+    applied.push("Due Date: " + filters.dateValue)
   }
   if (filters.stuckValue && filters.stuckValue !== "All") {
-    applied.push("Show Stuck " + filters.stuckValue)
+    if (filters.stuckValue === "Yes") {
+      applied.push("Show Stuck Tasks");
+    } else {
+      applied.push("Show Non-Stuck Tasks");
+    }
   }
   if (filters.orderByValue && filters.orderByValue !== "None") {
     applied.push("Order By " + filters.orderByValue)

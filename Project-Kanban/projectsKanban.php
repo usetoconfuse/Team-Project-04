@@ -35,12 +35,12 @@
         <div class="projects-intro-buttons">
             <div class="order-by-dropdown">
                 <select>
-                    <option value="none" selected>None</option>
-                    <option value="p-h-l">Priority High to Low</option>
-                    <option value="p-l-h">Priority Low to High</option>
-                    <option value="due-first">Due First</option>
-                    <option value="due-last">Due Last</option>
-                    <option value="most-overdue">Most Overdue</option>
+                    <option value="None" selected>None</option>
+                    <option value="Priority High to Low">Priority High to Low</option>
+                    <option value="Priority Low to High">Priority Low to High</option>
+                    <option value="Due First">Due First</option>
+                    <option value="Due Last">Due Last</option>
+                    <option value="Most Overdue">Most Overdue</option>
                 </select>
                 <div>
                     <a href="#" class="order-by-confirm black-btn">Order By</a>
@@ -77,7 +77,13 @@
         </div>
 
     </div>
-    <p class="filter-applied-msg"></p>
+    <div class="filter-applied-container">
+        <p class="filter-applied-msg"></p>
+        <div class="remove-filters-btn">
+            <i class='fa fa-solid fa-x'></i>
+        </div>
+    </div>
+
 
 
     <!--Kanban Board-->

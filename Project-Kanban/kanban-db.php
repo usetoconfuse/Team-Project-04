@@ -61,19 +61,19 @@ if (!empty($stuck)) {
 if ($orderBy !== 'None') {
     if (!empty($orderBy)) {
         switch ($orderBy) {
-            case 'p-h-l':
+            case 'Priority High to Low':
                 $taskSQL .= " ORDER BY t.Priority DESC";
                 break;
-            case 'p-l-h':
+            case 'Priority Low to High':
                 $taskSQL .= " ORDER BY t.Priority ASC";
                 break;
-            case 'due-first':
+            case 'Due First':
                 $taskSQL .= " ORDER BY t.Due_Date ASC";
                 break;
-            case 'due-last':
+            case 'Due Last':
                 $taskSQL .= " ORDER BY t.Due_Date DESC";
                 break;
-            case 'most-overdue':
+            case 'Most Overdue':
                 $taskSQL .= " ORDER BY t.Due_Date ASC";
                 break;
             default: 
