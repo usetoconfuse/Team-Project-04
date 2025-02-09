@@ -26,9 +26,7 @@
                 Project Filters Here
             </div>
             <div id="statsHomeTableProj">
-                <table id='projectStatsHomeTbl' class="statsHome-table">
-                    <!--Fetch Project Data Here-->
-                </table>
+                <!--Fetch Project Table Here-->
             </div>
         </div>
 
@@ -48,9 +46,7 @@
                 User Filters Here
             </div>
             <div id="statsHomeTableUser">
-                <table id='userStatsHomeTbl' class="statsHome-table">
-                    <!--Fetch User Data Here-->
-                </table>
+                <!--Fetch User Table Here-->
             </div>
         </div>
 

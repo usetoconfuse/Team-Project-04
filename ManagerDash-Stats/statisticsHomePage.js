@@ -74,12 +74,9 @@ async function fetchProjectTable() {
         const data = await response.json();
         console.log("2: ", data[0].Forename);
 
-        // Find the container/table to display the data
-        var container = document.getElementById('projectStatsHomeTbl');
-        container.innerHTML = ''; // Clear any existing content
-
-        container.innerHTML  += "<table class='statsHome-table'>"
-        container.innerHTML  += `<thead>
+        // Build the new table to display
+        let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table'>"
+        projectTable  += `<thead>
                                     <tr>
                                         <th>Title</th>
                                         <th>Start Date</th>
@@ -87,19 +84,22 @@ async function fetchProjectTable() {
                                         <th>Leader</th>
                                     </tr>
                                 </thead>`
-        container.innerHTML  += '<tbody>'
+        projectTable  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           container.innerHTML  += `<tr onclick=viewSelectedProject(` + item.Project_ID + `)>
+           projectTable  += `<tr onclick=viewSelectedProject(` + item.Project_ID + `)>
                                         <td>` + item.Project_Title + `</td>
                                         <td>` + item.Start_Date + `</td>
                                         <td>` + item.Due_Date + `</td>
                                         <td>` + item.Forename + ` ` + item.Surname + `</td>
                                     </tr>`
         });     
-        container.innerHTML  += '</tbody>'
-        container.innerHTML  += '</table>';
+        projectTable  += '</tbody>'
+        projectTable  += '</table>';
 
+        // Find the container/table to display the data
+        const container = document.getElementById('statsHomeTableProj');
+        container.innerHTML = projectTable;
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
@@ -122,29 +122,30 @@ async function fetchUserTable() {
         const data = await response.json();
         console.log("2: ", data[0].Forename);
 
-        // Find the container/table to display the data
-        var container = document.getElementById('userStatsHomeTbl');
-        container.innerHTML = ''; // Clear any existing content
-
-        container.innerHTML  += "<table class='statsHome-table'>"
-        container.innerHTML  += `<thead>
+        // Build the new table to display
+        let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table'>"
+        userTable  += `<thead>
                                     <tr>
                                         <th>User ID</th>
                                         <th>Name</th>
                                         <th>Job Position</th>
                                     </tr>
                                 </thead>`
-        container.innerHTML  += '<tbody>'
+        userTable  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           container.innerHTML  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
+           userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
                                         <td>` + item.User_ID + `</td>
                                         <td>` + item.Forename + ` ` + item.Surname + `</td>
                                         <td>` + item.User_Type + `</td>
                                     </tr>`
         });     
-        container.innerHTML  += '</tbody>'
-        container.innerHTML  += '</table>';
+        userTable  += '</tbody>'
+        userTable  += '</table>';
+
+        // Find the container/table to display the data
+        var container = document.getElementById('statsHomeTableUser');
+        container.innerHTML = userTable;
 
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur

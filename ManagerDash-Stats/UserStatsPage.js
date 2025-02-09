@@ -30,7 +30,7 @@ async function PopulateUserStatsPage() {
     // fetchWeeklyHrsGraph();
 
     //Fetch task status graph
-    await fetchTaskStatusGraph();
+    fetchTaskStatusGraph();
 };
 
 //Fetch user details for user object
@@ -171,32 +171,32 @@ async function fetchUserProjHrsTable() {
         if (data.length > 0) {
             console.log("2: ", data[0].Project_ID);
 
-
-            // Find the container/table to display the data
-            var container = document.getElementById('userStats-projHrsTable');
-            container.innerHTML = ''; // Clear any existing content
-
-            container.innerHTML  += "<table class='statsHome-table'>"
+            // Build the new table to display
+            let hoursTable  = "<table class='statsHome-table'>"
             //Approx man-hrs as tasks could be shorter/longer than expected
-            container.innerHTML  += `<thead>
+            hoursTable  += `<thead>
                                         <tr>
                                             <th>Project ID</th>
                                             <th>Project Name</th>
                                             <th>Approx Man Hours Spent by ` + userDetails.forename + ` ` + userDetails.surname + ` (ID=` + userDetails.id + `)` + `</th>
                                         </tr>
                                     </thead>`
-            container.innerHTML  += '<tbody>'
+            hoursTable  += '<tbody>'
 
             // Loop through the data and create a new element for each item
             data.forEach(function(item) {
-            container.innerHTML  += `<tr>
+            hoursTable  += `<tr>
                                         <td>` + item.Project_ID + `</td>
                                         <td>` + item.Project_Title + `</td>
                                         <td>` + item.TotalHrs + `</td>
                                     </tr>`
             });     
-            container.innerHTML  += '</tbody>'
-            container.innerHTML  += '</table>';
+            hoursTable  += '</tbody>'
+            hoursTable  += '</table>';
+
+            // Find the container/table to display the data
+            var container = document.getElementById('userStats-projHrsTable');
+            container.innerHTML = hoursTable;
 
             } else {
                 var container = document.getElementById('userStats-projHrsTable');
@@ -227,12 +227,9 @@ async function fetchUserProjHrsTable() {
 
                 console.log("2: ", data[0].Task_ID);
 
-                // Find the container/table to display the data
-                var container = document.getElementById('allTaskTable-userStats');
-                container.innerHTML = ''; // Clear any existing content
-
-                container.innerHTML  += "<table class='statsHome-table'>"
-                container.innerHTML  += `<thead>
+                // Build the new table to display
+                let tasksTable  = "<table class='statsHome-table'>"
+                tasksTable  += `<thead>
                                             <tr>
                                                 <th>Task ID</th>
                                                 <th>Task Name</th>
@@ -245,7 +242,7 @@ async function fetchUserProjHrsTable() {
                                                 <th>Project Name</th>
                                             </tr>
                                         </thead>`
-                container.innerHTML  += '<tbody>'
+                tasksTable  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
                     if (item.Stuck === "1") { // Make the "stuck" field readable for user.
@@ -255,7 +252,7 @@ async function fetchUserProjHrsTable() {
                         var stuck = "No";
                         var stuckStyles = "color:black";
                     }
-                    container.innerHTML  += `<tr>
+                    tasksTable  += `<tr>
                                             <td>` + item.Task_ID + `</td>
                                             <td>` + item.Name + `</td>
                                             <td>` + item.Description + `</td>
@@ -267,8 +264,12 @@ async function fetchUserProjHrsTable() {
                                             <td>` + item.Project_Title+ `</td>
                                         </tr>`
                     });     
-                    container.innerHTML  += '</tbody>'
-                    container.innerHTML  += '</table>';
+                    tasksTable  += '</tbody>'
+                    tasksTable  += '</table>';
+
+                    // Find the container/table to display the data
+                    var container = document.getElementById('allTaskTable-userStats');
+                    container.innerHTML = tasksTable;
             } else {
                 var container = document.getElementById('allTaskTable-userStats');
                 container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
