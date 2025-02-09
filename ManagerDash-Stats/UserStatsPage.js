@@ -8,7 +8,7 @@ const userDetails = {};
 
 // Populate page when a user is selected
 
-document.getElementById("userViewStats").addEventListener('selected', async () => {
+async function PopulateUserStatsPage() {
 
     //Get user ID from URL
     const params = new URLSearchParams(window.location.search);
@@ -18,17 +18,17 @@ document.getElementById("userViewStats").addEventListener('selected', async () =
     await(fetchUserDetails(userID));
 
     //Fetch all tasks of a user
-    fetchUserTaskTable();
+    await(fetchUserTaskTable());
 
     //Fetch overall project hours of a user
-    fetchUserProjHrsTable();
+    await(fetchUserProjHrsTable());
 
     //Fetch weekly man-hours graph across all projects
     // fetchWeeklyHrsGraph();
 
     //Fetch task status graph
-    fetchTaskStatusGraph();
-});
+    await fetchTaskStatusGraph();
+};
 
 //Fetch user details for user object
 async function fetchUserDetails(userID) {

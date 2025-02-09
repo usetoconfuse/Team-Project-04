@@ -16,6 +16,7 @@
 const mgrStatsPostTypeButtons = document.querySelectorAll('#mgrStats-tabBtn button');
 mgrStatsPostTypeButtons.forEach(button => {
     button.addEventListener("click", () => {
+
         mgrStatsPostTypeButtons.forEach(btn => { // Hide all other tabs
             btn.classList.remove('mgrStats-activeTab')
             document.getElementById(btn.getAttribute("value")).style.display = "none";
@@ -35,30 +36,25 @@ mgrStatsPostTypeButtons.forEach(button => {
 
 
 // Switch from table to stats view
-// Fires the "selected" event on the div made visible to simulate DOMContentLoaded for subpage
 
-const selected = new Event("selected");
-
-function viewSelectedProject(id) {
+async function viewSelectedProject(id) {
     const params = new URLSearchParams(window.location.search);
     params.set("project", id);
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
+    // await(PopulateProjectStatsPage());
     document.getElementById("statsHomeGridProject").style.display = "none";
-    const container = document.getElementById("projectViewStats");
-    container.style.display = "block";
-    container.dispatchEvent(selected);
+    document.getElementById("projectViewStats").style.display = "block";
 }
 
-function viewSelectedUser(id) {
+async function viewSelectedUser(id) {
     const params = new URLSearchParams(window.location.search);
     params.set("user", id);
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
+    await(PopulateUserStatsPage());
     document.getElementById("statsHomeGridUser").style.display = "none";
-    const container = document.getElementById("userViewStats");
-    container.style.display = "block";
-    container.dispatchEvent(selected);
+    document.getElementById("userViewStats").style.display = "block";
 }
 
 
