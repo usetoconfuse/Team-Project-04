@@ -83,8 +83,10 @@
 
 .statsHome-table {
     width: 50%;
+    height: 100%;
     border-collapse: collapse;
     justify-self: center;
+    overflow-y: auto;
 }
 
 tr:hover {
@@ -103,7 +105,7 @@ tr:hover {
     width: 100%;
 }
 
-.mgrStats-post-type-btns {
+#mgrStats-tabBtn {
     background-color: var(--secondary-colour);
     padding: 0px;
     white-space: nowrap;
@@ -113,30 +115,30 @@ tr:hover {
     justify-content: center;
 }
 
-.mgrStats-post-type-btns button {
+#mgrStats-tabBtn button {
     border-radius: 0px;
 }
 
-.mgrStats-post-type-btns button:first-child {
+#mgrStats-tabBtn button:first-child {
     border-top-left-radius: var(--line-border-radius);
     border-bottom-left-radius: var(--line-border-radius);
 }
 
-.mgrStats-post-type-btns button:last-child {
+#mgrStats-tabBtn button:last-child {
     border-top-right-radius: var(--line-border-radius);
     border-bottom-right-radius: var(--line-border-radius);
 }
 
-.mgrStats-post-type-btns button {
+#mgrStats-tabBtn button {
     background-color: transparent;
     color: var(--primary-colour);
 }
 
-.mgrStats-post-type-btns button:hover {
+#mgrStats-tabBtn button:hover {
     background-color: #9A9A9A;
 }
 
-.mgrStats-post-type-btns button.mgrStats-activeTab {
+#mgrStats-tabBtn button.mgrStats-activeTab {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
 }
