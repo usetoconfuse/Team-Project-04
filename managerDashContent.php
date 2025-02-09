@@ -1,3 +1,5 @@
+<!-- OUTDATED - CONTENT IS BEING MERGED INTO STATISTICS -->
+
 <!-- Displays a list of all projects on the left. A manager selects a project
  to view project progress, project team members and contributions by member. -->
 

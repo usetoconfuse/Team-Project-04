@@ -1,3 +1,5 @@
+// OUTDATED - CONTENT IS BEING MERGED INTO STATISTICS
+
 const taskByMember = document.querySelector('#mdContributionGraphContainer');
 const progressOverTime = document.querySelector('#mdProgressTimeChartContainer');
 const graphDropdown = document.querySelector('#chooseGraph');
