@@ -2,25 +2,34 @@
 // Updated by Quinn Little 03/02/25 lines 6 to 48
 // Updated by Quinn Little 07/02/2025 
 
-// Updated by Toby Tischler 08/02/2025
+// Updated by Toby Tischler 09/02/2025
 
 
 // Statistics Home Page
 
 // =============================================================
 
-// Switch project/user tab
 
-const mgrStatsPostTypeButtons = document.querySelectorAll('.mgrStats-post-type-btns button');
+// Switch between project and user tabs
+// When switching tabs return to the list page
+
+const mgrStatsPostTypeButtons = document.querySelectorAll('#mgrStats-tabBtn button');
 mgrStatsPostTypeButtons.forEach(button => {
     button.addEventListener("click", () => {
-        mgrStatsPostTypeButtons.forEach(btn => {
+        mgrStatsPostTypeButtons.forEach(btn => { // Hide all other tabs
             btn.classList.remove('mgrStats-activeTab')
             document.getElementById(btn.getAttribute("value")).style.display = "none";
         });
- 
-        button.classList.add('mgrStats-activeTab')
-        document.getElementById(button.getAttribute("value")).style.display = "block";
+
+        button.classList.add('mgrStats-activeTab'); // Show this tab
+
+        // Show the tab in list view
+        const showingTab = document.getElementById(button.getAttribute("value"));
+        for (const subpage of showingTab.children) {
+            subpage.style.display = "none";
+        }
+        showingTab.querySelector(".statsHome-grid").style.display = "block";
+        showingTab.style.display = "block";
     });
 });
 
@@ -35,7 +44,7 @@ function viewSelectedProject(id) {
     params.set("project", id);
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
-    document.getElementById("projectStatsHomeTbl").style.display = "none";
+    document.getElementById("statsHomeGridProject").style.display = "none";
     const container = document.getElementById("projectViewStats");
     container.style.display = "block";
     container.dispatchEvent(selected);
@@ -46,7 +55,7 @@ function viewSelectedUser(id) {
     params.set("user", id);
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
-    document.getElementById("userStatsHomeTbl").style.display = "none";
+    document.getElementById("statsHomeGridUser").style.display = "none";
     const container = document.getElementById("userViewStats");
     container.style.display = "block";
     container.dispatchEvent(selected);
@@ -98,16 +107,12 @@ async function fetchProjectTable() {
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
-};
+}
 
-// Projects table event handlers
-// Populate on load as project is the default tab
-document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
-document.addEventListener('DOMContentLoaded', fetchProjectTable());
 
 //Get all users query and generate user table
 
-document.getElementById('mgrUserStats').addEventListener('click', async () => {
+async function fetchUserTable() {
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageQuery.php');
@@ -148,4 +153,10 @@ document.getElementById('mgrUserStats').addEventListener('click', async () => {
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
-});
+};
+
+// Projects table event handlers
+// Populate project table on load as project is the default tab
+document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
+document.addEventListener('DOMContentLoaded', fetchProjectTable());
+document.getElementById('mgrUserStats').addEventListener('click', fetchUserTable());

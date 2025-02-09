@@ -11,11 +11,11 @@
 
     // Select employee name, email, role, and status (are they still working here)
     $sql = "SELECT
-	users.Forename,
-    users.Surname,
-    users.Email,
-    users.User_Type,
-    users.Employee_Status
+        users.Forename,
+        users.Surname,
+        users.Email,
+        users.User_Type,
+        users.Employee_Status
     FROM users
     WHERE users.User_ID = '$userID'
     ";
