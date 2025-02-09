@@ -19,7 +19,7 @@
 
 
 <!-- Tab for Project Statistics -->
-<div id='tabGroupProjectStats'>
+<div id='tabGroupProjectStats' class="tabGroup">
 <div id="statsHomeGridProject">
 <div id="statsHomeFiltersProj">
 Project Filters Here
@@ -37,9 +37,9 @@ Project Filters Here
 
 
 <!-- Tab for User Statistics -->
-<div id='tabGroupUserStats'>
+<div id='tabGroupUserStats' class="tabGroup">
 <div id="statsHomeGridUser">
-<div id="statsHomeFilterUser">
+<div id="statsHomeFiltersUser">
 User Filters Here
 </div>
 <div id="statsHomeTableUser">
