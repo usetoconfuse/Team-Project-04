@@ -15,8 +15,8 @@ if (isset($_GET['ID'])) {
     $sql = "SELECT 
     projects.Project_ID, 
     projects.Project_Title, 
-    COALESCE(SUM(tasks.Man_Hours), 0) AS 'totalHrs', 
-    COALESCE(COUNT(tasks.Task_ID), 0) AS 'totalTasksCompleted'
+    COALESCE(SUM(tasks.Man_Hours), 0) AS 'TotalHrs', 
+    COALESCE(COUNT(tasks.Task_ID), 0) AS 'TotalTasksCompleted'
     FROM 
         projects
 

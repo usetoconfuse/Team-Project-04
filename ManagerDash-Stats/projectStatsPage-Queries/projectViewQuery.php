@@ -1,24 +1,14 @@
 <?php
 // Made by Quinn Little 23/12/24
 
-    include '../config/db-setup.php';
-
-    //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
-
+    include '../../config/db-setup.php';
+    
     $sql = "SELECT COUNT(projects.Project_ID) AS projectCount
             FROM projects   
             INNER JOIN tasks 
             ON projects.Project_ID = tasks.Project_ID  
             WHERE projects.Project_ID >= 1
             ";
-    
-    // if ($type == "Technical"){
-	//     $sql .= " WHERE kb.Type = 'Technical' ";  
-    // }
-
-    // if ($type == "Non-Technical"){
-    //     $sql .=  " WHERE kb.Type = 'Non-Technical' ";  
-    // }
 
 
     $result = mysqli_query($conn,$sql);

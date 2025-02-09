@@ -1,17 +1,12 @@
-//Created by Quinn Little 07/02/2025
-
+// Created by Quinn Little 07/02/2025
+// Updated by Toby Tischler 08/02/2025
 
 //Get Parameters
 
-const url = window.location.href;
-
-//URL object
-const urlObj = new URL(url);
-
 //get params
-const params = new URLSearchParams(urlObj.search);
+const params = new URLSearchParams(window.location.search);
 
-const userID = params.get('ID');
+const userID = params.get('user');
 const forename = params.get('forename'); 
 const surname = params.get('surname');
 
@@ -56,7 +51,7 @@ const surname = params.get('surname');
     async function fetchTaskStatusGraph() {
         try {
             // Make an HTTP request to the PHP file
-            const response = await fetch('userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userID);
+            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userID);
             console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
@@ -111,7 +106,7 @@ const surname = params.get('surname');
 async function fetchUserProjHrsTable() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userID);
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userID);
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
@@ -130,22 +125,23 @@ async function fetchUserProjHrsTable() {
             container.innerHTML = ''; // Clear any existing content
 
             container.innerHTML  += "<table class='statsHome-table'>"
-
             //Approx man-hrs as tasks could be shorter/longer than expected
-            container.innerHTML  += '<thead><tr><th>Project ID</th><th>Project Name</th><th>Approx Man-Hours Spent by ' 
-            + forename + ' ' + surname + ' (' + userID + ')' 
-            + '</th><th>Number of Tasks Completed</th></tr></thead>'
-
+            container.innerHTML  += `<thead>
+                                        <tr>
+                                            <th>Project ID</th>
+                                            <th>Project Name</th>
+                                            <th>Approx Man Hours Spent by ` + forename + ` ` + surname + ` (ID=` + userID + `)` + `</th>
+                                        </tr>
+                                    </thead>`
             container.innerHTML  += '<tbody>'
 
             // Loop through the data and create a new element for each item
             data.forEach(function(item) {
-            container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" 
-            + item.Project_ID + "</td><td>" 
-            + item.Project_Title + "</td><td>" 
-            + item.totalHrs + "</td><td>" 
-            + item.totalTasksCompleted 
-            + "</td></tr>"
+            container.innerHTML  += `<tr>
+                                        <td>` + item.Project_ID + `</td>
+                                        <td>` + item.Project_Title + `</td>
+                                        <td>` + item.TotalHrs + `</td>
+                                    </tr>`
             });     
             container.innerHTML  += '</tbody>'
             container.innerHTML  += '</table>';
@@ -166,7 +162,7 @@ async function fetchUserProjHrsTable() {
     async function fetchUserTaskTable() {
         try {
             // Make an HTTP request to the PHP file
-            const response = await fetch('userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userID);
+            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userID);
             console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
@@ -184,7 +180,19 @@ async function fetchUserProjHrsTable() {
                 container.innerHTML = ''; // Clear any existing content
 
                 container.innerHTML  += "<table class='statsHome-table'>"
-                container.innerHTML  += '<thead><tr><th>Task ID</th><th>Task Name</th><th>Description</th><th>Status</th><th>Stuck?</th><th>Due Date</th><th>Priority</th><th>Start Date</th><th>Project Name</th></tr></thead>'
+                container.innerHTML  += `<thead>
+                                            <tr>
+                                                <th>Task ID</th>
+                                                <th>Task Name</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
+                                                <th>Stuck?</th>
+                                                <th>Due Date</th>
+                                                <th>Priority</th>
+                                                <th>Start Date</th>
+                                                <th>Project Name</th>
+                                            </tr>
+                                        </thead>`
                 container.innerHTML  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
@@ -195,7 +203,17 @@ async function fetchUserProjHrsTable() {
                         var stuck = "No";
                         var stuckStyles = "color:black";
                     }
-                    container.innerHTML  += "<tr onclick=redirectToPage('#')><td>" + item.Task_ID + "</td><td>" + item.Name + "</td><td>" + item.Description + "</td><td>" + item.Status + "</td><td style=" + stuckStyles + ";>" + stuck + "</td><td>" + item.Due_Date + "</td><td>" + item.Priority + "</td><td>" + item.Start_Date+ "</td><td>" + item.Project_Title+ "</td></tr>"
+                    container.innerHTML  += `<tr>
+                                            <td>` + item.Task_ID + `</td>
+                                            <td>` + item.Name + `</td>
+                                            <td>` + item.Description + `</td>
+                                            <td>` + item.Status + `</td>
+                                            <td style="` + stuckStyles + `";>` + stuck + `</td>
+                                            <td>` + item.Due_Date + `</td>
+                                            <td>` + item.Priority + `</td>
+                                            <td>` + item.Start_Date+ `</td>
+                                            <td>` + item.Project_Title+ `</td>
+                                        </tr>`
                     });     
                     container.innerHTML  += '</tbody>'
                     container.innerHTML  += '</table>';
@@ -208,20 +226,25 @@ async function fetchUserProjHrsTable() {
     }
     };
 
+
 // Event Listeners
-//Fetch all tasks of a user
-document.addEventListener('DOMContentLoaded', fetchUserTaskTable());
+// We cannot use DOMContentLoaded as this is not its own page
+// Therefore we use the "selected" custom event to know when a user has been selected
 
-//Fetch overall project hours of a user
-document.addEventListener('DOMContentLoaded', fetchUserProjHrsTable());
+document.getElementById("userViewStats").addEventListener('selected', () => {
 
-//Fetch weekly man-hours graph across all projects
-//document.addEventListener('DOMContentLoaded', fetchWeeklyHrsGraph());
+    //Fetch all tasks of a user
+    fetchUserTaskTable();
 
+    //Fetch overall project hours of a user
+    fetchUserProjHrsTable();
 
+    //Fetch weekly man-hours graph across all projects
+    // fetchWeeklyHrsGraph();
 
-// Fetch task status graph
-document.addEventListener('DOMContentLoaded', fetchTaskStatusGraph());
+    // Fetch task status graph
+    fetchTaskStatusGraph();
+});
 
 
 

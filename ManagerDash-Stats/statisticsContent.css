@@ -1,7 +1,9 @@
 /* Updated by Quinn Little 03/02/25 */
 /* Updated by Quinn Little 07/02/25 lines 133 to 216*/
+/* Updated by Toby Tischler 08/02/25 added project stats styling
 
 
+/*--------------------- General Statistics CSS ---------------------*/
 
 /* User Home Page Table */
 .statsHome-table {
@@ -168,7 +170,7 @@ tr:hover {
     background-color: #9A9A9A;
 }
 
-.mgrStats-post-type-btns button.mgrStats-active {
+.mgrStats-post-type-btns button.mgrStats-activeTab {
     background-color: var(--primary-colour);
     color: var(--bg-colour);
 }
@@ -193,13 +195,18 @@ tr:hover {
     overflow-y:auto;
 }
 
-#tabGroupUserStats {
+#tabGroupUserStats, #projectViewStats {
     display: none;
     height:50vh;
     overflow-y:auto;
 }
 
-/* User Statistics CSS - Quinn */
+/*--------------------- Project Statistics CSS - Toby ---------------------*/
+
+
+
+
+/*--------------------- User Statistics CSS - Quinn ---------------------*/
     
 
 /* Grid container */

@@ -1,9 +1,11 @@
-//Created by Quinn Little 07/02/2025
+
+// Created by Quinn Little 07/02/2025
+// Updated by Toby Tischler 08/02/2025
 
 document.getElementById('fetchDataTest').addEventListener('click', async function() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('stats-db.php');
+        const response = await fetch('ManagerDash-Stats/projectStatsPage-Queries/projectViewQuery.php');
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
