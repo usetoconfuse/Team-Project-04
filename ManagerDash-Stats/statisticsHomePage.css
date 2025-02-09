@@ -189,14 +189,15 @@ tr:hover {
 
 /* Tab groups */
 
+.tabGroup {
+    height: 50vh;
+    overflow-y: auto;
+}
+
 #tabGroupProjectStats {
     display: block;
-    height:50vh;
-    overflow-y:auto;
 }
 
 #tabGroupUserStats, #projectViewStats, #userViewStats {
     display: none;
-    height:50vh;
-    overflow-y:auto;
 }

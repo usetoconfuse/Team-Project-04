@@ -1,14 +1,39 @@
 // Created by Quinn Little 07/02/2025
-// Updated by Toby Tischler 08/02/2025
+// Updated by Toby Tischler 09/02/2025
 
-//Get Parameters
+
 
 //get params
-const params = new URLSearchParams(window.location.search);
+var params = new URLSearchParams(window.location.search);
 
-const userID = params.get('user');
-const forename = params.get('forename'); 
-const surname = params.get('surname');
+var userID = params.get('user');
+var forename = params.get('forename'); 
+var surname = params.get('surname');
+
+
+// Populate page when a user is selected
+
+document.getElementById("userViewStats").addEventListener('selected', () => {
+
+    //get params
+    params = new URLSearchParams(window.location.search);
+
+    userID = params.get('user');
+    forename = params.get('forename'); 
+    surname = params.get('surname');
+
+    //Fetch all tasks of a user
+    fetchUserTaskTable();
+
+    //Fetch overall project hours of a user
+    fetchUserProjHrsTable();
+
+    //Fetch weekly man-hours graph across all projects
+    // fetchWeeklyHrsGraph();
+
+    // Fetch task status graph
+    fetchTaskStatusGraph();
+});
 
 //console.log(userID);
 
@@ -225,26 +250,6 @@ async function fetchUserProjHrsTable() {
         console.error('Error:', error); // Log any errors that occur
     }
     };
-
-
-//=============================== EVENT LISTENERS ===============================
-// We cannot use DOMContentLoaded as this is not its own page
-// Instead use 'selected' event fired on container div when a user is selected
-
-document.getElementById("userViewStats").addEventListener('selected', () => {
-
-    //Fetch all tasks of a user
-    fetchUserTaskTable();
-
-    //Fetch overall project hours of a user
-    fetchUserProjHrsTable();
-
-    //Fetch weekly man-hours graph across all projects
-    // fetchWeeklyHrsGraph();
-
-    // Fetch task status graph
-    fetchTaskStatusGraph();
-});
 
 
 
