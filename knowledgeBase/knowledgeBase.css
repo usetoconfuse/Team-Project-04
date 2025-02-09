@@ -156,6 +156,7 @@
 
 .kb-listing-search {
     display: flex;
+    flex-grow: 1;
     flex-direction: row;
     align-items: center;
     background-color: var(--secondary-colour);
