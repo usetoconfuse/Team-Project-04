@@ -4,8 +4,6 @@ const kanbanContainers = document.querySelectorAll('.kanban-board');
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
 
-
-
   if (selectedProjectID) {
     const kanbanContainer = document.querySelector('#kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
@@ -44,14 +42,18 @@ window.addEventListener("storage", function () {
       const orderByValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
       if (orderByValue !== "None") {
         filters.orderByValue = orderByValue;
-      } else {
-        filters.orderByValue = null;
-      }
+      } 
 
-      
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(filters);
-      filterRemoveBtn.style.display = 'flex';
+
+      let filtersLength = Object.keys(filters).length;
+      if (filtersLength > 0) {
+        filterRemoveBtn.style.display = 'flex';
+      } else {
+        filterRemoveBtn.style.display = 'none';
+      }
+
       filterTaskModal.style.display = 'none';
       searchBar.value = "";
 
@@ -62,7 +64,8 @@ window.addEventListener("storage", function () {
     const orderByBtn = document.querySelector('.projects-intro-buttons .order-by-confirm');
     orderByBtn.addEventListener('click', () => {
       const orderByDropdownValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
-      const orderByParam = { orderByValue: orderByDropdownValue};
+      const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+
 
       const currentFilters = getCurrentFilters();
       const allFilters = { ...currentFilters, ...orderByParam};
@@ -70,7 +73,14 @@ window.addEventListener("storage", function () {
 
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
-      filterRemoveBtn.style.display = 'flex';
+
+      let filtersLength = Object.keys(allFilters).length;
+      if (filtersLength > 0) {
+        filterRemoveBtn.style.display = 'flex';
+      } else {
+        filterRemoveBtn.style.display = 'none';
+      }
+
       searchBar.value = "";
 
       getKanbanData(userID, selectedProjectID, allFilters);
