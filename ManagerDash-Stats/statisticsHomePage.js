@@ -60,7 +60,7 @@ function viewSelectedUser(id, forename, surname) {
 async function fetchProjectTable() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/projectStatsPage-Queries/projectStatsHomePageQuery.php');
+        const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/projectStatsHomePageQuery.php');
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', fetchProjectTable());
 document.getElementById('mgrUserStats').addEventListener('click', async () => {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsHomePageQuery.php');
+        const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageQuery.php');
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 

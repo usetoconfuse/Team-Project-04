@@ -15,7 +15,7 @@ session_start()
     </link>
     <link rel="stylesheet" href="Projects/projects.css">
     </link>
-    <link rel="stylesheet" href="ManagerDash-Stats/statisticsContent.css">
+    <link rel="stylesheet" href="ManagerDash-Stats/statisticsHomePage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="Project-Kanban/kanban.css" />
@@ -196,7 +196,7 @@ session_start()
    
     <script src="navbar.js"></script>
     <script type="module" src="Project-Kanban/kanban.js"></script>
-    <script src="ManagerDash-Stats/Manager-Statistics.js"></script>
+    <script src="ManagerDash-Stats/statisticsHomePage.js"></script>
     <script src="Projects/projects.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>

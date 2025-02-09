@@ -5,7 +5,7 @@
 document.getElementById('fetchDataTest').addEventListener('click', async function() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/projectStatsPage-Queries/projectViewQuery.php');
+        const response = await fetch('ManagerDash-Stats/projectStatsPage-Queries/projectStatsTestQuery.php');
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
