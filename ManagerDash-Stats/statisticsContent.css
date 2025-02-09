@@ -78,7 +78,54 @@ tr:hover {
     border-radius: 30px;
 }
 
+/* Grid Home Page */
+/* Project Home Grid */
+#statsHomeGridProject {
+    display: grid;
+    grid-template-areas: 'filtersHomeProj'
+                         'tableHomeProj'
+                         'tableHomeProj';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
 
+#statsHomeFiltersProj {
+    grid-area: filtersHomeProj;
+    justify-self: center;
+}
+
+#statsHomeTableProj {
+    grid-area: tableHomeProj;
+}
+
+
+/* User Home Grid */
+
+#statsHomeGridUser {
+    display: grid;
+    grid-template-areas: 'filtersHomeUser'
+                         'tableHomeUser'
+                         'tableHomeUser';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#statsHomeFilterUser{
+    grid-area: filtersHomeUser;
+    justify-self: center;
+}
+
+#statsHomeTableUser {
+    grid-area: tableHomeUser;
+}
 
 /* Tab Styles */
 .mgrStats-header-section {
@@ -144,10 +191,14 @@ tr:hover {
 
 #tabGroupProjectStats {
     display: block;
+    height:50vh;
+    overflow-y:auto;
 }
 
 #tabGroupUserStats, #projectViewStats {
     display: none;
+    height:50vh;
+    overflow-y:auto;
 }
 
 /*--------------------- Project Statistics CSS - Toby ---------------------*/
