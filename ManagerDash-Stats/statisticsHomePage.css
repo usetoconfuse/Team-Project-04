@@ -195,7 +195,7 @@ tr:hover {
     overflow-y:auto;
 }
 
-#tabGroupUserStats, #projectViewStats {
+#tabGroupUserStats, #projectViewStats, #userViewStats {
     display: none;
     height:50vh;
     overflow-y:auto;
