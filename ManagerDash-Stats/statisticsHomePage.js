@@ -41,11 +41,9 @@ function viewSelectedProject(id) {
     container.dispatchEvent(selected);
 }
 
-function viewSelectedUser(id, forename, surname) {
+function viewSelectedUser(id) {
     const params = new URLSearchParams(window.location.search);
     params.set("user", id);
-    params.set("forename", forename);
-    params.set("surname", surname);
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
     document.getElementById("userStatsHomeTbl").style.display = "none";
@@ -138,7 +136,7 @@ document.getElementById('mgrUserStats').addEventListener('click', async () => {
         container.innerHTML  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           container.innerHTML  += `<tr onclick=viewSelectedUser(` + item.User_ID + `,'` + item.Forename + `','` + item.Surname + `')>
+           container.innerHTML  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
                                         <td>` + item.User_ID + `</td>
                                         <td>` + item.Forename + ` ` + item.Surname + `</td>
                                         <td>` + item.User_Type + `</td>

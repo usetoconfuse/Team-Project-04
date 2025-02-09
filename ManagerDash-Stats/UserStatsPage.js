@@ -2,25 +2,20 @@
 // Updated by Toby Tischler 09/02/2025
 
 
-
-//get params
-var params = new URLSearchParams(window.location.search);
-
-var userID = params.get('user');
-var forename = params.get('forename'); 
-var surname = params.get('surname');
-
+// Object that stores the user details used by the page
+// Attributes: id, forename, surname, email, role, status
+const userDetails = {};
 
 // Populate page when a user is selected
 
-document.getElementById("userViewStats").addEventListener('selected', () => {
+document.getElementById("userViewStats").addEventListener('selected', async () => {
 
-    //get params
-    params = new URLSearchParams(window.location.search);
+    //Get user ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const userID = params.get('user');
 
-    userID = params.get('user');
-    forename = params.get('forename'); 
-    surname = params.get('surname');
+    //Fetch full user details from ID
+    await(fetchUserDetails(userID));
 
     //Fetch all tasks of a user
     fetchUserTaskTable();
@@ -31,9 +26,38 @@ document.getElementById("userViewStats").addEventListener('selected', () => {
     //Fetch weekly man-hours graph across all projects
     // fetchWeeklyHrsGraph();
 
-    // Fetch task status graph
+    //Fetch task status graph
     fetchTaskStatusGraph();
 });
+
+//Fetch user details for user object
+async function fetchUserDetails(userID) {
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsGetUserInfoQuery.php?ID=' + userID);
+        console.log("1: ", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        
+        // Populate userDetails object
+        userDetails.id = userID;
+        userDetails.forename = data[0].Forename;
+        userDetails.surname = data[0].Surname;
+        userDetails.email = data[0].Email;
+        userDetails.role = data[0].User_Type;
+        userDetails.status = data[0].Employee_Status;
+        console.log(userDetails);
+
+    } catch (error) {
+        console.error('Error:', error); // Log any errors that occur
+    }
+};
+
 
 //console.log(userID);
 
@@ -42,7 +66,7 @@ document.getElementById("userViewStats").addEventListener('selected', () => {
     // async function fetchWeeklyHrsGraph() {
     //     try {
     //         // Make an HTTP request to the PHP file
-    //         const response = await fetch('userStatsPage-Queries/userStatsWeeklyHrsGraphQuery.php?ID=' + userID);
+    //         const response = await fetch('userStatsPage-Queries/userStatsWeeklyHrsGraphQuery.php?ID=' + userDetails.id);
     //         console.log("1: ", response);
             
     //         // Ensure the response is OK and return the JSON data 
@@ -73,65 +97,65 @@ document.getElementById("userViewStats").addEventListener('selected', () => {
 
     
 //Function to fetch all man-hours over the past week of a user
-    async function fetchTaskStatusGraph() {
-        try {
-            // Make an HTTP request to the PHP file
-            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userID);
-            console.log("1: ", response);
-            
-            // Ensure the response is OK and return the JSON data 
-            if (!response.ok) { 
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            // Convert the response to JSON format
-            const data = await response.json();
+async function fetchTaskStatusGraph() {
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userDetails.id);
+        console.log("1: ", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        console.log(data);
+
+        if (data.length > 0) {
             console.log(data);
-
-            if (data.length > 0) {
-                console.log(data);
-                statusTaskArr = [];
-                i = 0;
-                console.log(data[0][0].tasks);
-                if (data[0][0] != null) {
-                    statusTaskArr.push(parseInt(data[0][0].tasks)); // To Do
-                }
-                if (data[1][0] != null) {
-                    statusTaskArr.push(parseInt(data[1][0].tasks)); // In Progress
-
-                }
-                if (data[2][0] != null) {
-                    statusTaskArr.push(parseInt(data[2][0].tasks)); // Completed
-
-                }
-                if (data[3][0] != null) {
-                    statusTaskArr.push(parseInt(data[3][0].tasks)); // Stuck
-
-                }
-
-
-
-
-
-                // data.forEach(function(item) {
-                //     statusTaskArr.push(item[i]);
-                //     i++;
-                // });                        
-                console.log(statusTaskArr)
-                createTaskStatusGraph(statusTaskArr);
-
-            } else {
-                createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
+            statusTaskArr = [];
+            i = 0;
+            console.log(data[0][0].tasks);
+            if (data[0][0] != null) {
+                statusTaskArr.push(parseInt(data[0][0].tasks)); // To Do
             }
-    } catch (error) {
-        console.error('Error:', error); // Log any errors that occur
-    }
-    };
+            if (data[1][0] != null) {
+                statusTaskArr.push(parseInt(data[1][0].tasks)); // In Progress
+
+            }
+            if (data[2][0] != null) {
+                statusTaskArr.push(parseInt(data[2][0].tasks)); // Completed
+
+            }
+            if (data[3][0] != null) {
+                statusTaskArr.push(parseInt(data[3][0].tasks)); // Stuck
+
+            }
+
+
+
+
+
+            // data.forEach(function(item) {
+            //     statusTaskArr.push(item[i]);
+            //     i++;
+            // });                        
+            console.log(statusTaskArr)
+            createTaskStatusGraph(statusTaskArr);
+
+        } else {
+            createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
+        }
+} catch (error) {
+    console.error('Error:', error); // Log any errors that occur
+}
+};
 
 //Function to fetch overall manhours per project of a user
 async function fetchUserProjHrsTable() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userID);
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userDetails.id);
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
@@ -155,7 +179,7 @@ async function fetchUserProjHrsTable() {
                                         <tr>
                                             <th>Project ID</th>
                                             <th>Project Name</th>
-                                            <th>Approx Man Hours Spent by ` + forename + ` ` + surname + ` (ID=` + userID + `)` + `</th>
+                                            <th>Approx Man Hours Spent by ` + userDetails.forename + ` ` + userDetails.surname + ` (ID=` + userDetails.id + `)` + `</th>
                                         </tr>
                                     </thead>`
             container.innerHTML  += '<tbody>'
@@ -187,7 +211,7 @@ async function fetchUserProjHrsTable() {
     async function fetchUserTaskTable() {
         try {
             // Make an HTTP request to the PHP file
-            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userID);
+            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id);
             console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
@@ -288,7 +312,7 @@ function createTaskStatusGraph(currentTaskStatus) {
             },
             title: {
                 display: true,
-                text: `Task Status Graph for user ${userID} - ${forename} ${surname}`
+                text: `Task Status Graph for user ${userDetails.id} - ${userDetails.forename} ${userDetails.surname}`
                 }
         }
         });

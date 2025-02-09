@@ -3,15 +3,15 @@
 
     include '../../config/db-setup.php';
 
-// Check if ID parameter exists in the URL
-if (isset($_GET['ID'])) {
-    // Retrieve parameter
-    $userID = htmlspecialchars($_GET['ID']); // Sanitize input
-}
+    // Check if ID parameter exists in the URL
+    if (isset($_GET['ID'])) {
+        // Retrieve parameter
+        $userID = htmlspecialchars($_GET['ID']); // Sanitize input
+    }
 
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
-//Select all To Do tasks for that user
+    //Select all To Do tasks for that user
     $queries = ["SELECT SUM(Task_ID) AS 'tasks'
     FROM tasks 
     WHERE tasks.Assignee_ID = '$userID'

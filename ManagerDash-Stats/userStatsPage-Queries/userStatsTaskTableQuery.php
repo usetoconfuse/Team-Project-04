@@ -3,11 +3,11 @@
 
     include '../../config/db-setup.php';
 
-// Check if ID parameter exists in the URL
-if (isset($_GET['ID'])) {
-    // Retrieve parameter
-    $userID = htmlspecialchars($_GET['ID']); // Sanitize input
-}
+    // Check if ID parameter exists in the URL
+    if (isset($_GET['ID'])) {
+        // Retrieve parameter
+        $userID = htmlspecialchars($_GET['ID']); // Sanitize input
+    }
 
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
