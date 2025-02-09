@@ -890,3 +890,7 @@ input[type="file"]::-webkit-file-upload-button {
     align-items: center;
 
 }
+
+.filter-applied-msg {
+    display: none;
+}

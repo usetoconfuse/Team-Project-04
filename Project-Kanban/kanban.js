@@ -38,7 +38,16 @@ window.addEventListener("storage", function () {
       if (stuckValue === "All") {
         delete filters.stuckValue;
       }
+      const orderByValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
+      if (orderByValue !== "None") {
+        filters.orderByValue = orderByValue;
+      } else {
+        filters.orderByValue = null;
+      }
 
+      const filterAppliedMsg = document.querySelector('.filter-applied-msg');
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsg(filters);
 
       filterTaskModal.style.display = 'none';
       getKanbanData(userID, selectedProjectID, filters);
@@ -52,12 +61,38 @@ window.addEventListener("storage", function () {
 
       const currentFilters = getCurrentFilters();
       const allFilters = { ...currentFilters, ...orderByParam};
+
+      const filterAppliedMsg = document.querySelector('.filter-applied-msg');
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
       getKanbanData(userID, selectedProjectID, allFilters);
 
     })
 
   }
 });
+
+
+function createFiltersMsg(filters) {
+  let applied = [];
+  if (filters.priorityValue && filters.priorityValue !== "All") {
+    applied.push("Priority " + filters.priorityValue)
+  }
+  if (filters.dateValue && filters.dateValue !== "All") {
+    applied.push("Due Date " + filters.dateValue)
+  }
+  if (filters.stuckValue && filters.stuckValue !== "All") {
+    applied.push("Show Stuck " + filters.stuckValue)
+  }
+  if (filters.orderByValue && filters.orderByValue !== "None") {
+    applied.push("Order By " + filters.orderByValue)
+  }
+  if (applied.length === 0) {
+    return '';
+  } else {
+    return 'Filters Applied: ' + applied.join(', ');
+  }
+}
 
 function formatDate(date) {
   const dateSplit = date.split('-');

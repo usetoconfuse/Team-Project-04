@@ -77,6 +77,7 @@
         </div>
 
     </div>
+    <p class="filter-applied-msg"></p>
 
 
     <!--Kanban Board-->
