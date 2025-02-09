@@ -8,15 +8,16 @@ $userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 
 $priority = isset($_GET['priorityValue']) ? $_GET['priorityValue'] : null;
 $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
+$stuck = isset($_GET['stuckValue']) ? $_GET['stuckValue'] : null;
 $orderBy = isset($_GET['orderByValue']) ? $_GET['orderByValue'] : null;
 
-$taskSQL = "SELECT t.Task_ID, t.Name, t.Description, t.Status, t.Due_Date, t.Priority, t.Author_ID, t.Stuck, t.Project_ID,
+$taskSQL = "SELECT t.Task_ID, t.Name, t.Description, t.Status, t.Due_Date, t.Start_Date, t.Priority, t.Author_ID, t.Stuck, t.Project_ID,
             t.Assignee_ID, p.Project_Title, u1.Forename AS User_Forename, u1.Surname AS User_Surname, u2.Forename AS Author_Forename, u2.Surname AS Author_Surname
             FROM Tasks t
             JOIN Projects p ON t.Project_ID = p.Project_ID
             LEFT JOIN Users u1 ON t.Assignee_ID = u1.User_ID
             LEFT JOIN Users u2 ON t.Author_ID = u2.User_ID
-            WHERE t.Project_ID = $projectId AND t.Assignee_ID = $userId";
+            WHERE t.Project_ID = $projectId AND t.Assignee_ID = $userId AND t.Start_Date <= CURDATE()";
 
 if (!empty($priority)) {
     $taskSQL .= " AND t.Priority = '$priority'";  
@@ -38,6 +39,19 @@ if (!empty($date)) {
             break;
         case 'Later':
             $taskSQL .= " AND t.Due_Date > CURDATE()";
+            break;
+        default:
+            break;
+    }
+}
+
+if (!empty($stuck)) {
+    switch ($stuck) {
+        case 'Yes':
+            $taskSQL .= " AND t.Stuck IN (1, 2)";
+            break;
+        case 'No':
+            $taskSQL .= " AND t.Stuck = 0";
             break;
         default:
             break;
