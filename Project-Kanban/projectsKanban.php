@@ -151,7 +151,7 @@
                                 <i class="fa fa-solid fa-star"></i>
                             </div>
                             <select name="priority" id="priority">
-                                <option value="All" selected>All</option>
+                                <option value="All" selected>Show All</option>
                                 <option value="None">None</option>
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
@@ -167,12 +167,26 @@
                                 <i class="fa fa-solid fa-calendar-days"></i>
                             </div>
                             <select name="date" id="date-task">
-                                <option value="All" selected>All</option>
+                                <option value="All" selected>Show All</option>
                                 <option value="Today">Today</option>
                                 <option value="Tomorrow">Tomorrow</option>
                                 <option value="This Week">This Week</option>
                                 <option value="Next Week">Next Week</option>
                                 <option value="Later">Later</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--DropDown 3-->
+                    <div class="task-dropdown task-dropdown-stuck">
+                        <label for="date">Show Stuck</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-stuck-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-exclamation"></i>
+                            </div>
+                            <select name="stuck" id="stuck-task">
+                                <option value="All" selected>Show All</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                     </div>

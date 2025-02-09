@@ -8,6 +8,7 @@ $userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 
 $priority = isset($_GET['priorityValue']) ? $_GET['priorityValue'] : null;
 $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
+$stuck = isset($_GET['stuckValue']) ? $_GET['stuckValue'] : null;
 $orderBy = isset($_GET['orderByValue']) ? $_GET['orderByValue'] : null;
 
 $taskSQL = "SELECT t.Task_ID, t.Name, t.Description, t.Status, t.Due_Date, t.Start_Date, t.Priority, t.Author_ID, t.Stuck, t.Project_ID,
@@ -38,6 +39,19 @@ if (!empty($date)) {
             break;
         case 'Later':
             $taskSQL .= " AND t.Due_Date > CURDATE()";
+            break;
+        default:
+            break;
+    }
+}
+
+if (!empty($stuck)) {
+    switch ($stuck) {
+        case 'Yes':
+            $taskSQL .= " AND t.Stuck IN (1, 2)";
+            break;
+        case 'No':
+            $taskSQL .= " AND t.Stuck = 0";
             break;
         default:
             break;

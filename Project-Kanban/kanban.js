@@ -25,8 +25,9 @@ window.addEventListener("storage", function () {
     applyFilterBtn.addEventListener('click', () => {
       const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
       const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+      const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
       
-      const filters = {priorityValue,dateValue};
+      const filters = {priorityValue,dateValue,stuckValue};
 
       if (priorityValue === "All") {
         delete filters.priorityValue;
@@ -34,6 +35,10 @@ window.addEventListener("storage", function () {
       if (dateValue === "All") {
         delete filters.dateValue;
       }
+      if (stuckValue === "All") {
+        delete filters.stuckValue;
+      }
+
 
       filterTaskModal.style.display = 'none';
       getKanbanData(userID, selectedProjectID, filters);
@@ -66,14 +71,18 @@ function getCurrentFilters() {
   const filterKanbanModal = document.querySelector('#kanban-content #filter-modal');
   const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
   const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+  const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
   
-  const filters = {priorityValue,dateValue};
+  const filters = {priorityValue,dateValue,stuckValue};
 
   if (priorityValue === "All") {
     delete filters.priorityValue;
   }
   if (dateValue === "All") {
     delete filters.dateValue;
+  }
+  if (stuckValue === "All") {
+    delete filters.stuckValue;
   }
 
   return filters;
