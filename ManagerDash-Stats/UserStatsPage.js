@@ -130,7 +130,7 @@ async function fetchUserProjHrsTable() {
                                         <tr>
                                             <th>Project ID</th>
                                             <th>Project Name</th>
-                                            <th>Total Man Hours Spent by' + forename + ' ' + surname + '(' + userID + ')' + '</th>
+                                            <th>Approx Man Hours Spent by ` + forename + ` ` + surname + ` (ID=` + userID + `)` + `</th>
                                         </tr>
                                     </thead>`
             container.innerHTML  += '<tbody>'
@@ -208,7 +208,7 @@ async function fetchUserProjHrsTable() {
                                             <td>` + item.Name + `</td>
                                             <td>` + item.Description + `</td>
                                             <td>` + item.Status + `</td>
-                                            <td style="` + stuckStyles + `";>"` + stuck + `</td>
+                                            <td style="` + stuckStyles + `";>` + stuck + `</td>
                                             <td>` + item.Due_Date + `</td>
                                             <td>` + item.Priority + `</td>
                                             <td>` + item.Start_Date+ `</td>
@@ -244,7 +244,6 @@ document.getElementById("userViewStats").addEventListener('selected', () => {
 
     // Fetch task status graph
     fetchTaskStatusGraph();
-    console.log("yippee")
 });
 
 
