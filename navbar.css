@@ -476,6 +476,12 @@ nav {
     display: none;
 }
 
+
+/* Overview content is made up of smaller boxes with their own padding so remove its padding */
+#overview-content {
+    padding: 0;
+}
+
 .nav-item-content.open {
     display: block !important;
 }
