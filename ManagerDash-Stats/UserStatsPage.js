@@ -6,6 +6,9 @@
 // Attributes: id, forename, surname, email, role, status
 const userDetails = {};
 
+// Task breakdown chart
+var weekhrsansd = new Chart(document.getElementById('userStats-weekHrsContainerGraph'));
+
 // Populate page when a user is selected
 
 async function PopulateUserStatsPage() {
@@ -278,11 +281,12 @@ async function fetchUserProjHrsTable() {
 
 
 function createTaskStatusGraph(currentTaskStatus) {
+
+        weekhrsansd.destroy();
+    
         const daysOfWeek = ['To Do', 'In Progress', 'Completed', 'Stuck'];
     
-        weekhrs = document.getElementById('userStats-weekHrsContainerGraph');
-    
-        const weekhrsansd = new Chart(weekhrs, {
+        weekhrsansd = new Chart(document.getElementById('userStats-weekHrsContainerGraph'), {
         type: "bar",
         data: {
             labels: daysOfWeek,
