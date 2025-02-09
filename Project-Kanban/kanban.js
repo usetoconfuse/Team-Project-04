@@ -305,9 +305,16 @@ function generateCard(kanbanData) {
                               </div>
                           </div>`
     } else if (userRole === 'Employee' || userRole === 'Team Leader') {
-      roleBasedBtns = ` <a class="report-task">
-                              Report as stuck
-                            </a>
+      if (task.Stuck === '0') {
+        roleBasedBtns = ` <a class="report-task">
+                              Report as Stuck
+                            </a>`
+      } else {
+        roleBasedBtns = ` <a class="report-task">
+                              Unmark as Stuck
+                            </a>`
+      }
+      roleBasedBtns += `
                             <div class="move-task-dropdown">
                               <select>
                                 <option value="kanban-to-do">To Do</option>
@@ -404,8 +411,9 @@ function generateCard(kanbanData) {
 
     const reportStuckBtn = viewTaskModal.querySelector('.report-task');
     reportStuckBtn.addEventListener('click',  () =>{
-
-       reportStuck(task.Task_ID);
+      const currentStuck = task.Stuck;
+      const newStuck = currentStuck === '0' ? '1' : '0';
+      reportStuck(task.Task_ID, newStuck, reportStuckBtn);
       viewTaskModal.style.display = 'none';
     });
 
@@ -566,11 +574,12 @@ function generateCard(kanbanData) {
 
 }
 
-async function reportStuck(taskID) {
+async function reportStuck(taskID, newStatus, reportBtn) {
   try {
     const url = 'Project-Kanban/confirmStuck.php';
     const data = {
-      Task_ID: taskID
+      Task_ID: taskID,
+      Stuck_Status: newStatus,
     };
     const params = {
       method: 'POST',
@@ -582,6 +591,11 @@ async function reportStuck(taskID) {
     if (!response.ok) {
       throw new Error('Failed to update task status');
     } else {
+      if (newStatus === '1' || newStatus === '2') {
+        reportBtn.innerHTML = "Unmark as Stuck";
+      } else {
+        reportBtn.innerHTML = "Report as Stuck";
+      }
       alert('Task Reported as Stuck');
     }
 
