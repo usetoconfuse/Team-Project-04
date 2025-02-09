@@ -227,9 +227,9 @@ async function fetchUserProjHrsTable() {
     };
 
 
-// Event Listeners
+//=============================== EVENT LISTENERS ===============================
 // We cannot use DOMContentLoaded as this is not its own page
-// Therefore we use the "selected" custom event to know when a user has been selected
+// Instead use 'selected' event fired on container div when a user is selected
 
 document.getElementById("userViewStats").addEventListener('selected', () => {
 

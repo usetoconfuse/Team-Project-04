@@ -3,6 +3,8 @@
 
 <!-- Tab for User Statistics -->
 
+<link rel="stylesheet" href="ManagerDash-Stats/userStatsPage.css" />
+
 <h1>User Statistics</h1>
 <div id="mgrStatsUser-grid-container">
         <!-- <div id="userStats-Flex-Item1"> -->

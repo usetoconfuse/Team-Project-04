@@ -1,6 +1,10 @@
 <!-- Created By Quinn Little 07/02/2025 -->
 <!-- Updated By Toby Tischler 08/02/2025 -->
 
+<!-- Tab for project statistics -->
+
+<link rel="stylesheet" href="ManagerDash-Stats/projectStatsPage.css" />
+
 <div id="statGrid">
     <!-- Filter 1 -->
     <div class="statFilter1 stat-grid-item ">

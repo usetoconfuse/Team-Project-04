@@ -1,0 +1,69 @@
+/* Created by Toby Tischler 09/02/2025 using code from statisticsContent.css */
+
+
+/*--------------------- User Statistics CSS ---------------------*/
+    
+/* Grid container */
+#mgrStatsUser-grid-container {
+    display: grid;
+    grid-template-areas: 'graph table1'
+                         'table2 table2';
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#userStats-weeklyGraph {
+    grid-area: graph;
+}
+#userStats-projectHrsTable{
+    grid-area: table1;
+}
+#userStats-allTasksUser {
+    grid-area: table2;
+    align-self: center;
+    justify-self: center;
+}
+
+.mgrStatsUser-grid-item {
+    padding: 20px;
+    font-size: 1.2em;
+    height: 50%;
+    color: #333;
+    background-color: white;
+    border-radius: 30px;
+}
+
+/* Flex Box for top half of User Stats */
+#userStats-Flex-Item1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height:100%;
+    width: 100%;
+}
+
+.userStatsChartContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem;
+}
+
+
+/* graph */
+
+
+#userStats-weekHrsContainer{
+    display: flex;
+    flex-grow: 1;
+    align-self: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 0.5rem;
+}
+
