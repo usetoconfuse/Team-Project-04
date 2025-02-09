@@ -5,8 +5,12 @@
 
 /*--------------------- General Statistics CSS ---------------------*/
 
+tr:hover {
+    background-color: #d4d100;
+    cursor: pointer;
+}
 
-/* -------- Page container -------- */
+/* Page container */
 #mgrStatsAll {
     font-family: 'Avenir Next';
     font-size: 1rem;
@@ -29,20 +33,32 @@
 }
 
 
-/* Home Page Grids */
+/* Homepage Styles */
 
-/* Project Home Grid */
-#statsHomeGridProject {
+.statsHome-grid {
     display: grid;
-    grid-template-areas: 'filtersHomeProj'
-                         'tableHomeProj'
-                         'tableHomeProj';
+    margin-top: 1rem;
+    max-height: 80vh;
+    width: 100%;
+    overflow-y: auto;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
-    width: 100%;
+}
+
+.statsHome-table {
+    width: 50%;
     height: 100%;
-    margin: 0 auto;
+    border-collapse: collapse;
+    justify-self: center;
+    overflow-y: auto;
+}
+
+/* Project Home Grid */
+#statsHomeGridProject {
+    grid-template-areas: 'filtersHomeProj'
+                         'tableHomeProj'
+                         'tableHomeProj';
 }
 
 #statsHomeFiltersProj {
@@ -61,12 +77,6 @@
     grid-template-areas: 'filtersHomeUser'
                          'tableHomeUser'
                          'tableHomeUser';
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
 }
 
 #statsHomeFilterUser{
@@ -76,22 +86,6 @@
 
 #statsHomeTableUser {
     grid-area: tableHomeUser;
-}
-
-
-/* -------- Home Page Tables -------- */
-
-.statsHome-table {
-    width: 50%;
-    height: 100%;
-    border-collapse: collapse;
-    justify-self: center;
-    overflow-y: auto;
-}
-
-tr:hover {
-    background-color: #d4d100;
-    cursor: pointer;
 }
 
 
@@ -154,6 +148,7 @@ tr:hover {
 .mgrStats-title-header {
     flex-grow: 1;
 }
+
 
 /* Tab groups */
 
