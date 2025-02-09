@@ -96,7 +96,7 @@ const renderTopics = (topics) => {
         // Create the HTML for the post
         const topicHTML = `
         <li class="kb-topic" value ="${topic.Topic_Name}" id="topic-${topic.Topic_ID}"> 
-        <span class="kb-topic-circle" style="background-color:${getTopicColour(topic.Topic_ID)}"></span> ${topic.Topic_Name}</li>
+        <span class="kb-topic-circle" style="background-color:${getTopicColour(topic.Topic_ID)}"></span> <p>${topic.Topic_Name}</p></li>
       `;
 
         // Append the post HTML to the container

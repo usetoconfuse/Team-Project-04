@@ -160,7 +160,6 @@
     align-items: center;
     background-color: var(--secondary-colour);
     border-radius: var(--line-border-radius);
-    flex-grow: 1;
     padding-left: 10px;
     border: 0px;
 }
@@ -172,7 +171,6 @@
 }
 
 #topic-searchbar{
-    margin-top: 3%;
     background-color: var(--bg-colour) ;
 }
 
@@ -190,7 +188,7 @@
     gap: var(--section-gap);
     flex-grow: 1;
     width: 100%;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .kb-post {
@@ -274,23 +272,26 @@
     align-items: center;
     width: 300px;
     height: 100%;
+    gap: 10px;
     max-height: 100%;
     padding: 15px;
     background-color: var(--secondary-colour);
     border-radius: var(--box-border-radius);
-    overflow: hidden;
 }
 
 .kb-topic {
-    display: inline-flex;
+    display: flex;
     border-radius: var(--line-border-radius);
     background-color: var(--bg-colour);
     padding: 10px;
-    text-align: center;
-    min-width: fit-content;
     transition: 0.5s color ease, 0.5s background-color ease;
     cursor: pointer;
     user-select: none;
+}
+
+.kb-topic p {
+    word-break: break-word;
+    text-wrap: auto;
 }
 
 .kb-topic-circle {
@@ -309,15 +310,11 @@
 
 #topicsList {
     display: flex;
-    width: fit-content;
-    text-wrap: nowrap;
     flex-direction: column;
-    flex-grow: 1;
-    max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     gap: 10px;
-    margin: 10px;
     width: 100%;
+    height: 100%;
 }
 
 .kb-title-line {
