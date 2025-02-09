@@ -208,4 +208,26 @@
             </div>
         </div>
     </div>
+
+
+    <!--Report Modal-->
+    <div class="modal report-task-modal" style="display: none;">
+        <div class="modal-box report-task-modal-box">
+            <div class="modal-header">
+                <p id="report-modal-header">Report Task</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="report-modal-message"></p>
+                <div class="task-submit-buttons">
+                    <a class="report-task-db black-btn"><i class="fa fa-arrow-right"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

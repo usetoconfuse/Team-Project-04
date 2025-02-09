@@ -525,11 +525,11 @@ input[type="file"]::-webkit-file-upload-button {
     margin: 0.2rem 2rem 2rem 2rem;
 }
 
-.task-submit-buttons .add-task-btn i, .task-submit-buttons #add-filter-btn i, .task-submit-buttons #add-project-btn i {
+.task-submit-buttons .add-task-btn i, .task-submit-buttons #add-filter-btn i, .task-submit-buttons #add-project-btn i, .report-task-modal .report-task-db i {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db  {
     margin: 0.2rem 8rem 2rem 8rem;
     padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
@@ -539,6 +539,22 @@ input[type="file"]::-webkit-file-upload-button {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.report-task-modal .modal-body {
+    padding: 0.2rem 2rem 1rem 2rem;
+}
+
+.report-task-modal .task-submit-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.report-task-modal .report-task-db {
+    margin: 1rem 1rem 1rem 1rem;
+    width: 30%;
+    background-color: #f98a93;
+    color: black;
 }
 
 /*===View Task Modal ===*/

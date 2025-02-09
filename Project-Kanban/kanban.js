@@ -409,13 +409,43 @@ function generateCard(kanbanData) {
                                         </div>
     `;
 
-    const reportStuckBtn = viewTaskModal.querySelector('.report-task');
-    reportStuckBtn.addEventListener('click',  () =>{
-      const currentStuck = task.Stuck;
-      const newStuck = currentStuck === '0' ? '1' : '0';
-      reportStuck(task.Task_ID, newStuck, reportStuckBtn);
+    const reportModal = document.querySelector('.report-task-modal');
+    const openReportModalBtn = viewTaskModal.querySelector('.report-task');
+    openReportModalBtn.addEventListener('click',  () =>{
       viewTaskModal.style.display = 'none';
+      const currentStuck = task.Stuck;
+      const reportMsg = reportModal.querySelector('#report-modal-message');
+      const reportTaskBtn = reportModal.querySelector('.report-task-db');
+
+      if (currentStuck === '0') {
+        reportMsg.innerHTML = `Are you sure you'd like to report Task ${task.Task_ID}: ${task.Name} as Stuck?`;
+        reportTaskBtn.innerHTML = 'Report as Stuck';
+      } else {
+        reportMsg.innerHTML = `Are you sure you'd like to Unmark Task ${task.Task_ID}: ${task.Name} as Stuck?`;
+        reportTaskBtn.innerHTML = 'Unmark as Stuck';
+      }
+
+      reportModal.style.display = 'block';
+
+      reportTaskBtn.addEventListener('click', async () => {
+        const currentStuck = task.Stuck;
+        const newStuck = currentStuck === '0' ? '1' : '0';
+        await reportStuck(task.Task_ID, newStuck, openReportModalBtn);
+        task.Stuck = newStuck;
+        reportModal.style.display = 'none';
+      })
+  
+      const closeReportModal = reportModal.querySelector('.close-modal-btn');
+      closeReportModal.addEventListener('click', () => {
+        reportModal.style.display = 'none';
+      })
+  
+
     });
+
+  
+
+
 
     //Add Card and Modal to body
     document.body.appendChild(viewTaskModal);
@@ -596,7 +626,6 @@ async function reportStuck(taskID, newStatus, reportBtn) {
       } else {
         reportBtn.innerHTML = "Report as Stuck";
       }
-      alert('Task Reported as Stuck');
     }
 
   } catch (error) {
