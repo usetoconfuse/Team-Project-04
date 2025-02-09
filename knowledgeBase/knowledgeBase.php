@@ -29,6 +29,11 @@
                 <i class="fa-solid fa-search"></i>
                 <input type="text" placeholder="Search Topics" id="searched-topic">
             </div>
+            <template id="kb-topic-list-item-template">
+                <li class="kb-topic" value ="[DYNAMIC]" id="[DYNAMIC]"> 
+                <span class="kb-topic-circle" style="DYNAMIC"></span> <p>[DYNAMIC]</p>
+                </li>
+            </template>
             <ul id="kb-topics-list" class="kb-flex-col kb-scrollable">
                 <!-- Topics are dynamically loaded with JS -->
             </ul>

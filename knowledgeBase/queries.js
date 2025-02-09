@@ -90,19 +90,29 @@ const renderTopics = (topics) => {
     }
 
     topicsContainer.innerHTML = '';
-    topics.forEach(topic => {
-        const hue = ((topic.Topic_ID * 137) + 47) % 360; 
-        const hsl = `hsl(${hue},44%,44%)`;
+    const topicTemplate = document.getElementById('kb-topic-list-item-template');
+    for (const topic of topics) {
+        const topicElement = topicTemplate.content.cloneNode(true).querySelector('li');
 
-        // Create the HTML for the post
-        const topicHTML = `
-        <li class="kb-topic" value ="${topic.Topic_Name}" id="topic-${topic.Topic_ID}"> 
-        <span class="kb-topic-circle" style="background-color:${getTopicColour(topic.Topic_ID)}"></span> <p>${topic.Topic_Name}</p></li>
-      `;
+        topicElement.setAttribute('value', topic.Topic_Name);
+        topicElement.setAttribute('id', `topic-${topic.Topic_ID}`);
+        topicElement.querySelector('.kb-topic-circle').style.backgroundColor = getTopicColour(topic.Topic_ID);
+        topicElement.querySelector('p').innerText = topic.Topic_Name;
 
-        // Append the post HTML to the container
-        topicsContainer.insertAdjacentHTML('beforeend', topicHTML);
-    });
+        topicsContainer.appendChild(topicElement);
+
+        topicElement.addEventListener('click', () => {
+            if (topicElement.classList.contains('kb-active')) {
+                topicElement.classList.remove('kb-active');
+                selectedTopic = null;
+            } else {
+                document.querySelectorAll('.kb-topic').forEach(topic => topic.classList.remove('kb-active'));
+                topicElement.classList.add('kb-active');
+                selectedTopic = topicElement.getAttribute('value');
+            }
+            updatePosts();
+        });
+    };
 }
 
 // method to render the Topics to be as items to choose from the dropdown within the add topic modal
@@ -272,27 +282,7 @@ document.getElementById('searched-post').addEventListener("input", async (e) =>{
     updatePosts();
 });
 
-
-//on topic item clicked it will show all posts of specified under that topic
-document.querySelector('#kb-topics-list').addEventListener('click', (event) => {
-    clickedTopic = event.target;
-    if (!clickedTopic.classList.contains('kb-topic')) {
-        return;
-    };
-
-    if (clickedTopic.classList.contains('kb-active')) {
-        clickedTopic.classList.remove('kb-active');
-        selectedTopic = null;
-    } else {
-        document.querySelectorAll('.kb-topic').forEach(topic => topic.classList.remove('kb-active'));
-        clickedTopic.classList.add('kb-active');
-        selectedTopic = clickedTopic.getAttribute('value');
-    }
-    updatePosts();
-});
-
 var selectedTopicQuery = null;
-
 const updateTopics = async () => {
     await fetchTopics(selectedTopicQuery).then(renderTopics);
 }
