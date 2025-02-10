@@ -470,16 +470,11 @@ nav {
     display: flex;
     min-height: 0;
     flex-grow: 1;
+    
 }
 
 #overview-content, #projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
     display: none;
-}
-
-
-/* Overview content is made up of smaller boxes with their own padding so remove its padding */
-#overview-content {
-    padding: 0;
 }
 
 .nav-item-content.open {
@@ -496,7 +491,7 @@ nav {
 
 }
 
-#projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
+#overview-content, #projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
     background-color: #ffffff;
     border-radius: 30px;
 }
@@ -536,7 +531,8 @@ nav {
 
     body {
         background-color: white;
-        height: unset;
+        height: auto;
+        min-height: 100vh;
     }
 
     nav {
