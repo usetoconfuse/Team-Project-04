@@ -1,4 +1,4 @@
-<div id="project-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?> data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="project-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <div class="project-intro">
         <div class="project-txt">
             <p>All Projects</p>
