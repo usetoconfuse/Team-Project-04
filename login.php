@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         crossorigin="anonymous" />
 </head>
 
-<body id="sign-in-bg">
+<body>    
     <section class="top-navbar">
         <div class="top-navbar-left">
             <div id="logo-container">
@@ -165,168 +165,171 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             </div>
         </div>
     </section>
-    <div id="signin-wrapper">
 
-        <div id="left">
-            <div id="signIn">
+    <section id="login-content">
+        <div id="signin-wrapper">
+            <div id="left">
+                <div id="signIn">
 
-                <div>
-                    <h1>Welcome Back</h1>
-                    <p>Enter your credentials to sign in.</p>
-                </div>
-
-
-                <!--Register was successful-->
-                <?php if (isset($_SESSION['success_register'])): ?>
-                    <p class="register-success-msg"><?= htmlspecialchars($_SESSION['success_register']) ?></p>
-                    <?php
-                    unset($_SESSION['success_register']);
-                endif; ?>
-
-
-                <form id="loginForm" method="POST">
-                    <div class="input-container">
-                        <label for="usernameInput">Email<span>*</span></label>
-                        <input type="email" name="login_email" class="text-input" id="usernameInput"
-                            placeholder=" Enter your email" required>
-                        <p class="error-message" id="username-error"></p>
-                    </div>
-                    <div class="input-container">
-                        <div class="password-label">
-                            <label>Password<span>*</span></label>
-                            <i class="fa fa-solid fa-eye-slash"></i>
-                        </div>
-
-                        <input type="password" name="login_password" class="text-input" id="passwordInput"
-                            placeholder=" Enter your password">
-                        <p class="error-message" id="password-error"></p>
+                    <div>
+                        <h1>Welcome Back</h1>
+                        <p>Enter your credentials to sign in.</p>
                     </div>
 
-                    <!--Login Error-->
-                    <?php if (isset($_SESSION['login_err'])): ?>
-                        <p class="register-error-msg"><?= htmlspecialchars($_SESSION['login_err']) ?></p>
+
+                    <!--Register was successful-->
+                    <?php if (isset($_SESSION['success_register'])): ?>
+                        <p class="register-success-msg"><?= htmlspecialchars($_SESSION['success_register']) ?></p>
                         <?php
-                        unset($_SESSION['login_err']);
+                        unset($_SESSION['success_register']);
                     endif; ?>
 
 
-                    <div class="signin-btn-container">
-                        <button type="submit" class="login-btn" name="login">Continue</button>
+                    <form id="loginForm" method="POST">
+                        <div class="input-container">
+                            <label for="usernameInput">Email<span>*</span></label>
+                            <input type="email" name="login_email" class="text-input" id="usernameInput"
+                                placeholder=" Enter your email" required>
+                            <p class="error-message" id="username-error"></p>
+                        </div>
+                        <div class="input-container">
+                            <div class="password-label">
+                                <label>Password<span>*</span></label>
+                                <i class="fa fa-solid fa-eye-slash"></i>
+                            </div>
+
+                            <input type="password" name="login_password" class="text-input" id="passwordInput"
+                                placeholder=" Enter your password">
+                            <p class="error-message" id="password-error"></p>
+                        </div>
+
+                        <!--Login Error-->
+                        <?php if (isset($_SESSION['login_err'])): ?>
+                            <p class="register-error-msg"><?= htmlspecialchars($_SESSION['login_err']) ?></p>
+                            <?php
+                            unset($_SESSION['login_err']);
+                        endif; ?>
+
+
+                        <div class="signin-btn-container">
+                            <button type="submit" class="login-btn" name="login">Continue</button>
+                        </div>
+
+                    </form>
+
+
+                    <div class="register-container">
+
+                        <p>Don't have an account. <a href="#" class="signup-btn">Register here</a></p>
+
                     </div>
-
-                </form>
-
-
-                <div class="register-container">
-
-                    <p>Don't have an account. <a href="#" class="signup-btn">Register here</a></p>
-
                 </div>
             </div>
+
+            <div id="right">
+                <img src="assets/Demo.svg" alt="demo-image">
+            </div>        
         </div>
-        <div id="right">
-            <img src="assets/Demo.svg" alt="demo-image">
-        </div>
-    </div>
 
-    <div id="signup-wrapper">
-        <div id="left">
-            <div id="signIn">
-                <div>
-                    <h1>Register Now</h1>
-                    <p>Enter your credentials to register.</p>
-                </div>
-
-                <!--Register was unsuccessful-->
-                <?php if (isset($_SESSION['reject'])): ?>
-                    <p class="register-error-msg"><?= htmlspecialchars($_SESSION['reject']) ?></p>
-                    <?php
-                    unset($_SESSION['reject']);
-                endif; ?>
-
-                <form id="loginForm" method="POST">
-
-                    <div class="name-input-container">
-                        <div class="input-container">
-                            <label for="forenameInput">Forename<span>*</span></label>
-                            <input type="text" name="forename" class="text-input" id="forenameInput"
-                                placeholder=" Enter your forename" required>
-                        </div>
-
-                        <div class="input-container">
-                            <label for="surnameInput">Surname<span>*</span></label>
-                            <input type="text" name="surname" class="text-input" id="surnameInput"
-                                placeholder=" Enter your surname" required>
-
-                        </div>
+        <div id="signup-wrapper">
+            <div id="left">
+                <div id="signIn">
+                    <div>
+                        <h1>Register Now</h1>
+                        <p>Enter your credentials to register.</p>
                     </div>
 
-
-                    <div class="input-container">
-                        <label for="usernameInput">Email<span>*</span></label>
-                        <input type="email" name="register_email" class="text-input" id="usernameInput"
-                            placeholder=" Enter your email" required>
-                        <p class="error-message" id="username-error"></p>
-                    </div>
-                    <div class="input-container">
-                        <div class="password-label">
-                            <label>Password<span>*</span></label>
-                            <i class="fa fa-solid fa-eye-slash"></i>
-                        </div>
-                        <input type="password" name="register_password" class="text-input" id="passwordInput"
-                            placeholder=" Enter your password">
-                        <p class="error-message" id="password-error"></p>
-                    </div>
-
-                    <div class="password-criteria-container">
-                        <p class="password-criteria-label">Password must contain:</p>
-
-                        <ul class="password-criteria">
-                            <li class="criteria-item" id="password-length">At least 12 characters long</li>
-                            <li class="criteria-item" id="uppercase-char">At least 1 uppercase leter</li>
-                            <li class="criteria-item" id="lowercase-char">At least 1 lowercase letter</li>
-                            <li class="criteria-item" id="number-check">At least 1 number</li>
-                            <li class="criteria-item" id="special-char">At least 1 special character</li>
-                        </ul>
-
-
-                    </div>
-
-
-
-                    <div class="input-container">
-                        <label>Confirm Password<span>*</span></label>
-                        <input type="password" name="register_password_confirm" class="text-input"
-                            id="passwordInputConfirm" placeholder=" Enter your password">
-                        <p class="error-message" id="password-error"></p>
-                    </div>
-
-                    <!--Register Error-->
-                    <?php if (isset($_SESSION['register_err'])): ?>
-                        <p class="register-error-msg"><?= htmlspecialchars($_SESSION['register_err']) ?></p>
+                    <!--Register was unsuccessful-->
+                    <?php if (isset($_SESSION['reject'])): ?>
+                        <p class="register-error-msg"><?= htmlspecialchars($_SESSION['reject']) ?></p>
                         <?php
-                        unset($_SESSION['register_err']);
+                        unset($_SESSION['reject']);
                     endif; ?>
 
-                    <div class="signin-btn-container">
-                        <button type="submit" class="login-btn" name="register">Continue</button>
+                    <form id="loginForm" method="POST">
+
+                        <div class="name-input-container">
+                            <div class="input-container">
+                                <label for="forenameInput">Forename<span>*</span></label>
+                                <input type="text" name="forename" class="text-input" id="forenameInput"
+                                    placeholder=" Enter your forename" required>
+                            </div>
+
+                            <div class="input-container">
+                                <label for="surnameInput">Surname<span>*</span></label>
+                                <input type="text" name="surname" class="text-input" id="surnameInput"
+                                    placeholder=" Enter your surname" required>
+
+                            </div>
+                        </div>
+
+
+                        <div class="input-container">
+                            <label for="usernameInput">Email<span>*</span></label>
+                            <input type="email" name="register_email" class="text-input" id="usernameInput"
+                                placeholder=" Enter your email" required>
+                            <p class="error-message" id="username-error"></p>
+                        </div>
+                        <div class="input-container">
+                            <div class="password-label">
+                                <label>Password<span>*</span></label>
+                                <i class="fa fa-solid fa-eye-slash"></i>
+                            </div>
+                            <input type="password" name="register_password" class="text-input" id="passwordInput"
+                                placeholder=" Enter your password">
+                            <p class="error-message" id="password-error"></p>
+                        </div>
+
+                        <div class="password-criteria-container">
+                            <p class="password-criteria-label">Password must contain:</p>
+
+                            <ul class="password-criteria">
+                                <li class="criteria-item" id="password-length">At least 12 characters long</li>
+                                <li class="criteria-item" id="uppercase-char">At least 1 uppercase leter</li>
+                                <li class="criteria-item" id="lowercase-char">At least 1 lowercase letter</li>
+                                <li class="criteria-item" id="number-check">At least 1 number</li>
+                                <li class="criteria-item" id="special-char">At least 1 special character</li>
+                            </ul>
+
+
+                        </div>
+
+
+
+                        <div class="input-container">
+                            <label>Confirm Password<span>*</span></label>
+                            <input type="password" name="register_password_confirm" class="text-input"
+                                id="passwordInputConfirm" placeholder=" Enter your password">
+                            <p class="error-message" id="password-error"></p>
+                        </div>
+
+                        <!--Register Error-->
+                        <?php if (isset($_SESSION['register_err'])): ?>
+                            <p class="register-error-msg"><?= htmlspecialchars($_SESSION['register_err']) ?></p>
+                            <?php
+                            unset($_SESSION['register_err']);
+                        endif; ?>
+
+                        <div class="signin-btn-container">
+                            <button type="submit" class="login-btn" name="register">Continue</button>
+                        </div>
+
+                    </form>
+
+
+
+                    <div class="register-container">
+
+                        <p>Already have an account. <a href="#" class="signup-btn" id="backtologin">Login here</a></p>
+
                     </div>
-
-                </form>
-
-
-
-                <div class="register-container">
-
-                    <p>Already have an account. <a href="#" class="signup-btn" id="backtologin">Login here</a></p>
-
                 </div>
             </div>
+            <div id="right">
+                <img src="assets/Demo.svg" alt="demo-image">
+            </div>
         </div>
-        <div id="right">
-            <img src="assets/Demo.svg" alt="demo-image">
-        </div>
-    </div>
+    </>
 
 
     <script>

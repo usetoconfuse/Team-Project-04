@@ -7,12 +7,12 @@ window.addEventListener("storage", function () {
   projectID = selectedProjectID;
 
   if (selectedProjectID) {
-    const kanbanContainer = document.querySelector('#kanban-content')
+    const kanbanContainer = document.querySelector('#proj-kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
     getKanbanData(userID, selectedProjectID, {});
     getProjectName(selectedProjectID)
 
-    const filterKanbanModal = document.querySelector('#kanban-content #filter-modal')
+    const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal')
     document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = 'None';
     filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
     filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
@@ -140,7 +140,7 @@ function formatDate(date) {
 }
 
 function getCurrentFilters() {
-  const filterKanbanModal = document.querySelector('#kanban-content #filter-modal');
+  const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal');
   const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
   const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
   const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
@@ -177,7 +177,7 @@ async function getProjectName(selectedProjectID) {
       throw new Error('Failed to fetch projects data');
     }
     const projectNameData = await response.json();
-    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
+    document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
     console.log(projectNameData);
 
 
@@ -209,7 +209,7 @@ async function getKanbanData(userID, projectID, filters={}) {
       throw new Error('Failed to fetch projects data');
     }
     const allKanbanData = await response.json();
-    //document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
+    //document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
     console.log(allKanbanData);
     generateCard(allKanbanData);
 
@@ -264,7 +264,7 @@ function generateCard(kanbanData) {
 
 
     
-    const userRole = document.getElementById('kanban-content').getAttribute('data-role');
+    const userRole = document.getElementById('proj-kanban-content').getAttribute('data-role');
 
     const viewTaskModal = document.createElement('div');
     viewTaskModal.classList.add('modal', 'view-task-modal'); 
@@ -447,7 +447,7 @@ function generateCard(kanbanData) {
         reportModal.style.display = 'none';
 
         const currentFilters = getCurrentFilters();
-        const kanbanContainer = document.querySelector('#kanban-content')
+        const kanbanContainer = document.querySelector('#proj-kanban-content')
         const userID = kanbanContainer.getAttribute('data-user-id');
         getKanbanData(userID, projectID, currentFilters);
 
@@ -906,8 +906,8 @@ addTaskBtn.forEach(btn => {
 })
 
 //Filter Modal Functionality
-const filterTaskModal = document.querySelector("#kanban-content #filter-modal");
-const filterTaskBtn = document.querySelector('#kanban-content  .filter-task-btn');
+const filterTaskModal = document.querySelector("#proj-kanban-content #filter-modal");
+const filterTaskBtn = document.querySelector('#proj-kanban-content  .filter-task-btn');
 const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
 
 filterTaskBtn.addEventListener('click', () => {

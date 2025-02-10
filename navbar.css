@@ -470,7 +470,6 @@ nav {
     display: flex;
     min-height: 0;
     flex-grow: 1;
-    
 }
 
 #overview-content, #projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
@@ -487,7 +486,7 @@ nav {
     padding: 20px;
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
 
 }
 

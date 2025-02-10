@@ -1,6 +1,12 @@
 <?php
-session_start()
-    ?>
+session_start();
+
+if (empty($_SESSION['user_id'])) {
+    header("Location: login.php");
+    die("Redirecting to login");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
