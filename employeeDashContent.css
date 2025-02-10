@@ -25,26 +25,25 @@
 }
 
 .emp-item-container.empdash-stats-container {
-    background-color: #c9b7a8;
+    background-color: #d6c7bb;
 }
 
 .emp-item-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0.2rem 0.6rem 0.6rem 0.6rem;
+    margin: 0 0.6rem 0.6rem 0.6rem;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .emp-item-top a {
-    padding: 0.8rem 0.8rem;
-    border: 2px solid #F5F5F5;
+    padding: 0.6rem 0.8rem;
     font-size: 0.8rem;
-    font-weight: 500;
-    color: black;
+    color: white;
     border-radius: 30px;
     white-space: nowrap;
+    font-weight: 400;
 }
 
 /*User Stats Section*/
@@ -54,6 +53,7 @@
     gap: 10px;
     place-items: center center;
     grid-auto-flow: row;
+    margin-top: 1.2rem;
 }
 
 .emp-stat {
@@ -100,6 +100,57 @@
     width: 95%;
     margin: 0 auto;
     margin-top: 0.3rem;
+}
+
+/*Personal To Do List Snippet*/
+.emp-kanban-bottom {
+    margin-top: 1.2rem;
+}
+
+.emp-task {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto;
+
+}
+
+.emp-task-top {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+
+.emp-task-line {
+    height: 0.1rem;
+    background-color: #8E8E91;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 0.8rem;
+}
+
+.emp-task-priority {
+    padding: 0.1rem 0.2rem;
+    border-radius: 6px;
+    color: white;
+    text-align: center;
+    width: 20%;
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+.emp-high-priority {
+    background-color: #E6757E;
+}
+
+.emp-medium-priority {
+    background-color:  #EAB385;
+}
+
+.emp-low-priority {
+    background-color: #ADDA9D;
 }
 
 
