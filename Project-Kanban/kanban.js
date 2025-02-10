@@ -1,18 +1,18 @@
 const kanbanContainers = document.querySelectorAll('.kanban-board');
 
 // Listen for sessionStorage updates
-let projectID;
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
-  projectID = selectedProjectID;
+
+
 
   if (selectedProjectID) {
-    const kanbanContainer = document.querySelector('#proj-kanban-content')
+    const kanbanContainer = document.querySelector('#kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
     getKanbanData(userID, selectedProjectID, {});
     getProjectName(selectedProjectID)
 
-    const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal')
+    const filterKanbanModal = document.querySelector('#kanban-content #filter-modal')
     document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = 'None';
     filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
     filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
@@ -44,18 +44,14 @@ window.addEventListener("storage", function () {
       const orderByValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
       if (orderByValue !== "None") {
         filters.orderByValue = orderByValue;
-      } 
-
-      filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsg(filters);
-
-      let filtersLength = Object.keys(filters).length;
-      if (filtersLength > 0) {
-        filterRemoveBtn.style.display = 'flex';
       } else {
-        filterRemoveBtn.style.display = 'none';
+        filters.orderByValue = null;
       }
 
+      
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsg(filters);
+      filterRemoveBtn.style.display = 'flex';
       filterTaskModal.style.display = 'none';
       searchBar.value = "";
 
@@ -66,8 +62,7 @@ window.addEventListener("storage", function () {
     const orderByBtn = document.querySelector('.projects-intro-buttons .order-by-confirm');
     orderByBtn.addEventListener('click', () => {
       const orderByDropdownValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
-      const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
-
+      const orderByParam = { orderByValue: orderByDropdownValue};
 
       const currentFilters = getCurrentFilters();
       const allFilters = { ...currentFilters, ...orderByParam};
@@ -75,14 +70,7 @@ window.addEventListener("storage", function () {
 
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
-
-      let filtersLength = Object.keys(allFilters).length;
-      if (filtersLength > 0) {
-        filterRemoveBtn.style.display = 'flex';
-      } else {
-        filterRemoveBtn.style.display = 'none';
-      }
-
+      filterRemoveBtn.style.display = 'flex';
       searchBar.value = "";
 
       getKanbanData(userID, selectedProjectID, allFilters);
@@ -140,7 +128,7 @@ function formatDate(date) {
 }
 
 function getCurrentFilters() {
-  const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal');
+  const filterKanbanModal = document.querySelector('#kanban-content #filter-modal');
   const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
   const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
   const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
@@ -177,7 +165,7 @@ async function getProjectName(selectedProjectID) {
       throw new Error('Failed to fetch projects data');
     }
     const projectNameData = await response.json();
-    document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
+    document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
     console.log(projectNameData);
 
 
@@ -209,7 +197,7 @@ async function getKanbanData(userID, projectID, filters={}) {
       throw new Error('Failed to fetch projects data');
     }
     const allKanbanData = await response.json();
-    //document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
+    //document.querySelector("#kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
     console.log(allKanbanData);
     generateCard(allKanbanData);
 
@@ -264,7 +252,7 @@ function generateCard(kanbanData) {
 
 
     
-    const userRole = document.getElementById('proj-kanban-content').getAttribute('data-role');
+    const userRole = document.getElementById('kanban-content').getAttribute('data-role');
 
     const viewTaskModal = document.createElement('div');
     viewTaskModal.classList.add('modal', 'view-task-modal'); 
@@ -317,16 +305,9 @@ function generateCard(kanbanData) {
                               </div>
                           </div>`
     } else if (userRole === 'Employee' || userRole === 'Team Leader') {
-      if (task.Stuck === '0') {
-        roleBasedBtns = ` <a class="report-task">
-                              Report as Stuck
-                            </a>`
-      } else {
-        roleBasedBtns = ` <a class="report-task">
-                              Unmark as Stuck
-                            </a>`
-      }
-      roleBasedBtns += `
+      roleBasedBtns = ` <a class="report-task">
+                              Report as stuck
+                            </a>
                             <div class="move-task-dropdown">
                               <select>
                                 <option value="kanban-to-do">To Do</option>
@@ -421,49 +402,12 @@ function generateCard(kanbanData) {
                                         </div>
     `;
 
-    const reportModal = document.querySelector('.report-task-modal');
-    const openReportModalBtn = viewTaskModal.querySelector('.report-task');
-    openReportModalBtn.addEventListener('click',  () =>{
+    const reportStuckBtn = viewTaskModal.querySelector('.report-task');
+    reportStuckBtn.addEventListener('click',  () =>{
+
+       reportStuck(task.Task_ID);
       viewTaskModal.style.display = 'none';
-      const currentStuck = task.Stuck;
-      const reportMsg = reportModal.querySelector('#report-modal-message');
-      const reportTaskBtn = reportModal.querySelector('.report-task-db');
-
-      if (currentStuck === '0') {
-        reportMsg.innerHTML = `Are you sure you'd like to report Task ${task.Task_ID}: ${task.Name} as Stuck?`;
-        reportTaskBtn.innerHTML = 'Report as Stuck';
-      } else {
-        reportMsg.innerHTML = `Are you sure you'd like to Unmark Task ${task.Task_ID}: ${task.Name} as Stuck?`;
-        reportTaskBtn.innerHTML = 'Unmark as Stuck';
-      }
-
-      reportModal.style.display = 'block';
-
-      reportTaskBtn.addEventListener('click', async () => {
-        const currentStuck = task.Stuck;
-        const newStuck = currentStuck === '0' ? '1' : '0';
-        await reportStuck(task.Task_ID, newStuck, openReportModalBtn);
-        task.Stuck = newStuck;
-        reportModal.style.display = 'none';
-
-        const currentFilters = getCurrentFilters();
-        const kanbanContainer = document.querySelector('#proj-kanban-content')
-        const userID = kanbanContainer.getAttribute('data-user-id');
-        getKanbanData(userID, projectID, currentFilters);
-
-      })
-  
-      const closeReportModal = reportModal.querySelector('.close-modal-btn');
-      closeReportModal.addEventListener('click', () => {
-        reportModal.style.display = 'none';
-      })
-  
-
     });
-
-  
-
-
 
     //Add Card and Modal to body
     document.body.appendChild(viewTaskModal);
@@ -622,12 +566,11 @@ function generateCard(kanbanData) {
 
 }
 
-async function reportStuck(taskID, newStatus, reportBtn) {
+async function reportStuck(taskID) {
   try {
     const url = 'Project-Kanban/confirmStuck.php';
     const data = {
-      Task_ID: taskID,
-      Stuck_Status: newStatus,
+      Task_ID: taskID
     };
     const params = {
       method: 'POST',
@@ -639,11 +582,7 @@ async function reportStuck(taskID, newStatus, reportBtn) {
     if (!response.ok) {
       throw new Error('Failed to update task status');
     } else {
-      if (newStatus === '1' || newStatus === '2') {
-        reportBtn.innerHTML = "Unmark as Stuck";
-      } else {
-        reportBtn.innerHTML = "Report as Stuck";
-      }
+      alert('Task Reported as Stuck');
     }
 
   } catch (error) {
@@ -906,8 +845,8 @@ addTaskBtn.forEach(btn => {
 })
 
 //Filter Modal Functionality
-const filterTaskModal = document.querySelector("#proj-kanban-content #filter-modal");
-const filterTaskBtn = document.querySelector('#proj-kanban-content  .filter-task-btn');
+const filterTaskModal = document.querySelector("#kanban-content #filter-modal");
+const filterTaskBtn = document.querySelector('#kanban-content  .filter-task-btn');
 const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
 
 filterTaskBtn.addEventListener('click', () => {

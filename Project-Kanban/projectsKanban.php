@@ -1,4 +1,4 @@
-<div id="proj-kanban-content" class="kanban-content kanban-content-personal" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="kanban-content" class="kanban-content-personal" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro">
         <div class="project-txt">
@@ -208,26 +208,4 @@
             </div>
         </div>
     </div>
-
-
-    <!--Report Modal-->
-    <div class="modal report-task-modal" style="display: none;">
-        <div class="modal-box report-task-modal-box">
-            <div class="modal-header">
-                <p id="report-modal-header">Report Task</p>
-                <div class="close-modal-btn">
-                    <i class="fa-solid fa-x"></i>
-                </div>
-            </div>
-            <div class="modal-body">
-                <p id="report-modal-message"></p>
-                <div class="task-submit-buttons">
-                    <a class="report-task-db black-btn"><i class="fa fa-arrow-right"></i></a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </div>

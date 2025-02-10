@@ -1,0 +1,88 @@
+
+@font-face {
+    font-family: 'DIN Alternate Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DIN Alternate Bold'), url('fonts/DINAlternate-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir Next'), url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');
+}
+
+body{
+    font-family: "DIN Alternate Bold";
+    font-weight: 300;
+    background-color: white;
+    color: #000000;  
+    overflow: hidden;
+}
+
+h1,h2,h3,h4{
+    font-weight: 500;
+}
+
+#main-wrapper{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#signUp-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #edeaea;
+    border-radius: 30px;
+    width: 30%;
+}
+
+#signUpForm{
+    width: 70%;
+    padding-bottom: 1rem;
+}
+
+#signUpForm label{
+    font-size: 12.6px;
+    padding-bottom: 0.5rem;
+}
+
+.signUp-inputs{
+    padding-bottom: 1rem;
+}
+
+#signUpForm .text-input{
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: 10px;
+    height: 1.7rem;
+    font-family: "Avenir Next";
+    font-size: 12px;
+    border-width: thin;
+    margin-bottom: 0;
+}  
+
+#signUpForm button{
+    width: 100%;
+    border: none;
+    background-color: #000000;
+    color: #f5f5f5;
+    border-radius: 10px;
+    font-family: "Avenir Next";
+    font-size: 16px;
+    height: 1.7rem;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+    margin-left: 0.9%;
+}
+
+#signUpForm button:hover{
+    background-color: #2a2929;
+}

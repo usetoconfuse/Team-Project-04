@@ -1,6 +1,8 @@
-<!-- Created by Quinn Little 03/02/25 -->
+<!-- Updated by Quinn Little 03/02/25 -->
+<!-- Updated by Quinn Little 07/02/2025 -->
+<!-- Renamed by Quinn Little 07/02/2025 -->
 <!-- Updated by Toby Tischler 09/02/2025 -->
-<!-- Updated by Quinn Little 09/02/2025 -->
+ <!-- Updated by Quinn Little 09/02/2025 -->
 
 <!-- Tabs -->
 <div id="mgrStatsAll">
@@ -41,10 +43,8 @@
         <!-- User List Page -->
         <div id="statsHomeGridUser" class="statsHome-grid">
             <div id="statsHomeFiltersUser">
-                <div class="userStats-search">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search user" id="searched-user">
-                </div>            </div>
+                User Filters Here
+            </div>
             <div id="statsHomeTableUser">
                 <!--Fetch User Table Here-->
             </div>

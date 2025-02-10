@@ -1,6 +1,8 @@
-// Created by Quinn Little 23/12/24
+// Made by Quinn Little 23/12/24
+// Updated by Quinn Little 03/02/25 lines 6 to 48
+// Updated by Quinn Little 07/02/2025 
+
 // Updated by Toby Tischler 09/02/2025
-// Updated by Quinn Little 10/02/2025 
 
 
 // Statistics Home Page
@@ -106,56 +108,10 @@ async function fetchProjectTable() {
 
 //Get all users query and generate user table
 
-// async function fetchUserTable() {
-//     try {
-//         // Make an HTTP request to the PHP file
-//         const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageQuery.php');
-//         console.log("1: ", response);
-        
-//         // Ensure the response is OK and return the JSON data 
-//         if (!response.ok) { 
-//             throw new Error('Network response was not ok ' + response.statusText);
-//         }
-//         // Convert the response to JSON format
-//         const data = await response.json();
-//         console.log("2: ", data[0].Forename);
-
-//         // Build the new table to display
-//         let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table'>"
-//         userTable  += `<thead>
-//                                     <tr>
-//                                         <th>User ID</th>
-//                                         <th>Name</th>
-//                                         <th>Job Position</th>
-//                                     </tr>
-//                                 </thead>`
-//         userTable  += '<tbody>'
-//         // Loop through the data and create a new element for each item
-//         data.forEach(function(item) {
-//            userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
-//                                         <td>` + item.User_ID + `</td>
-//                                         <td>` + item.Forename + ` ` + item.Surname + `</td>
-//                                         <td>` + item.User_Type + `</td>
-//                                     </tr>`
-//         });     
-//         userTable  += '</tbody>'
-//         userTable  += '</table>';
-
-//         // Find the container/table to display the data
-//         var container = document.getElementById('statsHomeTableUser');
-//         container.innerHTML = userTable;
-
-//     } catch (error) {
-//         console.error('Error:', error); // Log any errors that occur
-//     }
-// };
-
-
-async function fetchUserSearch(searchParams) {
+async function fetchUserTable() {
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
-
+        const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageQuery.php');
         console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
@@ -164,55 +120,40 @@ async function fetchUserSearch(searchParams) {
         }
         // Convert the response to JSON format
         const data = await response.json();
-        if (data.length > 0) {
+        console.log("2: ", data[0].Forename);
 
+        // Build the new table to display
+        let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table'>"
+        userTable  += `<thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Job Position</th>
+                                    </tr>
+                                </thead>`
+        userTable  += '<tbody>'
+        // Loop through the data and create a new element for each item
+        data.forEach(function(item) {
+           userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
+                                        <td>` + item.User_ID + `</td>
+                                        <td>` + item.Forename + ` ` + item.Surname + `</td>
+                                        <td>` + item.User_Type + `</td>
+                                    </tr>`
+        });     
+        userTable  += '</tbody>'
+        userTable  += '</table>';
 
-            console.log("2: ", data[0].Forename);
-
-            // Build the new table to display
-            let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table'>"
-            userTable  += `<thead>
-                                        <tr>
-                                            <th>User ID</th>
-                                            <th>Name</th>
-                                            <th>Job Position</th>
-                                        </tr>
-                                    </thead>`
-            userTable  += '<tbody>'
-            // Loop through the data and create a new element for each item
-            data.forEach(function(item) {
-            userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
-                                            <td>` + item.User_ID + `</td>
-                                            <td>` + item.Forename + ` ` + item.Surname + `</td>
-                                            <td>` + item.User_Type + `</td>
-                                        </tr>`
-            });     
-            userTable  += '</tbody>'
-            userTable  += '</table>';
-
-            // Find the container/table to display the data
-            var container = document.getElementById('statsHomeTableUser');
-            container.innerHTML = userTable;
-        } else {
-            var container = document.getElementById('statsHomeTableUser');
-            container.innerHTML = 'No matching users';
-        }
+        // Find the container/table to display the data
+        var container = document.getElementById('statsHomeTableUser');
+        container.innerHTML = userTable;
 
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
-}
+};
 
 // Projects table event handlers
 // Populate project table on load as project is the default tab
 document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
 document.addEventListener('DOMContentLoaded', fetchProjectTable());
-document.getElementById('mgrUserStats').addEventListener('click', fetchUserSearch(""));
-
-
-
-// Update selected posts when the search bar is used
-document.getElementById('searched-user').addEventListener("input", async (e) =>{
-    selectedQuery = e.target.value.trim();
-    fetchUserSearch(selectedQuery);
-});
+document.getElementById('mgrUserStats').addEventListener('click', fetchUserTable());
