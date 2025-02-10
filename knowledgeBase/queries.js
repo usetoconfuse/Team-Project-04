@@ -243,6 +243,7 @@ const updatePosts = async () => {
         if (deleteButton) {
             deleteButton.addEventListener("click", () => {
                 openDeletePostModal(postId);
+
             });
         }
 
@@ -339,6 +340,11 @@ var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 // Delete Post Modal
 const deletePostModal = document.getElementById('delete-post-modal');
 var [closeDeletePostModal, openDeletePostModal] = makeModal(deletePostModal);
+
+document.getElementById('kb-delete-post-modal-confirm').addEventListener('click', () =>{
+
+    //add code to delte post
+});
 
 
 //Add topic Modal functionality
