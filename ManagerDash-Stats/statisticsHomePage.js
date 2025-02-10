@@ -1,7 +1,5 @@
-// Made by Quinn Little 23/12/24
-// Updated by Quinn Little 03/02/25 lines 6 to 48
+// Created by Quinn Little 23/12/24
 // Updated by Quinn Little 07/02/2025 
-
 // Updated by Toby Tischler 09/02/2025
 
 
