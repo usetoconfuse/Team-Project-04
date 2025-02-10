@@ -315,7 +315,7 @@ const submitAddPostModalBtn = document.getElementById('add-post-btn');
 // on submission of the add post form add the new post to the knowledgebase db
 submitAddPostModalBtn.addEventListener('click', async (event) => {
     // Helper function to get the value of an input field.
-    const getValue = (id) => { addPostModal.querySelector(`#${id}`).value; }
+    const getValue = (id) => { return addPostModal.querySelector(`#${id}`).value; }
 
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
