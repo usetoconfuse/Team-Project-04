@@ -4,11 +4,11 @@
             <p>All Projects</p>
             <p>View all your assigned projects below. Statistics about these are within.</p>
         </div>
-     
+
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
             <a href="#" class="add-project black-btn">Add Project</a>
         <?php endif; ?>
-        
+
     </div>
     <div class="project-filter-container">
         <div class="project-search">
@@ -26,8 +26,8 @@
 
     </div>
 
-      <!--Filter Projects -->
-      <div id="project-filter-modal" class="modal">
+    <!--Filter Projects -->
+    <div id="project-filter-modal" class="modal">
         <div class="modal-box">
             <!--Header-->
             <div class="modal-header">
@@ -39,8 +39,8 @@
             <!--Body-->
             <form id="filter-modal-form" class="modal-body">
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
-                   
-                
+
+
                     <!--DropDown 1--><!--
                     <div class="task-dropdown task-dropdown-priority">
                         <label for="priority">Priority</label>
@@ -81,70 +81,81 @@
 
 
 
-        <!--Filter Posts -->
-        <div id="projects-modal" class="modal">
-            <div class="modal-box">
-                <!--Header-->
-                <div class="modal-header">
-                    <p>Add Project</p>
-                    <div class="close-modal-btn">
-                        <i class="fa-solid fa-x"></i>
+    <!--Filter Posts -->
+    <div id="projects-modal" class="modal">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+                <p>Add Project</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <!--Body-->
+
+            <form id="project-modal-form" class="modal-body">
+                <!--Title and Description-->
+                <div class="task-title-form">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" name="task-title">
+                </div>
+                <!--<div class="task-description-form">
+                    <label for="task-description">Description</label>
+                    <textarea type="text" id="task-description" name="task-description"></textarea>
+                </div>-->
+                <div class="task-dropdowns-form" id="project-dropdowns-form" >
+                    <!--DropDown Leader-->
+                    <div class="task-dropdown task-dropdown-leader">
+                        <label for="team-leader">Team Leader</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-user-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-user"></i>
+                            </div>
+                            <select name="team-leader" id="team-leader">
+                                <option value="choose" selected disabled hidden>Choose</option>
+                                <option value="jlittle">John Little</option>
+                                <option value="jganatra">Jeevan Ganatra</option>
+                                <option value="dnovetsky">Daniel Novetsky</option>
+                                <option value="supreti">Sawan Upreti</option>
+                                <option value="high">High</option>
+                                <option value="stuck">Stuck</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Choose Start Date-->
+                    <div class="task-dropdown task-dropdown-start-date">
+                        <label for="date">Start Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="date" id="start-date-project">
+                        </div>
+                    </div>
+
+                    <!--Choose Due Date-->
+                    <div class="task-dropdown task-dropdown-due-date">
+                        <label for="date">Due Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="date" id="date-project">
+                        </div>
                     </div>
                 </div>
-                <!--Body-->
-                
-                <form id="project-modal-form" class="modal-body">
-                    <!--Title and Description-->
-                    <div class="task-title-form">
-                        <label for="task-title">Title</label>
-                        <input type="text" id="task-title" name="task-title">
-                    </div>
-                    <div class="task-description-form">
-                        <label for="task-description">Description</label>
-                        <textarea type="text" id="task-description" name="task-description"></textarea>
-                    </div>
-                    <div class="task-dropdowns-form" id="project-dropdowns-form" style="margin: 2rem;">
-                        <!--DropDown Leader-->
-                        <div class="task-dropdown task-dropdown-leader">
-                            <label for="team-leader">Team Leader</label>
-                            <div class="task-dropdown-select-options">
-                                <div class="task-dropdown-user-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
-                                </div>
-                                <select name="team-leader" id="team-leader">
-                                    <option value="choose" selected disabled hidden>Choose</option>
-                                    <option value="jlittle">John Little</option>
-                                    <option value="jganatra">Jeevan Ganatra</option>
-                                    <option value="dnovetsky">Daniel Novetsky</option>
-                                    <option value="supreti">Sawan Upreti</option>
-                                    <option value="high">High</option>
-                                    <option value="stuck">Stuck</option>
-                                </select>
-                            </div>  
-                        </div>
-                    
-                        <!--Choose Due Date-->
-                        <div class="task-dropdown task-dropdown-date">
-                            <label for="date">Due Date</label>
-                            <div class="task-dropdown-select-options">
-                                <div class="task-dropdown-date-icon task-dropdown-icon">
-                                    <i class="fa fa-regular fa-calendar"></i>
-                                </div>
-                                <input type="date" name="date" id="date-project">
-                            </div>  
-                        </div>
-                    </div>
-                </form>
-                <div class="task-submit-buttons">
-                    <div class="add-project-btn" id="add-project-btn">
-                        Create Project
-                        <i class="fa fa-arrow-right"></i>
-                    </div>
+            </form>
+            <div class="task-submit-buttons">
+                <div class="add-project-btn" id="add-project-btn">
+                    Create Project
+                    <i class="fa fa-arrow-right"></i>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    
-  
+
+
 </div>

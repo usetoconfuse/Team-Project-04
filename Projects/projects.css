@@ -260,3 +260,7 @@
 #project-filter-modal .modal-box{
     padding-bottom: 0.4rem;
 }
+
+.task-dropdowns-form#project-dropdowns-form {
+    flex-direction: column !important;
+}
