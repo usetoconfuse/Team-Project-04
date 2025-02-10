@@ -10,7 +10,7 @@ const doRequest = async (method, endpoint, query, body) => {
     let formData;
     if (body) {
         formData = new FormData();
-        for ([key, value] of Object.entries(body)) {
+        for (const [key, value] of Object.entries(body)) {
             formData.append(key, value);
         }
     }
@@ -171,7 +171,7 @@ const renderAllPosts = async (posts) => {
       <div class="kb-post kb-flex-col" id="post-${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
         <div class="kb-flex-row kb-flex-wrap">
           <h2 class="kb-title-header">${post.Title}</h2>
-          <div class="kb-flex-row kb-flex-wrap">
+          <div class="kb-flex-row kb-flex-wrap kb-post-badges">
             <div ${currentTypeHtml} > ${post.Type} </div>
             <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>
           </div>
@@ -315,14 +315,14 @@ const submitAddPostModalBtn = document.getElementById('add-post-btn');
 // on submission of the add post form add the new post to the knowledgebase db
 submitAddPostModalBtn.addEventListener('click', async (event) => {
     // Helper function to get the value of an input field.
-    const getValue = (id) => { addPostModal.getElementById(id).value; }
+    const getValue = (id) => { addPostModal.querySelector(`#${id}`).value; }
 
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
         'title': getValue('postInput'),
         'content': getValue('contentInput'),
         'type': getValue('type-dropdown'),
-        'topic': getValue('topic'),
+        'topic': getValue('topic-modal-dropdown'),
         'visibility': getValue('visibility-dropdown')
     });
 
