@@ -470,7 +470,6 @@ nav {
     display: flex;
     min-height: 0;
     flex-grow: 1;
-    
 }
 
 #overview-content, #projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
