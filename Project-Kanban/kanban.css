@@ -3,7 +3,7 @@
 .kanban-content {
     display: flex;
     flex-direction: column;
-    height: 100%;
+
 }   
 
 .project-intro {
