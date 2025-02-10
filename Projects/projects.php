@@ -1,5 +1,5 @@
-<div id="project-content"
-    data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?> data-role=" <?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="project-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>"
+    data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <div class="project-intro">
         <div class="project-txt">
             <p>All Projects</p>
@@ -104,7 +104,7 @@
                     <label for="task-description">Description</label>
                     <textarea type="text" id="task-description" name="task-description"></textarea>
                 </div>-->
-                <div class="task-dropdowns-form" id="project-dropdowns-form" >
+                <div class="task-dropdowns-form" id="project-dropdowns-form">
                     <!--DropDown Leader-->
                     <div class="task-dropdown task-dropdown-leader">
                         <label for="team-leader">Team Leader</label>
