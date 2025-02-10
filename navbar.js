@@ -13,6 +13,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    /*
     //====Date and Time====//
     window.addEventListener("load", () => {
         time()
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         setTimeout(date, 1000)
     }
-
+    */
  
 
     function getPageId() {
