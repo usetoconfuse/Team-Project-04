@@ -1,8 +1,6 @@
-<!-- Updated by Quinn Little 03/02/25 -->
-<!-- Updated by Quinn Little 07/02/2025 -->
-<!-- Renamed by Quinn Little 07/02/2025 -->
+<!-- Created by Quinn Little 03/02/25 -->
 <!-- Updated by Toby Tischler 09/02/2025 -->
- <!-- Updated by Quinn Little 09/02/2025 -->
+<!-- Updated by Quinn Little 09/02/2025 -->
 
 <!-- Tabs -->
 <div id="mgrStatsAll">
