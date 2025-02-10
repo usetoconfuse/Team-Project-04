@@ -26,7 +26,8 @@
     grid-area: table2;
     align-self: center;
     justify-self: center;
-}
+    overflow-y: auto;
+    height: 20rem;}
 
 .mgrStatsUser-grid-item {
     padding: 20px;
@@ -67,3 +68,62 @@
     padding-top: 0.5rem;
 }
 
+
+
+
+/* Graph styles for dropdown */
+#mdContributionSortButton select option {
+    font-weight: 600 !important;
+}
+
+
+#userStats-graphChangeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #F5F5F5;
+    background-color: white;
+    border-radius: 30px;
+    padding: 0.2rem 0.4rem;
+    transition: all 0.4s ease;
+}
+
+#userStats-graphChangeButton:hover {
+    background-color: #F5F5F5;
+}
+
+#userStats-graphChangeButton:hover select {
+    background-color: #F5F5F5;
+}
+
+#userStats-graphChangeButton select {
+    width: 100%;
+    margin-left: 10px;
+    box-shadow: none;
+    outline: none;
+    border-radius: 30px;
+    border: none;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    height: 40px;
+    background-color: white;
+    transition: all 0.4s ease;
+}
+
+#userStats-weekHrsContainer{
+    display: block;
+}
+#userStats-overlapContainer{
+    display: none;
+}
+
+#userStats-weekHrsContainerGraph{
+    display: block;
+}
+
+
+#userStats-overlapContainerGraph {
+    display: none;
+}

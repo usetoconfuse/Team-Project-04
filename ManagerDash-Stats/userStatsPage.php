@@ -8,14 +8,37 @@
 <h1>User Statistics</h1>
 <div id="mgrStatsUser-grid-container">
         <!-- <div id="userStats-Flex-Item1"> -->
+
+
+
+
         
             <!-- <canvas id="weeklyManHrsChart" width="400" height="200"></canvas> -->
             <!-- Graph showing how many tasks in each category are assigned to each member -->
             <div id="userStats-weeklyGraph" class="mgrStatsUser-grid-item">
-            <div id="userStats-weekHrsContainer"> <!--GRAPH OVERALL MAN HOURS LAST 7 DAYS-->
-                <canvas id="userStats-weekHrsContainerGraph"></canvas>
+
+                <!-- Dropdown for graphs -->
+                <div id="userStats-graphChangeButton">
+                    <i class="fa fa-solid fa-sort"></i>
+                    <select name="userStats-chooseGraph" id="userStats-chooseGraph">
+                        <option value="userStats-chooseGraph-weekHrs">Week Hrs (status)</option>
+                        <option value="userStats-chooseGraph-overlap">Overlap Graph</option>
+                    </select>
+                </div>
+
+                <div id="userStats-weekHrsContainer"> <!--GRAPH OVERALL MAN HOURS LAST 7 DAYS-->
+                    <canvas id="userStats-weekHrsContainerGraph"></canvas>
+                </div>
+                <div id="userStats-overlapContainer">
+                    <canvas id="userStats-overlapContainerGraph"></canvas>
+                </div>
+
             </div>
-            </div>
+
+
+
+
+
 <!-- //TABLE OF EVERY PROJECT FOR THAT USER, AND MAN HOURS -->
             <div id='userStats-projHrs' class='mgrStatsUser-grid-item'>
                 <table id="userStats-projHrsTable">
@@ -28,11 +51,12 @@
 <!-- test -->
 <!-- Table of all tasks for specific user -->
     <div id="userStats-allTasksUser" class="mgrStatsUser-grid-item">
-    <table id="allTaskTable-userStats">
+        <table id="allTaskTable-userStats">
         
         </table>
     </div>
 
+</div>
 </div>
 
 

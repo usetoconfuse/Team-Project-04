@@ -331,28 +331,52 @@ function createTaskStatusGraph(currentTaskStatus) {
 
 //function to create chart
 
-// function createWeeklyHrsGraph(dailyManHrs) {
-//     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+function createWeeklyHrsGraph(dailyManHrs) {
+    const yValues=['2','3','4','5','6','7','8'];
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-//     weekhrs = document.getElementById('userStats-weekHrsContainerGraph');
+    weekhrs = document.getElementById('userStats-overlapContainerGraph');
 
-//     const weekhrsansd = new Chart(weekhrs, {
-//     type: "bar",
-//     data: {
-//         labels: daysOfWeek,
-//         datasets: [{
-//         backgroundColor:"rgba(0,0,255,1.0)",
-//         borderColor: "rgba(0,0,255,0.1)",
-//         data: yValues
-//         }]
-//     },
-//     options:{
-//     responsive: true,
-//     }
-//     });
-// }
-
-
+    const weekhrsansd = new Chart(weekhrs, {
+    type: "bar",
+    data: {
+        labels: daysOfWeek,
+        datasets: [{
+        backgroundColor:"rgba(0,0,255,1.0)",
+        borderColor: "rgba(0,0,255,0.1)",
+        data: yValues
+        }]
+    },
+    options:{
+    responsive: true,
+    }
+    });
+}
 
 
+createWeeklyHrsGraph();
+//graph dropdown
+const userGraphDropdown = document.querySelector('#userStats-chooseGraph');
+const weekHrsCont = document.querySelector('#userStats-weekHrsContainer');
+const overlapCont = document.querySelector('#userStats-overlapContainer');
+const weekHrsGraphCanvas = document.querySelector('#userStats-weekHrsContainerGraph');
+const overlayGraphCanvas = document.querySelector('#userStats-overlapContainerGraph');
+
+
+//userStats-overlapContainerGraph
+userGraphDropdown.addEventListener('change', () => {
+    if (userGraphDropdown.value === 'userStats-chooseGraph-weekHrs') {
+        weekHrsCont.style.display = 'block';
+        weekHrsGraphCanvas.style.display = 'block';
+        overlapCont.style.display = 'none';
+        overlayGraphCanvas.style.display = 'none';
+
+    } else if (userGraphDropdown.value === 'userStats-chooseGraph-overlap') {
+        overlapCont.style.display = 'block';
+        overlayGraphCanvas.style.display = 'block';
+        weekHrsCont.style.display = 'none';
+        weekHrsGraphCanvas.style.display = 'none';
+    }
+    updateGraphAxes();
+});
 
