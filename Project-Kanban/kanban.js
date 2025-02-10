@@ -1,8 +1,10 @@
 const kanbanContainers = document.querySelectorAll('.kanban-board');
 
 // Listen for sessionStorage updates
+let projectID;
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
+  projectID = selectedProjectID;
 
   if (selectedProjectID) {
     const kanbanContainer = document.querySelector('#kanban-content')
@@ -443,6 +445,12 @@ function generateCard(kanbanData) {
         await reportStuck(task.Task_ID, newStuck, openReportModalBtn);
         task.Stuck = newStuck;
         reportModal.style.display = 'none';
+
+        const currentFilters = getCurrentFilters();
+        const kanbanContainer = document.querySelector('#kanban-content')
+        const userID = kanbanContainer.getAttribute('data-user-id');
+        getKanbanData(userID, projectID, currentFilters);
+
       })
   
       const closeReportModal = reportModal.querySelector('.close-modal-btn');
