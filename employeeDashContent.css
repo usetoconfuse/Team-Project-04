@@ -1,0 +1,116 @@
+.dash-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 2rem 0.6rem 2rem;
+    font-family: 'avenir next';
+    font-size: 22px;
+}
+
+/*======Dashboard Top=====*/
+.emp-dash-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+/*For each item on the top row*/
+.emp-item-container {
+    padding: 20px;
+    color: black;
+    background-color: #F5F5F5;
+    border-radius: 24px;
+    margin-top: 1rem;
+    height: auto;
+}
+
+.emp-item-container.empdash-stats-container {
+    background-color: #c9b7a8;
+}
+
+.emp-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.2rem 0.6rem 0.6rem 0.6rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.emp-item-top a {
+    padding: 0.8rem 0.8rem;
+    border: 2px solid #F5F5F5;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: black;
+    border-radius: 30px;
+    white-space: nowrap;
+}
+
+/*User Stats Section*/
+.emp-grid-stat-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    place-items: center center;
+    grid-auto-flow: row;
+}
+
+.emp-stat {
+    background-color: white;
+    color: black;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10.5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0.6rem;
+    border: 2px solid transparent;
+    height: 6.5rem;
+}
+
+.emp-stat-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    align-self: flex-start;
+}
+
+.emp-stat-txt {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: normal;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.emp-stat-nums {
+    font-size: 1.1rem;
+    font-weight: normal;
+
+}
+
+.emp-stat-line {
+    height: 0.2rem;
+    border-radius: 10px;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 0.3rem;
+}
+
+
+@media (max-width: 1250px) {
+    .emp-dash-top {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 920px) {
+    .emp-grid-stat-content  {
+        grid-template-columns: 1fr 1fr;
+    }
+}
