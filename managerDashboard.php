@@ -127,7 +127,7 @@ session_start()
                 <div class="bar"></div>
 
 
-                <div class="date-item">
+                <!-- <div class="date-item">
                     <div class="date-item-top">
                         <div class="date-txt">
                             <i class="fa fa-regular fa-calendar fa-lg"></i>
@@ -141,7 +141,7 @@ session_start()
                             <div class="date"></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 

@@ -253,7 +253,7 @@
         <div class="kb-post kb-full-height">
             <div class="kb-flex-row kb-flex-wrap">
                 <h2 class="kb-title-header"></h2>
-                <div class="kb-flex-row kb-flex-wrap">
+                <div class="kb-flex-row kb-flex-wrap kb-post-badges">
                     <div class="kb-badge"></div>
                     <div class="kb-badge"></div>
                 </div>
