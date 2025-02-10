@@ -43,8 +43,10 @@
         <!-- User List Page -->
         <div id="statsHomeGridUser" class="statsHome-grid">
             <div id="statsHomeFiltersUser">
-                User Filters Here
-            </div>
+                <div class="userStats-search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search user" id="searched-user">
+                </div>            </div>
             <div id="statsHomeTableUser">
                 <!--Fetch User Table Here-->
             </div>
