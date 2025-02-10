@@ -1,8 +1,10 @@
 
 /*====Project Information====*/
-#kanban-content {
-    height: auto;
-}
+.kanban-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}   
 
 .project-intro {
     display: flex;
@@ -142,6 +144,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    height: 100%;
     width: 100%;
     font-family: 'avenir next';
 }
@@ -151,7 +154,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;    
+    flex-direction: column; 
+    height: 100%;   
     width: 50%;
 }
 

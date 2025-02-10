@@ -1,4 +1,4 @@
-<div id="kanban-content" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div class="kanban-content" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro personal-kanban-intro">
         <div class="project-txt">
@@ -28,7 +28,7 @@
                 <i class="fa fa-solid fa-caret-up"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body open" id = 'kanban-to-do'>
+            <div class="kanban-body open" class = 'kanban-to-do'>
 
                 <!--Kanban Card 1-->
                 <div class="kanban-card" id="kanban-task-overdue" draggable=true>
