@@ -103,7 +103,7 @@
                     <label for="task-description">Description</label>
                     <textarea type="text" id="task-description" name="task-description"></textarea>
                 </div>-->
-                <div class="task-dropdowns-form" id="project-dropdowns-form" >
+                <div class="task-dropdowns-form" id="project-dropdowns-form">
                     <!--DropDown Leader-->
                     <div class="task-dropdown task-dropdown-leader">
                         <label for="team-leader">Team Leader</label>
