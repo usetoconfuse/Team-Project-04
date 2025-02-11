@@ -132,7 +132,7 @@ if (empty($_SESSION['user_id'])) {
                 <div class="bar"></div>
 
 
-                <!-- <div class="date-item">
+                <div class="date-item">
                     <div class="date-item-top">
                         <div class="date-txt">
                             <i class="fa fa-regular fa-calendar fa-lg"></i>
@@ -146,7 +146,7 @@ if (empty($_SESSION['user_id'])) {
                             <div class="date"></div>
                         </div>
                     </div>
-                </div> -->
+                </div> 
             </div>
 
 
