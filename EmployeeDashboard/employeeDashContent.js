@@ -81,7 +81,7 @@ async function getEmpTaskTable(userID) {
       throw new Error('Failed to fetch projects data');
     }
     const empDashTableData = await response.json();
-    console.log(empDashTableData);
+    populateTasksTable(empDashTableData);
 
 
     } catch (error) {
@@ -91,5 +91,23 @@ async function getEmpTaskTable(userID) {
 
 
 function populateTasksTable(tableData) {
+    const tableBody = document.querySelector(".emp-projectKanban-bottom tbody");
+    tableBody.innerHTML = "";
+    tableData.forEach(task => {
+        const row = document.createElement('tr');
 
+        let taskStuck = (task.Stuck === '1' || task.Stuck === '2') ? "Yes" : "No";
+
+        row.innerHTML = `   <td>${task.Task_ID}</td>
+                            <td>${task.Name}</td>
+                            <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
+                            <td>${task.Due_Date}</td>
+                            <td>${taskStuck}</td>
+                            <td>${task.Project_ID}: ${task.Project_Title}</td>
+                            <td>${task.Forename} ${task.Surname}</td>`
+        
+        tableBody.appendChild(row);
+
+    })
 }
