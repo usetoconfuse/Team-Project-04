@@ -914,11 +914,11 @@ filterTaskBtn.addEventListener('click', () => {
 
 
 //Keyword Search
-const searchBar = document.querySelector('.task-search #searched-task');
+const searchBar = document.querySelector('#proj-kanban-content .task-search #searched-task');
 
 searchBar.addEventListener('input', ()=>{
   const searchValue = searchBar.value.toLowerCase();
-  const allTasks = document.querySelectorAll('.kanban-content-personal .kanban-card');
+  const allTasks = document.querySelectorAll('.kanban-content-project .kanban-card');
   console.log(allTasks);
   let foundTasks = 0;
 
@@ -934,9 +934,9 @@ searchBar.addEventListener('input', ()=>{
     }
   })
   if (foundTasks === 0) {
-    document.querySelector('.search-task-error-msg').style.display = 'block';
+    document.querySelector('#proj-kanban-content .search-task-error-msg').style.display = 'block';
   } else {
-    document.querySelector('.search-task-error-msg').style.display = 'none';
+    document.querySelector('#proj-kanban-content .search-task-error-msg').style.display = 'none';
   }
 })
 

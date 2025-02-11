@@ -99,7 +99,7 @@ function populateTasksTable(tableData) {
         let taskStuck = (task.Stuck === '1' || task.Stuck === '2') ? "Yes" : "No";
 
         row.innerHTML = `   <td>${task.Task_ID}</td>
-                            <td>${task.Name}</td>
+                            <td id="emp-task-title">${task.Name}</td>
                             <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
                             <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
                             <td>${task.Due_Date}</td>
@@ -111,3 +111,31 @@ function populateTasksTable(tableData) {
 
     })
 }
+
+
+//Keyword Search
+const searchBar = document.querySelector('#emp-dash-content .task-search #searched-task');
+
+searchBar.addEventListener('input', ()=>{
+  const searchValue = searchBar.value.toLowerCase();
+  const allTasks = document.querySelectorAll('.emp-projectKanban-bottom tbody tr');
+  let foundTasks = 0;
+
+  allTasks.forEach(task => {
+    const taskTitle = task.querySelector('#emp-task-title').innerHTML.toLowerCase();
+
+
+    if (taskTitle.includes(searchValue)) {
+      foundTasks++;
+      task.style.display = 'table-row';
+    } else {
+      task.style.display = 'none';
+    }
+  })
+  if (foundTasks === 0) {
+    document.querySelector('#emp-dash-content .search-task-error-msg').style.display = 'block';
+  } else {
+    document.querySelector('#emp-dash-content .search-task-error-msg').style.display = 'none';
+  }
+})
+

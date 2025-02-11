@@ -486,8 +486,12 @@ nav {
     padding: 20px;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 
+}
+
+.nav-item-content#current-project-content  {
+    overflow-y: auto;
 }
 
 #overview-content, #projects-content, #forums-content, #personal-content, #current-project-content, #stats-content {
@@ -508,6 +512,9 @@ nav {
     .date-item-bottom .date-time {
         flex-direction: column;
     }
+    .nav-item-content#overview-content  {
+        overflow-y: auto;
+    }
 
 }
 
@@ -515,6 +522,7 @@ nav {
     nav {
         min-width: 11rem;
     }
+
 }
 
 
