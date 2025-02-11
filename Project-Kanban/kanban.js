@@ -283,6 +283,7 @@ function generateCard(kanbanData) {
       taskPriority = "No Priority";
     }
 
+    
 
     const fullTaskDescription = task.Description;
     const taskDescriptionWords = fullTaskDescription;
@@ -518,29 +519,7 @@ function generateCard(kanbanData) {
     });
 
 
-    
-    //====Dragging Features
-    const kanbanSection = document.querySelectorAll('.kanban-body')
-    
-    /*
-    taskCard.addEventListener("dragstart", () => {
-      taskCard.classList.add("dragging");
-      setTimeout(() => {taskCard.classList.add('overlay')}, 1)
-    });
-    taskCard.addEventListener("dragend", () => {
-        //Dynamically set task status when moving card to other columns
-      checkStatus(taskCard, statusBox, statusCircle)
-
-      taskCard.classList.remove("dragging");
-      taskCard.classList.remove('overlay')
-
-      const currentSectionId = taskCard.parentElement.id;
-      const kanbanCardDueDate = taskCard.querySelector('.due-date');
-
-      //Change the overdue tag depending on section it is in 
-      validate_date_icon(taskCard, kanbanCardDueDate, currentSectionId);
-      
-    }); */
+   
 
     const kanbanCardDueDate = taskCard.querySelector('.due-date');
     const currentSectionId = taskCard.parentElement.id;
@@ -571,46 +550,6 @@ function generateCard(kanbanData) {
 
       
     });
-
-    
-  /*
-   kanbanSection.forEach((section) => {
-      section.addEventListener("dragover", (e) => {
-        e.preventDefault();
-    
-        const taskBelow = insertAbove(section, e.clientY);
-        const draggedTask = document.querySelector(".dragging");
-    
-        if (!taskBelow) {
-          section.appendChild(draggedTask);
-        } else {
-          section.insertBefore(draggedTask, taskBelow);
-          //We have a drop down list = lets use choose the section
-          // On button press = confirm pressed = we either appendChild = if nothing or we just insertBefore
-
-        }
-      });
-    });
-    
-    const insertAbove = (section, mouseY) => {
-      const notDraggedTasks = section.querySelectorAll(".kanban-card:not(.dragging)");
-     
-      let closestTask = null;
-      let closestOffset = Number.NEGATIVE_INFINITY;
-    
-      notDraggedTasks.forEach((task) => {
-        const { top } = task.getBoundingClientRect();
-    
-        const offset = mouseY - top;
-    
-        if (offset < 0 && offset > closestOffset) {
-          closestOffset = offset;
-          closestTask = task;
-        }
-      });
-    
-      return closestTask;
-    };*/
 
 
   })

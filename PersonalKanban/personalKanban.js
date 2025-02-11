@@ -98,6 +98,8 @@ function populatePersonalTasks(tasks) {
 
 
 
+
+    
     // View Task Modal content
     viewTaskModal.innerHTML = `
                                   <div class="modal-box view-task-modal-box">
@@ -158,10 +160,6 @@ function populatePersonalTasks(tasks) {
     document.body.appendChild(viewTaskModal);
     kanbanColumns[task.Status]?.appendChild(taskCard);
 
-
-
-
-    
     //Closing and opening modal
     const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn');
 
@@ -174,7 +172,74 @@ function populatePersonalTasks(tasks) {
       viewTaskModal.style.display = 'none';
     });
 
+     
+
+    
+    
+    taskCard.addEventListener("dragstart", () => {
+      taskCard.classList.add("dragging");
+      setTimeout(() => {taskCard.classList.add('overlay')}, 1)
+    });
+    taskCard.addEventListener("dragend", () => {
+        //Dynamically set task status when moving card to other columns
+      //checkStatus(taskCard, statusBox, statusCircle)
+
+      taskCard.classList.remove("dragging");
+      taskCard.classList.remove('overlay')
+
+      //const currentSectionId = taskCard.parentElement.id;
+      //const kanbanCardDueDate = taskCard.querySelector('.due-date');
+      //validate_date_icon(taskCard, kanbanCardDueDate, currentSectionId);
+      
+    });
+
+    
+
+
+    
+
+
 
   });
   
 }
+
+    //====Dragging Features
+    const kanbanSection = document.querySelectorAll('#personal-kanban-content .kanban-body')  
+    kanbanSection.forEach((section) => {
+       section.addEventListener("dragover", (e) => {
+         e.preventDefault();
+     
+         const taskBelow = insertAbove(section, e.clientY);
+         const draggedTask = document.querySelector(".dragging");
+     
+         if (!taskBelow) {
+           section.appendChild(draggedTask);
+         } else {
+           section.insertBefore(draggedTask, taskBelow);
+       
+ 
+         }
+       });
+     });
+     
+     const insertAbove = (section, mouseY) => {
+       const notDraggedTasks = section.querySelectorAll(".kanban-card:not(.dragging)");
+      
+       let closestTask = null;
+       let closestOffset = Number.NEGATIVE_INFINITY;
+     
+       notDraggedTasks.forEach((task) => {
+         const { top } = task.getBoundingClientRect();
+     
+         const offset = mouseY - top;
+     
+         if (offset < 0 && offset > closestOffset) {
+           closestOffset = offset;
+           closestTask = task;
+         }
+       });
+     
+       return closestTask;
+     };
+ 
