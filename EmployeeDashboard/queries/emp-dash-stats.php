@@ -29,8 +29,8 @@ while ($row = mysqli_fetch_array($statsResult, MYSQLI_ASSOC)) {
 
 //Emp Dashboard Stats Query
 $personalTasksSQL = "SELECT Name, Priority
-                     FROM Tasks
-                     WHERE Assignee_ID = $userId
+                     FROM personal_tasks
+                     WHERE User_ID = $userId
                      ORDER BY Priority DESC
                      LIMIT 3";
 
