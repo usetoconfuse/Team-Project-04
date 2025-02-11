@@ -159,9 +159,11 @@
 
 
 .emp-projectKanban-bottom {
-    overflow-x: auto;
+    overflow: auto;
     max-width: 100%;
     max-height: 38vh;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .emp-projectKanban-bottom table {
@@ -170,13 +172,18 @@
     text-align: left;
     border-radius: 20px;
     width: 100%;
-
 }
+
+thead, tbody {
+    white-space: nowrap;
+}
+
 
 .emp-projectKanban-bottom table  thead {
     border-bottom: 1px solid black;
 }
 
+/*PADDING*/
 .emp-projectKanban-bottom table  th {
     padding: 1rem 2rem;
     letter-spacing: 0.1rem;
@@ -242,4 +249,6 @@
     .emp-grid-stat-content  {
         grid-template-columns: 1fr 1fr;
     }
+    .emp-projectKanban-bottom table {
+        width: fit-content; }
 }
