@@ -216,9 +216,9 @@ async function getKanbanData(userID, projectID, filters={}) {
 
 function generateCard(kanbanData) {
   const kanbanColumns = {
-    "To Do": document.querySelector("#kanban-to-do"),
-    "In Progress": document.querySelector("#kanban-in-progress"),
-    "Completed": document.querySelector("#kanban-completed")
+    "To Do": document.querySelector("#proj-kanban-content #kanban-to-do"),
+    "In Progress": document.querySelector("#proj-kanban-content #kanban-in-progress"),
+    "Completed": document.querySelector("#proj-kanban-content #kanban-completed")
   };
 
   Object.values(kanbanColumns).forEach(column => column.innerHTML = ""); //clear columns
@@ -338,7 +338,7 @@ function generateCard(kanbanData) {
 
     // View Task Modal content
     viewTaskModal.innerHTML = `
-                                  <div class="modal-box .view-task-modal-box">
+                                  <div class="modal-box view-task-modal-box">
                                             <!--Header-->
                                             <div class="modal-header">
                                                 <p class="modal-task-title">${taskTitle}</p>

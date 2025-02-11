@@ -166,7 +166,7 @@ if (empty($_SESSION['user_id'])) {
             </div>
 
             <div class="nav-item-content" id="personal-content">
-                <?php include 'personalKanban.php'; ?>
+            <?php include 'PersonalKanban/personalKanban.php'; ?>
             </div>
 
             <div class="nav-item-content" id="forums-content">
