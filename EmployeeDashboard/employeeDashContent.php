@@ -54,10 +54,116 @@
                 
             </div>
         </section>
+    </section>
 
 
+    <section class="emp-dash-bottom">
+        <section class="emp-projectKanban-container emp-item-container" id="emp-projectKanban-container">
+            <div class="emp-item-top">
+                <p>All Tasks</p>
+                <a href="employeeDashboard.php?page=projects" class="black-btn">All Projects</a>
+            </div>
+
+            <div class="emp-projectKanban-bottom">
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Task Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Deadline</th>
+                            <th>Stuck</th>
+                            <th>Project ID/Title</th>
+                            <th>Assigned By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-to-do">To Do</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-low">Low</p></td>
+                            <td>23/02/2025</td>
+                            <td>No</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-in-progress">In Progress</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-medium">Medium</p></td>
+                            <td>23/02/2025</td>
+                            <td>Yes</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-completed">Completed</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-high">High</p></td>
+                            <td>23/02/2025</td>
+                            <td>No</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-to-do">To Do</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-low">Low</p></td>
+                            <td>23/02/2025</td>
+                            <td>No</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-in-progress">In Progress</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-medium">Medium</p></td>
+                            <td>23/02/2025</td>
+                            <td>Yes</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-completed">Completed</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-high">High</p></td>
+                            <td>23/02/2025</td>
+                            <td>No</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Create Modal</td>
+                            <td><p class="emp-table-status emp-table-status-to-do">To Do</p></td>
+                            <td><p class="emp-table-priority emp-table-priority-low">Low</p></td>
+                            <td>23/02/2025</td>
+                            <td>No</td>
+                            <td>7: Python Project</td>
+                            <td>John Little</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
 
 
+        </section>
     </section>
 
        

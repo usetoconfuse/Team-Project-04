@@ -154,10 +154,74 @@
 }
 
 
+/*===Table Styling===*/
+
+.emp-projectKanban-bottom {
+    overflow-x: auto;
+
+}
+
+.emp-projectKanban-bottom table {
+    border-collapse: collapse;
+    background-color: white;
+    text-align: left;
+    border-radius: 20px;
+    width: 100%;
+
+}
+
+.emp-projectKanban-bottom table  thead {
+    border-bottom: 1px solid black;
+}
+
+.emp-projectKanban-bottom table  th {
+    padding: 1rem 2rem;
+    letter-spacing: 0.1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+}
+
+.emp-projectKanban-bottom table td {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+
+}
+
+.emp-projectKanban-bottom table tr:not(thead tr) {
+    border-bottom: 2px solid #F5F5F5;
+}
+
+
+
+.emp-table-status, .emp-table-priority {
+    border-radius: 5px;
+    padding: 0.1rem 0.3rem;
+    text-align: center;
+}
+
+.emp-table-status.emp-table-status-to-do, .emp-table-priority.emp-table-priority-high {
+    background-color: #ffcdd2;
+    color: #c62828;
+}
+
+.emp-table-status.emp-table-status-in-progress, .emp-table-priority.emp-table-priority-medium  {
+    background-color:  #fff0c2;
+    color: #947c01;
+}
+
+.emp-table-status.emp-table-status-completed, .emp-table-priority.emp-table-priority-low  {
+    background-color: #c8e6c9;
+    color: #388e3c;
+}
+
+
+
 @media (max-width: 1250px) {
     .emp-dash-top {
         grid-template-columns: 1fr;
     }
+    
 }
 
 @media (max-width: 920px) {
