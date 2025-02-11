@@ -2,6 +2,7 @@
 const userID = document.querySelector('#emp-dash-content').getAttribute('data-user-id');
 document.addEventListener('DOMContentLoaded', () => {
     getEmpStats(userID);
+    getEmpTaskTable(userID)
 })
 
 async function getEmpStats(userID) {
@@ -63,3 +64,32 @@ function populateEmpPersonalTasks(empDashData) {
     })
 }
 
+
+
+async function getEmpTaskTable(userID) {
+    try {
+    let url = `EmployeeDashboard/queries/emp-dash-table.php?userID=${encodeURIComponent(userID)}`; 
+
+    const params = { 
+      method: "GET",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch projects data');
+    }
+    const empDashTableData = await response.json();
+    console.log(empDashTableData);
+
+
+    } catch (error) {
+        console.log("Fetch Issue",error);
+    }
+}
+
+
+function populateTasksTable(tableData) {
+
+}
