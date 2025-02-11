@@ -22,7 +22,7 @@ if (empty($_SESSION['user_id'])) {
     </link>
     <link rel="stylesheet" href="Projects/projects.css">
     </link>
-    <link rel="stylesheet" href="employeeDashContent.css">
+    <link rel="stylesheet" href="EmployeeDashboard/employeeDashContent.css">
     </link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         crossorigin="anonymous" />
@@ -154,7 +154,7 @@ if (empty($_SESSION['user_id'])) {
         <section id="content">
 
             <div class="nav-item-content open" id="overview-content">
-                <?php include 'employeeDashContent.php' ?>
+                <?php include 'EmployeeDashboard/employeeDashContent.php' ?>
             </div>
 
             <div class="nav-item-content" id="projects-content">
@@ -178,7 +178,6 @@ if (empty($_SESSION['user_id'])) {
     </section>
 
     <script src="navbar.js"></script>
-
     <script type="module" src="Project-Kanban/kanban.js"></script>
     <script src="Projects/projects.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>

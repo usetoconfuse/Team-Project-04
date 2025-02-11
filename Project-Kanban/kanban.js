@@ -178,7 +178,6 @@ async function getProjectName(selectedProjectID) {
     }
     const projectNameData = await response.json();
     document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
-    console.log(projectNameData);
 
 
   } catch (error) {
@@ -196,8 +195,6 @@ async function getKanbanData(userID, projectID, filters={}) {
     const filterQuery = new URLSearchParams(filters).toString();
     url += filterQuery ? `&${filterQuery}` : '';
 
-    console.log(url);
-
     const params = { 
       method: "GET",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -209,8 +206,6 @@ async function getKanbanData(userID, projectID, filters={}) {
       throw new Error('Failed to fetch projects data');
     }
     const allKanbanData = await response.json();
-    //document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = allKanbanData[0].Project_Title;
-    console.log(allKanbanData);
     generateCard(allKanbanData);
 
   } catch (error) {
