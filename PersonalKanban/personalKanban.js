@@ -30,28 +30,26 @@ async function fetchPersonalData(userID, filters={}) {
     
       const personalTaskData = await response.json();
       console.log(personalTaskData);
-      const countData = personalTaskData.count[0];
-      populatePersonalTasks(personalTaskData.tasks)
-      changeCount(countData);
+      populatePersonalTasks(personalTaskData)
+
+      const personalCardCounts = {
+        "To Do": document.querySelector("#personal-kanban-content #kanban-to-do").children.length,
+        "In Progress": document.querySelector("#personal-kanban-content #kanban-in-progress").children.length,
+        "Completed": document.querySelector("#personal-kanban-content #kanban-completed").children.length
+      };
+      changeProjectsCount(personalCardCounts);
     } catch(error) {
-      //console.log("Fetch Issue",error);
+      console.log("Fetch Issue",error);
       //Show Error Card
     }
 }
 
-function changeCount(countData) {
-  const toDoSection = document.querySelector("#personal-kanban-content #to-do-header .kanban-header-no");
-  const inProgressSection = document.querySelector("#personal-kanban-content #in-progress-header .kanban-header-no");
-  const completedSection = document.querySelector("#personal-kanban-content #completed-header .kanban-header-no");
-
-
-  console.log(toDoSection)
-  toDoSection.innerHTML = countData.To_Do_Count;
-  inProgressSection.innerHTML = countData.In_Progress_Count;
-  completedSection.innerHTML = countData.Completed_Count;
+function changeProjectsCount(cardCounts) {
+  // Update the count display elements in the headers
+  document.querySelector('#personal-kanban-content #to-do-header .kanban-header-no').innerText = cardCounts["To Do"];
+  document.querySelector('#personal-kanban-content #in-progress-header .kanban-header-no').innerText = cardCounts["In Progress"];
+  document.querySelector('#personal-kanban-content #completed-header .kanban-header-no').innerText = cardCounts["Completed"];
 }
-
-
 
 function populatePersonalTasks(tasks) {
   const kanbanColumns = {

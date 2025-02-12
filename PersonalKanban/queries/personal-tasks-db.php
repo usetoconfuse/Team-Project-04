@@ -75,30 +75,6 @@ while ($row = mysqli_fetch_array($taskResult, MYSQLI_ASSOC)) {
 }
 
 
-//Count of each column number of tasks
 
-$countStatusSQL = "SELECT
-    SUM(CASE WHEN Status = 'To Do' THEN 1 ELSE 0 END) AS To_Do_Count,  
-    SUM(CASE WHEN Status = 'In Progress' THEN 1 ELSE 0 END) AS In_Progress_Count,  
-    SUM(CASE WHEN Status = 'Completed' THEN 1 ELSE 0 END) AS Completed_Count  
-FROM personal_tasks  
-WHERE User_ID = $userId
-GROUP BY User_ID;";
-
-
-$countStatusResult = mysqli_query($conn, $countStatusSQL);
-
-if (!$countStatusResult) {
-    die("Query failed for Task Results" . mysqli_error($conn));
-}
-
-$countDataArray = array();
-while ($row = mysqli_fetch_array($countStatusResult, MYSQLI_ASSOC)) {
-    $countDataArray[] = $row;
-}
-
-$allDataArray = array("count" => $countDataArray, "tasks" => $taskDataArray);
-
-
-echo json_encode($allDataArray);
+echo json_encode($taskDataArray);
 ?>
