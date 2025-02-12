@@ -490,7 +490,7 @@ nav {
 
 }
 
-.nav-item-content#current-project-content  {
+.nav-item-content#current-project-content , .nav-item-content#personal-content {
     overflow-y: auto;
 }
 

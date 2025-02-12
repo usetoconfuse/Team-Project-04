@@ -1,24 +1,24 @@
 //Fetch from database send a request to server the database
 // to get the personal kanban board
 // Send user iD to the personalTaskfetch.php data
-
+const userId = document.querySelector('.kanban-content').getAttribute('data-user-id');
 document.addEventListener('DOMContentLoaded',()=>{
-    const userID = document.querySelector('.kanban-content').getAttribute('data-user-id');
-    fetchPersonalData(userID);
+    fetchPersonalData(userId, {});
 })
 
 
 
-async function fetchPersonalData(userID) {
+async function fetchPersonalData(userID, filters={}) {
     try {
       let url = `PersonalKanban/queries/personal-tasks-db.php?userID=${encodeURIComponent(userID)}`;
 
-
-    const params = { 
-      method: "GET",
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    }
-
+      const filterQuery = new URLSearchParams(filters).toString();
+      url += filterQuery ? `&${filterQuery}` : '';
+  
+      const params = { 
+        method: "GET",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }
 
       const response = await fetch(url, params);
 
@@ -27,15 +27,11 @@ async function fetchPersonalData(userID) {
           console.log(response);
       }
       
-      
-
+    
       const personalTaskData = await response.json();
       console.log(personalTaskData);
 
       populatePersonalTasks(personalTaskData)
-
-
-
     } catch(error) {
       //console.log("Fetch Issue",error);
       //Show Error Card
@@ -43,9 +39,6 @@ async function fetchPersonalData(userID) {
 }
 
 
-console.log(document.querySelector("#personal-kanban-content #kanban-to-do"))
-console.log(document.querySelector("#personal-kanban-content #kanban-in-progress"))
-console.log(document.querySelector("#personal-kanban-content #kanban-completed"))
 
 
 function populatePersonalTasks(tasks) {
@@ -234,3 +227,162 @@ function populatePersonalTasks(tasks) {
        return closestTask;
      };
  
+
+//Keyword Search
+const searchBarPersonal = document.querySelector('#personal-kanban-content .task-search #searched-task');
+
+searchBarPersonal.addEventListener('input', ()=>{
+  const searchValue = searchBarPersonal.value.toLowerCase();
+  const allTasks = document.querySelectorAll('.kanban-card');
+  let foundTasks = 0;
+
+  allTasks.forEach(task => {
+    const taskTitle = task.getAttribute('data-task-title').toLowerCase();
+
+
+    if (taskTitle.includes(searchValue)) {
+      foundTasks++;
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  })
+  if (foundTasks === 0) {
+    document.querySelector('#personal-kanban-content .search-task-error-msg').style.display = 'block';
+  } else {
+    document.querySelector('#personal-kanban-content .search-task-error-msg').style.display = 'none';
+  }
+})
+
+
+//Filters
+const filterTaskModal = document.querySelector("#personal-kanban-content #filter-modal");
+const filterTaskBtn = document.querySelector('#personal-kanban-content  .filter-task-btn');
+const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
+
+filterTaskBtn.addEventListener('click', () => {
+  filterTaskModal.style.display = 'flex';
+  })
+  closeFilterTaskModal.addEventListener('click', () => {
+    filterTaskModal.style.display = 'none';
+  })
+
+
+
+
+  const filterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal')
+  document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value = 'None';
+  filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
+  filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
+    
+
+  
+//Filters
+const filterAppliedMsg = document.querySelector('#personal-kanban-content .filter-applied-msg');
+const filterRemoveBtn = document.querySelector(' #personal-kanban-content .remove-filters-btn');
+
+const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
+applyFilterBtn.addEventListener('click', () => {
+  const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
+  const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+  
+  const filters = {priorityValue,dateValue};
+
+  if (priorityValue === "All") {
+    delete filters.priorityValue;
+  }
+  if (dateValue === "All") {
+    delete filters.dateValue;
+  }
+
+  filterAppliedMsg.style.display = 'block';
+  filterAppliedMsg.innerHTML = createFiltersMsg(filters);
+  let filtersLength = Object.keys(filters).length;
+  if (filtersLength > 0) {
+    filterRemoveBtn.style.display = 'flex';
+  } else {
+    filterRemoveBtn.style.display = 'none';
+  }
+
+
+  filterTaskModal.style.display = 'none';
+  searchBar.value = "";
+
+  fetchPersonalData(userId, filters);
+})
+
+//Order By Filters
+const orderByBtn = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-confirm');
+orderByBtn.addEventListener('click', () => {
+  const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
+  const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+
+
+  const currentFilters = getCurrentFilters();
+  const allFilters = { ...currentFilters, ...orderByParam};
+
+
+  filterAppliedMsg.style.display = 'block';
+  filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+
+  let filtersLength = Object.keys(allFilters).length;
+  if (filtersLength > 0) {
+    filterRemoveBtn.style.display = 'flex';
+  } else {
+    filterRemoveBtn.style.display = 'none';
+  }
+
+  searchBar.value = "";
+
+  fetchPersonalData(userID, allFilters);
+})
+
+filterRemoveBtn.addEventListener('click', () => {
+  filterAppliedMsg.innerHTML = "";
+  filterAppliedMsg.style.display = 'none';
+  filterRemoveBtn.style.display = 'none';
+  searchBarPersonal.value = "";
+  document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value = "None";
+  filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
+  filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
+
+  fetchPersonalData(userID, {});
+})
+
+function getCurrentFilters() {
+  const filterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal');
+  const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
+  const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+  
+  const filters = {priorityValue,dateValue};
+
+  if (priorityValue === "All") {
+    delete filters.priorityValue;
+  }
+  if (dateValue === "All") {
+    delete filters.dateValue;
+  }
+
+  return filters;
+}
+
+
+
+function createFiltersMsg(filters) {
+  let applied = [];
+  if (filters.priorityValue && filters.priorityValue !== "All") {
+    applied.push(filters.priorityValue + " Priority");
+  }
+  if (filters.dateValue && filters.dateValue !== "All") {
+    applied.push("Due Date: " + filters.dateValue)
+  }
+  if (filters.orderByValue && filters.orderByValue !== "None") {
+    applied.push("Order By " + filters.orderByValue)
+  }
+
+  if (applied.length === 0) {
+    return '';
+  } else {
+    return 'Filters Applied: ' + applied.join(', ');
+  }
+}

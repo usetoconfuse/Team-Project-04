@@ -13,7 +13,7 @@ window.addEventListener("storage", function () {
     getProjectName(selectedProjectID)
 
     const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal')
-    document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = 'None';
+    document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value = 'None';
     filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
     filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
     filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
@@ -21,8 +21,8 @@ window.addEventListener("storage", function () {
   
     
     //Filters
-    const filterAppliedMsg = document.querySelector('.filter-applied-msg');
-    const filterRemoveBtn = document.querySelector('.remove-filters-btn');
+    const filterAppliedMsg = document.querySelector('#proj-kanban-content .filter-applied-msg');
+    const filterRemoveBtn = document.querySelector('#proj-kanban-content .remove-filters-btn');
 
     const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
     applyFilterBtn.addEventListener('click', () => {
@@ -63,9 +63,9 @@ window.addEventListener("storage", function () {
     })
 
     //Order By Filters
-    const orderByBtn = document.querySelector('.projects-intro-buttons .order-by-confirm');
+    const orderByBtn = document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-confirm');
     orderByBtn.addEventListener('click', () => {
-      const orderByDropdownValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
+      const orderByDropdownValue = document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
       const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
 
 
@@ -93,7 +93,7 @@ window.addEventListener("storage", function () {
       filterAppliedMsg.style.display = 'none';
       filterRemoveBtn.style.display = 'none';
       searchBar.value = "";
-      document.querySelector('.projects-intro-buttons .order-by-dropdown select').value = "None";
+      document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value = "None";
       filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
       filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
       filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
