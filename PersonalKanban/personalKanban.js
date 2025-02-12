@@ -133,6 +133,20 @@ function populatePersonalTasks(tasks) {
 
                </div>
 
+
+               <div class="modal-task-btns">
+                <div class="move-task-dropdown">
+                  <select>
+                    <option value="kanban-to-do">To Do</option>
+                    <option value="kanban-in-progress">In Progress</option>
+                    <option value="kanban-completed">Completed</option>
+                  </select>
+                  <div>
+                    <a href="#" class="move-task-confirm black-btn">Confirm Move</a>
+                  </div>
+                </div>
+                </div>
+
  
 
              </div>
@@ -155,10 +169,82 @@ function populatePersonalTasks(tasks) {
       viewTaskModal.style.display = 'none';
     });
 
+     //Move button and Update Task Status in Database
+     const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown select');
+     const moveTaskBtn = viewTaskModal.querySelector('.move-task-dropdown .move-task-confirm');
+ 
+     //Moving Cards Using Dropdown
+     moveTaskBtn.addEventListener('click', async () => {
+       const newSection = moveTaskDropDown.value;
+       const newSectionElement = document.getElementById(newSection);
+ 
+       newSectionElement.insertBefore(taskCard, newSectionElement.firstChild);
+       viewTaskModal.style.display = 'none';
+ 
+       //checkStatus(taskCard, statusBox, statusCircle)
+       //validate_date_icon(taskCard, kanbanCardDueDate, newSection);
+ 
+       let newStatus = {
+         'kanban-to-do': 'To Do',
+         'kanban-in-progress': 'In Progress',
+         'kanban-completed': 'Completed'
+       }[newSection];
+       
+       await updatePersonalTaskStatus(task.PersonalTask_ID, newStatus);
+ 
+       const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
+       const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+       const currentFilters = getCurrentFilters();
+       const allFilters = { ...currentFilters, ...orderByParam};
+ 
+       filterAppliedMsg.style.display = 'block';
+       filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+ 
+       let filtersLength = Object.keys(allFilters).length;
+       if (filtersLength > 0) {
+         filterRemoveBtn.style.display = 'flex';
+       } else {
+         filterRemoveBtn.style.display = 'none';
+       }
+ 
+       searchBar.value = "";
+ 
+       fetchPersonalData(userId, allFilters);
+ 
+       
+     });
+
 
   });
   
 }
+
+
+async function updatePersonalTaskStatus(taskID, newStatus) {
+  try {
+    const url = 'PersonalKanban/queries/update-status-db.php';
+    
+    const data = {
+      Task_ID: taskID,
+      Status: newStatus
+    };
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(url, params);
+    if (!response.ok) {
+      throw new Error('Failed to update task status');
+    }
+
+
+  } catch (error) {
+    console.log("Error updating the task status", error);
+  }
+}
+
 
 
 
