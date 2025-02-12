@@ -448,7 +448,7 @@ function createProjTimeGraph(yAxProj, durArr) {
     weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
 
     const weekhrsansd = new Chart(weekhrs, {
-    type: "bar",
+    type: "horizontalBar",
     data: {
         labels: yAxProj,
         datasets: [{
