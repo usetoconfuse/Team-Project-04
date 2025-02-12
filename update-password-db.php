@@ -15,7 +15,7 @@ if (!password_verify($currentPass, $user['Password'])) {
 
 $password_regex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).{12,}$/";
 
-if (!preg_match($password_regex, $inputted_password)) {
+if (!preg_match($password_regex, $newPass)) {
     echo json_encode(['success' => false, 'error' => "New Password doesn't meet criteria"]);
 }
 

@@ -195,9 +195,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     console.log('clicked');
 
+
+
+
     //Send Request to Update Password in Database on Click 
     const userId = changePassModal.getAttribute('data-user-id');
     const changePassBtn = changePassModal.querySelector('#add-filter-btn');
+    const logOutModal = document.querySelector('.change-pass-log-out');
+
+    //Change Password functionality and Force Log out
+    if (localStorage.getItem('passwordChanged') === 'true') {
+        logOutModal.style.display = 'block';
+    }
+
+
     changePassBtn.addEventListener('click', async () => {
         const currentPassword = oldPasswordInput.value;
         const newPassword = newPasswordInput.value;
@@ -205,7 +216,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const userId = changePassModal.getAttribute('data-user-id');
     
         if (newPassword !== confirmPassword) {
-            alert("New Passwords do not match");
+            changePassModal.querySelector('.change-pass-error').innerHTML = "New Passwords do not match.";
+            return;
+        }
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{12,}$/;
+    
+        if (!passwordRegex.test(newPassword)) {
+            changePassModal.querySelector('.change-pass-error').innerHTML = "New Password doesn't meet the criteria.";
             return;
         }
     
@@ -226,15 +244,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const responseData = await response.json(); 
     
             if (responseData.success) {
-                alert("Password Changed Successfully");
+                localStorage.setItem('passwordChanged', 'true');
+                changePassModal.style.display = 'none';
+                logOutModal.style.display = 'block';
             } else {
-                alert("Error Changing Password: " + responseData.error);
+                localStorage.setItem('passwordChanged', 'false');
+                changePassModal.querySelector('.change-pass-error').innerHTML = responseData.error;
             }
     
         } catch (error) {
             console.log("Error updating password", error);
         }
     });
+
+
+    const forceLogOutBtn = logOutModal.querySelector('.log-out-pass-btn');
+    forceLogOutBtn.addEventListener('click', () => {
+        localStorage.removeItem('passwordChanged');
+        window.location.href = "logout.php";
+    })
+
+
 
 
 

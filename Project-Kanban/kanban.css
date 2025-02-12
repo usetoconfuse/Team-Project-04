@@ -568,7 +568,8 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db  {
-    margin: 0.2rem 8rem 2rem 8rem;
+    width: 60%;
+    margin: 1rem auto;
     padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
     color: white;

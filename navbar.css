@@ -513,6 +513,11 @@ nav {
     display: none;
 }
 
+.change-pass-log-out .modal-body {
+    padding-bottom: 0.6rem !important;
+}
+
+
 
 
 @media (max-width: 1480px) {

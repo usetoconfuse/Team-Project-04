@@ -240,11 +240,27 @@ if ($_SESSION['role'] !== 'Employee') {
                         placeholder=" Confirm your old password" required>
                 </div>
             </form>
+            <p class="change-pass-error"></p>
             <div class="task-submit-buttons">
                 <a class="change-pass-btn" id="add-filter-btn">
                     Change Password
                     <i class="fa fa-arrow-right"></i>
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Change Password Force Log Out Modal-->
+    <div class="modal change-pass-log-out" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <p>Password Changed Successfully</p>
+            </div>
+            <div class="modal-body">
+                <p>Password successfully changed. You are required to log back in again with your new password.</p>
+                <div class="task-submit-buttons">
+                    <a class="log-out-pass-btn black-btn" id="add-filter-btn">Go To Login<i class="fa fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
     </div>
