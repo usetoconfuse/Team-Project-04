@@ -1,5 +1,5 @@
 // Created by Quinn Little 07/02/2025
-// Updated by Toby Tischler 09/02/2025
+// Updated by Toby Tischler 12/02/2025
 
 
 // Object that stores the user details used by the page
@@ -10,15 +10,10 @@ const userDetails = {};
 var weekhrsansd = new Chart(document.getElementById('userStats-weekHrsContainerGraph'));
 
 // Populate page when a user is selected
-
 async function PopulateUserStatsPage() {
 
-    //Get user ID from URL
-    const params = new URLSearchParams(window.location.search);
-    const userID = params.get('user');
-
     //Fetch full user details from ID
-    await(fetchUserDetails(userID));
+    await(fetchUserDetails());
 
     //Fetch all tasks of a user
     await(fetchUserTaskTable());
@@ -36,8 +31,12 @@ async function PopulateUserStatsPage() {
 };
 
 //Fetch user details for user object
-async function fetchUserDetails(userID) {
+async function fetchUserDetails() {
     try {
+        //Get user ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const userID = params.get('user');
+        
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsGetUserInfoQuery.php?ID=' + userID);
         console.log("1: ", response);
