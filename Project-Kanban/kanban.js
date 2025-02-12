@@ -210,6 +210,14 @@ async function getKanbanData(userID, projectID, filters={}) {
     const allKanbanData = await response.json();
     generateCard(allKanbanData);
 
+    // Update the count display elements in the headers
+    const cardCounts = {
+      "To Do": document.querySelector("#proj-kanban-content #kanban-to-do").children.length,
+      "In Progress": document.querySelector("#proj-kanban-content #kanban-in-progress").children.length,
+      "Completed": document.querySelector("#proj-kanban-content #kanban-completed").children.length
+    };
+    changeProjectsCount(cardCounts);
+
   } catch (error) {
     console.log("Fetch Issue",error);
   }
@@ -217,6 +225,7 @@ async function getKanbanData(userID, projectID, filters={}) {
       
 
 function generateCard(kanbanData) {
+  console.log('Generate card being called!')
   const kanbanColumns = {
     "To Do": document.querySelector("#proj-kanban-content #kanban-to-do"),
     "In Progress": document.querySelector("#proj-kanban-content #kanban-in-progress"),
@@ -225,11 +234,6 @@ function generateCard(kanbanData) {
 
   Object.values(kanbanColumns).forEach(column => column.innerHTML = ""); //clear columns
   
-  const cardCounts = {
-    "To Do": 0,
-    "In Progress": 0,
-    "Completed": 0
-  };
 
   kanbanData.forEach(task => {
     const taskCard = document.createElement("div");
@@ -455,8 +459,6 @@ function generateCard(kanbanData) {
     kanbanColumns[task.Status]?.appendChild(taskCard);
     
 
-    // Increment the count for the respective column
-    cardCounts[task.Status]++;
      //Due Date dot colour 
      const dueDateDot = viewTaskModal.querySelector('.modal-task-due-date .task-indicator-circle');
      if (taskCard.id === 'kanban-task-overdue') {
@@ -526,7 +528,7 @@ function generateCard(kanbanData) {
 
       
     });
-    changeProjectsCount(cardCounts);
+    
 
   })
 
