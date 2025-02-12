@@ -125,5 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentPage) {
         openPage(currentPage);
     }
+
+
+    const changePassBtn = document.querySelector('.top-navbar-right .change-password');
+    const changePassModal = document.querySelector('#change-password-modal');
+    changePassBtn.addEventListener('click', () => {
+        changePassModal.style.display = 'block';
+    })
 })
 

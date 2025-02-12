@@ -57,6 +57,11 @@ if ($_SESSION['role'] !== 'Employee') {
         </div>
 
         <div class="top-navbar-right">
+            <a class="change-password">
+                <p>Change Password</p>
+            </a>
+
+
             <div class="user-profile">
                 <div class="user-profile-left">
                     <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
@@ -182,6 +187,54 @@ if ($_SESSION['role'] !== 'Employee') {
 
         </section>
     </section>
+
+    <div class="modal" id="change-password-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <p>Change Password</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <form id="change-password-modal-form" class="modal-body">
+                <div class="input-container">
+                    <div class="password-label">
+                        <label>Enter Old Password<span>*</span></label>
+                        <i class="fa fa-solid fa-eye-slash"></i>
+                    </div>
+
+                    <input type="password" name="old_password" class="text-input" id="passwordInput"
+                        placeholder=" Enter your old password">
+                </div>
+
+                <div class="input-container">
+                    <div class="password-label">
+                        <label>Enter New Password<span>*</span></label>
+                        <i class="fa fa-solid fa-eye-slash"></i>
+                    </div>
+
+                    <input type="password" name="new_password" class="text-input" id="passwordInput"
+                        placeholder=" Enter your new password">
+                </div>
+
+                <div class="input-container">
+                    <div class="password-label">
+                        <label>Confirm New Password<span>*</span></label>
+                        <i class="fa fa-solid fa-eye-slash"></i>
+                    </div>
+
+                    <input type="password" name="old_password" class="text-input" id="passwordInput"
+                        placeholder=" Confirm your old password">
+                </div>
+            </form>
+            <div class="task-submit-buttons">
+                <a class="add-filter-btn" id="add-filter-btn">
+                    Change Password
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="navbar.js"></script>
     <script type="module" src="Project-Kanban/kanban.js"></script>

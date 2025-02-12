@@ -241,6 +241,40 @@ thead, tbody {
 }
 
 
+/*===Change Password===*/
+#change-password-modal .modal-box {
+    padding-bottom: 0.6rem;
+}
+
+#change-password-modal .password-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#change-password-modal .password-label i {
+    font-size: 12.6px;
+}
+
+
+#change-password-modal .text-input{
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: 10px;
+    font-family: "Avenir Next";
+    font-size: 12px;
+    margin-top: 5px;
+    border: 1px solid black;
+    appearance: none;
+    padding: 0.6rem 0.6rem;
+}
+
+#change-password-modal form {
+    padding-bottom: 1rem;
+}
+
+
+
 @media (max-width: 1500px) {
     .emp-dash-top {
         grid-template-columns: 1fr;
