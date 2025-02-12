@@ -582,15 +582,15 @@ async function updateTaskStatus(taskID, newStatus) {
 function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
   if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
     if (task.id === 'kanban-task-overdue') {
-      kanbanCardDueDate.style.backgroundColor = '#E6757E';
-      kanbanCardDueDate.style.color = 'white';
+      kanbanCardDueDate.style.backgroundColor = '#ffcdd2';
+      kanbanCardDueDate.style.color = '#c62828';
     } else {
       kanbanCardDueDate.style.backgroundColor = '#F5F5F5';
       kanbanCardDueDate.style.color = '#656565';
     }
   } else if (currentSectionId === 'kanban-completed') {
-    kanbanCardDueDate.style.backgroundColor = '#ADDA9D';
-    kanbanCardDueDate.style.color = 'white';
+    kanbanCardDueDate.style.backgroundColor = '#c8e6c9';
+    kanbanCardDueDate.style.color = '#388e3c';
   }
 
 }
