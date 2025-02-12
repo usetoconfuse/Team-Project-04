@@ -675,104 +675,18 @@ backToProjectsBtn.addEventListener('click', () => {
 
 
 //====Add Task Modal  
-const addTaskBtn = document.querySelectorAll('.add-task-btn')
+const addTaskBtn = document.querySelector('#proj-kanban-content .add-task-btn')
+const addTaskModal = document.querySelector('#proj-kanban-content .add-task-modal')
+const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
 
-addTaskBtn.forEach(btn => {
-
-  const addTaskModal = document.createElement('div');
-  addTaskModal.classList.add('modal', 'add-task-modal')
-  addTaskModal.innerHTML = `
-    <div class="modal-box">
-        <!--Header-->
-        <div class="modal-header">
-            <p>Add Task</p>
-            <div class="close-modal-btn">
-                <i class="fa-solid fa-x"></i>
-            </div>
-        </div>
-        <!--Body-->
-        <form class="modal-body">
-            <!--Title and Description-->
-            <div class="task-title-form">
-                <label for="task-title">Title</label>
-                <input type="text" id="task-title" name="task-title">
-            </div>
-            <div class="task-description-form">
-                <label for="task-description">Description</label>
-                <textarea type="text" id="task-description" name="task-description"></textarea>
-            </div>
-            <!--Dropdowns-->
-            <div class="task-dropdowns-form">
-                <!--Choose User-->
-                <div class="task-dropdown task-dropdown-user">
-                    <label for="user">Employee</label>
-                    <div class="task-dropdown-select-options">
-                        <div class="task-dropdown-user-icon task-dropdown-icon">
-                            <i class="fa fa-solid fa-user"></i>
-                        </div>
-                        <select name="user" id="user">
-                            <option value="" selected disabled hidden>Choose User</option>
-                            <option value="jlittle">John Little</option>
-                            <option value="slarkin">Sandra Larkin</option>
-                            <option value="ncage">Nick Cage</option>
-                            <option value="ssmith">Sally Smith</option>
-                        </select>
-                    </div>  
-                </div>
-                <!--Choose Priority-->
-                <div class="task-dropdown task-dropdown-priority">
-                    <label for="priority">Priority</label>
-                    <div class="task-dropdown-select-options">
-                        <div class="task-dropdown-priority-icon task-dropdown-icon">
-                            <i class="fa fa-solid fa-exclamation"></i>
-                        </div>
-                        <select name="priority" id="priority">
-                            <option value="" selected disabled hidden>Choose Priority</option>
-                            <option value="no priority">No Priority</option>
-                            <option value="low priority">Low Priority</option>
-                            <option value="medium priority">Medium Priority</option>
-                            <option value="high priority">High Priority</option>
-                        </select>
-                    </div>  
-                </div>
-                <!--Choose Due Date-->
-                <div class="task-dropdown task-dropdown-date">
-                    <label for="date">Due Date</label>
-                    <div class="task-dropdown-select-options">
-                        <div class="task-dropdown-date-icon task-dropdown-icon">
-                            <i class="fa fa-regular fa-calendar"></i>
-                        </div>
-                        <input type="date" name="date" id="date-input">
-                    </div>  
-                </div>
-            </div>
-            <!--Add Attachments-->
-            <div class="task-upload-form">
-                <label for="task-upload">Upload Attachments</label>
-                <input type="file" id="upload" name="upload" multiple>
-            </div>
-        </form>
-        <div class="task-submit-buttons">
-            <div class="add-task-btn">
-                Add Task
-                <i class="fa fa-arrow-right"></i>
-            </div>
-        </div>
-    </div>
-`
-
-  document.body.appendChild(addTaskModal);
-
-  const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
-
-  btn.addEventListener('click', () => {
-    addTaskModal.style.display = 'flex';
-  })
-  closeAddTaskModal.addEventListener('click', () => {
-    addTaskModal.style.display = 'none';
-  })
-
+addTaskBtn.addEventListener('click', () => {
+  addTaskModal.style.display = 'flex';
 })
+closeAddTaskModal.addEventListener('click', () => {
+  addTaskModal.style.display = 'none';
+})
+
+
 
 //Filter Modal Functionality
 const filterTaskModal = document.querySelector("#proj-kanban-content #filter-modal");

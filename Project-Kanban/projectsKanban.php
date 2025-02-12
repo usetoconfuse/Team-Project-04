@@ -1,4 +1,6 @@
-<div id="proj-kanban-content" class="kanban-content kanban-content-project" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="proj-kanban-content" class="kanban-content kanban-content-project"
+    data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>"
+    data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro">
         <div class="project-txt">
@@ -100,7 +102,7 @@
             <!--Kanban Body-->
             <div class="kanban-body open" id='kanban-to-do'>
 
-               
+
             </div>
         </div>
 
@@ -114,7 +116,7 @@
             </div>
             <!--Kanban Body-->
             <div class="kanban-body" id='kanban-in-progress'>
-               
+
             </div>
         </div>
 
@@ -148,8 +150,8 @@
             <!--Body-->
             <form id="filter-modal-form" class="modal-body">
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
-                   
-                
+
+
                     <!--DropDown 1-->
                     <div class="task-dropdown task-dropdown-priority">
                         <label for="priority">Priority</label>
@@ -228,6 +230,88 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal add-task-modal">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+                <p>Add Task</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <!--Body-->
+            <form class="modal-body">
+                <!--Title and Description-->
+                <div class="task-title-form">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" name="task-title">
+                </div>
+                <div class="task-description-form">
+                    <label for="task-description">Description</label>
+                    <textarea type="text" id="task-description" name="task-description"></textarea>
+                </div>
+                <!--Dropdowns-->
+                <div class="task-dropdowns-form">
+                    <!--Choose User-->
+                    <div class="task-dropdown task-dropdown-user">
+                        <label for="user">Employee</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-user-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-user"></i>
+                            </div>
+                            <select name="user" id="user">
+                                <option value="" selected disabled hidden>Choose User</option>
+                                <option value="jlittle">John Little</option>
+                                <option value="slarkin">Sandra Larkin</option>
+                                <option value="ncage">Nick Cage</option>
+                                <option value="ssmith">Sally Smith</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Choose Priority-->
+                    <div class="task-dropdown task-dropdown-priority">
+                        <label for="priority">Priority</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-priority-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-exclamation"></i>
+                            </div>
+                            <select name="priority" id="priority">
+                                <option value="" selected disabled hidden>Choose Priority</option>
+                                <option value="no priority">No Priority</option>
+                                <option value="low priority">Low Priority</option>
+                                <option value="medium priority">Medium Priority</option>
+                                <option value="high priority">High Priority</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Choose Due Date-->
+                    <div class="task-dropdown task-dropdown-date">
+                        <label for="date">Due Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="date" id="date-input">
+                        </div>
+                    </div>
+                </div>
+                <!--Add Attachments-->
+                <div class="task-upload-form">
+                    <label for="task-upload">Upload Attachments</label>
+                    <input type="file" id="upload" name="upload" multiple>
+                </div>
+            </form>
+            <div class="task-submit-buttons">
+                <div class="add-task-btn">
+                    Add Task
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 </div>
