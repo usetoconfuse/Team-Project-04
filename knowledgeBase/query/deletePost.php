@@ -12,8 +12,8 @@ WHERE Post_ID = '$postID'
 ";
 
 if (!mysqli_query($conn, $sql)) {
-    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
+    //die("Error deleting from Knowledgebase_Posts: " . mysqli_error($conn));
+    echo "Error deleting from Knowledgebase_Posts: " . mysqli_error($conn);
     exit();
 }
 
