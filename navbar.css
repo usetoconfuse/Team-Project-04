@@ -517,6 +517,10 @@ nav {
     padding-bottom: 0.6rem !important;
 }
 
+.change-pass-error {
+    color: red;
+    margin-left: 1rem;
+}
 
 
 
