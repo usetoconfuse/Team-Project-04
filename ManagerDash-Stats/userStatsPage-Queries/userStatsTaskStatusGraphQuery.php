@@ -12,22 +12,22 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select all To Do tasks for that user
-    $queries = ["SELECT SUM(Task_ID) AS 'tasks'
+    $queries = ["SELECT COUNT(Task_ID) AS 'tasks'
     FROM tasks 
     WHERE tasks.Assignee_ID = '$userID'
     AND tasks.Status = 'To Do'
     ",
-    "SELECT SUM(Task_ID) AS 'tasks'
+    "SELECT COUNT(Task_ID) AS 'tasks'
     FROM tasks 
     WHERE tasks.Assignee_ID = '$userID'
     AND tasks.Status = 'In Progress'
     ",
-    "SELECT SUM(Task_ID) AS 'tasks'
+    "SELECT COUNT(Task_ID) AS 'tasks'
     FROM tasks 
     WHERE tasks.Assignee_ID = '$userID'
     AND tasks.Status = 'Completed'
     ", 
-    "SELECT SUM(Task_ID) AS 'tasks'
+    "SELECT COUNT(Task_ID) AS 'tasks'
     FROM tasks 
     WHERE tasks.Assignee_ID = '$userID'
     AND tasks.Stuck = 1
