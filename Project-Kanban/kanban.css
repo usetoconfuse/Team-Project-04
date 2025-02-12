@@ -230,8 +230,9 @@
 
 .kanban-card-top {
     display: flex;
-    align-items:center;
+
     justify-content: space-between;
+    flex-direction: column-reverse;
     margin-bottom: 1rem;
 }
 
@@ -243,6 +244,21 @@
 
 .kanban-card-top-details i {
     display: none;
+}
+
+
+.kanban-card-top p {
+    align-self: flex-start;
+}
+
+.kanban-card-top-details p {
+    text-align: left;
+}
+
+
+.kanban-card-top .kanban-card-priority {
+    align-self: flex-start;
+    margin-bottom: 10px;
 }
 
 
@@ -734,20 +750,6 @@ input[type="file"]::-webkit-file-upload-button {
         margin-bottom: 1.4rem;
     }
 
-    .kanban-card-top {
-        flex-direction: column-reverse;
-    }
-
-   
-    .kanban-card-top p {
-        align-self: flex-start;
-    }
-    
-
-    .kanban-card-top .kanban-card-priority {
-        align-self: flex-start;
-        margin-bottom: 10px;
-    }
 
     .kanban-card-bottom {
         flex-direction: column-reverse;
