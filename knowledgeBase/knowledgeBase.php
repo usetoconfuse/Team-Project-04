@@ -213,7 +213,7 @@
                 </div>
             </div>
         </div>
-        <div id="delete-post-modal" class="modal">
+        <div id="delete-post-modal" deleted-post-id="" class="modal">
             <div class="modal-box">
                 <!--Header-->
                 <div class="modal-header">

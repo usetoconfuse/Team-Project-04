@@ -168,7 +168,7 @@ const renderAllPosts = async (posts) => {
 
         // Create the HTML for the post
         const postHTML = `
-      <div class="kb-post kb-flex-col" id="post-${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
+      <div class="kb-post kb-flex-col" id="post-${post.Post_ID}" data-id="${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
         <div class="kb-flex-row kb-flex-wrap">
           <h2 class="kb-title-header">${post.Title}</h2>
           <div class="kb-flex-row kb-flex-wrap kb-post-badges">
@@ -241,9 +241,13 @@ const updatePosts = async () => {
 
         const deleteButton = post.querySelector(".kb-delete-post-button");
         if (deleteButton) {
-            deleteButton.addEventListener("click", () => {
+            deleteButton.addEventListener("click", (event) => {
+                const postElement = event.target.closest(".kb-post");
+                let postId = postElement.getAttribute("data-id");
+                console.log(`post id is : ${postId}`);
+                const deleteElement = document.getElementById('delete-post-modal');
+                deleteElement.setAttribute('deleted-post-id',postId)
                 openDeletePostModal(postId);
-
             });
         }
 
@@ -341,9 +345,28 @@ var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 const deletePostModal = document.getElementById('delete-post-modal');
 var [closeDeletePostModal, openDeletePostModal] = makeModal(deletePostModal);
 
-document.getElementById('kb-delete-post-modal-confirm').addEventListener('click', () =>{
+document.getElementById('kb-delete-post-modal-confirm').addEventListener('click',  async() =>{
+    //need to find a way to actaully get the post id
+    const deletedElement = document.getElementById('delete-post-modal');
+    const postId = deletedElement.getAttribute('deleted-post-id');
 
-    //add code to delte post
+    try {
+        const response = await doRequest("GET", "deletePost", { postId }, null);
+        console.log("Delete response:", response);
+        
+        if(response && response.success){
+            console.log("Post deleted successful");
+            closeDeletePostModal();
+            // Remove the deleted post from the DOM
+            const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
+            if (postElement) postElement.remove();
+
+        }else{
+            console.error("Failed to delete post", response);
+        }
+    } catch (error) {
+        console.error("Error deleting post:", error);
+    }
 });
 
 
