@@ -127,10 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Show and Hide Password Modal
-    const changePassBtn = document.querySelector('.top-navbar-right .change-password');
+    const openChangePassBtn = document.querySelector('.top-navbar-right .change-password');
     const closeChangePassBtn = document.querySelector('#change-password-modal .close-modal-btn')
     const changePassModal = document.querySelector('#change-password-modal');
-    changePassBtn.addEventListener('click', () => {
+    openChangePassBtn.addEventListener('click', () => {
         changePassModal.style.display = 'block';
     })
     closeChangePassBtn.addEventListener('click', () => {
@@ -193,6 +193,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
     }
+    console.log('clicked');
+
+    //Send Request to Update Password in Database on Click 
+    const userId = changePassModal.getAttribute('data-user-id');
+    const changePassBtn = changePassModal.querySelector('#add-filter-btn');
+    changePassBtn.addEventListener('click', async () => {
+        const currentPassword = oldPasswordInput.value;
+        const newPassword = newPasswordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        const userId = changePassModal.getAttribute('data-user-id');
+    
+        if (newPassword !== confirmPassword) {
+            alert("New Passwords do not match");
+            return;
+        }
+    
+        try {
+            const url = 'update-password-db.php';
+            const data = {
+                userID: userId,
+                currentPass: currentPassword,
+                newPass: newPassword,
+            };
+            const params = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            };
+    
+            const response = await fetch(url, params);
+            const responseData = await response.json(); 
+    
+            if (responseData.success) {
+                alert("Password Changed Successfully");
+            } else {
+                alert("Error Changing Password: " + responseData.error);
+            }
+    
+        } catch (error) {
+            console.log("Error updating password", error);
+        }
+    });
+
+
+
 
 
 })
