@@ -6,7 +6,7 @@
             <p>View all your tasks below.</p>
         </div>
 
-        <div class="vertical-bar"></div>
+        <!--<div class="vertical-bar"></div>
 
         <div class="project-stats">
             <div class="project-progress">
@@ -30,7 +30,7 @@
         </div>
 
 
-        <div class="vertical-bar"></div>
+        <div class="vertical-bar"></div>-->
 
         <div class="projects-intro-buttons">
             <div class="order-by-dropdown">
