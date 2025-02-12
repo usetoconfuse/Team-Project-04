@@ -100,61 +100,52 @@ function populatePersonalTasks(tasks) {
 
 
     
-    // View Task Modal content
-    viewTaskModal.innerHTML = `
-                                  <div class="modal-box view-task-modal-box">
-                                            <!--Header-->
-                                            <div class="modal-header">
-                                                <p class="modal-task-title">${task.Name}</p>
-                                                <div class="close-modal-btn">
-                                                    <i class="fa-solid fa-x"></i>
-                                                </div>
-                                            </div>
-                                            <!--Body-->
-                                            <div class="modal-body">
-                                              <p class="modal-task-description">${task.Description}</p>
+   // View Task Modal content
+   viewTaskModal.innerHTML = `
+   <div class="modal-box view-task-modal-box">
+             <!--Header-->
+             <div class="modal-header">
+                 <p class="modal-task-title">${task.Name}</p>
+                 <div class="close-modal-btn">
+                     <i class="fa-solid fa-x"></i>
+                 </div>
+             </div>
+             <!--Body-->
+             <div class="modal-body">
+               <p class="modal-task-description">${task.Description}</p>
 
-                                              <div class="modal-task-info">
-                                                  <div class="modal-task-info-section-top">
-                                                      <p class="task-modal-title">Status</p>
-                                                      <div class="status-box">
-                                                          <div class="task-indicator-circle"></div>
-                                                          <p>${task.Status}</p>
-                                                      </div>
-                                                  </div>
+               <div class="modal-task-info">
+                   <div class="modal-task-info-section-top">
+                       <p class="task-modal-title">Status</p>
+                       <div class="status-box">
+                           <div class="task-indicator-circle"></div>
+                           <p>${task.Status}</p>
+                       </div>
+                   </div>
 
-                                                  <div class="modal-task-info-section-top">
-                                                      <p class="task-modal-title">Priority</p>
-                                                      <div class="priority-box">
-                                                          <div class="task-indicator-circle"></div>
-                                                          <p>${task.Priority}</p>
-                                                      </div>
-                                                  </div>
+                   <div class="modal-task-info-section-top">
+                       <p class="task-modal-title">Priority</p>
+                       <div class="priority-box">
+                           <div class="task-indicator-circle"></div>
+                           <p>${task.Priority}</p>
+                       </div>
+                   </div>
 
-                                              </div>
+                    <div class="modal-task-info-section-top">
+                       <p class="task-modal-title">Due Date</p>
+                       <div class="status-box">
+                           <div class="task-indicator-circle"></div>
+                           <p>${task.Due_Date}</p>
+                       </div>
+                   </div>
 
-                                              <div class="modal-task-info">
-                                                
-                                                  <div class="modal-task-info-section">
-                                                      <div class="modal-task-info-section-header">
-                                                          <i class="fa fa-regular fa-calendar"></i>
-                                                          <p>Due date</p>
-                                                      </div>
-                                                      <div class="modal-task-info-section-body modal-task-due-date">
-                                                          <div class="task-indicator-circle"></div>
-                                                          <p>${task.Due_Date}</p>
-                                                      </div>
-                                                  </div>
+               </div>
 
-                                       
-                                              </div>
+ 
 
-                                
-
-                                            </div>
-                                        </div>
-    `;
-
+             </div>
+         </div>
+`;
     
 
     document.body.appendChild(viewTaskModal);
