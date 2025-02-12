@@ -68,6 +68,11 @@ function populatePersonalTasks(tasks) {
     taskCard.setAttribute('data-task-title', task.Name);
 
 
+    if (taskIsOverdue(task.Due_Date)) {
+      taskCard.id = "kanban-task-overdue";
+    }
+
+
     const fullTaskDescription = task.Description;
     const taskDescriptionWords = fullTaskDescription;
     const previewTaskDescription = taskDescriptionWords.substring(0, 60) + '...';
@@ -181,6 +186,10 @@ function populatePersonalTasks(tasks) {
       viewTaskModal.style.display = 'none';
     });
 
+    const kanbanCardDueDate = taskCard.querySelector('.due-date');
+    const currentSectionId = taskCard.parentElement.id;
+    validate_date_icon(taskCard, kanbanCardDueDate, currentSectionId)
+
      //Move button and Update Task Status in Database
      const moveTaskDropDown = viewTaskModal.querySelector('.move-task-dropdown select');
      const moveTaskBtn = viewTaskModal.querySelector('.move-task-dropdown .move-task-confirm');
@@ -201,6 +210,8 @@ function populatePersonalTasks(tasks) {
          'kanban-in-progress': 'In Progress',
          'kanban-completed': 'Completed'
        }[newSection];
+
+       validate_date_icon(taskCard, kanbanCardDueDate, newSection)
        
        await updatePersonalTaskStatus(task.PersonalTask_ID, newStatus);
  
@@ -431,6 +442,26 @@ addTaskBtn.addEventListener('click', () => {
 closeAddTaskModal.addEventListener('click', () => {
   addTaskModal.style.display = 'none';
 })
+
+function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
+  if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
+    if (task.id === 'kanban-task-overdue') {
+      kanbanCardDueDate.style.backgroundColor = '#ffcdd2';
+      kanbanCardDueDate.style.color = '#c62828';
+    } else {
+      kanbanCardDueDate.style.backgroundColor = '#F5F5F5';
+      kanbanCardDueDate.style.color = '#656565';
+    }
+  } else if (currentSectionId === 'kanban-completed') {
+    kanbanCardDueDate.style.backgroundColor = '#c8e6c9';
+    kanbanCardDueDate.style.color = '#388e3c';
+  }
+
+}
+
+function taskIsOverdue(dueDate) {
+  return new Date(dueDate) < new Date();
+}
 
 //Sending data whena adding task to data base 
 async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userId) {
