@@ -197,17 +197,17 @@ if ($_SESSION['role'] !== 'Employee') {
                 </div>
             </div>
             <form id="change-password-modal-form" class="modal-body">
-                <div class="input-container">
+                <div class="input-container password-old">
                     <div class="password-label">
                         <label>Enter Old Password<span>*</span></label>
                         <i class="fa fa-solid fa-eye-slash"></i>
                     </div>
 
-                    <input type="password" name="old_password" class="text-input" id="passwordInput"
+                    <input type="password" name="old_password" class="text-input" id="oldPasswordInput"
                         placeholder=" Enter your old password">
                 </div>
 
-                <div class="input-container">
+                <div class="input-container password-new">
                     <div class="password-label">
                         <label>Enter New Password<span>*</span></label>
                         <i class="fa fa-solid fa-eye-slash"></i>
@@ -230,13 +230,13 @@ if ($_SESSION['role'] !== 'Employee') {
                 </div>
 
 
-                <div class="input-container">
+                <div class="input-container password-confirm">
                     <div class="password-label">
                         <label>Confirm New Password<span>*</span></label>
                         <i class="fa fa-solid fa-eye-slash"></i>
                     </div>
 
-                    <input type="password" name="old_password" class="text-input" id="passwordInput"
+                    <input type="password" name="old_password" class="text-input" id="confirmPasswordInput"
                         placeholder=" Confirm your old password">
                 </div>
             </form>

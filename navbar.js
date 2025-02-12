@@ -168,7 +168,31 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     });
 
+    //Show
+    const showOldPasswordBtn = document.querySelector('#change-password-modal .password-old .password-label i'); 
+    const oldPasswordInput = document.querySelector('#change-password-modal #oldPasswordInput');
+    showPassword(showOldPasswordBtn, oldPasswordInput);
 
+    const newPasswordInput = document.querySelector('#change-password-modal #newPasswordInput');
+    const showNewPasswordBtn = document.querySelector('#change-password-modal .password-new .password-label i'); 
+    showPassword(showNewPasswordBtn, newPasswordInput);
+
+    const confirmPasswordInput = document.querySelector('#change-password-modal #confirmPasswordInput');
+    const showConfirmPasswordBtn = document.querySelector('#change-password-modal .password-confirm .password-label i'); 
+    showPassword(showConfirmPasswordBtn, confirmPasswordInput);
+
+    function showPassword(showBtn, passInput) {
+        showBtn.addEventListener('click', () => {
+            showBtn.classList.toggle('fa-eye');
+            showBtn.classList.toggle('fa-eye-slash');
+
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+            } else {
+                passInput.type = 'password';
+            }
+        })
+    }
 
 
 })
