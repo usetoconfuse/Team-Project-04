@@ -31,6 +31,8 @@ async function PopulateUserStatsPage() {
 
     //Fetch task status graph
     fetchTaskStatusGraph();
+
+    fetchProjTimeGraph();
 };
 
 //Fetch user details for user object
@@ -327,34 +329,220 @@ function createTaskStatusGraph(currentTaskStatus) {
 
 
 
+    function calculateProjectDurations(projects) {
+        // Helper function to calculate duration in days
+        const calculateDuration = (start, end) => {
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            const diffInMs = endDate - startDate;
+            return diffInMs / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        };
+    
+        // Array to store the results
+        const result = [];
+        let xValArr = [];
+            let yValArr = [];
+    
+        for (let i = 0; i < projects.length; i++) {
+            const startDate = (projects[i].Start_Date).substring(0,10);
+            const endDate = (projects[i].Due_Date).substring(0,10);
+    
+            // Calculate duration of the current project
+            const duration = calculateDuration(startDate, endDate);
+    
+            // Determine when the next project starts relative to the previous one
+            if (i === 0) {
+                result.push({
+                    project: projects[i].Project_Title,
+                    startDate: startDate,
+                    endDate: endDate,
+                    duration: duration,
+                    sequentialStart: 0 // First project starts at 0
+                });
+            } else {
+                const previousEndDate = new Date(projects[i - 1].Due_Date);
+                const currentStartDate = new Date(startDate);
+                const overlap = (currentStartDate - previousEndDate) / (1000 * 60 * 60 * 24); // Difference in days
+                console.log("NANANANA ",overlap );
+                result.push({
+                    project: projects[i].Project_Title,
+                    startDate: startDate,
+                    endDate: endDate,
+                    duration: duration,
+                    sequentialStart: result[i - 1].sequentialStart + duration + overlap
+                });
+
+            }
+            console.log("resy:", result);
+
+            
 
 
+        }
+        
+        result.forEach(function(item) {
+            let miniTempArr = []
+            miniTempArr.push(item.sequentialStart);
+            miniTempArr.push((item.sequentialStart + item.duration));
+            xValArr.push(item.project);
+            yValArr.push(miniTempArr);
+        });
+        createProjTimeGraph(xValArr,yValArr);
+    
+    }    
+
+// fetch data for projTime chart
+async function fetchProjTimeGraph() {
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjTimeGraphQuery.php?ID=' + userDetails.id);
+        // console.log("4:", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        // console.log(data);
+
+        if (data.length > 0) {
+            console.log(data);
+
+            let yAxProj = [];
+            let xAxDates = []; //store: [startDate, endDate] pairs
+            let durArr = [];
+            calculateProjectDurations(data);
+
+
+
+            // data.forEach(function(item) {
+            //     let tempDateArr = [];
+            //     yAxProj.push(item.Project_Title);
+            //     tempDateArr.push((item.Start_Date).substring(0,10));
+            //     tempDateArr.push((item.Due_Date).substring(0,10));
+            //     dur = calculateDuration((item.Start_Date).substring(0,10), (item.Due_Date.substring(0,10)));
+            //     durArr.push(dur);
+            //     xAxDates.push(tempDateArr);
+
+            // });
+            // console.log("yax ", yAxProj);
+            // console.log("xax ", xAxDates);
+
+            // createProjTimeGraph(yAxProj, durArr) 
+            //generateProjTimeGraph(data);
+           // console.log(statusTaskArr)
+            //createTaskStatusGraph(statusTaskArr);
+
+        } else {
+           // createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
+        }
+} catch (error) {
+    console.error('Error:', error); // Log any errors that occur
+}
+};
 //function to create chart
 
-function createWeeklyHrsGraph(dailyManHrs) {
-    const yValues=['2','3','4','5','6','7','8'];
-    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+function createProjTimeGraph(yAxProj, durArr) {
 
-    weekhrs = document.getElementById('userStats-overlapContainerGraph');
+    weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
 
     const weekhrsansd = new Chart(weekhrs, {
     type: "bar",
     data: {
-        labels: daysOfWeek,
+        labels: yAxProj,
         datasets: [{
-        backgroundColor:"rgba(0,0,255,1.0)",
-        borderColor: "rgba(0,0,255,0.1)",
-        data: yValues
+        backgroundColor:"rgba(255, 242, 0, 1)",
+        borderColor: "rgba(255, 242, 0, 1)",
+        data: durArr
         }]
     },
-    options:{
+options: {
     responsive: true,
-    }
+    plugins: {
+        title: {
+            display: true,
+            text: 'Duration Graph'
+        }
+    },
+    scales: {
+        x: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Duration' // The x-axis represents the duration
+            }
+        },
+        y: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Project' // The y-axis represents the projects
+            }
+        }
+    }}
     });
 }
 
 
-createWeeklyHrsGraph();
+
+// function generateProjTimeGraph(data) {
+//     ctx = document.getElementById('userStats-overlapContainerGraph');
+    
+//     const weekhrsansd = new Chart(ctx, {
+//     type: "scatter",
+//     data: {
+//         labels: data.map(entry => `${(entry.Start_Date).substring(0,10)} - ${(entry.Due_Date).substring(0,10)}`), //yAxProj, // y-AXIS, PROJECTS
+//         datasets: [{
+//             label: "projects",
+//             data: data.map(entry => ({
+//                 x:(entry.Start_Date).substring(0,10),
+//                 y: entry.Project_Title
+//             })),
+//             backgroundColor:"rgba(0,0,255,1.0)",
+//             borderColor: "rgba(0,0,255,0.1)",
+//             borderWidth: 1
+//              // *ARRAY OF DATES FROM EARLIEST START TO LATEST END*========
+//         }]
+//     },
+//     options: {
+//         // indexAxis: 'y',
+//         responsive: true,
+//         scales: {
+//             x: {
+//                 type: 'time',
+//                 time: {
+//                     unit: 'day',
+//                     tooltipFormat: 'yyyy-MM-dd',
+//                     parser: 'yyyy-MM-dd' // Capitalise Month so it isn't seen as minutes.
+//                 },
+//                 title: {
+//                     display: true,
+//                     text: 'Date Range'
+//                 }
+//             },
+//             y: {
+//                 type: 'category',
+//                 labels: [... new Set(data.map(entry => entry.Project_Title))],
+//                 title: {
+//                     display: true,
+//                     text: 'Projects'
+//                 }
+//             }
+//         },
+//         plugins: {
+//             tooltip: {
+//                 callbacks: {
+//                     title: function(tooltipItem) {
+//                         return `${tooltipItem[0].raw.x} - ${tooltipItem[0].raw.y}`;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     });
+// }
+//createWeeklyHrsGraph();
 //graph dropdown
 const userGraphDropdown = document.querySelector('#userStats-chooseGraph');
 const weekHrsCont = document.querySelector('#userStats-weekHrsContainer');
@@ -379,4 +567,5 @@ userGraphDropdown.addEventListener('change', () => {
     }
     updateGraphAxes();
 });
+
 
