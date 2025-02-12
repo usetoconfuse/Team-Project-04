@@ -8,11 +8,12 @@ $userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 $priority = isset($_GET['priorityValue']) ? $_GET['priorityValue'] : null;
 $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
 $orderBy = isset($_GET['orderByValue']) ? $_GET['orderByValue'] : null;
+
 $taskSQL = "SELECT * FROM personal_tasks WHERE User_ID = $userId";
 
 
 if (!empty($priority)) {
-    $taskSQL .= " AND Priority = '$priority'";  
+    $taskSQL .= " AND Priority = '$priority'";
 }
 
 if (!empty($date)) {
@@ -54,7 +55,7 @@ if ($orderBy !== 'None') {
             case 'Most Overdue':
                 $taskSQL .= " ORDER BY Due_Date ASC";
                 break;
-            default: 
+            default:
                 break;
         }
     }
@@ -73,5 +74,31 @@ while ($row = mysqli_fetch_array($taskResult, MYSQLI_ASSOC)) {
     $taskDataArray[] = $row;
 }
 
-echo json_encode($taskDataArray);
+
+//Count of each column number of tasks
+
+$countStatusSQL = "SELECT
+    SUM(CASE WHEN Status = 'To Do' THEN 1 ELSE 0 END) AS To_Do_Count,  
+    SUM(CASE WHEN Status = 'In Progress' THEN 1 ELSE 0 END) AS In_Progress_Count,  
+    SUM(CASE WHEN Status = 'Completed' THEN 1 ELSE 0 END) AS Completed_Count  
+FROM personal_tasks  
+WHERE User_ID = $userId
+GROUP BY User_ID;";
+
+
+$countStatusResult = mysqli_query($conn, $countStatusSQL);
+
+if (!$countStatusResult) {
+    die("Query failed for Task Results" . mysqli_error($conn));
+}
+
+$countDataArray = array();
+while ($row = mysqli_fetch_array($countStatusResult, MYSQLI_ASSOC)) {
+    $countDataArray[] = $row;
+}
+
+$allDataArray = array("count" => $countDataArray, "tasks" => $taskDataArray);
+
+
+echo json_encode($allDataArray);
 ?>

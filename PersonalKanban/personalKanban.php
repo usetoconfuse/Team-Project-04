@@ -59,7 +59,7 @@
         <!--Kanban Column-->
         <div class="kanban-section">
             <!--Kanban Header-->
-            <div class="kanban-header">
+            <div class="kanban-header" id="to-do-header">
                 <div class="kanban-header-txt">To Do</div>
                 <div class="kanban-header-no">4</div>
                 <i class="fa fa-solid fa-caret-up"></i>
@@ -73,7 +73,7 @@
         <!--Kanban Column-->
         <div class="kanban-section">
             <!--Kanban Header-->
-            <div class="kanban-header">
+            <div class="kanban-header" id="in-progress-header">
                 <div class="kanban-header-txt">In Progress</div>
                 <div class="kanban-header-no">3</div>
                 <i class="fa fa-solid fa-caret-down"></i>
@@ -87,7 +87,7 @@
         <!--Kanban Column-->
         <div class="kanban-section">
             <!--Kanban Header-->
-            <div class="kanban-header">
+            <div class="kanban-header" id="completed-header">
                 <div class="kanban-header-txt">Completed</div>
                 <div class="kanban-header-no">2</div>
                 <i class="fa fa-solid fa-caret-down"></i>

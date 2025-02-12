@@ -30,14 +30,26 @@ async function fetchPersonalData(userID, filters={}) {
     
       const personalTaskData = await response.json();
       console.log(personalTaskData);
-
-      populatePersonalTasks(personalTaskData)
+      const countData = personalTaskData.count[0];
+      populatePersonalTasks(personalTaskData.tasks)
+      changeCount(countData);
     } catch(error) {
       //console.log("Fetch Issue",error);
       //Show Error Card
     }
 }
 
+function changeCount(countData) {
+  const toDoSection = document.querySelector("#personal-kanban-content #to-do-header .kanban-header-no");
+  const inProgressSection = document.querySelector("#personal-kanban-content #in-progress-header .kanban-header-no");
+  const completedSection = document.querySelector("#personal-kanban-content #completed-header .kanban-header-no");
+
+
+  console.log(toDoSection)
+  toDoSection.innerHTML = countData.To_Do_Count;
+  inProgressSection.innerHTML = countData.In_Progress_Count;
+  completedSection.innerHTML = countData.Completed_Count;
+}
 
 
 
