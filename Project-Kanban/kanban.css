@@ -324,21 +324,39 @@
     margin-right: 10px;
 }
 
-.kanban-card-priority.high-priority {
-    background-color: #dd9592;
+.kanban-card-priority.high-priority, .priority-box.high-priority, .status-box.status-to-do-box {
+    background-color: #ffcdd2;
+    color: #c62828;
 }
 
-.kanban-card-priority.medium-priority {
-    background-color: #EAB385;
+.kanban-card-priority.medium-priority, .priority-box.medium-priority, .status-box.status-in-progress-box {
+    background-color:  #fff0c2;
+    color: #947c01;
 }
 
-.kanban-card-priority.low-priority {
-    background-color: #ADDA9D;
+.kanban-card-priority.low-priority, .priority-box.low-priority, .status-box.status-completed-box {
+    background-color: #c8e6c9;
+    color: #388e3c;
 }
 
 .kanban-card-priority.none-priority {
     background-color: #9A9A9A;
 }
+
+.priority-box .task-indicator-circle.high-priority, .task-indicator-circle.status-to-do-box {
+    background-color: red;
+}
+
+.priority-box .task-indicator-circle.medium-priority, .task-indicator-circle.status-in-progress-box {
+    background-color: orange;
+}
+
+.priority-box .task-indicator-circle.low-priority, .task-indicator-circle.status-completed-box {
+    background-color: green;
+}
+
+
+
 
 
 

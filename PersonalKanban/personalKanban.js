@@ -109,16 +109,16 @@ function populatePersonalTasks(tasks) {
                <div class="modal-task-info">
                    <div class="modal-task-info-section-top">
                        <p class="task-modal-title">Status</p>
-                       <div class="status-box">
-                           <div class="task-indicator-circle"></div>
+                       <div class="status-box status-${task.Status.toLowerCase().replace(" ", '-')}-box">
+                           <div class="task-indicator-circle status-${task.Status.toLowerCase().replace(" ", '-')}-box"></div>
                            <p>${task.Status}</p>
                        </div>
                    </div>
 
                    <div class="modal-task-info-section-top">
                        <p class="task-modal-title">Priority</p>
-                       <div class="priority-box">
-                           <div class="task-indicator-circle"></div>
+                       <div class="priority-box ${task.Priority.toLowerCase()}-priority">
+                           <div class="task-indicator-circle ${task.Priority.toLowerCase()}-priority"></div>
                            <p>${task.Priority}</p>
                        </div>
                    </div>

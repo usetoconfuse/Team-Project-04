@@ -268,23 +268,6 @@ function generateCard(kanbanData) {
     const viewTaskBtn = taskCard.querySelector('.kanban-card-bottom a');
     
     //===Fields from database for View Modal
-
-    const taskTitle = task.Name;
-
-
-    
-    const priorityElement = taskCard.querySelector('.kanban-card-priority');
-    let taskPriority = "";
-    if (task.Priority === "High") {
-      taskPriority = "High Priority";
-    } else if (task.Priority === "Medium") {
-      taskPriority = "Medium Priority";
-    } else if (task.Priority === "Low") {
-      taskPriority = "Low Priority";
-    } else if (task.Priority === "None") {
-      taskPriority = "No Priority";
-    }
-
     
 
     const fullTaskDescription = task.Description;
@@ -344,7 +327,7 @@ function generateCard(kanbanData) {
                                   <div class="modal-box view-task-modal-box">
                                             <!--Header-->
                                             <div class="modal-header">
-                                                <p class="modal-task-title">${taskTitle}</p>
+                                                <p class="modal-task-title">${task.Name}</p>
                                                 <div class="close-modal-btn">
                                                     <i class="fa-solid fa-x"></i>
                                                 </div>
@@ -358,17 +341,17 @@ function generateCard(kanbanData) {
                                               <div class="modal-task-info">
                                                   <div class="modal-task-info-section-top">
                                                       <p class="task-modal-title">Status</p>
-                                                      <div class="status-box">
-                                                          <div class="task-indicator-circle"></div>
+                                                      <div class="status-box status-${task.Status.toLowerCase().replace(" ", '-')}-box">
+                                                          <div class="task-indicator-circle status-${task.Status.toLowerCase().replace(" ", '-')}-box"></div>
                                                           <p>${task.Status}</p>
                                                       </div>
                                                   </div>
 
                                                   <div class="modal-task-info-section-top">
                                                       <p class="task-modal-title">Priority</p>
-                                                      <div class="priority-box">
-                                                          <div class="task-indicator-circle"></div>
-                                                          <p>${taskPriority}</p>
+                                                      <div class="priority-box ${task.Priority.toLowerCase()}-priority">
+                                                          <div class="task-indicator-circle ${task.Priority.toLowerCase()}-priority"></div>
+                                                          <p>${task.Priority} Priority</p>
                                                       </div>
                                                   </div>
 
@@ -459,41 +442,11 @@ function generateCard(kanbanData) {
 
     });
 
-  
-
-
 
     //Add Card and Modal to body
     document.body.appendChild(viewTaskModal);
     
     kanbanColumns[task.Status]?.appendChild(taskCard);
-    
-    //on load, set status in card
-    const statusBox = viewTaskModal.querySelector('.status-box');
-    const statusCircle = viewTaskModal.querySelector('.status-box .task-indicator-circle');
-    checkStatus(taskCard, statusBox, statusCircle)
-
-    //Move Task Click
-
-    
-    
-    //Priority Colours in modal 
-    const priorityBox = viewTaskModal.querySelector('.priority-box');
-    const priorityCircle = viewTaskModal.querySelector('.priority-box .task-indicator-circle');
-
-    if (task.Priority === "High") {
-      priorityBox.style.backgroundColor = "#dd9592";
-      priorityCircle.style.backgroundColor = "red";
-    } else if (task.Priority === "Medium") {
-      priorityBox.style.backgroundColor = "#EAB385";
-      priorityCircle.style.backgroundColor = "orange";
-    } else if (task.Priority === "Low") {
-      priorityBox.style.backgroundColor = "#ADDA9D";
-      priorityCircle.style.backgroundColor = "green";
-    } else if (task.Priority === "None") {
-      priorityBox.style.backgroundColor = "#F5F5F5";
-      priorityCircle.style.backgroundColor = "#8E8E91";
-    }
 
      //Due Date dot colour 
      const dueDateDot = viewTaskModal.querySelector('.modal-task-due-date .task-indicator-circle');
@@ -504,10 +457,6 @@ function generateCard(kanbanData) {
        dueDateDot.style.backgroundColor = "#ADDA9D";
      }
 
-   
-
-
-  
     //Closing and opening modal
     const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn');
 
@@ -519,9 +468,6 @@ function generateCard(kanbanData) {
     closeViewTaskModal.addEventListener('click', () => {
       viewTaskModal.style.display = 'none';
     });
-
-
-   
 
     const kanbanCardDueDate = taskCard.querySelector('.due-date');
     const currentSectionId = taskCard.parentElement.id;
@@ -539,7 +485,7 @@ function generateCard(kanbanData) {
       newSectionElement.insertBefore(taskCard, newSectionElement.firstChild);
       viewTaskModal.style.display = 'none';
 
-      checkStatus(taskCard, statusBox, statusCircle)
+
       validate_date_icon(taskCard, kanbanCardDueDate, newSection);
 
       let newStatus = {
@@ -632,28 +578,6 @@ async function updateTaskStatus(taskID, newStatus) {
 }
 
 
-
-function checkStatus(taskCard, statusBox, statusCircle) {
-  let taskStatus;
-  if (taskCard.parentElement.id === 'kanban-to-do') {
-    taskStatus = "To Do";
-    statusBox.style.backgroundColor = "#dd9592";
-    statusCircle.style.backgroundColor = "red";
-  } else if (taskCard.parentElement.id  === 'kanban-in-progress') {
-    taskStatus = "In Progress";
-    statusBox.style.backgroundColor = "#EAB385";
-    statusCircle.style.backgroundColor = "orange";
-  } else if (taskCard.parentElement.id  === 'kanban-completed') {
-    taskStatus = "Completed";
-    statusBox.style.backgroundColor = "#ADDA9D";
-    statusCircle.style.backgroundColor = "green";
-  }
-  
-  // Update the displayed task status text in the modal
-  statusBox.querySelector('p').innerText = taskStatus;
-}
-
-
 //Add colours to due dates when moved
 function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
   if (currentSectionId === 'kanban-to-do' || currentSectionId === 'kanban-in-progress') {
@@ -671,15 +595,9 @@ function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
 
 }
 
-
-
-
-
 function taskIsOverdue(dueDate) {
   return new Date(dueDate) < new Date();
 }
-
-
 
 
 kanbanContainers.forEach(kanbanContainer => {
@@ -688,9 +606,6 @@ kanbanContainers.forEach(kanbanContainer => {
     const kanbanCardHeader = e.target.closest('.kanban-card-top');
     if (!kanbanCardHeader) return;
 
-   
-
-
     const kanbanCardGroup = kanbanCardHeader.parentElement;
     const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
     const kanbanCardIcon = kanbanCardHeader.querySelector('.kanban-card-top-details i');
@@ -698,7 +613,6 @@ kanbanContainers.forEach(kanbanContainer => {
     kanbanCardIcon.classList.toggle('fa-caret-up');
     kanbanCardIcon.classList.toggle('fa-caret-down');
   
-    
     kanbanCardBody.classList.toggle('open');
 
     const otherCards = kanbanContainer.querySelectorAll('.kanban-board .kanban-card');
