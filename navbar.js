@@ -126,11 +126,50 @@ document.addEventListener('DOMContentLoaded', () => {
         openPage(currentPage);
     }
 
-
+    //Show and Hide Password Modal
     const changePassBtn = document.querySelector('.top-navbar-right .change-password');
+    const closeChangePassBtn = document.querySelector('#change-password-modal .close-modal-btn')
     const changePassModal = document.querySelector('#change-password-modal');
     changePassBtn.addEventListener('click', () => {
         changePassModal.style.display = 'block';
     })
+    closeChangePassBtn.addEventListener('click', () => {
+        changePassModal.style.display = 'none';
+    })
+
+    //Show and HIde Password Criteria in Change Password Modal
+    const passwordInput = document.querySelector('#change-password-modal #newPasswordInput');
+    const passwordCriteriaBlock = document.querySelector('#change-password-modal .password-criteria-container');
+    passwordInput.addEventListener('focus', () => {
+        passwordCriteriaBlock.classList.add('active');
+    })
+    passwordInput.addEventListener('focusout', () => {
+        passwordCriteriaBlock.classList.remove('active');
+    })
+
+    //Inform User when they have met a criteria for a new password
+    const passwordCriteriaList = document.querySelectorAll('#change-password-modal .criteria-item');
+    const passwordRegex = [
+        { regex: /.{12,}/ },
+        { regex: /[A-Z]/ },
+        { regex: /[a-z]/ },
+        { regex: /[0-9]/ },
+        { regex: /[!@#$%^&*(),.?":{}|<>]/ }
+    ]
+
+    passwordInput.addEventListener('keyup', () => {
+        passwordRegex.forEach((pattern, i) => {
+            let valid = pattern.regex.test(passwordInput.value);
+            if (valid) {
+                passwordCriteriaList[i].classList.add('valid');
+            } else {
+                passwordCriteriaList[i].classList.remove('valid');
+            }
+        })
+    });
+
+
+
+
 })
 

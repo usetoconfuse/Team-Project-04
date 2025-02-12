@@ -256,6 +256,9 @@ thead, tbody {
     font-size: 12.6px;
 }
 
+#change-password-modal .password-label span {
+    color: red;
+}
 
 #change-password-modal .text-input{
     margin-bottom: 1rem;
@@ -272,6 +275,60 @@ thead, tbody {
 #change-password-modal form {
     padding-bottom: 1rem;
 }
+
+
+.password-criteria-container {
+    background-color: #F5F5F5;
+    padding: 0.6rem 0.6rem;
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 0.6rem;
+    white-space: nowrap;
+    margin-bottom: 0.8rem;
+    display: none;
+}
+
+.password-criteria-container.active {
+    display: block;
+}
+
+.password-criteria-container .password-criteria-label {
+    text-align: left;
+    font-weight: 550;
+    font-size: 12.6px !important;
+
+}
+
+.password-criteria-container .password-criteria {
+    list-style: none;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.password-criteria-container .password-criteria .criteria-item {
+    padding-left: 1rem;
+    color: rgb(201, 87, 87);
+}
+
+.password-criteria-container .password-criteria .criteria-item::before {
+    content: '\f00d';
+    font-family: FontAwesome;
+    display: inline-block;
+    margin: 8px 0;
+    margin-left: -10px;
+    width: 20px;
+    font-size: 12px;
+}
+
+.password-criteria-container .password-criteria .criteria-item.valid::before {
+    content: '\f00c';
+    color: green;
+}
+
+.password-criteria-container .password-criteria .criteria-item.valid {
+    color: rgb(70, 150, 70);
+}
+
 
 
 

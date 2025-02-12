@@ -213,9 +213,22 @@ if ($_SESSION['role'] !== 'Employee') {
                         <i class="fa fa-solid fa-eye-slash"></i>
                     </div>
 
-                    <input type="password" name="new_password" class="text-input" id="passwordInput"
+                    <input type="password" name="new_password" class="text-input" id="newPasswordInput"
                         placeholder=" Enter your new password">
                 </div>
+
+                <div class="password-criteria-container">
+                    <p class="password-criteria-label">Password must contain:</p>
+
+                    <ul class="password-criteria">
+                        <li class="criteria-item" id="password-length">At least 12 characters long</li>
+                        <li class="criteria-item" id="uppercase-char">At least 1 uppercase leter</li>
+                        <li class="criteria-item" id="lowercase-char">At least 1 lowercase letter</li>
+                        <li class="criteria-item" id="number-check">At least 1 number</li>
+                        <li class="criteria-item" id="special-char">At least 1 special character</li>
+                    </ul>
+                </div>
+
 
                 <div class="input-container">
                     <div class="password-label">
