@@ -3,7 +3,7 @@
 <!-- Displays a list of all projects on the left. A manager selects a project
  to view project progress, project team members and contributions by member. -->
 
-<link rel="stylesheet" href="managerDashContent.css">
+<link rel="stylesheet" href="OUTDATEDmanagerDashContent.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
 
 <div id="mdGrid">
@@ -131,4 +131,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0"></script>
-<script src="managerDashContent.js"></script>
+<script src="OUTDATEDmanagerDashContent.js"></script>
