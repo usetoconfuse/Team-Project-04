@@ -224,6 +224,12 @@ function generateCard(kanbanData) {
   };
 
   Object.values(kanbanColumns).forEach(column => column.innerHTML = ""); //clear columns
+  
+  const cardCounts = {
+    "To Do": 0,
+    "In Progress": 0,
+    "Completed": 0
+  };
 
   kanbanData.forEach(task => {
     const taskCard = document.createElement("div");
@@ -447,7 +453,10 @@ function generateCard(kanbanData) {
     document.body.appendChild(viewTaskModal);
     
     kanbanColumns[task.Status]?.appendChild(taskCard);
+    
 
+    // Increment the count for the respective column
+    cardCounts[task.Status]++;
      //Due Date dot colour 
      const dueDateDot = viewTaskModal.querySelector('.modal-task-due-date .task-indicator-circle');
      if (taskCard.id === 'kanban-task-overdue') {
@@ -517,10 +526,19 @@ function generateCard(kanbanData) {
 
       
     });
-
+    changeProjectsCount(cardCounts);
 
   })
 
+  
+
+}
+
+function changeProjectsCount(cardCounts) {
+  // Update the count display elements in the headers
+  document.querySelector('#to-do-header .kanban-header-no').innerText = cardCounts["To Do"];
+  document.querySelector('#in-progress-header .kanban-header-no').innerText = cardCounts["In Progress"];
+  document.querySelector('#completed-header .kanban-header-no').innerText = cardCounts["Completed"];
 }
 
 async function reportStuck(taskID, newStatus, reportBtn) {
@@ -577,6 +595,12 @@ async function updateTaskStatus(taskID, newStatus) {
   }
 }
 
+function changeCount(cardCounts) {
+  // Update the count display elements in the headers
+  document.querySelector('#to-do-header .kanban-header-no').innerText = cardCounts["To Do"];
+  document.querySelector('#in-progress-header .kanban-header-no').innerText = cardCounts["In Progress"];
+  document.querySelector('#completed-header .kanban-header-no').innerText = cardCounts["Completed"];
+}
 
 //Add colours to due dates when moved
 function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
