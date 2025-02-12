@@ -195,10 +195,10 @@
                             </div>
                             <select name="priority" id="priority">
                                 <option value="" selected disabled hidden>Choose Priority</option>
-                                <option value="no priority">No Priority</option>
-                                <option value="low priority">Low Priority</option>
-                                <option value="medium priority">Medium Priority</option>
-                                <option value="high priority">High Priority</option>
+
+                                <option value="Low">Low Priority</option>
+                                <option value="Medium">Medium Priority</option>
+                                <option value="High">High Priority</option>
                             </select>
                         </div>
                     </div>
@@ -213,6 +213,9 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="error-message" id="error-message" style="display: none; color: red;"></div>
+
 
             </form>
             <div class="task-submit-buttons">
