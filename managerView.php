@@ -1,9 +1,15 @@
 <?php
 session_start();
 
+// Redirects if not logged in or wrong role
 if (empty($_SESSION['user_id'])) {
     header("Location: login.php");
     die("Redirecting to login");
+}
+
+if ($_SESSION['role'] !== 'Admin') {
+    header("Location: employeeView.php");
+    die("Redirecting user");
 }
 
 ?>
@@ -169,7 +175,7 @@ if (empty($_SESSION['user_id'])) {
         <section id="content">
 
          <div class="nav-item-content" id="overview-content">
-                <?php include 'managerDashContent.php' ?>
+                <?php include 'OUTDATEDmanagerDashContent.php' ?>
             </div>
 
 

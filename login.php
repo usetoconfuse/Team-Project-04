@@ -6,6 +6,18 @@
 
 session_start();
 
+// Redirects if user is already logged in
+if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] === 'Employee') {
+        header("Location: employeeView.php");
+        die("Redirecting user");
+    }
+    
+    if ($_SESSION['role'] === 'Admin') {
+        header("Location: managerView.php");
+        die("Redirecting user");
+    }
+}
 
 //Errors saved in session, and redirects to error or success page+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
