@@ -288,12 +288,35 @@ searchBarPersonal.addEventListener('input', ()=>{
       task.style.display = 'none';
     }
   })
+
+  const personalCardCounts = {
+    "To Do": countBlockTasks("#personal-kanban-content #kanban-to-do"),
+    "In Progress": countBlockTasks("#personal-kanban-content #kanban-in-progress"),
+    "Completed": countBlockTasks("#personal-kanban-content #kanban-completed")
+  };
+  changeProjectsCount(personalCardCounts);
+
   if (foundTasks === 0) {
     document.querySelector('#personal-kanban-content .search-task-error-msg').style.display = 'block';
   } else {
     document.querySelector('#personal-kanban-content .search-task-error-msg').style.display = 'none';
   }
 })
+
+
+function countBlockTasks(column) {
+  const kanbanColumn = document.querySelector(column);
+  let tasks = [];
+  tasks = kanbanColumn.children;
+  let count = 0;
+  Array.from(tasks).forEach(task => {
+    if (task.style.display === 'block') {
+      count++;
+    }
+  })
+  return count;
+
+}
 
 
 //Filters
