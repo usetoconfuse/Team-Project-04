@@ -365,7 +365,7 @@ orderByBtn.addEventListener('click', () => {
 
   searchBar.value = "";
 
-  fetchPersonalData(userID, allFilters);
+  fetchPersonalData(userId, allFilters);
 })
 
 filterRemoveBtn.addEventListener('click', () => {
@@ -377,7 +377,7 @@ filterRemoveBtn.addEventListener('click', () => {
   filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
   filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
 
-  fetchPersonalData(userID, {});
+  fetchPersonalData(userId, {});
 })
 
 function getCurrentFilters() {
@@ -422,6 +422,7 @@ function createFiltersMsg(filters) {
 const addTaskBtn = document.querySelector('#personal-content .add-task-btn')
 const addTaskModal = document.querySelector('#personal-content .add-task-modal')
 const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
+const submitTaskBtn = addTaskModal.querySelector('.add-task-btn')
 
 addTaskBtn.addEventListener('click', () => {
   addTaskModal.style.display = 'flex';
@@ -449,3 +450,56 @@ function validate_date_icon(task, kanbanCardDueDate, currentSectionId) {
 function taskIsOverdue(dueDate) {
   return new Date(dueDate) < new Date();
 }
+
+//Sending data whena adding task to data base 
+async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userId) {
+    try {
+      const url = 'PersonalKanban/queries/add-personal-task-db.php';
+      
+      const data = {
+        Name: taskName,
+        Description: taskDescription,
+        Priority: taskPriority,
+        Due_Date: taskDueDate,
+        User_ID: userId,
+        Status: 'To Do'
+      };
+
+      const params = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      };
+  
+      const response = await fetch(url, params);
+      if (!response.ok) {
+        throw new Error('Failed to update task status');
+      }
+  
+    } catch (error) {
+      console.log("Error updating the task status", error);
+    }
+  }
+
+submitTaskBtn.addEventListener('click', async () => {
+  //get data from add task modal and validate it firts
+  const taskName = addTaskModal.querySelector('#task-title').value;
+  const taskDescription = addTaskModal.querySelector('#task-description').value;
+  const taskPriority = addTaskModal.querySelector('#priority').value;
+  const taskDueDate = addTaskModal.querySelector('#date-input').value;
+  const errorMessage = addTaskModal.querySelector('#error-message');
+  
+  console.log(taskName, taskDescription, taskPriority, taskDueDate);
+  
+  if (taskName === "" || taskDescription === "" || taskPriority === "" || taskDueDate === "") {
+    errorMessage.textContent = 'Please fill out all fields';
+    errorMessage.style.display = 'block';
+    return;
+  }
+  alert('Task Added');
+  addTaskModal.style.display = 'none';
+  //send data to database to write 
+  await addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userId);
+  fetchPersonalData(userId, {});
+
+})

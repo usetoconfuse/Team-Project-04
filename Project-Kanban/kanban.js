@@ -679,6 +679,8 @@ const addTaskBtn = document.querySelector('#proj-kanban-content .add-task-btn')
 const addTaskModal = document.querySelector('#proj-kanban-content .add-task-modal')
 const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
 
+
+
 addTaskBtn.addEventListener('click', () => {
   addTaskModal.style.display = 'flex';
 })

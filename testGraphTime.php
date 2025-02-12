@@ -10,6 +10,8 @@
   }; -->
 
 
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -64,20 +66,23 @@
     <script>
       
 
+
+  function createGantt(dataset) {
     // setup 
     const data = {
       // labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       datasets: [{
-        label: 'Weekly Sales',
-        data: [
-          {x: ['2025-02-02', '2025-02-08'], y: 'Task 1'},
-          {x: ['2025-01-03', '2025-02-09'], y: 'Task 2'},
-          {x: ['2025-01-04', '2025-02-11'], y: 'Task 3'},
-          {x: ['2025-01-07', '2025-02-13'], y: 'Task 4'},
-          {x: ['2025-01-08', '2025-02-12'], y: 'Task 5'},
-          {x: ['2025-01-11', '2025-01-31'], y: 'Task 6'}
+        label: 'Project',
+        data: dataset,
+        // data: [
+        //   {x: ['2025-02-02', '2025-02-08'], y: 'Task 1'},
+        //   {x: ['2025-01-03', '2025-02-09'], y: 'Task 2'},
+        //   {x: ['2025-01-04', '2025-02-11'], y: 'Task 3'},
+        //   {x: ['2025-01-07', '2025-02-13'], y: 'Task 4'},
+        //   {x: ['2025-01-08', '2025-02-12'], y: 'Task 5'},
+        //   {x: ['2025-01-11', '2025-01-31'], y: 'Task 6'}
 
-        ],
+        // ],
         //     {x: '2021-06-26', y: 22},
         //     {x: '2021-06-27', y: 23},
         //     {x: '2021-06-28', y: 24},
@@ -146,8 +151,13 @@
             time: {
               unit: 'day'
             },
-            min: '2025-01-01',
-            max: '2025-03-01'
+            min: '2023-01-01',
+            max: '2026-03-01'
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
           }
         }
       },
@@ -163,6 +173,52 @@
     // Instantly assign Chart.js version
     const chartVersion = document.getElementById('chartVersion');
     chartVersion.innerText = Chart.version;
+  }
+
+  
+  async function fetchProjTimeGraph() {
+
+    const userID = '41';
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjTimeGraphQuery.php?ID=' + userID);
+        // console.log("4:", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        // console.log(data);
+
+        if (data.length > 0) {
+            console.log(data);
+             // Create a dictionary (object) from the data
+            //  const dataDict = {};
+            //     data.forEach(item => {
+            //         dataDict[item.Project_Title] = { x: [(item.Start_Date).substring(0,10), (item.Due_Date).substring(0,10)], y: item.Project_Title };
+            //     });
+            const dataset = data.map(item => ({
+                    x:  [(item.Start_Date).substring(0,10), (item.Due_Date).substring(0,10)],
+                    y: (item.Project_Title)
+                }));
+                // Log the dictionary to the console
+                console.log(dataset);
+                createGantt(dataset);
+  
+        } else {
+           // createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
+        }
+      } catch (error) {
+          console.error('Error:', error); // Log any errors that occur
+      }
+      
+        
+
+      }
+      fetchProjTimeGraph();
+
     </script>
 
   </body>
