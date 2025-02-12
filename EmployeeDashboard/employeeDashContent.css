@@ -134,24 +134,27 @@
 .emp-task-priority {
     padding: 0.1rem 0.2rem;
     border-radius: 6px;
-    color: white;
     text-align: center;
     width: 20%;
     white-space: nowrap;
     font-size: 15px;
 }
 
-.emp-high-priority {
-    background-color: #E6757E;
+.emp-high-priority  {
+    background-color: #ffcdd2;
+    color: #c62828;
 }
 
-.emp-medium-priority {
-    background-color:  #EAB385;
+.emp-medium-priority  {
+    background-color:  #fff0c2;
+    color: #947c01;
 }
 
-.emp-low-priority {
-    background-color: #ADDA9D;
+.emp-low-priority  {
+    background-color: #c8e6c9;
+    color: #388e3c;
 }
+
 
 
 /*===Table Styling===*/
@@ -160,7 +163,7 @@
 
 .emp-projectKanban-bottom {
     overflow: auto;
-    max-width: 100%;
+    width: 100%;
     max-height: 38vh;
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -171,7 +174,8 @@
     background-color: white;
     text-align: left;
     border-radius: 20px;
-    width: 100%;
+    min-width: 100%;
+    width: fit-content;
 }
 
 thead, tbody {
