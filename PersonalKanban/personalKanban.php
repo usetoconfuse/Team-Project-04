@@ -1,4 +1,6 @@
-<div id="personal-kanban-content" class="kanban-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="personal-kanban-content" class="kanban-content"
+    data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>"
+    data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
     <section class="project-intro personal-kanban-intro">
         <div class="project-txt">
@@ -29,7 +31,7 @@
                 Add Task
             </div>
         </div>
-        
+
         <div class="kanban-separator"></div>
     </section>
 
@@ -63,7 +65,7 @@
                 <i class="fa fa-solid fa-caret-up"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body open" id = 'kanban-to-do'>
+            <div class="kanban-body open" id='kanban-to-do'>
 
             </div>
         </div>
@@ -77,8 +79,8 @@
                 <i class="fa fa-solid fa-caret-down"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body" id = 'kanban-in-progress'>
-                    
+            <div class="kanban-body" id='kanban-in-progress'>
+
             </div>
         </div>
 
@@ -91,8 +93,8 @@
                 <i class="fa fa-solid fa-caret-down"></i>
             </div>
             <!--Kanban Body-->
-            <div class="kanban-body" id = 'kanban-completed'>
-                
+            <div class="kanban-body" id='kanban-completed'>
+
             </div>
 
         </div>
@@ -100,8 +102,8 @@
 
 
 
-   <!--Filter Posts -->
-   <div id="filter-modal" class="modal">
+    <!--Filter Posts -->
+    <div id="filter-modal" class="modal">
         <div class="modal-box">
             <!--Header-->
             <div class="modal-header">
@@ -113,8 +115,8 @@
             <!--Body-->
             <form id="filter-modal-form" class="modal-body">
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
-                   
-                
+
+
                     <!--DropDown 1-->
                     <div class="task-dropdown task-dropdown-priority">
                         <label for="priority">Priority</label>
@@ -148,7 +150,7 @@
                             </select>
                         </div>
                     </div>
-                  
+
 
                 </div>
             </form>
@@ -160,8 +162,6 @@
             </div>
         </div>
     </div>
-
-
 
 </div>
 
