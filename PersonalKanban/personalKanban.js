@@ -406,3 +406,15 @@ function createFiltersMsg(filters) {
     return 'Filters Applied: ' + applied.join(', ');
   }
 }
+
+//=== Personal Board Task Board
+const addTaskBtn = document.querySelector('#personal-content .add-task-btn')
+const addTaskModal = document.querySelector('#personal-content .add-task-modal')
+const closeAddTaskModal = addTaskModal.querySelector('.close-modal-btn')
+
+addTaskBtn.addEventListener('click', () => {
+  addTaskModal.style.display = 'flex';
+})
+closeAddTaskModal.addEventListener('click', () => {
+  addTaskModal.style.display = 'none';
+})

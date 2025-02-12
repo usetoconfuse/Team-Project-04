@@ -163,6 +163,67 @@
         </div>
     </div>
 
+    <!--Add Task Modal-->
+    <div class="modal add-task-modal">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+                <p>Add Task</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <!--Body-->
+            <form class="modal-body">
+                <!--Title and Description-->
+                <div class="task-title-form">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" name="task-title">
+                </div>
+                <div class="task-description-form">
+                    <label for="task-description">Description</label>
+                    <textarea type="text" id="task-description" name="task-description"></textarea>
+                </div>
+                <!--Dropdowns-->
+                <div class="task-dropdowns-form">
+                    <!--Choose Priority-->
+                    <div class="task-dropdown task-dropdown-priority">
+                        <label for="priority">Priority</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-priority-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-exclamation"></i>
+                            </div>
+                            <select name="priority" id="priority">
+                                <option value="" selected disabled hidden>Choose Priority</option>
+                                <option value="no priority">No Priority</option>
+                                <option value="low priority">Low Priority</option>
+                                <option value="medium priority">Medium Priority</option>
+                                <option value="high priority">High Priority</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Choose Due Date-->
+                    <div class="task-dropdown task-dropdown-date">
+                        <label for="date">Due Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="date" id="date-input">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <div class="task-submit-buttons">
+                <div class="add-task-btn">
+                    Add Task
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
