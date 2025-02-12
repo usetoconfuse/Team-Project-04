@@ -11,7 +11,7 @@
         <section class="empdash-stats-container emp-item-container">
             <div class="emp-item-top">
                 <p>Your Statistics</p>
-                <a href="employeeDashboard.php?page=projects" class="black-btn">All Projects</a>
+                <a href="employeeView.php?page=projects" class="black-btn">All Projects</a>
             </div>
             <div class="emp-grid-stat-content">
                 <div class="emp-stat" id="emp-stat-to-do">
@@ -49,7 +49,7 @@
         <section class="emp-kanban-container emp-item-container" id="emp-personalkanban-container">
             <div class="emp-item-top">
                 <p>Personal Tasks</p>
-                <a href="employeeDashboard.php?page=personal" class="black-btn">All Tasks</a>
+                <a href="employeeView.php?page=personal" class="black-btn">All Tasks</a>
             </div>
             <div class="emp-kanban-bottom">
                 

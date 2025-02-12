@@ -129,9 +129,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
                 // Redirect based on user role
                 if ($_SESSION['role'] === 'Admin') {
-                    header("Location: managerDashboard.php");
+                    header("Location: managerView.php");
                 } else {
-                    header("Location: employeeDashboard.php");
+                    header("Location: employeeView.php");
                 }
                 exit();
 
