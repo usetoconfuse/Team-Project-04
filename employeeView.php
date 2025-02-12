@@ -188,7 +188,7 @@ if ($_SESSION['role'] !== 'Employee') {
         </section>
     </section>
 
-    <div class="modal" id="change-password-modal">
+    <div class="modal" id="change-password-modal" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" >
         <div class="modal-box">
             <div class="modal-header">
                 <p>Change Password</p>
@@ -204,7 +204,7 @@ if ($_SESSION['role'] !== 'Employee') {
                     </div>
 
                     <input type="password" name="old_password" class="text-input" id="oldPasswordInput"
-                        placeholder=" Enter your old password">
+                        placeholder=" Enter your old password" required>
                 </div>
 
                 <div class="input-container password-new">
@@ -214,7 +214,7 @@ if ($_SESSION['role'] !== 'Employee') {
                     </div>
 
                     <input type="password" name="new_password" class="text-input" id="newPasswordInput"
-                        placeholder=" Enter your new password">
+                        placeholder=" Enter your new password" required>
                 </div>
 
                 <div class="password-criteria-container">
@@ -237,11 +237,11 @@ if ($_SESSION['role'] !== 'Employee') {
                     </div>
 
                     <input type="password" name="old_password" class="text-input" id="confirmPasswordInput"
-                        placeholder=" Confirm your old password">
+                        placeholder=" Confirm your old password" required>
                 </div>
             </form>
             <div class="task-submit-buttons">
-                <a class="add-filter-btn" id="add-filter-btn">
+                <a class="change-pass-btn" id="add-filter-btn">
                     Change Password
                     <i class="fa fa-arrow-right"></i>
                 </a>
