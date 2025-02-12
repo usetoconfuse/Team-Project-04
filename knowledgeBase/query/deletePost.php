@@ -8,7 +8,7 @@ $postID = $_GET['postId'];
 // using data from the Post modal form add a post to the knowledge base table
 $sql = "
 DELETE FROM KnowledgeBase_Posts
-WHERE Post_ID = ${postID}
+WHERE Post_ID = '$postID'
 ";
 
 if (!mysqli_query($conn, $sql)) {
