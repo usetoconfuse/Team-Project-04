@@ -1,6 +1,7 @@
 const kanbanContainers = document.querySelectorAll('.kanban-board');
 
 // Listen for sessionStorage updates
+let userId;
 let projectID;
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
@@ -9,6 +10,7 @@ window.addEventListener("storage", function () {
   if (selectedProjectID) {
     const kanbanContainer = document.querySelector('#proj-kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
+    userId = userID;
     getKanbanData(userID, selectedProjectID, {});
     getProjectName(selectedProjectID)
 
@@ -547,6 +549,25 @@ function generateCard(kanbanData) {
       }[newSection];
       
       await updateTaskStatus(task.Task_ID, newStatus);
+
+      const orderByDropdownValue = document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
+      const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+      const currentFilters = getCurrentFilters();
+      const allFilters = { ...currentFilters, ...orderByParam};
+
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+
+      let filtersLength = Object.keys(allFilters).length;
+      if (filtersLength > 0) {
+        filterRemoveBtn.style.display = 'flex';
+      } else {
+        filterRemoveBtn.style.display = 'none';
+      }
+
+      searchBar.value = "";
+
+      getKanbanData(userId, projectID, allFilters);
 
       
     });
