@@ -258,11 +258,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-const searchBar = document.querySelector('.project-search #searched-project');
+const searchBarProjects = document.querySelector('.project-search #searched-project');
 
-searchBar.addEventListener('input', ()=>{
+searchBarProjects.addEventListener('input', ()=>{
 
-  const searchValue = searchBar.value.toLowerCase();
+  const searchValue = searchBarProjects.value.toLowerCase();
   const allProjects = document.querySelectorAll('.project-card');
   let foundProjects = 0;
   allProjects.forEach(project => {
