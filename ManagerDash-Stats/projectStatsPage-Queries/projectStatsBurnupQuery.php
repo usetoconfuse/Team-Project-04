@@ -19,33 +19,33 @@
     $sql = "SELECT
                 ? AS week,
                 SUM(CASE
-                        WHEN tasks.Project_ID = ?
-                        AND DATEDIFF(?, tasks.Start_Date) >= 0
-                        AND tasks.Status = 'Completed'
-                            THEN tasks.Man_Hours
+                        WHEN Tasks.Project_ID = ?
+                        AND DATEDIFF(?, Tasks.Start_Date) >= 0
+                        AND Tasks.Status = 'Completed'
+                            THEN Tasks.Man_Hours
                         ELSE 0
                     END) AS comp,
                 SUM(CASE
-                        WHEN tasks.Project_ID = ?
-                        AND DATEDIFF(?, tasks.Start_Date) >= 0
-                            THEN tasks.Man_Hours
+                        WHEN Tasks.Project_ID = ?
+                        AND DATEDIFF(?, Tasks.Start_Date) >= 0
+                            THEN Tasks.Man_Hours
                         ELSE 0
                     END) AS scope
             FROM 
-                tasks
+                Tasks
             GROUP BY
                 week
             ";
 
     /* $sql = "SELECT
                 ? AS week,
-                SUM(CASE WHEN tasks.Status = 'Completed' THEN tasks.Man_Hours ELSE 0 END) AS comp,
-                SUM(tasks.Man_Hours) AS scope
+                SUM(CASE WHEN Tasks.Status = 'Completed' THEN Tasks.Man_Hours ELSE 0 END) AS comp,
+                SUM(Tasks.Man_Hours) AS scope
             FROM 
-                tasks
+                Tasks
             WHERE
-                tasks.Project_ID = ?
-                AND DATEDIFF(?, tasks.Start_Date) >= 0
+                Tasks.Project_ID = ?
+                AND DATEDIFF(?, Tasks.Start_Date) >= 0
             GROUP BY
                 week
             "; */

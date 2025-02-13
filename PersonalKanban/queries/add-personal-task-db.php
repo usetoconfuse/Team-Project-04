@@ -12,7 +12,7 @@ if (isset($taskData['Name']) && isset($taskData['Description']) && isset($taskDa
     $user_id = $taskData['User_ID'];
     $status = $taskData['Status'];
 
-    $insertTaskSQL = "INSERT INTO personal_tasks (Name, Description, Priority, Due_Date, User_ID, Status) VALUES (?, ?, ?, ?, ?, ?)";
+    $insertTaskSQL = "INSERT INTO Personal_Tasks (Name, Description, Priority, Due_Date, User_ID, Status) VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($insertTaskSQL);
     $stmt->bind_param("ssssis", $name, $description, $priority, $due_date, $user_id, $status);

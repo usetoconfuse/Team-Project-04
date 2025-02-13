@@ -12,7 +12,7 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select the first 45 users
-    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM users WHERE Forename like '%$searchParams%' or User_ID like '%$searchParams%';
+    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM Users WHERE Forename like '%$searchParams%' or User_ID like '%$searchParams%';
             ";
     
     // if ($type == "Technical"){

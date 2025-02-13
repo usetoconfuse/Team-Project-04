@@ -9,7 +9,7 @@ $priority = isset($_GET['priorityValue']) ? $_GET['priorityValue'] : null;
 $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
 $orderBy = isset($_GET['orderByValue']) ? $_GET['orderByValue'] : null;
 
-$taskSQL = "SELECT * FROM personal_tasks WHERE User_ID = $userId";
+$taskSQL = "SELECT * FROM Personal_Tasks WHERE User_ID = $userId";
 
 
 if (!empty($priority)) {

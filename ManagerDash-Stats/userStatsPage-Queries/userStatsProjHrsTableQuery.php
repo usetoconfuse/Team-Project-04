@@ -13,23 +13,23 @@
 
     //Select the first 20 tasks for the given UserID
     $sql = "SELECT 
-    projects.Project_ID, 
-    projects.Project_Title, 
-    COALESCE(SUM(tasks.Man_Hours), 0) AS 'TotalHrs', 
-    COALESCE(COUNT(tasks.Task_ID), 0) AS 'TotalTasksCompleted'
+    Projects.Project_ID, 
+    Projects.Project_Title, 
+    COALESCE(SUM(Tasks.Man_Hours), 0) AS 'TotalHrs', 
+    COALESCE(COUNT(Tasks.Task_ID), 0) AS 'TotalTasksCompleted'
     FROM 
-        projects
+        Projects
 
     LEFT JOIN 
-        tasks ON tasks.Project_ID = projects.Project_ID 
-        AND tasks.Assignee_ID = '$userID' 
-        AND tasks.Status = 'Completed'
+        Tasks ON Tasks.Project_ID = Projects.Project_ID 
+        AND Tasks.Assignee_ID = '$userID' 
+        AND Tasks.Status = 'Completed'
         INNER JOIN 
-        user_teams ON projects.Project_ID = user_teams.Project_ID
-        AND user_teams.User_ID='$userID'
+        User_Teams ON Projects.Project_ID = User_Teams.Project_ID
+        AND User_Teams.User_ID='$userID'
 
     GROUP BY 
-        projects.Project_ID;
+        Projects.Project_ID;
     ";
     
     // if ($type == "Technical"){

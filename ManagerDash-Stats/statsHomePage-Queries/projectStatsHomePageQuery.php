@@ -6,9 +6,9 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select the first 20 Projects, and select project leader name
-    $sql = "SELECT projects.Project_ID, projects.Project_Title, projects.Start_Date, projects.Due_Date, projects.Project_Leader, Users.Forename, Users.Surname
-FROM projects INNER JOIN users
-ON users.User_ID = projects.Project_Leader
+    $sql = "SELECT Projects.Project_ID, Projects.Project_Title, Projects.Start_Date, Projects.Due_Date, Projects.Project_Leader, Users.Forename, Users.Surname
+FROM Projects INNER JOIN Users
+ON Users.User_ID = Projects.Project_Leader
 LIMIT 20;
             ";
     

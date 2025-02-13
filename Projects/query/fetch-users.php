@@ -3,7 +3,7 @@
 include '../../config/db-setup.php';
 
 // Fetch only employees (not admins) with Employee_Status = 1
-$sql = "SELECT User_ID, Forename, Surname FROM users WHERE Employee_Status = 1 AND User_Type = 'Employee'";
+$sql = "SELECT User_ID, Forename, Surname FROM Users WHERE Employee_Status = 1 AND User_Type = 'Employee'";
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {

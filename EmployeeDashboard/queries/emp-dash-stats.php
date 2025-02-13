@@ -29,7 +29,7 @@ while ($row = mysqli_fetch_array($statsResult, MYSQLI_ASSOC)) {
 
 //Emp Dashboard Stats Query
 $personalTasksSQL = "SELECT Name, Priority
-                     FROM personal_tasks
+                     FROM Personal_Tasks
                      WHERE User_ID = $userId
                      ORDER BY Priority DESC
                      LIMIT 3";

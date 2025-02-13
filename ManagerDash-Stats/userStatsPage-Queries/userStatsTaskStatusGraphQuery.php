@@ -12,25 +12,25 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select all To Do tasks for that user
-    $queries = ["SELECT COUNT(Task_ID) AS 'tasks'
-    FROM tasks 
-    WHERE tasks.Assignee_ID = '$userID'
-    AND tasks.Status = 'To Do'
+    $queries = ["SELECT COUNT(Task_ID) AS 'Tasks'
+    FROM Tasks 
+    WHERE Tasks.Assignee_ID = '$userID'
+    AND Tasks.Status = 'To Do'
     ",
-    "SELECT COUNT(Task_ID) AS 'tasks'
-    FROM tasks 
-    WHERE tasks.Assignee_ID = '$userID'
-    AND tasks.Status = 'In Progress'
+    "SELECT COUNT(Task_ID) AS 'Tasks'
+    FROM Tasks 
+    WHERE Tasks.Assignee_ID = '$userID'
+    AND Tasks.Status = 'In Progress'
     ",
-    "SELECT COUNT(Task_ID) AS 'tasks'
-    FROM tasks 
-    WHERE tasks.Assignee_ID = '$userID'
-    AND tasks.Status = 'Completed'
+    "SELECT COUNT(Task_ID) AS 'Tasks'
+    FROM Tasks 
+    WHERE Tasks.Assignee_ID = '$userID'
+    AND Tasks.Status = 'Completed'
     ", 
-    "SELECT COUNT(Task_ID) AS 'tasks'
-    FROM tasks 
-    WHERE tasks.Assignee_ID = '$userID'
-    AND tasks.Stuck = 1
+    "SELECT COUNT(Task_ID) AS 'Tasks'
+    FROM Tasks 
+    WHERE Tasks.Assignee_ID = '$userID'
+    AND Tasks.Stuck = 1
     "];
 
 

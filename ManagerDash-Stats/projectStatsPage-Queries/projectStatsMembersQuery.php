@@ -6,30 +6,30 @@
     $projID = $_GET['ID'];
 
     $sql = "SELECT
-                user_teams.User_ID,
-                users.Email,
-                users.Forename,
-                users.Surname,
-                users.User_Type,
-                users.Employee_Status,
-                COUNT(tasks.Task_ID) AS Tasks,
+                User_Teams.User_ID,
+                Users.Email,
+                Users.Forename,
+                Users.Surname,
+                Users.User_Type,
+                Users.Employee_Status,
+                COUNT(Tasks.Task_ID) AS Tasks,
                 IF(
                 EXISTS(
-                    SELECT tasks.Task_ID
-                    FROM tasks
-                    WHERE tasks.Stuck = 1
-                    AND tasks.Assignee_ID = users.User_ID),
+                    SELECT Tasks.Task_ID
+                    FROM Tasks
+                    WHERE Tasks.Stuck = 1
+                    AND Tasks.Assignee_ID = Users.User_ID),
                 'Yes', 'No') AS Stuck
             FROM
-                users,
-                user_teams,
-                tasks
+                Users,
+                User_Teams,
+                Tasks
             WHERE
-                user_teams.Project_ID = ?
-                AND users.User_ID = user_teams.User_ID
-                AND users.User_ID = tasks.Assignee_ID
+                User_Teams.Project_ID = ?
+                AND Users.User_ID = User_Teams.User_ID
+                AND Users.User_ID = Tasks.Assignee_ID
             GROUP BY
-                users.User_ID
+                Users.User_ID
             ";
 
     $stmt = $conn->prepare($sql);

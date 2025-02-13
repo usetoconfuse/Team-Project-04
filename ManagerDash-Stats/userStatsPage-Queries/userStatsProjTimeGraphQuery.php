@@ -12,11 +12,11 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select the first 20 tasks for the given UserID
-    $sql = "SELECT projects.Project_Title, projects.Project_ID, projects.Start_Date, projects.Due_Date
-            FROM user_teams INNER JOIN projects
-            ON user_teams.Project_ID = projects.Project_ID
-            WHERE user_teams.User_ID = '$userID'
-            ORDER BY projects.Start_Date;
+    $sql = "SELECT Projects.Project_Title, Projects.Project_ID, Projects.Start_Date, Projects.Due_Date
+            FROM User_Teams INNER JOIN Projects
+            ON User_Teams.Project_ID = Projects.Project_ID
+            WHERE User_Teams.User_ID = '$userID'
+            ORDER BY Projects.Start_Date;
             ";
     
     // if ($type == "Technical"){

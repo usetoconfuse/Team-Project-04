@@ -11,13 +11,13 @@
 
     // Select employee name, email, role, and status (are they still working here)
     $sql = "SELECT
-        users.Forename,
-        users.Surname,
-        users.Email,
-        users.User_Type,
-        users.Employee_Status
-    FROM users
-    WHERE users.User_ID = '$userID'
+        Users.Forename,
+        Users.Surname,
+        Users.Email,
+        Users.User_Type,
+        Users.Employee_Status
+    FROM Users
+    WHERE Users.User_ID = '$userID'
     ";
 
     $result = mysqli_query($conn,$sql);

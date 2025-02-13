@@ -6,13 +6,13 @@
     $projID = $_GET['ID'];
 
     $sql = "SELECT
-                COUNT(CASE WHEN tasks.Status = 'To Do' THEN 1 END) AS Todo,
-                COUNT(CASE WHEN tasks.Status = 'In Progress' THEN 1 END) AS Inprog,
-                COUNT(CASE WHEN tasks.Status = 'Completed' THEN 1 END) AS Done
+                COUNT(CASE WHEN Tasks.Status = 'To Do' THEN 1 END) AS Todo,
+                COUNT(CASE WHEN Tasks.Status = 'In Progress' THEN 1 END) AS Inprog,
+                COUNT(CASE WHEN Tasks.Status = 'Completed' THEN 1 END) AS Done
             FROM
-                tasks
+                Tasks
             WHERE
-                tasks.Project_ID = ?
+                Tasks.Project_ID = ?
             ";
 
     $stmt = $conn->prepare($sql);

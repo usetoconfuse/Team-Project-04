@@ -9,7 +9,7 @@ if (isset($statusData['Task_ID']) && isset($statusData['Status'])) {
     $task_id = $statusData['Task_ID'];
     $status = $statusData['Status'];
 
-    $updateStatusSQL = "UPDATE personal_tasks SET Status = ? WHERE PersonalTask_ID = ?";
+    $updateStatusSQL = "UPDATE Personal_Tasks SET Status = ? WHERE PersonalTask_ID = ?";
 
     $stmt = $conn->prepare($updateStatusSQL);
     $stmt->bind_param("si", $status, $task_id);

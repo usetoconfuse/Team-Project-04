@@ -13,8 +13,8 @@
 
     //Select the first 20 tasks for the given UserID
     $sql = "SELECT * 
-    FROM tasks INNER JOIN projects 
-    ON tasks.Project_ID = projects.Project_ID 
+    FROM tasks INNER JOIN Projects 
+    ON tasks.Project_ID = Projects.Project_ID 
     WHERE Assignee_ID = '$userID';
             ";
     

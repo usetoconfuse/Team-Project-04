@@ -7,14 +7,14 @@
     $projID = $_GET['ID'];
 
     $sql = "SELECT
-                projects.Project_Title,
-                projects.Start_Date,
-                projects.Due_Date,
-                projects.Creation_Date,
-                projects.Completion_Date,
-                projects.Project_Leader
+                Projects.Project_Title,
+                Projects.Start_Date,
+                Projects.Due_Date,
+                Projects.Creation_Date,
+                Projects.Completion_Date,
+                Projects.Project_Leader
             FROM
-                projects
+                Projects
             WHERE Project_ID = '$projID'
             ";
 
