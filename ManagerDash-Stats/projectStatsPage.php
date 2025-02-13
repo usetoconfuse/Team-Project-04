@@ -13,7 +13,9 @@
     </div>
 
     <div id="prjStGrid">
-
+        <div id="prjStBurnupChartBox">
+            <canvas id="prjStBurnupChart"></canvas>
+        </div>
     </div>
 </div>
 

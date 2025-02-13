@@ -20,6 +20,6 @@
 }
 
 /* Burnup chart */
-#prjStBurnupChart {
+#prjStBurnupChartBox {
     grid-area: burnup;
 }
