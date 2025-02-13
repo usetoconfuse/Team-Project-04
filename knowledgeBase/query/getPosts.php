@@ -19,6 +19,7 @@ SELECT
     kb.Title,
     kb.Description,
     kb.Type,
+    kb.Visibility,
     t.Topic_Name,
     t.Topic_ID,
     usr.User_ID,

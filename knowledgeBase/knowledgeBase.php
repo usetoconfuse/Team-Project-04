@@ -150,14 +150,14 @@
                     </div>
                 </div>
                 <!--Body-->
-                <form id="post-modal-form" class="modal-body">
+                <form id="edit-post-modal-form" class="modal-body">
                     <div>
                         <label for="postInput">Title :</label>
-                        <input type="text" id="postInput" name="title" placeholder="Enter post title">
+                        <input type="text" id="edit-post-title-input" name="title" placeholder="Enter post title">
                     </div>
                     <div>
                         <label for="contentInput">Content :</label>
-                        <textarea type="text" id="contentInput" name="content"
+                        <textarea type="text" id="edit-post-content-input" name="content"
                             placeholder="Enter post content"></textarea>
                     </div>
                     <div class="kb-flex-row">
@@ -168,7 +168,7 @@
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
-                                <select name="type" id="type-dropdown">
+                                <select name="type" id="edit-post-type-input">
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="Technical">Technical</option>
                                     <option value="Non-Technical">Non-technical</option>
@@ -177,12 +177,12 @@
                         </div>
                         <!--topic-->
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="topic-modal-dropdown">Topic :</label>
+                            <label for="edit-post-topic-input">Topic :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
-                                <select name="topic" id="topic-modal-dropdown">
+                                <select name="topic" id="edit-post-topic-input">
                                     <!--These topics will be retrieved via sql query-->
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="Coding Standards">Coding Standards</option>
@@ -195,7 +195,7 @@
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-user"></i>
                                 </div>
-                                <select name="visibility" id="visibility-dropdown">
+                                <select name="visibility" id="edit-post-visibility-input">
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="All Users">All Users</option>
                                     <!--disabled , will depend on if user or manager logged in-->
