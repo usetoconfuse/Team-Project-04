@@ -4,13 +4,13 @@
             <p>All Projects</p>
             <p>View all your assigned projects below. Statistics about these are within.</p>
         </div>
-
-        <div class="project-switch-buttons">
-            <a href="#" id="active-project" class="project-item active">Active</a>
-            <a href="#" id="not-started-project" class="project-item ">Not Started</a>
-            <a href="#" id="archive-project" class="project-item ">Archive</a>
-        </div>
-
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
+            <div class="project-switch-buttons">
+                <a href="#" id="active-project" class="project-item active">Active</a>
+                <a href="#" id="not-started-project" class="project-item ">Not Started</a>
+                <a href="#" id="archive-project" class="project-item ">Archive</a>
+            </div>
+        <?php endif; ?>
     </div>
 
 

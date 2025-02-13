@@ -7,15 +7,19 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchProjectsData(userID, { status: 'Active' },  "#active-project-content #gridContainer"); //default load in is always active projects
 
   //Fetch different project types depending on which view is selected (admin only)
-  document.querySelector('#active-project').addEventListener("click", ()=> {
-    fetchProjectsData(userID, { status: 'Active' }, "#active-project-content #gridContainer");
-  })
-  document.querySelector('#not-started-project').addEventListener("click", ()=> {
-    fetchProjectsData(userID, { status: 'Not Started' }, "#not-started-project-content #gridContainer");
-  })
-  document.querySelector('#archive-project').addEventListener("click", ()=> {
-    fetchProjectsData(userID, { status: 'Archived' }, "#archive-project-content #gridContainer");
-  })
+  const userRole = document.querySelector('#project-content').getAttribute('data-role');
+  if (userRole === 'Admin') {
+    document.querySelector('#active-project').addEventListener("click", ()=> {
+      fetchProjectsData(userID, { status: 'Active' }, "#active-project-content #gridContainer");
+    })
+    document.querySelector('#not-started-project').addEventListener("click", ()=> {
+      fetchProjectsData(userID, { status: 'Not Started' }, "#not-started-project-content #gridContainer");
+    })
+    document.querySelector('#archive-project').addEventListener("click", ()=> {
+      fetchProjectsData(userID, { status: 'Archived' }, "#archive-project-content #gridContainer");
+    })
+  
+  }
 
 
 
@@ -32,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 
 
-  const userRole = document.querySelector('#project-content').getAttribute('data-role');
+
 
 
   //Fetch all project data for this user and display on page
@@ -69,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         projectCard.setAttribute('data-project-title', project.Project_Title);
 
         let cardBottom = "";
+       
         if (userRole === "Admin") {
           cardBottom = `
                       <div class="project-card-bottom">

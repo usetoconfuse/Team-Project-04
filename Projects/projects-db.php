@@ -14,7 +14,7 @@ if ($role === 'Employee') {
     $sql = "SELECT Projects.*, COUNT(Tasks.Task_ID) AS Task_Count FROM `User_Teams`
     INNER JOIN Projects ON User_Teams.Project_ID = Projects.Project_ID
     LEFT JOIN Tasks ON Projects.Project_ID = Tasks.Project_ID AND (Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress')
-    WHERE User_ID = $userID AND Projects.Start_Date <= CURDATE() AND Project.Status = 'Active";
+    WHERE User_ID = $userID AND Projects.Start_Date <= CURDATE() AND Projects.Status = '$status'";
 } else {
     $sql = "SELECT Projects.* FROM Projects WHERE 1=1";
     if ($status) {
