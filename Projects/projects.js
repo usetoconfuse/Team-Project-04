@@ -325,56 +325,6 @@ closeProjectFilterModal.addEventListener('click', () => {
    }
  }
 
- // Open Add Project Modal & Fetch Users
- addProjectBtn.addEventListener('click', () => {
-   addProjectModal.style.display = 'flex';
-   fetchUsers(); // Load Team Leaders dynamically
- });
-
- // Close Modal
- closeAddProjectModal.addEventListener('click', () => {
-   addProjectModal.style.display = 'none';
- });
-
- // Submit New Project Data
- submitAddProject.addEventListener("click", async function () {
-   const title = document.getElementById("task-title").value;
-   const teamLeader = teamLeaderDropdown.value;
-   const startDate = document.getElementById("start-date-project").value;
-   const dueDate = document.getElementById("date-project").value;
-
-   if (!title || !teamLeader || !startDate || !dueDate) {
-     alert("Please fill in all fields.");
-     return;
-   }
-
-   const projectData = {
-     title: title,
-     teamLeader: teamLeader,
-     startDate: startDate,
-     dueDate: dueDate
-   };
-
-   try {
-     const response = await fetch("Projects/query/add-project.php", {
-       method: "POST",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify(projectData),
-     });
-
-     if (response.ok) {
-       alert("Project successfully added!");
-       addProjectModal.style.display = 'none';
-       fetchProjectsData(userID); // Reload projects to display new one
-     } else {
-       alert("Failed to add project. Try again.");
-     }
-
-   } catch (error) {
-     console.error("Error adding project:", error);
-     alert("An error occurred. Please try again.");
-   }
- });
 
 
 //Switch Buttons for different project pages
