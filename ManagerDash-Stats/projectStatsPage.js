@@ -330,14 +330,7 @@ async function PopulateBurnUpChart() {
                             xMin: dueDateWeek,
                             xMax: dueDateWeek,
                             borderColor: '#000000',
-                            borderWidth: 2,
-                            label: {
-                                content: 'Deadline',
-                                enabled: isOverdue,
-                                position: 'start',
-                                backgroundColor: 'rgb(187, 38, 70)',
-                                color: '#ffffff'
-                            }
+                            borderWidth: 2
                         }
                     }
                 }
