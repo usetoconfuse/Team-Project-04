@@ -206,7 +206,7 @@
                     </div>
                 </form>
                 <div class="task-submit-buttons">
-                    <div class="add-post-btn black-btn" id="add-post-btn">
+                    <div class="add-post-btn black-btn" id="kb-edit-post-submit-btn">
                         Edit Post
                         <i class="fa fa-arrow-right"></i>
                     </div>
