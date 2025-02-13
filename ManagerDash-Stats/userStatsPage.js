@@ -1,5 +1,5 @@
 // Created by Quinn Little 07/02/2025
-// Updated by Toby Tischler 09/02/2025
+// Updated by Toby Tischler 13/02/2025
 
 
 
@@ -12,15 +12,10 @@ const userDetails = {};
 var weekhrsansd = new Chart(document.getElementById('userStats-weekHrsContainerGraph'));
 
 // Populate page when a user is selected
-
 async function PopulateUserStatsPage() {
 
-    //Get user ID from URL
-    const params = new URLSearchParams(window.location.search);
-    const userID = params.get('user');
-
     //Fetch full user details from ID
-    await(fetchUserDetails(userID));
+    await(fetchUserDetails());
 
     //Fetch all tasks of a user
     await(fetchUserTaskTable());
@@ -38,8 +33,12 @@ async function PopulateUserStatsPage() {
 };
 
 //Fetch user details for user object
-async function fetchUserDetails(userID) {
+async function fetchUserDetails() {
     try {
+        //Get user ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const userID = params.get('user');
+        
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsGetUserInfoQuery.php?ID=' + userID);
         console.log("1: ", response);
@@ -296,7 +295,6 @@ function createTaskStatusGraph(currentTaskStatus) {
         data: {
             labels: daysOfWeek,
             datasets: [{
-                label:['To Do', 'In Progress', 'Completed', 'Stuck'],
             backgroundColor:["rgba(255, 85, 0, 0.5)", "rgba(255, 225, 0, 0.5)", "rgba(111, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"],
             borderColor: ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
             data: currentTaskStatus
@@ -305,8 +303,8 @@ function createTaskStatusGraph(currentTaskStatus) {
         options: {
             responsive: true,
             plugins: {
-                legend: {
-                    display: true,
+                legend: {           // The legend seems to have broken when I moved all the ChartJS imports into one place. Sorry - Toby
+                    display: true, // One way to have each bar as a separate legend item is to make each task category its own dataset.
                     labels: {
                         color: [
                             "rgba(255, 85, 0, 0.5)",
@@ -319,7 +317,9 @@ function createTaskStatusGraph(currentTaskStatus) {
             },
             scales: {
                 y: {
-                    beginAtZero: true
+                    ticks: {
+                        beginAtZero: true // Make y-axis start at zero.
+                    }
                 }
             },
             title: {
@@ -444,42 +444,43 @@ async function fetchProjTimeGraph(userID) {
 
 //     weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
 
-//     const weekhrsansd = new Chart(weekhrs, {
-//     type: "horizontalBar",
-//     data: {
-//         labels: yAxProj,
-//         datasets: [{
-//         backgroundColor:"rgba(255, 242, 0, 1)",
-//         borderColor: "rgba(255, 242, 0, 1)",
-//         data: durArr
-//         }]
-//     },
-// options: {
-//     responsive: true,
-//     plugins: {
-//         title: {
-//             display: true,
-//             text: 'Duration Graph'
-//         }
-//     },
-//     scales: {
-//         x: {
-//             beginAtZero: true,
-//             title: {
-//                 display: true,
-//                 text: 'Duration' // The x-axis represents the duration
-//             }
-//         },
-//         y: {
-//             beginAtZero: true,
-//             title: {
-//                 display: true,
-//                 text: 'Project' // The y-axis represents the projects
-//             }
-//         }
-//     }}
-//     });
-// }
+    const weekhrsansd = new Chart(weekhrs, {
+    type: "bar",
+    data: {
+        labels: yAxProj,
+        datasets: [{
+        backgroundColor:"rgba(255, 242, 0, 1)",
+        borderColor: "rgba(255, 242, 0, 1)",
+        data: durArr
+        }]
+    },
+options: {
+    indexAxis: "y",
+    responsive: true,
+    plugins: {
+        title: {
+            display: true,
+            text: 'Duration Graph'
+        }
+    },
+    scales: {
+        x: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Duration' // The x-axis represents the duration
+            }
+        },
+        y: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Project' // The y-axis represents the projects
+            }
+        }
+    }}
+    });
+
 
 
 

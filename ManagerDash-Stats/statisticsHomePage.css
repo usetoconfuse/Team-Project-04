@@ -30,6 +30,9 @@ tr:hover {
     --pastel-colour-4: rgb(134, 159, 100);
 
     padding: var(--section-gap);
+
+    height: 100%;
+    width: 100%;
 }
 
 
@@ -52,6 +55,11 @@ tr:hover {
     border-collapse: collapse;
     justify-self: center;
     overflow-y: auto;
+}
+
+.statsHome-view {
+    height: 100%;
+    width: 100%;
 }
 
 /* Project Home Grid */
@@ -151,6 +159,11 @@ tr:hover {
 
 
 /* Tab groups */
+
+.tabGroup {
+    height: 100%;
+    width: 100%;
+}
 
 #tabGroupProjectStats {
     display: block;

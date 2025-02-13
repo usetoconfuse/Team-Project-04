@@ -1,58 +1,81 @@
 <!-- Created By Quinn Little 07/02/2025 -->
-<!-- Updated By Toby Tischler 08/02/2025 -->
+<!-- Updated By Toby Tischler 13/02/2025 -->
 
 <!-- Tab for project statistics -->
 
 <link rel="stylesheet" href="ManagerDash-Stats/projectStatsPage.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
 
-<div id="statGrid">
-    <!-- Filter 1 -->
-    <div class="statFilter1 stat-grid-item ">
-        <h1>Select Project</h1>
-        <form>
-            <select id="statProjectSelect" name="statProjSel">
-                <option value="ProjectA">Project A</option>
-            </select>
-        </form>
+<div id="prjStContainer">
+
+    <!-- Header -->
+    <div id="prjStHeader">
+
+        <!-- Numerical stats -->
+        <div id="prjStHeaderNums">
+        </div>
+
+        <!-- Task dial -->
+        <div id="prjStTaskDialCell">
+            <div id="prjStTaskDialChartBox">
+                <canvas id="prjStTaskDialChart"></canvas>
+            </div>
+
+            <div id="prjStTaskDialPercentage">
+                <h1 id="prjStTaskDialPercentageText"></h1>
+                <p>Of Tasks Complete</p>
+            </div>
+
+            <div id="prjStTaskDialLegend">
+                <div class="prjStTaskDialLegendItem">
+                    <div class="prjStTaskDialLegendCounter">
+                        <i class="fa-solid fa-circle fa-2xs prjStG"></i>
+                        <h3 id="prjStLegendDone"></h3>
+                    </div>
+                    <p>Done</p>
+                </div>
+
+                <div class="prjStTaskDialLegendItem">
+                    <div class="prjStTaskDialLegendCounter">
+                        <i class="fa-solid fa-circle fa-2xs prjStY"></i>
+                        <h3 id="prjStLegendInprog"></h3>
+                    </div>
+                    <p>In Progress</p>
+                </div>
+
+                <div class="prjStTaskDialLegendItem">
+                    <div class="prjStTaskDialLegendCounter">
+                        <i class="fa-solid fa-circle fa-2xs prjStGray"></i>
+                        <h3 id="prjStLegendTodo"></h3>
+                    </div>
+                    <p>Not Started</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Filter 2 -->
-    <div class="statFilter2 stat-grid-item ">
-        <h1>Select Employee</h1>
-        <form>
-            <select id="statEmpSelect" name="statEmpSel">
-                <option value="ProjectA">John Little</option>
-            </select>
-        </form>
-    </div>
+    <!-- Main grid -->
+    <div id="prjStGrid">
 
-    <!-- Filter 3 -->
-    <div class="statFilter3 stat-grid-item ">
-        <h1>Select statistic objective</h1>
-        <form>
-            <select id="statObjSelect" name="statObjSel">
-                <option value="ProjectA">Sum</option>
-            </select>
+        <!-- Burnup chart -->
+        <div id="prjStBurnupCell" class="prjStGridCells">
+            <div id="prjStBurnupChartBox">
+                <canvas id="prjStBurnupChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Member list -->
+        <div id="prjStMembersCell" class="prjStGridCells">
+            <div id="prjStMembersHeader">
+            </div>
 
-            <br>
-            <br>
-            <input type="submit" value="apply filters">
-        </form>
-    </div>
-
-    <div id="dataContainer">
-        <p>Click the "Fetch Test" button</p>
-    </div> <!--Data from fetch goes here-->
-
-    <button id='fetchDataTest'>Fetch Test</button> <!--Fetches data-->
-
-
-    <div class="statOutput stat-grid-item">
-        <canvas id="myChart" width="400" height="200" style="text-align: center;"></canvas>
-
+            <div id="prjStMembersList">
+            </div>
+        </div>
     </div>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
 <script src="ManagerDash-Stats/projectStatsPage.js"></script>
