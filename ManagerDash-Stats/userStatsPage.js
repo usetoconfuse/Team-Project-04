@@ -29,7 +29,7 @@ async function PopulateUserStatsPage() {
     //Fetch task status graph
     fetchTaskStatusGraph();
 
-    fetchProjTimeGraph(userID);
+    fetchProjTimeGraph(userDetails.id);
 };
 
 //Fetch user details for user object
@@ -411,7 +411,7 @@ async function fetchProjTimeGraph(userID) {
         }
         // Convert the response to JSON format
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
 
         if (data.length > 0) {
             console.log(data);
@@ -440,11 +440,11 @@ async function fetchProjTimeGraph(userID) {
       }
 //function to create chart
 
-// function createProjTimeGraph(yAxProj, durArr) {
+function createProjTimeGraph(yAxProj, durArr) {
 
-//     weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
+     weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
 
-    const weekhrsansd = new Chart(weekhrs, {
+    weekhrsansd = new Chart(weekhrs, {
     type: "bar",
     data: {
         labels: yAxProj,
@@ -480,7 +480,7 @@ options: {
         }
     }}
     });
-
+}
 
 
 

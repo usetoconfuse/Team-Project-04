@@ -5,9 +5,7 @@
 
 <link rel="stylesheet" href="ManagerDash-Stats/userStatsPage.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script> <!-- Gets Dates -->
-
-
+   
 <h1>User Statistics</h1>
 <div id="mgrStatsUser-grid-container">
         <!-- <div id="userStats-Flex-Item1"> -->
