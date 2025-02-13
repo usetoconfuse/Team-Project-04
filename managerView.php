@@ -49,7 +49,7 @@ if ($_SESSION['role'] !== 'Admin') {
     <section class="top-navbar">
         <div class="top-navbar-left">
             <div id="logo-container">
-                    <img src="assets/make-it-all-logo.jpg" alt="logo">
+                <img src="assets/make-it-all-logo.jpg" alt="logo">
             </div>
         </div>
 
@@ -62,7 +62,7 @@ if ($_SESSION['role'] !== 'Admin') {
                 <div class="user-profile-left">
                     <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
                     <div class="user-info">
-                        <p><span><?=$_SESSION['user_name'];?></span> | <?=$_SESSION['role'];?></p>
+                        <p><span><?= $_SESSION['user_name']; ?></span> | <?= $_SESSION['role']; ?></p>
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@ if ($_SESSION['role'] !== 'Admin') {
 
                 <div class="intro-txt">
 
-                    <h1>Welcome back, <?=$_SESSION['user_forename'];?>.</h1>
+                    <h1>Welcome back, <?= $_SESSION['user_forename']; ?>.</h1>
                     <!--<p>View your daily overview here.</p>-->
                 </div>
 
@@ -158,7 +158,7 @@ if ($_SESSION['role'] !== 'Admin') {
                             <div class="date"></div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
 
 
@@ -180,7 +180,7 @@ if ($_SESSION['role'] !== 'Admin') {
 
         <section id="content">
 
-         <div class="nav-item-content" id="overview-content">
+            <div class="nav-item-content" id="overview-content">
                 <?php include 'OUTDATEDmanagerDashContent.php' ?>
             </div>
 
@@ -194,7 +194,7 @@ if ($_SESSION['role'] !== 'Admin') {
             </div>
 
             <div class="nav-item-content" id="current-project-content">
-                <?php include 'Project-Kanban/projectsKanban.php'; ?>
+                <?php include 'Project-Kanban/adminTaskManager.php'; ?>
             </div>
 
             <div class="nav-item-content" id="forums-content">
@@ -205,14 +205,15 @@ if ($_SESSION['role'] !== 'Admin') {
                 <?php include 'ManagerDash-Stats/statisticsHomePage.php'; ?>
             </div>
 
-      
+
 
 
         </section>
     </section>
-   
-    
-    <div class="modal" id="change-password-modal" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" >
+
+
+    <div class="modal" id="change-password-modal"
+        data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>">
         <div class="modal-box">
             <div class="modal-header">
                 <p>Change Password</p>
@@ -283,7 +284,8 @@ if ($_SESSION['role'] !== 'Admin') {
             <div class="modal-body">
                 <p>Password successfully changed. You are required to log back in again with your new password.</p>
                 <div class="task-submit-buttons">
-                    <a class="log-out-pass-btn black-btn" id="add-filter-btn">Go To Login<i class="fa fa-arrow-right"></i></a>
+                    <a class="log-out-pass-btn black-btn" id="add-filter-btn">Go To Login<i
+                            class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -291,13 +293,16 @@ if ($_SESSION['role'] !== 'Admin') {
 
 
     <script src="navbar.js"></script>
-    <script type="module" src="Project-Kanban/kanban.js"></script>
+    <!--<script type="module" src="Project-Kanban/kanban.js"></script>-->
     <script src="ManagerDash-Stats/statisticsHomePage.js"></script>
     <script src="Projects/projects.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
+        integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,3 @@
-
 const userID = document.querySelector('#emp-dash-content').getAttribute('data-user-id');
 document.addEventListener('DOMContentLoaded', () => {
     getEmpStats(userID);
