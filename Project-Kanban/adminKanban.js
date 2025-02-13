@@ -54,9 +54,7 @@ async function getProjectName(selectedProjectID) {
     console.log(adminProjectData);
     populateTasksTable(adminProjectData);
     
-   
-
-
+  
     } catch (error) {
         console.log("Fetch Issue",error);
     }
@@ -77,8 +75,9 @@ function populateTasksTable(tableData) {
                             <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
                             <td>${task.Due_Date}</td>
                             <td>${taskStuck}</td>
-                            <td>${task.Project_ID}: ${task.Project_Title}</td>
-                            <td>${task.Forename} ${task.Surname}</td>`
+                            <td>${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
+                            <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>
+              `
         
         tableBody.appendChild(row);
 

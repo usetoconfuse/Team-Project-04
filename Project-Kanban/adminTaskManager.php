@@ -88,6 +88,50 @@
 
 
 
+    <section class="emp-dash-bottom">
+        <section class="emp-projectKanban-container emp-item-container" id="emp-projectKanban-container">
+            <div class="emp-item-top">
+                <p>All Tasks</p>
+                <div class="task-search-container">
+
+                    <p class="search-task-error-msg">No Tasks Found</p>
+
+                    <div class="task-search">
+                        <i class="fa fa-solid fa-search"></i>
+                        <input type="text" placeholder="Search Tasks" id="searched-task">
+                    </div>
+                </div>
+            </div>
+
+            <div class="emp-projectKanban-bottom">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Task Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Deadline</th>
+                            <th>Stuck</th>
+                            <th>Assignee</th>
+                            <th>Assigned By</th>
+                            <th>More</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </section>
+    </section>
+
+
+
 
 
     <!--Filter Posts -->
@@ -263,49 +307,6 @@
             </div>
         </div>
     </div>
-
-    <section class="emp-dash-bottom">
-        <section class="emp-projectKanban-container emp-item-container" id="emp-projectKanban-container">
-            <div class="emp-item-top">
-                <p>All Tasks</p>
-                <div class="task-search-container">
-
-                    <p class="search-task-error-msg">No Tasks Found</p>
-
-                    <div class="task-search">
-                        <i class="fa fa-solid fa-search"></i>
-                        <input type="text" placeholder="Search Tasks" id="searched-task">
-                    </div>
-                </div>
-            </div>
-
-            <div class="emp-projectKanban-bottom">
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Task ID</th>
-                            <th>Task Title</th>
-                            <th>Status</th>
-                            <th>Priority</th>
-                            <th>Deadline</th>Fetch Issue SyntaxError: Unexpected token 'Q', "Query fail"... is not valid
-                            JSON
-                            <th>Stuck</th>
-                            <th>Assignee</th>
-                            <th>Assigned By</th>
-                            <th>More</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
-            </div>
-
-
-        </section>
-    </section>
 
 
 

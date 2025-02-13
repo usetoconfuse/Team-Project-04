@@ -5,8 +5,7 @@ include '../config/db-setup.php';
 $projectID = isset($_GET['projectID']) ? intval($_GET['projectID']) : null;
 
 //Emp Dashboard Stats Query
-$projectTaskSQL = "
-    SELECT 
+$projectTaskSQL = "SELECT 
         Tasks.*, 
         assignee.forename AS assignee_forename, 
         assignee.surname AS assignee_surname, 
@@ -19,8 +18,7 @@ $projectTaskSQL = "
     LEFT JOIN 
         Users AS assigned_by ON Tasks.Author_ID = assigned_by.user_id 
     WHERE 
-        Tasks.Project_ID = $projectID;
-";
+        Tasks.Project_ID = $projectID;";
 
 $projectTaskResult = mysqli_query($conn, $projectTaskSQL);
 
