@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 
 
-
+  const userRole = document.querySelector('#project-content').getAttribute('data-role');
+  console.log(userRole);
   //Fetch all project data for this user and display on page
   async function fetchProjectsData(userID, filters={}) {
     try {
@@ -55,6 +56,34 @@ document.addEventListener("DOMContentLoaded", function () {
         projectCard.classList.add('project-card');
         projectCard.setAttribute('data-project-id', project.Project_ID);
         projectCard.setAttribute('data-project-title', project.Project_Title);
+
+        let cardBottom = "";
+        if (userRole === "Admin") {
+          cardBottom = `
+                      <div class="project-card-bottom">
+                          <div class="project-card-task-count">
+                          
+                          </div>
+                      
+                          <div class="project-card-due-date">
+                              <i class="fa fa-regular fa-calendar"></i>
+                              <p>Due: ${project.Due_Date}</p>
+                          </div>
+                      </div>`
+        } else {
+          cardBottom = `
+                      <div class="project-card-bottom">
+                          <div class="project-card-task-count">
+                            <i class="fa fa-solid fa-list-check"></i>
+                            <p>${project.Task_Count} Tasks<p>
+                          </div>
+                      
+                          <div class="project-card-due-date">
+                              <i class="fa fa-regular fa-calendar"></i>
+                              <p>Due: ${project.Due_Date}</p>
+                          </div>
+                      </div>`
+        }
         
         
     
@@ -75,17 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                       </div>
                                   </div>
     
-                                  <div class="project-card-bottom">
-                                      <div class="project-card-task-count">
-                                        <i class="fa fa-solid fa-list-check"></i>
-                                        <p>${project.Task_Count} Tasks<p>
-                                      </div>
-                                  
-                                      <div class="project-card-due-date">
-                                          <i class="fa fa-regular fa-calendar"></i>
-                                          <p>Due: ${project.Due_Date}</p>
-                                      </div>
-                                  </div>
+                                  ${cardBottom}
                             
                               `;
     
