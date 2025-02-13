@@ -23,3 +23,8 @@
 #prjStBurnupChartBox {
     grid-area: burnup;
 }
+
+/* Member list */
+#prjStMemberList {
+    grid-area: members;
+}

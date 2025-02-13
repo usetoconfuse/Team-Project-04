@@ -155,17 +155,19 @@ async function PopulateBurnUpChart() {
                     },
                     grid: {
                         display: false
-                    }
+                    },
                 },
 
                 y: {
                     title: {
                         display: true,
-                        text: "Tasks"
+                        text: "Person-Hours Contributed"
                     },
                     ticks: {
                         beginAtZero: true
-                    }
+                    },
+                    // Set max of y scale to 20% above max person-hours, rounded to the nearest 5
+                    max: Math.ceil(burnUpScope[burnUpCompleted.length-1] * 0.24) * 5
                 }
             },
 
@@ -187,14 +189,14 @@ async function PopulateBurnUpChart() {
                             display: isOverdue,
                             xMin: dueDateWeek,
                             xMax: dueDateWeek,
-                            borderColor: 'rgb(255, 99, 132)',
+                            borderColor: '#000000',
                             borderWidth: 2,
                             label: {
                                 content: 'Deadline',
                                 enabled: isOverdue,
-                                position: 'top',
-                                backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                                color: '#fff'
+                                position: 'start',
+                                backgroundColor: 'rgb(187, 38, 70)',
+                                color: '#ffffff'
                             }
                         }
                     }
