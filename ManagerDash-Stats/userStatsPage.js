@@ -27,9 +27,11 @@ async function PopulateUserStatsPage() {
     // fetchWeeklyHrsGraph();
 
     //Fetch task status graph
-    fetchTaskStatusGraph();
+    // fetchTaskStatusGraph();
 
     fetchProjTimeGraph(userDetails.id);
+
+    PopulateTaskDialChartUserStats();
 };
 
 //Fetch user details for user object
@@ -103,62 +105,62 @@ async function fetchUserDetails() {
 
     
 //Function to fetch all man-hours over the past week of a user
-async function fetchTaskStatusGraph() {
-    try {
-        // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userDetails.id);
-        // console.log("1: ", response);
+// async function fetchTaskStatusGraph() {
+//     try {
+//         // Make an HTTP request to the PHP file
+//         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userDetails.id);
+//         // console.log("1: ", response);
         
-        // Ensure the response is OK and return the JSON data 
-        if (!response.ok) { 
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        // Convert the response to JSON format
-        const data = await response.json();
-        // console.log(data);
+//         // Ensure the response is OK and return the JSON data 
+//         if (!response.ok) { 
+//             throw new Error('Network response was not ok ' + response.statusText);
+//         }
+//         // Convert the response to JSON format
+//         const data = await response.json();
+//         // console.log(data);
 
-        if (data.length > 0) {
-            // console.log("Test 0: ", data);
-            statusTaskArr = [];
-            i = 0;
-            // console.log("Test 1: ", data[0][0]);
-            // console.log("Test 2: ", (data[0][0]).tasks);
+//         if (data.length > 0) {
+//             // console.log("Test 0: ", data);
+//             statusTaskArr = [];
+//             i = 0;
+//             // console.log("Test 1: ", data[0][0]);
+//             // console.log("Test 2: ", (data[0][0]).tasks);
 
-            if (data[0][0] != null) {
-                statusTaskArr.push(parseInt(data[0][0].Tasks)); // To Do
-                // console.log("test",data[0]);
-            }
-            if (data[1][0] != null) {
-                statusTaskArr.push(parseInt(data[1][0].Tasks)); // In Progress
+//             if (data[0][0] != null) {
+//                 statusTaskArr.push(parseInt(data[0][0].Tasks)); // To Do
+//                 // console.log("test",data[0]);
+//             }
+//             if (data[1][0] != null) {
+//                 statusTaskArr.push(parseInt(data[1][0].Tasks)); // In Progress
 
-            }
-            if (data[2][0] != null) {
-                statusTaskArr.push(parseInt(data[2][0].Tasks)); // Completed
+//             }
+//             if (data[2][0] != null) {
+//                 statusTaskArr.push(parseInt(data[2][0].Tasks)); // Completed
 
-            }
-            if (data[3][0] != null) {
-                statusTaskArr.push(parseInt(data[3][0].Tasks)); // Stuck
+//             }
+//             if (data[3][0] != null) {
+//                 statusTaskArr.push(parseInt(data[3][0].Tasks)); // Stuck
 
-            }
-
-
+//             }
 
 
 
-            // data.forEach(function(item) {
-            //     statusTaskArr.push(item[i]);
-            //     i++;
-            // });                        
-            // console.log("status: ", statusTaskArr)
-            createTaskStatusGraph(statusTaskArr);
 
-        } else {
-            createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
-        }
-} catch (error) {
-    console.error('Error:', error); // Log any errors that occur
-}
-};
+
+//             // data.forEach(function(item) {
+//             //     statusTaskArr.push(item[i]);
+//             //     i++;
+//             // });                        
+//             // console.log("status: ", statusTaskArr)
+//             createTaskStatusGraph(statusTaskArr);
+
+//         } else {
+//             createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
+//         }
+// } catch (error) {
+//     console.error('Error:', error); // Log any errors that occur
+// }
+// };
 
 //Function to fetch overall manhours per project of a user
 async function fetchUserProjHrsTable() {
@@ -681,3 +683,108 @@ function createGantt(dataset) {
 
   
 
+
+
+
+//   Dial chart task Status...
+// Task dial chart
+const dialCtxUserStats = document.getElementById("userStTaskDialChart").getContext("2d");
+var taskDialUserStats = new Chart(dialCtxUserStats)
+
+
+//====================== TASK DIAL ========================
+
+async function PopulateTaskDialChartUserStats() {
+
+    // CHART DATA
+
+    // Make an HTTP request to the PHP file
+    const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userDetails.id);
+    // console.log("1: ", response);
+    
+    // Ensure the response is OK and return the JSON data 
+    if (!response.ok) { 
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    // Convert the response to JSON format
+    const data = await response.json();
+    // console.log(data);
+
+    if (data.length > 0) {
+        // console.log("Test 0: ", data);
+        statusTaskArr = [];
+        i = 0;
+        // console.log("Test 1: ", data[0][0]);
+        // console.log("Test 2: ", (data[0][0]).tasks);
+
+        if (data[0][0] != null) {
+            statusTaskArr.push(parseInt(data[0][0].Tasks)); // To Do
+            // console.log("test",data[0]);
+        }
+        if (data[1][0] != null) {
+            statusTaskArr.push(parseInt(data[1][0].Tasks)); // In Progress
+
+        }
+        if (data[2][0] != null) {
+            statusTaskArr.push(parseInt(data[2][0].Tasks)); // Completed
+
+        }
+ 
+        console.log("Original Status Data: ", data);
+        console.log("Refined Status Array",statusTaskArr)
+    
+
+
+    // const dialData = [data[0][0]["Done"], data[0][0]["Inprog"], data[0][0]["Todo"]];
+
+    // console.log("DIAL DATA:", data);
+    // console.log("DIAL DATA 22:", dialData);
+
+
+    // DRAW CHART
+
+    // Calculate progress completion percentage
+    let totalTasksUserStats = statusTaskArr[0] + statusTaskArr[1] + statusTaskArr[2];
+    let percentageUserStats = Math.round((statusTaskArr[2]*100) / totalTasksUserStats);
+    document.getElementById("userStTaskDialPercentageText").innerText = percentageUserStats + "%";
+
+    // Populate chart legend text
+    document.getElementById("userStLegendDone").innerText = statusTaskArr[0];
+    document.getElementById("userStLegendInprog").innerText = statusTaskArr[1];
+    document.getElementById("userStLegendTodo").innerText = statusTaskArr[2];
+
+    taskDialUserStats.destroy();
+
+    taskDialUserStats = new Chart(dialCtxUserStats, {
+        type: 'doughnut',
+
+        data: {
+            labels: ['To Do',
+                'In Progress',
+                'Completed'],
+            datasets: [{
+                data: statusTaskArr,
+                backgroundColor: [
+                    '#8e8e91',
+                    '#eab385',
+                    '#adda9d'
+                ]
+            }],
+        },
+        
+        options: {
+            rotation: -90,
+            circumference: 180, 
+            cutout: '80%',
+            responsive: true,
+            aspectRatio: 2,
+    
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+}

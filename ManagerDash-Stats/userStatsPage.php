@@ -22,13 +22,50 @@
                 <div id="userStats-graphChangeButton">
                     <i class="fa fa-solid fa-sort"></i>
                     <select name="userStats-chooseGraph" id="userStats-chooseGraph">
-                        <option value="userStats-chooseGraph-weekHrs">Week Hrs (status)</option>
-                        <option value="userStats-chooseGraph-overlap">Overlap Graph</option>
+                        <option value="userStats-chooseGraph-weekHrs">Task Status Graph</option>
+                        <option value="userStats-chooseGraph-overlap">Project Gantt Chart</option>
                     </select>
                 </div>
 
-                <div id="userStats-weekHrsContainer"> <!--GRAPH OVERALL MAN HOURS LAST 7 DAYS-->
-                    <canvas id="userStats-weekHrsContainerGraph"></canvas>
+                <div id="userStats-weekHrsContainer"> <!-- Task Status Graph -->
+                    <!-- <canvas id="userStats-weekHrsContainerGraph"></canvas> -->
+                                        <!-- Task dial -->
+                                        <div id="userStTaskDialCell">
+                                            <div id="userStTaskDialChartBox">
+                                                <canvas id="userStTaskDialChart"></canvas>
+                                            </div>
+
+                                            <div id="userStTaskDialPercentage">
+                                                <h1 id="userStTaskDialPercentageText"></h1>
+                                                <p>Of Tasks Complete</p>
+                                            </div>
+
+                                            <div id="userStTaskDialLegend">
+                                                <div class="userStTaskDialLegendItem">
+                                                    <div class="userStTaskDialLegendCounter">
+                                                        <i class="fa-solid fa-circle fa-2xs prjStGray"></i>
+                                                        <h3 id="userStLegendDone"></h3>
+                                                    </div>
+                                                    <p>To Do</p>
+                                                </div>
+
+                                                <div class="userStTaskDialLegendItem">
+                                                    <div class="userStTaskDialLegendCounter">
+                                                        <i class="fa-solid fa-circle fa-2xs prjStY"></i>
+                                                        <h3 id="userStLegendInprog"></h3>
+                                                    </div>
+                                                    <p>In Progress</p>
+                                                </div>
+
+                                                <div class="userStTaskDialLegendItem">
+                                                    <div class="userStTaskDialLegendCounter">
+                                                        <i class="fa-solid fa-circle fa-2xs  prjStG"></i>
+                                                        <h3 id="userStLegendTodo"></h3>
+                                                    </div>
+                                                    <p>Completed</p>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
                 <div id="userStats-overlapContainer">
                     <canvas id="userStats-overlapContainerGraph"></canvas>
