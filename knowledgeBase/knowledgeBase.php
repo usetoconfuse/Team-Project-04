@@ -205,11 +205,11 @@
                         </div>
                     </div>
                 </form>
-                <div class="task-submit-buttons">
-                    <div class="add-post-btn black-btn" id="kb-edit-post-submit-btn">
+                <div class="kb-modal-submission-btns">
+                    <button id="kb-edit-post-submit-btn">
                         Edit Post
                         <i class="fa fa-arrow-right"></i>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
