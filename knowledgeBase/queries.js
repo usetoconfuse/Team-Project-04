@@ -73,8 +73,8 @@ const fetchTopics = async (query) => {
 };
 
 //helped colour formula methdo
-const getTopicColour = (topicId) =>{
-    const hue = ((topicId * 137) + 47) % 360; 
+const getTopicColour = (topicId) => {
+    const hue = ((topicId * 137) + 47) % 360;
     const hsl = `hsl(${hue},44%,44%)`;
 
     return hsl;
@@ -84,7 +84,7 @@ const getTopicColour = (topicId) =>{
 const renderTopics = (topics) => {
     const topicsContainer = document.getElementById('kb-topics-list');
 
-    if (topics.length === 0){
+    if (topics.length === 0) {
         topicsContainer.innerHTML = '<p>No Topics Available</p>';
         return;
     }
@@ -157,12 +157,12 @@ const renderAllPosts = async (posts) => {
             <button class="kb-delete-post-button red-btn">Delete Post <i class="fa-solid fa-trash"></i></button>
             `;
         }
-        
+
         let currentTypeHtml = '';
-        if (post.Type === 'Technical'){
+        if (post.Type === 'Technical') {
             currentTypeHtml = ` class="kb-badge" style="background-color:hsl(17 ,5% ,10%);" `;
         }
-        if (post.Type === 'Non-Technical'){
+        if (post.Type === 'Non-Technical') {
             currentTypeHtml = `class="kb-badge" style="background-color:hsl(17, 5% ,50%);" `;
         }
 
@@ -203,6 +203,7 @@ const renderAllPosts = async (posts) => {
         const editButton = postElement.querySelector(".kb-edit-post-button");
         if (editButton) {
             editButton.addEventListener("click", () => {
+                editPostModal.setAttribute("data-post-id", post.Post_ID);
                 editPostModal.querySelector("#edit-post-title-input").value = post.Title
                 editPostModal.querySelector("#edit-post-content-input").value = post.Description
                 editPostModal.querySelector("#edit-post-type-input").value = post.Type
@@ -256,7 +257,7 @@ const updatePosts = async () => {
                 let postId = postElement.getAttribute("data-id");
                 console.log(`post id is : ${postId}`);
                 const deleteElement = document.getElementById('delete-post-modal');
-                deleteElement.setAttribute('deleted-post-id',postId)
+                deleteElement.setAttribute('deleted-post-id', postId)
                 openDeletePostModal(postId);
             });
         }
@@ -292,7 +293,7 @@ document.getElementById('kb-type-nontechnical-btn').addEventListener('click', (e
 });
 
 // Update selected posts when the search bar is used
-document.getElementById('searched-post').addEventListener("input", async (e) =>{
+document.getElementById('searched-post').addEventListener("input", async (e) => {
     selectedQuery = e.target.value.trim();
     updatePosts();
 });
@@ -355,7 +356,7 @@ var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 const deletePostModal = document.getElementById('delete-post-modal');
 var [closeDeletePostModal, openDeletePostModal] = makeModal(deletePostModal);
 
-document.getElementById('kb-delete-post-modal-confirm').addEventListener('click',  async() =>{
+document.getElementById('kb-delete-post-modal-confirm').addEventListener('click', async () => {
     //need to find a way to actaully get the post id
     const deletedElement = document.getElementById('delete-post-modal');
     const postId = deletedElement.getAttribute('deleted-post-id');
@@ -363,15 +364,15 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
     try {
         const response = await doRequest("GET", "deletePost", { postId }, null);
         console.log("Delete response:", response);
-        
-        if(response && response.success){
+
+        if (response && response.success) {
             console.log("Post deleted successful");
             closeDeletePostModal();
             // Remove the deleted post from the DOM
             const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
             if (postElement) postElement.remove();
 
-        }else{
+        } else {
             console.error("Failed to delete post", response);
         }
     } catch (error) {
@@ -396,9 +397,9 @@ submitTopicBtn.addEventListener('click', async (event) => {
     const newTopic = document.getElementById('kb-add-topic-modal-name-input').value;
 
     //pass data from form to addtopic sql query
-    await doRequest("POST", "addTopic", {}, {name: newTopic});
+    await doRequest("POST", "addTopic", {}, { name: newTopic });
     await updateTopics();
-    await fetchTopics().then((topics)=> {
+    await fetchTopics().then((topics) => {
         const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
         const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
         renderTopicsInDropdown(topics, newPostTopicsDropdown)
@@ -410,7 +411,7 @@ submitTopicBtn.addEventListener('click', async (event) => {
 });
 
 //topic search bar functionality
-document.getElementById('searched-topic').addEventListener("input", async (e) =>{
+document.getElementById('searched-topic').addEventListener("input", async (e) => {
     selectedTopicQuery = e.target.value.trim();
     updateTopics();
 });
@@ -489,7 +490,7 @@ window.onload = async () => {
     user = await getUser();
     await updatePosts();
     await updateTopics();
-    await fetchTopics().then((topics)=> {
+    await fetchTopics().then((topics) => {
         const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
         const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
         renderTopicsInDropdown(topics, newPostTopicsDropdown)
