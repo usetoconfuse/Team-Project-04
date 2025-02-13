@@ -1,4 +1,4 @@
-<div id="proj-kanban-content" class="kanban-content kanban-content-project"
+<div id="admin-kanban-content" class="kanban-content kanban-content-project"
     data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>"
     data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
@@ -53,7 +53,12 @@
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
 
-
+            <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Team Leader')): ?>
+                <div class="add-task-btn black-btn">
+                    <i class="fa fa-solid fa-plus"></i>
+                    Add Task
+                </div>
+            <?php endif; ?>
             <div class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
                 Close
@@ -83,53 +88,6 @@
 
 
 
-    <!--Kanban Board-->
-    <section class="kanban-board">
-
-        <!--Kanban Column-->
-        <div class="kanban-section">
-            <!--Kanban Header-->
-            <div class="kanban-header" id="to-do-header">
-                <div class="kanban-header-txt">To Do</div>
-                <div class="kanban-header-no">4</div>
-                <i class="fa fa-solid fa-caret-up"></i>
-            </div>
-            <!--Kanban Body-->
-            <div class="kanban-body open" id='kanban-to-do'>
-
-
-            </div>
-        </div>
-
-        <!--Kanban Column-->
-        <div class="kanban-section">
-            <!--Kanban Header-->
-            <div class="kanban-header" id="in-progress-header">
-                <div class="kanban-header-txt">In Progress</div>
-                <div class="kanban-header-no">3</div>
-                <i class="fa fa-solid fa-caret-down"></i>
-            </div>
-            <!--Kanban Body-->
-            <div class="kanban-body" id='kanban-in-progress'>
-
-            </div>
-        </div>
-
-        <!--Kanban Column-->
-        <div class="kanban-section">
-            <!--Kanban Header-->
-            <div class="kanban-header" id="completed-header">
-                <div class="kanban-header-txt">Completed</div>
-                <div class="kanban-header-no">2</div>
-                <i class="fa fa-solid fa-caret-down"></i>
-            </div>
-            <!--Kanban Body-->
-            <div class="kanban-body" id='kanban-completed'>
-
-            </div>
-
-        </div>
-    </section>
 
 
     <!--Filter Posts -->
@@ -305,6 +263,48 @@
             </div>
         </div>
     </div>
+
+    <section class="emp-dash-bottom">
+        <section class="emp-projectKanban-container emp-item-container" id="emp-projectKanban-container">
+            <div class="emp-item-top">
+                <p>All Tasks</p>
+                <div class="task-search-container">
+
+                    <p class="search-task-error-msg">No Tasks Found</p>
+
+                    <div class="task-search">
+                        <i class="fa fa-solid fa-search"></i>
+                        <input type="text" placeholder="Search Tasks" id="searched-task">
+                    </div>
+                </div>
+            </div>
+
+            <div class="emp-projectKanban-bottom">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Task Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Deadline</th>
+                            <th>Stuck</th>
+                            <th>Assignee</th>
+                            <th>Assigned By</th>
+                            <th>More</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </section>
+    </section>
 
 
 
