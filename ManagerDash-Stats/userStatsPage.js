@@ -41,7 +41,7 @@ async function fetchUserDetails() {
         
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsGetUserInfoQuery.php?ID=' + userID);
-        console.log("1: ", response);
+        // console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
         if (!response.ok) { 
@@ -57,7 +57,7 @@ async function fetchUserDetails() {
         userDetails.email = data[0].Email;
         userDetails.role = data[0].User_Type;
         userDetails.status = data[0].Employee_Status;
-        console.log(userDetails);
+        // console.log(userDetails);
 
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
@@ -107,7 +107,7 @@ async function fetchTaskStatusGraph() {
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskStatusGraphQuery.php?ID=' + userDetails.id);
-        console.log("1: ", response);
+        // console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
         if (!response.ok) { 
@@ -115,26 +115,29 @@ async function fetchTaskStatusGraph() {
         }
         // Convert the response to JSON format
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         if (data.length > 0) {
-            console.log(data);
+            // console.log("Test 0: ", data);
             statusTaskArr = [];
             i = 0;
-            console.log(data[0][0].tasks);
+            // console.log("Test 1: ", data[0][0]);
+            // console.log("Test 2: ", (data[0][0]).tasks);
+
             if (data[0][0] != null) {
-                statusTaskArr.push(parseInt(data[0][0].tasks)); // To Do
+                statusTaskArr.push(parseInt(data[0][0].Tasks)); // To Do
+                // console.log("test",data[0]);
             }
             if (data[1][0] != null) {
-                statusTaskArr.push(parseInt(data[1][0].tasks)); // In Progress
+                statusTaskArr.push(parseInt(data[1][0].Tasks)); // In Progress
 
             }
             if (data[2][0] != null) {
-                statusTaskArr.push(parseInt(data[2][0].tasks)); // Completed
+                statusTaskArr.push(parseInt(data[2][0].Tasks)); // Completed
 
             }
             if (data[3][0] != null) {
-                statusTaskArr.push(parseInt(data[3][0].tasks)); // Stuck
+                statusTaskArr.push(parseInt(data[3][0].Tasks)); // Stuck
 
             }
 
@@ -146,7 +149,7 @@ async function fetchTaskStatusGraph() {
             //     statusTaskArr.push(item[i]);
             //     i++;
             // });                        
-            console.log(statusTaskArr)
+            // console.log("status: ", statusTaskArr)
             createTaskStatusGraph(statusTaskArr);
 
         } else {
@@ -162,7 +165,7 @@ async function fetchUserProjHrsTable() {
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userDetails.id);
-        console.log("1: ", response);
+        // console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
         if (!response.ok) { 
@@ -172,7 +175,7 @@ async function fetchUserProjHrsTable() {
         const data = await response.json();
 
         if (data.length > 0) {
-            console.log("2: ", data[0].Project_ID);
+            // console.log("2: ", data[0].Project_ID);
 
             // Build the new table to display
             let hoursTable  = "<table class='statsHome-table'>"
@@ -218,7 +221,7 @@ async function fetchUserProjHrsTable() {
         try {
             // Make an HTTP request to the PHP file
             const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id);
-            console.log("1: ", response);
+            // console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
             if (!response.ok) { 
@@ -228,7 +231,7 @@ async function fetchUserProjHrsTable() {
             const data = await response.json();
             if (data.length > 0) {
 
-                console.log("2: ", data[0].Task_ID);
+                // console.log("2: ", data[0].Task_ID);
 
                 // Build the new table to display
                 let tasksTable  = "<table class='statsHome-table'>"
@@ -414,7 +417,7 @@ async function fetchProjTimeGraph(userID) {
         console.log(data);
 
         if (data.length > 0) {
-            console.log(data);
+            // console.log(data);
              // Create a dictionary (object) from the data
             //  const dataDict = {};
             //     data.forEach(item => {
@@ -425,7 +428,7 @@ async function fetchProjTimeGraph(userID) {
                     y: (item.Project_Title)
                 }));
                 // Log the dictionary to the console
-                console.log(dataset);
+                // console.log(dataset);
                 createGantt(dataset);
   
         } else {
