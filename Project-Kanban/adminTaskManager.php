@@ -69,16 +69,6 @@
         <div class="kanban-separator"></div>
     </section>
 
-    <div class="task-search-container">
-        <div class="task-search">
-            <i class="fa fa-solid fa-search"></i>
-            <input type="text" placeholder="Search Tasks" id="searched-task">
-        </div>
-        <div>
-            <p class="search-task-error-msg">No Tasks Found</p>
-        </div>
-
-    </div>
     <div class="filter-applied-container">
         <p class="filter-applied-msg"></p>
         <div class="remove-filters-btn">
@@ -129,6 +119,10 @@
 
         </section>
     </section>
+
+
+
+
 
 
 
@@ -307,6 +301,7 @@
             </div>
         </div>
     </div>
+
 
 
 

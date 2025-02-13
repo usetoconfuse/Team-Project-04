@@ -81,6 +81,40 @@ function populateTasksTable(tableData) {
         
         tableBody.appendChild(row);
 
+        const moreActionsModal = document.createElement('div');
+        moreActionsModal.classList.add('modal', 'admin-actions-modal');
+        moreActionsModal.style.display = 'none';
+
+        moreActionsModal.innerHTML = `<div class="modal-box admin-actions-modal-box">
+                                        <div class="modal-header">
+                                            <p id="admin-actions-modal-header">Actions for Task ${task.Task_ID}: ${task.Name}</p>
+                                            <div class="close-modal-btn">
+                                                <i class="fa-solid fa-x"></i>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p id="admin-actions-modal-message"></p>
+                                            <div class="task-submit-buttons">
+                                                <a class="admin-actions-db black-btn"><i class="fa fa-arrow-right"></i></a>
+
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+
+        document.body.appendChild(moreActionsModal);
+        
+        const openAdminMoreBtn = row.querySelector('.view-admin-functionality-btn');
+        const closeAdminMoreBtn = moreActionsModal.querySelector('.close-modal-btn');
+        openAdminMoreBtn.addEventListener('click', () => {
+          moreActionsModal.style.display = 'block';
+        })
+
+        closeAdminMoreBtn.addEventListener('click', () => {
+          moreActionsModal.style.display = 'none';
+        })
+        
+
     })
 }
 
@@ -132,3 +166,4 @@ filterProjectTaskBtn.addEventListener('click', () => {
   closeProjectFilterTaskModal.addEventListener('click', () => {
     filterProjectTaskModal.style.display = 'none';
   })
+
