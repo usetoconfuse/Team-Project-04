@@ -288,7 +288,8 @@
                             <th>Task Title</th>
                             <th>Status</th>
                             <th>Priority</th>
-                            <th>Deadline</th>
+                            <th>Deadline</th>Fetch Issue SyntaxError: Unexpected token 'Q', "Query fail"... is not valid
+                            JSON
                             <th>Stuck</th>
                             <th>Assignee</th>
                             <th>Assigned By</th>
