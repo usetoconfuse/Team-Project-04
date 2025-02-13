@@ -249,7 +249,7 @@ closeProjectFilterModal.addEventListener('click', () => {
 
 
 //Add Projects Modal
-const addProjectBtn = document.querySelector('.project-intro .add-project')
+const addProjectBtn = document.querySelector('.project-filter-container .add-project')
 const addProjectModal = document.querySelector('#projects-modal')
 const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn')
 
@@ -265,3 +265,23 @@ submitAddProject.addEventListener('click', () => {
   addProjectModal.style.display = 'none';
 })
 
+//Switch Buttons for different project pages
+const projectItems = document.querySelectorAll('.project-switch-buttons .project-item');
+const projectItemContents = document.querySelectorAll('.project-item-content');
+
+function openProjectContent(pageId) {
+  const projectItem = document.querySelector(`#${pageId}`);
+  projectItems.forEach(item => item.classList.remove('active'));
+  projectItem.classList.add('active');
+
+  projectItemContents.forEach(item => item.classList.remove('open'))
+  const projectItemContent = document.querySelector(`#${projectItem.id}-content`)
+  projectItemContent.classList.add('open');
+}
+
+projectItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+      e.preventDefault();
+      openProjectContent(item.id);
+  })
+})

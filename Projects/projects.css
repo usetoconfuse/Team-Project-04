@@ -30,14 +30,6 @@
     color: #9A9A9A;
 }
 
-.project-intro a {
-    background-color: black;
-    color: white; 
-    padding: 0.8rem 1rem;
-    border-radius: 30px;
-    white-space: nowrap;
-    font-size: 15px;
-}
 
 /*====Project Cards====*/
 
@@ -62,6 +54,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 30px;
+}
+
+.filter-project-btn {
     margin-right: 20px;
 }
 
@@ -202,6 +198,50 @@
 }
 
 
+/*Open and Close Project Sections*/
+.project-switch-buttons {
+    background-color: #F5F5F5;
+    white-space: nowrap;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-switch-buttons a {
+    border-radius: 0px;
+    padding: 10px;
+    color: black;
+    transition: all 0.4s ease;
+}
+
+.project-switch-buttons  a:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.project-switch-buttons a:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.project-switch-buttons a:hover {
+    background-color: #9A9A9A;
+}
+
+.project-switch-buttons a.active {
+    background-color: black;
+    color: white;
+}
+
+
+#active-project-content, #not-started-project-content, #archive-project-content {
+    display: none;
+}
+
+.project-item-content.open {
+    display: block !important;
+}
 
 
 /*====Responsiveness====*/
@@ -228,7 +268,7 @@
         display: none;
     }
     .project-filter-container {
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-items: flex-start;
         margin-left: 20px;
     }
