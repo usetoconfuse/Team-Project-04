@@ -103,7 +103,7 @@ async function PopulateBurnUpChart() {
         burnUpCompleted.push(item[0].comp);
         burnUpScope.push(item[0].scope);
 
-        if (new Date(projDetails.due) > new Date(item[0].week)
+        if (new Date(projDetails.due) < new Date(item[0].week)
             && !dueDateWeek) {
             dueDateWeek = weekCounter;
         }
@@ -112,8 +112,9 @@ async function PopulateBurnUpChart() {
     });
 
     // Show deadline for overdue projects
-    const isOverdue = new Date(projDetails.due) < new Date(projDetails.completed) ?
-        true : false;
+    const isOverdue = new Date(projDetails.due) < new Date(projDetails.completed)
+                    || !projDetails.completed ?
+                    true : false;
 
     projBurnup.destroy();
 
@@ -147,25 +148,25 @@ async function PopulateBurnUpChart() {
             },
 
             scales: {
-                xAxes: [{
-                    scaleLabel: {
+                x: {
+                    title: {
                         display: true,
-                        labelString: "Week"
+                        text: "Week"
                     },
-                    gridLines: {
+                    grid: {
                         display: false
                     }
-                }],
+                },
 
-                yAxes: [{
-                    scaleLabel: {
+                y: {
+                    title: {
                         display: true,
-                        labelString: "Tasks"
+                        text: "Tasks"
                     },
                     ticks: {
                         beginAtZero: true
                     }
-                }]
+                }
             },
 
             elements: {
@@ -183,6 +184,7 @@ async function PopulateBurnUpChart() {
                     annotations: {
                         deadlineLine: {
                             type: 'line',
+                            display: isOverdue,
                             xMin: dueDateWeek,
                             xMax: dueDateWeek,
                             borderColor: 'rgb(255, 99, 132)',
@@ -193,9 +195,9 @@ async function PopulateBurnUpChart() {
                                 position: 'top',
                                 backgroundColor: 'rgba(255, 99, 132, 0.8)',
                                 color: '#fff'
-                      }
+                            }
+                        }
                     }
-                  }
                 }
             }
         }
