@@ -76,7 +76,7 @@ async function fetchProjectTable() {
         console.log("2: ", data[0].Forename);
 
         // Build the new table to display
-        let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table'>"
+        let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
         projectTable  += `<thead>
                                     <tr>
                                         <th>Title</th>
@@ -159,7 +159,7 @@ async function fetchUserSearch(searchParams) {
         // Make an HTTP request to the PHP file
         const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
 
-        console.log("1: ", response);
+        // console.log("1: ", response);
         
         // Ensure the response is OK and return the JSON data 
         if (!response.ok) { 
@@ -170,10 +170,10 @@ async function fetchUserSearch(searchParams) {
         if (data.length > 0) {
 
 
-            console.log("2: ", data[0].Forename);
+            // console.log("2: ", data[0].Forename);
 
             // Build the new table to display
-            let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table'>"
+            let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table userStats-tr'>"
             userTable  += `<thead>
                                         <tr>
                                             <th>User ID</th>

@@ -42,7 +42,7 @@
 
 <!-- //TABLE OF EVERY PROJECT FOR THAT USER, AND MAN HOURS -->
             <div id='userStats-projHrs' class='mgrStatsUser-grid-item'>
-                <table id="userStats-projHrsTable">
+                <table class="userStats-tr" id="userStats-projHrsTable">
             <!-- Fetch Data Here -->
                 </table>
         <!-- </div> -->
@@ -52,7 +52,7 @@
 <!-- test -->
 <!-- Table of all tasks for specific user -->
     <div id="userStats-allTasksUser" class="mgrStatsUser-grid-item">
-        <table id="allTaskTable-userStats">
+        <table class="userStats-tr" id="allTaskTable-userStats">
         
         </table>
     </div>
