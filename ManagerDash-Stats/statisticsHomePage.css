@@ -5,10 +5,10 @@
 
 /*--------------------- General Statistics CSS ---------------------*/
 
-tr:hover {
+/* .userStats-tr:hover {
     background-color: #d4d100;
     cursor: pointer;
-}
+} */
 
 /* Page container */
 #mgrStatsAll {
