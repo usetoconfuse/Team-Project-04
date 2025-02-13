@@ -116,8 +116,7 @@ const renderTopics = (topics) => {
 }
 
 // method to render the Topics to be as items to choose from the dropdown within the add topic modal
-const renderTopicsInModal = (topics) => {
-    const topicsDropdown = document.querySelector("#topic-modal-dropdown"); // Reference the select element directly
+const renderTopicsInDropdown = (topics, topicsDropdown) => {
     topicsDropdown.innerHTML = '';
 
     // Add the default placeholder option
@@ -140,12 +139,14 @@ const renderTopicsInModal = (topics) => {
 const renderAllPosts = async (posts) => {
     const postsContainer = document.getElementById('kb-posts-list');
     postsContainer.innerHTML = '';
+    const editPostModal = document.getElementById('edit-post-modal');
 
     if (posts.length === 0) {
         postsContainer.innerHTML = '<p>No Posts Available</p>';
         return;
     };
     for (const post of posts) {
+        const postID = post.Post_ID;
         let currentUserHtml = '';
 
         // Only allow editing/deleting of posts if the user is the author or an admin.
@@ -196,6 +197,20 @@ const renderAllPosts = async (posts) => {
 
         // Append the post HTML to the container
         postsContainer.insertAdjacentHTML('beforeend', postHTML);
+
+        const postElement = document.getElementById(`post-${post.Post_ID}`);
+
+        const editButton = postElement.querySelector(".kb-edit-post-button");
+        if (editButton) {
+            editButton.addEventListener("click", () => {
+                editPostModal.querySelector("#edit-post-title-input").value = post.Title
+                editPostModal.querySelector("#edit-post-content-input").value = post.Description
+                editPostModal.querySelector("#edit-post-type-input").value = post.Type
+                editPostModal.querySelector("#edit-post-topic-input").value = post.Topic_Name
+                editPostModal.querySelector("#edit-post-visibility-input").value = post.Visibility
+                openEditPostModal();
+            });
+        }
     }
 }
 
@@ -228,16 +243,11 @@ const updatePosts = async () => {
 
     for (const post of document.querySelectorAll("#kb-posts-list .kb-post")) {
         const postId = post.id;
+
+
         post.querySelector(".read-post-btn").addEventListener("click", () => {
             openPost(postId);
         });
-
-        const editButton = post.querySelector(".kb-edit-post-button");
-        if (editButton) {
-            editButton.addEventListener("click", () => {
-                openEditPostModal(postId);
-            });
-        }
 
         const deleteButton = post.querySelector(".kb-delete-post-button");
         if (deleteButton) {
@@ -388,7 +398,12 @@ submitTopicBtn.addEventListener('click', async (event) => {
     //pass data from form to addtopic sql query
     await doRequest("POST", "addTopic", {}, {name: newTopic});
     await updateTopics();
-    await fetchTopics().then(renderTopicsInModal);
+    await fetchTopics().then((topics)=> {
+        const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
+        const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
+        renderTopicsInDropdown(topics, newPostTopicsDropdown)
+        renderTopicsInDropdown(topics, editPostTopicsDropdown)
+    });
 
     alert('Topic added successfully! ');
     closeAddTopicModal();
@@ -459,7 +474,7 @@ const sharePost = (postId) => {
     const params = new URLSearchParams(window.location.search);
     params.set("post", postId);
     const shareData = {
-        title: document.getElementById(postId).querySelector(".kb-title-header").innerText,
+        title: document.getElementById(postId).querySelector(".kb-title-header").value,
         url: `${window.location.origin}${window.location.pathname}?${params.toString()}`,
     };
     navigator.share(shareData);
@@ -474,5 +489,10 @@ window.onload = async () => {
     user = await getUser();
     await updatePosts();
     await updateTopics();
-    await fetchTopics().then(renderTopicsInModal);
+    await fetchTopics().then((topics)=> {
+        const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
+        const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
+        renderTopicsInDropdown(topics, newPostTopicsDropdown)
+        renderTopicsInDropdown(topics, editPostTopicsDropdown)
+    });
 };
