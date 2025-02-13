@@ -74,10 +74,10 @@ function populateTasksTable(tableData) {
                             <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
                             <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
                             <td>${task.Due_Date}</td>
-                            <td>${taskStuck}</td>
+                            <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
                             <td>${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
                             <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>
-              `
+                            <td><a class="view-admin-functionality-btn">More</a></td>  `;
         
         tableBody.appendChild(row);
 

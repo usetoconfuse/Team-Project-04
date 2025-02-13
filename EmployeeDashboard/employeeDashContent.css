@@ -188,7 +188,7 @@ thead, tbody {
 }
 
 /*PADDING*/
-.emp-projectKanban-bottom table  th {
+.emp-projectKanban-bottom table th {
     padding: 1rem 2rem;
     letter-spacing: 0.1rem;
     font-size: 0.9rem;
@@ -208,13 +208,13 @@ thead, tbody {
 
 
 
-.emp-table-status, .emp-table-priority {
+.emp-table-status, .emp-table-priority, .stuck-yes, .stuck-no {
     border-radius: 5px;
     padding: 0.1rem 0.3rem;
     text-align: center;
 }
 
-.emp-table-status.emp-table-status-to-do, .emp-table-priority.emp-table-priority-high {
+.emp-table-status.emp-table-status-to-do, .emp-table-priority.emp-table-priority-high, .stuck-yes {
     background-color: #ffcdd2;
     color: #c62828;
 }
@@ -224,7 +224,7 @@ thead, tbody {
     color: #947c01;
 }
 
-.emp-table-status.emp-table-status-completed, .emp-table-priority.emp-table-priority-low  {
+.emp-table-status.emp-table-status-completed, .emp-table-priority.emp-table-priority-low, .stuck-no  {
     background-color: #c8e6c9;
     color: #388e3c;
 }

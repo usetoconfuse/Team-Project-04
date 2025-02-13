@@ -1,0 +1,9 @@
+.view-admin-functionality-btn {
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.4rem 1.4rem;
+    font-size: 0.9rem;
+    text-align: center;
+    background-color: black;
+}

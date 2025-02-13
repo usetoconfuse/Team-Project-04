@@ -102,7 +102,7 @@ function populateTasksTable(tableData) {
                             <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
                             <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
                             <td>${task.Due_Date}</td>
-                            <td>${taskStuck}</td>
+                            <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
                             <td>${task.Project_ID}: ${task.Project_Title}</td>
                             <td>${task.Forename} ${task.Surname}</td>`
         

@@ -33,6 +33,7 @@ if ($_SESSION['role'] !== 'Admin') {
         crossorigin="anonymous" />
     <link rel="stylesheet" href="Project-Kanban/kanban.css" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Project-Kanban/adminKanban.css">
     </link>
     <title>Manager Dashboard</title>
 </head>
