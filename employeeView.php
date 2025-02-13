@@ -22,7 +22,7 @@ if ($_SESSION['role'] !== 'Employee') {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="navbar.css"/>
     </link>
     <link rel="stylesheet" href="knowledgeBase/knowledgeBase.css">
     </link>

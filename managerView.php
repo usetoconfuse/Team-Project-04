@@ -27,6 +27,8 @@ if ($_SESSION['role'] !== 'Admin') {
     <link rel="stylesheet" href="Projects/projects.css">
     </link>
     <link rel="stylesheet" href="ManagerDash-Stats/statisticsHomePage.css">
+    <link rel="stylesheet" href="EmployeeDashboard/employeeDashContent.css">
+    </link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="Project-Kanban/kanban.css" />
@@ -52,6 +54,10 @@ if ($_SESSION['role'] !== 'Admin') {
         </div>
 
         <div class="top-navbar-right">
+            <a class="change-password">
+                <p>Change Password</p>
+            </a>
+
             <div class="user-profile">
                 <div class="user-profile-left">
                     <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
@@ -205,6 +211,85 @@ if ($_SESSION['role'] !== 'Admin') {
         </section>
     </section>
    
+    
+    <div class="modal" id="change-password-modal" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" >
+        <div class="modal-box">
+            <div class="modal-header">
+                <p>Change Password</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <form id="change-password-modal-form" class="modal-body">
+                <div class="input-container password-old">
+                    <div class="password-label">
+                        <label>Enter Old Password<span>*</span></label>
+                        <i class="fa fa-solid fa-eye-slash"></i>
+                    </div>
+
+                    <input type="password" name="old_password" class="text-input" id="oldPasswordInput"
+                        placeholder=" Enter your old password" required>
+                </div>
+
+                <div class="input-container password-new">
+                    <div class="password-label">
+                        <label>Enter New Password<span>*</span></label>
+                        <i class="fa fa-solid fa-eye-slash"></i>
+                    </div>
+
+                    <input type="password" name="new_password" class="text-input" id="newPasswordInput"
+                        placeholder=" Enter your new password" required>
+                </div>
+
+                <div class="password-criteria-container">
+                    <p class="password-criteria-label">Password must contain:</p>
+
+                    <ul class="password-criteria">
+                        <li class="criteria-item" id="password-length">At least 12 characters long</li>
+                        <li class="criteria-item" id="uppercase-char">At least 1 uppercase leter</li>
+                        <li class="criteria-item" id="lowercase-char">At least 1 lowercase letter</li>
+                        <li class="criteria-item" id="number-check">At least 1 number</li>
+                        <li class="criteria-item" id="special-char">At least 1 special character</li>
+                    </ul>
+                </div>
+
+
+                <div class="input-container password-confirm">
+                    <div class="password-label">
+                        <label>Confirm New Password<span>*</span></label>
+                        <i class="fa fa-solid fa-eye-slash"></i>
+                    </div>
+
+                    <input type="password" name="old_password" class="text-input" id="confirmPasswordInput"
+                        placeholder=" Confirm your old password" required>
+                </div>
+            </form>
+            <p class="change-pass-error"></p>
+            <div class="task-submit-buttons">
+                <a class="change-pass-btn" id="add-filter-btn">
+                    Change Password
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Change Password Force Log Out Modal-->
+    <div class="modal change-pass-log-out" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <p>Password Changed Successfully</p>
+            </div>
+            <div class="modal-body">
+                <p>Password successfully changed. You are required to log back in again with your new password.</p>
+                <div class="task-submit-buttons">
+                    <a class="log-out-pass-btn black-btn" id="add-filter-btn">Go To Login<i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="navbar.js"></script>
     <script type="module" src="Project-Kanban/kanban.js"></script>
     <script src="ManagerDash-Stats/statisticsHomePage.js"></script>
