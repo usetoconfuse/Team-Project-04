@@ -22,7 +22,7 @@ if ($type) {
     $setQuery .= "Type = '$type', ";
 }
 if ($visibility) {
-    $setQuery .= "Visibility = '$visibility', ";
+    $setQuery .= "Visibility = '$visibility'";
 }
 
 // using data from the Post modal form add a post to the knowledge base table
@@ -33,6 +33,7 @@ SET
 WHERE
     Post_ID = $id
 ";
+echo $sql;
 
 if (!mysqli_query($conn, $sql)) {
     //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));

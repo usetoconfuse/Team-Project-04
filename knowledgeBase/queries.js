@@ -351,6 +351,25 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
 const editPostModal = document.getElementById('edit-post-modal');
 var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 
+document.getElementById("kb-edit-post-submit-btn").addEventListener("click", async () => {
+    const getValue = (id) => { return editPostModal.querySelector(`#${id}`).value; }
+    const postID = editPostModal.getAttribute("data-post-id")
+    // Send post creation request to the server.
+    const data = await doRequest("POST", "editPost", {}, {
+        'id': postID,
+        'title': getValue('edit-post-title-input'),
+        'content': getValue('edit-post-content-input'),
+        'type': getValue('edit-post-type-input'),
+        'topic': getValue('edit-post-topic-input'),
+        'visibility': getValue('edit-post-visibility-input')
+    });
+
+    alert('Post edited successfully!');
+    await updatePosts();
+
+    closeEditPostModal();
+})
+
 
 // Delete Post Modal
 const deletePostModal = document.getElementById('delete-post-modal');
