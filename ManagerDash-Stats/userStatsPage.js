@@ -1,5 +1,5 @@
 // Created by Quinn Little 07/02/2025
-// Updated by Toby Tischler 12/02/2025
+// Updated by Toby Tischler 13/02/2025
 
 
 // Object that stores the user details used by the page
@@ -293,7 +293,6 @@ function createTaskStatusGraph(currentTaskStatus) {
         data: {
             labels: daysOfWeek,
             datasets: [{
-                label:['To Do', 'In Progress', 'Completed', 'Stuck'],
             backgroundColor:["rgba(255, 85, 0, 0.5)", "rgba(255, 225, 0, 0.5)", "rgba(111, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"],
             borderColor: ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
             data: currentTaskStatus
@@ -303,8 +302,8 @@ function createTaskStatusGraph(currentTaskStatus) {
             responsive: true,
           
             plugins: {
-                legend: {
-                    display: true,
+                legend: {           // The legend seems to have broken when I moved all the ChartJS imports into one place. Sorry - Toby
+                    display: true, // One way to have each bar as a separate legend item is to make each task category its own dataset.
                     labels: {
                         color:  ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
                     }
@@ -320,7 +319,7 @@ function createTaskStatusGraph(currentTaskStatus) {
             title: {
                 display: true,
                 text: `Task Status Graph for user ${userDetails.id} - ${userDetails.forename} ${userDetails.surname}`
-                }
+            }
         }
         });
     }
