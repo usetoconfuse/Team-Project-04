@@ -224,11 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-    } catch(error) {
-      console.log("Fetch Issue",error);
-      //Show Error Card
-    }
-}
+
 
 
 const searchBar = document.querySelector('.project-search #searched-project');
@@ -282,7 +278,7 @@ searchBar.addEventListener('input', ()=>{
 
 
 
-});
+
 
 
 //Filter Projects Modal
@@ -379,7 +375,7 @@ closeProjectFilterModal.addEventListener('click', () => {
      alert("An error occurred. Please try again.");
    }
  });
-});
+
 
 //Switch Buttons for different project pages
 const projectItems = document.querySelectorAll('.project-switch-buttons .project-item');

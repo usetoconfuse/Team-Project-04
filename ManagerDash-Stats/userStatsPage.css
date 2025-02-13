@@ -131,11 +131,7 @@
 
 
 /* Gantt Chart CSS */
-* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
+
   .chartMenu {
     width: 100vw;
     height: 40px;
