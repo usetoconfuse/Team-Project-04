@@ -54,7 +54,7 @@
     justify-content: space-between;
 }
 
-.filter-project-btn {
+.filter-project-btn, .add-project {
     padding: 0.8rem 0.8rem;
     border-radius: 10.5px;
     color: white;
@@ -70,6 +70,11 @@
     margin-left: 0.4rem;
 }
 
+.project-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .grid-container {
     display: grid;
@@ -204,15 +209,13 @@
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
-    .add-project {
-        margin-top: 0.6rem;
-    }
     .filler-project-card {
         display: none;
     }
     #project-content {
         height: 94vh;
     }
+
     
 
 }
@@ -223,6 +226,17 @@
     }
     .filler-project-card {
         display: none;
+    }
+    .project-filter-container {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        margin-left: 20px;
+    }
+    .project-search {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
     }
 }
 

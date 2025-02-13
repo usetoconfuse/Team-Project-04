@@ -5,9 +5,6 @@
             <p>View all your assigned projects below. Statistics about these are within.</p>
         </div>
 
-        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
-            <a href="#" class="add-project black-btn">Add Project</a>
-        <?php endif; ?>
 
     </div>
     <div class="project-filter-container">
@@ -15,9 +12,17 @@
             <i class="fa fa-solid fa-search"></i>
             <input type="text" placeholder="Search Projects" id="searched-project">
         </div>
-        <div class="filter-project-btn black-btn"> Filter
-            <i class="fa fa-solid fa-sliders"></i>
+
+        <div class="project-buttons-container">
+            <div class="filter-project-btn black-btn"> Filter
+                <i class="fa fa-solid fa-sliders"></i>
+            </div>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
+                <a href="#" class="add-project black-btn">Add Project</a>
+            <?php endif; ?>
         </div>
+       
+
     </div>
 
     <p class="search-error-msg">No Projects Found</p>
