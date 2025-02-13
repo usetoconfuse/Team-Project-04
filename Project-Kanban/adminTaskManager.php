@@ -290,7 +290,7 @@
                             <th>Priority</th>
                             <th>Deadline</th>
                             <th>Stuck</th>
-                            <th>Project ID/Title</th>
+                            <th>Assignee</th>
                             <th>Assigned By</th>
                             <th>More</th>
                         </tr>
@@ -309,6 +309,3 @@
 
 
 </div>
-
-
-<script src="Project-Kanban/adminKanban.js"></script>

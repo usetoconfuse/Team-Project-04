@@ -53,12 +53,7 @@
                 <i class="fa fa-solid fa-sliders"></i>
             </div>
 
-            <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Team Leader')): ?>
-                <div class="add-task-btn black-btn">
-                    <i class="fa fa-solid fa-plus"></i>
-                    Add Task
-                </div>
-            <?php endif; ?>
+
             <div class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
                 Close
