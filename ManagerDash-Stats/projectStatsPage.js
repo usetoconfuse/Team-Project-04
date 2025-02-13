@@ -280,11 +280,6 @@ async function PopulateBurnUpChart() {
         options: {
             responsive: true,
 
-            title: {
-                display: true,
-                text: "Progression Burnup Chart",
-            },
-
             scales: {
                 x: {
                     title: {
@@ -322,6 +317,11 @@ async function PopulateBurnUpChart() {
             },
 
             plugins: {
+                title: {
+                    display: true,
+                    text: "Team Person-Hour Burnup Chart",
+                },
+
                 annotation: {
                     annotations: {
                         deadlineLine: {
