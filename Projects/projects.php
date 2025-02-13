@@ -42,11 +42,17 @@
 
 
     <section class="project-item-content"  id="not-started-project-content">
-        <p>Not Started</p>
+        <div class="grid-container" id="gridContainer">
+            <!-- Project Cards dynamically generated-->
+
+        </div>
     </section>
 
     <section class="project-item-content"  id="archive-project-content">
-        <p>Archive</p>
+        <div class="grid-container" id="gridContainer">
+            <!-- Project Cards dynamically generated-->
+
+        </div>
     </section>
 
 

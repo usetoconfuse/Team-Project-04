@@ -2,11 +2,20 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const gridContainer = document.getElementById("gridContainer");
-
   const projectContainer = document.querySelector('#project-content')
   const userID = projectContainer.getAttribute('data-user-id');
-  fetchProjectsData(userID);
+  fetchProjectsData(userID, { status: 'Active' },  "#active-project-content #gridContainer"); //default load in is always active projects
+
+  //Fetch different project types depending on which view is selected (admin only)
+  document.querySelector('#active-project').addEventListener("click", ()=> {
+    fetchProjectsData(userID, { status: 'Active' }, "#active-project-content #gridContainer");
+  })
+  document.querySelector('#not-started-project').addEventListener("click", ()=> {
+    fetchProjectsData(userID, { status: 'Not Started' }, "#not-started-project-content #gridContainer");
+  })
+  document.querySelector('#archive-project').addEventListener("click", ()=> {
+    fetchProjectsData(userID, { status: 'Archived' }, "#archive-project-content #gridContainer");
+  })
 
 
 
@@ -19,14 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
       delete filters.dateValue;
     }
     projectsFilterModal.style.display = 'none';
-    fetchProjectsData(userID, filters);
+    fetchProjectsData(userID, filters, "#active-project-content #gridContainer");
   })
 
 
   const userRole = document.querySelector('#project-content').getAttribute('data-role');
-  console.log(userRole);
+
+
   //Fetch all project data for this user and display on page
-  async function fetchProjectsData(userID, filters={}) {
+  async function fetchProjectsData(userID, filters={}, containerSelector) {
     try {
 
       let url = `Projects/projects-db.php?userID=${encodeURIComponent(userID)}`;
@@ -39,7 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     }
 
-    document.querySelector('#project-content #gridContainer').innerHTML = "";
+    const container = document.querySelector(containerSelector);
+    container.innerHTML = "";
 
       const response = await fetch(url, params);
 
@@ -121,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
           progressBar.style.backgroundColor = '#ADDA9D';
         }
     
-        gridContainer.appendChild(projectCard);
+        container.appendChild(projectCard);
     
         //Links to project kanban
         projectCard.querySelector('.project-card-top a').addEventListener('click', (e) => {
@@ -215,22 +226,6 @@ searchBar.addEventListener('input', ()=>{
 
 
 
-  //Need to fix this so it gets the proper value on mobile
-  const gridItems = gridContainer.children.length; //number of projects
-  const columns = 3;
-  const remainder = gridItems % columns;
-
-  // Add filler card to fill that row
-  //Get remainder to see if we need to fill that row and 
-  //how many to fill it by 
-  if (remainder !== 0) {
-    const fillersNeeded = columns - remainder;
-    for (let i = 0; i < fillersNeeded; i++) {
-      const filler = document.createElement("div");
-      filler.classList.add("project-card", "filler-project-card");
-      gridContainer.appendChild(filler);
-    }
-  }
 });
 
 
