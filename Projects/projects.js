@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+ // Add Project Modal Functionality
+ const addProjectBtn = document.querySelector('.add-project');
+ const addProjectModal = document.querySelector('#projects-modal');
+ const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn');
+ const submitAddProject = addProjectModal.querySelector('#add-project-btn');
+ const teamLeaderDropdown = document.querySelector("#team-leader");
 
 
   //Fetch all project data for this user and display on page
@@ -173,6 +179,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+   // Fetch Users for Team Leader Selection
+ async function fetchUsers() {
+  try {
+    const response = await fetch('Projects/query/fetch-users.php');
+    if (!response.ok) throw new Error('Failed to fetch users');
+
+    const users = await response.json();
+    
+    // Clear existing options
+    teamLeaderDropdown.innerHTML = '<option value="" selected disabled hidden>Choose</option>';
+
+    users.forEach(user => {
+      const option = document.createElement("option");
+      option.value = user.User_ID; 
+      option.textContent = `${user.User_ID} - ${user.Forename} ${user.Surname}`; 
+      teamLeaderDropdown.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error("Error fetching users:", error);
+  }
+}
+
+
+
   // Open Add Project Modal & Fetch Users
   addProjectBtn.addEventListener('click', () => {
     addProjectModal.style.display = 'flex';
@@ -186,10 +217,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Submit New Project Data
   submitAddProject.addEventListener("click", async function () {
-    const title = document.getElementById("task-title").value;
+    const title = addProjectModal.querySelector("#task-title").value;
     const teamLeader = teamLeaderDropdown.value;
-    const startDate = document.getElementById("start-date-project").value;
-    const dueDate = document.getElementById("date-project").value;
+    const startDate = addProjectModal.querySelector("#start-date-project").value;
+    const dueDate = addProjectModal.querySelector("#date-project").value;
 
     if (!title || !teamLeader || !startDate || !dueDate) {
       alert("Please fill in all fields.");
@@ -213,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         alert("Project successfully added!");
         addProjectModal.style.display = 'none';
-        fetchProjectsData(userID); // Reload projects to display new one
+        fetchProjectsData(userID, { status: 'Active' },  "#active-project-content #gridContainer");
       } else {
         alert("Failed to add project. Try again.");
       }
@@ -295,35 +326,6 @@ closeProjectFilterModal.addEventListener('click', () => {
 
 
 
- // Add Project Modal Functionality
- const addProjectBtn = document.querySelector('.add-project');
- const addProjectModal = document.querySelector('#projects-modal');
- const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn');
- const submitAddProject = addProjectModal.querySelector('#add-project-btn');
- const teamLeaderDropdown = document.getElementById("team-leader");
-
- // Fetch Users for Team Leader Selection
- async function fetchUsers() {
-   try {
-     const response = await fetch('Projects/query/fetch-users.php');
-     if (!response.ok) throw new Error('Failed to fetch users');
-
-     const users = await response.json();
-     
-     // Clear existing options
-     teamLeaderDropdown.innerHTML = '<option value="" selected disabled hidden>Choose</option>';
-
-     users.forEach(user => {
-       const option = document.createElement("option");
-       option.value = user.User_ID; 
-       option.textContent = `${user.User_ID} - ${user.Forename} ${user.Surname}`; 
-       teamLeaderDropdown.appendChild(option);
-     });
-
-   } catch (error) {
-     console.error("Error fetching users:", error);
-   }
- }
 
 
 
