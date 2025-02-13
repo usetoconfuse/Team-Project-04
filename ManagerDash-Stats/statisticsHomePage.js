@@ -1,5 +1,5 @@
 // Created by Quinn Little 23/12/24
-// Updated by Toby Tischler 12/02/2025
+// Updated by Toby Tischler 13/02/2025
 // Updated by Quinn Little 10/02/2025 
 
 
@@ -219,3 +219,17 @@ document.getElementById('searched-user').addEventListener("input", async (e) =>{
     selectedQuery = e.target.value.trim();
     fetchUserSearch(selectedQuery);
 });
+
+
+
+/* Redirect to correct sub-page if loading with URL params
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("project")) {
+        viewSelectedProject(params.get("project"));
+    }
+
+    else if (params.has("user")) {
+        viewSelectedUser(params.get("user"));
+    }
+}); */

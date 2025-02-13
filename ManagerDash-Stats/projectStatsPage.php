@@ -1,5 +1,5 @@
 <!-- Created By Quinn Little 07/02/2025 -->
-<!-- Updated By Toby Tischler 12/02/2025 -->
+<!-- Updated By Toby Tischler 13/02/2025 -->
 
 <!-- Tab for project statistics -->
 
@@ -8,21 +8,70 @@
 
 <div id="prjStContainer">
 
+    <!-- Header -->
     <div id="prjStHeader">
-        <!-- Header content -->
+
+        <!-- Numerical stats -->
+        <div id="prjStHeaderNums">
+        </div>
+
+        <!-- Task dial -->
+        <div id="prjStTaskDialCell">
+            <div id="prjStTaskDialChartBox">
+                <canvas id="prjStTaskDialChart"></canvas>
+            </div>
+
+            <div id="prjStTaskDialPercentage">
+                <h1 id="prjStTaskDialPercentageText"></h1>
+                <p>Of Tasks Complete</p>
+            </div>
+
+            <div id="prjStTaskDialLegend">
+                <div class="prjStTaskDialLegendItem">
+                    <div class="prjStTaskDialLegendCounter">
+                        <i class="fa-solid fa-circle fa-2xs prjStG"></i>
+                        <h3 id="prjStLegendDone"></h3>
+                    </div>
+                    <p>Done</p>
+                </div>
+
+                <div class="prjStTaskDialLegendItem">
+                    <div class="prjStTaskDialLegendCounter">
+                        <i class="fa-solid fa-circle fa-2xs prjStY"></i>
+                        <h3 id="prjStLegendInprog"></h3>
+                    </div>
+                    <p>In Progress</p>
+                </div>
+
+                <div class="prjStTaskDialLegendItem">
+                    <div class="prjStTaskDialLegendCounter">
+                        <i class="fa-solid fa-circle fa-2xs prjStGray"></i>
+                        <h3 id="prjStLegendTodo"></h3>
+                    </div>
+                    <p>Not Started</p>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Main grid -->
     <div id="prjStGrid">
 
         <!-- Burnup chart -->
-        <div id="prjStBurnupChartBox">
-            <canvas id="prjStBurnupChart"></canvas>
+        <div id="prjStBurnupCell" class="prjStGridCells">
+            <div id="prjStBurnupChartBox">
+                <canvas id="prjStBurnupChart"></canvas>
+            </div>
         </div>
-
+        
         <!-- Member list -->
-         <div id="prjStMemberList">
+        <div id="prjStMembersCell" class="prjStGridCells">
+            <div id="prjStMembersHeader">
+            </div>
 
-         </div>
+            <div id="prjStMembersList">
+            </div>
+        </div>
     </div>
 </div>
 

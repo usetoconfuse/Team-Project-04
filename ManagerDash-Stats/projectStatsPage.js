@@ -4,14 +4,22 @@
 // Path of project queries folder
 const PRJST_QUERY_PATH = "ManagerDash-Stats/projectStatsPage-Queries/";
 
+
 // Object that stores the project details used by the page
 // Attributes: id, title start, due, created, completed, leader
 const projDetails = {};
 
-// CHARTS
+
+// CHART INSTANCE LOCATIONS
+
+// Task dial chart
+const dialCtx = document.getElementById("prjStTaskDialChart").getContext("2d");
+var taskDial = new Chart(dialCtx)
+
 // Task burnup chart
-const ctx = document.getElementById("prjStBurnupChart").getContext("2d");
-var projBurnup = new Chart(ctx);
+const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
+var projBurnup = new Chart(burnupCtx);
+
 
 // Generic query function
 async function FetchStatsData(query) {
@@ -33,7 +41,11 @@ async function FetchStatsData(query) {
 };
 
 
+
+
 //==============================================================
+
+
 
 // Populate page when a project is selected
 async function PopulateProjectStatsPage() {
@@ -43,8 +55,14 @@ async function PopulateProjectStatsPage() {
 
     PopulateProjectStatsHeader();
 
+    PopulateMemberList();
+
+    PopulateTaskDialChart();
+
     PopulateBurnUpChart();
 }
+
+
 
 //Fetch user details for project object
 async function FetchProjectData() {
@@ -54,7 +72,8 @@ async function FetchProjectData() {
     const projID = params.get('project');
 
     //Fetch full project details from ID
-    const data = await(FetchStatsData(`projectStatsDetailsQuery.php?ID=${projID}`));
+    const data = await(FetchStatsData(
+        `projectStatsDetailsQuery.php?ID=${projID}`));
 
     // Populate projDetails object
     projDetails.id = projID;
@@ -67,22 +86,138 @@ async function FetchProjectData() {
     console.log(projDetails);
 };
 
+
+
 // Project header
 function PopulateProjectStatsHeader() {
     const header = `
         <p id="prjStTitle">`+projDetails.title+`</p>
-        <p id="prjStDueDate">Due: `+projDetails.due+`</p>
         <p id="prjStStartDate">Started: `+projDetails.start+`</p>
+        <p id="prjStDueDate">Due: `+projDetails.due+`</p>
         <p id="prjStCreationDate">Created: `+projDetails.created+`</p>
         <p id="prjStCompletionDate">Completed: `+projDetails.completed+`</p>
         <p id="prjStLeader">Leader: `+projDetails.leader+`</p>
     `;
 
-    document.getElementById("prjStHeader").innerHTML = header;
+    document.getElementById("prjStHeaderNums").innerHTML = header;
 }
 
-// Burnup chart
+
+
+//====================== MEMBER LIST ========================
+async function PopulateMemberList() {
+
+    // LIST DATA
+
+    const data = await(FetchStatsData(
+        `projectStatsMembersQuery.php?ID=${projDetails.id}`));
+
+    // Build the new table to display
+    let membersTable  = "<table class='statsHome-table'>"
+    membersTable  += `<thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Tasks</th>
+                                <th>Stuck</th>
+                            </tr>
+                        </thead>`
+    membersTable  += '<tbody>'
+
+    // Loop through the data and create a new element for each item provided there are project members
+    if(data[0][0]) {
+        data.forEach(item => {
+            let crown = `<i class="fa-solid fa-circle fa-stack-2x"></i>
+                        <i class="fa-solid fa-crown fa-stack-1x fa-inverse"></i>`;
+            if ((item[0].User_ID) == projDetails.leader) {
+                crown = ""
+            }
+    
+            membersTable  += `<tr>
+                                <td><span class="fa-stack">${crown}</span> ${item[0].Forename} ${item[0].Surname}</td>
+                                <td>${item[0].Email}</td>
+                                <td>${item[0].Tasks}</td>
+                                <td>${item[0].Stuck}</td>
+                            </tr>`
+        });     
+        membersTable  += '</tbody>'
+        membersTable  += '</table>';
+    
+        // Find the container/table to display the data
+        var container = document.getElementById('prjStMembersList');
+        container.innerHTML = membersTable;
+    }
+    else {
+        var container = document.getElementById('prjStMembersList');
+        container.innerHTML = "<p>This project has no members</p>";
+    }
+}
+
+
+//====================== TASK DIAL ========================
+
+async function PopulateTaskDialChart() {
+
+    // CHART DATA
+
+    const data = await(FetchStatsData(
+        `projectStatsDialQuery.php?ID=${projDetails.id}`));
+
+    const dialData = [data[0][0]["Done"], data[0][0]["Inprog"], data[0][0]["Todo"]];
+
+    // DRAW CHART
+
+    // Calculate progress completion percentage
+    let totalTasks = dialData[0] + dialData[1] + dialData[2];
+    let percentage = Math.round((dialData[0]*100) / totalTasks);
+    document.getElementById("prjStTaskDialPercentageText").innerText = percentage + "%";
+
+    // Populate chart legend text
+    document.getElementById("prjStLegendDone").innerText = dialData[0];
+    document.getElementById("prjStLegendInprog").innerText = dialData[1];
+    document.getElementById("prjStLegendTodo").innerText = dialData[2];
+
+    taskDial.destroy();
+
+    taskDial = new Chart(dialCtx, {
+        type: 'doughnut',
+
+        data: {
+            labels: ['Done',
+                'In Progress',
+                'To Do'],
+            datasets: [{
+                data: dialData,
+                backgroundColor: [
+                    '#adda9d',
+                    '#eab385',
+                    '#8e8e91'
+                ]
+            }],
+        },
+        
+        options: {
+            rotation: -90,
+            circumference: 180, 
+            cutout: '80%',
+            responsive: true,
+            aspectRatio: 2,
+    
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+
+
+//====================== BURNUP CHART ========================
 async function PopulateBurnUpChart() {
+
+    // CHART DATA
 
     const data = await(FetchStatsData(
         `projectStatsBurnupQuery.php?ID=${projDetails.id}&START=${projDetails.start}&END=${projDetails.completed}`));
@@ -116,9 +251,12 @@ async function PopulateBurnUpChart() {
                     || !projDetails.completed ?
                     true : false;
 
+
+    // DRAW CHART
+
     projBurnup.destroy();
 
-    projBurnup = new Chart(ctx, {
+    projBurnup = new Chart(burnupCtx, {
         type: "line",
         data: {
             labels: burnUpLabels,
@@ -155,19 +293,21 @@ async function PopulateBurnUpChart() {
                     },
                     grid: {
                         display: false
-                    },
+                    }
                 },
 
                 y: {
+                    suggestedMin: 0,
+                    // Set max of y scale to 20% above max person-hours, rounded to the nearest 10
+                    max: Math.ceil(burnUpScope[burnUpCompleted.length-1] * 0.12) * 10,
+                    
                     title: {
                         display: true,
-                        text: "Person-Hours Contributed"
+                        text: "Person-Hours"
                     },
                     ticks: {
                         beginAtZero: true
-                    },
-                    // Set max of y scale to 20% above max person-hours, rounded to the nearest 5
-                    max: Math.ceil(burnUpScope[burnUpCompleted.length-1] * 0.24) * 5
+                    }
                 }
             },
 

@@ -3,28 +3,122 @@
 
 /*--------------------- Project Statistics CSS ---------------------*/
 
-/* Header */
-#prjStHeader {
-    display: flex;
+#prjStContainer {
+    height: 100%;
+    width: 100%;
     justify-content: space-between;
 }
 
-/* Grid container */
+#prjStHeader {
+    display: flex;
+}
+
 #prjStGrid {
     display: grid;
     grid-template-areas:
-    'prevweek members'
-    'burnup burnup';
+    'burnup prevweek'
+    'members members';
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
     width: 100%;
     height: 100%;
+    gap: 1rem;
 }
 
-/* Burnup chart */
-#prjStBurnupChartBox {
-    grid-area: burnup;
+.prjStGridCells {
+    background-color: var(--light-gray-bg);
+    border-radius: var(--b-radius-lg);
+    padding: 1rem;
 }
+
+
 
 /* Member list */
-#prjStMemberList {
+#prjStMembersCell {
     grid-area: members;
+}
+
+#prjStMembersList table {
+    width: 80%;
+}
+
+.fa-stack .fa-circle {
+    color: black;
+}
+
+.fa-stack .fa-crown {
+    color: var(--light-gray-bg);
+}
+
+
+
+/* Task dial */
+#prjStTaskDialCell {
+    position: relative;
+    overflow-y: auto;
+}
+
+#prjStTaskDialPercentage {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -55%)
+}
+
+#prjStTaskDialBox {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    margin-top: 2rem;
+}
+
+#prjStTaskDialLegend {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 1rem;
+}
+
+.prjStTaskDialLegendItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prfStTaskDialLegendItem p {
+    font-size: small;
+}
+
+.prjStTaskDialLegendCounter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+.prjStTaskDialLegendCounter h3 {
+    margin-left: 0.2rem;
+}
+
+.prjStG{
+    color: var(--green);
+}
+
+.prjStY{
+    color: var(--orange);
+}
+
+.prjStGray{
+    color: var(--medium-gray);
+}
+
+
+
+/* Burnup chart */
+#prjStBurnupCell {
+    grid-area: burnup;
 }

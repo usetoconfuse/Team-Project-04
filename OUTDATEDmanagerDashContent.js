@@ -189,7 +189,7 @@ let colourArr = ["#9F648F","#64649F","#9F6464","#869F64"];
 
 //----------------------------CHARTS-----------------------------
 
-// Project progress chart
+/* Project progress chart
 const progressBar = document.getElementById("mdProgressChart");
 
 const progressBarChart = new Chart(progressBar, {
@@ -228,7 +228,7 @@ const progressBarChart = new Chart(progressBar, {
         aspectRatio: 2
     }
 });
-
+*/
 
 // Member contribution graph
 

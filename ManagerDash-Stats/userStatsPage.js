@@ -311,10 +311,11 @@ function createTaskStatusGraph(currentTaskStatus) {
                 }
             },    
             scales: {
-                yAxes: [{
+                y: {
                     ticks: {
                         beginAtZero: true // Make y-axis start at zero.
-                    }}]
+                    }
+                }
             },
             title: {
                 display: true,
@@ -447,7 +448,7 @@ function createProjTimeGraph(yAxProj, durArr) {
     weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
 
     const weekhrsansd = new Chart(weekhrs, {
-    type: "horizontalBar",
+    type: "bar",
     data: {
         labels: yAxProj,
         datasets: [{
@@ -457,6 +458,7 @@ function createProjTimeGraph(yAxProj, durArr) {
         }]
     },
 options: {
+    indexAxis: "y",
     responsive: true,
     plugins: {
         title: {
