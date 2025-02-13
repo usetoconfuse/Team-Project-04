@@ -2,6 +2,8 @@
 // Updated by Toby Tischler 09/02/2025
 
 
+
+
 // Object that stores the user details used by the page
 // Attributes: id, forename, surname, email, role, status
 const userDetails = {};
@@ -32,7 +34,7 @@ async function PopulateUserStatsPage() {
     //Fetch task status graph
     fetchTaskStatusGraph();
 
-    fetchProjTimeGraph();
+    fetchProjTimeGraph(userID);
 };
 
 //Fetch user details for user object
@@ -300,28 +302,32 @@ function createTaskStatusGraph(currentTaskStatus) {
             data: currentTaskStatus
             }]
         },
-        options:{
+        options: {
             responsive: true,
-          
             plugins: {
                 legend: {
                     display: true,
                     labels: {
-                        color:  ["rgba(255, 85, 0, 0.5)","rgba(255, 225, 0, 0.5)","rgba(111, 255, 0, 0.5)","rgba(255, 0, 0, 0.5)"],
+                        color: [
+                            "rgba(255, 85, 0, 0.5)",
+                            "rgba(255, 225, 0, 0.5)",
+                            "rgba(111, 255, 0, 0.5)",
+                            "rgba(255, 0, 0, 0.5)"
+                        ]
                     }
                 }
-            },    
+            },
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true // Make y-axis start at zero.
-                    }}]
+                y: {
+                    beginAtZero: true
+                }
             },
             title: {
                 display: true,
                 text: `Task Status Graph for user ${userDetails.id} - ${userDetails.forename} ${userDetails.surname}`
-                }
+            }
         }
+        
         });
     }
     
@@ -329,73 +335,74 @@ function createTaskStatusGraph(currentTaskStatus) {
 
 
 
-    function calculateProjectDurations(projects) {
-        // Helper function to calculate duration in days
-        const calculateDuration = (start, end) => {
-            const startDate = new Date(start);
-            const endDate = new Date(end);
-            const diffInMs = endDate - startDate;
-            return diffInMs / (1000 * 60 * 60 * 24); // Convert milliseconds to days
-        };
+//     function calculateProjectDurations(projects) {
+//         // Helper function to calculate duration in days
+//         const calculateDuration = (start, end) => {
+//             const startDate = new Date(start);
+//             const endDate = new Date(end);
+//             const diffInMs = endDate - startDate;
+//             return diffInMs / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+//         };
     
-        // Array to store the results
-        const result = [];
-        let xValArr = [];
-            let yValArr = [];
+//         // Array to store the results
+//         const result = [];
+//         let xValArr = [];
+//             let yValArr = [];
     
-        for (let i = 0; i < projects.length; i++) {
-            const startDate = (projects[i].Start_Date).substring(0,10);
-            const endDate = (projects[i].Due_Date).substring(0,10);
+//         for (let i = 0; i < projects.length; i++) {
+//             const startDate = (projects[i].Start_Date).substring(0,10);
+//             const endDate = (projects[i].Due_Date).substring(0,10);
     
-            // Calculate duration of the current project
-            const duration = calculateDuration(startDate, endDate);
+//             // Calculate duration of the current project
+//             const duration = calculateDuration(startDate, endDate);
     
-            // Determine when the next project starts relative to the previous one
-            if (i === 0) {
-                result.push({
-                    project: projects[i].Project_Title,
-                    startDate: startDate,
-                    endDate: endDate,
-                    duration: duration,
-                    sequentialStart: 0 // First project starts at 0
-                });
-            } else {
-                const previousEndDate = new Date(projects[i - 1].Due_Date);
-                const currentStartDate = new Date(startDate);
-                const overlap = (currentStartDate - previousEndDate) / (1000 * 60 * 60 * 24); // Difference in days
-                console.log("NANANANA ",overlap );
-                result.push({
-                    project: projects[i].Project_Title,
-                    startDate: startDate,
-                    endDate: endDate,
-                    duration: duration,
-                    sequentialStart: result[i - 1].sequentialStart + duration + overlap
-                });
+//             // Determine when the next project starts relative to the previous one
+//             if (i === 0) {
+//                 result.push({
+//                     project: projects[i].Project_Title,
+//                     startDate: startDate,
+//                     endDate: endDate,
+//                     duration: duration,
+//                     sequentialStart: 0 // First project starts at 0
+//                 });
+//             } else {
+//                 const previousEndDate = new Date(projects[i - 1].Due_Date);
+//                 const currentStartDate = new Date(startDate);
+//                 const overlap = (currentStartDate - previousEndDate) / (1000 * 60 * 60 * 24); // Difference in days
+//                 console.log("NANANANA ",overlap );
+//                 result.push({
+//                     project: projects[i].Project_Title,
+//                     startDate: startDate,
+//                     endDate: endDate,
+//                     duration: duration,
+//                     sequentialStart: result[i - 1].sequentialStart + duration + overlap
+//                 });
 
-            }
-            console.log("resy:", result);
+//             }
+//             console.log("resy:", result);
 
             
 
 
-        }
+//         }
         
-        result.forEach(function(item) {
-            let miniTempArr = []
-            miniTempArr.push(item.sequentialStart);
-            miniTempArr.push((item.sequentialStart + item.duration));
-            xValArr.push(item.project);
-            yValArr.push(miniTempArr);
-        });
-        createProjTimeGraph(xValArr,yValArr);
+//         result.forEach(function(item) {
+//             let miniTempArr = []
+//             miniTempArr.push(item.sequentialStart);
+//             miniTempArr.push((item.sequentialStart + item.duration));
+//             xValArr.push(item.project);
+//             yValArr.push(miniTempArr);
+//         });
+//         createProjTimeGraph(xValArr,yValArr);
     
-    }    
+//     }    
 
 // fetch data for projTime chart
-async function fetchProjTimeGraph() {
+async function fetchProjTimeGraph(userID) {
+
     try {
         // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjTimeGraphQuery.php?ID=' + userDetails.id);
+        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjTimeGraphQuery.php?ID=' + userID);
         // console.log("4:", response);
         
         // Ensure the response is OK and return the JSON data 
@@ -408,81 +415,71 @@ async function fetchProjTimeGraph() {
 
         if (data.length > 0) {
             console.log(data);
-
-            let yAxProj = [];
-            let xAxDates = []; //store: [startDate, endDate] pairs
-            let durArr = [];
-            calculateProjectDurations(data);
-
-
-
-            // data.forEach(function(item) {
-            //     let tempDateArr = [];
-            //     yAxProj.push(item.Project_Title);
-            //     tempDateArr.push((item.Start_Date).substring(0,10));
-            //     tempDateArr.push((item.Due_Date).substring(0,10));
-            //     dur = calculateDuration((item.Start_Date).substring(0,10), (item.Due_Date.substring(0,10)));
-            //     durArr.push(dur);
-            //     xAxDates.push(tempDateArr);
-
-            // });
-            // console.log("yax ", yAxProj);
-            // console.log("xax ", xAxDates);
-
-            // createProjTimeGraph(yAxProj, durArr) 
-            //generateProjTimeGraph(data);
-           // console.log(statusTaskArr)
-            //createTaskStatusGraph(statusTaskArr);
-
+             // Create a dictionary (object) from the data
+            //  const dataDict = {};
+            //     data.forEach(item => {
+            //         dataDict[item.Project_Title] = { x: [(item.Start_Date).substring(0,10), (item.Due_Date).substring(0,10)], y: item.Project_Title };
+            //     });
+            const dataset = data.map(item => ({
+                    x:  [(item.Start_Date).substring(0,10), (item.Due_Date).substring(0,10)],
+                    y: (item.Project_Title)
+                }));
+                // Log the dictionary to the console
+                console.log(dataset);
+                createGantt(dataset);
+  
         } else {
            // createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
         }
-} catch (error) {
-    console.error('Error:', error); // Log any errors that occur
-}
-};
+      } catch (error) {
+          console.error('Error:', error); // Log any errors that occur
+      }
+      
+        
+
+      }
 //function to create chart
 
-function createProjTimeGraph(yAxProj, durArr) {
+// function createProjTimeGraph(yAxProj, durArr) {
 
-    weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
+//     weekhrs = document.getElementById('userStats-overlapContainerGraph').getContext('2d');
 
-    const weekhrsansd = new Chart(weekhrs, {
-    type: "horizontalBar",
-    data: {
-        labels: yAxProj,
-        datasets: [{
-        backgroundColor:"rgba(255, 242, 0, 1)",
-        borderColor: "rgba(255, 242, 0, 1)",
-        data: durArr
-        }]
-    },
-options: {
-    responsive: true,
-    plugins: {
-        title: {
-            display: true,
-            text: 'Duration Graph'
-        }
-    },
-    scales: {
-        x: {
-            beginAtZero: true,
-            title: {
-                display: true,
-                text: 'Duration' // The x-axis represents the duration
-            }
-        },
-        y: {
-            beginAtZero: true,
-            title: {
-                display: true,
-                text: 'Project' // The y-axis represents the projects
-            }
-        }
-    }}
-    });
-}
+//     const weekhrsansd = new Chart(weekhrs, {
+//     type: "horizontalBar",
+//     data: {
+//         labels: yAxProj,
+//         datasets: [{
+//         backgroundColor:"rgba(255, 242, 0, 1)",
+//         borderColor: "rgba(255, 242, 0, 1)",
+//         data: durArr
+//         }]
+//     },
+// options: {
+//     responsive: true,
+//     plugins: {
+//         title: {
+//             display: true,
+//             text: 'Duration Graph'
+//         }
+//     },
+//     scales: {
+//         x: {
+//             beginAtZero: true,
+//             title: {
+//                 display: true,
+//                 text: 'Duration' // The x-axis represents the duration
+//             }
+//         },
+//         y: {
+//             beginAtZero: true,
+//             title: {
+//                 display: true,
+//                 text: 'Project' // The y-axis represents the projects
+//             }
+//         }
+//     }}
+//     });
+// }
 
 
 
@@ -568,4 +565,115 @@ userGraphDropdown.addEventListener('change', () => {
     updateGraphAxes();
 });
 
+var myGanttChart = new Chart(document.getElementById('userStats-overlapContainerGraph'));
+
+// Gantt Chart
+function createGantt(dataset) {
+
+    myGanttChart.destroy();
+    // setup 
+    const data = {
+      datasets: [{
+        label: 'Project',
+        data: dataset,
+        // data: [
+        //   {x: ['2025-02-02', '2025-02-08'], y: 'Task 1'},
+        //   {x: ['2025-01-03', '2025-02-09'], y: 'Task 2'},
+        //   {x: ['2025-01-04', '2025-02-11'], y: 'Task 3'},
+        //   {x: ['2025-01-07', '2025-02-13'], y: 'Task 4'},
+        //   {x: ['2025-01-08', '2025-02-12'], y: 'Task 5'},
+        //   {x: ['2025-01-11', '2025-01-31'], y: 'Task 6'}
+
+        // ],
+        //     {x: '2021-06-26', y: 22},
+        //     {x: '2021-06-27', y: 23},
+        //     {x: '2021-06-28', y: 24},
+        //     {x: '2021-06-29', y: 25},
+        //     {x: '2021-06-30', y: 26},
+        //     {x: '2021-07-1', y: 29}
+        // ],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1,
+        borderSkipped: false,
+        borderRadius: 10,
+        barPercentage: 0.5
+      }]
+    };
+
+    // todayLine - for plugin
+    const todayLine ={
+      id:'todayLine',
+      afterDatasetsDraw(chart, args, pluginOptions) {
+        const {ctx, data, chartArea: {top,bottom, left, right}, scales: {x,y
+        }} = chart;
+
+        ctx.save();
+
+        ctx.beginPath(); // Gets drawn independent of the main datasets (dates and project name)
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'rgba(255, 26, 104, 1)';
+        ctx.setLineDash([6, 6]); // 6 pixels solid, 6 white
+        ctx.moveTo(x.getPixelForValue(new Date()), top);
+        ctx.lineTo(x.getPixelForValue(new Date()), bottom);
+        ctx.stroke();
+
+        ctx.setLineDash([ ,]); // empty to avoid crossing axes.
+
+      }
+
+    }
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        indexAxis: 'y',
+        scales: {
+          x: {
+            position: 'top',
+            type: 'time',
+            time: {
+              unit: 'day'
+            },
+            min: '2023-01-01',
+            max: '2026-03-01'
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      },
+      plugins: [todayLine]
+    };
+
+    // render init block
+    myGanttChart = new Chart(
+      document.getElementById('userStats-overlapContainerGraph'),
+      config
+    );
+
+
+  }
+
+  
 
