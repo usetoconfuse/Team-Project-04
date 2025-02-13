@@ -1,8 +1,6 @@
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
-  const projectContainer = document.querySelector('#project-content')
+  const gridContainer = document.getElementById("gridContainer");
+  const projectContainer = document.querySelector('#project-content');
   const userID = projectContainer.getAttribute('data-user-id');
   fetchProjectsData(userID, { status: 'Active' },  "#active-project-content #gridContainer"); //default load in is always active projects
 
@@ -42,9 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //Fetch all project data for this user and display on page
   async function fetchProjectsData(userID, filters={}, containerSelector) {
     try {
-
-      let url = `Projects/projects-db.php?userID=${encodeURIComponent(userID)}`;
-      
+      let url = `Projects/query/projects-db.php?userID=${encodeURIComponent(userID)}`;
       const filterQuery = new URLSearchParams(filters).toString();
       url += filterQuery ? `&${filterQuery}` : '';
 
@@ -63,8 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const projectData = await response.json();
-
       console.log(projectData);
+
+      gridContainer.innerHTML = ""; // Clear existing projects
 
       projectData.forEach((project) => {
         const projectCard = document.createElement("div");
@@ -100,9 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                           </div>
                       </div>`
         }
-        
-        
-    
+
         projectCard.innerHTML = `
                                   <div class="project-card-top">
                                     
@@ -173,6 +168,62 @@ document.addEventListener("DOMContentLoaded", function () {
     
       });
 
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }
+
+  // Open Add Project Modal & Fetch Users
+  addProjectBtn.addEventListener('click', () => {
+    addProjectModal.style.display = 'flex';
+    fetchUsers(); // Load Team Leaders dynamically
+  });
+
+  // Close Modal
+  closeAddProjectModal.addEventListener('click', () => {
+    addProjectModal.style.display = 'none';
+  });
+
+  // Submit New Project Data
+  submitAddProject.addEventListener("click", async function () {
+    const title = document.getElementById("task-title").value;
+    const teamLeader = teamLeaderDropdown.value;
+    const startDate = document.getElementById("start-date-project").value;
+    const dueDate = document.getElementById("date-project").value;
+
+    if (!title || !teamLeader || !startDate || !dueDate) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const projectData = {
+      title: title,
+      teamLeader: teamLeader,
+      startDate: startDate,
+      dueDate: dueDate
+    };
+
+    try {
+      const response = await fetch("Projects/query/add-project.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projectData),
+      });
+
+      if (response.ok) {
+        alert("Project successfully added!");
+        addProjectModal.style.display = 'none';
+        fetchProjectsData(userID); // Reload projects to display new one
+      } else {
+        alert("Failed to add project. Try again.");
+      }
+
+    } catch (error) {
+      console.error("Error adding project:", error);
+      alert("An error occurred. Please try again.");
+    }
+  });
+});
     } catch(error) {
       console.log("Fetch Issue",error);
       //Show Error Card
@@ -248,22 +299,87 @@ closeProjectFilterModal.addEventListener('click', () => {
 
 
 
-//Add Projects Modal
-const addProjectBtn = document.querySelector('.project-filter-container .add-project')
-const addProjectModal = document.querySelector('#projects-modal')
-const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn')
+ // Add Project Modal Functionality
+ const addProjectBtn = document.querySelector('.add-project');
+ const addProjectModal = document.querySelector('#projects-modal');
+ const closeAddProjectModal = addProjectModal.querySelector('.close-modal-btn');
+ const submitAddProject = addProjectModal.querySelector('#add-project-btn');
+ const teamLeaderDropdown = document.getElementById("team-leader");
 
-addProjectBtn.addEventListener('click', () => {
-  addProjectModal.style.display = 'flex';
-})
-closeAddProjectModal.addEventListener('click', () => {
-  addProjectModal.style.display = 'none';
-})
+ // Fetch Users for Team Leader Selection
+ async function fetchUsers() {
+   try {
+     const response = await fetch('Projects/query/fetch-users.php');
+     if (!response.ok) throw new Error('Failed to fetch users');
 
-const submitAddProject = addProjectModal.querySelector('.task-submit-buttons #add-project-btn')
-submitAddProject.addEventListener('click', () => {
-  addProjectModal.style.display = 'none';
-})
+     const users = await response.json();
+     
+     // Clear existing options
+     teamLeaderDropdown.innerHTML = '<option value="" selected disabled hidden>Choose</option>';
+
+     users.forEach(user => {
+       const option = document.createElement("option");
+       option.value = user.User_ID; 
+       option.textContent = `${user.User_ID} - ${user.Forename} ${user.Surname}`; 
+       teamLeaderDropdown.appendChild(option);
+     });
+
+   } catch (error) {
+     console.error("Error fetching users:", error);
+   }
+ }
+
+ // Open Add Project Modal & Fetch Users
+ addProjectBtn.addEventListener('click', () => {
+   addProjectModal.style.display = 'flex';
+   fetchUsers(); // Load Team Leaders dynamically
+ });
+
+ // Close Modal
+ closeAddProjectModal.addEventListener('click', () => {
+   addProjectModal.style.display = 'none';
+ });
+
+ // Submit New Project Data
+ submitAddProject.addEventListener("click", async function () {
+   const title = document.getElementById("task-title").value;
+   const teamLeader = teamLeaderDropdown.value;
+   const startDate = document.getElementById("start-date-project").value;
+   const dueDate = document.getElementById("date-project").value;
+
+   if (!title || !teamLeader || !startDate || !dueDate) {
+     alert("Please fill in all fields.");
+     return;
+   }
+
+   const projectData = {
+     title: title,
+     teamLeader: teamLeader,
+     startDate: startDate,
+     dueDate: dueDate
+   };
+
+   try {
+     const response = await fetch("Projects/query/add-project.php", {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify(projectData),
+     });
+
+     if (response.ok) {
+       alert("Project successfully added!");
+       addProjectModal.style.display = 'none';
+       fetchProjectsData(userID); // Reload projects to display new one
+     } else {
+       alert("Failed to add project. Try again.");
+     }
+
+   } catch (error) {
+     console.error("Error adding project:", error);
+     alert("An error occurred. Please try again.");
+   }
+ });
+});
 
 //Switch Buttons for different project pages
 const projectItems = document.querySelectorAll('.project-switch-buttons .project-item');

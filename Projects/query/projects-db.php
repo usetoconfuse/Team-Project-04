@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config/db-setup.php';
+include '../../config/db-setup.php';
 
 $userID = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
