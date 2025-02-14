@@ -219,10 +219,15 @@ async function fetchUserProjHrsTable() {
 
 
     //Function to fetch all tasks of a user
-    async function fetchUserTaskTable(stuck, high, earliest) {
+    async function fetchUserTaskTable(stuckValue, priorityValue, dateValue, orderByValue) {
+        console.log(stuck);
+
+        console.log(high);
+        console.log(earliest);
+
         try {
             // Make an HTTP request to the PHP file
-            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id + '&stuck=' + stuck + '&high=' + high + '&earliest=' + earliest);
+            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?userID=' + userDetails.id + '&stuckValue=' + stuckValue + '&priorityValue=' + priorityValue + '&orderByValue=' + orderByValue + '&dateValue' +dateValue);
             // console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
@@ -237,7 +242,7 @@ async function fetchUserProjHrsTable() {
             
 
             if (data.length > 0) {
-
+                console.log(data);
                 // console.log("2: ", data[0].Task_ID);
 
                 // Build the new table to display
@@ -267,7 +272,7 @@ async function fetchUserProjHrsTable() {
                     tasksTable  += `<tr>
                                             <td>` + item.Task_ID + `</td>
                                             <td>` + item.Name + `</td>
-                                            <td>` + item.Status + `</td>
+                                            <td>` + item.Task_Status + `</td>
                                             <td style="` + stuckStyles + `";>` + stuck + `</td>
                                             <td>` + item.Due_Date + `</td>
                                             <td>` + item.Priority + `</td>
@@ -828,7 +833,7 @@ document.getElementById('userStats-type-earliest-btn').addEventListener('click',
 document.getElementById('userStats-type-high-btn').addEventListener('click', (event) => {
     document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
     event.target.classList.add('active');
-    selectedType = 'High';
+    selectedType = 'high';
     fetchUserTaskTable('',selectedType,'');
 });
 

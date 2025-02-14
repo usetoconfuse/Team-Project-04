@@ -500,7 +500,7 @@ nav {
 
 }
 
-.nav-item-content#current-project-content , .nav-item-content#personal-content, .nav-item-content#projects-content {
+.nav-item-content#current-project-content , .nav-item-content#personal-content, .nav-item-content#projects-, .nav-item-content#stats-content {
     overflow-y: auto;
 }
 

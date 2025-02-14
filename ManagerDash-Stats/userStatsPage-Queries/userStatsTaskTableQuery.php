@@ -1,5 +1,5 @@
-<?php
-// Created by Quinn Little 08/02/2025
+<?php 
+Created by Quinn Little 08/02/2025
 
     include '../../config/db-setup.php';
 
@@ -13,29 +13,36 @@
 
     }
 
-    //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
+    $type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
-    //Select the first 20 tasks for the given UserID
-    $sql = "SELECT * 
-    FROM tasks INNER JOIN Projects 
-    ON tasks.Project_ID = Projects.Project_ID 
-    WHERE tasks.Assignee_ID = '$userID'
-    OR tasks.Stuck = '$stuck'
-    OR tasks.Priority = '$high'
-            ";
-
-            // if ($earliest == 'earliest') {
-            //     $sql .= "ORDER BY tasks.Start_Date";
-            // }
+    Select the first 20 tasks for the given UserID
+    $sql = "SELECT *, Tasks.Status AS 'Task_Status' 
+    FROM Tasks INNER JOIN Projects 
+    ON Tasks.Project_ID = Projects.Project_ID 
+    WHERE Tasks.Assignee_ID = '$userID'";
     
-    // if ($type == "Technical"){
-	//     $sql .= " WHERE kb.Type = 'Technical' ";  
-    // }
+ 
 
-    // if ($type == "Non-Technical"){
-    //     $sql .=  " WHERE kb.Type = 'Non-Technical' ";  
-    // }
+    if ($stuck === '1') {
+        $sql .= " AND tasks.Stuck = '$stuck'";
+    }
 
+    if ($high === 'high') {
+        $sql .= " AND tasks.Priority = 'High'";
+    }
+
+    if ($earliest === 'earliest') {
+        $sql .= " ORDER BY tasks.Start_Date";
+    }
+    
+    if ($type == "Technical"){
+	    $sql .= " WHERE kb.Type = 'Technical' ";  
+    }
+
+    if ($type == "Non-Technical"){
+        $sql .=  " WHERE kb.Type = 'Non-Technical' ";  
+    }
+echo $sql;
 
     $result = mysqli_query($conn,$sql);
 
@@ -50,3 +57,4 @@
     
     echo json_encode($allDataArray);
 ?>
+
