@@ -178,6 +178,7 @@ function populatePersonalTasks(tasks) {
     const deleteTaskModal = document.querySelector('#personal-kanban-content #delete-personal-modal');
     const openDeleteTaskModal = viewTaskModal.querySelector('.personal-delete-task');
     const closeDeleteTaskModal = deleteTaskModal.querySelector('#cancel-delete-task-btn');
+    const deletePersonalTaskBtn = deleteTaskModal.querySelector('#delete-personal-task-confirm');
     openDeleteTaskModal.addEventListener('click', () => {
       deleteTaskModal.style.display = 'flex';
       viewTaskModal.style.display = 'none';
@@ -188,6 +189,7 @@ function populatePersonalTasks(tasks) {
     closeDeleteTaskModal.addEventListener('click', () => {
       deleteTaskModal.style.display = 'none';
     })
+
 
     //Closing and opening modal
     const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn');
@@ -266,7 +268,55 @@ function populatePersonalTasks(tasks) {
   
 }
 
+const deleteTaskModal = document.querySelector('#personal-kanban-content #delete-personal-modal');
+const deletePersonalTaskBtn = deleteTaskModal.querySelector('#delete-personal-task-confirm');
+deletePersonalTaskBtn.addEventListener('click', () => {
+  deletePersonalTask(deleteTaskModal.getAttribute("deleted-personal-task-id"));
+})
 
+async function deletePersonalTask(personalTaskID) {
+  try {
+    let url = `PersonalKanban/queries/delete-personal-task-db.php?taskID=${encodeURIComponent(personalTaskID)}`;
+
+    const params = { 
+      method: "GET",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+        console.log(response);
+    } else {
+      deleteTaskModal.style.display = 'none';
+
+      const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
+      const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+      const currentFilters = getCurrentFilterPersonal();
+      const allFilters = { ...currentFilters, ...orderByParam};
+
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
+
+      let filtersLength = Object.keys(allFilters).length;
+      if (filtersLength > 0) {
+        filterRemoveBtn.style.display = 'flex';
+      } else {
+        filterRemoveBtn.style.display = 'none';
+      }
+
+      searchBarPersonal.value = "";
+
+      fetchPersonalData(userIdPersonal, allFilters);
+      
+      
+      
+    }
+  } catch(error) {
+    console.log("Fetch Issue",error);
+    //Show Error Card
+  }
+}
 
 
 async function updatePersonalTaskStatus(taskID, newStatus) {
