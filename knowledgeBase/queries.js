@@ -276,7 +276,7 @@ document.getElementById("kb-type-showall-btn").addEventListener('click', (event)
     updatePosts();
 });
 
-//on techincal button clicked show all post with type of techincal
+//on technical button clicked show all post with type of technical
 document.getElementById('kb-type-technical-btn').addEventListener('click', (event) => {
     document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
     event.target.classList.add('active');
@@ -284,7 +284,7 @@ document.getElementById('kb-type-technical-btn').addEventListener('click', (even
     updatePosts();
 });
 
-//on techincal button clicked show all post with type of non-techincal
+//on technical button clicked show all post with type of non-technical
 document.getElementById('kb-type-nontechnical-btn').addEventListener('click', (event) => {
     document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
     event.target.classList.add('active');
