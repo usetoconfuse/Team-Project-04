@@ -120,17 +120,27 @@ const renderTopicsInDropdown = (topics, topicsDropdown) => {
     topicsDropdown.innerHTML = '';
 
     // Add the default placeholder option
-    const placeholderOption = `<option value="" selected disabled hidden>Choose</option>`;
-    topicsDropdown.insertAdjacentHTML('beforeend', placeholderOption);
+    //const placeholderOption = `<option value="" selected disabled hidden>Choose</option>`;
+    //topicsDropdown.insertAdjacentHTML('beforeend', placeholderOption);
 
     topics.forEach(topic => {
 
-        // Create the HTML for the post
-        const topicHTML = `
-        <option value="${topic.Topic_Name}" id="topic-${topic.Topic_ID}"> ${topic.Topic_Name} </option>
-      `;
-        // Append the post HTML to the container
-        topicsDropdown.insertAdjacentHTML('beforeend', topicHTML);
+        // Create the HTML for the topic
+        const topicElement = document.createElement('a');
+        topicElement.setAttribute('value', topic.Topic_Name);
+        topicElement.setAttribute('id', `topic-${topic.Topic_ID}`);
+        topicElement.textContent = topic.Topic_Name;
+
+        const topicName = topic.Topic_Name;
+
+        // Append the topic element to the container
+        topicsDropdown.appendChild(topicElement);
+
+        // Add event listener to the topic element
+        topicElement.addEventListener('click', () => {
+            document.getElementById("kb-new-post-topic-input").innerText = topicName; 
+            document.querySelector("#kb-topic-dropdown").classList.toggle("show");
+        });
     });
 };
 
@@ -149,9 +159,12 @@ const renderAllPosts = async (posts) => {
         const postID = post.Post_ID;
         let currentUserHtml = '';
 
-        // Only allow editing/deleting of posts if the user is the author or an admin.
-        // TODO: If the post is protected don't allow author either.
-        if (post.User_ID === user.user_id || user.role === 'Admin') {
+        if (
+            // Allow editing/deletion by the author if the post is not protected...
+            (post.User_ID === user.user_id && post.Is_Protected !== "1") || 
+            // ...or if the user is an admin.
+            user.role === 'Admin'
+        ) {
             currentUserHtml = `
             <button class="kb-edit-post-button black-btn">Edit Post</button>
             <button class="kb-delete-post-button red-btn">Delete Post <i class="fa-solid fa-trash"></i></button>
@@ -404,6 +417,11 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
 const addTopicModal = document.getElementById('add-topic-modal');
 const [closeAddTopicModal, openAddTopicModal] = makeModal(addTopicModal);
 
+document.getElementById('kb-topic-modal-add-topic').addEventListener('click', () => {
+    event.preventDefault();
+    openAddTopicModal();
+});
+
 const addTopicBtn = document.querySelector('#new-topic-btn');
 const submitTopicBtn = document.getElementById('kb-add-topic-modal-submit');
 
@@ -517,3 +535,34 @@ window.onload = async () => {
         openPost(currentPost);
     }
 };
+
+document.addEventListener("click", (event) => {
+    if (!event.target.closest('.task-dropdown')) {
+        const dropdown = document.querySelector("#kb-topic-dropdown");
+        if (dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+        }
+    }
+});
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+document.querySelector(".kb-topic-dropdown-btn").addEventListener("click", (event) => {
+    document.querySelector("#kb-topic-dropdown").classList.toggle("show");
+})
+
+document.querySelector("#kb-topic-dropdown-search-input").addEventListener("keyup", (event) => {
+    const input = document.getElementById("kb-topic-dropdown-search-input");
+    const filter = input.value.toUpperCase();
+    const div = document.getElementById("topic-modal-dropdown");
+    const a = div.getElementsByTagName("a");
+    console.log(input, filter, div, a);
+    for (let i = 0; i < a.length; i++) {
+      const txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  })

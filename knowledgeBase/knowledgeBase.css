@@ -113,6 +113,7 @@
 
 .kb-content .task-dropdown-select-options {
     width: 250px;
+    background-color: #e9e9ed;
 }
 
 .kb-content .kb-wide-modal {
@@ -362,4 +363,78 @@
 
 .kb-scrollable {
     overflow-y: scroll;
+}
+
+ /* Dropdown Button */
+ .kb-topic-dropdown-btn {
+    padding: 16px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus
+  .kb-topic-dropdown-btn:hover, .kb-topic-dropdown-btn:focus {
+    background-color: #3e8e41;
+  } */
+  
+  /* The search field when it gets focus/clicked on */
+  /* #kb-topic-dropdown-search:focus {outline: 3px solid #ddd;} */
+  
+  /* The container <div> - needed to position the dropdown content */
+#kb-topic-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+#kb-topic-dropdown {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    gap: 5px;
+    align-content: center;
+    align-items: center;
+    background-color: #f6f6f6;
+    width: 250px;
+    border: 2px solid #ddd;
+    padding: 5px;
+    z-index: 1;
+    border-top: 0px;
+  }
+  
+  /* Links inside the dropdown */
+#kb-topic-dropdown a {
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  
+  /* Change color of dropdown links on hover */
+#kb-topic-dropdown a:hover {background-color: #f1f1f1}
+
+#topic-modal-dropdown {
+    max-height: 150px;
+    overflow-y: auto;
+}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:flex !important;} 
+
+#kb-topic-dropdown-search-input {
+    min-width: 0;
+}
+
+#topic-modal-dropdown {
+    width: 100%;
+    padding: 0px 10px;
+}
+
+#add-topic-modal {
+    z-index: 10000;
 }

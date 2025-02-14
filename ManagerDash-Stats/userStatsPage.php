@@ -97,6 +97,9 @@
 
         </div>
         <div class="statsHome-table">
+            <!-- <div class="filter-task-btn black-btn">Filter
+                <i class="fa fa-solid fa-sliders"></i>
+            </div> -->
             <table class="userStats-tr" id="allTaskTable-userStats">
             
             </table>
