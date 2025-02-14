@@ -9,6 +9,7 @@
                 <a href="#" id="active-project" class="project-item active">Active</a>
                 <a href="#" id="not-started-project" class="project-item ">Not Started</a>
                 <a href="#" id="archive-project" class="project-item ">Archive</a>
+                <a href="#" id="completed-project" class="project-item ">Completed</a>
             </div>
         <?php endif; ?>
     </div>
@@ -49,6 +50,13 @@
     </section>
 
     <section class="project-item-content"  id="archive-project-content">
+        <div class="grid-container" id="gridContainer">
+            <!-- Project Cards dynamically generated-->
+
+        </div>
+    </section>
+
+    <section class="project-item-content"  id="completed-project-content">
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 

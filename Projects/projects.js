@@ -36,6 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "#archive-project-content #gridContainer"
       );
     });
+    document.querySelector("#completed-project").addEventListener("click", () => {
+      fetchProjectsData(
+        userID,
+        { status: "Completed" },
+        "#completed-project-content #gridContainer"
+      );
+    });
   }
 
   //Filter Projects Functionality

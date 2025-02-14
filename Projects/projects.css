@@ -235,7 +235,7 @@
 }
 
 
-#active-project-content, #not-started-project-content, #archive-project-content {
+#active-project-content, #not-started-project-content, #archive-project-content, #completed-project-content {
     display: none;
 }
 

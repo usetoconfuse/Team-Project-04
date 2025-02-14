@@ -24,6 +24,8 @@ if ($role === 'Employee') {
             $sql .= " AND Projects.Start_Date > CURDATE()";
         } elseif ($status === 'Archived') {
             $sql .= " AND Projects.Status = '$status'";
+        } elseif ($status === 'Completed') {
+            $sql .= " AND Projects.Status = '$status'";
         }
     }
 }
