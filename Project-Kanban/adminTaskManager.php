@@ -356,13 +356,14 @@
                             <div class="task-dropdown-user-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-user"></i>
                             </div>
-                            <select name="user" id="user">
-                                <option value="" selected disabled hidden>Choose User</option>
-                                <option value="jlittle">John Little</option>
-                                <option value="slarkin">Sandra Larkin</option>
-                                <option value="ncage">Nick Cage</option>
-                                <option value="ssmith">Sally Smith</option>
-                            </select>
+                            <input autocomplete="off" list="task-user" placeholder="Enter Name"
+                                id="task-user-dropdown">
+                            <datalist name="task-user" id="task-user">
+                                <option value="John Little">
+                                <option value="Sandra Larkin">
+                                <option value="Nick Cage">
+                                <option value="Sally Smith">
+                            </datalist>
                         </div>
                     </div>
                     <!--Choose Priority-->
@@ -398,10 +399,33 @@
                 </div>
             </form>
             <div class="task-submit-buttons">
-                <div class="add-task-btn">
-                    Add Task
+                <div class="add-task-btn" id="update-task-btn">
+                    Edit Tasks
                     <i class="fa fa-arrow-right"></i>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!--Modal to delete task in personal board-->
+    <div id="delete-project-task-modal" class="modal">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+            
+            </div>
+            <div class="task-delete-buttons">
+                <a id="delete-project-task-confirm">     <i class="fa fa-trash"></i>
+                    Delete
+                </a>
+                <a class="cancel-delete-task-btn" id="cancel-delete-task-btn"><i class="fa fa-xmark"></i>
+                    Cancel
+                </a>
             </div>
         </div>
     </div>

@@ -504,7 +504,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input {
+.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #task-user-dropdown {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -567,7 +567,7 @@ input[type="file"]::-webkit-file-upload-button {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn  {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm  {
     width: 60%;
     margin: 1rem auto;
     padding: 0.8rem 0.8rem;
@@ -589,22 +589,22 @@ input[type="file"]::-webkit-file-upload-button {
     justify-content: flex-end;
 }
 
-.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm  {
+.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm  {
     margin: 1rem 1rem 1rem 1rem;
     width: 30%;
     background-color: #f98a93;
     color: black;
 }
 
-.personal-delete-task, #delete-personal-task-confirm  {
+.personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm   {
     color: white !important;
 }
 
-.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i {
+.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i, #delete-project-task-confirm i {
     margin-right: 5px;
 }
 
-#delete-personal-task-confirm, #cancel-delete-task-btn  {
+#delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm   {
     flex: 1;
 } 
 

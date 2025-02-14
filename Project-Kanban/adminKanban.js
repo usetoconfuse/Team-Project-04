@@ -1,5 +1,7 @@
+let globalSelectedProjectID = null;
 window.addEventListener("storage", function () {
     const selectedProjectID = sessionStorage.getItem('clicked-project-id');
+    globalSelectedProjectID = selectedProjectID;
     console.log(selectedProjectID);
 
     getProjectName(selectedProjectID);
@@ -62,47 +64,176 @@ async function getProjectName(selectedProjectID) {
 
 
 function populateTasksTable(tableData) {
-    const tableBody = document.querySelector(".emp-projectKanban-bottom tbody");
-    tableBody.innerHTML = "";
-    tableData.forEach(task => {
-        const row = document.createElement('tr');
+  const tableBody = document.querySelector(".emp-projectKanban-bottom tbody");
+  tableBody.innerHTML = "";
+  tableData.forEach(task => {
+      const row = document.createElement('tr');
 
-        let taskStuck = (task.Stuck === '1' || task.Stuck === '2') ? "Yes" : "No";
+      let taskStuck = (task.Stuck === '1' || task.Stuck === '2') ? "Yes" : "No";
 
-        row.innerHTML = `   <td>${task.Task_ID}</td>
-                            <td id="emp-task-title">${task.Name}</td>
-                            <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
-                            <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
-                            <td>${task.Due_Date}</td>
-                            <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
-                            <td>${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
-                            <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>
-                            <td><a class="edit-admin-functionality-btn">Edit</a></td> 
-                            <td><a class="delete-admin-functionality-btn">Delete</a></td>   `;
-        
-        tableBody.appendChild(row);
+      row.innerHTML = `   <td>${task.Task_ID}</td>
+                          <td id="emp-task-title">${task.Name}</td>
+                          <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
+                          <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
+                          <td>${task.Due_Date}</td>
+                          <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
+                          <td>${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
+                          <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>
+                          <td><a class="edit-admin-functionality-btn" data-task-id="${task.Task_ID}">Edit</a></td> 
+                          <td><a class="delete-admin-functionality-btn" data-task-id="${task.Task_ID}">Delete</a></td>   `;
+      
+      tableBody.appendChild(row);
+  });
 
-        const moreActionsModal = document.querySelector('#admin-kanban-content .edit-admin-actions-modal');
-        const openAdminMoreBtn = row.querySelector('.edit-admin-functionality-btn');
-        const closeAdminMoreBtn = moreActionsModal.querySelector('.close-modal-btn');
-        openAdminMoreBtn.addEventListener('click', () => {
-          moreActionsModal.querySelector('#admin-actions-modal-header').innerText = `Actions for Task #${task.Task_ID}`;
-          moreActionsModal.querySelector('#admin-actions-modal-message').innerText = `Task Description: ${task.Description}`;
-          moreActionsModal.style.display = 'block'; 
-        })
+  // Event delegation for edit buttons
+  tableBody.addEventListener('click', (event) => {
+      if (event.target.classList.contains('edit-admin-functionality-btn')) {
+          const taskID = event.target.getAttribute('data-task-id');
+          const task = tableData.find(t => t.Task_ID == taskID);
+          openEditModal(task);
+      }
+  });
 
-        closeAdminMoreBtn.addEventListener('click', () => {
-          moreActionsModal.style.display = 'none';
-        })
-
-
-        const openDeleteActionsBtn = row.querySelector('#delete-admin-functionality-btn');
-        
-        
-        
-
-    })
+  // Event delegation for delete buttons
+  tableBody.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-admin-functionality-btn')) {
+          const taskID = event.target.getAttribute('data-task-id');
+          openDeleteModal(taskID);
+      }
+  });
 }
+
+function openEditModal(task) {
+  const editActionsModal = document.querySelector('#admin-kanban-content .edit-task-modal');
+  fetchUsersForEdit();
+  editActionsModal.querySelector('.modal-header p').innerText = `Actions for Task #${task.Task_ID}`;
+  editActionsModal.style.display = 'block';
+  editActionsModal.querySelector('#task-title').value = task.Name;
+  editActionsModal.querySelector('#priority').value = task.Priority;
+  editActionsModal.querySelector('#date-input').value = task.Due_Date;
+  editActionsModal.querySelector('#task-user-dropdown').value = task.Assignee_ID;
+  editActionsModal.querySelector('#task-description').value = task.Description;
+
+  const updateTaskBtn = editActionsModal.querySelector('#update-task-btn');
+  updateTaskBtn.onclick = () => {
+      const taskName = editActionsModal.querySelector('#task-title').value;
+      const taskDescription = editActionsModal.querySelector('#task-description').value;
+      const taskPriority = editActionsModal.querySelector('#priority').value;
+      const taskDueDate = editActionsModal.querySelector('#date-input').value;
+      const Assignee_ID = editActionsModal.querySelector('#task-user-dropdown').value;
+      const Task_ID = task.Task_ID;
+
+      
+      updatePersonalTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID);
+      editActionsModal.style.display = 'none';
+  };
+
+  const closeAdminEditBtn = editActionsModal.querySelector('.close-modal-btn');
+  closeAdminEditBtn.onclick = () => {
+      editActionsModal.style.display = 'none';
+  };
+}
+
+function openDeleteModal(taskID) {
+  const deleteProjectTaskModal = document.querySelector('#admin-kanban-content #delete-project-task-modal');
+  deleteProjectTaskModal.querySelector('.modal-header').innerText = `Delete Task #${taskID}`;
+  deleteProjectTaskModal.querySelector('.modal-body').innerText = `Are you sure you want to delete Task #${taskID}?`;
+  deleteProjectTaskModal.style.display = 'flex';
+
+  const deleteProjectTaskConfirm = deleteProjectTaskModal.querySelector('#delete-project-task-confirm');
+  deleteProjectTaskConfirm.onclick = () => {
+      deleteProjectTask(taskID);
+      deleteProjectTaskModal.style.display = 'none';
+  };
+
+  const closeProjectTaskModal = deleteProjectTaskModal.querySelector('#cancel-delete-task-btn');
+  closeProjectTaskModal.onclick = () => {
+      deleteProjectTaskModal.querySelector('.modal-header').innerText = "";
+      deleteProjectTaskModal.querySelector('.modal-body').innerText = "";
+      deleteProjectTaskModal.style.display = 'none';
+  };
+}
+
+async function deleteProjectTask(projectTaskID) {
+  try {
+    let url = `Project-Kanban/delete-project-task-db.php?taskID=${encodeURIComponent(projectTaskID)}`;
+
+    const params = { 
+      method: "GET",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+        console.log(response);
+    } else {
+      getProjectTable(globalSelectedProjectID);
+        
+    }
+  } catch(error) {
+    console.log("Fetch Issue",error);
+    //Show Error Card
+  }
+}
+
+
+const taskDropdown = document.querySelector('#admin-kanban-content #task-user')
+async function fetchUsersForEdit() {
+  try {
+    const response = await fetch("Projects/query/fetch-users.php");
+    if (!response.ok) throw new Error("Failed to fetch users");
+
+    const users = await response.json();
+
+    // Clear existing options
+    taskDropdown.innerHTML =
+      '<option value="" selected disabled hidden>Choose</option>';
+
+    users.forEach((user) => {
+      const option = document.createElement("option");
+      option.value = user.User_ID;
+      option.textContent = `${user.User_ID} - ${user.Forename} ${user.Surname}`;
+      taskDropdown.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+  }
+}
+
+async function updatePersonalTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, taskID) {
+  try {
+    const url = 'Project-Kanban/updateTaskDetails.php';
+    
+    const data = {
+      Name: taskName,
+      Description: taskDescription,
+      Priority: taskPriority,
+      Due_Date: taskDueDate,
+      Assignee_ID: Assignee_ID,
+      Task_ID: taskID
+    };
+
+    console.log(data);
+
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(url, params);
+    if (!response.ok) {
+      console.log(response);
+    } else {
+      getProjectTable(globalSelectedProjectID);
+    }
+
+  } catch (error) {
+    console.log("Error updating the task status", error);
+  }
+}
+
 
 
 
@@ -154,6 +285,5 @@ filterProjectTaskBtn.addEventListener('click', () => {
   })
 
 
-//====Edit Task Modal
-const editProjectTaskModal = document.querySelector('#admin-kanban-content .edit-task-modal');
-const editTaskBtn = document.querySelector('#admin-kanban-content .edit-task-btn');
+
+
