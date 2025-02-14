@@ -166,12 +166,16 @@ const renderAllPosts = async (posts) => {
             currentTypeHtml = `class="kb-badge" style="background-color:hsl(17, 5% ,50%);" `;
         }
 
+        let lock = ''
+        if (post.Is_Protected === "1") {
+            lock = '<i class="fa-solid fa-lock"></i>'
+        }
 
         // Create the HTML for the post
         const postHTML = `
       <div class="kb-post kb-flex-col" id="post-${post.Post_ID}" data-id="${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
         <div class="kb-flex-row kb-flex-wrap">
-          <h2 class="kb-title-header">${post.Title}</h2>
+          <h2 class="kb-title-header">${post.Title} ${lock}</h2>
           <div class="kb-flex-row kb-flex-wrap kb-post-badges">
             <div ${currentTypeHtml} > ${post.Type} </div>
             <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>

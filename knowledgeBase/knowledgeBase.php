@@ -139,8 +139,8 @@
                                     <i class="fa fa-solid fa-lock"></i>
                                 </div>
                                 <select name="visibility" id="kb-new-post-protected-input">
-                                    <option value="No">No</option>
-                                    <option value="Manager Only" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>Yes</option>
+                                    <option value="0">No</option>
+                                    <option value="1" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>Yes</option>
                                 </select>
                             </div>
                         </div>

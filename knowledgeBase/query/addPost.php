@@ -8,19 +8,21 @@ $content = $_POST['content'];
 $type = $_POST['type'];
 $topic = $_POST['topic'];
 $visibility = $_POST['visibility'];
+$protected = $_POST['protected'];
 $userId = $_SESSION['user_id'];
 
 // using data from the Post modal form add a post to the knowledge base table
 $sql1 = "
 INSERT INTO 
 Knowledgebase_Posts 
-(Title, Description, Type, User_ID, Visibility) 
+(Title, Description, Type, User_ID, Visibility, Is_Protected) 
 VALUES ( 
     '$title',  
     '$content',  
     '$type',    
      $userId,  
-    '$visibility'
+    '$visibility',
+    '$protected'
 );
 ";
 

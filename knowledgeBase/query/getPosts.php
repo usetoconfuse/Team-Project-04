@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../../config/db-setup.php';
 
 $VALID_TYPES = ['Technical', 'Non-Technical'];
@@ -25,7 +26,8 @@ SELECT
     usr.User_ID,
     usr.Forename,
     usr.Surname,
-    kb.Date_Created
+    kb.Date_Created,
+    kb.Is_Protected
 FROM
     Knowledgebase_Posts kb
 LEFT JOIN
@@ -45,6 +47,9 @@ if ($type) {
 }
 if ($query) {
     $sql .= " AND LOWER(kb.Title) LIKE LOWER('%$query%')";
+}
+if ($_SESSION['role'] !== 'Admin') {
+    $sql .= " AND kb.Visibility = 'All Users'";
 }
 
 $result = mysqli_query($conn, $sql);
