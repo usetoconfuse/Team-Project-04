@@ -1,4 +1,5 @@
-<div id="project-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>" data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
+<div id="project-content" data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>"
+    data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <div class="project-intro">
         <div class="project-txt">
             <p>All Projects</p>
@@ -19,19 +20,19 @@
     <section class="project-item-content open" id="active-project-content">
 
         <div class="project-filter-container">
-                <div class="project-search">
-                    <i class="fa fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Projects" id="searched-project">
-                </div>
+            <div class="project-search">
+                <i class="fa fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Projects" id="searched-project">
+            </div>
 
-                <div class="project-buttons-container">
-                    <div class="filter-project-btn black-btn"> Filter
-                        <i class="fa fa-solid fa-sliders"></i>
-                    </div>
-                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
-                        <a href="#" class="add-project black-btn">Add Project</a>
-                    <?php endif; ?>
+            <div class="project-buttons-container">
+                <div class="filter-project-btn black-btn"> Filter
+                    <i class="fa fa-solid fa-sliders"></i>
                 </div>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
+                    <a href="#" class="add-project black-btn">Add Project</a>
+                <?php endif; ?>
+            </div>
         </div>
 
         <p class="search-error-msg">No Projects Found</p>
@@ -42,12 +43,12 @@
     </section>
 
 
-    <section class="project-item-content"  id="not-started-project-content">
+    <section class="project-item-content" id="not-started-project-content">
         <div class="project-filter-container">
-                <div class="project-search">
-                    <i class="fa fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Projects" id="searched-project">
-                </div>
+            <div class="project-search">
+                <i class="fa fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Projects" id="searched-project">
+            </div>
         </div>
 
         <p class="search-error-msg">No Projects Found</p>
@@ -57,12 +58,12 @@
         </div>
     </section>
 
-    <section class="project-item-content"  id="archive-project-content">
+    <section class="project-item-content" id="archive-project-content">
         <div class="project-filter-container">
-                <div class="project-search">
-                    <i class="fa fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Projects" id="searched-project">
-                </div>
+            <div class="project-search">
+                <i class="fa fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Projects" id="searched-project">
+            </div>
         </div>
         <p class="search-error-msg">No Projects Found</p>
         <div class="grid-container" id="gridContainer">
@@ -71,12 +72,12 @@
         </div>
     </section>
 
-    <section class="project-item-content"  id="completed-project-content">
+    <section class="project-item-content" id="completed-project-content">
         <div class="project-filter-container">
-                <div class="project-search">
-                    <i class="fa fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Projects" id="searched-project">
-                </div>
+            <div class="project-search">
+                <i class="fa fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Projects" id="searched-project">
+            </div>
         </div>
         <p class="search-error-msg">No Projects Found</p>
         <div class="grid-container" id="gridContainer">
@@ -173,15 +174,11 @@
                             <div class="task-dropdown-user-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-user"></i>
                             </div>
-                            <select name="team-leader" id="team-leader">
-                                <option value="choose" selected disabled hidden>Choose</option>
-                                <option value="jlittle">John Little</option>
-                                <option value="jganatra">Jeevan Ganatra</option>
-                                <option value="dnovetsky">Daniel Novetsky</option>
-                                <option value="supreti">Sawan Upreti</option>
-                                <option value="high">High</option>
-                                <option value="stuck">Stuck</option>
-                            </select>
+                            <input autocomplete="off" list="team-leader" placeholder="Enter Name"
+                                id="team-leader-dropdown">
+                            <datalist name="team-leader" id="team-leader">
+
+                            </datalist>
                         </div>
                     </div>
 

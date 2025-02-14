@@ -504,7 +504,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select  {
+.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -528,7 +528,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*add icons next to dropdown*/
-.task-dropdown-select-options, .move-task-dropdown select option, .order-by-dropdown select option{
+.task-dropdown-select-options, .move-task-dropdown select option, .order-by-dropdown select option {
     display: flex;
     align-items: center;
     justify-content: center;

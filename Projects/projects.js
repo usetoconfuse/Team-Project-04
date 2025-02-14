@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     addProjectModal.querySelector(".close-modal-btn");
   const submitAddProject = addProjectModal.querySelector("#add-project-btn");
   const teamLeaderDropdown = document.querySelector("#team-leader");
+  const teamLeaderDropdownInput = document.querySelector("#team-leader-dropdown");
 
   //Fetch all project data for this user and display on page
   async function fetchProjectsData(userID, filters = {}, containerSelector) {
@@ -269,6 +270,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Open Add Project Modal & Fetch Users
   addProjectBtn.addEventListener("click", () => {
     addProjectModal.style.display = "flex";
+    const title = addProjectModal.querySelector("#task-title");
+    title.value ="";
+    const teamLeader = teamLeaderDropdownInput;
+    teamLeader.value ="";
+    const startDate = addProjectModal.querySelector(
+      "#start-date-project"
+    );
+    startDate.value ="";
+    const dueDate = addProjectModal.querySelector("#date-project");
+    dueDate.value ="";
     fetchUsers(); // Load Team Leaders dynamically
   });
 
@@ -280,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Submit New Project Data
   submitAddProject.addEventListener("click", async function () {
     const title = addProjectModal.querySelector("#task-title").value;
-    const teamLeader = teamLeaderDropdown.value;
+    const teamLeader = teamLeaderDropdownInput.value;
     const startDate = addProjectModal.querySelector(
       "#start-date-project"
     ).value;
