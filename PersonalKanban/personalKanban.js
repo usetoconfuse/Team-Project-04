@@ -228,7 +228,7 @@ function populatePersonalTasks(tasks) {
          filterRemoveBtn.style.display = 'none';
        }
  
-       searchBar.value = "";
+       searchBarPersonal.value = "";
  
        fetchPersonalData(userId, allFilters);
  
@@ -375,7 +375,7 @@ applyFilterBtn.addEventListener('click', () => {
 
 
   filterTaskModal.style.display = 'none';
-  searchBar.value = "";
+  searchBarPersonal.value = "";
 
   fetchPersonalData(userId, filters);
 })
@@ -401,7 +401,7 @@ orderByBtn.addEventListener('click', () => {
     filterRemoveBtn.style.display = 'none';
   }
 
-  searchBar.value = "";
+  searchBarPersonal.value = "";
 
   fetchPersonalData(userId, allFilters);
 })
