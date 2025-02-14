@@ -229,8 +229,42 @@
 
 
 
-/* HomePage Styling */
-.instruction-txt {
-    font-size: 22px;
-    color: #9A9A9A;
+
+
+
+.userStats-type-btns {
+    background-color: var(--secondary-colour);
+    white-space: nowrap;
+    border-radius: var(--line-border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userStats-type-btns button {
+    border-radius: 0px;
+}
+
+.userStats-type-btns button:first-child {
+    border-top-left-radius: var(--line-border-radius);
+    border-bottom-left-radius: var(--line-border-radius);
+}
+
+.userStats-type-btns button:last-child {
+    border-top-right-radius: var(--line-border-radius);
+    border-bottom-right-radius: var(--line-border-radius);
+}
+
+.userStats-type-btns button {
+    background-color: transparent;
+    color: var(--primary-colour);
+}
+
+.userStats-type-btns button:hover {
+    background-color: #9A9A9A;
+}
+
+.userStats-type-btns button.active {
+    background-color: var(--primary-colour);
+    color: var(--bg-colour);
 }

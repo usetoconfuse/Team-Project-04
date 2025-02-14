@@ -7,6 +7,10 @@
     if (isset($_GET['ID'])) {
         // Retrieve parameter
         $userID = htmlspecialchars($_GET['ID']); // Sanitize input
+        $stuck = htmlspecialchars($_GET['stuck']); // Sanitize input
+        $high = htmlspecialchars($_GET['high']); // Sanitize input
+        $earliest = htmlspecialchars($_GET['earliest']); // Sanitize input
+
     }
 
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
@@ -15,8 +19,14 @@
     $sql = "SELECT * 
     FROM tasks INNER JOIN Projects 
     ON tasks.Project_ID = Projects.Project_ID 
-    WHERE Assignee_ID = '$userID';
+    WHERE tasks.Assignee_ID = '$userID'
+    OR tasks.Stuck = '$stuck'
+    OR tasks.Priority = '$high'
             ";
+
+            // if ($earliest == 'earliest') {
+            //     $sql .= "ORDER BY tasks.Start_Date";
+            // }
     
     // if ($type == "Technical"){
 	//     $sql .= " WHERE kb.Type = 'Technical' ";  

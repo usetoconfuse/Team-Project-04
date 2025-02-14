@@ -219,10 +219,10 @@ async function fetchUserProjHrsTable() {
 
 
     //Function to fetch all tasks of a user
-    async function fetchUserTaskTable() {
+    async function fetchUserTaskTable(stuck, high, earliest) {
         try {
             // Make an HTTP request to the PHP file
-            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id);
+            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id + '&stuck=' + stuck + '&high=' + high + '&earliest=' + earliest);
             // console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
@@ -231,6 +231,11 @@ async function fetchUserProjHrsTable() {
             }
             // Convert the response to JSON format
             const data = await response.json();
+
+            var container = document.getElementById('allTaskTable-userStats');
+            container.innerHTML = ''; // No results, show user.
+            
+
             if (data.length > 0) {
 
                 // console.log("2: ", data[0].Task_ID);
@@ -276,11 +281,13 @@ async function fetchUserProjHrsTable() {
                     tasksTable  += '</table>';
 
                     // Find the container/table to display the data
-                    var container = document.getElementById('allTaskTable-userStats');
                     container.innerHTML = tasksTable;
             } else {
-                var container = document.getElementById('allTaskTable-userStats');
-                container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
+                if(stuck != '' || earliest != '' || high != '') {
+                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
+                } else {
+                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
+                }
             }
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
@@ -435,6 +442,9 @@ async function fetchProjTimeGraph(userID) {
   
         } else {
            // createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
+           var emptyGantt = new Chart(document.getElementById('userStats-overlapContainerGraph'));
+
+
         }
       } catch (error) {
           console.error('Error:', error); // Log any errors that occur
@@ -749,8 +759,8 @@ async function PopulateTaskDialChartUserStats() {
     let totalTasksUserStats = statusTaskArr[0] + statusTaskArr[1] + statusTaskArr[2];
     let percentageUserStats = Math.round((statusTaskArr[2]*100) / totalTasksUserStats);
     document.getElementById("userStTaskDialPercentageText").innerText = percentageUserStats + "%";
-    
-    if(statusTaskArr.length > 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
+
+    if(statusTaskArr.length === 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
         let userStatsPercentText = document.getElementById('userStatsPercentText');
         userStatsPercentText.innerHTML = "";
         document.getElementById("userStTaskDialPercentageText").innerText = "No tasks have been set for userID: " + userDetails.id;
@@ -797,3 +807,37 @@ async function PopulateTaskDialChartUserStats() {
     });
 }
 }
+
+
+// Filters for the All Tasks Table
+
+//on showall btn click will load all posts from db
+document.getElementById("userStats-type-showall-btn").addEventListener('click', (event) => {
+    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
+    fetchUserTaskTable('', '', '');
+});
+
+//on techincal button clicked show all post with type of techincal
+document.getElementById('userStats-type-earliest-btn').addEventListener('click', (event) => {
+    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
+    selectedType = 'earliest';
+    fetchUserTaskTable('', '', selectedType);
+});
+
+//on techincal button clicked show all post with type of non-techincal
+document.getElementById('userStats-type-high-btn').addEventListener('click', (event) => {
+    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
+    selectedType = 'High';
+    fetchUserTaskTable('',selectedType,'');
+});
+
+//on techincal button clicked show all post with type of non-techincal
+document.getElementById('userStats-type-stuck-btn').addEventListener('click', (event) => {
+    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+    event.target.classList.add('active');
+    selectedType = 1;
+    fetchUserTaskTable(selectedType, '', '');
+});

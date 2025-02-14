@@ -260,8 +260,8 @@ async function fetchProjSearch(searchParams) {
 
 // Projects table event handlers
 // Populate project table on load as project is the default tab
-document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
-document.addEventListener('DOMContentLoaded', fetchProjectTable());
+document.getElementById('mgrProjStats').addEventListener('click', fetchProjSearch(""));
+document.addEventListener('DOMContentLoaded', fetchUserSearch(""));
 document.getElementById('mgrUserStats').addEventListener('click', fetchUserSearch(""));
 
 
