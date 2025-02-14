@@ -172,6 +172,12 @@ async function PopulateTaskDialChart() {
     let percentage = Math.round((dialData[0]*100) / totalTasks);
     document.getElementById("prjStTaskDialPercentageText").innerText = percentage + "%";
 
+    if(dialData.length > 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
+        let prjStatsPercentText = document.getElementById('prjStatsPercentText');
+        prjStatsPercentText.innerHTML = "";
+        document.getElementById("prjStTaskDialPercentageText").innerText = "No projects have been set for userID: " + userDetails.id;
+    }
+
     // Populate chart legend text
     document.getElementById("prjStLegendDone").innerText = dialData[0];
     document.getElementById("prjStLegendInprog").innerText = dialData[1];

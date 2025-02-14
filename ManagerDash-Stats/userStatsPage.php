@@ -37,7 +37,7 @@
 
                                             <div id="userStTaskDialPercentage">
                                                 <h1 id="userStTaskDialPercentageText"></h1>
-                                                <p>Of Tasks Complete</p>
+                                                <p id="userStatsPercentText">Of Tasks Complete</p>
                                             </div>
 
                                             <div id="userStTaskDialLegend">

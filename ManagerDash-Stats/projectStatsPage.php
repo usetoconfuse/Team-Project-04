@@ -23,7 +23,7 @@
 
             <div id="prjStTaskDialPercentage">
                 <h1 id="prjStTaskDialPercentageText"></h1>
-                <p>Of Tasks Complete</p>
+                <p id="prjStatsPercentText">Of Tasks Complete</p>
             </div>
 
             <div id="prjStTaskDialLegend">

@@ -730,8 +730,10 @@ async function PopulateTaskDialChartUserStats() {
 
         }
  
-        console.log("Original Status Data: ", data);
-        console.log("Refined Status Array",statusTaskArr)
+        // console.log("Original Status Data: ", data);
+        // console.log("Refined Status Array",statusTaskArr);
+
+   
     
 
 
@@ -747,6 +749,12 @@ async function PopulateTaskDialChartUserStats() {
     let totalTasksUserStats = statusTaskArr[0] + statusTaskArr[1] + statusTaskArr[2];
     let percentageUserStats = Math.round((statusTaskArr[2]*100) / totalTasksUserStats);
     document.getElementById("userStTaskDialPercentageText").innerText = percentageUserStats + "%";
+    
+    if(statusTaskArr.length > 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
+        let userStatsPercentText = document.getElementById('userStatsPercentText');
+        userStatsPercentText.innerHTML = "";
+        document.getElementById("userStTaskDialPercentageText").innerText = "No tasks have been set for userID: " + userDetails.id;
+    }
 
     // Populate chart legend text
     document.getElementById("userStLegendDone").innerText = statusTaskArr[0];
@@ -754,6 +762,7 @@ async function PopulateTaskDialChartUserStats() {
     document.getElementById("userStLegendTodo").innerText = statusTaskArr[2];
 
     taskDialUserStats.destroy();
+
 
     taskDialUserStats = new Chart(dialCtxUserStats, {
         type: 'doughnut',
