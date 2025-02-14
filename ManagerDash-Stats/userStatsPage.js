@@ -246,7 +246,6 @@ async function fetchUserProjHrsTable() {
                                             <tr>
                                                 <th>Task ID</th>
                                                 <th>Task Name</th>
-                                                <th>Description</th>
                                                 <th>Status</th>
                                                 <th>Stuck?</th>
                                                 <th>Due Date</th>
@@ -268,7 +267,6 @@ async function fetchUserProjHrsTable() {
                     tasksTable  += `<tr>
                                             <td>` + item.Task_ID + `</td>
                                             <td>` + item.Name + `</td>
-                                            <td>` + item.Description + `</td>
                                             <td>` + item.Status + `</td>
                                             <td style="` + stuckStyles + `";>` + stuck + `</td>
                                             <td>` + item.Due_Date + `</td>

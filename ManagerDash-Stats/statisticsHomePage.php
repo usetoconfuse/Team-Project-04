@@ -22,13 +22,13 @@
             <div id="statsHomeFiltersProj">
             <h1 class="instruction-txt">Click a Project to view it's Statistics</h1>
 
-                <div class="projStats-search"> <!-- Filters here -->
+                <div class="stats-listing-search projStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search project" id="searched-proj">
+                    <input type="text" placeholder="Search project" class="stats-search-colour " id="searched-proj">
                 </div>
             </div>
 
-            <div id="statsHomeTableProj">
+            <div class="statsHome-table" id="statsHomeTableProj">
 
                 <!--Fetch Project Table Here-->
             </div>
@@ -50,12 +50,12 @@
             <div id="statsHomeFiltersUser">
             <h1 class="instruction-txt">Click an employee to view their Statistics</h1>
 
-                <div class="userStats-search"> <!-- Filters here -->
+                <div class="stats-listing-search userStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search user" id="searched-user">
+                    <input type="text" placeholder="Search user" class="stats-search-colour " id="searched-user">
                 </div>            
             </div>
-            <div id="statsHomeTableUser">
+            <div class="statsHome-table" id="statsHomeTableUser">
                 <!--Fetch User Table Here-->
             </div>
         </div>

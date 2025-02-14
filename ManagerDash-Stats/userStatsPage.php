@@ -96,9 +96,11 @@
             <button id="userStats-type-stuck-btn" value="stuck">Stuck</button>
 
         </div>
-        <table class="userStats-tr" id="allTaskTable-userStats">
-        
-        </table>
+        <div class="statsHome-table">
+            <table class="userStats-tr" id="allTaskTable-userStats">
+            
+            </table>
+        </div>
     </div>
 
 </div>
