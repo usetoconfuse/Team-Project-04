@@ -106,7 +106,8 @@
                             <th>Stuck</th>
                             <th>Assignee</th>
                             <th>Assigned By</th>
-                            <th>More</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -303,6 +304,23 @@
     </div>
 
 
+<div class="modal admin-actions-modal" data-task-id="">
+    <div class="modal-box admin-actions-modal-box">
+        <div class="modal-header">
+            <p id="admin-actions-modal-header">Actions for Task</p>
+            <div class="close-modal-btn">
+                <i class="fa-solid fa-x"></i>
+            </div>
+        </div>
+        <div class="modal-body">
+            <p id="admin-actions-modal-message"></p>
+            <div class="task-submit-buttons">
+          
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </div>
