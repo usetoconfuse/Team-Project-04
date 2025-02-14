@@ -13,6 +13,11 @@ if (!password_verify($currentPass, $user['Password'])) {
     exit;
 }
 
+if (password_verify($newPass, $user['Password'])) {
+    echo json_encode(['success' => false, 'error' => 'New password cannot be the same as the current password']);
+    exit;
+}
+
 $password_regex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).{12,}$/";
 
 if (!preg_match($password_regex, $newPass)) {
@@ -20,6 +25,7 @@ if (!preg_match($password_regex, $newPass)) {
 }
 
 $newPasswordHashed = password_hash($newPass, PASSWORD_DEFAULT);
+
 
 $updatePasswordSQL = "UPDATE Users SET Password = ? WHERE User_ID = ?";
 $stmt = $conn->prepare($updatePasswordSQL);

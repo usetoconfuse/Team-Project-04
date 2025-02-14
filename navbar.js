@@ -132,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const changePassModal = document.querySelector('#change-password-modal');
     openChangePassBtn.addEventListener('click', () => {
         changePassModal.style.display = 'block';
+        oldPasswordInput.value = "";
+        newPasswordInput.value = "";
+        confirmPasswordInput.value = "";
     })
     closeChangePassBtn.addEventListener('click', () => {
         changePassModal.style.display = 'none';
@@ -214,6 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const newPassword = newPasswordInput.value;
         const confirmPassword = confirmPasswordInput.value;
         const userId = changePassModal.getAttribute('data-user-id');
+
+        if (!currentPassword || !newPassword || !confirmPassword) {
+            changePassModal.querySelector('.change-pass-error').innerHTML = "Please fill in all fields.";
+            return;
+        }
     
         if (newPassword !== confirmPassword) {
             changePassModal.querySelector('.change-pass-error').innerHTML = "New Passwords do not match.";
