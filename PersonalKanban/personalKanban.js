@@ -140,7 +140,7 @@ function populatePersonalTasks(tasks) {
 
                     <div class="modal-task-info-section-top">
                        <p class="task-modal-title">Due Date</p>
-                       <div class="status-box">
+                       <div class="modal-task-due-date modal-task-info-section-body">
                            <div class="task-indicator-circle"></div>
                            <p>${task.Due_Date}</p>
                        </div>
@@ -183,6 +183,15 @@ function populatePersonalTasks(tasks) {
     closeViewTaskModal.addEventListener('click', () => {
       viewTaskModal.style.display = 'none';
     });
+
+    const dueDateDot = viewTaskModal.querySelector('.modal-task-due-date .task-indicator-circle');
+    if (taskCard.id === 'kanban-task-overdue') {
+      dueDateDot.style.backgroundColor = "#E6757E";
+      
+    } else {
+      dueDateDot.style.backgroundColor = "#ADDA9D";
+    }
+
 
     const kanbanCardDueDate = taskCard.querySelector('.due-date');
     const currentSectionId = taskCard.parentElement.id;
