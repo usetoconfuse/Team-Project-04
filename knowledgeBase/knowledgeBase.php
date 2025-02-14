@@ -110,13 +110,22 @@
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-comment"></i>
                                 </div>
-                                <input autocomplete="off" list="topic-modal-dropdown" placeholder="Enter Topic"
-                                id="kb-new-post-topic-input">
-                                <datalist name="topic" id="topic-modal-dropdown">
-                                    <!--These topics will be retrieved via sql query-->
-                                    <option value="" selected disabled hidden>Choose</option>
-                                </datalist>
+                                <div class="kb-topic-dropdown-btn" id="kb-new-post-topic-input">
+                                <div class="centered-div">Select Topic</div>
+                                </div>
                             </div>
+                            <div class="kb-topic-dropdown-container">
+                                    <div id="kb-topic-dropdown">
+                                        <div class="kb-flex-row kb-topic-dropdown-search">
+                                            <i class="fa-solid fa-search"></i>
+                                            <input type="text" placeholder="Search.." id="kb-topic-dropdown-search-input">
+                                        </div>
+                                        <div id="topic-modal-dropdown">
+                                        </div>
+                                        <button id="kb-topic-modal-add-topic">Add Topic</button>
+                                        <!-- Topics are dynamically loaded with JS -->
+                                    </div>
+                            </div> 
                         </div>
                     </div>
                     <div class="kb-flex-row space-evenly kb-flex-wrap">
