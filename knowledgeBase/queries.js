@@ -149,9 +149,12 @@ const renderAllPosts = async (posts) => {
         const postID = post.Post_ID;
         let currentUserHtml = '';
 
-        // Only allow editing/deleting of posts if the user is the author or an admin.
-        // TODO: If the post is protected don't allow author either.
-        if (post.User_ID === user.user_id || user.role === 'Admin') {
+        if (
+            // Allow editing/deletion by the author if the post is not protected...
+            (post.User_ID === user.user_id && post.Is_Protected !== "1") || 
+            // ...or if the user is an admin.
+            user.role === 'Admin'
+        ) {
             currentUserHtml = `
             <button class="kb-edit-post-button black-btn">Edit Post</button>
             <button class="kb-delete-post-button red-btn">Delete Post <i class="fa-solid fa-trash"></i></button>
@@ -191,7 +194,7 @@ const renderAllPosts = async (posts) => {
           </div>
         </div>
         <div class="kb-post-divider"></div>
-        <p class="kb-post-content kb-post-content-shortened">${marked.parse(post.Description)}</p>
+        <div class="kb-post-content kb-post-content-shortened">${marked.parse(post.Description)}</div>
         <div class="kb-flex-row kb-post-buttons">
           <button class="read-post-btn black-btn">Read Post</button>
           ${currentUserHtml}
@@ -466,6 +469,7 @@ const openPost = (postId) => {
 
     const post = document.getElementById(postId);
     const postDetail = document.getElementById("kb-post-view");
+    console.log(post.querySelector(".kb-post-content").innerHTML);
 
     postDetail.querySelector(".kb-title-header").innerHTML = post.querySelector(".kb-title-header").innerHTML;
     postDetail.querySelector(".kb-post-badges").innerHTML = post.querySelector(".kb-post-badges").innerHTML;
@@ -481,9 +485,6 @@ const closePost = () => {
 }
 
 const currentPost = new URLSearchParams(window.location.search).get("post");
-if (currentPost) {
-    openPost(currentPost);
-}
 
 backBtn.addEventListener("click", () => {
     closePost();
@@ -515,4 +516,7 @@ window.onload = async () => {
         renderTopicsInDropdown(topics, newPostTopicsDropdown)
         renderTopicsInDropdown(topics, editPostTopicsDropdown)
     });
+    if (currentPost) {
+        openPost(currentPost);
+    }
 };

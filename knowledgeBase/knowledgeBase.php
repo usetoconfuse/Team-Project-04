@@ -264,7 +264,7 @@
         </button>
     </div>
     <div class="kb-main kb-full-height">
-        <div class="kb-post kb-full-height">
+        <div class="kb-post kb-flex-col kb-full-height">
             <div class="kb-flex-row kb-flex-wrap">
                 <h2 class="kb-title-header"></h2>
                 <div class="kb-flex-row kb-flex-wrap kb-post-badges">
@@ -279,7 +279,7 @@
                 </div>
             </div>
             <div class="kb-post-divider"></div>
-            <p class="kb-post-content kb-scrollable"></p>
+            <div class="kb-post-content kb-scrollable"></div>
         </div>
     </div>
 </div>

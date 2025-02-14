@@ -1,4 +1,4 @@
-.view-admin-functionality-btn {
+.edit-admin-functionality-btn, .delete-admin-functionality-btn {
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -6,4 +6,12 @@
     font-size: 0.9rem;
     text-align: center;
     background-color: black;
+}
+
+.delete-admin-functionality-btn {
+    background-color: #f98a93;
+}
+
+#admin-kanban-content .admin-actions-modal {
+    display: none;
 }
