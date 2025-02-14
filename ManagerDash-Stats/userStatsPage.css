@@ -226,3 +226,11 @@
 .userStGray{
     color: var(--medium-gray);
 }
+
+
+
+/* HomePage Styling */
+.instruction-txt {
+    font-size: 22px;
+    color: #9A9A9A;
+}
