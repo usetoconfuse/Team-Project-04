@@ -219,15 +219,16 @@ async function fetchUserProjHrsTable() {
 
 
     //Function to fetch all tasks of a user
-    async function fetchUserTaskTable(stuckValue, priorityValue, dateValue, orderByValue) {
+    async function fetchUserTaskTable(stuck, high, earliest) {
         console.log(stuck);
 
         console.log(high);
         console.log(earliest);
+        //stuckValue, priorityValue, dateValue, orderByValue
 
         try {
             // Make an HTTP request to the PHP file
-            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?userID=' + userDetails.id + '&stuckValue=' + stuckValue + '&priorityValue=' + priorityValue + '&orderByValue=' + orderByValue + '&dateValue' +dateValue);
+            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id + '&stuck=' + stuck + '&high=' + high + '&earliest=' + earliest); // '&orderByValue=' + orderByValue + '&dateValue' +dateValue
             // console.log("1: ", response);
             
             // Ensure the response is OK and return the JSON data 
