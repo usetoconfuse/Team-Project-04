@@ -37,14 +37,14 @@ async function fetchPersonalData(userID, filters={}) {
         "In Progress": document.querySelector("#personal-kanban-content #kanban-in-progress").children.length,
         "Completed": document.querySelector("#personal-kanban-content #kanban-completed").children.length
       };
-      changeProjectsCount(personalCardCounts);
+      changePersonalCount(personalCardCounts);
     } catch(error) {
       console.log("Fetch Issue",error);
       //Show Error Card
     }
 }
 
-function changeProjectsCount(cardCounts) {
+function changePersonalCount(cardCounts) {
   // Update the count display elements in the headers
   document.querySelector('#personal-kanban-content #to-do-header .kanban-header-no').innerText = cardCounts["To Do"];
   document.querySelector('#personal-kanban-content #in-progress-header .kanban-header-no').innerText = cardCounts["In Progress"];
@@ -224,11 +224,11 @@ function populatePersonalTasks(tasks) {
  
        const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
        const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
-       const currentFilters = getCurrentFilters();
+       const currentFilters = getCurrentFilterPersonal();
        const allFilters = { ...currentFilters, ...orderByParam};
  
        filterAppliedMsg.style.display = 'block';
-       filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+       filterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
  
        let filtersLength = Object.keys(allFilters).length;
        if (filtersLength > 0) {
@@ -303,7 +303,7 @@ searchBarPersonal.addEventListener('input', ()=>{
     "In Progress": countBlockTasks("#personal-kanban-content #kanban-in-progress"),
     "Completed": countBlockTasks("#personal-kanban-content #kanban-completed")
   };
-  changeProjectsCount(personalCardCounts);
+  changePersonalCount(personalCardCounts);
 
   if (foundTasks === 0) {
     document.querySelector('#personal-kanban-content .search-task-error-msg').style.display = 'block';
@@ -374,7 +374,7 @@ applyFilterBtn.addEventListener('click', () => {
   } 
 
   filterAppliedMsg.style.display = 'block';
-  filterAppliedMsg.innerHTML = createFiltersMsg(filters);
+  filterAppliedMsg.innerHTML = createFiltersMsgPersonal(filters);
   let filtersLength = Object.keys(filters).length;
   if (filtersLength > 0) {
     filterRemoveBtn.style.display = 'flex';
@@ -396,12 +396,12 @@ orderByBtn.addEventListener('click', () => {
   const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
 
 
-  const currentFilters = getCurrentFilters();
+  const currentFilters = getCurrentFilterPersonal();
   const allFilters = { ...currentFilters, ...orderByParam};
 
 
   filterAppliedMsg.style.display = 'block';
-  filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+  filterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
 
   let filtersLength = Object.keys(allFilters).length;
   if (filtersLength > 0) {
@@ -427,7 +427,7 @@ filterRemoveBtn.addEventListener('click', () => {
   fetchPersonalData(userIdPersonal, {});
 })
 
-function getCurrentFilters() {
+function getCurrentFilterPersonal() {
   const filterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal');
   const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
   const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
@@ -446,7 +446,7 @@ function getCurrentFilters() {
 
 
 
-function createFiltersMsg(filters) {
+function createFiltersMsgPersonal(filters) {
   let applied = [];
   if (filters.priorityValue && filters.priorityValue !== "All") {
     applied.push(filters.priorityValue + " Priority");

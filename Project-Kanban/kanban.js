@@ -32,7 +32,7 @@ window.addEventListener("storage", function () {
       const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
       const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
       
-      const filters = {priorityValue,dateValue,stuckValue};
+      const filters = {priorityValue, dateValue, stuckValue};
 
       if (priorityValue === "All") {
         delete filters.priorityValue;
@@ -50,6 +50,8 @@ window.addEventListener("storage", function () {
 
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(filters);
+      console.log(createFiltersMsg(filters))
+      console.log(filters)
 
       let filtersLength = Object.keys(filters).length;
       if (filtersLength > 0) {
@@ -147,7 +149,7 @@ function getCurrentFilters() {
   const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
   const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
   
-  const filters = {priorityValue,dateValue,stuckValue};
+  const filters = {priorityValue, dateValue, stuckValue};
 
   if (priorityValue === "All") {
     delete filters.priorityValue;

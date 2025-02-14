@@ -156,7 +156,7 @@
                             </div>
                             <select name="priority" id="priority">
                                 <option value="All" selected>Show All</option>
-                                <option value="None">None</option>
+                    
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
