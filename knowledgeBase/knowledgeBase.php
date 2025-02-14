@@ -279,7 +279,7 @@
                 </div>
             </div>
             <div class="kb-post-divider"></div>
-            <p class="kb-post-content kb-scrollable"></p>
+            <div class="kb-post-content kb-scrollable"></div>
         </div>
     </div>
 </div>

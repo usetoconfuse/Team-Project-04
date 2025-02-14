@@ -191,7 +191,7 @@ const renderAllPosts = async (posts) => {
           </div>
         </div>
         <div class="kb-post-divider"></div>
-        <p class="kb-post-content kb-post-content-shortened">${marked.parse(post.Description)}</p>
+        <div class="kb-post-content kb-post-content-shortened">${marked.parse(post.Description)}</div>
         <div class="kb-flex-row kb-post-buttons">
           <button class="read-post-btn black-btn">Read Post</button>
           ${currentUserHtml}
@@ -466,6 +466,7 @@ const openPost = (postId) => {
 
     const post = document.getElementById(postId);
     const postDetail = document.getElementById("kb-post-view");
+    console.log(post.querySelector(".kb-post-content").innerHTML);
 
     postDetail.querySelector(".kb-title-header").innerHTML = post.querySelector(".kb-title-header").innerHTML;
     postDetail.querySelector(".kb-post-badges").innerHTML = post.querySelector(".kb-post-badges").innerHTML;
@@ -481,9 +482,6 @@ const closePost = () => {
 }
 
 const currentPost = new URLSearchParams(window.location.search).get("post");
-if (currentPost) {
-    openPost(currentPost);
-}
 
 backBtn.addEventListener("click", () => {
     closePost();
@@ -515,4 +513,7 @@ window.onload = async () => {
         renderTopicsInDropdown(topics, newPostTopicsDropdown)
         renderTopicsInDropdown(topics, editPostTopicsDropdown)
     });
+    if (currentPost) {
+        openPost(currentPost);
+    }
 };
