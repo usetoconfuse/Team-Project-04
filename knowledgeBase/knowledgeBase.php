@@ -94,7 +94,7 @@
                             <label for="type-dropdown">Type :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
+                                    <i class="fa fa-solid fa-gear"></i>
                                 </div>
                                 <select name="type" id="type-dropdown">
                                     <option value="" selected disabled hidden>Choose</option>
@@ -108,12 +108,14 @@
                             <label for="topic-modal-dropdown">Topic :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
+                                    <i class="fa fa-solid fa-comment"></i>
                                 </div>
-                                <select name="topic" id="topic-modal-dropdown">
+                                <input autocomplete="off" list="topic-modal-dropdown" placeholder="Enter Topic"
+                                id="topic-modal-dropdown-input">
+                                <datalist name="topic" id="topic-modal-dropdown">
                                     <!--These topics will be retrieved via sql query-->
                                     <option value="" selected disabled hidden>Choose</option>
-                                </select>
+                                </datalist>
                             </div>
                         </div>
                         <div class="task-dropdown task-dropdown-topic">
@@ -166,7 +168,7 @@
                             <label for="type-dropdown">Type :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
+                                    <i class="fa fa-solid fa-gear"></i>
                                 </div>
                                 <select name="type" id="edit-post-type-input">
                                     <option value="" selected disabled hidden>Choose</option>
@@ -180,7 +182,7 @@
                             <label for="edit-post-topic-input">Topic :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
+                                    <i class="fa fa-solid fa-comment"></i>
                                 </div>
                                 <select name="topic" id="edit-post-topic-input">
                                     <!--These topics will be retrieved via sql query-->

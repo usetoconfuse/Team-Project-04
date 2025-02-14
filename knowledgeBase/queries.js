@@ -338,7 +338,7 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
         'title': getValue('postInput'),
         'content': getValue('contentInput'),
         'type': getValue('type-dropdown'),
-        'topic': getValue('topic-modal-dropdown'),
+        'topic': getValue('topic-modal-dropdown-input'),
         'visibility': getValue('visibility-dropdown')
     });
 
