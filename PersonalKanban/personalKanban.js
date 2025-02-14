@@ -359,6 +359,11 @@ applyFilterBtn.addEventListener('click', () => {
     delete filters.dateValue;
   }
 
+  const orderByValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
+  if (orderByValue !== "None") {
+    filters.orderByValue = orderByValue;
+  } 
+
   filterAppliedMsg.style.display = 'block';
   filterAppliedMsg.innerHTML = createFiltersMsg(filters);
   let filtersLength = Object.keys(filters).length;
