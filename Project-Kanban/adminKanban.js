@@ -82,7 +82,7 @@ function populateTasksTable(tableData) {
         
         tableBody.appendChild(row);
 
-        const moreActionsModal = document.querySelector('#admin-kanban-content .admin-actions-modal');
+        const moreActionsModal = document.querySelector('#admin-kanban-content .edit-admin-actions-modal');
         const openAdminMoreBtn = row.querySelector('.edit-admin-functionality-btn');
         const closeAdminMoreBtn = moreActionsModal.querySelector('.close-modal-btn');
         openAdminMoreBtn.addEventListener('click', () => {
@@ -94,6 +94,10 @@ function populateTasksTable(tableData) {
         closeAdminMoreBtn.addEventListener('click', () => {
           moreActionsModal.style.display = 'none';
         })
+
+
+        const openDeleteActionsBtn = row.querySelector('#delete-admin-functionality-btn');
+        
         
         
 
@@ -149,3 +153,7 @@ filterProjectTaskBtn.addEventListener('click', () => {
     filterProjectTaskModal.style.display = 'none';
   })
 
+
+//====Edit Task Modal
+const editProjectTaskModal = document.querySelector('#admin-kanban-content .edit-task-modal');
+const editTaskBtn = document.querySelector('#admin-kanban-content .edit-task-btn');
