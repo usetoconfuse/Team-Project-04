@@ -64,6 +64,7 @@
                     <input type="text" placeholder="Search Projects" id="searched-project">
                 </div>
         </div>
+        <p class="search-error-msg">No Projects Found</p>
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 
@@ -77,6 +78,7 @@
                     <input type="text" placeholder="Search Projects" id="searched-project">
                 </div>
         </div>
+        <p class="search-error-msg">No Projects Found</p>
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const userRole = document
     .querySelector("#project-content")
     .getAttribute("data-role");
+    
   if (userRole === "Admin") {
     document.querySelector("#active-project").addEventListener("click", () => {
       fetchProjectsData(
@@ -19,7 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
         { status: "Active" },
         "#active-project-content #gridContainer"
       );
+
+      searchBarProjects.forEach(bar => {
+        bar.value = "";
+        document.querySelector(".search-error-msg").style.display = "none";
+      })
+
     });
+
     document
       .querySelector("#not-started-project")
       .addEventListener("click", () => {
@@ -28,20 +36,37 @@ document.addEventListener("DOMContentLoaded", function () {
           { status: "Not Started" },
           "#not-started-project-content #gridContainer"
         );
+        searchBarProjects.forEach(bar => {
+          bar.value = "";
+          document.querySelector(".search-error-msg").style.display = "none";
+        })
+  
       });
+
     document.querySelector("#archive-project").addEventListener("click", () => {
       fetchProjectsData(
         userID,
         { status: "Archived" },
         "#archive-project-content #gridContainer"
       );
+      searchBarProjects.forEach(bar => {
+        bar.value = "";
+        document.querySelector(".search-error-msg").style.display = "none";
+      })
+
     });
+
     document.querySelector("#completed-project").addEventListener("click", () => {
       fetchProjectsData(
         userID,
         { status: "Completed" },
         "#completed-project-content #gridContainer"
       );
+      searchBarProjects.forEach(bar => {
+        bar.value = "";
+        document.querySelector(".search-error-msg").style.display = "none";
+      })
+
     });
   }
 
@@ -96,9 +121,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const projectData = await response.json();
-      console.log(projectData);
-
       gridContainer.innerHTML = ""; // Clear existing projects
+      if (projectData.length === 0) {
+        container.parentElement.querySelector(".search-error-msg").style.display = "block";
+        return;
+      }
+
+
 
       projectData.forEach((project) => {
         const projectCard = document.createElement("div");
