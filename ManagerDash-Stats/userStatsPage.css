@@ -231,6 +231,17 @@
 
 
 
+#mgrStatsUser-grid-container button, #mgrStatsUser-grid-container input {
+    border: none;
+    outline: none;
+    border-radius: var(--line-border-radius);
+    cursor: pointer;
+    min-height: fit-content;
+    min-width: fit-content;
+    width: fit-content;
+    transition: 0.5s color ease, 0.5s background-color ease;
+    padding: 10px;
+}
 
 .userStats-type-btns {
     background-color: var(--secondary-colour);
