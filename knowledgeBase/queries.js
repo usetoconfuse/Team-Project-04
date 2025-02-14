@@ -149,9 +149,12 @@ const renderAllPosts = async (posts) => {
         const postID = post.Post_ID;
         let currentUserHtml = '';
 
-        // Only allow editing/deleting of posts if the user is the author or an admin.
-        // TODO: If the post is protected don't allow author either.
-        if (post.User_ID === user.user_id || user.role === 'Admin') {
+        if (
+            // Allow editing/deletion by the author if the post is not protected...
+            (post.User_ID === user.user_id && post.Is_Protected !== "1") || 
+            // ...or if the user is an admin.
+            user.role === 'Admin'
+        ) {
             currentUserHtml = `
             <button class="kb-edit-post-button black-btn">Edit Post</button>
             <button class="kb-delete-post-button red-btn">Delete Post <i class="fa-solid fa-trash"></i></button>
