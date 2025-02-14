@@ -19,17 +19,11 @@ if (empty($title) || empty($teamLeader) || empty($startDate) || empty($dueDate))
 }
 
 
-$currentDate = date('Y-m-d');
-$status = "";
-if ($startDate > $currentDate) {
-    $status = "Not Started";
-} else {
-    $status = "Active";
-}
+
 
 // Prepare and execute SQL query
-$stmt = $conn->prepare("INSERT INTO Projects (Project_Title,Start_Date, Due_Date,Project_Leader, Status) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param('sssis', $title, $startDate, $dueDate, $teamLeader, $status);
+$stmt = $conn->prepare("INSERT INTO Projects (Project_Title,Start_Date, Due_Date,Project_Leader) VALUES (?, ?, ?, ?)");
+$stmt->bind_param('sssi', $title, $startDate, $dueDate, $teamLeader);
 
 $stmt->execute();
 
