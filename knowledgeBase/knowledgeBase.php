@@ -284,4 +284,5 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="knowledgeBase/queries.js"></script>

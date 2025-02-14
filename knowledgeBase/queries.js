@@ -191,7 +191,7 @@ const renderAllPosts = async (posts) => {
           </div>
         </div>
         <div class="kb-post-divider"></div>
-        <p class="kb-post-content kb-post-content-shortened">${nl2br(post.Description)}</p>
+        <p class="kb-post-content kb-post-content-shortened">${marked.parse(post.Description)}</p>
         <div class="kb-flex-row kb-post-buttons">
           <button class="read-post-btn black-btn">Read Post</button>
           ${currentUserHtml}
@@ -218,11 +218,6 @@ const renderAllPosts = async (posts) => {
         }
     }
 }
-
-// Helper function to convert newline characters to HTML line breaks
-const nl2br = (str) => {
-    return str.replace(/\n/g, '<br>');
-};
 
 //helper function to convert the date time from database to a more readable form
 const formatDate = (dateString) => {
