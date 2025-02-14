@@ -309,32 +309,39 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const searchBarProjects = document.querySelector(
+
+
+const searchBarProjects = document.querySelectorAll(
   ".project-search #searched-project"
 );
 
-searchBarProjects.addEventListener("input", () => {
-  const searchValue = searchBarProjects.value.toLowerCase();
-  const allProjects = document.querySelectorAll(".project-card");
-  let foundProjects = 0;
-  allProjects.forEach((project) => {
-    const projectTitle = project
-      .getAttribute("data-project-title")
-      .toLowerCase();
-
-    if (projectTitle.includes(searchValue)) {
-      foundProjects++;
-      project.style.display = "block";
+searchBarProjects.forEach((bar) => {
+  bar.addEventListener("input", () => {
+    const searchValue = bar.value.toLowerCase();
+    const allProjects = document.querySelectorAll(".project-card");
+    let foundProjects = 0;
+    allProjects.forEach((project) => {
+      const projectTitle = project
+        .getAttribute("data-project-title")
+        .toLowerCase();
+  
+      if (projectTitle.includes(searchValue)) {
+        foundProjects++;
+        project.style.display = "block";
+      } else {
+        project.style.display = "none";
+      }
+    });
+    if (foundProjects === 0) {
+      document.querySelector(".search-error-msg").style.display = "block";
     } else {
-      project.style.display = "none";
+      document.querySelector(".search-error-msg").style.display = "none";
     }
-  });
-  if (foundProjects === 0) {
-    document.querySelector(".search-error-msg").style.display = "block";
-  } else {
-    document.querySelector(".search-error-msg").style.display = "none";
-  }
+  });  
 });
+
+
+
 
 const leaderProjectCard = document.querySelector("#leader-project-card");
 if (leaderProjectCard) {

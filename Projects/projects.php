@@ -43,6 +43,14 @@
 
 
     <section class="project-item-content"  id="not-started-project-content">
+        <div class="project-filter-container">
+                <div class="project-search">
+                    <i class="fa fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search Projects" id="searched-project">
+                </div>
+        </div>
+
+        <p class="search-error-msg">No Projects Found</p>
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 
@@ -50,6 +58,12 @@
     </section>
 
     <section class="project-item-content"  id="archive-project-content">
+        <div class="project-filter-container">
+                <div class="project-search">
+                    <i class="fa fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search Projects" id="searched-project">
+                </div>
+        </div>
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 
@@ -57,6 +71,12 @@
     </section>
 
     <section class="project-item-content"  id="completed-project-content">
+        <div class="project-filter-container">
+                <div class="project-search">
+                    <i class="fa fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search Projects" id="searched-project">
+                </div>
+        </div>
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 
