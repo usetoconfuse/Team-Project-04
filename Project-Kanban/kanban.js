@@ -59,7 +59,7 @@ window.addEventListener("storage", function () {
       }
 
       filterTaskModal.style.display = 'none';
-      searchBar.value = "";
+      searchBarProject.value = "";
 
       getKanbanData(userID, selectedProjectID, filters);
     })
@@ -85,7 +85,7 @@ window.addEventListener("storage", function () {
         filterRemoveBtn.style.display = 'none';
       }
 
-      searchBar.value = "";
+      searchBarProject.value = "";
 
       getKanbanData(userID, selectedProjectID, allFilters);
     })
@@ -94,7 +94,7 @@ window.addEventListener("storage", function () {
       filterAppliedMsg.innerHTML = "";
       filterAppliedMsg.style.display = 'none';
       filterRemoveBtn.style.display = 'none';
-      searchBar.value = "";
+      searchBarProject.value = "";
       document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value = "None";
       filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
       filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
@@ -133,7 +133,7 @@ function createFiltersMsg(filters) {
   }
 }
 
-function formatDate(date) {
+function formatDateDeadline(date) {
   const dateSplit = date.split('-');
   const year = dateSplit[0]
   const month = dateSplit[1];
@@ -264,7 +264,7 @@ function generateCard(kanbanData) {
                           <a href="">View Task</a>
                           <div class="due-date">
                               <i class="fa fa-regular fa-calendar"></i>
-                              <p>Due: ${formatDate(task.Due_Date)}</p>
+                              <p>Due: ${formatDateDeadline(task.Due_Date)}</p>
                           </div>
                       </div>
                     </div>`;
@@ -390,7 +390,7 @@ function generateCard(kanbanData) {
                                                       </div>
                                                       <div class="modal-task-info-section-body modal-task-due-date">
                                                           <div class="task-indicator-circle"></div>
-                                                          <p>${formatDate(task.Due_Date)}</p>
+                                                          <p>${formatDateDeadline(task.Due_Date)}</p>
                                                       </div>
                                                   </div>
 
@@ -522,7 +522,7 @@ function generateCard(kanbanData) {
         filterRemoveBtn.style.display = 'none';
       }
 
-      searchBar.value = "";
+      searchBarProject.value = "";
 
       getKanbanData(userId, projectID, allFilters);
 
@@ -716,10 +716,10 @@ filterTaskBtn.addEventListener('click', () => {
 
 
 //Keyword Search
-const searchBar = document.querySelector('#proj-kanban-content .task-search #searched-task');
+const searchBarProject = document.querySelector('#proj-kanban-content .task-search #searched-task');
 
-searchBar.addEventListener('input', ()=>{
-  const searchValue = searchBar.value.toLowerCase();
+searchBarProject.addEventListener('input', ()=>{
+  const searchValue = searchBarProject.value.toLowerCase();
   const allTasks = document.querySelectorAll('.kanban-content-project .kanban-card');
   console.log(allTasks);
   let foundTasks = 0;

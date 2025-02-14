@@ -1,9 +1,9 @@
 //Fetch from database send a request to server the database
 // to get the personal kanban board
 // Send user iD to the personalTaskfetch.php data
-const userId = document.querySelector('.kanban-content').getAttribute('data-user-id');
+const userIdPersonal = document.querySelector('.kanban-content').getAttribute('data-user-id');
 document.addEventListener('DOMContentLoaded',()=>{
-    fetchPersonalData(userId, {});
+    fetchPersonalData(userIdPersonal, {});
 })
 
 
@@ -230,7 +230,7 @@ function populatePersonalTasks(tasks) {
  
        searchBarPersonal.value = "";
  
-       fetchPersonalData(userId, allFilters);
+       fetchPersonalData(userIdPersonal, allFilters);
  
        
      });
@@ -320,15 +320,15 @@ function countBlockTasks(column) {
 
 
 //Filters
-const filterTaskModal = document.querySelector("#personal-kanban-content #filter-modal");
-const filterTaskBtn = document.querySelector('#personal-kanban-content  .filter-task-btn');
-const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
+const filterTaskModalPersonal = document.querySelector("#personal-kanban-content #filter-modal");
+const filterTaskBtnPersonal = document.querySelector('#personal-kanban-content  .filter-task-btn');
+const closeFilterTaskModalPersonal = filterTaskModalPersonal.querySelector('#filter-modal .close-modal-btn')
 
-filterTaskBtn.addEventListener('click', () => {
-  filterTaskModal.style.display = 'flex';
+filterTaskBtnPersonal.addEventListener('click', () => {
+  filterTaskModalPersonal.style.display = 'flex';
   })
-  closeFilterTaskModal.addEventListener('click', () => {
-    filterTaskModal.style.display = 'none';
+  closeFilterTaskModalPersonal.addEventListener('click', () => {
+    filterTaskModalPersonal.style.display = 'none';
   })
 
 
@@ -374,10 +374,10 @@ applyFilterBtn.addEventListener('click', () => {
   }
 
 
-  filterTaskModal.style.display = 'none';
+  filterTaskModalPersonal.style.display = 'none';
   searchBarPersonal.value = "";
 
-  fetchPersonalData(userId, filters);
+  fetchPersonalData(userIdPersonal, filters);
 })
 
 //Order By Filters
@@ -403,7 +403,7 @@ orderByBtn.addEventListener('click', () => {
 
   searchBarPersonal.value = "";
 
-  fetchPersonalData(userId, allFilters);
+  fetchPersonalData(userIdPersonal, allFilters);
 })
 
 filterRemoveBtn.addEventListener('click', () => {
@@ -415,7 +415,7 @@ filterRemoveBtn.addEventListener('click', () => {
   filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
   filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
 
-  fetchPersonalData(userId, {});
+  fetchPersonalData(userIdPersonal, {});
 })
 
 function getCurrentFilters() {
@@ -490,7 +490,7 @@ function taskIsOverdue(dueDate) {
 }
 
 //Sending data whena adding task to data base 
-async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userId) {
+async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userIdPersonal) {
     try {
       const url = 'PersonalKanban/queries/add-personal-task-db.php';
       
@@ -499,7 +499,7 @@ async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueD
         Description: taskDescription,
         Priority: taskPriority,
         Due_Date: taskDueDate,
-        User_ID: userId,
+        User_ID: userIdPersonal,
         Status: 'To Do'
       };
 
@@ -537,7 +537,62 @@ submitTaskBtn.addEventListener('click', async () => {
   alert('Task Added');
   addTaskModal.style.display = 'none';
   //send data to database to write 
-  await addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userId);
-  fetchPersonalData(userId, {});
+  await addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userIdPersonal);
+  fetchPersonalData(userIdPersonal, {});
 
+})
+
+
+//Open and Close Kanban Modal 
+const kanbanContainersPersonal = document.querySelectorAll('#personal-kanban-content .kanban-board .kanban-section')
+kanbanContainersPersonal.forEach(kanbanContainer => {
+  //====Open and Close Task cards
+  kanbanContainer.addEventListener('click', (e) => {
+    const kanbanCardHeader = e.target.closest('.kanban-card-top');
+    if (!kanbanCardHeader) return;
+
+    const kanbanCardGroup = kanbanCardHeader.parentElement;
+    const kanbanCardBody = kanbanCardGroup.querySelector('.kanban-board .kanban-card-body');
+    const kanbanCardIcon = kanbanCardHeader.querySelector('.kanban-card-top-details i');
+
+    kanbanCardIcon.classList.toggle('fa-caret-up');
+    kanbanCardIcon.classList.toggle('fa-caret-down');
+  
+    kanbanCardBody.classList.toggle('open');
+
+    const otherCards = kanbanContainer.querySelectorAll('.kanban-board .kanban-card');
+    otherCards.forEach(otherCard => {
+        if (otherCard != kanbanCardGroup) {
+            const otherCardBody = otherCard.querySelector('.kanban-board .kanban-card-body')
+            const otherCardIcon = otherCard.querySelector('.kanban-board .kanban-card-top i')
+            otherCardBody.classList.remove('open')
+        }
+    })
+  })
+
+  //====Open and Close Kanban Columns
+  kanbanContainer.addEventListener('click', (e) => {
+    const kanbanColumnHeader = e.target.closest('.kanban-board .kanban-header');
+    if (!kanbanColumnHeader) return;
+
+    const kanbanColumnGroup = kanbanColumnHeader.parentElement;
+    const kanbanColumnBody = kanbanColumnGroup.querySelector('.kanban-board .kanban-body');
+    const kanbanColumnIcon = kanbanColumnGroup.querySelector('.kanban-board .kanban-header i');
+
+    kanbanColumnIcon.classList.toggle('fa-caret-down');
+    kanbanColumnIcon.classList.toggle('fa-caret-up');
+
+    kanbanColumnBody.classList.toggle('open');
+
+    const otherColumns = kanbanContainer.querySelectorAll('.kanban-board .kanban-section')
+    otherColumns.forEach(otherColumn => {
+        if (otherColumn != kanbanColumnGroup) {
+            const otherColumnBody = otherColumn.querySelector('.kanban-board .kanban-body');
+            const otherColumnIcon = otherColumn.querySelector('.kanban-board .kanban-header i');
+            otherColumnBody.classList.remove('open')
+            otherColumnIcon.classList.remove('fa-caret-up')
+            otherColumnIcon.classList.add('fa-caret-down')
+        }
+    })
+  });
 })
