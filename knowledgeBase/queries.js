@@ -335,11 +335,12 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
 
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
-        'title': getValue('postInput'),
-        'content': getValue('contentInput'),
-        'type': getValue('type-dropdown'),
-        'topic': getValue('topic-modal-dropdown-input'),
-        'visibility': getValue('visibility-dropdown')
+        'title': getValue('kb-new-post-title'),
+        'content': getValue('kb-new-post-content-input'),
+        'type': getValue('kb-new-post-type-input'),
+        'topic': getValue('kb-new-post-topic-input'),
+        'visibility': getValue('kb-new-post-visibility-input'),
+        'protected': getValue('kb-new-post-protected-input')
     });
 
     alert('Post added successfully!');

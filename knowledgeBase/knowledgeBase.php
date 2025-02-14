@@ -69,7 +69,7 @@
 
         <!--Add Post Modal-->
         <div id="add-post-modal" class="modal">
-            <div class="modal-box">
+            <div class="modal-box kb-wide-modal">
                 <!--Header-->
                 <div class="modal-header">
                     Add Post
@@ -80,23 +80,23 @@
                 <!--Body-->
                 <form id="post-modal-form" class="modal-body">
                     <div>
-                        <label for="postInput">Title :</label>
-                        <input type="text" id="postInput" name="title" placeholder="Enter post title">
+                        <label for="kb-new-post-title">Title :</label>
+                        <input type="text" id="kb-new-post-title" name="title" placeholder="Enter post title">
                     </div>
                     <div>
-                        <label for="contentInput">Content :</label>
-                        <textarea type="text" id="contentInput" name="content"
+                        <label for="kb-new-post-content-input">Content :</label>
+                        <textarea type="text" id="kb-new-post-content-input" name="content"
                             placeholder="Enter post content"></textarea>
                     </div>
-                    <div class="kb-flex-row">
+                    <div class="kb-flex-row space-evenly kb-flex-wrap">
                         <!--technical or non technical-->
                         <div class="task-dropdown task-dropdown-technical">
-                            <label for="type-dropdown">Type :</label>
+                            <label for="kb-new-post-type-input">Type :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-gear"></i>
                                 </div>
-                                <select name="type" id="type-dropdown">
+                                <select name="type" id="kb-new-post-type-input">
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="Technical">Technical</option>
                                     <option value="Non-Technical">Non-technical</option>
@@ -111,24 +111,36 @@
                                     <i class="fa fa-solid fa-comment"></i>
                                 </div>
                                 <input autocomplete="off" list="topic-modal-dropdown" placeholder="Enter Topic"
-                                id="topic-modal-dropdown-input">
+                                id="kb-new-post-topic-input">
                                 <datalist name="topic" id="topic-modal-dropdown">
                                     <!--These topics will be retrieved via sql query-->
                                     <option value="" selected disabled hidden>Choose</option>
                                 </datalist>
                             </div>
                         </div>
+                    </div>
+                    <div class="kb-flex-row space-evenly kb-flex-wrap">
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="visibility-dropdown">Visibility :</label>
+                            <label for="kb-new-post-visibility-input">Visibility :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
+                                    <i class="fa fa-solid fa-eye"></i>
                                 </div>
-                                <select name="visibility" id="visibility-dropdown">
-                                    <option value="" selected disabled hidden>Choose</option>
+                                <select name="visibility" id="kb-new-post-visibility-input">
                                     <option value="All Users">All Users</option>
-                                    <!--disabled , will depend on if user or manager logged in-->
-                                    <option value="Manager Only" disabled>Manager Only</option>
+                                    <option value="Manager Only" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>Manager Only</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="task-dropdown task-dropdown-topic">
+                            <label for="kb-new-post-protected-input">Protected?</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-topic-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-lock"></i>
+                                </div>
+                                <select name="visibility" id="kb-new-post-protected-input">
+                                    <option value="No">No</option>
+                                    <option value="Manager Only" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>Yes</option>
                                 </select>
                             </div>
                         </div>
@@ -158,7 +170,7 @@
                         <input type="text" id="edit-post-title-input" name="title" placeholder="Enter post title">
                     </div>
                     <div>
-                        <label for="contentInput">Content :</label>
+                        <label for="kb-edit-post-content-input">Content :</label>
                         <textarea type="text" id="edit-post-content-input" name="content"
                             placeholder="Enter post content"></textarea>
                     </div>
