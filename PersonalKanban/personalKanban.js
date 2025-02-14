@@ -150,6 +150,8 @@ function populatePersonalTasks(tasks) {
 
 
                <div class="modal-task-btns">
+                <a class="personal-delete-task"><i class="fa fa-solid fa-trash"></i> Delete Task</a>
+                   
                 <div class="move-task-dropdown">
                   <select>
                     <option value="kanban-to-do">To Do</option>
@@ -171,6 +173,21 @@ function populatePersonalTasks(tasks) {
 
     document.body.appendChild(viewTaskModal);
     kanbanColumns[task.Status]?.appendChild(taskCard);
+
+    //Close and Open Delete Task Modal
+    const deleteTaskModal = document.querySelector('#personal-kanban-content #delete-personal-modal');
+    const openDeleteTaskModal = viewTaskModal.querySelector('.personal-delete-task');
+    const closeDeleteTaskModal = deleteTaskModal.querySelector('#cancel-delete-task-btn');
+    openDeleteTaskModal.addEventListener('click', () => {
+      deleteTaskModal.style.display = 'flex';
+      viewTaskModal.style.display = 'none';
+      deleteTaskModal.querySelector('.modal-header').innerHTML = `Delete Personal Task`;
+      deleteTaskModal.setAttribute("deleted-personal-task-id", task.PersonalTask_ID);
+      deleteTaskModal.querySelector('.modal-body').innerHTML = `Are you sure you want to delete task: #${task.PersonalTask_ID}, ${task.Name}`;
+    })
+    closeDeleteTaskModal.addEventListener('click', () => {
+      deleteTaskModal.style.display = 'none';
+    })
 
     //Closing and opening modal
     const closeViewTaskModal = viewTaskModal.querySelector('.close-modal-btn');
@@ -248,6 +265,8 @@ function populatePersonalTasks(tasks) {
   });
   
 }
+
+
 
 
 async function updatePersonalTaskStatus(taskID, newStatus) {

@@ -227,6 +227,30 @@
         </div>
     </div>
 
+    <!--Modal to delete task in personal board-->
+    <div id="delete-personal-modal" class="modal">
+            <div class="modal-box">
+                <!--Header-->
+                <div class="modal-header">
+
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                
+                </div>
+                <div class="task-delete-buttons">
+                    <a id="delete-personal-task-confirm">     <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+                    <a class="cancel-delete-task-btn" id="cancel-delete-task-btn"><i class="fa fa-xmark"></i>
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
 </div>
 
 

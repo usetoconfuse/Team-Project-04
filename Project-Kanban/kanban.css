@@ -567,7 +567,7 @@ input[type="file"]::-webkit-file-upload-button {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db  {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn  {
     width: 60%;
     margin: 1rem auto;
     padding: 0.8rem 0.8rem;
@@ -589,13 +589,32 @@ input[type="file"]::-webkit-file-upload-button {
     justify-content: flex-end;
 }
 
-.report-task-modal .report-task-db {
+.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm  {
     margin: 1rem 1rem 1rem 1rem;
     width: 30%;
     background-color: #f98a93;
     color: black;
 }
 
+.personal-delete-task, #delete-personal-task-confirm  {
+    color: white !important;
+}
+
+.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i {
+    margin-right: 5px;
+}
+
+#delete-personal-task-confirm, #cancel-delete-task-btn  {
+    flex: 1;
+} 
+
+.task-delete-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin:0 auto;
+}
 /*===View Task Modal ===*/
 
 
@@ -868,6 +887,7 @@ input[type="file"]::-webkit-file-upload-button {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 0.9rem;
 }
 
 
