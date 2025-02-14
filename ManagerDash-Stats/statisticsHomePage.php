@@ -1,6 +1,6 @@
 <!-- Created by Quinn Little 03/02/25 -->
 <!-- Updated by Toby Tischler 09/02/2025 -->
-<!-- Updated by Quinn Little 09/02/2025 -->
+<!-- Updated by Quinn Little 14/02/2025 -->
 
 <!-- Tabs -->
 <div id="mgrStatsAll">
@@ -21,7 +21,10 @@
         <!-- Project List Page -->
         <div id="statsHomeGridProject" class="statsHome-grid">
             <div id="statsHomeFiltersProj">
-                Project Filters Here
+                <div class="projStats-search"> <!-- Filters here -->
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search project" id="searched-proj">
+                </div>
             </div>
             <div id="statsHomeTableProj">
                 <!--Fetch Project Table Here-->
@@ -41,10 +44,11 @@
         <!-- User List Page -->
         <div id="statsHomeGridUser" class="statsHome-grid">
             <div id="statsHomeFiltersUser">
-                <div class="userStats-search">
+                <div class="userStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
                     <input type="text" placeholder="Search user" id="searched-user">
-                </div>            </div>
+                </div>            
+            </div>
             <div id="statsHomeTableUser">
                 <!--Fetch User Table Here-->
             </div>

@@ -6,7 +6,7 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select the first 45 users
-    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM Users LIMIT 45;
+    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM Users;
             ";
     
     // if ($type == "Technical"){

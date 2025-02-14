@@ -1,6 +1,6 @@
 // Created by Quinn Little 23/12/24
 // Updated by Toby Tischler 13/02/2025
-// Updated by Quinn Little 10/02/2025 
+// Updated by Quinn Little 14/02/2025 
 
 
 // Common functionality for all tabs
@@ -206,6 +206,58 @@ async function fetchUserSearch(searchParams) {
     }
 }
 
+
+async function fetchProjSearch(searchParams) {
+    try {
+        // Make an HTTP request to the PHP file
+        const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/projectStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
+
+        // console.log("1: ", response);
+        
+        // Ensure the response is OK and return the JSON data 
+        if (!response.ok) { 
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response to JSON format
+        const data = await response.json();
+        if (data.length > 0) {
+
+            // Build the new table to display
+            let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
+            projectTable  += `<thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Start Date</th>
+                                            <th>Due Date</th>
+                                            <th>Leader</th>
+                                        </tr>
+                                    </thead>`
+            projectTable  += '<tbody>'
+            // Loop through the data and create a new element for each item
+            data.forEach(function(item) {
+            projectTable  += `<tr onclick=viewSelectedProject(` + item.Project_ID + `)>
+                                            <td>` + item.Project_Title + `</td>
+                                            <td>` + item.Start_Date + `</td>
+                                            <td>` + item.Due_Date + `</td>
+                                            <td>` + item.Forename + ` ` + item.Surname + `</td>
+                                        </tr>`
+            });     
+            projectTable  += '</tbody>'
+            projectTable  += '</table>';
+
+            // Find the container/table to display the data
+            const container = document.getElementById('statsHomeTableProj');
+            container.innerHTML = projectTable;
+        } else {
+            var container = document.getElementById('statsHomeTableProj');
+            container.innerHTML = 'No matching Projects';
+        }
+
+    } catch (error) {
+        console.error('Error:', error); // Log any errors that occur
+    }
+}
+
 // Projects table event handlers
 // Populate project table on load as project is the default tab
 document.getElementById('mgrProjStats').addEventListener('click', fetchProjectTable());
@@ -214,13 +266,17 @@ document.getElementById('mgrUserStats').addEventListener('click', fetchUserSearc
 
 
 
-// Update selected posts when the search bar is used
+// Update selected posts when the search bar is used USER
 document.getElementById('searched-user').addEventListener("input", async (e) =>{
     selectedQuery = e.target.value.trim();
     fetchUserSearch(selectedQuery);
 });
 
-
+// Update selected posts when the search bar is used PROJECT
+document.getElementById('searched-proj').addEventListener("input", async (e) =>{
+    selectedQuery = e.target.value.trim();
+    fetchProjSearch(selectedQuery);
+});
 
 /* Redirect to correct sub-page if loading with URL params
 document.addEventListener('DOMContentLoaded', () => {

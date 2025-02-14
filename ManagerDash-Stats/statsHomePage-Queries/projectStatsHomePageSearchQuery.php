@@ -1,7 +1,5 @@
 <?php
-// Made by Quinn Little 10/02/2025
-// Updated by Quinn Little 14/02/2025
-
+// Made by Quinn Little 14/02/2025
 
     include '../../config/db-setup.php';
 
@@ -14,8 +12,13 @@
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     //Select the first 45 users
-    $sql = "SELECT User_ID, Forename, Surname, User_Type FROM Users WHERE Forename LIKE '%$searchParams%' OR User_ID LIKE '%$searchParams%';
+   $sql = "SELECT Projects.Project_ID, Projects.Project_Title, Projects.Start_Date, Projects.Due_Date, Projects.Project_Leader, Users.Forename, Users.Surname
+            FROM Projects INNER JOIN Users
+            ON Users.User_ID = Projects.Project_Leader
+            WHERE Projects.Project_Title LIKE '%$searchParams%' 
+            OR Projects.Project_ID LIKE '%$searchParams%';
             ";
+
     
     // if ($type == "Technical"){
 	//     $sql .= " WHERE kb.Type = 'Technical' ";  
