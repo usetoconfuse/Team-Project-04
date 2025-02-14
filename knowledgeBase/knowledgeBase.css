@@ -111,6 +111,27 @@
     padding-bottom: 20px !important;
 }
 
+.kb-content .task-dropdown-select-options {
+    width: 250px;
+}
+
+.kb-content .kb-wide-modal {
+    width: max(600px, 50%);
+}
+
+.kb-content .task-dropdown {
+    margin-bottom: 0;
+}
+
+#kb-new-post-content-input {
+    height: 10rem;
+    min-height: 5rem;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
+
 /* Section specific CSS */
 
 .kb-header-section {

@@ -151,7 +151,7 @@ const renderAllPosts = async (posts) => {
 
         // Only allow editing/deleting of posts if the user is the author or an admin.
         // TODO: If the post is protected don't allow author either.
-        if (post.User_ID == user.user_id || user.role == 'Admin') {
+        if (post.User_ID === user.user_id || user.role === 'Admin') {
             currentUserHtml = `
             <button class="kb-edit-post-button black-btn">Edit Post</button>
             <button class="kb-delete-post-button red-btn">Delete Post <i class="fa-solid fa-trash"></i></button>
@@ -166,12 +166,16 @@ const renderAllPosts = async (posts) => {
             currentTypeHtml = `class="kb-badge" style="background-color:hsl(17, 5% ,50%);" `;
         }
 
+        let lock = ''
+        if (post.Is_Protected === "1") {
+            lock = '<i class="fa-solid fa-lock"></i>'
+        }
 
         // Create the HTML for the post
         const postHTML = `
       <div class="kb-post kb-flex-col" id="post-${post.Post_ID}" data-id="${post.Post_ID}" data-topic="${post.Topic_Name}" data-type="${post.Type}">
         <div class="kb-flex-row kb-flex-wrap">
-          <h2 class="kb-title-header">${post.Title}</h2>
+          <h2 class="kb-title-header">${post.Title} ${lock}</h2>
           <div class="kb-flex-row kb-flex-wrap kb-post-badges">
             <div ${currentTypeHtml} > ${post.Type} </div>
             <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>
@@ -335,11 +339,12 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
 
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
-        'title': getValue('postInput'),
-        'content': getValue('contentInput'),
-        'type': getValue('type-dropdown'),
-        'topic': getValue('topic-modal-dropdown-input'),
-        'visibility': getValue('visibility-dropdown')
+        'title': getValue('kb-new-post-title'),
+        'content': getValue('kb-new-post-content-input'),
+        'type': getValue('kb-new-post-type-input'),
+        'topic': getValue('kb-new-post-topic-input'),
+        'visibility': getValue('kb-new-post-visibility-input'),
+        'protected': getValue('kb-new-post-protected-input')
     });
 
     alert('Post added successfully!');
