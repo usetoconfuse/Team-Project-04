@@ -3,10 +3,18 @@ const BASE_QUERY_PATH = 'knowledgeBase/query/';
 let user;
 
 // #region API Request functions
+
+// Helper function to send requests to the server easily, and handle any errors.
+// Parameters:
+// - method: The HTTP method to use (e.g. "GET", "POST").
+// - endpoint: The endpoint to send the request to (e.g. "getUser").
+// - query: An object containing the query parameters to send with the request as a key value mapping.
+// - body: An object containing the body of the request as a key value mapping
 const doRequest = async (method, endpoint, query, body) => {
     const url = new URL(`${BASE_QUERY_PATH}${endpoint}.php`, window.location);
     url.search = new URLSearchParams(query).toString();
 
+    // We use form data for POST requests, so build the form data object if we have a body.
     let formData;
     if (body) {
         formData = new FormData();
@@ -21,19 +29,29 @@ const doRequest = async (method, endpoint, query, body) => {
             body: formData,
         }
     );
+
+    // If the response is not OK, display an error message.
     if (!response.ok) {
         sendToast('An unexpected error occurred. Please try again later.');
+        throw new Error(`An unexpected error occurred. Please try again later. Response: ${response.status} ${response.statusText}`);
     }
+
+    // All responses are JSON, so parse the response body as JSON.
     const data = await response.json();
     return data;
 }
 
+// Get the current user from the server.
 const getUser = async () => {
     user = await doRequest("GET", 'getUser', {});
     return user;
 };
 
-// fetch method for getting ALL posts with no constraints 
+// Fetch posts from the server.
+// Parameters:
+// - topic: The topic to filter the posts by, or null to get all topics.
+// - type: The type of post to filter by, or null to get all types.
+// - query: A search query to filter the posts by, or null to get all posts.
 const fetchPosts = async (topic, type, query) => {
     const params = {};
     if (topic) {
@@ -48,6 +66,7 @@ const fetchPosts = async (topic, type, query) => {
     return await doRequest("GET", 'getPosts', params);
 };
 
+// Edit the post with the given postId, setting the title, content, type, topic, and visibility.
 const editPost = async (postId, title, content, type, topic, visibility) => {
     return await doRequest("POST", 'editPost', {}, {
         'postId': postId,
@@ -59,7 +78,7 @@ const editPost = async (postId, title, content, type, topic, visibility) => {
     });
 };
 
-//method to get all the topics within the DB
+// Fetch topics from the server based on the search query given, or null to get all topics.
 const fetchTopics = async (query) => {
     const params = {};
     if (query) {
@@ -71,15 +90,22 @@ const fetchTopics = async (query) => {
 // #endregion
 
 // #region Helper Functions
-//helped colour formula methdo
-const getTopicColour = (topicId) => {
-    const hue = ((topicId * 137) + 47) % 360;
+
+// Helper function to convert an ID to a colour.
+const getColourFromID = (id) => {
+    // This is a simple function to generate seemingly random but consistent colours based on an ID.
+    // The values 137 and 47 are arbitrary prime numbers that were chosen because they look good.
+    const hue = ((id * 137) + 47) % 360;
+
+    // Use HSL so we can keep the saturation and lightness consistent.
+    // This will ensure that the colours are all different, but still look good together and
+    // don't clash with colours on the rest of the site.
     const hsl = `hsl(${hue},44%,44%)`;
 
     return hsl;
 };
 
-//helper function to convert the date time from database to a more readable form
+// Helper function to convert the date time from database to a more readable form
 const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -92,6 +118,8 @@ const formatDate = (dateString) => {
     return date.toLocaleString('en-GB', options);
 };
 
+// Helper function to handle simple modal creation and display.
+// Takes the modal element as an argument and returns an array containing the close and open functions.
 const makeModal = (modal) => {
     const closeBtn = modal.querySelector('.close-modal-btn');
     closeBtn.addEventListener('click', () => {
@@ -124,7 +152,7 @@ const renderTopics = (topics) => {
 
         topicElement.setAttribute('value', topic.Topic_Name);
         topicElement.setAttribute('id', `topic-${topic.Topic_ID}`);
-        topicElement.querySelector('.kb-topic-circle').style.backgroundColor = getTopicColour(topic.Topic_ID);
+        topicElement.querySelector('.kb-topic-circle').style.backgroundColor = getColourFromID(topic.Topic_ID);
         topicElement.querySelector('p').innerText = topic.Topic_Name;
 
         topicsContainer.appendChild(topicElement);
@@ -143,7 +171,7 @@ const renderTopics = (topics) => {
     };
 }
 
-// method to render the Topics to be as items to choose from the dropdown within the add topic modal
+// Method to render the Topics to be as items to choose from the dropdown within the add topic modal.
 const renderTopicsInDropdown = (topics, dropdownElement, topicsListElement, selectedTopicElement) => {
     topicsListElement.innerHTML = '';
 
@@ -169,7 +197,8 @@ const renderTopicsInDropdown = (topics, dropdownElement, topicsListElement, sele
 };
 
 
-//general method to renderAllposts to load them onto the page - REUSABLE
+// Method to render the given knowledge base posts to the page, and add all
+// necessary event listeners to the posts.
 const renderAllPosts = async (posts) => {
     const postsContainer = document.getElementById('kb-posts-list');
     postsContainer.innerHTML = '';
@@ -215,7 +244,7 @@ const renderAllPosts = async (posts) => {
           <h2 class="kb-title-header">${post.Title} ${lock}</h2>
           <div class="kb-flex-row kb-flex-wrap kb-post-badges">
             <div ${currentTypeHtml} > ${post.Type} </div>
-            <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>
+            <div class="kb-badge" style="background-color:${getColourFromID(post.Topic_ID)}">${post.Topic_Name}</div>
           </div>
           <i class="kb-share-link fa-solid fa-link" href="#"></i>
         </div>
@@ -258,12 +287,13 @@ const renderAllPosts = async (posts) => {
     }
 }
 
-//when the webpage loads all the posts and topics will be loaded onto the webpage from db
-
+// These variables allow the user to filter the posts by topic, type, and search query.
+// null represents that the user has not selected a filter for that category.
 var selectedTopic = null;
 var selectedType = null;
 var selectedQuery = null;
 
+// Method to update the posts displayed on the page based on the selected filters.
 const updatePosts = async () => {
     const posts = await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
 
@@ -296,6 +326,8 @@ const updatePosts = async () => {
 const typeShowAllBtn = document.getElementById('kb-type-showall-btn');
 const typeTechnicalBtn = document.getElementById('kb-type-technical-btn');
 const typeNonTechnicalBtn = document.getElementById('kb-type-nontechnical-btn');
+
+// Handling for filtering posts by post type.
 const selectTypeButton = (typeName) => {
     typeShowAllBtn.classList.remove('active');
     typeTechnicalBtn.classList.remove('active');
@@ -321,15 +353,22 @@ typeNonTechnicalBtn.addEventListener('click', () => selectTypeButton('Non-Techni
 // #endregion
 
 // #region Search Posts by Title
+
 const postTitleSearchInput = document.getElementById('kb-post-title-search');
+
+// Event handler to update the posts displayed when the user types in the search bar.
 postTitleSearchInput.addEventListener("input", async (e) => {
+    // Trim the search query to remove any leading or trailing whitespace.
     selectedQuery = e.target.value.trim();
     updatePosts();
 });
 // #endregion
 
 // #region Filter Posts by Topic
+
+// Event handler to update the posts displayed when the user selects a topic.
 document.getElementById('searched-topic').addEventListener("input", async (e) => {
+    // Trim the search query to remove any leading or trailing whitespace.
     selectedTopicQuery = e.target.value.trim();
     updateTopicsFilter();
 });
@@ -622,9 +661,13 @@ makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostmarkdownPreviewBtn, ed
 
 // #region Code to run on page load
 window.onload = async () => {
+    // Get the current user, so permissions are known and correct buttons etc can be displayed.
     user = await getUser();
+
+    // Load posts and topics from the server.
     await updatePosts();
     if (currentPost) {
+        // This runs after the posts have been loaded, so the necessary data is available.
         openPost(currentPost);
     }
     await updateTopicsFilter();
