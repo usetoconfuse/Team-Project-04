@@ -139,6 +139,7 @@ const renderTopicsInDropdown = (topics, topicsDropdown) => {
         // Add event listener to the topic element
         topicElement.addEventListener('click', () => {
             document.getElementById("kb-new-post-topic-input").innerText = topicName; 
+            document.getElementById("kb-new-post-topic-input").value = topicName; 
             document.querySelector("#kb-topic-dropdown").classList.toggle("show");
         });
     });
@@ -566,3 +567,26 @@ document.querySelector("#kb-topic-dropdown-search-input").addEventListener("keyu
       }
     }
   })
+
+// Markdown preview
+
+const markdownInputBtn = document.getElementById("kb-new-post-write-btn");
+const markdownPreviewBtn = document.getElementById("kb-new-post-preview-btn");
+
+const markdownInput = document.getElementById("kb-new-post-content-input");
+const markdownPreview = document.getElementById("kb-new-post-content-preview");
+
+markdownInputBtn.addEventListener("click", () => {
+    markdownInputBtn.classList.add("active");
+    markdownPreviewBtn.classList.remove("active");
+    markdownInput.style.display = "block";
+    markdownPreview.style.display = "none";
+});
+
+markdownPreviewBtn.addEventListener("click", () => {
+    markdownInputBtn.classList.remove("active");
+    markdownPreviewBtn.classList.add("active");
+    markdownInput.style.display = "none";
+    markdownPreview.style.display = "block";
+    markdownPreview.innerHTML = marked.parse(markdownInput.value);
+});
