@@ -33,13 +33,13 @@ VALUES (
 )";
 
 if (!mysqli_query($conn, $sql1)) {
-    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn)]);
     exit();
 }
 if (!mysqli_query($conn, $sql2)) {
-    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Error inserting into Post_Topic: " . mysqli_error($conn)]);
     exit();
 }
 

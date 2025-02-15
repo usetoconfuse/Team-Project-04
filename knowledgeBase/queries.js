@@ -15,21 +15,17 @@ const doRequest = async (method, endpoint, query, body) => {
         }
     }
 
-    try {
-        const response = await fetch(url,
-            {
-                method: method,
-                body: formData,
-            }
-        );
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+    const response = await fetch(url,
+        {
+            method: method,
+            body: formData,
         }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Error processing request ", error);
+    );
+    if (!response.ok) {
+        sendToast('An unexpected error occurred. Please try again later.');
     }
+    const data = await response.json();
+    return data;
 }
 
 const getUser = async () => {
@@ -412,23 +408,15 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
     const deletedElement = document.getElementById('delete-post-modal');
     const postId = deletedElement.getAttribute('deleted-post-id');
 
-    try {
-        const response = await doRequest("GET", "deletePost", { postId }, null);
+    const response = await doRequest("GET", "deletePost", { postId }, null);
 
-        if (response && response.success) {
-            sendToast('Topic deleted successfully!');
+    sendToast('Topic deleted successfully!');
 
-            closeDeletePostModal();
-            // Remove the deleted post from the DOM
-            const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
-            if (postElement) postElement.remove();
+    closeDeletePostModal();
+    // Remove the deleted post from the DOM
+    const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
+    if (postElement) postElement.remove();
 
-        } else {
-            console.error("Failed to delete post", response);
-        }
-    } catch (error) {
-        console.error("Error deleting post:", error);
-    }
 });
 
 // #endregion

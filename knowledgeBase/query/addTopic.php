@@ -11,10 +11,10 @@ VALUES ('$newTopic')
 ";
 
 if (!mysqli_query($conn, $sql)) {
-    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error inserting into Knowledgebase_Posts: " . mysqli_error($conn);
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Error inserting into Topics: " . mysqli_error($conn)]);
     exit();
 }
 
-echo json_encode(["success" => "Topic added successfully"]);
+echo json_encode(["status" => "success", "message" => "Topic added successfully"]);
 ?>

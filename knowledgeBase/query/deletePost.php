@@ -12,10 +12,10 @@ WHERE Post_ID = '$postID'
 ";
 
 if (!mysqli_query($conn, $sql)) {
-    //die("Error deleting from Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error deleting from Knowledgebase_Posts: " . mysqli_error($conn);
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Error deleting from Knowledgebase_Posts: " . mysqli_error($conn)]);
     exit();
 }
 
-echo json_encode(["success" => "Post deleted successfully"]);
+echo json_encode(["status" => "success", "message" => "Post deleted successfully"]);
 ?>
