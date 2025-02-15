@@ -135,7 +135,18 @@ document.addEventListener("DOMContentLoaded", function () {
         projectCard.classList.add("project-card");
         projectCard.setAttribute("data-project-id", project.Project_ID);
         projectCard.setAttribute("data-project-title", project.Project_Title);
-        const projectProgress = await getProjectProgress(project.Project_ID);
+
+
+        let projectProgress;
+        if (userRole === "Admin") {
+          console.log("Employee Code running - " + userRole + userID)
+          projectProgress = await getProjectProgress(project.Project_ID);
+        } else if (userRole === "Employee") {
+          console.log("Employee Code running - " + userRole + userID)
+          projectProgress = await getProjectProgress(project.Project_ID, userID);
+        }
+
+
 
         let cardBottom = "";
 
@@ -156,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <div class="project-card-bottom">
                           <div class="project-card-task-count">
                             <i class="fa fa-solid fa-list-check"></i>
-                            <p>${project.Task_Count} Tasks<p>
+                            <p>${project.Task_Count} Tasks Remaining<p>
                           </div>
                       
                           <div class="project-card-due-date">
@@ -250,9 +261,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  async function fetchTasksData(projectID) {
+  //takes an optional UserID for Employee veiw of progress on projects 
+  async function fetchTasksData(projectID, userID = null) {
     try {
-      const url = `Projects/query/get-tasks-db.php?projectID=${encodeURIComponent(projectID)}`;
+      let url = `Projects/query/get-tasks-db.php?projectID=${encodeURIComponent(projectID)}`;
+      if (userID) {
+        url += `&userID=${encodeURIComponent(userID)}`;
+      }
       const response = await fetch(url, {
         method: "GET",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -299,8 +314,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  async function getProjectProgress(projectID) {
-    const tasksData = await fetchTasksData(projectID);
+  async function getProjectProgress(projectID, userID = null) {
+
+    const tasksData = await fetchTasksData(projectID, userID);
     if (tasksData.length === 0) {
       return 0;
     }

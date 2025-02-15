@@ -4,13 +4,24 @@
 include '../../config/db-setup.php';
 
 $projectId = isset($_GET['projectID']) ? intval($_GET['projectID']) : null;
-//$userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
+$userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 
 
 
 $taskSQL = "SELECT Man_Hours, Status, Priority FROM Tasks WHERE Project_ID = ?";
+
+if ($userId !== null) {
+    $taskSQL .= " AND Assignee_ID = ?";
+}
 $stmt = $conn->prepare($taskSQL);
-$stmt->bind_param("i", $projectId);
+
+if ($userId !== null) {
+    $stmt->bind_param("ii", $projectId, $userId);
+} else {
+    $stmt->bind_param("i", $projectId); 
+}
+
+
 $stmt->execute();
 $taskResult = $stmt->get_result();
 
