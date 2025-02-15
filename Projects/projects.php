@@ -283,11 +283,15 @@
                     Edit Project
                     <i class="fa fa-arrow-right"></i>
                 </a>
-                <a class="complete-project-btn" id="add-project-btn">
+                <a class="active-project-btn" id="add-project-btn" style="display: none;">
+                    Active
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+                <a class="complete-project-btn" id="add-project-btn" style="display: none;">
                     Complete
                     <i class="fa fa-arrow-right"></i>
                 </a>
-                <a class="archive-project-btn" id="add-project-btn">
+                <a class="archive-project-btn" id="add-project-btn" style="display: none;">
                     Archive
                     <i class="fa fa-arrow-right"></i>
                 </a>

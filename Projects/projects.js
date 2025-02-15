@@ -301,6 +301,26 @@
   function openEditProjectModal(project, statusContainer, containerSelector) {
     const editProjectModal = document.querySelector('#edit-projects-modal');
 
+    if (statusContainer === "Active") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'none';
+    } else if (statusContainer === "Not Started") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'none';
+    } else if (statusContainer === "Archived") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'flex';
+    } else if (statusContainer === "Completed") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'flex';
+    }
+
+    
+
 
     editProjectModal.querySelector('.modal-header p').innerText = `Edit Project #${project.Project_ID}`;
     //Make Input fields show current project data
