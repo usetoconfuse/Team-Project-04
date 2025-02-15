@@ -2,7 +2,7 @@
 const BASE_QUERY_PATH = 'knowledgeBase/query/';
 let user;
 
-// Query is a object mapping query names to value
+// #region API Request functions
 const doRequest = async (method, endpoint, query, body) => {
     const url = new URL(`${BASE_QUERY_PATH}${endpoint}.php`, window.location);
     url.search = new URLSearchParams(query).toString();
@@ -72,6 +72,9 @@ const fetchTopics = async (query) => {
     return await doRequest("GET", 'getTopics', params);
 };
 
+// #endregion
+
+// #region Helper Functions
 //helped colour formula methdo
 const getTopicColour = (topicId) => {
     const hue = ((topicId * 137) + 47) % 360;
@@ -79,6 +82,35 @@ const getTopicColour = (topicId) => {
 
     return hsl;
 };
+
+//helper function to convert the date time from database to a more readable form
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+    return date.toLocaleString('en-GB', options);
+};
+
+const makeModal = (modal) => {
+    const closeBtn = modal.querySelector('.close-modal-btn');
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    const openModal = () => {
+        modal.style.display = 'flex';
+    }
+    const closeModal = () => {
+        modal.style.display = 'none';
+    }
+    return [closeModal, openModal];
+}
+// #endregion
 
 // Display the given topics in the sidebar on the page.
 const renderTopics = (topics) => {
@@ -116,33 +148,28 @@ const renderTopics = (topics) => {
 }
 
 // method to render the Topics to be as items to choose from the dropdown within the add topic modal
-const renderTopicsInDropdown = (topics, topicsDropdown) => {
-    topicsDropdown.innerHTML = '';
+const renderTopicsInDropdown = (topics, dropdownElement, topicsListElement, selectedTopicElement) => {
+    topicsListElement.innerHTML = '';
 
-    // Add the default placeholder option
-    //const placeholderOption = `<option value="" selected disabled hidden>Choose</option>`;
-    //topicsDropdown.insertAdjacentHTML('beforeend', placeholderOption);
-
-    topics.forEach(topic => {
-
+    for (const topic of topics) {
         // Create the HTML for the topic
         const topicElement = document.createElement('a');
         topicElement.setAttribute('value', topic.Topic_Name);
         topicElement.setAttribute('id', `topic-${topic.Topic_ID}`);
         topicElement.textContent = topic.Topic_Name;
 
-        const topicName = topic.Topic_Name;
 
         // Append the topic element to the container
-        topicsDropdown.appendChild(topicElement);
+        topicsListElement.appendChild(topicElement);
 
         // Add event listener to the topic element
+        const topicName = topic.Topic_Name;
         topicElement.addEventListener('click', () => {
-            document.getElementById("kb-new-post-topic-input").innerText = topicName; 
-            document.getElementById("kb-new-post-topic-input").value = topicName; 
-            document.querySelector("#kb-topic-dropdown").classList.toggle("show");
+            selectedTopicElement.innerText = topicName;
+            selectedTopicElement.value = topicName;
+            dropdownElement.classList.toggle("show");
         });
-    });
+    };
 };
 
 
@@ -162,7 +189,7 @@ const renderAllPosts = async (posts) => {
 
         if (
             // Allow editing/deletion by the author if the post is not protected...
-            (post.User_ID === user.user_id && post.Is_Protected !== "1") || 
+            (post.User_ID === user.user_id && post.Is_Protected !== "1") ||
             // ...or if the user is an admin.
             user.role === 'Admin'
         ) {
@@ -222,29 +249,18 @@ const renderAllPosts = async (posts) => {
         if (editButton) {
             editButton.addEventListener("click", () => {
                 editPostModal.setAttribute("data-post-id", post.Post_ID);
-                editPostModal.querySelector("#edit-post-title-input").value = post.Title
-                editPostModal.querySelector("#edit-post-content-input").value = post.Description
-                editPostModal.querySelector("#edit-post-type-input").value = post.Type
-                editPostModal.querySelector("#edit-post-topic-input").value = post.Topic_Name
-                editPostModal.querySelector("#edit-post-visibility-input").value = post.Visibility
+                editPostModal.querySelector("#kb-edit-post-title-input").value = post.Title
+                editPostModal.querySelector("#kb-edit-post-content-input").value = post.Description
+                editPostModal.querySelector("#kb-edit-post-type-input").value = post.Type
+                editPostModal.querySelector("#kb-edit-post-topic-input").value = post.Topic_Name
+                editPostModal.querySelector("#kb-edit-post-topic-input").innerText = post.Topic_Name
+                editPostModal.querySelector("#kb-edit-post-visibility-input").value = post.Visibility
+                editPostModal.querySelector("#kb-edit-post-protected-input").value = post.Is_Protected
                 openEditPostModal();
             });
         }
     }
 }
-
-//helper function to convert the date time from database to a more readable form
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    };
-    return date.toLocaleString('en-GB', options);
-};
 
 //when the webpage loads all the posts and topics will be loaded onto the webpage from db
 
@@ -257,7 +273,6 @@ const updatePosts = async () => {
 
     for (const post of document.querySelectorAll("#kb-posts-list .kb-post")) {
         const postId = post.id;
-
 
         post.querySelector(".read-post-btn").addEventListener("click", () => {
             openPost(postId);
@@ -281,70 +296,71 @@ const updatePosts = async () => {
     }
 }
 
-//on showall btn click will load all posts from db
-document.getElementById("kb-type-showall-btn").addEventListener('click', (event) => {
-    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = null;
-    updatePosts();
-});
+// #region Filter Posts by Type
 
-//on technical button clicked show all post with type of technical
-document.getElementById('kb-type-technical-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 'Technical';
-    updatePosts();
-});
+const typeShowAllBtn = document.getElementById('kb-type-showall-btn');
+const typeTechnicalBtn = document.getElementById('kb-type-technical-btn');
+const typeNonTechnicalBtn = document.getElementById('kb-type-nontechnical-btn');
+const selectTypeButton = (typeName) => {
+    typeShowAllBtn.classList.remove('active');
+    typeTechnicalBtn.classList.remove('active');
+    typeNonTechnicalBtn.classList.remove('active');
 
-//on technical button clicked show all post with type of non-technical
-document.getElementById('kb-type-nontechnical-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 'Non-Technical';
+    if (typeName === 'ShowAll') {
+        typeShowAllBtn.classList.add('active');
+        selectedType = null;
+    } else if (typeName === 'Technical') {
+        typeTechnicalBtn.classList.add('active');
+        selectedType = 'Technical';
+    } else if (typeName === 'Non-Technical') {
+        typeNonTechnicalBtn.classList.add('active');
+        selectedType = 'Non-Technical';
+    }
     updatePosts();
-});
+}
 
-// Update selected posts when the search bar is used
-document.getElementById('searched-post').addEventListener("input", async (e) => {
+typeShowAllBtn.addEventListener('click', () => selectTypeButton('ShowAll'));
+typeTechnicalBtn.addEventListener('click', () => selectTypeButton('Technical'));
+typeNonTechnicalBtn.addEventListener('click', () => selectTypeButton('Non-Technical'));
+
+// #endregion
+
+// #region Search Posts by Title
+const postTitleSearchInput = document.getElementById('kb-post-title-search');
+postTitleSearchInput.addEventListener("input", async (e) => {
     selectedQuery = e.target.value.trim();
     updatePosts();
 });
+// #endregion
+
+// #region Filter Posts by Topic
+document.getElementById('searched-topic').addEventListener("input", async (e) => {
+    selectedTopicQuery = e.target.value.trim();
+    updateTopicsFilter();
+});
 
 var selectedTopicQuery = null;
-const updateTopics = async () => {
-    await fetchTopics(selectedTopicQuery).then(renderTopics);
+const updateTopicsFilter = async () => {
+    const filteredTopics = await fetchTopics(selectedTopicQuery);
+    renderTopics(filteredTopics);
 }
 
-const makeModal = (modal) => {
-    const closeBtn = modal.querySelector('.close-modal-btn');
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+// #endregion
 
-    const openModal = () => {
-        modal.style.display = 'flex';
-    }
-    const closeModal = () => {
-        modal.style.display = 'none';
-    }
-    return [closeModal, openModal];
-}
-
-//Add Post Modal Functionality
+// #region Add Post Modal
 const addPostModal = document.getElementById('add-post-modal');
 const [closeAddPostModal, openAddPostModal] = makeModal(addPostModal);
 
-const addPostBtn = document.querySelector('#new-post-btn');
+const addPostBtn = document.getElementById('new-post-btn');
 addPostBtn.addEventListener('click', () => {
     openAddPostModal();
 });
 
-const submitAddPostModalBtn = document.getElementById('add-post-btn');
+const submitAddPostModalBtn = document.getElementById('kb-add-post-submit-btn');
 // on submission of the add post form add the new post to the knowledgebase db
 submitAddPostModalBtn.addEventListener('click', async (event) => {
     // Helper function to get the value of an input field.
-    const getValue = (id) => { return addPostModal.querySelector(`#${id}`).value; }
+    const getValue = (id) => { return document.getElementById(id).value; }
 
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
@@ -360,22 +376,24 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
     await updatePosts();
     closeAddPostModal();
 });
+// #endregion
 
-// Edit Post Modal
+// #region Edit Post Modal
 const editPostModal = document.getElementById('edit-post-modal');
 var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 
 document.getElementById("kb-edit-post-submit-btn").addEventListener("click", async () => {
-    const getValue = (id) => { return editPostModal.querySelector(`#${id}`).value; }
+    const getValue = (id) => { return document.getElementById(id).value; }
     const postID = editPostModal.getAttribute("data-post-id")
     // Send post creation request to the server.
     const data = await doRequest("POST", "editPost", {}, {
         'id': postID,
-        'title': getValue('edit-post-title-input'),
-        'content': getValue('edit-post-content-input'),
-        'type': getValue('edit-post-type-input'),
-        'topic': getValue('edit-post-topic-input'),
-        'visibility': getValue('edit-post-visibility-input')
+        'title': getValue('kb-edit-post-title-input'),
+        'content': getValue('kb-edit-post-content-input'),
+        'type': getValue('kb-edit-post-type-input'),
+        'topic': getValue('kb-edit-post-topic-input'),
+        'visibility': getValue('kb-edit-post-visibility-input'),
+        'protected': getValue('kb-edit-post-protected-input')
     });
 
     alert('Post edited successfully!');
@@ -384,8 +402,9 @@ document.getElementById("kb-edit-post-submit-btn").addEventListener("click", asy
     closeEditPostModal();
 })
 
+// #endregion
 
-// Delete Post Modal
+// #region Delete Post Modal
 const deletePostModal = document.getElementById('delete-post-modal');
 var [closeDeletePostModal, openDeletePostModal] = makeModal(deletePostModal);
 
@@ -413,46 +432,36 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
     }
 });
 
+// #endregion
 
-//Add topic Modal functionality
+// #region Add Topic Modal
 const addTopicModal = document.getElementById('add-topic-modal');
 const [closeAddTopicModal, openAddTopicModal] = makeModal(addTopicModal);
 
-document.getElementById('kb-topic-modal-add-topic').addEventListener('click', () => {
-    event.preventDefault();
-    openAddTopicModal();
-});
-
-const addTopicBtn = document.querySelector('#new-topic-btn');
 const submitTopicBtn = document.getElementById('kb-add-topic-modal-submit');
-
-addTopicBtn.addEventListener('click', () => {
-    openAddTopicModal();
-});
-
 submitTopicBtn.addEventListener('click', async (event) => {
     //get topic name from form
     const newTopic = document.getElementById('kb-add-topic-modal-name-input').value;
 
     //pass data from form to addtopic sql query
     await doRequest("POST", "addTopic", {}, { name: newTopic });
-    await updateTopics();
-    await fetchTopics().then((topics) => {
-        const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
-        const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
-        renderTopicsInDropdown(topics, newPostTopicsDropdown)
-        renderTopicsInDropdown(topics, editPostTopicsDropdown)
-    });
+    await refreshTopics();
 
     alert('Topic added successfully! ');
     closeAddTopicModal();
 });
 
-//topic search bar functionality
-document.getElementById('searched-topic').addEventListener("input", async (e) => {
-    selectedTopicQuery = e.target.value.trim();
-    updateTopics();
-});
+const filtersAddTopicBtn = document.getElementById('kb-filters-add-topic');
+const addPostAddTopicBtn = document.getElementById('kb-new-post-topic-add-topic');
+const editPostAddTopicBtn = document.getElementById('kb-edit-post-topic-add-topic');
+
+filtersAddTopicBtn.addEventListener('click', openAddTopicModal);
+addPostAddTopicBtn.addEventListener('click', openAddTopicModal);
+editPostAddTopicBtn.addEventListener('click', openAddTopicModal);
+
+// #endregion
+
+// #region Read Post Screen Functionality
 
 const allPostsView = document.getElementById("kb-all-view");
 const postView = document.getElementById("kb-post-view");
@@ -506,7 +515,9 @@ backBtn.addEventListener("click", () => {
     closePost();
 });
 
+// #endregion
 
+// #region Share Post Functionality
 const sharePost = (postId) => {
     const params = new URLSearchParams(window.location.search);
     params.set("post", postId);
@@ -516,77 +527,120 @@ const sharePost = (postId) => {
     };
     navigator.share(shareData);
 }
+// #endregion
+
+// #region Topic Selection Dropdown Menu
 
 document.querySelector("#kb-post-view .kb-share-link").addEventListener("click", () => {
     sharePost(getCurrentPost())
 });
 
-//when the page loads fetch all relevant posts and topic from the db onto the page
+const makeTopicDropdown = (dropdownButton, dropdownSearch, dropdown, dropdownElements) => {
+    // When the dropdown button is clicked, show the dropdown.
+    dropdownButton.addEventListener("click", (event) => {
+        console.log("clicked");
+        dropdown.classList.toggle("show");
+    });
+
+    // Close the dropdown if the user clicks outside of it.
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest('.task-dropdown')) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        }
+    });
+
+    // Filter the dropdown elements based on the search query.
+    dropdownSearch.addEventListener("keyup", (event) => {
+        const searchQuery = dropdownSearch.value.toUpperCase();
+        for (topicElement of dropdownElements.getElementsByTagName("a")) {
+            if (topicElement.innerText.toUpperCase().includes(searchQuery)) {
+                topicElement.style.display = "";
+            } else {
+                topicElement.style.display = "none";
+            }
+        }
+    })
+};
+
+const addPostTopicDropdownBtn = document.getElementById("kb-new-post-topic-input");
+const addPostTopicDropdownSearch = document.getElementById("kb-new-post-topic-dropdown-search-input");
+const addPostTopicDropdown = document.getElementById("kb-new-post-topic-dropdown");
+const addPostTopicDropdownElements = document.getElementById("kb-new-post-topic-dropdown-elements");
+
+makeTopicDropdown(
+    addPostTopicDropdownBtn,
+    addPostTopicDropdownSearch,
+    addPostTopicDropdown,
+    addPostTopicDropdownElements,
+)
+
+const editPostTopicDropdownBtn = document.getElementById("kb-edit-post-topic-input");
+const editPostTopicDropdownSearch = document.getElementById("kb-edit-post-topic-dropdown-search-input");
+const editPostTopicDropdown = document.getElementById("kb-edit-post-topic-dropdown");
+const editPostTopicDropdownElements = document.getElementById("kb-edit-post-topic-dropdown-elements");
+
+makeTopicDropdown(
+    editPostTopicDropdownBtn,
+    editPostTopicDropdownSearch,
+    editPostTopicDropdown,
+    editPostTopicDropdownElements,
+)
+
+const refreshTopics = async () => {
+    await updateTopicsFilter();
+
+    const topics = await fetchTopics();
+    renderTopicsInDropdown(topics, addPostTopicDropdown, addPostTopicDropdownElements, addPostTopicDropdownBtn)
+    renderTopicsInDropdown(topics, editPostTopicDropdown, editPostTopicDropdownElements, editPostTopicDropdownBtn)
+};
+
+// #endregion
+
+// #region Markdown Preview Tabbed Menu
+const makeTabbedMarkdownInput = (markdownInputBtn, markdownPreviewBtn, markdownInput, markdownPreview) => {
+    markdownInputBtn.addEventListener("click", () => {
+        markdownInputBtn.classList.add("active");
+        markdownPreviewBtn.classList.remove("active");
+        markdownInput.style.display = "block";
+        markdownPreview.style.display = "none";
+    });
+
+    markdownPreviewBtn.addEventListener("click", () => {
+        markdownInputBtn.classList.remove("active");
+        markdownPreviewBtn.classList.add("active");
+        markdownInput.style.display = "none";
+        markdownPreview.style.display = "block";
+        markdownPreview.innerHTML = marked.parse(markdownInput.value);
+    });
+};
+
+const addPostMarkdownInputBtn = document.getElementById("kb-new-post-write-btn");
+const addPostmarkdownPreviewBtn = document.getElementById("kb-new-post-preview-btn");
+
+const addPostmarkdownInput = document.getElementById("kb-new-post-content-input");
+const addPostmarkdownPreview = document.getElementById("kb-new-post-content-preview");
+
+makeTabbedMarkdownInput(addPostMarkdownInputBtn, addPostmarkdownPreviewBtn, addPostmarkdownInput, addPostmarkdownPreview);
+
+const editPostMarkdownInputBtn = document.getElementById("kb-edit-post-write-btn");
+const editPostmarkdownPreviewBtn = document.getElementById("kb-edit-post-preview-btn");
+
+const editPostmarkdownInput = document.getElementById("kb-edit-post-content-input");
+const editPostmarkdownPreview = document.getElementById("kb-edit-post-content-preview");
+
+makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostmarkdownPreviewBtn, editPostmarkdownInput, editPostmarkdownPreview);
+// #endregion
+
+// #region Code to run on page load
 window.onload = async () => {
     user = await getUser();
     await updatePosts();
-    await updateTopics();
-    await fetchTopics().then((topics) => {
-        const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
-        const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
-        renderTopicsInDropdown(topics, newPostTopicsDropdown)
-        renderTopicsInDropdown(topics, editPostTopicsDropdown)
-    });
+    await updateTopicsFilter();
+    await refreshTopics();
     if (currentPost) {
         openPost(currentPost);
     }
 };
-
-document.addEventListener("click", (event) => {
-    if (!event.target.closest('.task-dropdown')) {
-        const dropdown = document.querySelector("#kb-topic-dropdown");
-        if (dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-        }
-    }
-});
-
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-document.querySelector(".kb-topic-dropdown-btn").addEventListener("click", (event) => {
-    document.querySelector("#kb-topic-dropdown").classList.toggle("show");
-})
-
-document.querySelector("#kb-topic-dropdown-search-input").addEventListener("keyup", (event) => {
-    const input = document.getElementById("kb-topic-dropdown-search-input");
-    const filter = input.value.toUpperCase();
-    const div = document.getElementById("topic-modal-dropdown");
-    const a = div.getElementsByTagName("a");
-    console.log(input, filter, div, a);
-    for (let i = 0; i < a.length; i++) {
-      const txtValue = a[i].textContent || a[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        a[i].style.display = "";
-      } else {
-        a[i].style.display = "none";
-      }
-    }
-  })
-
-// Markdown preview
-
-const markdownInputBtn = document.getElementById("kb-new-post-write-btn");
-const markdownPreviewBtn = document.getElementById("kb-new-post-preview-btn");
-
-const markdownInput = document.getElementById("kb-new-post-content-input");
-const markdownPreview = document.getElementById("kb-new-post-content-preview");
-
-markdownInputBtn.addEventListener("click", () => {
-    markdownInputBtn.classList.add("active");
-    markdownPreviewBtn.classList.remove("active");
-    markdownInput.style.display = "block";
-    markdownPreview.style.display = "none";
-});
-
-markdownPreviewBtn.addEventListener("click", () => {
-    markdownInputBtn.classList.remove("active");
-    markdownPreviewBtn.classList.add("active");
-    markdownInput.style.display = "none";
-    markdownPreview.style.display = "block";
-    markdownPreview.innerHTML = marked.parse(markdownInput.value);
-});
+// #endregion

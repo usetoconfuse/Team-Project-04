@@ -380,13 +380,13 @@
   /* #kb-topic-dropdown-search:focus {outline: 3px solid #ddd;} */
   
   /* The container <div> - needed to position the dropdown content */
-#kb-topic-dropdown {
+/* .kb-topic-dropdown {
     position: relative;
     display: inline-block;
-  }
+  } */
   
   /* Dropdown Content (Hidden by Default) */
-#kb-topic-dropdown {
+.kb-topic-dropdown {
     display: none;
     position: absolute;
     flex-direction: column;
@@ -402,7 +402,7 @@
   }
   
   /* Links inside the dropdown */
-#kb-topic-dropdown a {
+.kb-topic-dropdown a {
     color: black;
     padding: 5px;
     text-decoration: none;
@@ -411,9 +411,9 @@
   }
   
   /* Change color of dropdown links on hover */
-#kb-topic-dropdown a:hover {background-color: #f1f1f1}
+.kb-topic-dropdown a:hover {background-color: #f1f1f1}
 
-#topic-modal-dropdown {
+.topic-dropdown-topics {
     max-height: 150px;
     overflow-y: auto;
 }
@@ -421,11 +421,11 @@
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:flex !important;} 
 
-#kb-topic-dropdown-search-input {
-    min-width: 0;
+.dropdown-search {
+    min-width: 0 !important;
 }
 
-#topic-modal-dropdown {
+.topic-dropdown-topics {
     width: 100%;
     padding: 0px 10px;
 }
