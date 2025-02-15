@@ -2,7 +2,7 @@
 // API endpoint to get all the topics from the Topics table.
 include '../../config/db-setup.php';
 
-$query = $_GET['query'] ?? null;
+$query = isset($_GET['query']) ? $conn->real_escape_string($_GET['query']) : null;
 
 // select all the topics from the Topics table
 $sql = "
@@ -14,7 +14,7 @@ FROM
 WHERE 1=1
 ";
 
-if ($query) {
+if ($query !== null) {
     $sql .= " AND LOWER(Topic_Name) LIKE LOWER('%$query%')";
 }
 

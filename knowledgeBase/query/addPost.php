@@ -4,12 +4,12 @@ session_start();
 include '../../config/db-setup.php';
 
 //POST method to gather all data from Form as well as User data
-$title = $_POST['title'];
-$content = $_POST['content'];
-$type = $_POST['type'];
-$topic = $_POST['topic'];
-$visibility = $_POST['visibility'];
-$protected = $_POST['protected'];
+$title = $conn->real_escape_string($_POST['title']);
+$content = $conn->real_escape_string($_POST['content']);
+$type = $conn->real_escape_string($_POST['type']);
+$topic = $conn->real_escape_string($_POST['topic']);
+$visibility = $conn->real_escape_string($_POST['visibility']);
+$protected = $conn->real_escape_string($_POST['protected']);
 $userId = $_SESSION['user_id'];
 
 // using data from the Post modal form add a post to the knowledge base table

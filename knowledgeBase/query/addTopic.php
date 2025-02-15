@@ -3,7 +3,7 @@
 include '../../config/db-setup.php';
 
 //POST method to gather all data from Form of topic name well as User data
-$newTopic = $_POST['name'];
+$newTopic = $conn->real_escape_string($_POST['name']);
 
 // using data from the Post modal form add a post to the knowledge base table
 $sql = "
