@@ -289,9 +289,10 @@
   completeProjectModal.querySelector('#cancel-complete-btn').addEventListener('click', () => {
     completeProjectModal.style.display = 'none';
   })
-  completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', () => {
+  completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', async () => {
     const completedProjectID = completeProjectModal.getAttribute('data-project-id');
-    markProjectUpdate(completedProjectID, 'complete', 'Active', "#active-project-content #gridContainer");
+    await markProjectUpdate(completedProjectID, 'complete', 'Active', "#active-project-content #gridContainer");
+    sendToast(`Completed Project #${completedProjectID} `);
     completeProjectModal.style.display = 'none';
     editProjectModal.style.display = 'none';
   })
@@ -301,11 +302,12 @@
   archiveProjectModal.querySelector('#cancel-archive-btn').addEventListener('click', () => {
     archiveProjectModal.style.display = 'none';
   })
-  archiveProjectModal.querySelector('#archive-project-confirm').addEventListener('click', () => {
+  archiveProjectModal.querySelector('#archive-project-confirm').addEventListener('click', async () => {
     const archivedProjectID = archiveProjectModal.getAttribute('data-project-id');
     const currentStatusContainer = archiveProjectModal.getAttribute('current-status-container');
     const currentgridContainer = archiveProjectModal.getAttribute('current-grid-container');
-    markProjectUpdate(archivedProjectID, 'archive', currentStatusContainer, currentgridContainer);
+    await markProjectUpdate(archivedProjectID, 'archive', currentStatusContainer, currentgridContainer);
+    sendToast(`Archived Project #${archivedProjectID}`);
     archiveProjectModal.style.display = 'none';
     editProjectModal.style.display = 'none';
   })
