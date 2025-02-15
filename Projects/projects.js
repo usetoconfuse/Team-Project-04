@@ -130,11 +130,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-      projectData.forEach((project) => {
+      for (const project of projectData) {
         const projectCard = document.createElement("div");
         projectCard.classList.add("project-card");
         projectCard.setAttribute("data-project-id", project.Project_ID);
         projectCard.setAttribute("data-project-title", project.Project_Title);
+        const projectProgress = await getProjectProgress(project.Project_ID);
 
         let cardBottom = "";
 
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                   <div class="project-card-progress">
                                       <div class="project-card-progress-info">
                                           <p>Progress</p>
-                                          <p>75%</p>
+                                          <p>${Math.round(projectProgress)}%</p>
                                       </div>
                                       <div class="project-card-progress-bar">
                                           <div class="project-card-progress-bar-inner"></div>
@@ -189,15 +190,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const progressBar = projectCard.querySelector(
           ".project-card-progress-bar-inner"
         );
-        let progressString = "75%";
-        progressBar.style.width = progressString;
 
-        let projectInt = 75;
-        if (projectInt <= 33) {
+
+        progressBar.style.width = `${projectProgress.toFixed(2)}%`;
+        console.log(`For ${project.Project_ID} the progress is ${Math.round(projectProgress)}`)
+
+        if (projectProgress === 0) {
+          progressBar.style.border = "2px solid #E6757E";
+        }
+
+        if (projectProgress <= 33) {
           progressBar.style.backgroundColor = "#E6757E";
-        } else if (projectInt <= 66) {
+        } else if (projectProgress <= 66) {
           progressBar.style.backgroundColor = "#EAB385";
-        } else if (projectInt <= 100) {
+        } else if (projectProgress <= 100) {
           progressBar.style.backgroundColor = "#ADDA9D";
         }
 
@@ -238,11 +244,81 @@ document.addEventListener("DOMContentLoaded", function () {
             );
             contentArea.classList.add("open");
           });
-      });
+      };
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching projects:", error);
     }
   }
+
+  async function fetchTasksData(projectID) {
+    try {
+      const url = `Projects/query/get-tasks-db.php?projectID=${encodeURIComponent(projectID)}`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch users")
+      };
+
+      const tasksData = await response.json();
+      return tasksData;
+    } catch (error) {
+      console.error("Error fetching Task Data for Progress:", error);
+      return [];
+    }
+  }
+
+//Task Progress
+  function getTaskProgress(task) {
+    const { Man_Hours, Status, Priority} = task;
+    const priorityWeighting = getPriority(Priority);
+    let manHoursCompleted = 0;
+    if (Status === "Completed") {
+      manHoursCompleted = Man_Hours;
+    } else if (Status === "In Progress") {
+      manHoursCompleted = 0.5 * Man_Hours;
+    } else {
+      manHoursCompleted = 0;
+    }
+ 
+    return (manHoursCompleted / Man_Hours) * priorityWeighting;
+  }
+
+  function getPriority(priority) {
+    switch (priority) {
+      case 'High':
+        return 1.5;
+      case 'Medium':
+        return 1;
+      case 'Low':
+        return 0.5;
+      default:
+        return 1;
+    }
+  }
+
+  async function getProjectProgress(projectID) {
+    const tasksData = await fetchTasksData(projectID);
+    if (tasksData.length === 0) {
+      return 0;
+    }
+    let totalTaskProgress = 0;
+    let totalPriorityWeighting = 0;
+
+    for (let i = 0; i < tasksData.length; i++) {
+      const taskProgress = getTaskProgress(tasksData[i]);
+      const priorityWeighting = getPriority(tasksData[i].Priority);
+      totalTaskProgress += taskProgress;
+      totalPriorityWeighting += priorityWeighting;
+    }
+
+    const averageTaskProgress = totalTaskProgress / totalPriorityWeighting;
+
+    return averageTaskProgress * 100;
+  }
+
 
   // Fetch Users for Team Leader Selection
   async function fetchUsers() {
