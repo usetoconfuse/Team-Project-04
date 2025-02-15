@@ -140,6 +140,25 @@ if ($_SESSION['role'] !== 'Employee') {
                 </ul>
 
                 <div class="bar"></div>
+                <div class="nav-mobile-bottom">
+                    <a class="change-password">
+                        <p>Change Password</p>
+                    </a>
+
+                    <div class="user-profile">
+                        <div class="user-profile-left">
+                            <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
+                            <div class="user-info">
+                                <p><span><?= $_SESSION['user_name']; ?></span> | <?= $_SESSION['role']; ?></p>
+                            </div>
+                        </div>
+
+                        <div class="user-profile-right">
+                            <div class="user-profile-logout black-btn">Sign Out</div>
+                        </div>
+                    </div>
+                </div>
+               
 
 
                 <div class="date-item">
