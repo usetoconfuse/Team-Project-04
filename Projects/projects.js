@@ -300,6 +300,8 @@
   //Edit Actions for Projects (Admin Only)
   function openEditProjectModal(project, statusContainer, containerSelector) {
     const editProjectModal = document.querySelector('#edit-projects-modal');
+
+
     editProjectModal.querySelector('.modal-header p').innerText = `Edit Project #${project.Project_ID}`;
     //Make Input fields show current project data
     const teamLeaderEditDropdown = editProjectModal.querySelector('#team-leader');
@@ -322,7 +324,7 @@
       editProjectModal.style.display = 'none';
     })
 
-    
+
     //Initialise the Complete Modal 
     editProjectModal.querySelector('.complete-project-btn').addEventListener('click', () => {
       completeProjectModal.querySelector('.modal-header').innerText = `Complete Project #${project.Project_ID}`;
