@@ -283,7 +283,6 @@ const updatePosts = async () => {
             deleteButton.addEventListener("click", (event) => {
                 const postElement = event.target.closest(".kb-post");
                 let postId = postElement.getAttribute("data-id");
-                console.log(`post id is : ${postId}`);
                 const deleteElement = document.getElementById('delete-post-modal');
                 deleteElement.setAttribute('deleted-post-id', postId)
                 openDeletePostModal(postId);
@@ -372,7 +371,7 @@ submitAddPostModalBtn.addEventListener('click', async (event) => {
         'protected': getValue('kb-new-post-protected-input')
     });
 
-    alert('Post added successfully!');
+    sendToast('Post added successfully!');
     await updatePosts();
     closeAddPostModal();
 });
@@ -396,7 +395,7 @@ document.getElementById("kb-edit-post-submit-btn").addEventListener("click", asy
         'protected': getValue('kb-edit-post-protected-input')
     });
 
-    alert('Post edited successfully!');
+    sendToast('Post edited successfully!');
     await updatePosts();
 
     closeEditPostModal();
@@ -415,10 +414,10 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
 
     try {
         const response = await doRequest("GET", "deletePost", { postId }, null);
-        console.log("Delete response:", response);
 
         if (response && response.success) {
-            console.log("Post deleted successful");
+            sendToast('Topic deleted successfully!');
+
             closeDeletePostModal();
             // Remove the deleted post from the DOM
             const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
@@ -447,7 +446,7 @@ submitTopicBtn.addEventListener('click', async (event) => {
     await doRequest("POST", "addTopic", {}, { name: newTopic });
     await refreshTopics();
 
-    alert('Topic added successfully! ');
+    sendToast('Topic added successfully!');
     closeAddTopicModal();
 });
 
@@ -637,10 +636,10 @@ makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostmarkdownPreviewBtn, ed
 window.onload = async () => {
     user = await getUser();
     await updatePosts();
-    await updateTopicsFilter();
-    await refreshTopics();
     if (currentPost) {
         openPost(currentPost);
     }
+    await updateTopicsFilter();
+    await refreshTopics();
 };
 // #endregion
