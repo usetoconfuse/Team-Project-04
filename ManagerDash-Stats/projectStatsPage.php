@@ -63,6 +63,13 @@
                 <canvas id="prjStBurnupChart"></canvas>
             </div>
         </div>
+
+        <!-- Contribution by member chart -->
+        <div id="prjStPrevWeekCell" class="prjStGridCells">
+            <div id="prjStPrevWeekChartBox">
+                <canvas id="prjStPrevWeekChart"></canvas>
+            </div>
+        </div>
         
         <!-- Member list -->
         <div id="prjStMembersCell" class="prjStGridCells">

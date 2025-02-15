@@ -116,9 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
-    const logoutBtn = document.querySelector('.user-profile .user-profile-logout');
-    logoutBtn.addEventListener('click', () => {
-        window.location.href = "logout.php";
+    const logoutBtns = document.querySelectorAll('.user-profile .user-profile-logout');
+    logoutBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            window.location.href = "logout.php";
+        })
+    
     })
 
     const currentPage = getPageId();
@@ -127,15 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Show and Hide Password Modal
-    const openChangePassBtn = document.querySelector('.top-navbar-right .change-password');
+    const openChangePassBtns = document.querySelectorAll('.change-password');
     const closeChangePassBtn = document.querySelector('#change-password-modal .close-modal-btn')
     const changePassModal = document.querySelector('#change-password-modal');
-    openChangePassBtn.addEventListener('click', () => {
-        changePassModal.style.display = 'block';
-        oldPasswordInput.value = "";
-        newPasswordInput.value = "";
-        confirmPasswordInput.value = "";
+
+    openChangePassBtns.forEach(openChangePassBtn => {
+        openChangePassBtn.addEventListener('click', () => {
+            changePassModal.style.display = 'block';
+            oldPasswordInput.value = "";
+            newPasswordInput.value = "";
+            confirmPasswordInput.value = "";
+        })
     })
+
     closeChangePassBtn.addEventListener('click', () => {
         changePassModal.style.display = 'none';
     })

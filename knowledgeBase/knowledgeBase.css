@@ -113,6 +113,7 @@
 
 .kb-content .task-dropdown-select-options {
     width: 250px;
+    background-color: #e9e9ed;
 }
 
 .kb-content .kb-wide-modal {
@@ -121,11 +122,6 @@
 
 .kb-content .task-dropdown {
     margin-bottom: 0;
-}
-
-#kb-new-post-content-input {
-    height: 10rem;
-    min-height: 5rem;
 }
 
 .space-evenly {
@@ -362,4 +358,127 @@
 
 .kb-scrollable {
     overflow-y: scroll;
+}
+
+ /* Dropdown Button */
+ .kb-topic-dropdown-btn {
+    padding: 16px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus
+  .kb-topic-dropdown-btn:hover, .kb-topic-dropdown-btn:focus {
+    background-color: #3e8e41;
+  } */
+  
+  /* The search field when it gets focus/clicked on */
+  /* #kb-topic-dropdown-search:focus {outline: 3px solid #ddd;} */
+  
+  /* The container <div> - needed to position the dropdown content */
+#kb-topic-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+#kb-topic-dropdown {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    gap: 5px;
+    align-content: center;
+    align-items: center;
+    background-color: #f6f6f6;
+    width: 250px;
+    border: 2px solid #ddd;
+    padding: 5px;
+    z-index: 1;
+    border-top: 0px;
+  }
+  
+  /* Links inside the dropdown */
+#kb-topic-dropdown a {
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  
+  /* Change color of dropdown links on hover */
+#kb-topic-dropdown a:hover {background-color: #f1f1f1}
+
+#topic-modal-dropdown {
+    max-height: 150px;
+    overflow-y: auto;
+}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:flex !important;} 
+
+#kb-topic-dropdown-search-input {
+    min-width: 0;
+}
+
+#topic-modal-dropdown {
+    width: 100%;
+    padding: 0px 10px;
+}
+
+#add-topic-modal {
+    z-index: 10000;
+}
+
+.kb-markdown-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: none;
+}
+
+.kb-markdown-header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #e1e1e1;
+}
+
+.kb-markdown-textarea {
+    border: 2px solid #e1e1e1 !important;
+    border-top: none !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    height: 10rem !important;
+    min-height: 5rem !important;
+    padding: 0.4rem 0.6rem;
+    overflow-y: scroll;
+}
+
+.kb-markdown-btn {
+    height: 100%;
+    padding: 0.4rem 0.6rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    color: #000000;
+}
+
+.kb-markdown-btn.active {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.kb-markdown-btn:hover {
+    background-color: #7A7A7A;
+}
+
+.kb-markdown-header :first-child {
+    border-top-left-radius: 5px;
 }

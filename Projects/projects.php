@@ -17,7 +17,7 @@
 
 
 
-    <section class="project-item-content open" id="active-project-content">
+    <section class="project-item-content open" id="active-project-content" data-status="Active">
 
         <div class="project-filter-container">
             <div class="project-search">
@@ -43,7 +43,7 @@
     </section>
 
 
-    <section class="project-item-content" id="not-started-project-content">
+    <section class="project-item-content" id="not-started-project-content" data-status="Not Started">
         <div class="project-filter-container">
             <div class="project-search">
                 <i class="fa fa-solid fa-search"></i>
@@ -58,7 +58,7 @@
         </div>
     </section>
 
-    <section class="project-item-content" id="archive-project-content">
+    <section class="project-item-content" id="archive-project-content" data-status="Archived">
         <div class="project-filter-container">
             <div class="project-search">
                 <i class="fa fa-solid fa-search"></i>
@@ -72,7 +72,7 @@
         </div>
     </section>
 
-    <section class="project-item-content" id="completed-project-content">
+    <section class="project-item-content" id="completed-project-content" data-status="Completed">
         <div class="project-filter-container">
             <div class="project-search">
                 <i class="fa fa-solid fa-search"></i>
@@ -209,6 +209,91 @@
                 <div class="add-project-btn" id="add-project-btn">
                     Create Project
                     <i class="fa fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!--Add Project -->
+    <div id="edit-projects-modal" class="modal" style="display: none;">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+                <p>Edit Project</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <!--Body-->
+
+            <form id="project-modal-form" class="modal-body">
+                <!--Title and Description-->
+                <div class="task-title-form">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" name="task-title">
+                </div>
+                <!--<div class="task-description-form">
+                    <label for="task-description">Description</label>
+                    <textarea type="text" id="task-description" name="task-description"></textarea>
+                </div>-->
+                <div class="task-dropdowns-form" id="project-dropdowns-form">
+                    <!--DropDown Leader-->
+                    <div class="task-dropdown task-dropdown-leader">
+                        <label for="team-leader">Team Leader</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-user-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-user"></i>
+                            </div>
+                            <input autocomplete="off" list="team-leader" placeholder="Enter Name"
+                                id="team-leader-dropdown" >
+                            <datalist name="team-leader" id="team-leader">
+
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <!--Choose Start Date-->
+                    <div class="task-dropdown task-dropdown-start-date">
+                        <label for="date">Start Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="date" id="start-date-project">
+                        </div>
+                    </div>
+
+                    <!--Choose Due Date-->
+                    <div class="task-dropdown task-dropdown-due-date">
+                        <label for="date">Due Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="date" id="date-project">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="task-submit-buttons">
+                <div class="edit-project-btn" id="add-project-btn">
+                    Edit Project
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+                <div class="complete-project-btn" id="add-project-btn">
+                    Mark as Complete
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+                <div class="archive-project-btn" id="add-project-btn">
+                    Mark as Archived
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+                <div class="delete-project-btn" id="add-project-btn">
+                    Delete
+                    <i class="fa fa-solid fa-trash"></i>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@
         <!-- Project List Page -->
         <div id="statsHomeGridProject" class="statsHome-grid">
             <div id="statsHomeFiltersProj">
-            <h1 class="instruction-txt">Click a Project to view it's Statistics</h1>
+            <h1 class="instruction-txt">Click a project for details</h1>
 
                 <div class="stats-listing-search projStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
@@ -48,7 +48,7 @@
         <div id="statsHomeGridUser" class="statsHome-grid">
 
             <div id="statsHomeFiltersUser">
-            <h1 class="instruction-txt">Click an employee to view their Statistics</h1>
+            <h1 class="instruction-txt">Click a user for details</h1>
 
                 <div class="stats-listing-search userStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>

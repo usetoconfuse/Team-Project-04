@@ -1,13 +1,15 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const gridContainer = document.getElementById("gridContainer");
+
+
+
   const projectContainer = document.querySelector("#project-content");
-  const userID = projectContainer.getAttribute("data-user-id");
+  const userProjectsID = projectContainer.getAttribute("data-user-id");
   fetchProjectsData(
-    userID,
+    userProjectsID,
     { status: "Active" },
     "#active-project-content #gridContainer"
   ); //default load in is always active projects
-
+  
+  
   //Fetch different project types depending on which view is selected (admin only)
   const userRole = document
     .querySelector("#project-content")
@@ -16,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (userRole === "Admin") {
     document.querySelector("#active-project").addEventListener("click", () => {
       fetchProjectsData(
-        userID,
+        userProjectsID,
         { status: "Active" },
         "#active-project-content #gridContainer"
       );
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .querySelector("#not-started-project")
       .addEventListener("click", () => {
         fetchProjectsData(
-          userID,
+          userProjectsID,
           { status: "Not Started" },
           "#not-started-project-content #gridContainer"
         );
@@ -45,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#archive-project").addEventListener("click", () => {
       fetchProjectsData(
-        userID,
+        userProjectsID,
         { status: "Archived" },
         "#archive-project-content #gridContainer"
       );
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#completed-project").addEventListener("click", () => {
       fetchProjectsData(
-        userID,
+        userProjectsID,
         { status: "Completed" },
         "#completed-project-content #gridContainer"
       );
@@ -69,7 +71,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
   }
-
+  const projectsFilterModal = document.querySelector(
+    "#project-content #project-filter-modal"
+  );
   //Filter Projects Functionality
   const filterProjectsBtn =
     projectsFilterModal.querySelector(".add-filter-btn");
@@ -83,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     projectsFilterModal.style.display = "none";
     fetchProjectsData(
-      userID,
+      userProjectsID,
       filters,
       "#active-project-content #gridContainer"
     );
@@ -95,12 +99,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeAddProjectModal =
     addProjectModal.querySelector(".close-modal-btn");
   const submitAddProject = addProjectModal.querySelector("#add-project-btn");
-  const teamLeaderDropdown = document.querySelector("#team-leader");
-  const teamLeaderDropdownInput = document.querySelector("#team-leader-dropdown");
+  const teamLeaderDropdown = addProjectModal.querySelector("#team-leader");
+  const teamLeaderDropdownInput = addProjectModal.querySelector("#team-leader-dropdown");
 
   //Fetch all project data for this user and display on page
   async function fetchProjectsData(userID, filters = {}, containerSelector) {
     try {
+      console.log("Fetching project data running")
       let url = `Projects/query/projects-db.php?userID=${encodeURIComponent(
         userID
       )}`;
@@ -113,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       const container = document.querySelector(containerSelector);
+      console.log(container)
       container.innerHTML = "";
 
       const response = await fetch(url, params);
@@ -122,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const projectData = await response.json();
-      gridContainer.innerHTML = ""; // Clear existing projects
       if (projectData.length === 0) {
         container.parentElement.querySelector(".search-error-msg").style.display = "block";
         return;
@@ -130,15 +135,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-      projectData.forEach((project) => {
+      for (const project of projectData) {
         const projectCard = document.createElement("div");
         projectCard.classList.add("project-card");
         projectCard.setAttribute("data-project-id", project.Project_ID);
         projectCard.setAttribute("data-project-title", project.Project_Title);
 
+
+        let projectProgress;
+        if (userRole === "Admin") {
+         
+          projectProgress = await getProjectProgress(project.Project_ID);
+        } else if (userRole === "Employee") {
+    
+          projectProgress = await getProjectProgress(project.Project_ID, userProjectsID);
+        }
+
+        let cardTop = "";
         let cardBottom = "";
 
         if (userRole === "Admin") {
+          cardTop = `<div class="project-card-top">
+                        
+                          <p>${project.Project_Title}</p>
+                          <div class="project-card-top-btns">
+                    
+                            <a href="#" class="black-btn" id="edit-project-kanban-btn" data-project-id="${project.Project_ID}">Edit</a>
+                            <a href="#" class="black-btn" id="view-project-kanban-btn">View</a>
+                          </div>
+               
+                      </div>`
           cardBottom = `
                       <div class="project-card-bottom">
                           <div class="project-card-task-count">
@@ -151,11 +177,16 @@ document.addEventListener("DOMContentLoaded", function () {
                           </div>
                       </div>`;
         } else {
+          cardTop = `<div class="project-card-top">         
+                        <p>${project.Project_Title}</p>
+             
+                        <a href="#" class="black-btn" id="view-project-kanban-btn">View</a>
+                    </div>`
           cardBottom = `
                       <div class="project-card-bottom">
                           <div class="project-card-task-count">
                             <i class="fa fa-solid fa-list-check"></i>
-                            <p>${project.Task_Count} Tasks<p>
+                            <p>${project.Task_Count} Tasks Remaining<p>
                           </div>
                       
                           <div class="project-card-due-date">
@@ -166,16 +197,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         projectCard.innerHTML = `
-                                  <div class="project-card-top">
-                                    
-                                      <p>${project.Project_Title}</p>
-                                    
-                                      <a href="#" class="black-btn">View</a>
-                                  </div>
+                                  ${cardTop}
                                   <div class="project-card-progress">
                                       <div class="project-card-progress-info">
                                           <p>Progress</p>
-                                          <p>75%</p>
+                                          <p>${Math.round(projectProgress)}%</p>
                                       </div>
                                       <div class="project-card-progress-bar">
                                           <div class="project-card-progress-bar-inner"></div>
@@ -189,15 +215,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const progressBar = projectCard.querySelector(
           ".project-card-progress-bar-inner"
         );
-        let progressString = "75%";
-        progressBar.style.width = progressString;
 
-        let projectInt = 75;
-        if (projectInt <= 33) {
+
+        progressBar.style.width = `${projectProgress.toFixed(2)}%`;
+
+        if (projectProgress === 0) {
+          progressBar.style.border = "2px solid #E6757E";
+        }
+
+        if (projectProgress <= 33) {
           progressBar.style.backgroundColor = "#E6757E";
-        } else if (projectInt <= 66) {
+        } else if (projectProgress <= 66) {
           progressBar.style.backgroundColor = "#EAB385";
-        } else if (projectInt <= 100) {
+        } else if (projectProgress <= 100) {
           progressBar.style.backgroundColor = "#ADDA9D";
         }
 
@@ -205,20 +235,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //Links to project kanban
         projectCard
-          .querySelector(".project-card-top a")
+          .querySelector(".project-card-top #view-project-kanban-btn")
           .addEventListener("click", (e) => {
             e.preventDefault();
 
-            //Add to URL the project ID so it can be used in Kanban.js
-            /*const currentURL = new URL(window.location.href);
-          currentURL.searchParams.set('projectID', project.Project_ID);
-          history.pushState({projectID: project.Project_ID}, '', currentURL);
-          */
-
             sessionStorage.setItem("clicked-project-id", project.Project_ID);
             window.dispatchEvent(new Event("storage"));
-
-            //console.log(sessionStorage.getItem('clicked-project-id'))
 
             const navItems = document.querySelectorAll(".nav-item");
             navItems.forEach((item) => item.classList.remove("active"));
@@ -238,14 +260,140 @@ document.addEventListener("DOMContentLoaded", function () {
             );
             contentArea.classList.add("open");
           });
+        };
+
+
+
+
+      container.addEventListener("click", (e) => {
+        if (e.target.id === "edit-project-kanban-btn") {
+          const projectID = e.target.getAttribute("data-project-id");
+          const project = projectData.find(p => p.Project_ID == projectID);
+          const gridContainerSelector = `#${e.target.closest('.project-item-content').id} #gridContainer`;
+          const containerStatus = e.target.closest('.project-item-content').getAttribute('data-status');
+          openEditProjectModal(project, containerStatus, gridContainerSelector);
+        }
       });
+
+
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching projects:", error);
     }
   }
 
+
+
+  function openEditProjectModal(project, statusContainer, containerSelector) {
+    const editProjectModal = document.querySelector('#edit-projects-modal');
+    editProjectModal.querySelector('.modal-header p').innerText = `Edit Project #${project.Project_ID}`;
+    //Make Input fields show current project data
+    const teamLeaderEditDropdown = editProjectModal.querySelector('#team-leader');
+    fetchUsers(teamLeaderEditDropdown);
+    editProjectModal.querySelector('#task-title').value = project.Project_Title;
+    editProjectModal.querySelector('#team-leader-dropdown').value = project.Project_Leader;
+    editProjectModal.querySelector('#start-date-project').value = new Date(project.Start_Date).toISOString().split('T')[0];
+    editProjectModal.querySelector('#date-project').value = project.Due_Date;
+    editProjectModal.style.display = 'flex';
+
+    const editProjectBtn = editProjectModal.querySelector('.edit-project-btn');
+    editProjectBtn.addEventListener('click', async () =>{
+      const projectTitle = editProjectModal.querySelector('#task-title').value;
+      const projectTeamLeader = editProjectModal.querySelector('#team-leader-dropdown').value;
+      const projectStartDate = editProjectModal.querySelector('#start-date-project').value;
+      const projectDueDate = editProjectModal.querySelector('#date-project').value;
+      const projectID = project.Project_ID;
+      //HERE CALL A FUNCTION TO EDIT PROJECT ENTRY IN DATABASE
+      //CALL fetchProjectsData(x,y,z) WITH THE CORRECT Status and Container Selector (from parameters of this function)
+
+      editProjectModal.style.display = 'none';
+    })
+
+    const closeProjectEditBtn = editProjectModal.querySelector('.close-modal-btn');
+    closeProjectEditBtn.addEventListener('click', () => {
+      editProjectModal.style.display = 'none';
+    });
+  }
+
+
+
+
+  //takes an optional UserID for Employee veiw of progress on projects 
+  async function fetchTasksData(projectID, userID = null) {
+    try {
+      let url = `Projects/query/get-tasks-db.php?projectID=${encodeURIComponent(projectID)}`;
+      if (userID) {
+        url += `&userID=${encodeURIComponent(userID)}`;
+      }
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch users")
+      };
+
+      const tasksData = await response.json();
+      return tasksData;
+    } catch (error) {
+      console.error("Error fetching Task Data for Progress:", error);
+      return [];
+    }
+  }
+
+//Task Progress
+  function getTaskProgress(task) {
+    const { Man_Hours, Status, Priority} = task;
+    const priorityWeighting = getPriority(Priority);
+    let manHoursCompleted = 0;
+    if (Status === "Completed") {
+      manHoursCompleted = Man_Hours;
+    } else if (Status === "In Progress") {
+      manHoursCompleted = 0.5 * Man_Hours;
+    } else {
+      manHoursCompleted = 0;
+    }
+ 
+    return (manHoursCompleted / Man_Hours) * priorityWeighting;
+  }
+
+  function getPriority(priority) {
+    switch (priority) {
+      case 'High':
+        return 1.5;
+      case 'Medium':
+        return 1;
+      case 'Low':
+        return 0.5;
+      default:
+        return 1;
+    }
+  }
+
+  async function getProjectProgress(projectID, userID = null) {
+
+    const tasksData = await fetchTasksData(projectID, userID);
+    if (tasksData.length === 0) {
+      return 0;
+    }
+    let totalTaskProgress = 0;
+    let totalPriorityWeighting = 0;
+
+    for (let i = 0; i < tasksData.length; i++) {
+      const taskProgress = getTaskProgress(tasksData[i]);
+      const priorityWeighting = getPriority(tasksData[i].Priority);
+      totalTaskProgress += taskProgress;
+      totalPriorityWeighting += priorityWeighting;
+    }
+
+    const averageTaskProgress = totalTaskProgress / totalPriorityWeighting;
+
+    return averageTaskProgress * 100;
+  }
+
+
   // Fetch Users for Team Leader Selection
-  async function fetchUsers() {
+  async function fetchUsers(dropdown) {
     try {
       const response = await fetch("Projects/query/fetch-users.php");
       if (!response.ok) throw new Error("Failed to fetch users");
@@ -253,19 +401,20 @@ document.addEventListener("DOMContentLoaded", function () {
       const users = await response.json();
 
       // Clear existing options
-      teamLeaderDropdown.innerHTML =
+      dropdown.innerHTML =
         '<option value="" selected disabled hidden>Choose</option>';
 
       users.forEach((user) => {
         const option = document.createElement("option");
         option.value = user.User_ID;
         option.textContent = `${user.User_ID} - ${user.Forename} ${user.Surname}`;
-        teamLeaderDropdown.appendChild(option);
+        dropdown.appendChild(option);
       });
     } catch (error) {
       console.error("Error fetching users:", error);
     }
   }
+
 
   // Open Add Project Modal & Fetch Users
   addProjectBtn.addEventListener("click", () => {
@@ -280,7 +429,7 @@ document.addEventListener("DOMContentLoaded", function () {
     startDate.value ="";
     const dueDate = addProjectModal.querySelector("#date-project");
     dueDate.value ="";
-    fetchUsers(); // Load Team Leaders dynamically
+    fetchUsers(teamLeaderDropdown); // Load Team Leaders dynamically
   });
 
   // Close Modal
@@ -335,7 +484,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Project successfully added!");
         addProjectModal.style.display = "none";
         fetchProjectsData(
-          userID,
+          userProjectsID,
           { status: "Active" },
           "#active-project-content #gridContainer"
         );
@@ -347,7 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("An error occurred. Please try again.");
     }
   });
-});
+
 
 
 
@@ -408,9 +557,7 @@ if (leaderProjectCard) {
 const openProjectsFilterBtn = document.querySelector(
   "#project-content .project-filter-container .filter-project-btn"
 );
-const projectsFilterModal = document.querySelector(
-  "#project-content #project-filter-modal"
-);
+
 
 openProjectsFilterBtn.addEventListener("click", () => {
   projectsFilterModal.style.display = "block";
