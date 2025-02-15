@@ -39,8 +39,8 @@ WHERE
 ";
 
 if (!mysqli_query($conn, $sql)) {
-    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error updating Knowledgebase_Posts: " . mysqli_error($conn);
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Error updating Knowledgebase_Posts: " . mysqli_error($conn)]);
     exit();
 }
 
@@ -50,10 +50,10 @@ WHERE Post_ID = $id
 ";
 
 if (!mysqli_query($conn, $sql2)) {
-    //die("Error inserting into Knowledgebase_Posts: " . mysqli_error($conn));
-    echo "Error updating Post_Topic: " . mysqli_error($conn);
+    http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Error updating Post_Topic: " . mysqli_error($conn)]);
     exit();
 }
 
-echo json_encode(["success" => "Topic added successfully"]);
+echo json_encode(["status" => "success", "message" => "Post updated successfully"]);
 ?>

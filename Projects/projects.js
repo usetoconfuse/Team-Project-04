@@ -289,17 +289,33 @@
   completeProjectModal.querySelector('#cancel-complete-btn').addEventListener('click', () => {
     completeProjectModal.style.display = 'none';
   })
-  completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', () => {
+  completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', async () => {
     const completedProjectID = completeProjectModal.getAttribute('data-project-id');
-    markProjectAsComplete(completedProjectID);
+    await markProjectUpdate(completedProjectID, 'complete', 'Active', "#active-project-content #gridContainer");
+    sendToast(`Completed Project #${completedProjectID} `);
     completeProjectModal.style.display = 'none';
+    editProjectModal.style.display = 'none';
+  })
+
+  //Archive Project 
+  const archiveProjectModal = document.querySelector('#archive-project-modal');
+  archiveProjectModal.querySelector('#cancel-archive-btn').addEventListener('click', () => {
+    archiveProjectModal.style.display = 'none';
+  })
+  archiveProjectModal.querySelector('#archive-project-confirm').addEventListener('click', async () => {
+    const archivedProjectID = archiveProjectModal.getAttribute('data-project-id');
+    const currentStatusContainer = archiveProjectModal.getAttribute('current-status-container');
+    const currentgridContainer = archiveProjectModal.getAttribute('current-grid-container');
+    await markProjectUpdate(archivedProjectID, 'archive', currentStatusContainer, currentgridContainer);
+    sendToast(`Archived Project #${archivedProjectID}`);
+    archiveProjectModal.style.display = 'none';
+    editProjectModal.style.display = 'none';
   })
 
 
-
+  const editProjectModal = document.querySelector('#edit-projects-modal');
   //Edit Actions for Projects (Admin Only)
   function openEditProjectModal(project, statusContainer, containerSelector) {
-    const editProjectModal = document.querySelector('#edit-projects-modal');
 
     if (statusContainer === "Active") {
       editProjectModal.querySelector('.complete-project-btn').style.display = 'flex';
@@ -320,8 +336,7 @@
     }
 
     
-
-
+    //EDIT PROJECT 
     editProjectModal.querySelector('.modal-header p').innerText = `Edit Project #${project.Project_ID}`;
     //Make Input fields show current project data
     const teamLeaderEditDropdown = editProjectModal.querySelector('#team-leader');
@@ -353,6 +368,15 @@
       completeProjectModal.style.display = 'flex';
     })
 
+    //Initialise the Archive Modal 
+    editProjectModal.querySelector('.archive-project-btn').addEventListener('click', () => {
+      archiveProjectModal.querySelector('.modal-header').innerText = `Archive Project #${project.Project_ID}`;
+      archiveProjectModal.querySelector('.modal-body').innerText = `Project #${project.Project_ID}: ${project.Project_Title} will be moved to archive. Are you sure?`;
+      archiveProjectModal.setAttribute('data-project-id', project.Project_ID);
+      archiveProjectModal.setAttribute('current-grid-container', containerSelector)
+      archiveProjectModal.setAttribute('current-status-container', statusContainer)
+      archiveProjectModal.style.display = 'flex';
+    })
 
     const closeProjectEditBtn = editProjectModal.querySelector('.close-modal-btn');
     closeProjectEditBtn.addEventListener('click', () => {
@@ -361,14 +385,13 @@
   }
 
 
-  async function markProjectAsComplete(projectID) {
-
+  async function markProjectUpdate(projectID, projectStatus, statusCont, gridContainer) {
     try {
-      console.log("Marking as completed running")
       const projectData = {
-        projectID : projectID
+        projectID : projectID,
+        status : projectStatus
       };
-      const response = await fetch("Projects/query/mark-complete-project.php", {
+      const response = await fetch("Projects/query/mark-update-project.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(projectData),
@@ -377,7 +400,7 @@
       if (!response.ok) {
         throw new Error("Failed to mark project as complete");
       } else {
-        fetchProjectsData(userProjectsID,{ status: "Active" },"#active-project-content #gridContainer");
+        fetchProjectsData(userProjectsID,{ status: statusCont }, gridContainer);
       }
     } catch (error) {
       console.error("Error adding project:", error);

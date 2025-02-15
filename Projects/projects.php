@@ -306,7 +306,7 @@
 </div>
 
 
-<!--Modal to delete task in personal board-->
+<!--Modal to complete project in admin pane;-->
 <div id="complete-project-modal" class="modal">
     <div class="modal-box">
         <!--Header-->
@@ -322,6 +322,29 @@
                 Complete
             </a>
             <a class="cancel-complete-btn" id="cancel-complete-btn"><i class="fa fa-xmark"></i>
+                Cancel
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal to archive project in admin pane;-->
+<div id="archive-project-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+        
+        </div>
+        <div class="task-delete-buttons">
+            <a id="archive-project-confirm">    
+                Archive
+            </a>
+            <a class="cancel-archive-btn" id="cancel-archive-btn"><i class="fa fa-xmark"></i>
                 Cancel
             </a>
         </div>

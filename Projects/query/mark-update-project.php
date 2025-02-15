@@ -4,13 +4,22 @@ include '../../config/db-setup.php';
 
 $projectData = json_decode(file_get_contents("php://input"), true);
 
-if (isset($projectData['projectID'])) {
+if (isset($projectData['projectID']) && isset($projectData['status'])) {
     $projectID = $projectData['projectID'];
+    $status = $projectData['status'];
 
-    $markCompleteSQL = "UPDATE Projects SET Completion_Date = NOW() WHERE Project_ID = ?";
 
-    $stmt = $conn->prepare($markCompleteSQL);
-    $stmt->bind_param("i", $projectID);
+    if ($status === 'complete') {
+        $markStatusSQL = "UPDATE Projects SET Completion_Date = NOW() WHERE Project_ID = ?";
+        $stmt = $conn->prepare($markStatusSQL);
+        $stmt->bind_param("i", $projectID);
+    } else if ($status === 'archive') {
+        $markStatusSQL = "UPDATE Projects SET Status = 'Archived' WHERE Project_ID = ?";
+        $stmt = $conn->prepare($markStatusSQL);
+        $stmt->bind_param("i", $projectID);
+    }
+
+
     if ($stmt->execute()) {
         http_response_code(200);
         echo json_encode(["message" => "Project marked as complete successfully"]);
