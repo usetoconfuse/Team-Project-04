@@ -52,6 +52,8 @@ if ($_SESSION['role'] !== 'Admin') {
     $sql .= " AND kb.Visibility = 'All Users'";
 }
 
+$sql .= " ORDER BY kb.Date_Created DESC";
+
 $result = mysqli_query($conn, $sql);
 $allDataArray = array();
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
