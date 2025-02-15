@@ -1,5 +1,6 @@
 
 <?php
+// API endpoint to delete a topic from the Topics table.
 include '../../config/db-setup.php';
 
 //POST method to gather all data from Form of topic name well as User data

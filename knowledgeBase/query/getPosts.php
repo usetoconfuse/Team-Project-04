@@ -1,4 +1,5 @@
 <?php
+// API endpoint to get posts from the knowledge base table.
 session_start();
 include '../../config/db-setup.php';
 

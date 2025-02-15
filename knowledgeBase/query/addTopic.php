@@ -1,4 +1,5 @@
 <?php
+// API endpoint to add a topic to the Topics table.
 include '../../config/db-setup.php';
 
 //POST method to gather all data from Form of topic name well as User data

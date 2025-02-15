@@ -1,4 +1,5 @@
 <?php
+// API endpoint to edit a post in the knowledge base table.
 include '../../config/db-setup.php';
 
 //POST method to gather all data from Form as well as User data

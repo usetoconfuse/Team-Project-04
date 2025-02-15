@@ -1,4 +1,5 @@
 <?php
+// API endpoint to get all the topics from the Topics table.
 include '../../config/db-setup.php';
 
 $query = $_GET['query'] ?? null;
