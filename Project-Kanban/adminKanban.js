@@ -119,6 +119,7 @@ function openEditModal(task) {
   editActionsModal.querySelector('#task-user-dropdown').value = task.Assignee_ID;
   editActionsModal.querySelector('#task-description').value = task.Description;
 
+
   const updateTaskBtn = editActionsModal.querySelector('#update-task-btn');
   updateTaskBtn.onclick = () => {
       const taskName = editActionsModal.querySelector('#task-title').value;
@@ -285,15 +286,14 @@ confirmAddTask.onclick = () => {
   const Assignee_ID = addProjectTaskModal.querySelector('#task-user-dropdown').value;
   const authorID = globalUserID;
   const projectID = globalSelectedProjectID;
+  const manHours = addProjectTaskModal.querySelector('#man-hours-input').value;
+  const startDate = addProjectTaskModal.querySelector('#start-date-input').value;
 
-  //Need to create these fields in the modal 
-  //Sawan
-  const manHours = 15;
-  const startDate = "2021-05-05";
   
+  console.log(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, authorID, projectID, manHours, startDate);
   
-  addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
-  addProjectTaskModal.style.display = 'none';
+  //addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
+  //addProjectTaskModal.style.display = 'none';
 
 }
 
