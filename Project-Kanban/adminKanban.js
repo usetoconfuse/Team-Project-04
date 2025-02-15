@@ -41,10 +41,10 @@ async function getProjectName(selectedProjectID) {
       const projectNameData = await response.json();
       document.querySelector("#admin-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
       globalProjectDeadline = projectNameData[0].Due_Date;
-      console.log(globalProjectDeadline);
-      //Sawan TO:DO get project deadline and compare when adding and editing a task and validate this!
+      
+      
   
-  
+      
     } catch (error) {
       console.log("Fetch Issue",error);
     }
@@ -163,8 +163,12 @@ function openEditModal(task) {
         return 
       }
 
-      //Check project deadline if task due date or start date is greater than project deadline
-      //Sawan
+      //Task cannot start or begin after project deadline
+      if (taskDueDate > globalProjectDeadline || startDate > globalProjectDeadline) {
+        errorText.innerText = 'Task Due Date or Start Date cannot be greater than Project Deadline';
+        errorText.style.display = 'block';
+        return
+      }
 
 
       
@@ -189,6 +193,7 @@ function openDeleteModal(taskID) {
   deleteProjectTaskConfirm.onclick = () => {
       deleteProjectTask(taskID);
       deleteProjectTaskModal.style.display = 'none';
+    
   };
 
   const closeProjectTaskModal = deleteProjectTaskModal.querySelector('#cancel-delete-task-btn');
@@ -354,6 +359,13 @@ confirmAddTask.onclick = () => {
 
   //Check project deadline if task due date or start date is greater than project deadline
   //Sawan
+  
+  //Task cannot start or begin after project deadline
+  if (taskDueDate > globalProjectDeadline || startDate > globalProjectDeadline) {
+    errorText.innerText = 'Task Due Date or Start Date cannot be greater than Project Deadline';
+    errorText.style.display = 'block';
+    return
+  }
 
 
 
@@ -363,6 +375,10 @@ confirmAddTask.onclick = () => {
   errorText.style.display = 'none';
   addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
   addProjectTaskModal.style.display = 'none';
+  //Pass in task name
+  sendToast(`🎉 Task "${taskName}" has been successfully added!`);
+
+
 
 }
 
