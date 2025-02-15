@@ -289,13 +289,34 @@ confirmAddTask.onclick = () => {
   const manHours = addProjectTaskModal.querySelector('#man-hours-input').value;
   const startDate = addProjectTaskModal.querySelector('#start-date-input').value;
 
+  const errorText = addProjectTaskModal.querySelector('#error-adding-message');
+  console.log(errorText);
+
+  //Validaiton for the form fields
+  if (!taskName || !taskDescription || !taskPriority || !taskDueDate || !Assignee_ID || !manHours || !startDate) {
+    errorText.innerText = "Please fill in all the fields";
+    errorText.style.display = 'block';
+    return
+  }
   
-  console.log(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, authorID, projectID, manHours, startDate);
-  
-  //addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
-  //addProjectTaskModal.style.display = 'none';
+  if (manHours <= 0) {
+    errorText.innerText = 'Man Hours has to be greater than 0';
+    errorText.style.display = 'block';
+    return
+  }
+
+  if (startDate > taskDueDate) {
+    errorText.innerText = 'Start Date cannot be greater than Due Date';
+    errorText.style.display = 'block';
+    return 
+  }
+
+  errorText.style.display = 'none';
+  addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
+  addProjectTaskModal.style.display = 'none';
 
 }
+
 
 
 

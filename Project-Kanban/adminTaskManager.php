@@ -312,6 +312,11 @@
                     </div>
                 </div>
 
+                <div class="error-message" id="error-adding-message" style="color: red; display: none;">
+                    <p>Error: Something went wrong. Please try again.</p>
+                </div>
+
+
             </form>
             <div class="task-submit-buttons">
                 <div class="add-task-btn">
@@ -410,11 +415,32 @@
                         </div>
                     </div>
                 </div>
-                <!--Add Attachments-->
-                <div class="task-upload-form">
-                    <label for="task-upload">Upload Attachments</label>
-                    <input type="file" id="upload" name="upload" multiple>
+
+                <!--Extra Buttons for inputting man hours and startdate-->
+                <div class="extra-buttons" id="extra-buttons">
+                    <div class="task-dropdown task-dropdown-start-date">
+                        <label for="start-date">Start Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="start-date" id="start-date-input">
+                        </div>
+                    </div>
+                    <div class="task-dropdown task-dropdown-man-hours">
+                        <label for="man-hours">Man Hours</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-man-hours-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-clock"></i>
+                            </div>
+                            <input type="number" name="man-hours" id="man-hours-input" min="1" step="1">
+                        </div>
+                    </div>
                 </div>
+                <div class="error-message" id="error-message" style="color: red; display: none;">
+                    <p>Error: Something went wrong. Please try again.</p>
+                </div>
+
             </form>
             <div class="task-submit-buttons">
                 <div class="add-task-btn" id="update-task-btn">
