@@ -254,8 +254,20 @@
     background-color: white;
     border: 1px solid black;
     color: black;
-
 }
+
+.complete-project-btn {
+    background-color: green;
+}
+
+.archive-project-btn {
+    background-color: yellow;
+}
+
+.delete-project-btn {
+    background-color: red;
+}
+
 
 
 /*====Responsiveness====*/
