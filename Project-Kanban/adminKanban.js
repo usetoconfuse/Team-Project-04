@@ -6,6 +6,23 @@ window.addEventListener("storage", function () {
     globalSelectedProjectID = selectedProjectID;
     console.log(selectedProjectID);
     
+    const navItems = document.querySelectorAll(".nav-item");
+    navItems.forEach((item) => item.classList.remove("active"));
+
+    const linkItem = document.querySelector("#current-project");
+    linkItem.style.display = "block";
+    linkItem.classList.add("active");
+    document
+      .querySelector(".nav-item#projects")
+      .classList.add("active");
+
+    const navItemContents =
+      document.querySelectorAll(".nav-item-content");
+    navItemContents.forEach((item) => item.classList.remove("open"));
+    const contentArea = document.querySelector(
+      "#current-project-content"
+    );
+    contentArea.classList.add("open");
 
     
     getProjectName(selectedProjectID);
@@ -292,6 +309,10 @@ async function updateProjectTasks(taskName, taskDescription, taskPriority, taskD
 //====Back to Projects Page Button
 const backToProjectsBtn = document.querySelector('#admin-kanban-content .project-intro .projects-intro-buttons .all-projects-btn');
 backToProjectsBtn.addEventListener('click', () => {
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", "projects");
+  window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
   const navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(item => item.classList.remove('active'));
   

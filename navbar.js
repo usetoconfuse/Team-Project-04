@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (navItem.id === 'current-project') {
             document.querySelector('.nav-item#projects').classList.add('active');
+            window.dispatchEvent(new Event('storage'));
         }
         
         hamburgerMenuBtn.classList.remove('openMobile'); //Change hamburger menu 

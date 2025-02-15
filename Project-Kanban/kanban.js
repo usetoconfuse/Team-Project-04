@@ -7,6 +7,24 @@ window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
   projectID = selectedProjectID;
 
+  const navItems = document.querySelectorAll(".nav-item");
+  navItems.forEach((item) => item.classList.remove("active"));
+
+  const linkItem = document.querySelector("#current-project");
+  linkItem.style.display = "block";
+  linkItem.classList.add("active");
+  document
+    .querySelector(".nav-item#projects")
+    .classList.add("active");
+
+  const navItemContents =
+    document.querySelectorAll(".nav-item-content");
+  navItemContents.forEach((item) => item.classList.remove("open"));
+  const contentArea = document.querySelector(
+    "#current-project-content"
+  );
+  contentArea.classList.add("open");
+
   if (selectedProjectID) {
     const kanbanContainer = document.querySelector('#proj-kanban-content')
     const userID = kanbanContainer.getAttribute('data-user-id');
@@ -104,8 +122,6 @@ window.addEventListener("storage", function () {
 
       getKanbanData(userID, selectedProjectID, {})
     })
-
-
   }
 });
 

@@ -240,25 +240,12 @@
             e.preventDefault();
 
             sessionStorage.setItem("clicked-project-id", project.Project_ID);
+
+            const params = new URLSearchParams(window.location.search);
+            params.set("page", "current-project");
+            window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+            
             window.dispatchEvent(new Event("storage"));
-
-            const navItems = document.querySelectorAll(".nav-item");
-            navItems.forEach((item) => item.classList.remove("active"));
-
-            const linkItem = document.querySelector("#current-project");
-            linkItem.style.display = "block";
-            linkItem.classList.add("active");
-            document
-              .querySelector(".nav-item#projects")
-              .classList.add("active");
-
-            const navItemContents =
-              document.querySelectorAll(".nav-item-content");
-            navItemContents.forEach((item) => item.classList.remove("open"));
-            const contentArea = document.querySelector(
-              "#current-project-content"
-            );
-            contentArea.classList.add("open");
           });
         };
 
