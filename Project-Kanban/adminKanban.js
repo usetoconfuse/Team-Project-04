@@ -124,7 +124,7 @@ function openEditModal(task) {
       const Task_ID = task.Task_ID;
 
       
-      updatePersonalTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID);
+      updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID);
       editActionsModal.style.display = 'none';
   };
 
@@ -201,7 +201,7 @@ async function fetchUsersForEdit() {
   }
 }
 
-async function updatePersonalTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, taskID) {
+async function updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, taskID) {
   try {
     const url = 'Project-Kanban/updateTaskDetails.php';
     

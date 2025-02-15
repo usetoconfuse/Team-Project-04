@@ -243,6 +243,20 @@
     display: block !important;
 }
 
+.project-card-top-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.project-card-top-btns #edit-project-kanban-btn {
+    margin-right: 0.2rem;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+
+}
+
 
 /*====Responsiveness====*/
 @media (max-width: 1300px) {

@@ -21,7 +21,7 @@ if ($role === 'Employee') {
         if ($status === 'Active') {
             $sql .= " AND Projects.Status = '$status' AND Projects.Start_Date <= CURDATE()";
         } elseif ($status === 'Not Started') {
-            $sql .= " AND Projects.Start_Date > CURDATE()";
+            $sql .= " AND Projects.Start_Date > CURDATE() AND Projects.Status = 'Active'";
         } elseif ($status === 'Archived') {
             $sql .= " AND Projects.Status = '$status'";
         } elseif ($status === 'Completed') {
