@@ -1,13 +1,18 @@
 let globalSelectedProjectID = null;
+let globalUserID = null;
 window.addEventListener("storage", function () {
     const selectedProjectID = sessionStorage.getItem('clicked-project-id');
     globalSelectedProjectID = selectedProjectID;
     console.log(selectedProjectID);
 
     getProjectName(selectedProjectID);
+    
+    const adminKanbanContent = document.querySelector("#admin-kanban-content");
 
+    // Get the user-id from the data-user-id attribute
+    globalUserID = adminKanbanContent.getAttribute("data-user-id");
 
-    //load project stats from the database
+    
     getProjectTable(selectedProjectID);
     
 });
@@ -211,7 +216,7 @@ async function updateProjectTasks(taskName, taskDescription, taskPriority, taskD
       Priority: taskPriority,
       Due_Date: taskDueDate,
       Assignee_ID: Assignee_ID,
-      Task_ID: taskID
+      Task_ID: taskID,
     };
 
     console.log(data);
@@ -261,14 +266,36 @@ const addProjectTaskBtn = document.querySelector('#admin-kanban-content .add-tas
 const addProjectTaskModal = document.querySelector('#admin-kanban-content .add-task-modal')
 const closeProjectAddTaskModal = addProjectTaskModal.querySelector('.close-modal-btn')
 
-
-
 addProjectTaskBtn.addEventListener('click', () => {
     addProjectTaskModal.style.display = 'flex';
+    fetchUsersForEdit();
 })
 closeProjectAddTaskModal.addEventListener('click', () => {
     addProjectTaskModal.style.display = 'none';
 })
+//====Add Task Modal Functionality
+const confirmAddTask = addProjectTaskModal.querySelector('.add-task-btn')
+confirmAddTask.onclick = () => {
+  //Get the values from the form
+  
+  const taskName = addProjectTaskModal.querySelector('#task-title').value;
+  const taskDescription = addProjectTaskModal.querySelector('#task-description').value;
+  const taskPriority = addProjectTaskModal.querySelector('#priority').value;
+  const taskDueDate = addProjectTaskModal.querySelector('#date-input').value;
+  const Assignee_ID = addProjectTaskModal.querySelector('#task-user-dropdown').value;
+  const authorID = globalUserID;
+  const projectID = globalSelectedProjectID;
+
+  //Need to create these fields in the modal 
+  //Sawan
+  const manHours = 15;
+  const startDate = "2021-05-05";
+  
+  
+  addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
+  addProjectTaskModal.style.display = 'none';
+
+}
 
 
 
@@ -285,5 +312,39 @@ filterProjectTaskBtn.addEventListener('click', () => {
   })
 
 
+async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID) {
+  try {
+    const url = 'Project-Kanban/addTaskProject.php';
+    
+    const data = {
+      Name: taskName,
+      Description: taskDescription,
+      Status: "To Do",
+      Due_Date: taskDueDate,
+      Priority: taskPriority,
+      Author_ID: authorID,
+      Project_ID: projectID,
+      Assignee_ID: Assignee_ID,
+      Man_Hours: manHours,
+      Start_Date: startDate
+    };
 
+    console.log(data);
 
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(url, params);
+    if (!response.ok) {
+      console.log(response);
+    } else {
+      getProjectTable(globalSelectedProjectID);
+    }
+
+  } catch (error) {
+    console.log("Error updating the task status", error);
+  }
+}
