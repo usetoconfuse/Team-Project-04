@@ -279,27 +279,49 @@
                 </div>
             </form>
             <div class="task-submit-buttons">
-                <div class="edit-project-btn" id="add-project-btn">
+                <a class="edit-project-btn" id="add-project-btn">
                     Edit Project
                     <i class="fa fa-arrow-right"></i>
-                </div>
-                <div class="complete-project-btn" id="add-project-btn">
-                    Mark as Complete
+                </a>
+                <a class="complete-project-btn" id="add-project-btn">
+                    Complete
                     <i class="fa fa-arrow-right"></i>
-                </div>
-                <div class="archive-project-btn" id="add-project-btn">
-                    Mark as Archived
+                </a>
+                <a class="archive-project-btn" id="add-project-btn">
+                    Archive
                     <i class="fa fa-arrow-right"></i>
-                </div>
-                <div class="delete-project-btn" id="add-project-btn">
+                </a>
+                <a class="delete-project-btn" id="add-project-btn">
                     Delete
                     <i class="fa fa-solid fa-trash"></i>
-                </div>
+                </a>
             </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--Modal to delete task in personal board-->
+<div id="complete-project-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+        
+        </div>
+        <div class="task-delete-buttons">
+            <a id="complete-project-confirm">    
+                Complete
+            </a>
+            <a class="cancel-complete-btn" id="cancel-complete-btn"><i class="fa fa-xmark"></i>
+                Cancel
+            </a>
         </div>
     </div>
 </div>
 
 
-
-</div>

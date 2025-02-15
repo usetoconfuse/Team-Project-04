@@ -256,16 +256,20 @@
     color: black;
 }
 
-.complete-project-btn {
-    background-color: green;
+#edit-projects-modal .complete-project-btn {
+    background-color: #89bc8a !important;;
+    color: black !important;;
+
 }
 
-.archive-project-btn {
-    background-color: yellow;
+#edit-projects-modal .archive-project-btn {
+    background-color: #efd179 !important;;
+    color: black!important;;
 }
 
-.delete-project-btn {
-    background-color: red;
+#edit-projects-modal .delete-project-btn {
+    background-color: #f98a93 !important;;
+    color: black !important;
 }
 
 
@@ -342,5 +346,16 @@
 }
 
 .task-dropdowns-form#project-dropdowns-form {
-    flex-direction: column !important;
+    flex-direction: row !important;
 }
+
+/*
+#edit-projects-modal .task-submit-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+    margin: 0 auto;
+
+}*/
+

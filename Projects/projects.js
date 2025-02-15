@@ -275,6 +275,8 @@
         }
       });
 
+      
+
 
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -282,7 +284,20 @@
   }
 
 
+  //Mark As Complete
+  const completeProjectModal =  document.querySelector('#complete-project-modal');
+  completeProjectModal.querySelector('#cancel-complete-btn').addEventListener('click', () => {
+    completeProjectModal.style.display = 'none';
+  })
+  completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', () => {
+    const completedProjectID = completeProjectModal.getAttribute('data-project-id');
+    markProjectAsComplete(completedProjectID);
+    completeProjectModal.style.display = 'none';
+  })
 
+
+
+  //Edit Actions for Projects (Admin Only)
   function openEditProjectModal(project, statusContainer, containerSelector) {
     const editProjectModal = document.querySelector('#edit-projects-modal');
     editProjectModal.querySelector('.modal-header p').innerText = `Edit Project #${project.Project_ID}`;
@@ -304,9 +319,18 @@
       const projectID = project.Project_ID;
       //HERE CALL A FUNCTION TO EDIT PROJECT ENTRY IN DATABASE
       //CALL fetchProjectsData(x,y,z) WITH THE CORRECT Status and Container Selector (from parameters of this function)
-
       editProjectModal.style.display = 'none';
     })
+
+    
+    //Initialise the Complete Modal 
+    editProjectModal.querySelector('.complete-project-btn').addEventListener('click', () => {
+      completeProjectModal.querySelector('.modal-header').innerText = `Complete Project #${project.Project_ID}`;
+      completeProjectModal.querySelector('.modal-body').innerText = `Project #${project.Project_ID}: ${project.Project_Title} will be marked as completed. Are you sure?`;
+      completeProjectModal.setAttribute('data-project-id', project.Project_ID);
+      completeProjectModal.style.display = 'flex';
+    })
+
 
     const closeProjectEditBtn = editProjectModal.querySelector('.close-modal-btn');
     closeProjectEditBtn.addEventListener('click', () => {
@@ -315,6 +339,29 @@
   }
 
 
+  async function markProjectAsComplete(projectID) {
+
+    try {
+      console.log("Marking as completed running")
+      const projectData = {
+        projectID : projectID
+      };
+      const response = await fetch("Projects/query/mark-complete-project.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projectData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to mark project as complete");
+      } else {
+        fetchProjectsData(userProjectsID,{ status: "Active" },"#active-project-content #gridContainer");
+      }
+    } catch (error) {
+      console.error("Error adding project:", error);
+      alert("An error occurred. Please try again.");
+    }
+  }
 
 
   //takes an optional UserID for Employee veiw of progress on projects 
