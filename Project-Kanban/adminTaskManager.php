@@ -437,7 +437,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="error-message" id="error-message" style="color: red; display: none;">
+                <div class="error-message" id="error-edit-message" style="color: red; display: none;">
                     <p>Error: Something went wrong. Please try again.</p>
                 </div>
 
