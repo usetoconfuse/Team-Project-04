@@ -504,7 +504,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #task-user-dropdown {
+.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #kb-edit-post-topic-input, #task-user-dropdown, input[type = 'number'] {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;

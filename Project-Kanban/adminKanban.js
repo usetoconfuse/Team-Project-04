@@ -1,11 +1,15 @@
 let globalSelectedProjectID = null;
 let globalUserID = null;
+let globalProjectDeadline = null;
 window.addEventListener("storage", function () {
     const selectedProjectID = sessionStorage.getItem('clicked-project-id');
     globalSelectedProjectID = selectedProjectID;
     console.log(selectedProjectID);
+    
 
+    
     getProjectName(selectedProjectID);
+
     
     const adminKanbanContent = document.querySelector("#admin-kanban-content");
 
@@ -36,6 +40,9 @@ async function getProjectName(selectedProjectID) {
       }
       const projectNameData = await response.json();
       document.querySelector("#admin-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
+      globalProjectDeadline = projectNameData[0].Due_Date;
+      console.log(globalProjectDeadline);
+      //Sawan TO:DO get project deadline and compare when adding and editing a task and validate this!
   
   
     } catch (error) {
@@ -74,7 +81,7 @@ function populateTasksTable(tableData) {
   tableData.forEach(task => {
       const row = document.createElement('tr');
 
-      let taskStuck = (task.Stuck === '1' || task.Stuck === '2') ? "Yes" : "No";
+      let taskStuck = (task.Stuck === '2') ? "Yes" : "No";
 
       row.innerHTML = `   <td>${task.Task_ID}</td>
                           <td id="emp-task-title">${task.Name}</td>
@@ -118,6 +125,8 @@ function openEditModal(task) {
   editActionsModal.querySelector('#date-input').value = task.Due_Date;
   editActionsModal.querySelector('#task-user-dropdown').value = task.Assignee_ID;
   editActionsModal.querySelector('#task-description').value = task.Description;
+  editActionsModal.querySelector('#man-hours-input').value = task.Man_Hours;
+  editActionsModal.querySelector('#start-date-input').value = task.Start_Date;
 
 
   const updateTaskBtn = editActionsModal.querySelector('#update-task-btn');
@@ -127,10 +136,40 @@ function openEditModal(task) {
       const taskPriority = editActionsModal.querySelector('#priority').value;
       const taskDueDate = editActionsModal.querySelector('#date-input').value;
       const Assignee_ID = editActionsModal.querySelector('#task-user-dropdown').value;
+      const manHours = editActionsModal.querySelector('#man-hours-input').value;
+      const startDate = editActionsModal.querySelector('#start-date-input').value;
       const Task_ID = task.Task_ID;
 
       
-      updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID);
+      const errorText = editActionsModal.querySelector('#error-edit-message');
+      console.log(errorText);
+
+      //Validaiton for the form fields
+      if (!taskName || !taskDescription || !taskPriority || !taskDueDate || !Assignee_ID || !manHours || !startDate || !manHours || !startDate) {
+        errorText.innerText = "Please fill in all the fields";
+        errorText.style.display = 'block';
+        return
+      }
+      
+      if (manHours <= 0) {
+        errorText.innerText = 'Man Hours has to be greater than 0';
+        errorText.style.display = 'block';
+        return
+      }
+
+      if (startDate > taskDueDate) {
+        errorText.innerText = 'Start Date cannot be before than Due Date';
+        errorText.style.display = 'block';
+        return 
+      }
+
+      //Check project deadline if task due date or start date is greater than project deadline
+      //Sawan
+
+
+      
+      
+     updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
       editActionsModal.style.display = 'none';
   };
 
@@ -207,7 +246,7 @@ async function fetchUsersForEdit() {
   }
 }
 
-async function updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, taskID) {
+async function updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, taskID, manHours, startDate) {
   try {
     const url = 'Project-Kanban/updateTaskDetails.php';
     
@@ -218,6 +257,8 @@ async function updateProjectTasks(taskName, taskDescription, taskPriority, taskD
       Due_Date: taskDueDate,
       Assignee_ID: Assignee_ID,
       Task_ID: taskID,
+      Man_Hours: manHours,
+      Start_Date: startDate
     };
 
     console.log(data);
@@ -289,13 +330,42 @@ confirmAddTask.onclick = () => {
   const manHours = addProjectTaskModal.querySelector('#man-hours-input').value;
   const startDate = addProjectTaskModal.querySelector('#start-date-input').value;
 
+  const errorText = addProjectTaskModal.querySelector('#error-adding-message');
+  console.log(errorText);
+
+  //Validaiton for the form fields
+  if (!taskName || !taskDescription || !taskPriority || !taskDueDate || !Assignee_ID || !manHours || !startDate) {
+    errorText.innerText = "Please fill in all the fields";
+    errorText.style.display = 'block';
+    return
+  }
   
-  console.log(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, authorID, projectID, manHours, startDate);
-  
-  //addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
-  //addProjectTaskModal.style.display = 'none';
+  if (manHours <= 0) {
+    errorText.innerText = 'Man Hours has to be greater than 0';
+    errorText.style.display = 'block';
+    return
+  }
+
+  if (startDate > taskDueDate) {
+    errorText.innerText = 'Start Date cannot be greater than Due Date';
+    errorText.style.display = 'block';
+    return 
+  }
+
+  //Check project deadline if task due date or start date is greater than project deadline
+  //Sawan
+
+
+
+
+
+
+  errorText.style.display = 'none';
+  addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
+  addProjectTaskModal.style.display = 'none';
 
 }
+
 
 
 

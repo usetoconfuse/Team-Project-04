@@ -12,7 +12,7 @@
             <div class="kb-listing-header kb-flex-row">
                 <div class="kb-listing-search">
                     <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search Post Content" id="searched-post">
+                    <input type="text" placeholder="Search Post Title" id="kb-post-title-search">
                 </div>
                 <button id="new-post-btn">
                     New Post
@@ -38,7 +38,7 @@
             <ul id="kb-topics-list" class="kb-flex-col kb-scrollable">
                 <!-- Topics are dynamically loaded with JS -->
             </ul>
-            <button id="new-topic-btn">New Topic</button>
+            <button id="kb-filters-add-topic">New Topic</button>
         </div>
 
         <!--Add Topic Modal-->
@@ -116,7 +116,7 @@
                         <!--topic-->
                         <div class="task-dropdown task-dropdown-topic">
                             <label for="topic-modal-dropdown">Topic :</label>
-                            <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-select-options" id="kb-new-post-topic-dropdown-btn">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-comment"></i>
                                 </div>
@@ -125,16 +125,21 @@
                                 </div>
                             </div>
                             <div class="kb-topic-dropdown-container">
-                                <div id="kb-topic-dropdown">
+                                <div class="kb-topic-dropdown" id="kb-new-post-topic-dropdown">
                                     <div class="kb-flex-row kb-topic-dropdown-search">
                                         <i class="fa-solid fa-search"></i>
-                                        <input type="text" placeholder="Search.." id="kb-topic-dropdown-search-input"
-                                            autocomplete="off">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Search.."
+                                            class="dropdown-search" 
+                                            id="kb-new-post-topic-dropdown-search-input"
+                                            autocomplete="off"
+                                        >
                                     </div>
-                                    <div id="topic-modal-dropdown">
+                                    <div class="topic-dropdown-topics" id="kb-new-post-topic-dropdown-elements">
+                                        <!-- Topics are dynamically loaded with JS -->
                                     </div>
-                                    <button id="kb-topic-modal-add-topic">Add Topic</button>
-                                    <!-- Topics are dynamically loaded with JS -->
+                                    <button id="kb-new-post-topic-add-topic">Add Topic</button>
                                 </div>
                             </div>
                         </div>
@@ -168,15 +173,16 @@
                     </div>
                 </form>
                 <div class="kb-modal-submission-btns">
-                    <button class="add-post-btn" id="add-post-btn">
+                    <button class="add-post-btn" id="kb-add-post-submit-btn">
                         Add Post
                         <i class="fa fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
         </div>
+        <!--Edit Post Modal-->
         <div id="edit-post-modal" class="modal">
-            <div class="modal-box">
+            <div class="modal-box kb-wide-modal">
                 <!--Header-->
                 <div class="modal-header">
                     Edit Post
@@ -185,25 +191,34 @@
                     </div>
                 </div>
                 <!--Body-->
-                <form id="edit-post-modal-form" class="modal-body">
+                <form id="post-modal-form" class="modal-body">
                     <div>
-                        <label for="postInput">Title :</label>
-                        <input type="text" id="edit-post-title-input" name="title" placeholder="Enter post title">
+                        <label for="kb-new-post-title">Title :</label>
+                        <input type="text" id="kb-edit-post-title-input" name="title" placeholder="Enter post title">
                     </div>
                     <div>
                         <label for="kb-edit-post-content-input">Content :</label>
-                        <textarea type="text" id="edit-post-content-input" name="content"
-                            placeholder="Enter post content"></textarea>
+                        <div class="kb-markdown-container">
+                            <div class="kb-markdown-header">
+                                <div class="kb-markdown-btn active" id="kb-edit-post-write-btn">Write</div>
+                                <div class="kb-markdown-btn" id="kb-edit-post-preview-btn">Preview</div>
+                            </div>
+                            <textarea class="kb-markdown-textarea" type="text" id="kb-edit-post-content-input"
+                                name="content" placeholder="Enter post content"></textarea>
+                            <div class="kb-markdown-textarea" id="kb-edit-post-content-preview" style="display: none;">
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="kb-flex-row">
+                    <div class="kb-flex-row space-evenly kb-flex-wrap">
                         <!--technical or non technical-->
                         <div class="task-dropdown task-dropdown-technical">
-                            <label for="type-dropdown">Type :</label>
+                            <label for="kb-edit-post-type-input">Type :</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-technical-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-gear"></i>
                                 </div>
-                                <select name="type" id="edit-post-type-input">
+                                <select name="type" id="kb-edit-post-type-input">
                                     <option value="" selected disabled hidden>Choose</option>
                                     <option value="Technical">Technical</option>
                                     <option value="Non-Technical">Non-technical</option>
@@ -212,36 +227,65 @@
                         </div>
                         <!--topic-->
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="edit-post-topic-input">Topic :</label>
-                            <div class="task-dropdown-select-options">
+                            <label for="topic-modal-dropdown">Topic :</label>
+                            <div class="task-dropdown-select-options" id="kb-add-post-topic-dropdown-btn">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
                                     <i class="fa fa-solid fa-comment"></i>
                                 </div>
-                                <select name="topic" id="edit-post-topic-input">
-                                    <!--These topics will be retrieved via sql query-->
-                                    <option value="" selected disabled hidden>Choose</option>
-                                    <option value="Coding Standards">Coding Standards</option>
+                                <div class="kb-topic-dropdown-btn" id="kb-edit-post-topic-input">
+                                    <div class="centered-div">Select Topic</div>
+                                </div>
+                            </div>
+                            <div class="kb-topic-dropdown-container">
+                                <div class="kb-topic-dropdown" id="kb-edit-post-topic-dropdown">
+                                    <div class="kb-flex-row kb-topic-dropdown-search">
+                                        <i class="fa-solid fa-search"></i>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Search.." 
+                                            class="dropdown-search"
+                                            id="kb-edit-post-topic-dropdown-search-input"
+                                            autocomplete="off"
+                                        >
+                                    </div>
+                                    <div class="topic-dropdown-topics" id="kb-edit-post-topic-dropdown-elements">
+                                        <!-- Topics are dynamically loaded with JS -->
+                                    </div>
+                                    <button id="kb-edit-post-topic-add-topic">Edit Topic</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kb-flex-row space-evenly kb-flex-wrap">
+                        <div class="task-dropdown task-dropdown-topic">
+                            <label for="kb-edit-post-visibility-input">Visibility :</label>
+                            <div class="task-dropdown-select-options">
+                                <div class="task-dropdown-topic-icon task-dropdown-icon">
+                                    <i class="fa fa-solid fa-eye"></i>
+                                </div>
+                                <select name="visibility" id="kb-edit-post-visibility-input">
+                                    <option value="All Users">All Users</option>
+                                    <option value="Manager Only" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>Manager Only</option>
                                 </select>
                             </div>
                         </div>
                         <div class="task-dropdown task-dropdown-topic">
-                            <label for="visibility-dropdown">Visibility :</label>
+                            <label for="kb-edit-post-protected-input">Protected?</label>
                             <div class="task-dropdown-select-options">
                                 <div class="task-dropdown-topic-icon task-dropdown-icon">
-                                    <i class="fa fa-solid fa-user"></i>
+                                    <i class="fa fa-solid fa-lock"></i>
                                 </div>
-                                <select name="visibility" id="edit-post-visibility-input">
-                                    <option value="" selected disabled hidden>Choose</option>
-                                    <option value="All Users">All Users</option>
-                                    <!--disabled , will depend on if user or manager logged in-->
-                                    <option value="Manager Only" disabled>Manager Only</option>
+                                <select name="visibility" id="kb-edit-post-protected-input">
+                                    <option value="0">No</option>
+                                    <option value="1" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>
+                                        Yes</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div class="kb-modal-submission-btns">
-                    <button id="kb-edit-post-submit-btn">
+                    <button class="edit-post-btn" id="kb-edit-post-submit-btn">
                         Edit Post
                         <i class="fa fa-arrow-right"></i>
                     </button>
@@ -304,6 +348,9 @@
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="knowledgeBase/queries.js"></script>
