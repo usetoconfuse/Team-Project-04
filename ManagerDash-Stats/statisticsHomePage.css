@@ -121,15 +121,24 @@ thead, tbody {
 
 }
 
-.statsHome-table table tr:not(thead tr) {
+.statsHome-table table tbody tr {
     border-bottom: 2px solid #F5F5F5;
 }
-
 
 .statsHome-view {
     height: 100%;
     width: 100%;
 }
+
+/* HOVER */
+.statsHome-table table tbody tr:hover {
+    background-color: #d4b400;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* Stats Home Tab Grids */
 
 /* Project Home Grid */
 #statsHomeGridProject {
@@ -146,7 +155,6 @@ thead, tbody {
 #statsHomeTableProj {
     grid-area: tableHomeProj;
 }
-
 
 /* User Home Grid */
 #statsHomeGridUser {
