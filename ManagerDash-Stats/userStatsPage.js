@@ -18,7 +18,7 @@ async function PopulateUserStatsPage() {
     await(fetchUserDetails());
 
     //Fetch all tasks of a user
-    await(getKanbanData());
+    await(getUserStatsTaskData());
 
     //Fetch overall project hours of a user
     await(fetchUserProjHrsTable());
@@ -225,7 +225,7 @@ async function fetchUserProjHrsTable() {
 // =======================FILTER FUNC ============================
 
 
-async function getKanbanData(filters={}) {
+async function getUserStatsTaskData(filters={}) {
     try {
   
       let url = `ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?userID=${encodeURIComponent(userDetails.id)}`; 
@@ -964,21 +964,12 @@ document.getElementById('userStats-type-stuck-btn').addEventListener('click', (e
 let userId;
 let projectID;
 window.addEventListener("DOMContentLoaded", function () {
-//   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
-//   projectID = selectedProjectID;
 
-//   if (selectedProjectID) {
-//     const kanbanContainer = document.querySelector('#mgrStatsUser-grid-container')
-//     const userID = kanbanContainer.getAttribute('data-user-id');
-//     userId = userID;
-    // getKanbanData(userID, selectedProjectID, {});
-    // getProjectName(selectedProjectID)
-
-    const filterKanbanModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal')
+    const filterUserStatsTaskModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal')
     document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = 'None';
-    filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
-    filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
-    filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
+    filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value = 'All';
+    filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value = 'All';
+    filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
       
   
     
@@ -986,13 +977,12 @@ window.addEventListener("DOMContentLoaded", function () {
     const filterAppliedMsg = document.querySelector('#mgrStatsUser-grid-container .filter-applied-msg');
     const filterRemoveBtn = document.querySelector('#mgrStatsUser-grid-container .remove-filters-btn');
 
-    const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
-    console.log("right now", applyFilterBtn);
+    const applyFilterBtn = filterUserStatsTaskModal.querySelector('#add-filter-btn');
+    // console.log(applyFilterBtn);
     applyFilterBtn.addEventListener('click', () => {
-        console.log("CLICKQUIN");
-      const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
-      const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
-      const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
+      const priorityValue = filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value;
+      const dateValue = filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value;
+      const stuckValue = filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value;
       
       const filters = {priorityValue, dateValue, stuckValue};
 
@@ -1025,16 +1015,16 @@ window.addEventListener("DOMContentLoaded", function () {
       filterTaskModal.style.display = 'none';
     //   searchBarProject.value = "";
 
-      getKanbanData(filters);
+      getUserStatsTaskData(filters);
     })
 
 
 
     function getCurrentFilters() {
-        const filterKanbanModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal');
-        const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
-        const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
-        const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
+        const filterUserStatsTaskModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal');
+        const priorityValue = filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value;
+        const dateValue = filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value;
+        const stuckValue = filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value;
         
         const filters = {priorityValue, dateValue, stuckValue};
       
@@ -1075,7 +1065,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     //   searchBarProject.value = "";
 
-      getKanbanData(allFilters);
+      getUserStatsTaskData(allFilters);
     })
 
     filterRemoveBtn.addEventListener('click', () => {
@@ -1084,11 +1074,11 @@ window.addEventListener("DOMContentLoaded", function () {
       filterRemoveBtn.style.display = 'none';
       searchBarProject.value = "";
       document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = "None";
-      filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
-      filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
-      filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
+      filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value = "All";
+      filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value = "All";
+      filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
 
-      getKanbanData({})
+      getUserStatsTaskData({})
     })
 
 
