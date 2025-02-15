@@ -30,8 +30,9 @@
                 <input type="text" placeholder="Search Topics" id="searched-topic">
             </div>
             <template id="kb-topic-list-item-template">
-                <li class="kb-topic" value ="[DYNAMIC]" id="[DYNAMIC]"> 
-                <span class="kb-topic-circle" style="DYNAMIC"></span> <p>[DYNAMIC]</p>
+                <li class="kb-topic" value="[DYNAMIC]" id="[DYNAMIC]">
+                    <span class="kb-topic-circle" style="DYNAMIC"></span>
+                    <p>[DYNAMIC]</p>
                 </li>
             </template>
             <ul id="kb-topics-list" class="kb-flex-col kb-scrollable">
@@ -85,8 +86,17 @@
                     </div>
                     <div>
                         <label for="kb-new-post-content-input">Content :</label>
-                        <textarea type="text" id="kb-new-post-content-input" name="content"
-                            placeholder="Enter post content"></textarea>
+                        <div class="kb-markdown-container">
+                            <div class="kb-markdown-header">
+                                <div class="kb-markdown-btn active" id="kb-new-post-write-btn">Write</div>
+                                <div class="kb-markdown-btn" id="kb-new-post-preview-btn">Preview</div>
+                            </div>
+                            <textarea class="kb-markdown-textarea" type="text" id="kb-new-post-content-input"
+                                name="content" placeholder="Enter post content"></textarea>
+                            <div class="kb-markdown-textarea" id="kb-new-post-content-preview" style="display: none;">
+                            </div>
+                        </div>
+
                     </div>
                     <div class="kb-flex-row space-evenly kb-flex-wrap">
                         <!--technical or non technical-->
@@ -111,21 +121,22 @@
                                     <i class="fa fa-solid fa-comment"></i>
                                 </div>
                                 <div class="kb-topic-dropdown-btn" id="kb-new-post-topic-input">
-                                <div class="centered-div">Select Topic</div>
+                                    <div class="centered-div">Select Topic</div>
                                 </div>
                             </div>
                             <div class="kb-topic-dropdown-container">
-                                    <div id="kb-topic-dropdown">
-                                        <div class="kb-flex-row kb-topic-dropdown-search">
-                                            <i class="fa-solid fa-search"></i>
-                                            <input type="text" placeholder="Search.." id="kb-topic-dropdown-search-input">
-                                        </div>
-                                        <div id="topic-modal-dropdown">
-                                        </div>
-                                        <button id="kb-topic-modal-add-topic">Add Topic</button>
-                                        <!-- Topics are dynamically loaded with JS -->
+                                <div id="kb-topic-dropdown">
+                                    <div class="kb-flex-row kb-topic-dropdown-search">
+                                        <i class="fa-solid fa-search"></i>
+                                        <input type="text" placeholder="Search.." id="kb-topic-dropdown-search-input"
+                                            autocomplete="off">
                                     </div>
-                            </div> 
+                                    <div id="topic-modal-dropdown">
+                                    </div>
+                                    <button id="kb-topic-modal-add-topic">Add Topic</button>
+                                    <!-- Topics are dynamically loaded with JS -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="kb-flex-row space-evenly kb-flex-wrap">
@@ -149,7 +160,8 @@
                                 </div>
                                 <select name="visibility" id="kb-new-post-protected-input">
                                     <option value="0">No</option>
-                                    <option value="1" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>Yes</option>
+                                    <option value="1" <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>>
+                                        Yes</option>
                                 </select>
                             </div>
                         </div>

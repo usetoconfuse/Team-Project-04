@@ -122,3 +122,8 @@
 #prjStBurnupCell {
     grid-area: burnup;
 }
+
+/* Prev week contributions */
+#prjStPrevWeekCell {
+    grid-area: prevweek;
+}

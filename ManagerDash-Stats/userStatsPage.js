@@ -18,7 +18,7 @@ async function PopulateUserStatsPage() {
     await(fetchUserDetails());
 
     //Fetch all tasks of a user
-    await(fetchUserTaskTable());
+    await(getUserStatsTaskData());
 
     //Fetch overall project hours of a user
     await(fetchUserProjHrsTable());
@@ -215,6 +215,103 @@ async function fetchUserProjHrsTable() {
             console.error('Error:', error); // Log any errors that occur
         }
         };
+
+
+
+
+
+
+
+// =======================FILTER FUNC ============================
+
+
+async function getUserStatsTaskData(filters={}) {
+    try {
+  
+      let url = `ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?userID=${encodeURIComponent(userDetails.id)}`; 
+  
+      const filterQuery = new URLSearchParams(filters).toString();
+      url += filterQuery ? `&${filterQuery}` : '';
+  
+      const params = { 
+        method: "GET",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }
+  
+      const response = await fetch(url, params);
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch projects data');
+      }
+      const data = await response.json();
+
+            var container = document.getElementById('allTaskTable-userStats');
+            container.innerHTML = ''; // No results, show user.
+            
+
+            if (data.length > 0) {
+                console.log(data);
+                // console.log("2: ", data[0].Task_ID);
+
+                // Build the new table to display
+                let tasksTable  = "<table class='statsHome-table'>"
+                tasksTable  += `<thead>
+                                            <tr>
+                                                <th>Task ID</th>
+                                                <th>Task Name</th>
+                                                <th>Status</th>
+                                                <th>Stuck?</th>
+                                                <th>Due Date</th>
+                                                <th>Priority</th>
+                                                <th>Start Date</th>
+                                                <th>Project Name</th>
+                                            </tr>
+                                        </thead>`
+                tasksTable  += '<tbody>'
+                // Loop through the data and create a new element for each item
+                data.forEach(function(item) {
+                    if (item.Stuck === "1") { // Make the "stuck" field readable for user.
+                        var stuck = "Yes";
+                        var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
+                    } else {
+                        var stuck = "No";
+                        var stuckStyles = "color:black";
+                    }
+                    tasksTable  += `<tr>
+                                            <td>` + item.Task_ID + `</td>
+                                            <td>` + item.Name + `</td>
+                                            <td>` + item.Task_Status + `</td>
+                                            <td style="` + stuckStyles + `";>` + stuck + `</td>
+                                            <td>` + item.Due_Date + `</td>
+                                            <td>` + item.Priority + `</td>
+                                            <td>` + item.Start_Date+ `</td>
+                                            <td>` + item.Project_Title+ `</td>
+                                        </tr>`
+                    });     
+                    tasksTable  += '</tbody>'
+                    tasksTable  += '</table>';
+
+                    // Find the container/table to display the data
+                    container.innerHTML = tasksTable;
+            } else {
+                if(stuck != '' || earliest != '' || high != '') {
+                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
+                } else {
+                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
+                }
+            }
+  
+    } catch (error) {
+      console.log("Fetch Issue",error);
+    }
+  }
+
+
+
+
+
+
+
 
 
 
@@ -845,3 +942,232 @@ document.getElementById('userStats-type-stuck-btn').addEventListener('click', (e
     selectedType = 1;
     fetchUserTaskTable(selectedType, '', '');
 });
+
+
+
+
+
+
+
+
+// ========================================= FILTERS ========================================================================
+
+
+
+
+
+
+
+
+
+// Listen for sessionStorage updates
+let userId;
+let projectID;
+window.addEventListener("DOMContentLoaded", function () {
+
+    const filterUserStatsTaskModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal')
+    document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = 'None';
+    filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value = 'All';
+    filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value = 'All';
+    filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
+      
+  
+    
+    //Filters
+    const filterAppliedMsg = document.querySelector('#mgrStatsUser-grid-container .filter-applied-msg');
+    const filterRemoveBtn = document.querySelector('#mgrStatsUser-grid-container .remove-filters-btn');
+
+    const applyFilterBtn = filterUserStatsTaskModal.querySelector('#add-filter-btn');
+    // console.log(applyFilterBtn);
+    applyFilterBtn.addEventListener('click', () => {
+      const priorityValue = filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value;
+      const dateValue = filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value;
+      const stuckValue = filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value;
+      
+      const filters = {priorityValue, dateValue, stuckValue};
+
+      if (priorityValue === "All") {
+        delete filters.priorityValue;
+      }
+      if (dateValue === "All") {
+        delete filters.dateValue;
+      }
+      if (stuckValue === "All") {
+        delete filters.stuckValue;
+      }
+      const orderByValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
+      if (orderByValue !== "None") {
+        filters.orderByValue = orderByValue;
+      } 
+
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsg(filters);
+      console.log(createFiltersMsg(filters))
+      console.log(filters)
+
+      let filtersLength = Object.keys(filters).length;
+      if (filtersLength > 0) {
+        filterRemoveBtn.style.display = 'flex';
+      } else {
+        filterRemoveBtn.style.display = 'none';
+      }
+
+      filterTaskModal.style.display = 'none';
+    //   searchBarProject.value = "";
+
+      getUserStatsTaskData(filters);
+    })
+
+
+
+    function getCurrentFilters() {
+        const filterUserStatsTaskModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal');
+        const priorityValue = filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value;
+        const dateValue = filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value;
+        const stuckValue = filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value;
+        
+        const filters = {priorityValue, dateValue, stuckValue};
+      
+        if (priorityValue === "All") {
+          delete filters.priorityValue;
+        }
+        if (dateValue === "All") {
+          delete filters.dateValue;
+        }
+        if (stuckValue === "All") {
+          delete filters.stuckValue;
+        }
+      
+        return filters;
+      }
+
+      
+    //Order By Filters
+    const orderByBtn = document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-confirm');
+    orderByBtn.addEventListener('click', () => {
+      const orderByDropdownValue = document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value;
+      const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+
+
+      const currentFilters = getCurrentFilters();
+      const allFilters = { ...currentFilters, ...orderByParam};
+
+
+      filterAppliedMsg.style.display = 'block';
+      filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+
+      let filtersLength = Object.keys(allFilters).length;
+      if (filtersLength > 0) {
+        filterRemoveBtn.style.display = 'flex';
+      } else {
+        filterRemoveBtn.style.display = 'none';
+      }
+
+    //   searchBarProject.value = "";
+
+      getUserStatsTaskData(allFilters);
+    })
+
+    filterRemoveBtn.addEventListener('click', () => {
+      filterAppliedMsg.innerHTML = "";
+      filterAppliedMsg.style.display = 'none';
+      filterRemoveBtn.style.display = 'none';
+      searchBarProject.value = "";
+      document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = "None";
+      filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value = "All";
+      filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value = "All";
+      filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
+
+      getUserStatsTaskData({})
+    })
+
+
+  }
+// }
+);
+
+
+
+
+
+function createFiltersMsg(filters) {
+    let applied = [];
+    if (filters.priorityValue && filters.priorityValue !== "All") {
+      applied.push(filters.priorityValue + " Priority");
+    }
+    if (filters.dateValue && filters.dateValue !== "All") {
+      applied.push("Due Date: " + filters.dateValue)
+    }
+    if (filters.stuckValue && filters.stuckValue !== "All") {
+      if (filters.stuckValue === "Yes") {
+        applied.push("Show Stuck Tasks");
+      } else {
+        applied.push("Show Non-Stuck Tasks");
+      }
+    }
+    if (filters.orderByValue && filters.orderByValue !== "None") {
+      applied.push("Order By " + filters.orderByValue)
+    }
+    if (applied.length === 0) {
+      return '';
+    } else {
+      return 'Filters Applied: ' + applied.join(', ');
+    }
+  }
+
+
+
+
+
+
+
+
+// filter button
+const filterTaskModal = document.querySelector("#mgrStatsUser-grid-container #filter-modal");
+const filterTaskBtn = document.querySelector('#mgrStatsUser-grid-container  .filter-task-btn');
+const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn');
+
+
+filterTaskBtn.addEventListener('click', () => {
+    filterTaskModal.style.display = 'flex';
+    })
+    closeFilterTaskModal.addEventListener('click', () => {
+      filterTaskModal.style.display = 'none';
+    })
+  
+  
+  //Keyword Search
+//   const searchBarProject = document.querySelector('#mgrStatsUser-grid-container .task-search #searched-task');
+  
+//   searchBarProject.addEventListener('input', ()=>{
+//     const searchValue = searchBarProject.value.toLowerCase();
+//     const allTasks = document.querySelectorAll('.kanban-content-project .kanban-card');
+//     console.log(allTasks);
+//     let foundTasks = 0;
+  
+//     allTasks.forEach(task => {
+//       const taskTitle = task.getAttribute('data-task-title').toLowerCase();
+  
+  
+//       if (taskTitle.includes(searchValue)) {
+//         foundTasks++;
+//         task.style.display = 'block';
+//       } else {
+//         task.style.display = 'none';
+//       }
+//     })
+  
+//     const cardCounts = {
+//       "To Do": countBlockTasks("#mgrStatsUser-grid-container #kanban-to-do"),
+//       "In Progress": countBlockTasks("#mgrStatsUser-grid-container #kanban-in-progress"),
+//       "Completed": countBlockTasks("#mgrStatsUser-grid-container #kanban-completed")
+//     };
+//     changeProjectsCount(cardCounts);
+  
+  
+//     if (foundTasks === 0) {
+//       document.querySelector('#mgrStatsUser-grid-container .search-task-error-msg').style.display = 'block';
+//     } else {
+//       document.querySelector('#mgrStatsUser-grid-container .search-task-error-msg').style.display = 'none';
+//     }
+//   })
