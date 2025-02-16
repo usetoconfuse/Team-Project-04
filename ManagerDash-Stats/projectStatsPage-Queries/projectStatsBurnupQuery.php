@@ -5,17 +5,16 @@
 
     $projID = $_GET['ID'];
 
-    // We will increment date from the project's start date to completion/current date
+    // We will increment date from the project's start date to end date
     $weekDate = date_create($_GET['START']);
 
     // End date is either completion date or current date if not completed
-    if (isset($_GET['END']) && $_GET['END'] !== 'null') {
-        $endDate = date_create($_GET['END']);
-    }
-    else {
-        $endDate = date_create();
-    }
+    $endDate = date_create($_GET['END']);
 
+    // Get the following for a given date:
+    //     week: current date
+    //     comp: total hours of completed tasks up to this date
+    //     scope: total hours of all tasks up to this date
     $sql = "SELECT
                 ? AS week,
                 SUM(CASE
@@ -53,7 +52,7 @@
     $stmt = $conn->prepare($sql);
 
     // Get burnup stats for each week of project history
-    while ($weekDate < $endDate) {
+    while ($weekDate <= $endDate) {
 
         // Convert date to string for binding
         $dateStr = $weekDate->format("Y-m-d");

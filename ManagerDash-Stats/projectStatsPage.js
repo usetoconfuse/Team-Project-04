@@ -20,7 +20,6 @@ var taskDial = new Chart(dialCtx)
 const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
 var projBurnup = new Chart(burnupCtx);
 
-
 // Generic query function
 async function FetchStatsData(query) {
     try {
@@ -223,42 +222,107 @@ async function PopulateTaskDialChart() {
 //====================== BURNUP CHART ========================
 async function PopulateBurnUpChart() {
 
-    // CHART DATA
+    // SET PROJECT END DATe
 
-    const data = await(FetchStatsData(
-        `projectStatsBurnupQuery.php?ID=${projDetails.id}&START=${projDetails.start}&END=${projDetails.completed}`));
+    // End date of duration to fetch tasks for, in priority order:
+    // - If completed, end is completion/due date, whichever is later
+    // - If incomplete, end is current/due date, whichever is later
+    // Sets flag to show completion line if completed
+    const dueDateObj = new Date(projDetails.due);
+    var projEndDate;
+    var showCompletion;
+
+    if (projDetails.completed) {
+
+        if (dueDateObj < new Date(projDetails.completed)) {
+            projEndDate = projDetails.completed;
+        }
+        else {
+            projEndDate = projDetails.due;
+        }
+
+        showCompletion = true;
+    }
+
+    else {
+
+        if (dueDateObj < Date.now()) {
+            projEndDate = new Date().toISOString().substring(0, 10);
+        }
+        else {
+            projEndDate = projDetails.due;
+        }
+
+        showCompletion = false;
+    } 
+
+    console.log("end date " + projEndDate);
+    console.log("show completion " + showCompletion);
+
+
+
+    // FETCH DATABASE DATA
     
+    // Fetch data each week between start and end dates
+    const data = await(FetchStatsData(
+        `projectStatsBurnupQuery.php?ID=${projDetails.id}&START=${projDetails.start}&END=${projEndDate}`));
 
-    // Translate data to chart
-    // Also count weeks from start for label and flag week of due date
-    var weekCounter = 1;
-    var dueDateWeek = null;
+
+    // FORMAT DATA FOR CHART
+
+    // Number of milliseconds in a week used for date comparisons
+    const WEEK_MILLIS = 1000 * 60 * 60 * 24 * 7;
+
+    // Count weeks from start for x-axis labels and annotation positions
+    var weekCounter = 0;
+    var dueDateWeek = -1;
+    var completionWeek = -1;
+
+    // Arrays to store fetched data in correct format for chart
     const burnUpLabels = new Array();
     const burnUpDates = new Array();
     const burnUpCompleted = new Array();
     const burnUpScope = new Array();
-
+    
     data.forEach(item => {
         burnUpLabels.push(weekCounter);
         burnUpDates.push(item[0].week);
         burnUpCompleted.push(item[0].comp);
         burnUpScope.push(item[0].scope);
 
-        if (new Date(projDetails.due) < new Date(item[0].week)
-            && !dueDateWeek) {
+        // Set correct week number for due date
+        // and completion date if showing completion
+        if (dueDateObj - new Date(item[0].week) < WEEK_MILLIS
+            && dueDateWeek == -1) {
             dueDateWeek = weekCounter;
+        }
+
+        if (showCompletion
+            && new Date(projDetails.completed) - new Date(item[0].week) < WEEK_MILLIS
+            && completionWeek == -1) {
+            completionWeek = weekCounter;
         }
 
         weekCounter++;
     });
 
-    // Show deadline for overdue projects
-    const isOverdue = new Date(projDetails.due) < new Date(projDetails.completed)
-                    || !projDetails.completed ?
-                    true : false;
-
-
+    console.log("due week: " + dueDateWeek + " " + burnUpDates[dueDateWeek]);
+    console.log("complete week: " + completionWeek + " " + burnUpDates[completionWeek]);
+    
+    
     // DRAW CHART
+
+    // Get global colours
+    const col = document.querySelector(':root');
+    const cols = getComputedStyle(col);
+
+    // Extend x axis to prevent cutoff
+    var xMaxCalc = Math.ceil(burnUpScope.length * 1.1);
+
+    // Extend "virtual" y axis to prevent cutoff
+    // True y axis is further extended based on this value
+    var yMaxCalc = Math.ceil(burnUpScope[burnUpCompleted.length-1] * 0.12) * 10;
+    if (yMaxCalc == 0) yMaxCalc = 10;
 
     projBurnup.destroy();
 
@@ -268,46 +332,64 @@ async function PopulateBurnUpChart() {
             labels: burnUpLabels,
             datasets: [
                 {
-                    label: "Completed",
-                    data: burnUpCompleted,
+                    label: "Scope",
+                    data: burnUpScope,
                     borderColor: "#6d8ce5",
                     backgroundColor: "#6d8ce5",
                     fill: false
                 },
                 {
-                    label: "Scope",
-                    data: burnUpScope,
-                    borderColor: "#c1524f",
-                    backgroundColor: "#c1524f",
+                    label: "Delivered",
+                    data: burnUpCompleted,
+                    borderColor: cols.getPropertyValue('--green'),
+                    backgroundColor: cols.getPropertyValue('--green'),
                     fill: false
+                },
+                {
+                    label: "Ideal Delivery",
+                    data: [{x: 0, y: 0}, {x: dueDateWeek, y: burnUpScope[dueDateWeek]}],
+                    borderDash: [10,5],
+                    borderColor: 'rgba(0,0,0,0.3)',
+                    backgroundColor: 'rgba(0,0,0,0)'
                 }
             ]
         },
         options: {
             responsive: true,
 
+            font: {
+                family: 'Avenir Next'
+            },
+
             scales: {
                 x: {
+                    type: 'linear',
+                    max: xMaxCalc,
+
                     title: {
                         display: true,
-                        text: "Week"
+                        text: "Weeks elapsed"
                     },
                     grid: {
-                        display: false
+                        display: true,
+                        drawOnChartArea: false
+                    },
+                    ticks: {
+                        includeBounds: false
                     }
                 },
 
                 y: {
-                    suggestedMin: 0,
-                    // Set max of y scale to 20% above max person-hours, rounded to the nearest 10
-                    max: Math.ceil(burnUpScope[burnUpCompleted.length-1] * 0.12) * 10,
+                    type: 'linear',
+                    max: yMaxCalc * 1.3,
                     
                     title: {
                         display: true,
-                        text: "Person-Hours"
+                        text: "Hours of work"
                     },
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        includeBounds: false
                     }
                 }
             },
@@ -323,24 +405,99 @@ async function PopulateBurnUpChart() {
             },
 
             plugins: {
-                title: {
-                    display: true,
-                    text: "Team Person-Hour Burnup Chart",
+
+                tooltip: {
+                    enabled: false
                 },
 
+                title: {
+                    display: true,
+                    align: 'start',
+                    text: `Total hours of work for ${projDetails.title}`,
+                    padding: {
+                        top: 10,
+                        bottom: 0
+                    }
+                },
+                
+                legend: {
+                    align: 'start',
+                    labels: {
+                        boxHeight: 0,
+                        textAlign: 'left'
+                    }
+                },
+                
                 annotation: {
+                    clip: false,
+
                     annotations: {
                         deadlineLine: {
                             type: 'line',
-                            display: isOverdue,
+                            display: true,
                             xMin: dueDateWeek,
                             xMax: dueDateWeek,
-                            borderColor: '#000000',
-                            borderWidth: 2
+                            yMin: 0,
+                            yMax: yMaxCalc,
+                            borderColor: cols.getPropertyValue('--red'),
+                            borderWidth: 2,
+                            z: 2
+                        },
+
+                        deadlineLabel: {
+                            type: 'label',
+                            display: true,
+                            content: 'Deadline',
+                            position: 'center',
+                            xValue: dueDateWeek,
+                            yValue: yMaxCalc,
+                            yAdjust: -10,
+                            padding: 0,
+                            backgroundColor: cols.getPropertyValue('--light-gray-bg'),
+                            z: 2,
+                            callout: {
+                                display: true,
+                                position: 'bottom',
+                                margin: 0,
+                                borderColor: cols.getPropertyValue('--red')
+                            }
+                        },
+
+                        completionLine: {
+                            type: 'line',
+                            display: showCompletion,
+                            xMin: completionWeek,
+                            xMax: completionWeek,
+                            yMin: 0,
+                            yMax: yMaxCalc,
+                            borderColor: cols.getPropertyValue('--dark-green'),
+                            borderWidth: 2,
+                            z: 1
+                        },
+
+                        completionLabel: {
+                            type: 'label',
+                            display: showCompletion,
+                            content: 'Completed',
+                            position: 'center',
+                            xValue: completionWeek,
+                            yValue: yMaxCalc,
+                            yAdjust: -30,
+                            padding: 0,
+                            backgroundColor: cols.getPropertyValue('--light-gray-bg'),
+                            z: 1,
+                            callout: {
+                                display: true,
+                                position: 'bottom',
+                                margin: 0,
+                                borderColor: cols.getPropertyValue('--dark-green')
+                            }
                         }
                     }
                 }
             }
         }
     });
+
+    Chart.defaults.font.family = 'Avenir Next';
 }

@@ -9,7 +9,7 @@
 const userDetails = {};
 
 // Task breakdown chart
-var weekhrsansd = new Chart(document.getElementById('userStats-weekHrsContainerGraph'));
+// var weekhrsansd = new Chart(document.getElementById('userStats-weekHrsContainerGraph'));
 
 // Populate page when a user is selected
 async function PopulateUserStatsPage() {
