@@ -8,6 +8,12 @@
             <p>View all your tasks below.</p>
         </div>
 
+
+        <div class="leader-switch-buttons" style="display: none;">
+            <a href="#" id="active-kanban" class="project-item active">Kanban Board</a>
+            <a href="#" id="active-leader" class="project-item ">Leader Dashboard</a>
+        </div>
+
         <!--<div class="vertical-bar"></div>
 
         <div class="project-stats">

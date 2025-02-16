@@ -130,7 +130,7 @@
                     <div class="projects-intro-buttons">
                         <div class="order-by-dropdown">
                             <select>
-                                <option value="None" selected>None</option>
+                                <option value="None" selected>User ID</option>
                                 <option value="MostOverdue">Most Overdue Tasks</option>
                                 <option value="MostCompleted">Most Completed Tasks</option>
                                 <option value="MostStuck">Most Stuck Tasks</option>

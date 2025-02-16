@@ -2,13 +2,29 @@ const kanbanContainers = document.querySelectorAll('.kanban-board');
 // Listen for sessionStorage updates
 let userId;
 let projectID;
+let leadingProject;
+
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
   projectID = selectedProjectID;
 
   const currentProjectNavItem = this.document.querySelector('#current-project span');
 
+  //sessionStorage.setItem("leading-on-project", "true");
 
+  
+  leadingProject = sessionStorage.getItem("leading-on-project");
+  
+  //Sawan
+  if (leadingProject === "true") {
+    const toggleView = document.querySelector('.leader-switch-buttons');
+    if (toggleView) {
+      toggleView.style.display = 'flex';
+    }
+  }
+  
+  
+  
   
 
   const navItems = document.querySelectorAll(".nav-item");
@@ -232,6 +248,7 @@ async function getKanbanData(userID, projectID, filters={}) {
       throw new Error('Failed to fetch projects data');
     }
     const allKanbanData = await response.json();
+    console.log(allKanbanData);
     generateCard(allKanbanData);
 
     // Update the count display elements in the headers
@@ -719,6 +736,9 @@ kanbanContainers.forEach(kanbanContainer => {
 //====Back to Projects Page Button
 const backToProjectsBtn = document.querySelector('.project-intro .projects-intro-buttons .all-projects-btn');
 backToProjectsBtn.addEventListener('click', () => {
+  //Sawan
+  const toggleView = document.querySelector('.leader-switch-buttons');
+  toggleView.style.display = 'none';
   const navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(item => item.classList.remove('active'));
   
