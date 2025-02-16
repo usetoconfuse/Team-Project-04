@@ -279,27 +279,76 @@
                 </div>
             </form>
             <div class="task-submit-buttons">
-                <div class="edit-project-btn" id="add-project-btn">
+                <a class="edit-project-btn" id="add-project-btn">
                     Edit Project
                     <i class="fa fa-arrow-right"></i>
-                </div>
-                <div class="complete-project-btn" id="add-project-btn">
-                    Mark as Complete
+                </a>
+                <a class="active-project-btn" id="add-project-btn" style="display: none;">
+                    Active
                     <i class="fa fa-arrow-right"></i>
-                </div>
-                <div class="archive-project-btn" id="add-project-btn">
-                    Mark as Archived
+                </a>
+                <a class="complete-project-btn" id="add-project-btn" style="display: none;">
+                    Complete
                     <i class="fa fa-arrow-right"></i>
-                </div>
-                <div class="delete-project-btn" id="add-project-btn">
+                </a>
+                <a class="archive-project-btn" id="add-project-btn" style="display: none;">
+                    Archive
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+                <a class="delete-project-btn" id="add-project-btn">
                     Delete
                     <i class="fa fa-solid fa-trash"></i>
-                </div>
+                </a>
             </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--Modal to complete project in admin pane;-->
+<div id="complete-project-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+        
+        </div>
+        <div class="task-delete-buttons">
+            <a id="complete-project-confirm">    
+                Complete
+            </a>
+            <a class="cancel-complete-btn" id="cancel-complete-btn"><i class="fa fa-xmark"></i>
+                Cancel
+            </a>
         </div>
     </div>
 </div>
 
 
+<!--Modal to archive project in admin pane;-->
+<div id="archive-project-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
 
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+        
+        </div>
+        <div class="task-delete-buttons">
+            <a id="archive-project-confirm">    
+                Archive
+            </a>
+            <a class="cancel-archive-btn" id="cancel-archive-btn"><i class="fa fa-xmark"></i>
+                Cancel
+            </a>
+        </div>
+    </div>
 </div>
+
+

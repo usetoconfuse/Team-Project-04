@@ -19,13 +19,13 @@ if ($role === 'Employee') {
     $sql = "SELECT Projects.* FROM Projects WHERE 1=1";
     if ($status) {
         if ($status === 'Active') {
-            $sql .= " AND Projects.Status = '$status' AND Projects.Start_Date <= CURDATE()";
+            $sql .= " AND Projects.Status = '$status' AND Projects.Start_Date <= CURDATE() AND Projects.Completion_Date IS NULL";
         } elseif ($status === 'Not Started') {
             $sql .= " AND Projects.Start_Date > CURDATE() AND Projects.Status = 'Active'";
         } elseif ($status === 'Archived') {
             $sql .= " AND Projects.Status = '$status'";
         } elseif ($status === 'Completed') {
-            $sql .= " AND Projects.Status = '$status'";
+            $sql .= " AND Projects.Completion_Date IS NOT NULL AND Projects.Status <> 'Archived'";
         }
     }
 }

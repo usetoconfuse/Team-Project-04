@@ -7,7 +7,7 @@ $projectId = isset($_GET['projectID']) ? intval($_GET['projectID']) : null;
 
 
 
-$projectNameSQL = "SELECT Project_Title
+$projectNameSQL = "SELECT Project_Title, Due_Date
             FROM Projects
             WHERE Project_ID = $projectId";
 

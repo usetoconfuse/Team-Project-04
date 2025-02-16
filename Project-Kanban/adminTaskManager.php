@@ -253,13 +253,13 @@
                             <div class="task-dropdown-user-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-user"></i>
                             </div>
-                            <select name="user" id="user">
-                                <option value="" selected disabled hidden>Choose User</option>
+                            <input autocomplete="off" list="task-user" placeholder="Enter Name" id="task-user-dropdown">
+                            <datalist name="task-user" id="task-user">
                                 <option value="jlittle">John Little</option>
                                 <option value="slarkin">Sandra Larkin</option>
                                 <option value="ncage">Nick Cage</option>
                                 <option value="ssmith">Sally Smith</option>
-                            </select>
+                                </select>
                         </div>
                     </div>
                     <!--Choose Priority-->
@@ -288,11 +288,35 @@
                         </div>
                     </div>
                 </div>
-                <!--Add Attachments-->
-                <div class="task-upload-form">
-                    <label for="task-upload">Upload Attachments</label>
-                    <input type="file" id="upload" name="upload" multiple>
+
+
+                <!--Extra Buttons for inputting man hours and startdate-->
+                <div class="extra-buttons" id="extra-buttons">
+                    <div class="task-dropdown task-dropdown-start-date">
+                        <label for="start-date">Start Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="start-date" id="start-date-input">
+                        </div>
+                    </div>
+                    <div class="task-dropdown task-dropdown-man-hours">
+                        <label for="man-hours">Man Hours</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-man-hours-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-clock"></i>
+                            </div>
+                            <input type="number" name="man-hours" id="man-hours-input" min="1" step="1">
+                        </div>
+                    </div>
                 </div>
+
+                <div class="error-message" id="error-adding-message" style="color: red; display: none;">
+                    <p>Error: Something went wrong. Please try again.</p>
+                </div>
+
+
             </form>
             <div class="task-submit-buttons">
                 <div class="add-task-btn">
@@ -356,8 +380,7 @@
                             <div class="task-dropdown-user-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-user"></i>
                             </div>
-                            <input autocomplete="off" list="task-user" placeholder="Enter Name"
-                                id="task-user-dropdown">
+                            <input autocomplete="off" list="task-user" placeholder="Enter Name" id="task-user-dropdown">
                             <datalist name="task-user" id="task-user">
                                 <option value="John Little">
                                 <option value="Sandra Larkin">
@@ -392,11 +415,32 @@
                         </div>
                     </div>
                 </div>
-                <!--Add Attachments-->
-                <div class="task-upload-form">
-                    <label for="task-upload">Upload Attachments</label>
-                    <input type="file" id="upload" name="upload" multiple>
+
+                <!--Extra Buttons for inputting man hours and startdate-->
+                <div class="extra-buttons" id="extra-buttons">
+                    <div class="task-dropdown task-dropdown-start-date">
+                        <label for="start-date">Start Date</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-date-icon task-dropdown-icon">
+                                <i class="fa fa-regular fa-calendar"></i>
+                            </div>
+                            <input type="date" name="start-date" id="start-date-input">
+                        </div>
+                    </div>
+                    <div class="task-dropdown task-dropdown-man-hours">
+                        <label for="man-hours">Man Hours</label>
+                        <div class="task-dropdown-select-options">
+                            <div class="task-dropdown-man-hours-icon task-dropdown-icon">
+                                <i class="fa fa-solid fa-clock"></i>
+                            </div>
+                            <input type="number" name="man-hours" id="man-hours-input" min="1" step="1">
+                        </div>
+                    </div>
                 </div>
+                <div class="error-message" id="error-edit-message" style="color: red; display: none;">
+                    <p>Error: Something went wrong. Please try again.</p>
+                </div>
+
             </form>
             <div class="task-submit-buttons">
                 <div class="add-task-btn" id="update-task-btn">
@@ -408,7 +452,7 @@
     </div>
 
 
-        <!--Modal to delete task in personal board-->
+    <!--Modal to delete task in personal board-->
     <div id="delete-project-task-modal" class="modal">
         <div class="modal-box">
             <!--Header-->
@@ -417,10 +461,10 @@
             </div>
             <!--Body-->
             <div class="modal-body">
-            
+
             </div>
             <div class="task-delete-buttons">
-                <a id="delete-project-task-confirm">     <i class="fa fa-trash"></i>
+                <a id="delete-project-task-confirm"> <i class="fa fa-trash"></i>
                     Delete
                 </a>
                 <a class="cancel-delete-task-btn" id="cancel-delete-task-btn"><i class="fa fa-xmark"></i>

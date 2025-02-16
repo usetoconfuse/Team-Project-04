@@ -2,11 +2,19 @@
 const BASE_QUERY_PATH = 'knowledgeBase/query/';
 let user;
 
-// Query is a object mapping query names to value
+// #region API Request functions
+
+// Helper function to send requests to the server easily, and handle any errors.
+// Parameters:
+// - method: The HTTP method to use (e.g. "GET", "POST").
+// - endpoint: The endpoint to send the request to (e.g. "getUser").
+// - query: An object containing the query parameters to send with the request as a key value mapping.
+// - body: An object containing the body of the request as a key value mapping
 const doRequest = async (method, endpoint, query, body) => {
     const url = new URL(`${BASE_QUERY_PATH}${endpoint}.php`, window.location);
     url.search = new URLSearchParams(query).toString();
 
+    // We use form data for POST requests, so build the form data object if we have a body.
     let formData;
     if (body) {
         formData = new FormData();
@@ -15,29 +23,35 @@ const doRequest = async (method, endpoint, query, body) => {
         }
     }
 
-    try {
-        const response = await fetch(url,
-            {
-                method: method,
-                body: formData,
-            }
-        );
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+    const response = await fetch(url,
+        {
+            method: method,
+            body: formData,
         }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Error processing request ", error);
+    );
+
+    // If the response is not OK, display an error message.
+    if (!response.ok) {
+        sendToast('An unexpected error occurred. Please try again later.');
+        throw new Error(`An unexpected error occurred. Please try again later. Response: ${response.status} ${response.statusText}`);
     }
+
+    // All responses are JSON, so parse the response body as JSON.
+    const data = await response.json();
+    return data;
 }
 
+// Get the current user from the server.
 const getUser = async () => {
     user = await doRequest("GET", 'getUser', {});
     return user;
 };
 
-// fetch method for getting ALL posts with no constraints 
+// Fetch posts from the server.
+// Parameters:
+// - topic: The topic to filter the posts by, or null to get all topics.
+// - type: The type of post to filter by, or null to get all types.
+// - query: A search query to filter the posts by, or null to get all posts.
 const fetchPosts = async (topic, type, query) => {
     const params = {};
     if (topic) {
@@ -52,6 +66,7 @@ const fetchPosts = async (topic, type, query) => {
     return await doRequest("GET", 'getPosts', params);
 };
 
+// Edit the post with the given postId, setting the title, content, type, topic, and visibility.
 const editPost = async (postId, title, content, type, topic, visibility) => {
     return await doRequest("POST", 'editPost', {}, {
         'postId': postId,
@@ -63,7 +78,7 @@ const editPost = async (postId, title, content, type, topic, visibility) => {
     });
 };
 
-//method to get all the topics within the DB
+// Fetch topics from the server based on the search query given, or null to get all topics.
 const fetchTopics = async (query) => {
     const params = {};
     if (query) {
@@ -72,13 +87,54 @@ const fetchTopics = async (query) => {
     return await doRequest("GET", 'getTopics', params);
 };
 
-//helped colour formula methdo
-const getTopicColour = (topicId) => {
-    const hue = ((topicId * 137) + 47) % 360;
+// #endregion
+
+// #region Helper Functions
+
+// Helper function to convert an ID to a colour.
+const getColourFromID = (id) => {
+    // This is a simple function to generate seemingly random but consistent colours based on an ID.
+    // The values 137 and 47 are arbitrary prime numbers that were chosen because they look good.
+    const hue = ((id * 137) + 47) % 360;
+
+    // Use HSL so we can keep the saturation and lightness consistent.
+    // This will ensure that the colours are all different, but still look good together and
+    // don't clash with colours on the rest of the site.
     const hsl = `hsl(${hue},44%,44%)`;
 
     return hsl;
 };
+
+// Helper function to convert the date time from database to a more readable form
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+    return date.toLocaleString('en-GB', options);
+};
+
+// Helper function to handle simple modal creation and display.
+// Takes the modal element as an argument and returns an array containing the close and open functions.
+const makeModal = (modal) => {
+    const closeBtn = modal.querySelector('.close-modal-btn');
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    const openModal = () => {
+        modal.style.display = 'flex';
+    }
+    const closeModal = () => {
+        modal.style.display = 'none';
+    }
+    return [closeModal, openModal];
+}
+// #endregion
 
 // Display the given topics in the sidebar on the page.
 const renderTopics = (topics) => {
@@ -96,10 +152,22 @@ const renderTopics = (topics) => {
 
         topicElement.setAttribute('value', topic.Topic_Name);
         topicElement.setAttribute('id', `topic-${topic.Topic_ID}`);
-        topicElement.querySelector('.kb-topic-circle').style.backgroundColor = getTopicColour(topic.Topic_ID);
+        topicElement.querySelector('.kb-topic-circle').style.backgroundColor = getColourFromID(topic.Topic_ID);
         topicElement.querySelector('p').innerText = topic.Topic_Name;
 
         topicsContainer.appendChild(topicElement);
+
+        if (topic.Post_Count !== "0") {
+            // Hide the delete button if the topic has posts.
+            topicElement.querySelector('i').style.display = 'none';
+        }
+
+        topicElement.querySelector('i').addEventListener('click', (event) => {
+            event.preventDefault();
+            const deleteElement = document.getElementById('delete-topic-modal');
+            deleteElement.setAttribute('deleted-topic-id', topic.Topic_ID)
+            openDeleteTopicModal();
+        });
 
         topicElement.addEventListener('click', () => {
             if (topicElement.classList.contains('kb-active')) {
@@ -115,37 +183,34 @@ const renderTopics = (topics) => {
     };
 }
 
-// method to render the Topics to be as items to choose from the dropdown within the add topic modal
-const renderTopicsInDropdown = (topics, topicsDropdown) => {
-    topicsDropdown.innerHTML = '';
+// Method to render the Topics to be as items to choose from the dropdown within the add topic modal.
+const renderTopicsInDropdown = (topics, dropdownElement, topicsListElement, selectedTopicElement) => {
+    topicsListElement.innerHTML = '';
 
-    // Add the default placeholder option
-    //const placeholderOption = `<option value="" selected disabled hidden>Choose</option>`;
-    //topicsDropdown.insertAdjacentHTML('beforeend', placeholderOption);
-
-    topics.forEach(topic => {
-
+    for (const topic of topics) {
         // Create the HTML for the topic
         const topicElement = document.createElement('a');
         topicElement.setAttribute('value', topic.Topic_Name);
         topicElement.setAttribute('id', `topic-${topic.Topic_ID}`);
         topicElement.textContent = topic.Topic_Name;
 
-        const topicName = topic.Topic_Name;
 
         // Append the topic element to the container
-        topicsDropdown.appendChild(topicElement);
+        topicsListElement.appendChild(topicElement);
 
         // Add event listener to the topic element
+        const topicName = topic.Topic_Name;
         topicElement.addEventListener('click', () => {
-            document.getElementById("kb-new-post-topic-input").innerText = topicName; 
-            document.querySelector("#kb-topic-dropdown").classList.toggle("show");
+            selectedTopicElement.innerText = topicName;
+            selectedTopicElement.value = topicName;
+            dropdownElement.classList.toggle("show");
         });
-    });
+    };
 };
 
 
-//general method to renderAllposts to load them onto the page - REUSABLE
+// Method to render the given knowledge base posts to the page, and add all
+// necessary event listeners to the posts.
 const renderAllPosts = async (posts) => {
     const postsContainer = document.getElementById('kb-posts-list');
     postsContainer.innerHTML = '';
@@ -161,7 +226,7 @@ const renderAllPosts = async (posts) => {
 
         if (
             // Allow editing/deletion by the author if the post is not protected...
-            (post.User_ID === user.user_id && post.Is_Protected !== "1") || 
+            (post.User_ID === user.user_id && post.Is_Protected !== "1") ||
             // ...or if the user is an admin.
             user.role === 'Admin'
         ) {
@@ -191,7 +256,7 @@ const renderAllPosts = async (posts) => {
           <h2 class="kb-title-header">${post.Title} ${lock}</h2>
           <div class="kb-flex-row kb-flex-wrap kb-post-badges">
             <div ${currentTypeHtml} > ${post.Type} </div>
-            <div class="kb-badge" style="background-color:${getTopicColour(post.Topic_ID)}">${post.Topic_Name}</div>
+            <div class="kb-badge" style="background-color:${getColourFromID(post.Topic_ID)}">${post.Topic_Name}</div>
           </div>
           <i class="kb-share-link fa-solid fa-link" href="#"></i>
         </div>
@@ -221,42 +286,32 @@ const renderAllPosts = async (posts) => {
         if (editButton) {
             editButton.addEventListener("click", () => {
                 editPostModal.setAttribute("data-post-id", post.Post_ID);
-                editPostModal.querySelector("#edit-post-title-input").value = post.Title
-                editPostModal.querySelector("#edit-post-content-input").value = post.Description
-                editPostModal.querySelector("#edit-post-type-input").value = post.Type
-                editPostModal.querySelector("#edit-post-topic-input").value = post.Topic_Name
-                editPostModal.querySelector("#edit-post-visibility-input").value = post.Visibility
+                editPostModal.querySelector("#kb-edit-post-title-input").value = post.Title
+                editPostModal.querySelector("#kb-edit-post-content-input").value = post.Description
+                editPostModal.querySelector("#kb-edit-post-type-input").value = post.Type
+                editPostModal.querySelector("#kb-edit-post-topic-input").value = post.Topic_Name
+                editPostModal.querySelector("#kb-edit-post-topic-input").innerText = post.Topic_Name
+                editPostModal.querySelector("#kb-edit-post-visibility-input").value = post.Visibility
+                editPostModal.querySelector("#kb-edit-post-protected-input").value = post.Is_Protected
+                refreshEditPostMarkdownPreview();
                 openEditPostModal();
             });
         }
     }
 }
 
-//helper function to convert the date time from database to a more readable form
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    };
-    return date.toLocaleString('en-GB', options);
-};
-
-//when the webpage loads all the posts and topics will be loaded onto the webpage from db
-
+// These variables allow the user to filter the posts by topic, type, and search query.
+// null represents that the user has not selected a filter for that category.
 var selectedTopic = null;
 var selectedType = null;
 var selectedQuery = null;
 
+// Method to update the posts displayed on the page based on the selected filters.
 const updatePosts = async () => {
     const posts = await fetchPosts(selectedTopic, selectedType, selectedQuery).then(renderAllPosts);
 
     for (const post of document.querySelectorAll("#kb-posts-list .kb-post")) {
         const postId = post.id;
-
 
         post.querySelector(".read-post-btn").addEventListener("click", () => {
             openPost(postId);
@@ -267,7 +322,6 @@ const updatePosts = async () => {
             deleteButton.addEventListener("click", (event) => {
                 const postElement = event.target.closest(".kb-post");
                 let postId = postElement.getAttribute("data-id");
-                console.log(`post id is : ${postId}`);
                 const deleteElement = document.getElementById('delete-post-modal');
                 deleteElement.setAttribute('deleted-post-id', postId)
                 openDeletePostModal(postId);
@@ -280,111 +334,135 @@ const updatePosts = async () => {
     }
 }
 
-//on showall btn click will load all posts from db
-document.getElementById("kb-type-showall-btn").addEventListener('click', (event) => {
-    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = null;
-    updatePosts();
-});
+// #region Filter Posts by Type
 
-//on technical button clicked show all post with type of technical
-document.getElementById('kb-type-technical-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 'Technical';
-    updatePosts();
-});
+const typeShowAllBtn = document.getElementById('kb-type-showall-btn');
+const typeTechnicalBtn = document.getElementById('kb-type-technical-btn');
+const typeNonTechnicalBtn = document.getElementById('kb-type-nontechnical-btn');
 
-//on technical button clicked show all post with type of non-technical
-document.getElementById('kb-type-nontechnical-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.post-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 'Non-Technical';
-    updatePosts();
-});
+// Handling for filtering posts by post type.
+const selectTypeButton = (typeName) => {
+    typeShowAllBtn.classList.remove('active');
+    typeTechnicalBtn.classList.remove('active');
+    typeNonTechnicalBtn.classList.remove('active');
 
-// Update selected posts when the search bar is used
-document.getElementById('searched-post').addEventListener("input", async (e) => {
+    if (typeName === 'ShowAll') {
+        typeShowAllBtn.classList.add('active');
+        selectedType = null;
+    } else if (typeName === 'Technical') {
+        typeTechnicalBtn.classList.add('active');
+        selectedType = 'Technical';
+    } else if (typeName === 'Non-Technical') {
+        typeNonTechnicalBtn.classList.add('active');
+        selectedType = 'Non-Technical';
+    }
+    updatePosts();
+}
+
+typeShowAllBtn.addEventListener('click', () => selectTypeButton('ShowAll'));
+typeTechnicalBtn.addEventListener('click', () => selectTypeButton('Technical'));
+typeNonTechnicalBtn.addEventListener('click', () => selectTypeButton('Non-Technical'));
+
+// #endregion
+
+// #region Search Posts by Title
+
+const postTitleSearchInput = document.getElementById('kb-post-title-search');
+
+// Event handler to update the posts displayed when the user types in the search bar.
+postTitleSearchInput.addEventListener("input", async (e) => {
+    // Trim the search query to remove any leading or trailing whitespace.
     selectedQuery = e.target.value.trim();
     updatePosts();
 });
+// #endregion
+
+// #region Filter Posts by Topic
+
+// Event handler to update the posts displayed when the user selects a topic.
+document.getElementById('searched-topic').addEventListener("input", async (e) => {
+    // Trim the search query to remove any leading or trailing whitespace.
+    selectedTopicQuery = e.target.value.trim();
+    updateTopicsFilter();
+});
 
 var selectedTopicQuery = null;
-const updateTopics = async () => {
-    await fetchTopics(selectedTopicQuery).then(renderTopics);
+const updateTopicsFilter = async () => {
+    const filteredTopics = await fetchTopics(selectedTopicQuery);
+    renderTopics(filteredTopics);
 }
 
-const makeModal = (modal) => {
-    const closeBtn = modal.querySelector('.close-modal-btn');
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+// #endregion
 
-    const openModal = () => {
-        modal.style.display = 'flex';
-    }
-    const closeModal = () => {
-        modal.style.display = 'none';
-    }
-    return [closeModal, openModal];
-}
-
-//Add Post Modal Functionality
+// #region Add Post Modal
 const addPostModal = document.getElementById('add-post-modal');
 const [closeAddPostModal, openAddPostModal] = makeModal(addPostModal);
 
-const addPostBtn = document.querySelector('#new-post-btn');
+const addPostBtn = document.getElementById('new-post-btn');
 addPostBtn.addEventListener('click', () => {
     openAddPostModal();
 });
 
-const submitAddPostModalBtn = document.getElementById('add-post-btn');
+const submitAddPostModalBtn = document.getElementById('kb-add-post-submit-btn');
+
+const validate = (name,  value) => {
+    if (!value) {
+        sendToast(`Please fill in all fields - missing ${name}`);
+        throw new Error("Please fill in all fields.");
+    }
+    return value;
+}
+
+const getValue = (name, id) => { 
+    const value = document.getElementById(id).value; 
+    return validate(name, value);
+}
+
 // on submission of the add post form add the new post to the knowledgebase db
 submitAddPostModalBtn.addEventListener('click', async (event) => {
     // Helper function to get the value of an input field.
-    const getValue = (id) => { return addPostModal.querySelector(`#${id}`).value; }
-
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
-        'title': getValue('kb-new-post-title'),
-        'content': getValue('kb-new-post-content-input'),
-        'type': getValue('kb-new-post-type-input'),
-        'topic': getValue('kb-new-post-topic-input'),
-        'visibility': getValue('kb-new-post-visibility-input'),
-        'protected': getValue('kb-new-post-protected-input')
+        'title': getValue('title', 'kb-new-post-title'),
+        'content': getValue('content', 'kb-new-post-content-input'),
+        'type': getValue('type', 'kb-new-post-type-input'),
+        'topic': getValue('topic', 'kb-new-post-topic-input'),
+        'visibility': getValue('visibility', 'kb-new-post-visibility-input'),
+        'protected': getValue('protected', 'kb-new-post-protected-input')
     });
 
-    alert('Post added successfully!');
+    sendToast('Post added successfully!');
     await updatePosts();
     closeAddPostModal();
 });
+// #endregion
 
-// Edit Post Modal
+// #region Edit Post Modal
 const editPostModal = document.getElementById('edit-post-modal');
 var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 
 document.getElementById("kb-edit-post-submit-btn").addEventListener("click", async () => {
-    const getValue = (id) => { return editPostModal.querySelector(`#${id}`).value; }
     const postID = editPostModal.getAttribute("data-post-id")
     // Send post creation request to the server.
     const data = await doRequest("POST", "editPost", {}, {
         'id': postID,
-        'title': getValue('edit-post-title-input'),
-        'content': getValue('edit-post-content-input'),
-        'type': getValue('edit-post-type-input'),
-        'topic': getValue('edit-post-topic-input'),
-        'visibility': getValue('edit-post-visibility-input')
+        'title': getValue('title', 'kb-edit-post-title-input'),
+        'content': getValue('content', 'kb-edit-post-content-input'),
+        'type': getValue('type', 'kb-edit-post-type-input'),
+        'topic': getValue('topic', 'kb-edit-post-topic-input'),
+        'visibility': getValue('visibility', 'kb-edit-post-visibility-input'),
+        'protected': getValue('protected', 'kb-edit-post-protected-input')
     });
 
-    alert('Post edited successfully!');
+    sendToast('Post edited successfully!');
     await updatePosts();
 
     closeEditPostModal();
 })
 
+// #endregion
 
-// Delete Post Modal
+// #region Delete Post Modal
 const deletePostModal = document.getElementById('delete-post-modal');
 var [closeDeletePostModal, openDeletePostModal] = makeModal(deletePostModal);
 
@@ -393,65 +471,68 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
     const deletedElement = document.getElementById('delete-post-modal');
     const postId = deletedElement.getAttribute('deleted-post-id');
 
-    try {
-        const response = await doRequest("GET", "deletePost", { postId }, null);
-        console.log("Delete response:", response);
+    const response = await doRequest("GET", "deletePost", { postId }, null);
 
-        if (response && response.success) {
-            console.log("Post deleted successful");
-            closeDeletePostModal();
-            // Remove the deleted post from the DOM
-            const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
-            if (postElement) postElement.remove();
+    sendToast('Post deleted successfully!');
 
-        } else {
-            console.error("Failed to delete post", response);
-        }
-    } catch (error) {
-        console.error("Error deleting post:", error);
-    }
+    closeDeletePostModal();
+    // Remove the deleted post from the DOM
+    const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
+    if (postElement) postElement.remove();
 });
 
+document.getElementById('kb-delete-post-modal-cancel').addEventListener('click', () => {
+    closeDeletePostModal();
+});
 
-//Add topic Modal functionality
+// #endregion
+
+// #region Delete Topic Modal
+const deleteTopicModal = document.getElementById('delete-topic-modal');
+var [closeDeleteTopicModal, openDeleteTopicModal] = makeModal(deleteTopicModal);
+
+document.getElementById('kb-delete-topic-modal-confirm').addEventListener('click', async () => {
+    const topicId = deleteTopicModal.getAttribute('deleted-topic-id');
+    const response = await doRequest("GET", "deleteTopic", { id: topicId }, null);
+    await refreshTopics();
+
+    sendToast('Topic deleted successfully!');
+    closeDeleteTopicModal();
+});
+
+document.getElementById('kb-delete-topic-modal-cancel').addEventListener('click', () => {
+    closeDeleteTopicModal();
+});
+
+// #endregion
+
+// #region Add Topic Modal
 const addTopicModal = document.getElementById('add-topic-modal');
 const [closeAddTopicModal, openAddTopicModal] = makeModal(addTopicModal);
 
-document.getElementById('kb-topic-modal-add-topic').addEventListener('click', () => {
-    event.preventDefault();
-    openAddTopicModal();
-});
-
-const addTopicBtn = document.querySelector('#new-topic-btn');
 const submitTopicBtn = document.getElementById('kb-add-topic-modal-submit');
-
-addTopicBtn.addEventListener('click', () => {
-    openAddTopicModal();
-});
-
+const newTopicModalInput = document.getElementById('kb-add-topic-modal-name-input');
 submitTopicBtn.addEventListener('click', async (event) => {
-    //get topic name from form
-    const newTopic = document.getElementById('kb-add-topic-modal-name-input').value;
-
     //pass data from form to addtopic sql query
-    await doRequest("POST", "addTopic", {}, { name: newTopic });
-    await updateTopics();
-    await fetchTopics().then((topics) => {
-        const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
-        const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
-        renderTopicsInDropdown(topics, newPostTopicsDropdown)
-        renderTopicsInDropdown(topics, editPostTopicsDropdown)
-    });
+    await doRequest("POST", "addTopic", {}, { name: validate("topic", newTopicModalInput.value) });
+    await refreshTopics();
 
-    alert('Topic added successfully! ');
+    sendToast('Topic added successfully!');
     closeAddTopicModal();
+    newTopicModalInput.value = "";
 });
 
-//topic search bar functionality
-document.getElementById('searched-topic').addEventListener("input", async (e) => {
-    selectedTopicQuery = e.target.value.trim();
-    updateTopics();
-});
+const filtersAddTopicBtn = document.getElementById('kb-filters-add-topic');
+const addPostAddTopicBtn = document.getElementById('kb-new-post-topic-add-topic');
+const editPostAddTopicBtn = document.getElementById('kb-edit-post-topic-add-topic');
+
+filtersAddTopicBtn.addEventListener('click', openAddTopicModal);
+addPostAddTopicBtn.addEventListener('click', openAddTopicModal);
+editPostAddTopicBtn.addEventListener('click', openAddTopicModal);
+
+// #endregion
+
+// #region Read Post Screen Functionality
 
 const allPostsView = document.getElementById("kb-all-view");
 const postView = document.getElementById("kb-post-view");
@@ -505,64 +586,139 @@ backBtn.addEventListener("click", () => {
     closePost();
 });
 
+// #endregion
 
+// #region Share Post Functionality
 const sharePost = (postId) => {
     const params = new URLSearchParams(window.location.search);
     params.set("post", postId);
-    const shareData = {
-        title: document.getElementById(postId).querySelector(".kb-title-header").value,
-        url: `${window.location.origin}${window.location.pathname}?${params.toString()}`,
-    };
-    navigator.share(shareData);
+
+    sendToast("Link copied to clipboard!");
+    navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?${params.toString()}`);
 }
+// #endregion
+
+// #region Topic Selection Dropdown Menu
 
 document.querySelector("#kb-post-view .kb-share-link").addEventListener("click", () => {
     sharePost(getCurrentPost())
 });
 
-//when the page loads fetch all relevant posts and topic from the db onto the page
-window.onload = async () => {
-    user = await getUser();
-    await updatePosts();
-    await updateTopics();
-    await fetchTopics().then((topics) => {
-        const newPostTopicsDropdown = document.querySelector("#topic-modal-dropdown");
-        const editPostTopicsDropdown = document.getElementById("edit-post-topic-input")
-        renderTopicsInDropdown(topics, newPostTopicsDropdown)
-        renderTopicsInDropdown(topics, editPostTopicsDropdown)
+const makeTopicDropdown = (dropdownButton, dropdownSearch, dropdown, dropdownElements) => {
+    // When the dropdown button is clicked, show the dropdown.
+    dropdownButton.addEventListener("click", (event) => {
+        console.log("clicked");
+        dropdown.classList.toggle("show");
     });
-    if (currentPost) {
-        openPost(currentPost);
-    }
+
+    // Close the dropdown if the user clicks outside of it.
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest('.task-dropdown')) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        }
+    });
+
+    // Filter the dropdown elements based on the search query.
+    dropdownSearch.addEventListener("keyup", (event) => {
+        const searchQuery = dropdownSearch.value.toUpperCase();
+        for (topicElement of dropdownElements.getElementsByTagName("a")) {
+            if (topicElement.innerText.toUpperCase().includes(searchQuery)) {
+                topicElement.style.display = "";
+            } else {
+                topicElement.style.display = "none";
+            }
+        }
+    })
 };
 
-document.addEventListener("click", (event) => {
-    if (!event.target.closest('.task-dropdown')) {
-        const dropdown = document.querySelector("#kb-topic-dropdown");
-        if (dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-        }
-    }
-});
+const addPostTopicDropdownBtn = document.getElementById("kb-new-post-topic-input");
+const addPostTopicDropdownSearch = document.getElementById("kb-new-post-topic-dropdown-search-input");
+const addPostTopicDropdown = document.getElementById("kb-new-post-topic-dropdown");
+const addPostTopicDropdownElements = document.getElementById("kb-new-post-topic-dropdown-elements");
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-document.querySelector(".kb-topic-dropdown-btn").addEventListener("click", (event) => {
-    document.querySelector("#kb-topic-dropdown").classList.toggle("show");
-})
+makeTopicDropdown(
+    addPostTopicDropdownBtn,
+    addPostTopicDropdownSearch,
+    addPostTopicDropdown,
+    addPostTopicDropdownElements,
+)
 
-document.querySelector("#kb-topic-dropdown-search-input").addEventListener("keyup", (event) => {
-    const input = document.getElementById("kb-topic-dropdown-search-input");
-    const filter = input.value.toUpperCase();
-    const div = document.getElementById("topic-modal-dropdown");
-    const a = div.getElementsByTagName("a");
-    console.log(input, filter, div, a);
-    for (let i = 0; i < a.length; i++) {
-      const txtValue = a[i].textContent || a[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        a[i].style.display = "";
-      } else {
-        a[i].style.display = "none";
-      }
+const editPostTopicDropdownBtn = document.getElementById("kb-edit-post-topic-input");
+const editPostTopicDropdownSearch = document.getElementById("kb-edit-post-topic-dropdown-search-input");
+const editPostTopicDropdown = document.getElementById("kb-edit-post-topic-dropdown");
+const editPostTopicDropdownElements = document.getElementById("kb-edit-post-topic-dropdown-elements");
+
+makeTopicDropdown(
+    editPostTopicDropdownBtn,
+    editPostTopicDropdownSearch,
+    editPostTopicDropdown,
+    editPostTopicDropdownElements,
+)
+
+const refreshTopics = async () => {
+    await updateTopicsFilter();
+
+    const topics = await fetchTopics();
+    renderTopicsInDropdown(topics, addPostTopicDropdown, addPostTopicDropdownElements, addPostTopicDropdownBtn)
+    renderTopicsInDropdown(topics, editPostTopicDropdown, editPostTopicDropdownElements, editPostTopicDropdownBtn)
+};
+
+// #endregion
+
+// #region Markdown Preview Tabbed Menu
+const makeTabbedMarkdownInput = (markdownInputBtn, markdownPreviewBtn, markdownInput, markdownPreview) => {
+    markdownInputBtn.addEventListener("click", () => {
+        markdownInputBtn.classList.add("active");
+        markdownPreviewBtn.classList.remove("active");
+        markdownInput.style.display = "block";
+        markdownPreview.style.display = "none";
+    });
+
+    markdownPreviewBtn.addEventListener("click", () => {
+        markdownInputBtn.classList.remove("active");
+        markdownPreviewBtn.classList.add("active");
+        markdownInput.style.display = "none";
+        markdownPreview.style.display = "block";
+        markdownPreview.innerHTML = marked.parse(markdownInput.value);
+    });
+
+    const refreshMarkdownPreview = () => {
+        markdownPreview.innerHTML = marked.parse(markdownInput.value);
     }
-  })
+    return refreshMarkdownPreview;
+};
+
+const addPostMarkdownInputBtn = document.getElementById("kb-new-post-write-btn");
+const addPostMarkdownPreviewBtn = document.getElementById("kb-new-post-preview-btn");
+
+const addPostMarkdownInput = document.getElementById("kb-new-post-content-input");
+const addPostMarkdownPreview = document.getElementById("kb-new-post-content-preview");
+
+const refreshAddPostMarkdownPreview = makeTabbedMarkdownInput(addPostMarkdownInputBtn, addPostMarkdownPreviewBtn, addPostMarkdownInput, addPostMarkdownPreview);
+
+const editPostMarkdownInputBtn = document.getElementById("kb-edit-post-write-btn");
+const editPostMarkdownPreviewBtn = document.getElementById("kb-edit-post-preview-btn");
+
+const editPostMarkdownInput = document.getElementById("kb-edit-post-content-input");
+const editPostMarkdownPreview = document.getElementById("kb-edit-post-content-preview");
+
+const refreshEditPostMarkdownPreview = makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostMarkdownPreviewBtn, editPostMarkdownInput, editPostMarkdownPreview);
+// #endregion
+
+// #region Code to run on page load
+window.onload = async () => {
+    // Get the current user, so permissions are known and correct buttons etc can be displayed.
+    user = await getUser();
+
+    // Load posts and topics from the server.
+    await updatePosts();
+    if (currentPost) {
+        // This runs after the posts have been loaded, so the necessary data is available.
+        openPost(currentPost);
+    }
+    await updateTopicsFilter();
+    await refreshTopics();
+};
+// #endregion

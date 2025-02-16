@@ -240,25 +240,12 @@
             e.preventDefault();
 
             sessionStorage.setItem("clicked-project-id", project.Project_ID);
+
+            const params = new URLSearchParams(window.location.search);
+            params.set("page", "current-project");
+            window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+            
             window.dispatchEvent(new Event("storage"));
-
-            const navItems = document.querySelectorAll(".nav-item");
-            navItems.forEach((item) => item.classList.remove("active"));
-
-            const linkItem = document.querySelector("#current-project");
-            linkItem.style.display = "block";
-            linkItem.classList.add("active");
-            document
-              .querySelector(".nav-item#projects")
-              .classList.add("active");
-
-            const navItemContents =
-              document.querySelectorAll(".nav-item-content");
-            navItemContents.forEach((item) => item.classList.remove("open"));
-            const contentArea = document.querySelector(
-              "#current-project-content"
-            );
-            contentArea.classList.add("open");
           });
         };
 
@@ -275,6 +262,8 @@
         }
       });
 
+      
+
 
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -282,9 +271,59 @@
   }
 
 
+  //Mark As Complete
+  const completeProjectModal =  document.querySelector('#complete-project-modal');
+  completeProjectModal.querySelector('#cancel-complete-btn').addEventListener('click', () => {
+    completeProjectModal.style.display = 'none';
+  })
+  completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', async () => {
+    const completedProjectID = completeProjectModal.getAttribute('data-project-id');
+    await markProjectUpdate(completedProjectID, 'complete', 'Active', "#active-project-content #gridContainer");
+    sendToast(`Completed Project #${completedProjectID} `);
+    completeProjectModal.style.display = 'none';
+    editProjectModal.style.display = 'none';
+  })
 
+  //Archive Project 
+  const archiveProjectModal = document.querySelector('#archive-project-modal');
+  archiveProjectModal.querySelector('#cancel-archive-btn').addEventListener('click', () => {
+    archiveProjectModal.style.display = 'none';
+  })
+  archiveProjectModal.querySelector('#archive-project-confirm').addEventListener('click', async () => {
+    const archivedProjectID = archiveProjectModal.getAttribute('data-project-id');
+    const currentStatusContainer = archiveProjectModal.getAttribute('current-status-container');
+    const currentgridContainer = archiveProjectModal.getAttribute('current-grid-container');
+    await markProjectUpdate(archivedProjectID, 'archive', currentStatusContainer, currentgridContainer);
+    sendToast(`Archived Project #${archivedProjectID}`);
+    archiveProjectModal.style.display = 'none';
+    editProjectModal.style.display = 'none';
+  })
+
+
+  const editProjectModal = document.querySelector('#edit-projects-modal');
+  //Edit Actions for Projects (Admin Only)
   function openEditProjectModal(project, statusContainer, containerSelector) {
-    const editProjectModal = document.querySelector('#edit-projects-modal');
+
+    if (statusContainer === "Active") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'none';
+    } else if (statusContainer === "Not Started") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'none';
+    } else if (statusContainer === "Archived") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'flex';
+    } else if (statusContainer === "Completed") {
+      editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
+      editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
+      editProjectModal.querySelector('.active-project-btn').style.display = 'flex';
+    }
+
+    
+    //EDIT PROJECT 
     editProjectModal.querySelector('.modal-header p').innerText = `Edit Project #${project.Project_ID}`;
     //Make Input fields show current project data
     const teamLeaderEditDropdown = editProjectModal.querySelector('#team-leader');
@@ -304,8 +343,26 @@
       const projectID = project.Project_ID;
       //HERE CALL A FUNCTION TO EDIT PROJECT ENTRY IN DATABASE
       //CALL fetchProjectsData(x,y,z) WITH THE CORRECT Status and Container Selector (from parameters of this function)
-
       editProjectModal.style.display = 'none';
+    })
+
+
+    //Initialise the Complete Modal 
+    editProjectModal.querySelector('.complete-project-btn').addEventListener('click', () => {
+      completeProjectModal.querySelector('.modal-header').innerText = `Complete Project #${project.Project_ID}`;
+      completeProjectModal.querySelector('.modal-body').innerText = `Project #${project.Project_ID}: ${project.Project_Title} will be marked as completed. Are you sure?`;
+      completeProjectModal.setAttribute('data-project-id', project.Project_ID);
+      completeProjectModal.style.display = 'flex';
+    })
+
+    //Initialise the Archive Modal 
+    editProjectModal.querySelector('.archive-project-btn').addEventListener('click', () => {
+      archiveProjectModal.querySelector('.modal-header').innerText = `Archive Project #${project.Project_ID}`;
+      archiveProjectModal.querySelector('.modal-body').innerText = `Project #${project.Project_ID}: ${project.Project_Title} will be moved to archive. Are you sure?`;
+      archiveProjectModal.setAttribute('data-project-id', project.Project_ID);
+      archiveProjectModal.setAttribute('current-grid-container', containerSelector)
+      archiveProjectModal.setAttribute('current-status-container', statusContainer)
+      archiveProjectModal.style.display = 'flex';
     })
 
     const closeProjectEditBtn = editProjectModal.querySelector('.close-modal-btn');
@@ -315,6 +372,28 @@
   }
 
 
+  async function markProjectUpdate(projectID, projectStatus, statusCont, gridContainer) {
+    try {
+      const projectData = {
+        projectID : projectID,
+        status : projectStatus
+      };
+      const response = await fetch("Projects/query/mark-update-project.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projectData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to mark project as complete");
+      } else {
+        fetchProjectsData(userProjectsID,{ status: statusCont }, gridContainer);
+      }
+    } catch (error) {
+      console.error("Error adding project:", error);
+      alert("An error occurred. Please try again.");
+    }
+  }
 
 
   //takes an optional UserID for Employee veiw of progress on projects 
