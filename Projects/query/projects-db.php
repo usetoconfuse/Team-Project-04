@@ -13,7 +13,7 @@ $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
 if ($role === 'Employee') {
     $sql = "SELECT Projects.*, COUNT(Tasks.Task_ID) AS Task_Count FROM `User_Teams`
     INNER JOIN Projects ON User_Teams.Project_ID = Projects.Project_ID
-    LEFT JOIN Tasks ON Projects.Project_ID = Tasks.Project_ID AND (Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress') AND Assignee_ID = $userID
+    LEFT JOIN Tasks ON Projects.Project_ID = Tasks.Project_ID AND (Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress') AND Assignee_ID = $userID AND Tasks.Start_Date <= CURDATE()
     WHERE User_ID = $userID AND Projects.Start_Date <= CURDATE() AND Projects.Status = '$status'";
 } else {
     $sql = "SELECT Projects.* FROM Projects WHERE 1=1";
@@ -21,7 +21,7 @@ if ($role === 'Employee') {
         if ($status === 'Active') {
             $sql .= " AND Projects.Status = '$status' AND Projects.Start_Date <= CURDATE() AND Projects.Completion_Date IS NULL";
         } elseif ($status === 'Not Started') {
-            $sql .= " AND Projects.Start_Date > CURDATE() AND Projects.Status = 'Active'";
+            $sql .= " AND Projects.Start_Date > NOW() AND Projects.Status = 'Active'";
         } elseif ($status === 'Archived') {
             $sql .= " AND Projects.Status = '$status'";
         } elseif ($status === 'Completed') {
@@ -31,7 +31,7 @@ if ($role === 'Employee') {
 }
 
 if (!empty($date)) {
-    $sql .= " AND Projects.Due_Date <= '$date'";  
+    $sql .= " AND Projects.Due_Date <= '$date'";
 }
 
 if ($role === 'Employee') {
