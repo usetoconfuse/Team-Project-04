@@ -75,7 +75,6 @@ window.addEventListener("storage", function () {
       filterAppliedMsg.style.display = 'block';
       filterAppliedMsg.innerHTML = createFiltersMsg(filters);
       console.log(createFiltersMsg(filters))
-      console.log(filters)
 
       let filtersLength = Object.keys(filters).length;
       if (filtersLength > 0) {

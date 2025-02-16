@@ -41,7 +41,7 @@ window.addEventListener("storage", function () {
     globalUserID = adminKanbanContent.getAttribute("data-user-id");
 
     
-    getProjectTable(selectedProjectID);
+    getProjectTable(selectedProjectID, {});
     
 });
 
@@ -72,9 +72,12 @@ async function getProjectName(selectedProjectID) {
     }
 }
 
-  async function getProjectTable(selectedProjectID) {
+  async function getProjectTable(selectedProjectID, filters={}) {
     try {
     let url = `Project-Kanban/get-project-table-db.php?projectID=${encodeURIComponent(selectedProjectID)}`; 
+
+    const filterQuery = new URLSearchParams(filters).toString();
+    url += filterQuery ? `&${filterQuery}` : "";
 
     const params = { 
       method: "GET",
@@ -503,8 +506,8 @@ filterProjectTaskBtn.addEventListener('click', () => {
       }
 
       filterAppliedAdminMsg.style.display = "block";
-      //filterAppliedMsg.innerHTML = createFiltersMsg(filters);
-      //console.log(createFiltersMsg(filters));
+      filterAppliedAdminMsg.innerHTML = createFiltersMsg(filterData);
+      console.log(createFiltersMsg(filterData));
 
       let filtersLength = Object.keys(filterData).length;
       if (filtersLength > 0) {
@@ -514,9 +517,103 @@ filterProjectTaskBtn.addEventListener('click', () => {
       }
 
       filterProjectTaskModal.style.display = "none";
-      //filterProjectTasks(filterData);
+      
+      getProjectTable(globalSelectedProjectID, filterData);  
   }
 
+  function createFiltersMsg(filters) {
+    let applied = [];
+    if (filters.filterPriority && filters.filterPriority !== "All") {
+      applied.push(filters.filterPriority + " Priority");
+    }
+    if (filters.filterDate && filters.filterDate !== "All") {
+      applied.push("Due Date: " + filters.filterDate);
+    }
+    if (filters.filterStuck && filters.filterStuck !== "All") {
+      if (filters.filterStuck === "Yes") {
+        applied.push("Show Stuck Tasks");
+      } else {
+        applied.push("Show Non-Stuck Tasks");
+      }
+    }
+    if (filters.orderByValue && filters.orderByValue !== "None") {
+      applied.push("Order By " + filters.orderByValue);
+    }
+    if (applied.length === 0) {
+      return '';
+    } else {
+      return 'Filters Applied: ' + applied.join(', ');
+    }
+  }
+
+    //Order By Filters
+  const orderByAdminBtn = document.querySelector('#admin-kanban-content .projects-intro-buttons .order-by-confirm');
+  orderByAdminBtn.addEventListener('click', () => {
+    const orderByDropdownValue = document.querySelector('#admin-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
+    const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+    
+    
+    const currentAdminFilters = getCurrentFilters();
+    const allAdminFilters = { ...currentAdminFilters, ...orderByParam };
+
+
+    filterAppliedAdminMsg.style.display = 'block';
+    filterAppliedAdminMsg.innerHTML = createFiltersMsg(allAdminFilters);
+
+    let filtersLength = Object.keys(allAdminFilters).length;
+    if (filtersLength > 0) {
+      filterRemoveAdminBtn.style.display = 'flex';
+    } else {
+      filterRemoveAdminBtn.style.display = 'none';
+    }
+
+    getProjectTable(globalSelectedProjectID, allAdminFilters); 
+  })
+
+  filterRemoveAdminBtn.addEventListener("click", () => {
+    filterAppliedAdminMsg.innerHTML = "";
+    filterAppliedAdminMsg.style.display = "none";
+    filterRemoveAdminBtn.style.display = "none";
+    document.querySelector(
+      "#admin-kanban-content .projects-intro-buttons .order-by-dropdown select"
+    ).value = "None";
+    filterProjectTaskModal.querySelector(".task-dropdown-priority #priority").value =
+      "All";
+    filterProjectTaskModal.querySelector(
+      ".task-dropdown-date #date-task"
+    ).value = "All";
+    filterProjectTaskModal.querySelector(
+      ".task-dropdown-stuck #stuck-task"
+    ).value = "All";
+
+    getProjectTable(globalSelectedProjectID, {});  
+  });
+
+  function getCurrentFilters() {
+    const filterProjectTaskModal = document.querySelector(
+      "#admin-kanban-content #filter-modal"
+    );
+    const filterStuck = filterProjectTaskModal.querySelector("#stuck-task").value;
+    const filterPriority =
+      filterProjectTaskModal.querySelector("#priority").value;
+    const filterDate = filterProjectTaskModal.querySelector("#date-task").value;
+
+    const filterData = { filterPriority, filterDate, filterStuck };
+
+    if (filterPriority === "All") {
+      delete filterData.filterPriority;
+    }
+    if (filterDate === "All") {
+      delete filterData.filterDate;
+    }
+    if (filterStuck === "All") {
+      delete filterData.filterStuck;
+    }
+    return filterData;
+  }
+
+
+  
 
 async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID) {
   try {
