@@ -157,6 +157,13 @@ const renderTopics = (topics) => {
 
         topicsContainer.appendChild(topicElement);
 
+        topicElement.querySelector('i').addEventListener('click', (event) => {
+            event.preventDefault();
+            const deleteElement = document.getElementById('delete-topic-modal');
+            deleteElement.setAttribute('deleted-topic-id', topic.Topic_ID)
+            openDeleteTopicModal();
+        });
+
         topicElement.addEventListener('click', () => {
             if (topicElement.classList.contains('kb-active')) {
                 topicElement.classList.remove('kb-active');
@@ -461,13 +468,28 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
 
     const response = await doRequest("GET", "deletePost", { postId }, null);
 
-    sendToast('Topic deleted successfully!');
+    sendToast('Post deleted successfully!');
 
     closeDeletePostModal();
     // Remove the deleted post from the DOM
     const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
     if (postElement) postElement.remove();
 
+});
+
+// #endregion
+
+// #region Delete Post Modal
+const deleteTopicModal = document.getElementById('delete-topic-modal');
+var [closeDeleteTopicModal, openDeleteTopicModal] = makeModal(deleteTopicModal);
+
+document.getElementById('kb-delete-topic-modal-confirm').addEventListener('click', async () => {
+    const topicId = deleteTopicModal.getAttribute('deleted-topic-id');
+    const response = await doRequest("GET", "deleteTopic", { id: topicId }, null);
+    await refreshTopics();
+
+    sendToast('Topic deleted successfully!');
+    closeDeleteTopicModal();
 });
 
 // #endregion

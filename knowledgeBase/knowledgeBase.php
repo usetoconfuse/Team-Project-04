@@ -33,6 +33,12 @@
                 <li class="kb-topic" value="[DYNAMIC]" id="[DYNAMIC]">
                     <span class="kb-topic-circle" style="DYNAMIC"></span>
                     <p>[DYNAMIC]</p>
+                    <i 
+                        class="fa-solid fa-xmark" 
+                        style="flex-grow:1; text-align:right;" 
+                        <?php echo ($_SESSION['role'] !== 'Admin') ? 'disabled' : ''; ?>
+                    >
+                    </i>
                 </li>
             </template>
             <ul id="kb-topics-list" class="kb-flex-col kb-scrollable">
@@ -311,6 +317,31 @@
                         <i class="fa fa-trash"></i>
                     </button>
                     <button class="cancel-delete-post-btn" id="cancel-delete-post-btn">
+                        Cancel
+                        <i class="fa fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="delete-topic-modal" deleted-post-id="" class="modal">
+            <div class="modal-box">
+                <!--Header-->
+                <div class="modal-header">
+                    Delete Topic
+                    <div class="close-modal-btn">
+                        <i class="fa-solid fa-x"></i>
+                    </div>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    Are you sure you want to delete this topic?
+                </div>
+                <div class="kb-modal-submission-btns">
+                    <button class="red-btn" id="kb-delete-topic-modal-confirm">
+                        Delete
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="cancel-delete-post-btn" id="cancel-delete-topic-btn">
                         Cancel
                         <i class="fa fa-xmark"></i>
                     </button>

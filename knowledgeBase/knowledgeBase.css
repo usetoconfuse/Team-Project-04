@@ -302,6 +302,7 @@
     transition: 0.5s color ease, 0.5s background-color ease;
     cursor: pointer;
     user-select: none;
+    align-items: center;
 }
 
 .kb-topic p {
