@@ -1012,9 +1012,9 @@ window.addEventListener("DOMContentLoaded", function () {
       } 
 
       filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsg(filters);
-      console.log(createFiltersMsg(filters))
-      console.log(filters)
+      filterAppliedMsg.innerHTML = createFiltersMsgUser(filters);
+      console.log("FILTERS",createFiltersMsgUser(filters))
+      console.log("NOT MSG", filters)
 
       let filtersLength = Object.keys(filters).length;
       if (filtersLength > 0) {
@@ -1065,7 +1065,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
       filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsg(allFilters);
+      filterAppliedMsg.innerHTML = createFiltersMsgUser(allFilters);
 
       let filtersLength = Object.keys(allFilters).length;
       if (filtersLength > 0) {
@@ -1080,10 +1080,11 @@ window.addEventListener("DOMContentLoaded", function () {
     })
 
     filterRemoveBtn.addEventListener('click', () => {
+      console.log("clicked");
       filterAppliedMsg.innerHTML = "";
       filterAppliedMsg.style.display = 'none';
       filterRemoveBtn.style.display = 'none';
-      searchBarProject.value = "";
+      // searchBarProject.value = "";
       document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = "None";
       filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value = "All";
       filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value = "All";
@@ -1101,8 +1102,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
 
-function createFiltersMsg(filters) {
-    let applied = [];
+function createFiltersMsgUser(filters) {
+  console.log("here");
+  let applied = [];
     if (filters.priorityValue && filters.priorityValue !== "All") {
       applied.push(filters.priorityValue + " Priority");
     }
@@ -1110,7 +1112,10 @@ function createFiltersMsg(filters) {
       applied.push("Due Date: " + filters.dateValue)
     }
     if (filters.stuckValue && filters.stuckValue !== "All") {
+      console.log("stck");
       if (filters.stuckValue === "Yes") {
+        console.log("instck");
+
         applied.push("Show Stuck Tasks");
       } else {
         applied.push("Show Non-Stuck Tasks");

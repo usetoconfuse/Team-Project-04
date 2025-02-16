@@ -501,6 +501,7 @@ window.addEventListener("DOMContentLoaded", function () {
     })
 
     filterRemoveBtn.addEventListener('click', () => {
+      console.log("clicked");
       filterAppliedMsg.innerHTML = "";
       filterAppliedMsg.style.display = 'none';
       filterRemoveBtn.style.display = 'none';
@@ -527,17 +528,17 @@ function createFiltersMsg(filters) {
       applied.push(filters.priorityValueHome + " Priority");
     }
     if (filters.dateValueHome && filters.dateValueHome !== "All") {
-      applied.push("Due Date: " + filters.dateValueHome)
+      applied.push("Users with Overdue Tasks: " + filters.dateValueHome)
     }
     if (filters.stuckValueHome && filters.stuckValueHome !== "All") {
       if (filters.stuckValueHome === "Yes") {
-        applied.push("Show Stuck Tasks");
+        applied.push("Show users with Stuck Tasks");
       } else {
-        applied.push("Show Non-Stuck Tasks");
+        applied.push("Show users with Non-Stuck Tasks");
       }
     }
-    if (filters.orderByValue && filters.orderByValue !== "None") {
-      applied.push("Order By " + filters.orderByValue)
+    if (filters.orderByValueHome && filters.orderByValueHome !== "None") {
+      applied.push("Order By " + filters.orderByValueHome)
     }
     if (applied.length === 0) {
       return '';
