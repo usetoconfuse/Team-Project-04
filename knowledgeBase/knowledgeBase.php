@@ -316,7 +316,7 @@
                         Delete
                         <i class="fa fa-trash"></i>
                     </button>
-                    <button class="cancel-delete-post-btn" id="cancel-delete-post-btn">
+                    <button class="cancel-delete-post-btn" id="kb-delete-post-modal-cancel">
                         Cancel
                         <i class="fa fa-xmark"></i>
                     </button>
@@ -341,7 +341,7 @@
                         Delete
                         <i class="fa fa-trash"></i>
                     </button>
-                    <button class="cancel-delete-post-btn" id="cancel-delete-topic-btn">
+                    <button class="cancel-delete-post-btn" id="kb-delete-topic-modal-cancel">
                         Cancel
                         <i class="fa fa-xmark"></i>
                     </button>

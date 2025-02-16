@@ -474,12 +474,15 @@ document.getElementById('kb-delete-post-modal-confirm').addEventListener('click'
     // Remove the deleted post from the DOM
     const postElement = document.querySelector(`.kb-post[data-id='${postId}']`);
     if (postElement) postElement.remove();
+});
 
+document.getElementById('kb-delete-post-modal-cancel').addEventListener('click', () => {
+    closeDeletePostModal();
 });
 
 // #endregion
 
-// #region Delete Post Modal
+// #region Delete Topic Modal
 const deleteTopicModal = document.getElementById('delete-topic-modal');
 var [closeDeleteTopicModal, openDeleteTopicModal] = makeModal(deleteTopicModal);
 
@@ -489,6 +492,10 @@ document.getElementById('kb-delete-topic-modal-confirm').addEventListener('click
     await refreshTopics();
 
     sendToast('Topic deleted successfully!');
+    closeDeleteTopicModal();
+});
+
+document.getElementById('kb-delete-topic-modal-cancel').addEventListener('click', () => {
     closeDeleteTopicModal();
 });
 
