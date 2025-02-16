@@ -281,6 +281,7 @@ const renderAllPosts = async (posts) => {
                 editPostModal.querySelector("#kb-edit-post-topic-input").innerText = post.Topic_Name
                 editPostModal.querySelector("#kb-edit-post-visibility-input").value = post.Visibility
                 editPostModal.querySelector("#kb-edit-post-protected-input").value = post.Is_Protected
+                refreshEditPostMarkdownPreview();
                 openEditPostModal();
             });
         }
@@ -465,16 +466,15 @@ const addTopicModal = document.getElementById('add-topic-modal');
 const [closeAddTopicModal, openAddTopicModal] = makeModal(addTopicModal);
 
 const submitTopicBtn = document.getElementById('kb-add-topic-modal-submit');
+const newTopicModalInput = document.getElementById('kb-add-topic-modal-name-input');
 submitTopicBtn.addEventListener('click', async (event) => {
-    //get topic name from form
-    const newTopic = document.getElementById('kb-add-topic-modal-name-input').value;
-
     //pass data from form to addtopic sql query
-    await doRequest("POST", "addTopic", {}, { name: newTopic });
+    await doRequest("POST", "addTopic", {}, { name: newTopicModalInput.value });
     await refreshTopics();
 
     sendToast('Topic added successfully!');
     closeAddTopicModal();
+    newTopicModalInput.value = "";
 });
 
 const filtersAddTopicBtn = document.getElementById('kb-filters-add-topic');
@@ -640,23 +640,28 @@ const makeTabbedMarkdownInput = (markdownInputBtn, markdownPreviewBtn, markdownI
         markdownPreview.style.display = "block";
         markdownPreview.innerHTML = marked.parse(markdownInput.value);
     });
+
+    const refreshMarkdownPreview = () => {
+        markdownPreview.innerHTML = marked.parse(markdownInput.value);
+    }
+    return refreshMarkdownPreview;
 };
 
 const addPostMarkdownInputBtn = document.getElementById("kb-new-post-write-btn");
-const addPostmarkdownPreviewBtn = document.getElementById("kb-new-post-preview-btn");
+const addPostMarkdownPreviewBtn = document.getElementById("kb-new-post-preview-btn");
 
-const addPostmarkdownInput = document.getElementById("kb-new-post-content-input");
-const addPostmarkdownPreview = document.getElementById("kb-new-post-content-preview");
+const addPostMarkdownInput = document.getElementById("kb-new-post-content-input");
+const addPostMarkdownPreview = document.getElementById("kb-new-post-content-preview");
 
-makeTabbedMarkdownInput(addPostMarkdownInputBtn, addPostmarkdownPreviewBtn, addPostmarkdownInput, addPostmarkdownPreview);
+const refreshAddPostMarkdownPreview = makeTabbedMarkdownInput(addPostMarkdownInputBtn, addPostMarkdownPreviewBtn, addPostMarkdownInput, addPostMarkdownPreview);
 
 const editPostMarkdownInputBtn = document.getElementById("kb-edit-post-write-btn");
-const editPostmarkdownPreviewBtn = document.getElementById("kb-edit-post-preview-btn");
+const editPostMarkdownPreviewBtn = document.getElementById("kb-edit-post-preview-btn");
 
-const editPostmarkdownInput = document.getElementById("kb-edit-post-content-input");
-const editPostmarkdownPreview = document.getElementById("kb-edit-post-content-preview");
+const editPostMarkdownInput = document.getElementById("kb-edit-post-content-input");
+const editPostMarkdownPreview = document.getElementById("kb-edit-post-content-preview");
 
-makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostmarkdownPreviewBtn, editPostmarkdownInput, editPostmarkdownPreview);
+const refreshEditPostMarkdownPreview = makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostMarkdownPreviewBtn, editPostMarkdownInput, editPostMarkdownPreview);
 // #endregion
 
 // #region Code to run on page load

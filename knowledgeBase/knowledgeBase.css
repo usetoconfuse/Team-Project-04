@@ -252,7 +252,7 @@
 }
 
 .kb-content {
-    gap: calc(var(--section-gap) + 10px);
+    gap: var(--section-gap);
     display: flex;
     flex-direction: column;
     height: 100%;
