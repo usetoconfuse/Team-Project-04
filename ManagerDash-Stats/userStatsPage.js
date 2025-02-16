@@ -21,7 +21,7 @@ async function PopulateUserStatsPage() {
     await(getUserStatsTaskData());
 
     //Fetch overall project hours of a user
-    await(fetchUserProjHrsTable());
+    // await(fetchUserProjHrsTable()); // Table currently not in use.
 
     //Fetch weekly man-hours graph across all projects
     // fetchWeeklyHrsGraph();
@@ -231,7 +231,7 @@ async function fetchUserDetails() {
 //         } catch (error) {
 //             console.error('Error:', error); // Log any errors that occur
 //         }
-//         };
+        // };
 
 
 
