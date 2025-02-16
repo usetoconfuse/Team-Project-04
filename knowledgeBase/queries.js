@@ -530,9 +530,9 @@ const filtersAddTopicBtn = document.getElementById('kb-filters-add-topic');
 const addPostAddTopicBtn = document.getElementById('kb-new-post-topic-add-topic');
 const editPostAddTopicBtn = document.getElementById('kb-edit-post-topic-add-topic');
 
-filtersAddTopicBtn.addEventListener('click', openAddTopicModal);
-addPostAddTopicBtn.addEventListener('click', openAddTopicModal);
-editPostAddTopicBtn.addEventListener('click', openAddTopicModal);
+filtersAddTopicBtn.addEventListener('click', (event) => { event.preventDefault(); openAddTopicModal(); });
+addPostAddTopicBtn.addEventListener('click', (event) => { event.preventDefault(); openAddTopicModal(); });
+editPostAddTopicBtn.addEventListener('click', (event) => { event.preventDefault(); openAddTopicModal(); });
 
 // #endregion
 
@@ -627,7 +627,7 @@ const makeTopicDropdown = (dropdownButton, dropdownSearch, dropdown, dropdownEle
     // Filter the dropdown elements based on the search query.
     dropdownSearch.addEventListener("keyup", (event) => {
         const searchQuery = dropdownSearch.value.toUpperCase();
-        for (topicElement of dropdownElements.getElementsByTagName("a")) {
+        for (const topicElement of dropdownElements.getElementsByTagName("a")) {
             if (topicElement.innerText.toUpperCase().includes(searchQuery)) {
                 topicElement.style.display = "";
             } else {

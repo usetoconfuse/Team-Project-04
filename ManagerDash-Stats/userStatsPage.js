@@ -32,8 +32,22 @@ async function PopulateUserStatsPage() {
     fetchProjTimeGraph(userDetails.id);
 
     PopulateTaskDialChartUserStats();
+
+    fillProjDropDown(userDetails.id);
 };
 
+
+// Back Button
+// const backButton = document.getElementById('backButton');
+// backButton.addEventListener("click", () => {
+
+//     // const showingTab = document.getElementById(backButton.getAttribute("value"));
+//       const currentPage = document.getElementById('mgrStatsUser-grid-container');
+//       currentPage.style.display = "none";
+//         const newTab = document.getElementById("statsHomeGridUser");
+//         newTab.style.display = "block";
+
+//       })
 //Fetch user details for user object
 async function fetchUserDetails() {
     try {
@@ -294,15 +308,44 @@ async function getUserStatsTaskData(filters={}) {
                     // Find the container/table to display the data
                     container.innerHTML = tasksTable;
             } else {
-                if(stuck != '' || earliest != '' || high != '') {
-                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
-                } else {
-                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
-                }
+                container.innerHTML = '<h2>Sorry, no tasks for this user - please check your filters</h2>'; // No results, show user.
+
             }
   
     } catch (error) {
       console.log("Fetch Issue",error);
+    }
+  }
+
+
+  async function fillProjDropDown(userID) {
+    try {
+      // Make an HTTP request to the PHP file
+      const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjDropdownQuery.php?ID=' + userID );
+      // console.log("1: ", response);
+      
+      // Ensure the response is OK and return the JSON data 
+      if (!response.ok) { 
+          throw new Error('Network response was not ok ' + response.statusText);
+      }
+      // Convert the response to JSON format
+      const data = await response.json();
+
+      var container = document.querySelector('.task-dropdown-proj #user-proj');
+      
+
+      if (data.length > 0) {
+          console.log(data);
+          container.innerHTML = "<option value='All' selected>Show All</option>";
+
+          data.forEach(function(item) {
+            container.innerHTML += `<option value='${item.Project_ID}'>${item.Project_Title}</option>`;
+          })
+      } else {
+        container.innerHTML = "<option value='All' selected>Show All</option>";
+      }
+    } catch (error) {
+      console.error('Error:', error); // Log any errors that occur
     }
   }
 
@@ -315,85 +358,85 @@ async function getUserStatsTaskData(filters={}) {
 
 
 
-    //Function to fetch all tasks of a user
-    async function fetchUserTaskTable(stuck, high, earliest) {
-        console.log(stuck);
+    // //Function to fetch all tasks of a user
+    // async function fetchUserTaskTable(stuck, high, earliest) {
+    //     console.log(stuck);
 
-        console.log(high);
-        console.log(earliest);
-        //stuckValue, priorityValue, dateValue, orderByValue
+    //     console.log(high);
+    //     console.log(earliest);
+    //     //stuckValue, priorityValue, dateValue, orderByValue
 
-        try {
-            // Make an HTTP request to the PHP file
-            const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id + '&stuck=' + stuck + '&high=' + high + '&earliest=' + earliest); // '&orderByValue=' + orderByValue + '&dateValue' +dateValue
-            // console.log("1: ", response);
+    //     try {
+    //         // Make an HTTP request to the PHP file
+    //         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsTaskTableQuery.php?ID=' + userDetails.id + '&stuck=' + stuck + '&high=' + high + '&earliest=' + earliest); // '&orderByValue=' + orderByValue + '&dateValue' +dateValue
+    //         // console.log("1: ", response);
             
-            // Ensure the response is OK and return the JSON data 
-            if (!response.ok) { 
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            // Convert the response to JSON format
-            const data = await response.json();
+    //         // Ensure the response is OK and return the JSON data 
+    //         if (!response.ok) { 
+    //             throw new Error('Network response was not ok ' + response.statusText);
+    //         }
+    //         // Convert the response to JSON format
+    //         const data = await response.json();
 
-            var container = document.getElementById('allTaskTable-userStats');
-            container.innerHTML = ''; // No results, show user.
+    //         var container = document.getElementById('allTaskTable-userStats');
+    //         container.innerHTML = ''; // No results, show user.
             
 
-            if (data.length > 0) {
-                console.log(data);
-                // console.log("2: ", data[0].Task_ID);
+    //         if (data.length > 0) {
+    //             console.log(data);
+    //             // console.log("2: ", data[0].Task_ID);
 
-                // Build the new table to display
-                let tasksTable  = "<table class='statsHome-table'>"
-                tasksTable  += `<thead>
-                                            <tr>
-                                                <th>Task ID</th>
-                                                <th>Task Name</th>
-                                                <th>Status</th>
-                                                <th>Stuck?</th>
-                                                <th>Due Date</th>
-                                                <th>Priority</th>
-                                                <th>Start Date</th>
-                                                <th>Project Name</th>
-                                            </tr>
-                                        </thead>`
-                tasksTable  += '<tbody>'
-                // Loop through the data and create a new element for each item
-                data.forEach(function(item) {
-                    if (item.Stuck === "1") { // Make the "stuck" field readable for user.
-                        var stuck = "Yes";
-                        var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
-                    } else {
-                        var stuck = "No";
-                        var stuckStyles = "color:black";
-                    }
-                    tasksTable  += `<tr>
-                                            <td>` + item.Task_ID + `</td>
-                                            <td>` + item.Name + `</td>
-                                            <td>` + item.Task_Status + `</td>
-                                            <td style="` + stuckStyles + `";>` + stuck + `</td>
-                                            <td>` + item.Due_Date + `</td>
-                                            <td>` + item.Priority + `</td>
-                                            <td>` + item.Start_Date+ `</td>
-                                            <td>` + item.Project_Title+ `</td>
-                                        </tr>`
-                    });     
-                    tasksTable  += '</tbody>'
-                    tasksTable  += '</table>';
+    //             // Build the new table to display
+    //             let tasksTable  = "<table class='statsHome-table'>"
+    //             tasksTable  += `<thead>
+    //                                         <tr>
+    //                                             <th>Task ID</th>
+    //                                             <th>Task Name</th>
+    //                                             <th>Status</th>
+    //                                             <th>Stuck?</th>
+    //                                             <th>Due Date</th>
+    //                                             <th>Priority</th>
+    //                                             <th>Start Date</th>
+    //                                             <th>Project Name</th>
+    //                                         </tr>
+    //                                     </thead>`
+    //             tasksTable  += '<tbody>'
+    //             // Loop through the data and create a new element for each item
+    //             data.forEach(function(item) {
+    //                 if (item.Stuck === "1") { // Make the "stuck" field readable for user.
+    //                     var stuck = "Yes";
+    //                     var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
+    //                 } else {
+    //                     var stuck = "No";
+    //                     var stuckStyles = "color:black";
+    //                 }
+    //                 tasksTable  += `<tr>
+    //                                         <td>` + item.Task_ID + `</td>
+    //                                         <td>` + item.Name + `</td>
+    //                                         <td>` + item.Task_Status + `</td>
+    //                                         <td style="` + stuckStyles + `";>` + stuck + `</td>
+    //                                         <td>` + item.Due_Date + `</td>
+    //                                         <td>` + item.Priority + `</td>
+    //                                         <td>` + item.Start_Date+ `</td>
+    //                                         <td>` + item.Project_Title+ `</td>
+    //                                     </tr>`
+    //                 });     
+    //                 tasksTable  += '</tbody>'
+    //                 tasksTable  += '</table>';
 
-                    // Find the container/table to display the data
-                    container.innerHTML = tasksTable;
-            } else {
-                if(stuck != '' || earliest != '' || high != '') {
-                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
-                } else {
-                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
-                }
-            }
-    } catch (error) {
-        console.error('Error:', error); // Log any errors that occur
-    }
-    };
+    //                 // Find the container/table to display the data
+    //                 container.innerHTML = tasksTable;
+    //         } else {
+    //             if(stuck != '' || earliest != '' || high != '') {
+    //                 container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
+    //             } else {
+    //                 container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
+    //             }
+    //         }
+    // } catch (error) {
+    //     console.error('Error:', error); // Log any errors that occur
+    // }
+    // };
 
 
 
@@ -994,8 +1037,11 @@ window.addEventListener("DOMContentLoaded", function () {
       const priorityValue = filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value;
       const dateValue = filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value;
       const stuckValue = filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value;
-      
-      const filters = {priorityValue, dateValue, stuckValue};
+      const projValue = filterUserStatsTaskModal.querySelector('.task-dropdown-proj #user-proj').value;
+      const dropdown = filterUserStatsTaskModal.querySelector('.task-dropdown-proj #user-proj')
+      const projectName = dropdown.options[dropdown.selectedIndex].text;
+
+      const filters = {priorityValue, dateValue, stuckValue, projValue};
 
       if (priorityValue === "All") {
         delete filters.priorityValue;
@@ -1006,15 +1052,25 @@ window.addEventListener("DOMContentLoaded", function () {
       if (stuckValue === "All") {
         delete filters.stuckValue;
       }
+      if (projValue === "All") {
+        delete filters.projValue;
+      }
       const orderByValue = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
       if (orderByValue !== "None") {
         filters.orderByValue = orderByValue;
       } 
 
       filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsgUser(filters);
-      console.log("FILTERS",createFiltersMsgUser(filters))
-      console.log("NOT MSG", filters)
+      if (projValue ==="ALL") {
+        filterAppliedMsg.innerHTML = createFiltersMsgUser(filters);
+        console.log("FILTERS",createFiltersMsgUser(filters))
+        console.log("NOT MSG", filters)
+      } else {
+        filterAppliedMsg.innerHTML = createFiltersMsgUser(filters, projectName);
+        console.log("FILTERS",createFiltersMsgUser(filters))
+        console.log("NOT MSG", filters)
+      }
+      
 
       let filtersLength = Object.keys(filters).length;
       if (filtersLength > 0) {
@@ -1036,8 +1092,10 @@ window.addEventListener("DOMContentLoaded", function () {
         const priorityValue = filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value;
         const dateValue = filterUserStatsTaskModal.querySelector('.task-dropdown-date #date-task').value;
         const stuckValue = filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value;
+        const projValue = filterUserStatsTaskModal.querySelector('.task-dropdown-proj #user-proj').value;
+
         
-        const filters = {priorityValue, dateValue, stuckValue};
+        const filters = {priorityValue, dateValue, stuckValue, projValue};
       
         if (priorityValue === "All") {
           delete filters.priorityValue;
@@ -1047,6 +1105,9 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         if (stuckValue === "All") {
           delete filters.stuckValue;
+        }
+        if (projValue === "All") {
+          delete filters.projValue;
         }
       
         return filters;
@@ -1102,14 +1163,16 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
 
-function createFiltersMsgUser(filters) {
-  console.log("here");
+function createFiltersMsgUser(filters, projectName = "") {
   let applied = [];
     if (filters.priorityValue && filters.priorityValue !== "All") {
       applied.push(filters.priorityValue + " Priority");
     }
     if (filters.dateValue && filters.dateValue !== "All") {
-      applied.push("Due Date: " + filters.dateValue)
+      applied.push("Due Date: " + filters.dateValue);
+    }
+    if (filters.projValue && filters.projValue !== "All") {
+      applied.push("Selected Project: " + projectName);
     }
     if (filters.stuckValue && filters.stuckValue !== "All") {
       console.log("stck");
@@ -1122,7 +1185,7 @@ function createFiltersMsgUser(filters) {
       }
     }
     if (filters.orderByValue && filters.orderByValue !== "None") {
-      applied.push("Order By " + filters.orderByValue)
+      applied.push("Order By " + filters.orderByValue);
     }
     if (applied.length === 0) {
       return '';
