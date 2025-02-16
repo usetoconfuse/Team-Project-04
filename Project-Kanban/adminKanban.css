@@ -25,3 +25,12 @@
 .task-submit-buttons {
     padding: 0.4rem;
 }
+
+#emp-projectKanban-container {
+    min-height: 70dvh;
+}
+
+#admin-kanban-content .task-search{
+    background-color: white;
+    width: 100%;
+}

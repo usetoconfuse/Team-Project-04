@@ -112,12 +112,12 @@ function populateTasksTable(tableData) {
 
       row.innerHTML = `   <td>${task.Task_ID}</td>
                           <td id="emp-task-title">${task.Name}</td>
-                          <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
-                          <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
+                          <td><p id="emp-task-status" class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
+                          <td><p id="emp-task-priority" class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
                           <td>${task.Due_Date}</td>
                           <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
-                          <td>${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
-                          <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>`;
+                          <td  id="emp-task-assignee">${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
+                          <td id="emp-task-author">${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>`;
       
       if (globalSelectedProjectStatus === "Active" && globalSelectedProjectCompletion === "null") {
         row.innerHTML +=  `<td><a class="edit-admin-functionality-btn" data-task-id="${task.Task_ID}">Edit</a></td> 
@@ -652,3 +652,35 @@ async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueD
     console.log("Error updating the task status", error);
   }
 }
+
+
+//Keyword Search
+const searchBarAdmin = document.querySelector('#admin-kanban-content .task-search #searched-task');
+
+searchBarAdmin.addEventListener('input', ()=>{
+  const searchValue = searchBarAdmin.value.toLowerCase().trim();
+  const allTasks = document.querySelectorAll('#admin-kanban-content .emp-projectKanban-bottom tbody tr');
+  let foundTasks = 0;
+
+  allTasks.forEach(task => {
+    const taskTitle = task.querySelector('#emp-task-title').innerHTML.toLowerCase();
+    const taskStatus = task.querySelector('#emp-task-status').innerHTML.toLowerCase();
+    const taskPriority = task.querySelector('#emp-task-priority').innerHTML.toLowerCase();
+    const taskAssignee = task.querySelector('#emp-task-assignee').innerHTML.toLowerCase();
+    const taskAuthor = task.querySelector('#emp-task-author').innerHTML.toLowerCase();
+
+
+    if (taskTitle.includes(searchValue) || taskStatus.includes(searchValue) || taskPriority.includes(searchValue) || taskAssignee.includes(searchValue) || taskAuthor.includes(searchValue)) {
+      foundTasks++;
+      task.style.display = 'table-row';
+    } else {
+      task.style.display = 'none';
+    }
+  })
+  if (foundTasks === 0) {
+    document.querySelector('#emp-dash-content .search-task-error-msg').style.display = 'block';
+  } else {
+    document.querySelector('#emp-dash-content .search-task-error-msg').style.display = 'none';
+  }
+})
+
