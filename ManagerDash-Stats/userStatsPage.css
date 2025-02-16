@@ -6,7 +6,7 @@
 /* Grid container */
 #mgrStatsUser-grid-container {
     display: grid;
-    grid-template-areas: 'graph table1'
+    grid-template-areas: 'graph ganttChart'
                         'filters filters'
                          'table2 table2';
     grid-template-columns: 1fr 1fr;
@@ -20,8 +20,8 @@
 #userStats-weeklyGraph {
     grid-area: graph;
 }
-#userStats-projectHrsTable{
-    grid-area: table1;
+#userStats-ganttChart{
+    grid-area: ganttChart;
 }
 
 #userStats-allTasksFilters {
@@ -122,7 +122,7 @@
     display: block;
 }
 #userStats-overlapContainer{
-    display: none;
+    display: block;
 }
 
 #userStats-weekHrsContainerGraph{
@@ -156,7 +156,7 @@
     justify-content: center;
   }
   .chartBox {
-    width: 80%;
+    width: 50%;
     padding: 20px;
     border-radius: 20px;
     border: solid 3px rgba(54, 162, 235, 1);
@@ -172,6 +172,7 @@
 #userStTaskDialCell {
     position: relative;
     overflow-y: auto;
+    width: 50%;
 }
 
 #userStTaskDialPercentage {

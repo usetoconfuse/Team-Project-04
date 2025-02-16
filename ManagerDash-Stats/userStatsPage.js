@@ -539,6 +539,7 @@ async function fetchProjTimeGraph(userID) {
                 }));
                 // Log the dictionary to the console
                 // console.log(dataset);
+
                 createGantt(dataset);
   
         } else {
@@ -666,28 +667,32 @@ const overlayGraphCanvas = document.querySelector('#userStats-overlapContainerGr
 
 
 //userStats-overlapContainerGraph
-userGraphDropdown.addEventListener('change', () => {
-    if (userGraphDropdown.value === 'userStats-chooseGraph-weekHrs') {
-        weekHrsCont.style.display = 'block';
-        weekHrsGraphCanvas.style.display = 'block';
-        overlapCont.style.display = 'none';
-        overlayGraphCanvas.style.display = 'none';
+// userGraphDropdown.addEventListener('change', () => {
+//     if (userGraphDropdown.value === 'userStats-chooseGraph-weekHrs') {
+//         weekHrsCont.style.display = 'block';
+//         weekHrsGraphCanvas.style.display = 'block';
+//         overlapCont.style.display = 'none';
+//         overlayGraphCanvas.style.display = 'none';
 
-    } else if (userGraphDropdown.value === 'userStats-chooseGraph-overlap') {
-        overlapCont.style.display = 'block';
-        overlayGraphCanvas.style.display = 'block';
-        weekHrsCont.style.display = 'none';
-        weekHrsGraphCanvas.style.display = 'none';
-    }
-    updateGraphAxes();
-});
+//     } else if (userGraphDropdown.value === 'userStats-chooseGraph-overlap') {
+//         overlapCont.style.display = 'block';
+//         overlayGraphCanvas.style.display = 'block';
+//         weekHrsCont.style.display = 'none';
+//         weekHrsGraphCanvas.style.display = 'none';
+//     }
+//     updateGraphAxes();
+// });
 
 var myGanttChart = new Chart(document.getElementById('userStats-overlapContainerGraph'));
 
 // Gantt Chart
 function createGantt(dataset) {
 
+  if(typeof emptyGantt !== 'undefined' && emptyGantt !== null){
+    emptyGantt.destroy();
+  } else if (typeof myGanttChart !== 'undefined' && myGanttChart !== null) {
     myGanttChart.destroy();
+  }
     // setup 
     const data = {
       datasets: [{

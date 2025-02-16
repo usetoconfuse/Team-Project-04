@@ -19,13 +19,13 @@
             <div id="userStats-weeklyGraph" class="mgrStatsUser-grid-item">
 
                 <!-- Dropdown for graphs -->
-                <div id="userStats-graphChangeButton">
+                <!-- <div id="userStats-graphChangeButton">
                     <i class="fa fa-solid fa-sort"></i>
                     <select name="userStats-chooseGraph" id="userStats-chooseGraph">
                         <option value="userStats-chooseGraph-weekHrs">Task Status Graph</option>
                         <option value="userStats-chooseGraph-overlap">Project Gantt Chart</option>
                     </select>
-                </div>
+                </div> -->
 
                 <div id="userStats-weekHrsContainer"> <!-- Task Status Graph -->
                     <!-- <canvas id="userStats-weekHrsContainerGraph"></canvas> -->
@@ -67,9 +67,6 @@
                                             </div>
                                         </div>
                 </div>
-                <div id="userStats-overlapContainer">
-                    <canvas id="userStats-overlapContainerGraph"></canvas>
-                </div>
 
             </div>
 
@@ -78,10 +75,18 @@
 
 
 <!-- //TABLE OF EVERY PROJECT FOR THAT USER, AND MAN HOURS -->
-            <div id='userStats-projHrs' class='mgrStatsUser-grid-item'>
-                <table class="userStats-tr" id="userStats-projHrsTable">
+            <div id='userStats-ganttChart' class='mgrStatsUser-grid-item'>
+
+            <div id="userStats-overlapContainer">
+                    <canvas id="userStats-overlapContainerGraph"></canvas>
+                </div>
+
+
+
+
+                <!-- <table class="userStats-tr" id="userStats-projHrsTable"> -->
             <!-- Fetch Data Here -->
-                </table>
+                <!-- </table> -->
         <!-- </div> -->
             </div>
 
@@ -232,7 +237,6 @@
         </div>
     </div>
 
-</div>
 </div>
 
 
