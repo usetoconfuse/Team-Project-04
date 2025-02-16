@@ -392,19 +392,31 @@ addPostBtn.addEventListener('click', () => {
 });
 
 const submitAddPostModalBtn = document.getElementById('kb-add-post-submit-btn');
+
+const validate = (name,  value) => {
+    if (!value) {
+        sendToast(`Please fill in all fields - missing ${name}`);
+        throw new Error("Please fill in all fields.");
+    }
+    return value;
+}
+
+const getValue = (name, id) => { 
+    const value = document.getElementById(id).value; 
+    return validate(name, value);
+}
+
 // on submission of the add post form add the new post to the knowledgebase db
 submitAddPostModalBtn.addEventListener('click', async (event) => {
     // Helper function to get the value of an input field.
-    const getValue = (id) => { return document.getElementById(id).value; }
-
     // Send post creation request to the server.
     const data = await doRequest("POST", "addPost", {}, {
-        'title': getValue('kb-new-post-title'),
-        'content': getValue('kb-new-post-content-input'),
-        'type': getValue('kb-new-post-type-input'),
-        'topic': getValue('kb-new-post-topic-input'),
-        'visibility': getValue('kb-new-post-visibility-input'),
-        'protected': getValue('kb-new-post-protected-input')
+        'title': getValue('title', 'kb-new-post-title'),
+        'content': getValue('content', 'kb-new-post-content-input'),
+        'type': getValue('type', 'kb-new-post-type-input'),
+        'topic': getValue('topic', 'kb-new-post-topic-input'),
+        'visibility': getValue('visibility', 'kb-new-post-visibility-input'),
+        'protected': getValue('protected', 'kb-new-post-protected-input')
     });
 
     sendToast('Post added successfully!');
@@ -418,17 +430,16 @@ const editPostModal = document.getElementById('edit-post-modal');
 var [closeEditPostModal, openEditPostModal] = makeModal(editPostModal);
 
 document.getElementById("kb-edit-post-submit-btn").addEventListener("click", async () => {
-    const getValue = (id) => { return document.getElementById(id).value; }
     const postID = editPostModal.getAttribute("data-post-id")
     // Send post creation request to the server.
     const data = await doRequest("POST", "editPost", {}, {
         'id': postID,
-        'title': getValue('kb-edit-post-title-input'),
-        'content': getValue('kb-edit-post-content-input'),
-        'type': getValue('kb-edit-post-type-input'),
-        'topic': getValue('kb-edit-post-topic-input'),
-        'visibility': getValue('kb-edit-post-visibility-input'),
-        'protected': getValue('kb-edit-post-protected-input')
+        'title': getValue('title', 'kb-edit-post-title-input'),
+        'content': getValue('content', 'kb-edit-post-content-input'),
+        'type': getValue('type', 'kb-edit-post-type-input'),
+        'topic': getValue('topic', 'kb-edit-post-topic-input'),
+        'visibility': getValue('visibility', 'kb-edit-post-visibility-input'),
+        'protected': getValue('protected', 'kb-edit-post-protected-input')
     });
 
     sendToast('Post edited successfully!');
@@ -469,7 +480,7 @@ const submitTopicBtn = document.getElementById('kb-add-topic-modal-submit');
 const newTopicModalInput = document.getElementById('kb-add-topic-modal-name-input');
 submitTopicBtn.addEventListener('click', async (event) => {
     //pass data from form to addtopic sql query
-    await doRequest("POST", "addTopic", {}, { name: newTopicModalInput.value });
+    await doRequest("POST", "addTopic", {}, { name: validate("topic", newTopicModalInput.value) });
     await refreshTopics();
 
     sendToast('Topic added successfully!');
