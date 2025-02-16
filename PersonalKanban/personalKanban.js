@@ -343,6 +343,21 @@ async function updatePersonalTaskStatus(taskID, newStatus) {
     if (!response.ok) {
       throw new Error('Failed to update task status');
     }
+    else{
+      let emoji = '';
+      switch (newStatus) {
+        case 'To Do':
+          emoji = '📝';
+          break;
+        case 'In Progress':
+          emoji = '🚧';
+          break;
+        case 'Completed':
+          emoji = '✅';
+          break;
+      }
+      sendToast(`${emoji} Task status updated to "${newStatus}"`);
+    }
 
 
   } catch (error) {
@@ -597,6 +612,7 @@ async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueD
       if (!response.ok) {
         throw new Error('Failed to update task status');
       }
+      sendToast('🎉 Task has been successfully added!');
   
     } catch (error) {
       console.log("Error updating the task status", error);
@@ -622,7 +638,7 @@ submitTaskBtn.addEventListener('click', async () => {
   //send data to database to write 
   await addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userIdPersonal);
   fetchPersonalData(userIdPersonal, {});
-  sendToast('🎉 Task has been successfully added!');
+  
 
 })
 

@@ -183,7 +183,7 @@ function openEditModal(task) {
 
       //Task cannot start or begin after project deadline
       if (taskDueDate > globalProjectDeadline || startDate > globalProjectDeadline) {
-        errorText.innerText = 'Task Due Date or Start Date cannot be greater than Project Deadline';
+        errorText.innerText = `Task Due Date or Start Date cannot be past the project deadline: ${globalProjectDeadline}}`;
         errorText.style.display = 'block';
         return
       }
@@ -205,7 +205,7 @@ function openEditModal(task) {
       }
 
       
-      
+
       
       
       updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
@@ -229,7 +229,6 @@ function openDeleteModal(taskID, taskName) {
   deleteProjectTaskConfirm.onclick = () => {
 
       deleteProjectTask(taskID);
-      sendToast(`🗑️ Task #${taskID} has been successfully deleted!`);
       deleteProjectTaskModal.style.display = 'none';
     
   };
@@ -256,6 +255,7 @@ async function deleteProjectTask(projectTaskID) {
     if (!response.ok) {
         console.log(response);
     } else {
+      sendToast(`🗑️ Task #${taskID} has been successfully deleted!`);
       getProjectTable(globalSelectedProjectID);
         
     }
@@ -431,7 +431,7 @@ confirmAddTask.onclick = () => {
   addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
   addProjectTaskModal.style.display = 'none';
   //Pass in task name
-  sendToast(`🎉 Task "${taskName}" has been successfully added!`);
+
 
 
 
@@ -482,6 +482,7 @@ async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueD
     if (!response.ok) {
       console.log(response);
     } else {
+      sendToast(`🎉 Task "${taskName}" has been successfully added!`);
       getProjectTable(globalSelectedProjectID);
     }
 
