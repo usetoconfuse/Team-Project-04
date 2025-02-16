@@ -465,6 +465,15 @@
     overflow-y: scroll;
 }
 
+.kb-markdown-textarea *, .kb-post-content * {
+    padding: revert;
+}
+
+.kb-markdown-textarea img, .kb-post-content img {
+    width: auto;
+    max-height: 200px;
+}
+
 .kb-markdown-btn {
     height: 100%;
     padding: 0.4rem 0.6rem;
