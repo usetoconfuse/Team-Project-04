@@ -6,7 +6,8 @@
 /* Grid container */
 #mgrStatsUser-grid-container {
     display: grid;
-    grid-template-areas: 'graph ganttChart'
+    grid-template-areas:'buttons buttons' 
+                        'graph ganttChart'
                         'filters filters'
                          'table2 table2';
     grid-template-columns: 1fr 1fr;
@@ -19,6 +20,9 @@
 
 #userStats-weeklyGraph {
     grid-area: graph;
+}
+#userStats-buttons {
+    grid-area: buttons;
 }
 #userStats-ganttChart{
     grid-area: ganttChart;
@@ -44,6 +48,13 @@
     border-radius: 30px;
 }
 
+/* flexbox for buttons at top of page (change PWD, promote) */
+#userStatsFlexTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 20%;
+}
 /* Flex Box for top half of User Stats */
 #userStats-Flex-Item1 {
     display: flex;

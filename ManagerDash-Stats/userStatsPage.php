@@ -6,11 +6,21 @@
 <link rel="stylesheet" href="ManagerDash-Stats/userStatsPage.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
    
-<h1>User Statistics</h1>
+
 <div id="mgrStatsUser-grid-container">
         <!-- <div id="userStats-Flex-Item1"> -->
 
-
+        <div id="userStats-buttons" class="mgrStatsUser-grid-item">
+            <div id='userStatsFlexTitle'>
+                    <h1>User Statistics</h1>
+                <div class='all-projects-btn black-btn'>
+                    change password
+                </div>
+                <div class='all-projects-btn black-btn' >
+                    Promote
+                </div>
+            </div>
+        </div>
 
 
         

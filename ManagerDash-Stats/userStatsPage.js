@@ -544,7 +544,11 @@ async function fetchProjTimeGraph(userID) {
   
         } else {
            // createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
-           var emptyGantt = new Chart(document.getElementById('userStats-overlapContainerGraph'));
+           if(typeof emptyGantt !== 'undefined' && emptyGantt !== null){
+            emptyGantt.destroy();
+           } else {
+              var emptyGantt = new Chart(document.getElementById('userStats-overlapContainerGraph'));
+           }
 
 
         }
