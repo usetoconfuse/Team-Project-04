@@ -16,7 +16,11 @@
         </div>
 
         <!-- Task dial -->
-        <div id="prjStTaskDialCell">
+        <div id="prjStTaskDialContainer">
+
+            <!-- Task dial content -->
+            <div id="prjStTaskDialDisplay">
+
             <div id="prjStTaskDialChartBox">
                 <canvas id="prjStTaskDialChart"></canvas>
             </div>
@@ -51,6 +55,11 @@
                     <p>Not Started</p>
                 </div>
             </div>
+        </div>
+
+            <!-- No tasks message box -->
+            <h1 id="prjStTaskDialEmptyText">
+            </h1>
         </div>
     </div>
 

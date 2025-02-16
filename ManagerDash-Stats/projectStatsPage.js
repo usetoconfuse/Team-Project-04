@@ -4,22 +4,6 @@
 // Path of project queries folder
 const PRJST_QUERY_PATH = "ManagerDash-Stats/projectStatsPage-Queries/";
 
-
-// Object that stores the project details used by the page
-// Attributes: id, title start, due, created, completed, leader
-const projDetails = {};
-
-
-// CHART INSTANCE LOCATIONS
-
-// Task dial chart
-const dialCtx = document.getElementById("prjStTaskDialChart").getContext("2d");
-var taskDial = new Chart(dialCtx)
-
-// Task burnup chart
-const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
-var projBurnup = new Chart(burnupCtx);
-
 // Generic query function
 async function FetchStatsData(query) {
     try {
@@ -40,6 +24,28 @@ async function FetchStatsData(query) {
 };
 
 
+// Object that stores the project details used by the page
+// Attributes: id, title start, due, created, completed, leader
+const projDetails = {};
+
+
+// CHART INSTANCE LOCATIONS
+// Need to be declared as each chart population function calls destroy()
+// which requires an existing chart instance
+
+// Task dial chart
+const dialCtx = document.getElementById("prjStTaskDialChart").getContext("2d");
+var taskDial = new Chart(dialCtx)
+
+// Project prev week contribution breakdown chart
+const prevWeekCtx = document.getElementById("prjStPrevWeekChart").getContext("2d");
+var prevWeek = new Chart(prevWeekCtx);
+
+// Project total hours burnup chart
+const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
+var projBurnup = new Chart(burnupCtx);
+
+
 
 
 //==============================================================
@@ -50,15 +56,15 @@ async function FetchStatsData(query) {
 async function PopulateProjectStatsPage() {
 
     // Fetch full project details from ID
-    await(FetchProjectData());
+    await FetchProjectData();
 
     PopulateProjectStatsHeader();
 
     PopulateMemberList();
 
-    PopulateTaskDialChart();
+    await PopulateTaskDialChart();
 
-    PopulateBurnUpChart();
+    await PopulateBurnUpChart();
 }
 
 
@@ -104,6 +110,7 @@ function PopulateProjectStatsHeader() {
 
 
 //====================== MEMBER LIST ========================
+
 async function PopulateMemberList() {
 
     // LIST DATA
@@ -164,18 +171,25 @@ async function PopulateTaskDialChart() {
 
     const dialData = [data[0][0]["Done"], data[0][0]["Inprog"], data[0][0]["Todo"]];
 
+
     // DRAW CHART
+
+    // Skip drawing and show "no tasks" message if project has no tasks
+    var noTasksHeader = document.getElementById('prjStTaskDialEmptyText');
+    if(dialData[0] + dialData[1] + dialData[2] === 0) {
+        noTasksHeader.innerText = `${projDetails.title} has no tasks assigned to it.`;
+        document.getElementById('prjStTaskDialDisplay').style.display = "none";
+        noTasksHeader.style.display = "block";
+    }
+    else {
+        noTasksHeader.style.display = "none";
+        document.getElementById('prjStTaskDialDisplay').style.display = "block";
+    }
 
     // Calculate progress completion percentage
     let totalTasks = dialData[0] + dialData[1] + dialData[2];
     let percentage = Math.round((dialData[0]*100) / totalTasks);
     document.getElementById("prjStTaskDialPercentageText").innerText = percentage + "%";
-
-    if(dialData[0] === 0 && dialData[1] ==0 && dialData[2] === 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
-        let prjStatsPercentText = document.getElementById('prjStatsPercentText');
-        prjStatsPercentText.innerHTML = "";
-        document.getElementById("prjStTaskDialPercentageText").innerText = "No projects have been set for userID: " +  projDetails.title;
-    }
 
     // Populate chart legend text
     document.getElementById("prjStLegendDone").innerText = dialData[0];
@@ -220,11 +234,12 @@ async function PopulateTaskDialChart() {
 
 
 //====================== BURNUP CHART ========================
+
 async function PopulateBurnUpChart() {
 
-    // SET PROJECT END DATe
+    // SET PROJECT END DATE
 
-    // End date of duration to fetch tasks for, in priority order:
+    // End date of interval to fetch tasks in, in priority order:
     // - If completed, end is completion/due date, whichever is later
     // - If incomplete, end is current/due date, whichever is later
     // Sets flag to show completion line if completed
@@ -279,16 +294,16 @@ async function PopulateBurnUpChart() {
     var completionWeek = -1;
 
     // Arrays to store fetched data in correct format for chart
-    const burnUpLabels = new Array();
-    const burnUpDates = new Array();
-    const burnUpCompleted = new Array();
-    const burnUpScope = new Array();
+    const burnupLabels = new Array();
+    const burnupDates = new Array();
+    const burnupCompleted = new Array();
+    const burnupScope = new Array();
     
     data.forEach(item => {
-        burnUpLabels.push(weekCounter);
-        burnUpDates.push(item[0].week);
-        burnUpCompleted.push(item[0].comp);
-        burnUpScope.push(item[0].scope);
+        burnupLabels.push(weekCounter);
+        burnupDates.push(item[0].week);
+        burnupCompleted.push(item[0].comp);
+        burnupScope.push(item[0].scope);
 
         // Set correct week number for due date
         // and completion date if showing completion
@@ -306,8 +321,8 @@ async function PopulateBurnUpChart() {
         weekCounter++;
     });
 
-    console.log("due week: " + dueDateWeek + " " + burnUpDates[dueDateWeek]);
-    console.log("complete week: " + completionWeek + " " + burnUpDates[completionWeek]);
+    console.log("due week: " + dueDateWeek + " " + burnupDates[dueDateWeek]);
+    console.log("complete week: " + completionWeek + " " + burnupDates[completionWeek]);
     
     
     // DRAW CHART
@@ -317,11 +332,11 @@ async function PopulateBurnUpChart() {
     const cols = getComputedStyle(col);
 
     // Extend x axis to prevent cutoff
-    var xMaxCalc = Math.ceil(burnUpScope.length * 1.1);
+    var xMaxCalc = Math.ceil(burnupScope.length * 1.1);
 
     // Extend "virtual" y axis to prevent cutoff
     // True y axis is further extended based on this value
-    var yMaxCalc = Math.ceil(burnUpScope[burnUpCompleted.length-1] * 0.12) * 10;
+    var yMaxCalc = Math.ceil(burnupScope[burnupCompleted.length-1] * 0.12) * 10;
     if (yMaxCalc == 0) yMaxCalc = 10;
 
     projBurnup.destroy();
@@ -329,25 +344,25 @@ async function PopulateBurnUpChart() {
     projBurnup = new Chart(burnupCtx, {
         type: "line",
         data: {
-            labels: burnUpLabels,
+            labels: burnupLabels,
             datasets: [
                 {
                     label: "Scope",
-                    data: burnUpScope,
+                    data: burnupScope,
                     borderColor: "#6d8ce5",
                     backgroundColor: "#6d8ce5",
                     fill: false
                 },
                 {
                     label: "Delivered",
-                    data: burnUpCompleted,
+                    data: burnupCompleted,
                     borderColor: cols.getPropertyValue('--green'),
                     backgroundColor: cols.getPropertyValue('--green'),
                     fill: false
                 },
                 {
                     label: "Ideal Delivery",
-                    data: [{x: 0, y: 0}, {x: dueDateWeek, y: burnUpScope[dueDateWeek]}],
+                    data: [{x: 0, y: 0}, {x: dueDateWeek, y: burnupScope[dueDateWeek]}],
                     borderDash: [10,5],
                     borderColor: 'rgba(0,0,0,0.3)',
                     backgroundColor: 'rgba(0,0,0,0)'

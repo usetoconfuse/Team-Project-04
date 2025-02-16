@@ -18,9 +18,9 @@
 
 
 /* Task dial */
-#prjStTaskDialCell {
+#prjStTaskDialDisplay {
     position: relative;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 #prjStTaskDialPercentage {
@@ -34,7 +34,7 @@
     transform: translate(-50%, -55%)
 }
 
-#prjStTaskDialBox {
+#prjStTaskDialChartBox {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -130,4 +130,9 @@
 /* Burnup chart */
 #prjStBurnupCell {
     grid-area: burnup;
+}
+
+#prjStBurnupChartBox {
+    width: 100%;
+    height: 100%;
 }
