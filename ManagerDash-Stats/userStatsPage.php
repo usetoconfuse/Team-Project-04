@@ -11,8 +11,12 @@
         <!-- <div id="userStats-Flex-Item1"> -->
 
         <div id="userStats-buttons" class="mgrStatsUser-grid-item">
+        <h1>User Statistics</h1>
             <div id='userStatsFlexTitle'>
-                    <h1>User Statistics</h1>
+                    <div id="backButton" class="all-projects-btn black-btn">
+                        <i class='fa fa-solid fa-arrow-left'></i>
+                        Back
+                    </div>
                 <div class='all-projects-btn black-btn'>
                     change password
                 </div>
@@ -166,6 +170,20 @@
                                 </div>
                             </div>
 
+                            <div class="task-dropdown">
+                                <label for="userProj">User's Projects</label>
+                                <div class="task-dropdown-select-options">
+                                    <div class="task-dropdown-stuck-icon task-dropdown-icon">
+                                        <i class="fa fa-solid fa-exclamation"></i>
+                                    </div>
+                                    <select name="userProj" id="user-proj-drop">
+                                            <!-- Auto Fill Options  -->
+
+                                    
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </form>
                     <div class="task-submit-buttons">
@@ -214,10 +232,6 @@
             </div>
 
 
-            <div class="all-projects-btn black-btn">
-                <i class='fa fa-solid fa-arrow-left'></i>
-                Close
-            </div>
 
             <div class="filter-applied-container">
                 <p class="filter-applied-msg"></p>

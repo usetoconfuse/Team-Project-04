@@ -32,8 +32,22 @@ async function PopulateUserStatsPage() {
     fetchProjTimeGraph(userDetails.id);
 
     PopulateTaskDialChartUserStats();
+
+    fillProjDropDown(userDetails.id);
 };
 
+
+// Back Button
+// const backButton = document.getElementById('backButton');
+// backButton.addEventListener("click", () => {
+
+//     // const showingTab = document.getElementById(backButton.getAttribute("value"));
+//       const currentPage = document.getElementById('mgrStatsUser-grid-container');
+//       currentPage.style.display = "none";
+//         const newTab = document.getElementById("statsHomeGridUser");
+//         newTab.style.display = "block";
+
+//       })
 //Fetch user details for user object
 async function fetchUserDetails() {
     try {
@@ -294,15 +308,43 @@ async function getUserStatsTaskData(filters={}) {
                     // Find the container/table to display the data
                     container.innerHTML = tasksTable;
             } else {
-                if(stuck != '' || earliest != '' || high != '') {
-                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
-                } else {
-                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
-                }
+                container.innerHTML = '<h2>Sorry, no tasks for this user - please check your filters</h2>'; // No results, show user.
+
             }
   
     } catch (error) {
       console.log("Fetch Issue",error);
+    }
+  }
+
+
+  async function fillProjDropDown(userID) {
+    try {
+      // Make an HTTP request to the PHP file
+      const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjDropdownQuery.php?ID=' + userID );
+      // console.log("1: ", response);
+      
+      // Ensure the response is OK and return the JSON data 
+      if (!response.ok) { 
+          throw new Error('Network response was not ok ' + response.statusText);
+      }
+      // Convert the response to JSON format
+      const data = await response.json();
+
+      var container = document.getElementById('user-proj-drop');
+      container.innerHTML = ''; // No results, show user.
+      
+
+      if (data.length > 0) {
+          console.log(data);
+          container.innerHTML = "<option value='All' selected>Show All</option>"
+
+          data.forEach(function(item) {
+            container.innerHTML += `<option value='${item.Project_ID}' selected>${item.Project_Title}</option>`;
+          })
+      }
+    } catch (error) {
+      console.error('Error:', error); // Log any errors that occur
     }
   }
 
