@@ -25,7 +25,25 @@ if (empty($title) || empty($teamLeader) || empty($startDate) || empty($dueDate))
 $stmt = $conn->prepare("INSERT INTO Projects (Project_Title,Start_Date, Due_Date,Project_Leader) VALUES (?, ?, ?, ?)");
 $stmt->bind_param('sssi', $title, $startDate, $dueDate, $teamLeader);
 
-$stmt->execute();
+if ($stmt->execute()) {
+    $projectID = $stmt->insert_id;
+    $stmtTeams = $conn->prepare("INSERT INTO User_Teams (Project_ID, User_ID) VALUES (?, ?)");
+    $stmtTeams->bind_param('ii', $projectID, $teamLeader);
+
+
+    if ($stmtTeams->execute()) {
+        http_response_code(200);
+        echo json_encode(['message' => 'Project and UserTeams entry added successfully.']);
+    } else {
+        http_response_code(500);
+        echo json_encode(['message' => 'Failed to add entry to UserTeams.']);
+    }
+
+    $stmtTeams->close();
+} else {
+    http_response_code(500);
+    echo json_encode(['message' => 'Failed to add project']);
+}
 
 
 
