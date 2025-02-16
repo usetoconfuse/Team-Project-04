@@ -185,6 +185,7 @@ function populatePersonalTasks(tasks) {
       deleteTaskModal.querySelector('.modal-header').innerHTML = `Delete Personal Task`;
       deleteTaskModal.setAttribute("deleted-personal-task-id", task.PersonalTask_ID);
       deleteTaskModal.querySelector('.modal-body').innerHTML = `Are you sure you want to delete task: #${task.PersonalTask_ID}, ${task.Name}`;
+      
     })
     closeDeleteTaskModal.addEventListener('click', () => {
       deleteTaskModal.style.display = 'none';
@@ -270,8 +271,11 @@ function populatePersonalTasks(tasks) {
 
 const deleteTaskModal = document.querySelector('#personal-kanban-content #delete-personal-modal');
 const deletePersonalTaskBtn = deleteTaskModal.querySelector('#delete-personal-task-confirm');
+
+
 deletePersonalTaskBtn.addEventListener('click', () => {
   deletePersonalTask(deleteTaskModal.getAttribute("deleted-personal-task-id"));
+
 })
 
 async function deletePersonalTask(personalTaskID) {
@@ -289,6 +293,8 @@ async function deletePersonalTask(personalTaskID) {
         console.log(response);
     } else {
       deleteTaskModal.style.display = 'none';
+      
+      sendToast(`🗑️ Personal Task #${personalTaskID} has been successfully deleted!`);
 
       const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
       const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
@@ -612,11 +618,11 @@ submitTaskBtn.addEventListener('click', async () => {
     errorMessage.style.display = 'block';
     return;
   }
-  alert('Task Added');
   addTaskModal.style.display = 'none';
   //send data to database to write 
   await addPersonalTask(taskName, taskDescription, taskPriority, taskDueDate, userIdPersonal);
   fetchPersonalData(userIdPersonal, {});
+  sendToast('🎉 Task has been successfully added!');
 
 })
 

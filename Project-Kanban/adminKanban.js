@@ -127,7 +127,8 @@ function populateTasksTable(tableData) {
   tableBody.addEventListener('click', (event) => {
       if (event.target.classList.contains('delete-admin-functionality-btn')) {
           const taskID = event.target.getAttribute('data-task-id');
-          openDeleteModal(taskID);
+          const taskName = tableData.find(t => t.Task_ID == taskID).Name;
+          openDeleteModal(taskID, taskName);
       }
   });
 }
@@ -187,10 +188,28 @@ function openEditModal(task) {
         return
       }
 
+      //today's date
+      todays_date = new Date().toISOString().split('T')[0]
+
+
+      if (taskDueDate < todays_date) {
+        errorText.innerText = 'Task Due Date cannot be in the past';
+        errorText.style.display = 'block';
+        return
+      }
+    
+      if (startDate < todays_date) {
+        errorText.innerText = 'Start date cannot be before today';
+        errorText.style.display = 'block';
+        return
+      }
 
       
       
-     updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
+      
+      
+      updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
+      endToast(`✅ Task "${taskName}" has been successfully updated!`);
       editActionsModal.style.display = 'none';
   };
 
@@ -200,15 +219,17 @@ function openEditModal(task) {
   };
 }
 
-function openDeleteModal(taskID) {
+function openDeleteModal(taskID, taskName) {
   const deleteProjectTaskModal = document.querySelector('#admin-kanban-content #delete-project-task-modal');
-  deleteProjectTaskModal.querySelector('.modal-header').innerText = `Delete Task #${taskID}`;
+  deleteProjectTaskModal.querySelector('.modal-header').innerText = `Delete Task #${taskID}: ${taskName}`;
   deleteProjectTaskModal.querySelector('.modal-body').innerText = `Are you sure you want to delete Task #${taskID}?`;
   deleteProjectTaskModal.style.display = 'flex';
 
   const deleteProjectTaskConfirm = deleteProjectTaskModal.querySelector('#delete-project-task-confirm');
   deleteProjectTaskConfirm.onclick = () => {
+
       deleteProjectTask(taskID);
+      sendToast(`🗑️ Task #${taskID} has been successfully deleted!`);
       deleteProjectTaskModal.style.display = 'none';
     
   };
@@ -388,8 +409,21 @@ confirmAddTask.onclick = () => {
     return
   }
 
+  //today's date
+  todays_date = new Date().toISOString().split('T')[0]
 
+  //if task due date is lower than today's date its not possible
+  if (taskDueDate < todays_date) {
+    errorText.innerText = 'Task Due Date cannot be in the past';
+    errorText.style.display = 'block';
+    return
+  }
 
+  if (startDate < todays_date) {
+    errorText.innerText = 'Start date cannot be before today';
+    errorText.style.display = 'block';
+    return
+  }
 
 
 
