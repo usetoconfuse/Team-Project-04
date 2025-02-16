@@ -29,6 +29,10 @@ async function FetchStatsData(query) {
 const projDetails = {};
 
 
+// Get global colours
+const col = document.querySelector(':root');
+const cols = getComputedStyle(col);
+
 // CHART INSTANCE LOCATIONS
 // Need to be declared as each chart population function calls destroy()
 // which requires an existing chart instance
@@ -63,6 +67,8 @@ async function PopulateProjectStatsPage() {
     PopulateMemberList();
 
     await PopulateTaskDialChart();
+
+    await PopulatePrevWeekChart();
 
     await PopulateBurnUpChart();
 }
@@ -233,6 +239,96 @@ async function PopulateTaskDialChart() {
 
 
 
+//====================== WEEKLY CONTRIBUTION BREAKDOWN CHART ========================
+
+async function PopulatePrevWeekChart() {
+    
+    // CHART DATA
+
+    const data = await(FetchStatsData(
+        `projectStatsPrevWeekQuery.php?ID=${projDetails.id}`));
+
+
+    // FORMAT DATA FOR CHART
+
+    // Arrays to store fetched data in correct format for chart
+    const prevWeekIDs = new Array();
+    const prevWeekNames = new Array();
+    const prevWeekInitials = new Array();
+    const prevWeekHours = new Array();
+
+    // Iterate and split data into the correct arrays
+    data[0].forEach((item) => {
+        prevWeekIDs.push(item.User_ID);
+        prevWeekNames.push(`${item.Forename} ${item.Surname}`);
+        prevWeekInitials.push(`${item.Forename} ${item.Surname}`);
+        prevWeekHours.push(item.Hours);
+    });
+
+    
+
+    // DRAW CHART
+
+    prevWeek.destroy();
+
+    prevWeek = new Chart(prevWeekCtx, {
+        type: 'bar',
+
+        data: {
+            labels: prevWeekInitials,
+            datasets: [{
+                label: 'Hours delivered',
+                data: prevWeekHours,
+                backgroundColor: cols.getPropertyValue('--green'),
+                borderColor: cols.getPropertyValue('--green')
+            }]
+        },
+
+        options: {
+            responsive: true,
+
+            font: {
+                family: 'Avenir Next'
+            },
+
+            scales: {
+                x: {
+                    grid: {
+                        display: true,
+                        drawOnChartArea: false
+                    }
+                },
+                y: {
+                    suggestedMax: 10
+                }
+            },
+
+            plugins: {
+
+                tooltip: {
+                    callbacks: {
+                        title: (TooltipItem) => {
+                            let pos = TooltipItem[0].dataIndex;
+                            return prevWeekNames[pos];
+                        }
+                    }
+                },
+
+                title: {
+                    display: true,
+                    align: 'start',
+                    text: 'Hours delivered by members - past week'
+                },
+
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+
 //====================== BURNUP CHART ========================
 
 async function PopulateBurnUpChart() {
@@ -326,10 +422,6 @@ async function PopulateBurnUpChart() {
     
     
     // DRAW CHART
-
-    // Get global colours
-    const col = document.querySelector(':root');
-    const cols = getComputedStyle(col);
 
     // Extend x axis to prevent cutoff
     var xMaxCalc = Math.ceil(burnupScope.length * 1.1);
@@ -428,11 +520,7 @@ async function PopulateBurnUpChart() {
                 title: {
                     display: true,
                     align: 'start',
-                    text: `Total hours of work for ${projDetails.title}`,
-                    padding: {
-                        top: 10,
-                        bottom: 0
-                    }
+                    text: `Total hours of work for ${projDetails.title}`
                 },
                 
                 legend: {
