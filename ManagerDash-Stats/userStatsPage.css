@@ -53,7 +53,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 20%;
+    text-wrap-mode: nowrap;
+    width: 40%;
+    height: 20%;
 }
 /* Flex Box for top half of User Stats */
 #userStats-Flex-Item1 {
