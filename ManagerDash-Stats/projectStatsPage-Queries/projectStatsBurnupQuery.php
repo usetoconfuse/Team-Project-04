@@ -36,19 +36,6 @@
                 week
             ";
 
-    /* $sql = "SELECT
-                ? AS week,
-                SUM(CASE WHEN Tasks.Status = 'Completed' THEN Tasks.Man_Hours ELSE 0 END) AS comp,
-                SUM(Tasks.Man_Hours) AS scope
-            FROM 
-                Tasks
-            WHERE
-                Tasks.Project_ID = ?
-                AND DATEDIFF(?, Tasks.Start_Date) >= 0
-            GROUP BY
-                week
-            "; */
-
     $stmt = $conn->prepare($sql);
 
     // Get burnup stats for each week of project history

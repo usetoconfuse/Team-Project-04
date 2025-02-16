@@ -76,12 +76,12 @@ async function FetchProjectData() {
 
     // Populate projDetails object
     projDetails.id = projID;
-    projDetails.title = data[0].Project_Title;
-    projDetails.start = data[0].Start_Date;
-    projDetails.due = data[0].Due_Date;
-    projDetails.created = data[0].Creation_Date;
-    projDetails.completed = data[0].Completion_Date;
-    projDetails.leader = data[0].Project_Leader;
+    projDetails.title = data[0][0].Project_Title;
+    projDetails.start = data[0][0].Start_Date;
+    projDetails.due = data[0][0].Due_Date;
+    projDetails.created = data[0][0].Creation_Date;
+    projDetails.completed = data[0][0].Completion_Date;
+    projDetails.leader = data[0][0].Project_Leader;
     console.log(projDetails);
 };
 

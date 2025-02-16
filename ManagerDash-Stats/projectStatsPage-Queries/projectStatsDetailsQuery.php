@@ -15,20 +15,31 @@
                 Projects.Project_Leader
             FROM
                 Projects
-            WHERE Project_ID = '$projID'
+            WHERE Project_ID = ?
             ";
 
+    $stmt = $conn->prepare($sql);
 
-    $result = mysqli_query($conn,$sql);
+    $stmt->bind_param("i", $projID);
 
-    if(!$result){
-        die("Query failed ". mysqli_error($conn));
-    }
-
-    $allDataArray = array();
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        $allDataArray[] = $row;
+    if ($stmt->execute()) {
+        http_response_code(200);
+        $data = [];
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+        $results[] = $data;
+        $result->free();
+    } else {
+        http_response_code(500);
+        echo "Query failed ". $stmt->error;
     }
     
-    echo json_encode($allDataArray);
+
+    $stmt->close();
+    
+    // Return the results as a JSON array
+    header('Content-Type: application/json');
+    echo json_encode($results);
 ?>
