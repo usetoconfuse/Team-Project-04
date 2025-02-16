@@ -861,7 +861,7 @@ async function PopulateTaskDialChartUserStats() {
     let percentageUserStats = Math.round((statusTaskArr[2]*100) / totalTasksUserStats);
     document.getElementById("userStTaskDialPercentageText").innerText = percentageUserStats + "%";
 
-    console.log("RESULTS",statusTaskArr);
+    // console.log("RESULTS",statusTaskArr);
 
     if(statusTaskArr[0] === 0 && statusTaskArr[1] ==0 && statusTaskArr[2] === 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
         let userStatsPercentText = document.getElementById('userStatsPercentText');
