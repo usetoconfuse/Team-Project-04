@@ -558,11 +558,9 @@ backBtn.addEventListener("click", () => {
 const sharePost = (postId) => {
     const params = new URLSearchParams(window.location.search);
     params.set("post", postId);
-    const shareData = {
-        title: document.getElementById(postId).querySelector(".kb-title-header").value,
-        url: `${window.location.origin}${window.location.pathname}?${params.toString()}`,
-    };
-    navigator.share(shareData);
+
+    sendToast("Link copied to clipboard!");
+    navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?${params.toString()}`);
 }
 // #endregion
 
