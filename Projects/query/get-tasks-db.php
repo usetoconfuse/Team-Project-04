@@ -8,7 +8,7 @@ $userId = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 
 
 
-$taskSQL = "SELECT Man_Hours, Status, Priority FROM Tasks WHERE Project_ID = ?";
+$taskSQL = "SELECT Man_Hours, Status, Priority FROM Tasks WHERE Project_ID = ? AND Start_Date <= CURDATE()";
 
 if ($userId !== null) {
     $taskSQL .= " AND Assignee_ID = ?";
@@ -18,7 +18,7 @@ $stmt = $conn->prepare($taskSQL);
 if ($userId !== null) {
     $stmt->bind_param("ii", $projectId, $userId);
 } else {
-    $stmt->bind_param("i", $projectId); 
+    $stmt->bind_param("i", $projectId);
 }
 
 

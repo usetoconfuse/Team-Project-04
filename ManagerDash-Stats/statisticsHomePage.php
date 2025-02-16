@@ -7,7 +7,7 @@
 
     <!-- Header -->
     <div class="mgrStats-header-section">
-        <h1 class="mgrStats-title">Statistics</h1>
+        <p class="mgrStats-title">Statistics</>
         <div id="mgrStats-tabBtn">
             <button class="mgrStats-activeTab" id="mgrProjStats" value="tabGroupProjectStats">Project</button>
             <button id="mgrUserStats" value="tabGroupUserStats">User</button>
@@ -20,7 +20,7 @@
         <!-- Project List Page -->
         <div id="statsHomeGridProject" class="statsHome-grid">
             <div id="statsHomeFiltersProj">
-            <h1 class="instruction-txt">Click a project for details</h1>
+                <p class="instruction-txt">Click a project for details</>
 
                 <div class="stats-listing-search projStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
@@ -44,15 +44,14 @@
     <!-- Tab for User Statistics -->
     <div id='tabGroupUserStats' class="tabGroup">
 
-       
-
         <!-- User List Page -->
         <div id="statsHomeGridUser" class="statsHome-grid">
-
+            <p class="instruction-txt">Click a user for details</>
             <div id="statsHomeFiltersUser">
-                <h1 class="instruction-txt">Click a user for details</h1>
-
-                
+                <div class="stats-listing-search userStats-search"> <!-- Filters here -->
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search user" class="stats-search-colour " id="searched-user">
+                </div>
                 <!-- ORDER BY DROPDOWN -->
                 <div id="userStatsHome-filterAll">
 
@@ -127,7 +126,7 @@
                         </div>
                     </div>
 
-            <!-- FILTERS -->
+                    <!-- FILTERS -->
                     <div class="projects-intro-buttons">
                         <div class="order-by-dropdown">
                             <select>
@@ -146,12 +145,6 @@
                             <i class="fa fa-solid fa-sliders"></i>
                         </div>
 
-
-                        <div class="all-projects-btn black-btn">
-                            <i class='fa fa-solid fa-arrow-left'></i>
-                            Close
-                        </div>
-
                         <div class="filter-applied-container">
                             <p class="filter-applied-msg"></p>
                             <div class="remove-filters-btn">
@@ -161,11 +154,6 @@
 
                     </div>
                 </div>
-
-                <div class="stats-listing-search userStats-search"> <!-- Filters here -->
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search user" class="stats-search-colour " id="searched-user">
-                </div>            
             </div>
             <div class="statsHome-table" id="statsHomeTableUser">
                 <!--Fetch User Table Here-->
@@ -179,23 +167,3 @@
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               
