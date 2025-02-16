@@ -177,58 +177,61 @@ async function fetchUserDetails() {
 // };
 
 //Function to fetch overall manhours per project of a user
-async function fetchUserProjHrsTable() {
-    try {
-        // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userDetails.id);
-        // console.log("1: ", response);
+
+
+// =====================================================Currently a table which isn't used ===================================================
+// async function fetchUserProjHrsTable() {
+//     try {
+//         // Make an HTTP request to the PHP file
+//         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjHrsTableQuery.php?ID=' + userDetails.id);
+//         // console.log("1: ", response);
         
-        // Ensure the response is OK and return the JSON data 
-        if (!response.ok) { 
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        // Convert the response to JSON format
-        const data = await response.json();
+//         // Ensure the response is OK and return the JSON data 
+//         if (!response.ok) { 
+//             throw new Error('Network response was not ok ' + response.statusText);
+//         }
+//         // Convert the response to JSON format
+//         const data = await response.json();
 
-        if (data.length > 0) {
-            // console.log("2: ", data[0].Project_ID);
+//         if (data.length > 0) {
+//             // console.log("2: ", data[0].Project_ID);
 
-            // Build the new table to display
-            let hoursTable  = "<table class='statsHome-table'>"
-            //Approx man-hrs as tasks could be shorter/longer than expected
-            hoursTable  += `<thead>
-                                        <tr>
-                                            <th>Project ID</th>
-                                            <th>Project Name</th>
-                                            <th>Approx Man Hours Spent by ` + userDetails.forename + ` ` + userDetails.surname + ` (ID=` + userDetails.id + `)` + `</th>
-                                        </tr>
-                                    </thead>`
-            hoursTable  += '<tbody>'
+//             // Build the new table to display
+//             let hoursTable  = "<table class='statsHome-table'>"
+//             //Approx man-hrs as tasks could be shorter/longer than expected
+//             hoursTable  += `<thead>
+//                                         <tr>
+//                                             <th>Project ID</th>
+//                                             <th>Project Name</th>
+//                                             <th>Approx Man Hours Spent by ` + userDetails.forename + ` ` + userDetails.surname + ` (ID=` + userDetails.id + `)` + `</th>
+//                                         </tr>
+//                                     </thead>`
+//             hoursTable  += '<tbody>'
 
-            // Loop through the data and create a new element for each item
-            data.forEach(function(item) {
-            hoursTable  += `<tr>
-                                        <td>` + item.Project_ID + `</td>
-                                        <td>` + item.Project_Title + `</td>
-                                        <td>` + item.TotalHrs + `</td>
-                                    </tr>`
-            });     
-            hoursTable  += '</tbody>'
-            hoursTable  += '</table>';
+//             // Loop through the data and create a new element for each item
+//             data.forEach(function(item) {
+//             hoursTable  += `<tr>
+//                                         <td>` + item.Project_ID + `</td>
+//                                         <td>` + item.Project_Title + `</td>
+//                                         <td>` + item.TotalHrs + `</td>
+//                                     </tr>`
+//             });     
+//             hoursTable  += '</tbody>'
+//             hoursTable  += '</table>';
 
-            // Find the container/table to display the data
-            var container = document.getElementById('userStats-projHrsTable');
-            container.innerHTML = hoursTable;
+//             // Find the container/table to display the data
+//             var container = document.getElementById('userStats-projHrsTable');
+//             container.innerHTML = hoursTable;
 
-            } else {
-                var container = document.getElementById('userStats-projHrsTable');
-                container.innerHTML = '<h2>Selected User isn\'t assigned to any projects, or they haven\'t completed any tasks.</h2>'; // No results, show user.
-            }
+//             } else {
+//                 var container = document.getElementById('userStats-projHrsTable');
+//                 container.innerHTML = '<h2>Selected User isn\'t assigned to any projects, or they haven\'t completed any tasks.</h2>'; // No results, show user.
+//             }
 
-        } catch (error) {
-            console.error('Error:', error); // Log any errors that occur
-        }
-        };
+//         } catch (error) {
+//             console.error('Error:', error); // Log any errors that occur
+//         }
+//         };
 
 
 
@@ -294,7 +297,7 @@ async function getUserStatsTaskData(filters={}) {
                     tasksTable  += `<tr>
                                             <td>` + item.Task_ID + `</td>
                                             <td>` + item.Name + `</td>
-                                            <td>` + item.Task_Status + `</td>
+                                            <td>` + item.Status + `</td>
                                             <td style="` + stuckStyles + `";>` + stuck + `</td>
                                             <td>` + item.Due_Date + `</td>
                                             <td>` + item.Priority + `</td>

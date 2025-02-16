@@ -23,6 +23,9 @@
                 <div class='all-projects-btn black-btn' >
                     Promote
                 </div>
+                <div class='all-projects-btn black-btn' >
+                    Mark as left company
+                </div>
             </div>
         </div>
 
