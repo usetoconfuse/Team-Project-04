@@ -365,11 +365,7 @@ async function getUsersHomeData(filters={}) {
                     // Find the container/table to display the data
                     container.innerHTML = userTable;
             } else {
-                if(stuck != '' || earliest != '' || high != '') {
-                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
-                } else {
-                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
-                }
+                container.innerHTML = 'Sorry, no users matching your filters.';
             }
   
     } catch (error) {
@@ -448,7 +444,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }
 
       filterHomeModal.style.display = 'none';
-    //   searchBarProject.value = "";
+      searchBarUserStats.value = "";
 
       getUsersHomeData(filtersHome);
     })
@@ -499,7 +495,7 @@ window.addEventListener("DOMContentLoaded", function () {
         filterRemoveBtn.style.display = 'none';
       }
 
-    //   searchBarProject.value = "";
+      searchBarUserStats.value = "";
 
       getUsersHomeData(allFiltersHome);
     })
@@ -508,7 +504,7 @@ window.addEventListener("DOMContentLoaded", function () {
       filterAppliedMsg.innerHTML = "";
       filterAppliedMsg.style.display = 'none';
       filterRemoveBtn.style.display = 'none';
-      searchBarProject.value = "";
+      searchBarUserStats.value = "";
       document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value = "None";
       filterUserStatsHomeModal.querySelector('.task-dropdown-priority #priority').value = "All";
       filterUserStatsHomeModal.querySelector('.task-dropdown-date #date-task').value = "All";
@@ -569,3 +565,74 @@ filterHomeBtn.addEventListener('click', () => {
     closefilterHomeModal.addEventListener('click', () => {
       filterHomeModal.style.display = 'none';
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Keyword Search
+const searchBarUserStats = document.querySelector('#searched-user');
+
+searchBarUserStats.addEventListener('input', ()=>{
+  const searchValue = searchBarUserStats.value.toLowerCase();
+
+//   const orderByDropDownValueHome = document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value;
+  const searchValueHome = searchValue !== "None" ? { searchParam: searchValue} : {};
+  console.log("brah", searchValueHome);
+
+
+//   const currentFiltersHome = getcurrentFiltersHome();
+  const allFiltersHome = {...searchValueHome};
+
+
+
+  let filtersLength = Object.keys(allFiltersHome).length;
+  if (filtersLength > 0) {
+    filterRemoveBtn.style.display = 'flex';
+  } else {
+    filterRemoveBtn.style.display = 'none';
+  }
+
+  getUsersHomeData(allFiltersHome);
+
+//   const allTasks = document.querySelectorAll('.kanban-content-project .kanban-card');
+//   console.log(allTasks);
+//   let foundTasks = 0;
+
+//   allTasks.forEach(task => {
+//     const taskTitle = task.getAttribute('data-task-title').toLowerCase();
+
+
+//     if (taskTitle.includes(searchValue)) {
+//       foundTasks++;
+//       task.style.display = 'block';
+//     } else {
+//       task.style.display = 'none';
+//     }
+//   })
+
+//   const cardCounts = {
+//     "To Do": countBlockTasks("#proj-kanban-content #kanban-to-do"),
+//     "In Progress": countBlockTasks("#proj-kanban-content #kanban-in-progress"),
+//     "Completed": countBlockTasks("#proj-kanban-content #kanban-completed")
+//   };
+//   changeProjectsCount(cardCounts);
+
+
+//   if (foundTasks === 0) {
+//     document.querySelector('#proj-kanban-content .search-task-error-msg').style.display = 'block';
+//   } else {
+//     document.querySelector('#proj-kanban-content .search-task-error-msg').style.display = 'none';
+//   }
+})
+

@@ -852,7 +852,7 @@ async function PopulateTaskDialChartUserStats() {
 
     // console.log("DIAL DATA:", data);
     // console.log("DIAL DATA 22:", dialData);
-
+ 
 
     // DRAW CHART
 
@@ -861,7 +861,9 @@ async function PopulateTaskDialChartUserStats() {
     let percentageUserStats = Math.round((statusTaskArr[2]*100) / totalTasksUserStats);
     document.getElementById("userStTaskDialPercentageText").innerText = percentageUserStats + "%";
 
-    if(statusTaskArr.length === 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
+    // console.log("RESULTS",statusTaskArr);
+
+    if(statusTaskArr[0] === 0 && statusTaskArr[1] ==0 && statusTaskArr[2] === 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
         let userStatsPercentText = document.getElementById('userStatsPercentText');
         userStatsPercentText.innerHTML = "";
         document.getElementById("userStTaskDialPercentageText").innerText = "No tasks have been set for userID: " + userDetails.id;
