@@ -28,6 +28,9 @@ img {
     --medium-gray: #8E8E91;
     --dark-gray: #414141;
 
+    /*Top navbar colour*/
+    --top-nav-col: #FFDD77;
+
     /*Border Radius*/
     --b-radius-lg: 30px;
     --b-radius-md: 10.5px;
