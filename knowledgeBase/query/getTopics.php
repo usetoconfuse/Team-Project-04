@@ -8,7 +8,12 @@ $query = isset($_GET['query']) ? $conn->real_escape_string($_GET['query']) : nul
 $sql = "
 SELECT
     Topic_Name, 
-    Topic_ID
+    Topic_ID,
+    (
+        SELECT Count(Post_ID) 
+        FROM Post_Topic 
+        WHERE Topic_ID = Topics.Topic_ID
+    ) AS Post_Count
 FROM 
     Topics
 WHERE 1=1
@@ -19,11 +24,7 @@ if ($query !== null) {
 }
 
 $sql .= " 
-ORDER BY (
-    SELECT Count(Post_ID) 
-    FROM Post_Topic 
-    WHERE Topic_ID = Topics.Topic_ID
-) DESC";
+ORDER BY Post_Count DESC";
 
 $result = mysqli_query($conn, $sql);
 $allDataArray = array();

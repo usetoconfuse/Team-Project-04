@@ -157,6 +157,11 @@ const renderTopics = (topics) => {
 
         topicsContainer.appendChild(topicElement);
 
+        if (topic.Post_Count !== "0") {
+            // Hide the delete button if the topic has posts.
+            topicElement.querySelector('i').style.display = 'none';
+        }
+
         topicElement.querySelector('i').addEventListener('click', (event) => {
             event.preventDefault();
             const deleteElement = document.getElementById('delete-topic-modal');
