@@ -465,13 +465,57 @@ confirmAddTask.onclick = () => {
 const filterProjectTaskModal = document.querySelector("#admin-kanban-content #filter-modal");
 const filterProjectTaskBtn = document.querySelector('#admin-kanban-content  .filter-task-btn');
 const closeProjectFilterTaskModal = filterProjectTaskModal.querySelector('#filter-modal .close-modal-btn')
-
+const filterAppliedAdminMsg = document.querySelector(
+  "#admin-kanban-content .filter-applied-msg"
+);
+const filterRemoveAdminBtn = document.querySelector(
+  "#admin-kanban-content .remove-filters-btn"
+);
 filterProjectTaskBtn.addEventListener('click', () => {
     filterProjectTaskModal.style.display = 'flex';
   })
   closeProjectFilterTaskModal.addEventListener('click', () => {
     filterProjectTaskModal.style.display = 'none';
   })
+
+  const confirmFilterAdminTask = filterProjectTaskModal.querySelector('#add-filter-btn')
+  confirmFilterAdminTask.onclick = () => {
+    const filterStuck = filterProjectTaskModal.querySelector('#stuck-task').value;
+    const filterPriority = filterProjectTaskModal.querySelector('#priority').value;
+    const filterDate = filterProjectTaskModal.querySelector('#date-task').value;
+     
+      const filterData = { filterPriority, filterDate, filterStuck };
+      
+      if (filterPriority === "All") {
+        delete filterData.filterPriority;
+      }
+      if (filterDate === "All") {
+        delete filterData.filterDate;
+      }
+      if (filterStuck === "All") {
+        delete filterData.filterStuck;
+      }
+      const orderByValue = document.querySelector(
+        "#admin-kanban-content .projects-intro-buttons .order-by-dropdown select").value;
+
+      if (orderByValue !== "None") {
+        filterData.orderByValue = orderByValue;
+      }
+
+      filterAppliedAdminMsg.style.display = "block";
+      //filterAppliedMsg.innerHTML = createFiltersMsg(filters);
+      //console.log(createFiltersMsg(filters));
+
+      let filtersLength = Object.keys(filterData).length;
+      if (filtersLength > 0) {
+        filterRemoveAdminBtn.style.display = "flex";
+      } else {
+        filterRemoveAdminBtn.style.display = "none";
+      }
+
+      filterProjectTaskModal.style.display = "none";
+      //filterProjectTasks(filterData);
+  }
 
 
 async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID) {
