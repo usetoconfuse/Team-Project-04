@@ -278,6 +278,7 @@ thead, tbody {
 #statsHomeFiltersUser {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
 }  
 
 #mgrStatsUser-grid-container {
