@@ -49,6 +49,7 @@
     $date = isset($_GET['dateValueHome']) ? $_GET['dateValueHome'] : null;
     $stuck = isset($_GET['stuckValueHome']) ? $_GET['stuckValueHome'] : null;
     $orderBy = isset($_GET['orderByValueHome']) ? $_GET['orderByValueHome'] : null;
+    $searchParam = isset($_GET['searchParam']) ? $_GET['searchParam'] : null;
 
     // echo $stuck;
     // echo $orderBy;
@@ -59,7 +60,7 @@
                 SUM(CASE WHEN Tasks.Status = 'Completed' THEN 1 ELSE 0 END) AS count_completed, 
                 SUM(CASE WHEN Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress' THEN 1 ELSE 0 END) AS count_remaining FROM Users LEFT JOIN Tasks
             ON Users.User_ID = Tasks.Assignee_ID
-            WHERE (Users.Forename LIKE '%%' OR Users.User_ID LIKE '%%')
+            WHERE (Users.Forename LIKE '%$searchParam%' OR Users.User_ID LIKE '%$searchParam%')
                 AND Users.User_Type <> 'Admin'
             ";
 
