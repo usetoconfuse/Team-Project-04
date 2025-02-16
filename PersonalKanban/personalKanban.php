@@ -236,10 +236,10 @@
             </div>
             <!--Body-->
             <div class="modal-body">
-            
+
             </div>
             <div class="task-delete-buttons">
-                <a id="delete-personal-task-confirm">     <i class="fa fa-trash"></i>
+                <a id="delete-personal-task-confirm"> <i class="fa fa-trash"></i>
                     Delete
                 </a>
                 <a class="cancel-delete-task-btn" id="cancel-delete-task-btn"><i class="fa fa-xmark"></i>
