@@ -118,12 +118,21 @@
     width: 80%;
 }
 
+#prjStMembersLeaderRow {
+    display: flex;
+}
+
 .fa-stack .fa-circle {
     color: black;
 }
 
 .fa-stack .fa-crown {
     color: var(--light-gray-bg);
+}
+
+.fa-stack.small-stack {
+    font-size: 0.5rem;
+    align-self: center;
 }
 
 

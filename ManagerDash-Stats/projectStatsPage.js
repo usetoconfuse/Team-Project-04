@@ -138,18 +138,25 @@ async function PopulateMemberList() {
 
     // Loop through the data and create a new element for each item provided there are project members
     if(data[0][0]) {
-        data.forEach(item => {
-            let crown = `<i class="fa-solid fa-circle fa-stack-2x"></i>
-                        <i class="fa-solid fa-crown fa-stack-1x fa-inverse"></i>`;
-            if ((item[0].User_ID) == projDetails.leader) {
-                crown = ""
+        data[0].forEach(item => {
+            // Add crown icon next to project leader's name
+            let isLeaderTag = "";
+            let crown = "";
+            if ((item.User_ID) == projDetails.leader) {
+                isLeaderTag = ` id="prjStMembersLeaderRow"`;
+
+                crown = `<i class="fa-solid fa-circle fa-stack-2x"></i>
+                        <i class="fa-solid fa-crown fa-stack-1x"></i>`;
             }
     
             membersTable  += `<tr>
-                                <td><span class="fa-stack">${crown}</span> ${item[0].Forename} ${item[0].Surname}</td>
-                                <td>${item[0].Email}</td>
-                                <td>${item[0].Tasks}</td>
-                                <td>${item[0].Stuck}</td>
+                                <td${isLeaderTag}>
+                                    <span class="fa-stack small-stack">${crown}</span>
+                                    ${item.Forename} ${item.Surname}
+                                </td>
+                                <td>${item.Email}</td>
+                                <td>${item.Tasks}</td>
+                                <td>${item.Stuck}</td>
                             </tr>`
         });     
         membersTable  += '</tbody>'
@@ -214,11 +221,11 @@ async function PopulateTaskDialChart() {
             datasets: [{
                 data: dialData,
                 backgroundColor: [
-                    '#adda9d',
-                    '#eab385',
-                    '#8e8e91'
+                    cols.getPropertyValue('--green'),
+                    cols.getPropertyValue('--orange'),
+                    cols.getPropertyValue('--medium-gray')
                 ]
-            }],
+            }]
         },
         
         options: {
