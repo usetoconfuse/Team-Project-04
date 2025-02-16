@@ -286,7 +286,7 @@ if ($_SESSION['role'] !== 'Employee') {
     <script src="navbar.js"></script>
 
     <?php 
-    if(isset($_SESSION['changePWD'])) {
+    if(isset($_SESSION['changePWD'])) { //Check if password has been reset.
         if($_SESSION['changePWD'] === 1): ?>
             <script>
             sendToast('Your password has been reset - Please change it immediately');

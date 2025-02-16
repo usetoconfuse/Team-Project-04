@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                 $_SESSION['user_forename'] = $fetched_forename;
                 $_SESSION['user_name'] = $fetched_forename . " " . $fetched_surname;
 
-                if($inputted_password === 'MakeItAll123!') {
+                if($inputted_password === 'MakeItAll123!') { // Check if the password has been reset
                     $_SESSION['changePWD'] = 1;
                 }
                 // Redirect based on user role

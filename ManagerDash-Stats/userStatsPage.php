@@ -14,6 +14,36 @@
 
 
 
+<!-- Delete user MODAL ==================== -->
+
+<div id="delete-user-modal" class="modal">
+                <div class="modal-box">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p>Delete User</p>
+                        <div class="close-modal-btn">
+                            <i class="fa-solid fa-x"></i>
+                        </div>
+                    </div>
+                    <!--Body-->
+                    <form id="filter-modal-form" class="modal-body">
+                        <h1>Are you sure you want to Delete this user?</h1>
+                        <div id="confirmDeleteUser" class='all-projects-btn black-btn' >
+                            Delete User
+                        </div>
+
+                    </form>
+                    <!-- <div class="task-submit-buttons">
+                        <a class="add-filter-btn" id="confirmPWDreset">
+                            Reset Password
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+
+
+
 
 <!-- RESET PASSWORD MODAL ==================== -->
 
@@ -59,11 +89,8 @@
                 <div id="resetPassword" class='all-projects-btn black-btn'>
                     Reset Password
                 </div>
-                <div class='all-projects-btn black-btn' >
-                    Promote
-                </div>
-                <div class='all-projects-btn black-btn' >
-                    Mark as left company
+                <div id="deleteUserBtn" class='all-projects-btn black-btn' >
+                    Delete User
                 </div>
             </div>
         </div>

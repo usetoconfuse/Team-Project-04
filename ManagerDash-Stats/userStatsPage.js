@@ -1002,33 +1002,62 @@ async function PopulateTaskDialChartUserStats() {
 
 
 
+//Delete User ===================================================================
+const deleteUserModal = document.querySelector("#delete-user-modal");
+const deleteUserBtn = document.querySelector('#deleteUserBtn');
+const closeDeleteUserModal = deleteUserModal.querySelector('#delete-user-modal .close-modal-btn');
 
-// RESET PASSWORD ==========================================================================================================
-// passwordReset = document.querySelector('#resetPassword');
-// passwordReset.addEventListener('click', resetPassword());
+
+deleteUserBtn.addEventListener('click', () => {
+  deleteUserModal.style.display = 'flex';
+    })
+    closeDeleteUserModal.addEventListener('click', () => {
+      deleteUserModal.style.display = 'none';
+    })
 
 
+const deleteUserConfirmBtn = document.querySelector("#confirmDeleteUser");
+deleteUserConfirmBtn.addEventListener('click', deleteUser); // Passes function to the event listener, but resetPassword() passess the result of function to event listener
+// console.log(deleteUserConfirmBtn);
 
-// filter button
+async function deleteUser() {
+  // console.log("resetting");
+  const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsDeleteUserQuery.php?ID=' + userDetails.id);
+  // console.log("1: ", response);
+  
+  // Ensure the response is OK and return the JSON data 
+  if (!response.ok) { 
+      throw new Error('Network response was not ok ' + response.statusText);
+  }
+  // Convert the response to JSON format
+  const data = await response.json();
+  // console.log(data);
+
+  sendToast(data.message);
+  
+  
+}
+
+// Reset password ===================================================================
 const passwordResetModal = document.querySelector("#password-modal");
 const passwordResetBtn = document.querySelector('#resetPassword');
-const closePasswordResetkModal = passwordResetModal.querySelector('#password-modal .close-modal-btn');
+const closePasswordResetModal = passwordResetModal.querySelector('#password-modal .close-modal-btn');
 
 
 passwordResetBtn.addEventListener('click', () => {
   passwordResetModal.style.display = 'flex';
     })
-    closePasswordResetkModal.addEventListener('click', () => {
+    closePasswordResetModal.addEventListener('click', () => {
       passwordResetModal.style.display = 'none';
     })
 
 
 const passwordResetConfirmBtn = document.querySelector("#confirmPWDreset");
 passwordResetConfirmBtn.addEventListener('click', resetPassword); // Passes function to the event listener, but resetPassword() passess the result of function to event listener
-console.log("BUT TON",passwordResetConfirmBtn);
+// console.log(passwordResetConfirmBtn);
 
 async function resetPassword() {
-  console.log("resetting");
+  // console.log("resetting");
   const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsResetPwdQuery.php?ID=' + userDetails.id);
   // console.log("1: ", response);
   
