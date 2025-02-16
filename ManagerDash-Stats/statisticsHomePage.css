@@ -47,7 +47,6 @@
 
 .stats-listing-search {
     display: flex;
-    flex-grow: 1;
     flex-direction: row;
     align-items: center;
     background-color: var(--secondary-colour);
@@ -55,6 +54,7 @@
     padding-left: 10px;
     border: 0px;
     width: 25vw;
+    height: fit-content;
 }
 
 .stats-search-colour {
@@ -151,6 +151,9 @@ thead, tbody {
 #statsHomeFiltersProj {
     grid-area: filtersHomeProj;
     justify-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #statsHomeTableProj {
@@ -191,6 +194,8 @@ thead, tbody {
     width: 100%;
     transition: 0.5s color ease, 0.5s background-color ease;
     padding: 10px;
+    font-size: 1rem;
+    border-radius: 10px;
 }
 
 
@@ -279,6 +284,7 @@ thead, tbody {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    gap: 10px;
 }  
 
 #mgrStatsUser-grid-container {

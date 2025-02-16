@@ -135,9 +135,7 @@
                                 <option value="MostCompleted">Most Completed Tasks</option>
                                 <option value="MostStuck">Most Stuck Tasks</option>
                             </select>
-                            <div>
-                                <a href="#" class="order-by-confirm black-btn">Order By</a>
-                            </div>
+                            <a href="#" class="order-by-confirm black-btn">Order By</a>
                         </div>
 
                         <!-- FILTER BTNS -->
@@ -145,14 +143,15 @@
                             <i class="fa fa-solid fa-sliders"></i>
                         </div>
 
-                        <div class="filter-applied-container">
-                            <p class="filter-applied-msg"></p>
-                            <div class="remove-filters-btn">
-                                <i class='fa fa-solid fa-x'></i>
-                            </div>
-                        </div>
+
 
                     </div>
+                </div>
+            </div>
+            <div class="filter-applied-container">
+                <p class="filter-applied-msg"></p>
+                <div class="remove-filters-btn">
+                    <i class='fa fa-solid fa-x'></i>
                 </div>
             </div>
             <div class="statsHome-table" id="statsHomeTableUser">

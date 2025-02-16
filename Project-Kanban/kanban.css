@@ -110,12 +110,15 @@
 
 .projects-intro-buttons {
     display: flex;
-    align-items: center;
     gap: 0.6rem;
 }
 
+#userStatsHome-filterAll {
+    flex-grow: 1;
+}
+
 .all-projects-btn, .add-task-btn, .filter-task-btn {
-    padding: 0.8rem 0.8rem;
+    padding: 10px;
     border-radius: 10.5px;
     color: white;
     background-color: black;
@@ -522,7 +525,7 @@ input[type="file"]::-webkit-file-upload-button {
 
 .order-by-dropdown select {
     border-radius: 10.5px 0 0 10.5px;
-    height: 45px;
+    border-right: 0px;
 }
 
 .move-task-dropdown select {
@@ -572,8 +575,8 @@ input[type="file"]::-webkit-file-upload-button {
 .task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn, #delete-project-confirm, #cancel-delete-btn, #active-project-confirm   {
     width: 60%;
     margin: 1rem auto;
-    padding: 0.8rem 0.8rem;
-    border-radius: 10.5px;
+    padding: 10px;
+    border-radius: 10px;
     color: white;
     background-color: black;
     display: flex;
@@ -907,7 +910,6 @@ input[type="file"]::-webkit-file-upload-button {
 
 .move-task-dropdown, .order-by-dropdown {
     display: flex;
-    align-items: center;
     justify-content: center;
     font-size: 0.9rem;
 }
@@ -926,7 +928,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .projects-intro-buttons .order-by-confirm {
-    padding: 0.8rem 0.8rem;
+    padding: 10px;
     border-radius: 0 10.5px 10.5px 0;
 }
 

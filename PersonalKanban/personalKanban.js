@@ -158,9 +158,7 @@ function populatePersonalTasks(tasks) {
                     <option value="kanban-in-progress">In Progress</option>
                     <option value="kanban-completed">Completed</option>
                   </select>
-                  <div>
-                    <a href="#" class="move-task-confirm black-btn">Confirm Move</a>
-                  </div>
+                  <a href="#" class="move-task-confirm black-btn">Confirm Move</a>
                 </div>
                 </div>
 

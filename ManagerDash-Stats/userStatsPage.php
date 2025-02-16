@@ -290,9 +290,7 @@
                     <option value="Due Last">Due Last</option>
                     <option value="Most Overdue">Most Overdue</option>
                 </select>
-                <div>
-                    <a href="#" class="order-by-confirm black-btn">Order By</a>
-                </div>
+                <a href="#" class="order-by-confirm black-btn">Order By</a>
             </div>
 
             <!-- FILTER BTNS -->

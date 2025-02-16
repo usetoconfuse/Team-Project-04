@@ -405,8 +405,8 @@ window.addEventListener("DOMContentLoaded", function () {
     getUsersHomeData();
     
     //Filters
-    const filterAppliedMsg = document.querySelector('#userStatsHome-filterAll .filter-applied-msg');
-    const filterRemoveBtn = document.querySelector('#userStatsHome-filterAll .remove-filters-btn');
+    const filterAppliedMsg = document.querySelector('#statsHomeGridUser .filter-applied-msg');
+    const filterRemoveBtn = document.querySelector('#statsHomeGridUser .remove-filters-btn');
 
     const applyFilterBtn = filterUserStatsHomeModal.querySelector('#add-filter-btn');
     // console.log(applyFilterBtn);
@@ -432,8 +432,7 @@ window.addEventListener("DOMContentLoaded", function () {
       } 
 
       filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsg(filtersHome);
-      console.log(createFiltersMsg(filtersHome))
+      filterAppliedMsg.innerHTML = createFiltersMsgStatsHome(filtersHome);
       console.log(filtersHome)
 
       let filtersLengthHome = Object.keys(filtersHome).length;
@@ -484,10 +483,6 @@ window.addEventListener("DOMContentLoaded", function () {
       const currentFiltersHome = getcurrentFiltersHome();
       const allFiltersHome = { ...currentFiltersHome, ...orderByParamHome};
 
-
-      filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsg(allFiltersHome);
-
       let filtersLength = Object.keys(allFiltersHome).length;
       if (filtersLength > 0) {
         filterRemoveBtn.style.display = 'flex';
@@ -522,7 +517,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
 
-function createFiltersMsg(filters) {
+function createFiltersMsgStatsHome(filters) {
+  console.log("CLLED RIGHT ONE")
     let applied = [];
     if (filters.priorityValueHome && filters.priorityValueHome !== "All") {
       applied.push(filters.priorityValueHome + " Priority");
