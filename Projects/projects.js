@@ -1,6 +1,4 @@
 
-
-
   const projectContainer = document.querySelector("#project-content");
   const userProjectsID = projectContainer.getAttribute("data-user-id");
   fetchProjectsData(
@@ -71,6 +69,7 @@
 
     });
   }
+
   const projectsFilterModal = document.querySelector(
     "#project-content #project-filter-modal"
   );
@@ -112,6 +111,7 @@
       const filterQuery = new URLSearchParams(filters).toString();
       url += filterQuery ? `&${filterQuery}` : "";
 
+      console.log(url);
       const params = {
         method: "GET",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -601,7 +601,9 @@
     }
   }
 
-
+  
+  if (userRole === "Admin") {
+    
   // Open Add Project Modal & Fetch Users
   addProjectBtn.addEventListener("click", () => {
     addProjectModal.style.display = "flex";
@@ -682,8 +684,7 @@
       alert("An error occurred. Please try again.");
     }
   });
-
-
+}
 
 
 const searchBarProjects = document.querySelectorAll(
@@ -714,8 +715,6 @@ searchBarProjects.forEach((bar) => {
     }
   });  
 });
-
-
 
 
 const leaderProjectCard = document.querySelector("#leader-project-card");

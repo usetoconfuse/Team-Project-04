@@ -6,17 +6,31 @@ $userID = isset($_GET['userID']) ? intval($_GET['userID']) : null;
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 $status = isset($_GET['status']) ? $_GET['status'] : null;
 
-//Filter Fields
+// Filter Fields
 $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
 
-
 if ($role === 'Employee') {
-    $sql = "SELECT Projects.*, COUNT(Tasks.Task_ID) AS Task_Count FROM `User_Teams`
-    INNER JOIN Projects ON User_Teams.Project_ID = Projects.Project_ID
-    LEFT JOIN Tasks ON Projects.Project_ID = Tasks.Project_ID AND (Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress') AND Assignee_ID = $userID AND Tasks.Start_Date <= CURDATE()
-    WHERE User_ID = $userID AND Projects.Start_Date <= CURDATE() AND Projects.Status = '$status'";
+    $sql = "SELECT Projects.Project_ID, Projects.*, COUNT(Tasks.Task_ID) AS Task_Count 
+            FROM `User_Teams`
+            INNER JOIN Projects ON User_Teams.Project_ID = Projects.Project_ID
+            LEFT JOIN Tasks ON Projects.Project_ID = Tasks.Project_ID 
+            AND ((Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress') 
+            AND Assignee_ID = $userID AND Tasks.Start_Date <= CURDATE())
+            WHERE User_Teams.User_ID = $userID 
+            AND Projects.Start_Date <= CURDATE()";
+
+    if ($status) {
+        $sql .= " AND Projects.Status = '$status'";
+    }
+
+    if (!empty($date)) {
+        $sql .= " AND Projects.Due_Date <= '$date'";
+    }
+
+    $sql .= " GROUP BY Projects.Project_ID";
 } else {
-    $sql = "SELECT Projects.* FROM Projects WHERE 1=1";
+    $sql = "SELECT Projects.Project_ID, Projects.* FROM Projects WHERE 1=1";
+
     if ($status) {
         if ($status === 'Active') {
             $sql .= " AND Projects.Status = '$status' AND Projects.Start_Date <= CURDATE() AND Projects.Completion_Date IS NULL";
@@ -28,14 +42,10 @@ if ($role === 'Employee') {
             $sql .= " AND Projects.Completion_Date IS NOT NULL AND Projects.Status <> 'Archived'";
         }
     }
-}
 
-if (!empty($date)) {
-    $sql .= " AND Projects.Due_Date <= '$date'";
-}
-
-if ($role === 'Employee') {
-    $sql .= " GROUP BY Projects.Project_ID;";
+    if (!empty($date)) {
+        $sql .= " AND Projects.Due_Date <= '$date'";
+    }
 }
 
 $result = mysqli_query($conn, $sql);
@@ -50,8 +60,4 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 }
 
 echo json_encode($allDataArray);
-
-
-
-
 ?>
