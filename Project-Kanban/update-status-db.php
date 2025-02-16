@@ -8,11 +8,17 @@ $statusData = json_decode(file_get_contents("php://input"), true);
 if (isset($statusData['Task_ID']) && isset($statusData['Status'])) {
     $task_id = $statusData['Task_ID'];
     $status = $statusData['Status'];
+    if ($status == 'Completed') {
+        $comp_date = date("Y-m-d");
+    }
+    else {
+        $comp_date = null;
+    }
 
-    $updateStatusSQL = "UPDATE Tasks SET Status = ? WHERE Task_ID = ?";
+    $updateStatusSQL = "UPDATE Tasks SET Status = ?, Completion_Date = ? WHERE Task_ID = ?";
 
     $stmt = $conn->prepare($updateStatusSQL);
-    $stmt->bind_param("si", $status, $task_id);
+    $stmt->bind_param("ssi", $status, $comp_date, $task_id);
     if ($stmt->execute()) {
         http_response_code(200);
     } else {
