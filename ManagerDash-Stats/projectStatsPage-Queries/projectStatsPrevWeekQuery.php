@@ -1,22 +1,24 @@
 <?php
-// Created by Quinn Little 23/12/24
-// Updated by Toby Tischler 16/02/25
+// Created by Toby Tischler 16/02/25
 
     include '../../config/db-setup.php';
-    
+
     $projID = $_GET['ID'];
+    $today = date("Y-m-d");
 
     $sql = "SELECT
-                Projects.Project_Title,
-                Projects.Start_Date,
-                Projects.Due_Date,
-                Projects.Creation_Date,
-                Projects.Completion_Date,
-                Projects.Project_Leader
+                Users.User_ID,
+                Users.Forename,
+                Users.Surname,
+                SUM(Tasks.Man_Hours) AS Hours
             FROM
-                Projects
+                Users, Tasks
             WHERE
-                Project_ID = ?
+                Tasks.Project_ID = ?
+                AND Users.User_ID = Tasks.Assignee_ID
+                AND DATEDIFF(CURRENT_DATE, Tasks.Completion_Date) <= 7
+            GROUP BY
+                Users.User_ID
             ";
 
     $stmt = $conn->prepare($sql);
