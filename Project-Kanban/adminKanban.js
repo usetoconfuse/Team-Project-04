@@ -199,7 +199,7 @@ function openEditModal(task) {
       }
 
       if (startDate > taskDueDate) {
-        errorText.innerText = 'Start Date cannot be after the Due Date';
+        errorText.innerText = 'Start Date cannot be after the Due Date of the task';
         errorText.style.display = 'block';
         return 
       }
@@ -220,18 +220,18 @@ function openEditModal(task) {
       
       if (startDateEditable) {
         console.log('start date is editable');
-      if (startDate < todays_date) {
-        errorText.innerText = 'Start date cannot be before today';
-        errorText.style.display = 'block';
-        return
-      }
+        if (startDate < todays_date) {
+          errorText.innerText = 'Start date cannot be before today';
+          errorText.style.display = 'block';
+          return
+        }
       }
       
 
       
       
       updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
-      sendToast(`✅ Task "${taskName}" has been successfully updated!`);
+      sendToast(`Task "${taskName}" has been successfully updated!`);
       editActionsModal.style.display = 'none';
   };
 
@@ -277,7 +277,7 @@ async function deleteProjectTask(projectTaskID) {
     if (!response.ok) {
         console.log(response);
     } else {
-      sendToast(`🗑️ Task #${taskID} has been successfully deleted!`);
+      sendToast(`Task #${taskID} has been successfully deleted!`);
       getProjectTable(globalSelectedProjectID);
         
     }
@@ -420,8 +420,8 @@ confirmAddTask.onclick = () => {
     return
   }
 
-  if (startDate < taskDueDate) {
-    errorText.innerText = 'Start Date cannot be after the Due Date';
+  if (startDate > taskDueDate) {
+    errorText.innerText = 'Start Date cannot be after the Due Date of the task';
     errorText.style.display = 'block';
     return 
   }
@@ -644,7 +644,7 @@ async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueD
     if (!response.ok) {
       console.log(response);
     } else {
-      sendToast(`🎉 Task "${taskName}" has been successfully added!`);
+      sendToast(`Task "${taskName}" has been successfully added!`);
       getProjectTable(globalSelectedProjectID);
     }
 
