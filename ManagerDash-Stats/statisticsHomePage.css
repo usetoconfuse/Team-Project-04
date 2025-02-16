@@ -53,11 +53,13 @@
     border-radius: var(--line-border-radius);
     padding-left: 10px;
     border: 0px;
+    width: 25vw;
 }
 
 .stats-search-colour {
     background-color: var(--secondary-colour);
 }
+
 
 /* Homepage Styles */
 
@@ -84,8 +86,8 @@
     overflow: auto;
     width: 100%;
     max-height: 38vh;
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    /* display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr)); */
 }
 
 .statsHome-table table {
@@ -93,7 +95,8 @@
     background-color: white;
     text-align: left;
     border-radius: 20px;
-    min-width: 100%;
+    justify-self: center;
+    /* min-width: 100%;  */
     width: fit-content;
 }
 
@@ -112,7 +115,7 @@ thead, tbody {
     letter-spacing: 0.1rem;
     font-size: 0.9rem;
     font-weight: 600;
-
+    white-space: wrap !important;
 }
 
 .statsHome-table table td {
@@ -132,8 +135,8 @@ thead, tbody {
 
 /* HOVER */
 .statsHome-table table tbody tr:hover {
-    background-color: #d4b400;
-    color: white;
+    background-color: #f5f5f5;
+    color: black;
     cursor: pointer;
 }
 
@@ -155,6 +158,7 @@ thead, tbody {
 #statsHomeTableProj {
     grid-area: tableHomeProj;
 }
+
 
 /* User Home Grid */
 #statsHomeGridUser {
@@ -183,7 +187,7 @@ thead, tbody {
     cursor: pointer;
     min-height: fit-content;
     min-width: fit-content;
-    width: fit-content;
+    width: 100%;
     transition: 0.5s color ease, 0.5s background-color ease;
     padding: 10px;
 }

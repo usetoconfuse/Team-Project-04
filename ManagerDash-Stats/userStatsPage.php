@@ -176,23 +176,9 @@
 
 
 
-
-
-
-<!-- test -->
-<!-- Table of all tasks for specific user -->
-    <div id="userStats-allTasksUser" class="mgrStatsUser-grid-item">
-    <div class="userStats-type-btns">
-            <button id="userStats-type-showall-btn" class="active">All</button>
-            <button id="userStats-type-earliest-btn" value="earliest">Earliest Start Date</button>
-            <button id="userStats-type-high-btn" value="high">High Priority</button>
-            <button id="userStats-type-stuck-btn" value="stuck">Stuck</button>
-
-        </div>
-        <div class="statsHome-table">
-
-        <!-- ORDER BY DROPDOWN -->
-        <div class="projects-intro-buttons">
+<div id="userStats-allTasksFilters" class="mgrStatsUser-grid-item">
+<!-- ORDER BY DROPDOWN -->
+         <div class="projects-intro-buttons">
             <div class="order-by-dropdown">
                 <select>
                     <option value="None" selected>None</option>
@@ -224,6 +210,21 @@
                     <i class='fa fa-solid fa-x'></i>
                 </div>
             </div>
+</div>
+
+<!-- Table of all tasks for specific user -->
+    <div id="userStats-allTasksUser" class="mgrStatsUser-grid-item">
+    <!-- <div class="userStats-type-btns">
+            <button id="userStats-type-showall-btn" class="active">All</button>
+            <button id="userStats-type-earliest-btn" value="earliest">Earliest Start Date</button>
+            <button id="userStats-type-high-btn" value="high">High Priority</button>
+            <button id="userStats-type-stuck-btn" value="stuck">Stuck</button>
+
+        </div> -->
+         
+        <div class="statsHome-table">
+
+       
 
             <table class="userStats-tr" id="allTaskTable-userStats">
             

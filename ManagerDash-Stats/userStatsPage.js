@@ -912,36 +912,36 @@ async function PopulateTaskDialChartUserStats() {
 
 // Filters for the All Tasks Table
 
-//on showall btn click will load all posts from db
-document.getElementById("userStats-type-showall-btn").addEventListener('click', (event) => {
-    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    fetchUserTaskTable('', '', '');
-});
+// //on showall btn click will load all posts from db
+// document.getElementById("userStats-type-showall-btn").addEventListener('click', (event) => {
+//     document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+//     event.target.classList.add('active');
+//     fetchUserTaskTable('', '', '');
+// });
 
-//on techincal button clicked show all post with type of techincal
-document.getElementById('userStats-type-earliest-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 'earliest';
-    fetchUserTaskTable('', '', selectedType);
-});
+// //on techincal button clicked show all post with type of techincal
+// document.getElementById('userStats-type-earliest-btn').addEventListener('click', (event) => {
+//     document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+//     event.target.classList.add('active');
+//     selectedType = 'earliest';
+//     fetchUserTaskTable('', '', selectedType);
+// });
 
-//on techincal button clicked show all post with type of non-techincal
-document.getElementById('userStats-type-high-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 'high';
-    fetchUserTaskTable('',selectedType,'');
-});
+// //on techincal button clicked show all post with type of non-techincal
+// document.getElementById('userStats-type-high-btn').addEventListener('click', (event) => {
+//     document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+//     event.target.classList.add('active');
+//     selectedType = 'high';
+//     fetchUserTaskTable('',selectedType,'');
+// });
 
-//on techincal button clicked show all post with type of non-techincal
-document.getElementById('userStats-type-stuck-btn').addEventListener('click', (event) => {
-    document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
-    event.target.classList.add('active');
-    selectedType = 1;
-    fetchUserTaskTable(selectedType, '', '');
-});
+// //on techincal button clicked show all post with type of non-techincal
+// document.getElementById('userStats-type-stuck-btn').addEventListener('click', (event) => {
+//     document.querySelectorAll('.userStats-type-btns button').forEach(topic => topic.classList.remove('active'));
+//     event.target.classList.add('active');
+//     selectedType = 1;
+//     fetchUserTaskTable(selectedType, '', '');
+// });
 
 
 
