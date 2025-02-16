@@ -345,6 +345,49 @@
 
 
   const editProjectModal = document.querySelector('#edit-projects-modal');
+  const editProjectBtn = editProjectModal.querySelector('.edit-project-btn');
+  //initialise the edit project details fields
+  editProjectBtn.addEventListener('click', async () =>{
+    const projectTitle = editProjectModal.querySelector('#task-title').value;
+    const projectTeamLeader = editProjectModal.querySelector('#team-leader-dropdown').value;
+    const projectStartDate = editProjectModal.querySelector('#start-date-project').value;
+    const projectDueDate = editProjectModal.querySelector('#date-project').value;
+    const projectID = editProjectModal.getAttribute('data-project-id');
+    const currentStatusContainer = editProjectModal.getAttribute('current-status-container');
+    const currentgridContainer = editProjectModal.getAttribute('current-grid-container');
+    await editProjectEntry(projectTitle, projectTeamLeader, projectStartDate, projectDueDate, projectID, currentStatusContainer, currentgridContainer)
+    editProjectModal.style.display = 'none';
+  })
+
+  async function editProjectEntry(title, leader, start, due, projectId, statusCont, gridContainer) {
+     try {
+      const projectData = {
+        title : title,
+        leader : leader,
+        start : start, 
+        due : due,
+        projectId : projectId
+      };
+      const response = await fetch("Projects/query/edit-project-entry.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projectData),
+      });
+
+      if (!response.ok) {
+        sendToast(`Error editing project status`);
+        throw new Error("Failed to mark project as complete");
+      } else {
+        fetchProjectsData(userProjectsID,{ status: statusCont }, gridContainer);
+        sendToast(`Project #${projectId} Edited`);
+      }
+    } catch (error) {
+      console.error("Error adding project:", error);
+      alert("An error occurred. Please try again.");
+    }
+  }
+
+
   //Edit Actions for Projects (Admin Only)
   function openEditProjectModal(project, statusContainer, containerSelector) {
 
@@ -376,19 +419,10 @@
     editProjectModal.querySelector('#team-leader-dropdown').value = project.Project_Leader;
     editProjectModal.querySelector('#start-date-project').value = new Date(project.Start_Date).toISOString().split('T')[0];
     editProjectModal.querySelector('#date-project').value = project.Due_Date;
+    editProjectModal.setAttribute('data-project-id', project.Project_ID);
+    editProjectModal.setAttribute('current-grid-container', containerSelector)
+    editProjectModal.setAttribute('current-status-container', statusContainer)
     editProjectModal.style.display = 'flex';
-
-    const editProjectBtn = editProjectModal.querySelector('.edit-project-btn');
-    editProjectBtn.addEventListener('click', async () =>{
-      const projectTitle = editProjectModal.querySelector('#task-title').value;
-      const projectTeamLeader = editProjectModal.querySelector('#team-leader-dropdown').value;
-      const projectStartDate = editProjectModal.querySelector('#start-date-project').value;
-      const projectDueDate = editProjectModal.querySelector('#date-project').value;
-      const projectID = project.Project_ID;
-      //HERE CALL A FUNCTION TO EDIT PROJECT ENTRY IN DATABASE
-      //CALL fetchProjectsData(x,y,z) WITH THE CORRECT Status and Container Selector (from parameters of this function)
-      editProjectModal.style.display = 'none';
-    })
 
 
     //Initialise the Complete Modal 

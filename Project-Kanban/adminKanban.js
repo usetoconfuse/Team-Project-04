@@ -134,6 +134,7 @@ function populateTasksTable(tableData) {
 }
 
 function openEditModal(task) {
+  let startDateEditable = true;
   const editActionsModal = document.querySelector('#admin-kanban-content .edit-task-modal');
   fetchUsersForEdit();
   editActionsModal.querySelector('.modal-header p').innerText = `Actions for Task #${task.Task_ID}`;
@@ -146,6 +147,15 @@ function openEditModal(task) {
   editActionsModal.querySelector('#man-hours-input').value = task.Man_Hours;
   editActionsModal.querySelector('#start-date-input').value = task.Start_Date;
 
+  const todays_date = new Date().toISOString().split('T')[0]
+  const startDate = editActionsModal.querySelector('#start-date-input').value;
+    if (startDate < todays_date) {
+      editActionsModal.querySelector('.task-dropdown-start-date').style.display = 'none';
+      startDateEditable = false;
+      console.log(startDate);
+    } else if (startDate > todays_date) {
+      editActionsModal.querySelector('.task-dropdown-start-date').style.display = 'block';
+    }
 
   const updateTaskBtn = editActionsModal.querySelector('#update-task-btn');
   updateTaskBtn.onclick = () => {
@@ -176,7 +186,7 @@ function openEditModal(task) {
       }
 
       if (startDate > taskDueDate) {
-        errorText.innerText = 'Start Date cannot be before than Due Date';
+        errorText.innerText = 'Start Date cannot be after the Due Date';
         errorText.style.display = 'block';
         return 
       }
@@ -188,28 +198,27 @@ function openEditModal(task) {
         return
       }
 
-      //today's date
-      todays_date = new Date().toISOString().split('T')[0]
-
 
       if (taskDueDate < todays_date) {
         errorText.innerText = 'Task Due Date cannot be in the past';
         errorText.style.display = 'block';
         return
       }
-    
+      
+      if (startDateEditable) {
+        console.log('start date is editable');
       if (startDate < todays_date) {
         errorText.innerText = 'Start date cannot be before today';
         errorText.style.display = 'block';
         return
       }
-
+      }
       
 
       
       
       updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
-      endToast(`✅ Task "${taskName}" has been successfully updated!`);
+      sendToast(`✅ Task "${taskName}" has been successfully updated!`);
       editActionsModal.style.display = 'none';
   };
 
@@ -355,6 +364,7 @@ const addProjectTaskBtn = document.querySelector('#admin-kanban-content .add-tas
 const addProjectTaskModal = document.querySelector('#admin-kanban-content .add-task-modal')
 const closeProjectAddTaskModal = addProjectTaskModal.querySelector('.close-modal-btn')
 
+
 addProjectTaskBtn.addEventListener('click', () => {
     addProjectTaskModal.style.display = 'flex';
     fetchUsersForEdit();
@@ -380,6 +390,10 @@ confirmAddTask.onclick = () => {
   const errorText = addProjectTaskModal.querySelector('#error-adding-message');
   console.log(errorText);
 
+  const todays_date = new Date().toISOString().split('T')[0]
+
+  console.log(addProjectTaskModal.querySelector('.task-dropdown-start-date'));
+
   //Validaiton for the form fields
   if (!taskName || !taskDescription || !taskPriority || !taskDueDate || !Assignee_ID || !manHours || !startDate) {
     errorText.innerText = "Please fill in all the fields";
@@ -393,8 +407,8 @@ confirmAddTask.onclick = () => {
     return
   }
 
-  if (startDate > taskDueDate) {
-    errorText.innerText = 'Start Date cannot be greater than Due Date';
+  if (startDate < taskDueDate) {
+    errorText.innerText = 'Start Date cannot be after the Due Date';
     errorText.style.display = 'block';
     return 
   }
@@ -410,7 +424,7 @@ confirmAddTask.onclick = () => {
   }
 
   //today's date
-  todays_date = new Date().toISOString().split('T')[0]
+  
 
   //if task due date is lower than today's date its not possible
   if (taskDueDate < todays_date) {
@@ -436,9 +450,6 @@ confirmAddTask.onclick = () => {
 
 
 }
-
-
-
 
 //Filter Modal Functionality
 const filterProjectTaskModal = document.querySelector("#admin-kanban-content #filter-modal");

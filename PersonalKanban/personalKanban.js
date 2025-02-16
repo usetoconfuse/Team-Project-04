@@ -517,6 +517,8 @@ filterRemoveBtn.addEventListener('click', () => {
   fetchPersonalData(userIdPersonal, {});
 })
 
+
+
 function getCurrentFilterPersonal() {
   const filterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal');
   const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
