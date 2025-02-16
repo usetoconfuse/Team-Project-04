@@ -64,6 +64,7 @@
     $priority = isset($_GET['priorityValue']) ? $_GET['priorityValue'] : null;
     $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
     $stuck = isset($_GET['stuckValue']) ? $_GET['stuckValue'] : null;
+    $project = isset($_GET['projValue']) ? $_GET['projValue'] : null;
     $orderBy = isset($_GET['orderByValue']) ? $_GET['orderByValue'] : null;
 
     $taskSQL = "SELECT t.Task_ID, t.Name, t.Description, t.Status, t.Due_Date, t.Start_Date, t.Priority, t.Author_ID, t.Stuck, t.Project_ID,
@@ -113,6 +114,10 @@
         }
     }
 
+
+    if (!empty($project)) {
+        $taskSQL .= " AND t.Project_ID = '$project'";
+    }
     if ($orderBy !== 'None') {
         if (!empty($orderBy)) {
             switch ($orderBy) {

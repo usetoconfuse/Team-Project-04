@@ -170,13 +170,13 @@
                                 </div>
                             </div>
 
-                            <div class="task-dropdown">
+                            <div class="task-dropdown task-dropdown-proj">
                                 <label for="userProj">User's Projects</label>
                                 <div class="task-dropdown-select-options">
                                     <div class="task-dropdown-stuck-icon task-dropdown-icon">
                                         <i class="fa fa-solid fa-exclamation"></i>
                                     </div>
-                                    <select name="userProj" id="user-proj-drop">
+                                    <select name="userProj" id="user-proj">
                                             <!-- Auto Fill Options  -->
 
                                     
