@@ -410,6 +410,10 @@ const validate = (name,  value) => {
         sendToast(`Please fill in all fields - missing ${name}`);
         throw new Error("Please fill in all fields.");
     }
+    if (!value.match(/^[^<>&]+$/)) {
+        sendToast(`Invalid characters in ${name}`);
+        throw new Error("Invalid characters in field.");
+    }
     return value;
 }
 
