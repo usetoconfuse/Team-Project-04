@@ -392,18 +392,22 @@
   function openEditProjectModal(project, statusContainer, containerSelector) {
 
     if (statusContainer === "Active") {
+      editProjectModal.querySelector('.edit-project-btn').style.display = 'flex';
       editProjectModal.querySelector('.complete-project-btn').style.display = 'flex';
       editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
       editProjectModal.querySelector('.active-project-btn').style.display = 'none';
     } else if (statusContainer === "Not Started") {
+      editProjectModal.querySelector('.edit-project-btn').style.display = 'flex';
       editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
       editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
       editProjectModal.querySelector('.active-project-btn').style.display = 'none';
     } else if (statusContainer === "Archived") {
+      editProjectModal.querySelector('.edit-project-btn').style.display = 'none';
       editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
       editProjectModal.querySelector('.archive-project-btn').style.display = 'none';
       editProjectModal.querySelector('.active-project-btn').style.display = 'flex';
     } else if (statusContainer === "Completed") {
+      editProjectModal.querySelector('.edit-project-btn').style.display = 'none';
       editProjectModal.querySelector('.complete-project-btn').style.display = 'none';
       editProjectModal.querySelector('.archive-project-btn').style.display = 'flex';
       editProjectModal.querySelector('.active-project-btn').style.display = 'flex';
