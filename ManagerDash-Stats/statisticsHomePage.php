@@ -7,7 +7,7 @@
 
     <!-- Header -->
     <div class="mgrStats-header-section">
-        <h1 class="mgrStats-title">Statistics</h1>
+        <p class="mgrStats-title">Statistics</>
         <div id="mgrStats-tabBtn">
             <button class="mgrStats-activeTab" id="mgrProjStats" value="tabGroupProjectStats">Project</button>
             <button id="mgrUserStats" value="tabGroupUserStats">User</button>
@@ -20,7 +20,7 @@
         <!-- Project List Page -->
         <div id="statsHomeGridProject" class="statsHome-grid">
             <div id="statsHomeFiltersProj">
-            <h1 class="instruction-txt">Click a project for details</h1>
+            <p class="instruction-txt">Click a project for details</>
 
                 <div class="stats-listing-search projStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
@@ -50,7 +50,7 @@
         <div id="statsHomeGridUser" class="statsHome-grid">
 
             <div id="statsHomeFiltersUser">
-                <h1 class="instruction-txt">Click a user for details</h1>
+                <p class="instruction-txt">Click a user for details</>
 
                 
                 <!-- ORDER BY DROPDOWN -->
