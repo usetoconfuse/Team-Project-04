@@ -272,6 +272,9 @@
     color: black !important;
 }
 
+#edit-projects-modal .active-project-btn{
+     background-color: #89bc8a !important;
+ }
 
 
 /*====Responsiveness====*/
