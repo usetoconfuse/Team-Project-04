@@ -210,6 +210,12 @@
                     Create Project
                     <i class="fa fa-arrow-right"></i>
                 </div>
+
+                <!-- NEW: Add Task Button (Initially Hidden) -->
+                <div class="add-task-btn black-btn" id="add-task-btn" style="display: none;">
+                    Add Task
+                    <i class="fa fa-solid fa-plus"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -217,91 +223,90 @@
 
 
 
-    <!--Add Project -->
-    <div id="edit-projects-modal" class="modal" style="display: none;">
-        <div class="modal-box">
-            <!--Header-->
-            <div class="modal-header">
-                <p>Edit Project</p>
-                <div class="close-modal-btn">
-                    <i class="fa-solid fa-x"></i>
-                </div>
+<!--Add Project -->
+<div id="edit-projects-modal" class="modal" style="display: none;">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+            <p>Edit Project</p>
+            <div class="close-modal-btn">
+                <i class="fa-solid fa-x"></i>
             </div>
-            <!--Body-->
+        </div>
+        <!--Body-->
 
-            <form id="project-modal-form" class="modal-body">
-                <!--Title and Description-->
-                <div class="task-title-form">
-                    <label for="task-title">Title</label>
-                    <input type="text" id="task-title" name="task-title">
-                </div>
-                <!--<div class="task-description-form">
+        <form id="project-modal-form" class="modal-body">
+            <!--Title and Description-->
+            <div class="task-title-form">
+                <label for="task-title">Title</label>
+                <input type="text" id="task-title" name="task-title">
+            </div>
+            <!--<div class="task-description-form">
                     <label for="task-description">Description</label>
                     <textarea type="text" id="task-description" name="task-description"></textarea>
                 </div>-->
-                <div class="task-dropdowns-form" id="project-dropdowns-form">
-                    <!--DropDown Leader-->
-                    <div class="task-dropdown task-dropdown-leader">
-                        <label for="team-leader">Team Leader</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-user-icon task-dropdown-icon">
-                                <i class="fa fa-solid fa-user"></i>
-                            </div>
-                            <input autocomplete="off" list="team-leader" placeholder="Enter Name"
-                                id="team-leader-dropdown" >
-                            <datalist name="team-leader" id="team-leader">
-
-                            </datalist>
+            <div class="task-dropdowns-form" id="project-dropdowns-form">
+                <!--DropDown Leader-->
+                <div class="task-dropdown task-dropdown-leader">
+                    <label for="team-leader">Team Leader</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-user-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-user"></i>
                         </div>
-                    </div>
+                        <input autocomplete="off" list="team-leader" placeholder="Enter Name" id="team-leader-dropdown">
+                        <datalist name="team-leader" id="team-leader">
 
-                    <!--Choose Start Date-->
-                    <div class="task-dropdown task-dropdown-start-date">
-                        <label for="date">Start Date</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-date-icon task-dropdown-icon">
-                                <i class="fa fa-regular fa-calendar"></i>
-                            </div>
-                            <input type="date" name="date" id="start-date-project">
-                        </div>
-                    </div>
-
-                    <!--Choose Due Date-->
-                    <div class="task-dropdown task-dropdown-due-date">
-                        <label for="date">Due Date</label>
-                        <div class="task-dropdown-select-options">
-                            <div class="task-dropdown-date-icon task-dropdown-icon">
-                                <i class="fa fa-regular fa-calendar"></i>
-                            </div>
-                            <input type="date" name="date" id="date-project">
-                        </div>
+                        </datalist>
                     </div>
                 </div>
-            </form>
-            <div class="task-submit-buttons">
-                <a class="edit-project-btn" id="add-project-btn">
-                    Edit Project
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-                <a class="active-project-btn" id="add-project-btn" style="display: none;">
-                    Active
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-                <a class="complete-project-btn" id="add-project-btn" style="display: none;">
-                    Complete
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-                <a class="archive-project-btn" id="add-project-btn" style="display: none;">
-                    Archive
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-                <a class="delete-project-btn" id="add-project-btn">
-                    Delete
-                    <i class="fa fa-solid fa-trash"></i>
-                </a>
+
+                <!--Choose Start Date-->
+                <div class="task-dropdown task-dropdown-start-date">
+                    <label for="date">Start Date</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-date-icon task-dropdown-icon">
+                            <i class="fa fa-regular fa-calendar"></i>
+                        </div>
+                        <input type="date" name="date" id="start-date-project">
+                    </div>
+                </div>
+
+                <!--Choose Due Date-->
+                <div class="task-dropdown task-dropdown-due-date">
+                    <label for="date">Due Date</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-date-icon task-dropdown-icon">
+                            <i class="fa fa-regular fa-calendar"></i>
+                        </div>
+                        <input type="date" name="date" id="date-project">
+                    </div>
+                </div>
             </div>
+        </form>
+        <div class="task-submit-buttons">
+            <a class="edit-project-btn" id="add-project-btn">
+                Edit Project
+                <i class="fa fa-arrow-right"></i>
+            </a>
+            <a class="active-project-btn" id="add-project-btn" style="display: none;">
+                Active
+                <i class="fa fa-arrow-right"></i>
+            </a>
+            <a class="complete-project-btn" id="add-project-btn" style="display: none;">
+                Complete
+                <i class="fa fa-arrow-right"></i>
+            </a>
+            <a class="archive-project-btn" id="add-project-btn" style="display: none;">
+                Archive
+                <i class="fa fa-arrow-right"></i>
+            </a>
+            <a class="delete-project-btn" id="add-project-btn">
+                Delete
+                <i class="fa fa-solid fa-trash"></i>
+            </a>
         </div>
     </div>
+</div>
 
 </div>
 
@@ -315,10 +320,10 @@
         </div>
         <!--Body-->
         <div class="modal-body">
-        
+
         </div>
         <div class="task-delete-buttons">
-            <a id="complete-project-confirm">    
+            <a id="complete-project-confirm">
                 Complete
             </a>
             <a class="cancel-complete-btn" id="cancel-complete-btn"><i class="fa fa-xmark"></i>
@@ -338,10 +343,10 @@
         </div>
         <!--Body-->
         <div class="modal-body">
-        
+
         </div>
         <div class="task-delete-buttons">
-            <a id="archive-project-confirm">    
+            <a id="archive-project-confirm">
                 Archive
             </a>
             <a class="cancel-archive-btn" id="cancel-archive-btn"><i class="fa fa-xmark"></i>
@@ -360,10 +365,10 @@
         </div>
         <!--Body-->
         <div class="modal-body">
-        
+
         </div>
         <div class="task-delete-buttons">
-            <a id="delete-project-confirm">    
+            <a id="delete-project-confirm">
                 Delete
             </a>
             <a class="cancel-delete-btn" id="cancel-delete-btn"><i class="fa fa-xmark"></i>
@@ -383,10 +388,10 @@
         </div>
         <!--Body-->
         <div class="modal-body">
-        
+
         </div>
         <div class="task-delete-buttons">
-            <a id="active-project-confirm">    
+            <a id="active-project-confirm">
                 Reactivate
             </a>
             <a class="cancel-active-btn" id="cancel-delete-btn"><i class="fa fa-xmark"></i>
@@ -395,9 +400,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
