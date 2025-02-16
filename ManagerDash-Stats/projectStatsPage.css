@@ -3,6 +3,9 @@
 
 /*--------------------- Project Statistics CSS ---------------------*/
 
+/* HEADER AND HEADER CONTENT */
+
+/* Main header */
 #prjStContainer {
     height: 100%;
     width: 100%;
@@ -12,42 +15,6 @@
 #prjStHeader {
     display: flex;
 }
-
-#prjStGrid {
-    display: grid;
-    grid-template-areas:
-    'burnup prevweek'
-    'members members';
-    grid-template-columns: 50%;
-    grid-template-rows: max-content;
-    gap: 1rem;
-}
-
-.prjStGridCells {
-    background-color: var(--light-gray-bg);
-    border-radius: var(--b-radius-lg);
-    padding: 1rem;
-}
-
-
-
-/* Member list */
-#prjStMembersCell {
-    grid-area: members;
-}
-
-#prjStMembersList table {
-    width: 80%;
-}
-
-.fa-stack .fa-circle {
-    color: black;
-}
-
-.fa-stack .fa-crown {
-    color: var(--light-gray-bg);
-}
-
 
 
 /* Task dial */
@@ -116,12 +83,51 @@
 
 
 
-/* Burnup chart */
-#prjStBurnupCell {
-    grid-area: burnup;
+/* GRID AND GRID CONTENT */
+
+/* Main grid */
+#prjStGrid {
+    display: grid;
+    grid-template-areas:
+    'burnup prevweek'
+    'members members';
+    grid-template-columns: 50%;
+    grid-template-rows: max-content;
+    gap: 1rem;
 }
+
+.prjStGridCells {
+    background-color: var(--light-gray-bg);
+    border-radius: var(--b-radius-lg);
+    padding: 1rem;
+}
+
+
+/* Member list */
+#prjStMembersCell {
+    grid-area: members;
+}
+
+#prjStMembersList table {
+    width: 80%;
+}
+
+.fa-stack .fa-circle {
+    color: black;
+}
+
+.fa-stack .fa-crown {
+    color: var(--light-gray-bg);
+}
+
 
 /* Prev week contributions */
 #prjStPrevWeekCell {
     grid-area: prevweek;
+}
+
+
+/* Burnup chart */
+#prjStBurnupCell {
+    grid-area: burnup;
 }
