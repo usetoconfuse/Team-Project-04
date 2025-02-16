@@ -60,7 +60,7 @@
                 SUM(CASE WHEN Tasks.Status = 'Completed' THEN 1 ELSE 0 END) AS count_completed, 
                 SUM(CASE WHEN Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress' THEN 1 ELSE 0 END) AS count_remaining FROM Users LEFT JOIN Tasks
             ON Users.User_ID = Tasks.Assignee_ID
-            WHERE (Users.Forename LIKE '%$searchParam%' OR Users.User_ID LIKE '%$searchParam%')
+            WHERE (CONCAT(Users.Forename, ' ', Users.Surname) LIKE '%$searchParam%' OR Users.User_ID LIKE '%$searchParam%')
                 AND Users.User_Type <> 'Admin'
             ";
 

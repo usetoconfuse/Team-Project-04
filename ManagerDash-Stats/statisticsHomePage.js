@@ -365,11 +365,7 @@ async function getUsersHomeData(filters={}) {
                     // Find the container/table to display the data
                     container.innerHTML = userTable;
             } else {
-                if(stuck != '' || earliest != '' || high != '') {
-                    container.innerHTML = '<h2>Sorry, no results for your selected filters</h2>'; // No results, show user.
-                } else {
-                    container.innerHTML = '<h2>Selected User isn\'t assigned to any projects or hasn\'t been assigned any tasks.</h2>'; // No results, show user.
-                }
+                container.innerHTML = 'Sorry, no users matching your filters.';
             }
   
     } catch (error) {
