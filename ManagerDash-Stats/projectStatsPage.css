@@ -3,6 +3,9 @@
 
 /*--------------------- Project Statistics CSS ---------------------*/
 
+/* HEADER AND HEADER CONTENT */
+
+/* Main header */
 #prjStContainer {
     height: 100%;
     width: 100%;
@@ -13,49 +16,11 @@
     display: flex;
 }
 
-#prjStGrid {
-    display: grid;
-    grid-template-areas:
-    'burnup prevweek'
-    'members members';
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
-    width: 100%;
-    height: 100%;
-    gap: 1rem;
-}
-
-.prjStGridCells {
-    background-color: var(--light-gray-bg);
-    border-radius: var(--b-radius-lg);
-    padding: 1rem;
-}
-
-
-
-/* Member list */
-#prjStMembersCell {
-    grid-area: members;
-}
-
-#prjStMembersList table {
-    width: 80%;
-}
-
-.fa-stack .fa-circle {
-    color: black;
-}
-
-.fa-stack .fa-crown {
-    color: var(--light-gray-bg);
-}
-
-
 
 /* Task dial */
-#prjStTaskDialCell {
+#prjStTaskDialDisplay {
     position: relative;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 #prjStTaskDialPercentage {
@@ -69,7 +34,7 @@
     transform: translate(-50%, -55%)
 }
 
-#prjStTaskDialBox {
+#prjStTaskDialChartBox {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -118,12 +83,66 @@
 
 
 
-/* Burnup chart */
-#prjStBurnupCell {
-    grid-area: burnup;
+/* GRID AND GRID CONTENT */
+
+/* Main grid */
+#prjStGrid {
+    display: grid;
+    grid-template-areas:
+    'burnup prevweek'
+    'members members';
+    grid-template-columns: 50%;
+    grid-template-rows: max-content;
+    gap: 1rem;
 }
+
+.prjStGridCells {
+    background-color: var(--light-gray-bg);
+    border-radius: var(--b-radius-lg);
+    padding: 1rem;
+}
+
+.prjStGridChartBox {
+    width: 100%;
+    height: 100%;
+    padding-inline: 0.5rem;
+}
+
+
+/* Member list */
+#prjStMembersCell {
+    grid-area: members;
+}
+
+#prjStMembersList table {
+    width: 80%;
+}
+
+#prjStMembersLeaderRow {
+    display: flex;
+}
+
+.fa-stack .fa-circle {
+    color: black;
+}
+
+.fa-stack .fa-crown {
+    color: var(--light-gray-bg);
+}
+
+.fa-stack.small-stack {
+    font-size: 0.5rem;
+    align-self: center;
+}
+
 
 /* Prev week contributions */
 #prjStPrevWeekCell {
     grid-area: prevweek;
+}
+
+
+/* Burnup chart */
+#prjStBurnupCell {
+    grid-area: burnup;
 }

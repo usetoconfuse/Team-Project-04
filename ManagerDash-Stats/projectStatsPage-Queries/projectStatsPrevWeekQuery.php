@@ -9,15 +9,18 @@
                 Users.User_ID,
                 Users.Forename,
                 Users.Surname,
-                SUM(Tasks.Man_Hours) AS Hours
+                SUM(IF(
+                    DATEDIFF(CURRENT_DATE, Tasks.Completion_Date) <= 7,
+                    Tasks.Man_Hours, 0)) AS Hours
             FROM
                 Users, Tasks
             WHERE
                 Tasks.Project_ID = ?
                 AND Users.User_ID = Tasks.Assignee_ID
-                AND DATEDIFF(CURRENT_DATE, Tasks.Completion_Date) <= 7
             GROUP BY
                 Users.User_ID
+            ORDER BY
+                Hours DESC
             ";
 
     $stmt = $conn->prepare($sql);
