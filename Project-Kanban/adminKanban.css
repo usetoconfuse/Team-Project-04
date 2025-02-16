@@ -25,3 +25,7 @@
 .task-submit-buttons {
     padding: 0.4rem;
 }
+
+#emp-projectKanban-container {
+    min-height: 70dvh;
+}

@@ -196,6 +196,10 @@ thead, tbody {
 
 }
 
+#emp-projectKanban-container {
+    min-height: 50dvh;
+}
+
 .emp-projectKanban-bottom table td {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
