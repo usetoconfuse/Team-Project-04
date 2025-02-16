@@ -4,7 +4,6 @@
     include '../../config/db-setup.php';
 
     $projID = $_GET['ID'];
-    $today = date("Y-m-d");
 
     $sql = "SELECT
                 Users.User_ID,
