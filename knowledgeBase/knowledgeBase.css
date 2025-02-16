@@ -279,6 +279,11 @@
     .kb-header-section {
         flex-direction: column;
     }
+
+    .kb-sidebar {
+        max-height: 400px;
+        padding: 10px;
+    }
 }
 
 .kb-sidebar {
@@ -288,7 +293,6 @@
     width: 300px;
     height: 100%;
     gap: 10px;
-    max-height: 400px;
     padding: 15px;
     background-color: var(--secondary-colour);
     border-radius: var(--box-border-radius);
