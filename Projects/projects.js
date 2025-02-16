@@ -724,6 +724,8 @@ async function fetchUsers(dropdown) {
 const addTaskButton = addProjectModal.querySelector("#add-task-btn");
 const addProjectModalForm = addProjectModal.querySelector('#project-modal-form');
 // Open Add Project Modal & Fetch Users
+
+if (userRole == 'Admin') {
 addProjectBtn.addEventListener("click", () => {
   addProjectModal.style.display = "flex";
   addTaskButton.style.display = "none";
@@ -809,7 +811,7 @@ submitAddProject.addEventListener("click", async function () {
   }
 });
 
-
+}
 
 const searchBarProjects = document.querySelectorAll(
   ".project-search #searched-project"
