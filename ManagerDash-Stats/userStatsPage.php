@@ -7,6 +7,45 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
    
 
+
+
+
+
+
+
+
+
+<!-- RESET PASSWORD MODAL ==================== -->
+
+            <div id="password-modal" class="modal">
+                <div class="modal-box">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p>Filter Tasks</p>
+                        <div class="close-modal-btn">
+                            <i class="fa-solid fa-x"></i>
+                        </div>
+                    </div>
+                    <!--Body-->
+                    <form id="filter-modal-form" class="modal-body">
+                        <h1>Are you sure you want to reset to the default password?</h1>
+                        <div id="confirmPWDreset" class='all-projects-btn black-btn' >
+                            Reset Password
+                        </div>
+
+                    </form>
+                    <!-- <div class="task-submit-buttons">
+                        <a class="add-filter-btn" id="confirmPWDreset">
+                            Reset Password
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+
+
+
+
 <div id="mgrStatsUser-grid-container">
         <!-- <div id="userStats-Flex-Item1"> -->
 
@@ -17,8 +56,8 @@
                         <i class='fa fa-solid fa-arrow-left'></i>
                         Back
                     </div>
-                <div class='all-projects-btn black-btn'>
-                    change password
+                <div id="resetPassword" class='all-projects-btn black-btn'>
+                    Reset Password
                 </div>
                 <div class='all-projects-btn black-btn' >
                     Promote

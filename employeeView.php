@@ -39,6 +39,7 @@ if ($_SESSION['role'] !== 'Employee') {
 </head>
 
 <body>
+<!-- Condition please change pwd -->
 
 
     <!--<div class="loading-screen">
@@ -283,6 +284,18 @@ if ($_SESSION['role'] !== 'Employee') {
     </div>
 
     <script src="navbar.js"></script>
+
+    <?php 
+    if(isset($_SESSION['changePWD'])) {
+        if($_SESSION['changePWD'] === 1): ?>
+            <script>
+            sendToast('Your password has been reset - Please change it immediately');
+            
+            </script>
+        <?php endif;
+        }
+    ?>
+
 
     <script src="Projects/projects.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>

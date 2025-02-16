@@ -1003,7 +1003,47 @@ async function PopulateTaskDialChartUserStats() {
 
 
 
+// RESET PASSWORD ==========================================================================================================
+// passwordReset = document.querySelector('#resetPassword');
+// passwordReset.addEventListener('click', resetPassword());
 
+
+
+// filter button
+const passwordResetModal = document.querySelector("#password-modal");
+const passwordResetBtn = document.querySelector('#resetPassword');
+const closePasswordResetkModal = passwordResetModal.querySelector('#password-modal .close-modal-btn');
+
+
+passwordResetBtn.addEventListener('click', () => {
+  passwordResetModal.style.display = 'flex';
+    })
+    closePasswordResetkModal.addEventListener('click', () => {
+      passwordResetModal.style.display = 'none';
+    })
+
+
+const passwordResetConfirmBtn = document.querySelector("#confirmPWDreset");
+passwordResetConfirmBtn.addEventListener('click', resetPassword); // Passes function to the event listener, but resetPassword() passess the result of function to event listener
+console.log("BUT TON",passwordResetConfirmBtn);
+
+async function resetPassword() {
+  console.log("resetting");
+  const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsResetPwdQuery.php?ID=' + userDetails.id);
+  // console.log("1: ", response);
+  
+  // Ensure the response is OK and return the JSON data 
+  if (!response.ok) { 
+      throw new Error('Network response was not ok ' + response.statusText);
+  }
+  // Convert the response to JSON format
+  const data = await response.json();
+  // console.log(data);
+
+  sendToast(data.message);
+  
+  
+}
 
 
 

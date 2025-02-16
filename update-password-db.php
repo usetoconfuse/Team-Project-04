@@ -33,6 +33,7 @@ $stmt->bind_param("si", $newPasswordHashed, $user_ID);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true]);
+    $SESSION['changePWD'] = 0;
 } else {
     echo json_encode(['success' => false, 'error' => 'Failed to update password']);
 }

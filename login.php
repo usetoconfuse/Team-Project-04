@@ -138,7 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                 $_SESSION['user_forename'] = $fetched_forename;
                 $_SESSION['user_name'] = $fetched_forename . " " . $fetched_surname;
 
-
+                if($inputted_password === 'MakeItAll123!') {
+                    $_SESSION['changePWD'] = 1;
+                }
                 // Redirect based on user role
                 if ($_SESSION['role'] === 'Admin') {
                     header("Location: managerView.php");
