@@ -138,3 +138,26 @@ searchBar.addEventListener('input', ()=>{
   }
 })
 
+//Filters
+
+const filterButton = document.querySelector('#emp-dash-content .emp-projectKanban-container .filter-task-btn');
+const filterEmpModal = document.querySelector('#emp-dash-content #filter-modal');
+
+//Opening and Closing Filter Modal
+filterButton.addEventListener('click', () => {
+  filterEmpModal.style.display = 'block';
+})
+
+filterEmpModal.querySelector('.close-modal-btn').addEventListener('click', () => {
+  filterEmpModal.style.display = 'none';
+})
+
+//Submit Filter Functionality
+filterEmpModal.querySelector('.add-filter-btn').addEventListener('click', () => {
+  const filterPriority = filterEmpModal.querySelector('#priority').value;
+  const filterDate = filterEmpModal.querySelector('#date-task').value;
+  const filterStuck = filterEmpModal.querySelector('#stuck-task').value;
+
+  console.log(filterPriority, filterDate, filterStuck);
+
+})

@@ -409,6 +409,7 @@
     position: relative;
     animation: openmodal 0.4s;
     border-radius: 30px;
+    padding-bottom: 2.2em;
 }
 
 @keyframes openmodal {
