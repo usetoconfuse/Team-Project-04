@@ -567,7 +567,7 @@ input[type="file"]::-webkit-file-upload-button {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn   {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn, #delete-project-confirm, #cancel-delete-btn, #active-project-confirm   {
     width: 60%;
     margin: 1rem auto;
     padding: 0.8rem 0.8rem;
@@ -589,7 +589,7 @@ input[type="file"]::-webkit-file-upload-button {
     justify-content: flex-end;
 }
 
-.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm {
+.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm, #delete-project-confirm {
     margin: 1rem 1rem 1rem 1rem;
     width: 30%;
     background-color: #f98a93;
@@ -614,18 +614,23 @@ input[type="file"]::-webkit-file-upload-button {
     color: white !important;
 }
 
-.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i, #delete-project-task-confirm i,  #cancel-complete-btn i, #cancel-archive-btn i {
+.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i, #delete-project-task-confirm i,  #cancel-complete-btn i, #cancel-archive-btn i, #delete-project-confirm i, #cancel-delete-btn i {
     margin-right: 5px;
 }
 
-#delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn     {
+#delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn, #delete-project-confirm, #cancel-delete-btn, #active-project-confirm, #active-project-confirm     {
     flex: 1;
 } 
+
+ #active-project-confirm {
+    background-color: #89bc8a !important;
+ }
 
 .task-delete-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
     width: 70%;
     margin:0 auto;
 }

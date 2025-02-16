@@ -278,10 +278,13 @@
   })
   completeProjectModal.querySelector('#complete-project-confirm').addEventListener('click', async () => {
     const completedProjectID = completeProjectModal.getAttribute('data-project-id');
-    await markProjectUpdate(completedProjectID, 'complete', 'Active', "#active-project-content #gridContainer");
-    sendToast(`Completed Project #${completedProjectID} `);
-    completeProjectModal.style.display = 'none';
-    editProjectModal.style.display = 'none';
+    const response = await markProjectUpdate(completedProjectID, 'Completed', 'Active', "#active-project-content #gridContainer");
+    if (response.ok) {
+        sendToast(`Completed Project #${completedProjectID}`);
+        completeProjectModal.style.display = 'none';
+        editProjectModal.style.display = 'none';
+    }
+
   })
 
   //Archive Project 
@@ -293,11 +296,52 @@
     const archivedProjectID = archiveProjectModal.getAttribute('data-project-id');
     const currentStatusContainer = archiveProjectModal.getAttribute('current-status-container');
     const currentgridContainer = archiveProjectModal.getAttribute('current-grid-container');
-    await markProjectUpdate(archivedProjectID, 'archive', currentStatusContainer, currentgridContainer);
-    sendToast(`Archived Project #${archivedProjectID}`);
-    archiveProjectModal.style.display = 'none';
-    editProjectModal.style.display = 'none';
+    const response = await markProjectUpdate(archivedProjectID, 'Archived', currentStatusContainer, currentgridContainer);
+    if (response.ok) {
+      sendToast(`Archived Project #${archivedProjectID}`);
+      archiveProjectModal.style.display = 'none';
+      editProjectModal.style.display = 'none';
+    }
+
   })
+
+
+  //Delete Project 
+  const deleteProjectModal = document.querySelector('#delete-project-modal');
+  deleteProjectModal.querySelector('#cancel-delete-btn').addEventListener('click', () => {
+    deleteProjectModal.style.display = 'none';
+  })
+  deleteProjectModal.querySelector('#delete-project-confirm').addEventListener('click', async () => {
+    const deletedProjectID = deleteProjectModal.getAttribute('data-project-id');
+    const currentStatusContainer = deleteProjectModal.getAttribute('current-status-container');
+    const currentgridContainer = deleteProjectModal.getAttribute('current-grid-container');
+    const response = await markProjectUpdate(deletedProjectID, 'Deleted', currentStatusContainer, currentgridContainer);
+    if (response.ok) {
+      sendToast(`Deleted Project #${deletedProjectID}`);
+      deleteProjectModal.style.display = 'none';
+      editProjectModal.style.display = 'none';
+    }
+
+  })
+
+  //Active Project 
+  const activeProjectModal = document.querySelector('#active-project-modal');
+  activeProjectModal.querySelector('.cancel-active-btn').addEventListener('click', () => {
+    activeProjectModal.style.display = 'none';
+  })
+  activeProjectModal.querySelector('#active-project-confirm').addEventListener('click', async () => {
+    const activeProjectID = activeProjectModal.getAttribute('data-project-id');
+    const currentStatusContainer = activeProjectModal.getAttribute('current-status-container');
+    const currentgridContainer = activeProjectModal.getAttribute('current-grid-container');
+    const response = await markProjectUpdate(activeProjectID, 'Active', currentStatusContainer, currentgridContainer);
+    if (response.ok) {
+      sendToast(`Reactivated Project #${activeProjectID}`);
+      activeProjectModal.style.display = 'none';
+      editProjectModal.style.display = 'none';
+    }
+
+  })
+
 
 
   const editProjectModal = document.querySelector('#edit-projects-modal');
@@ -365,6 +409,27 @@
       archiveProjectModal.style.display = 'flex';
     })
 
+    //Initialise the Delete Modal 
+    editProjectModal.querySelector('.delete-project-btn').addEventListener('click', () => {
+     deleteProjectModal.querySelector('.modal-header').innerText = `Delete Project #${project.Project_ID}`;
+      deleteProjectModal.querySelector('.modal-body').innerText = `Project #${project.Project_ID}: ${project.Project_Title} will be deleted permanently. Are you sure?`;
+      deleteProjectModal.setAttribute('data-project-id', project.Project_ID);
+      deleteProjectModal.setAttribute('current-grid-container', containerSelector)
+      deleteProjectModal.setAttribute('current-status-container', statusContainer)
+      deleteProjectModal.style.display = 'flex';
+    })
+
+        //Initialise the Active Modal 
+    editProjectModal.querySelector('.active-project-btn').addEventListener('click', () => {
+     activeProjectModal.querySelector('.modal-header').innerText = `Reactivate Project #${project.Project_ID}`;
+      activeProjectModal.querySelector('.modal-body').innerText = `Project #${project.Project_ID}: ${project.Project_Title} will be reactivted. Are you sure?`;
+      activeProjectModal.setAttribute('data-project-id', project.Project_ID);
+      activeProjectModal.setAttribute('current-grid-container', containerSelector)
+      activeProjectModal.setAttribute('current-status-container', statusContainer)
+      activeProjectModal.style.display = 'flex';
+    })
+
+
     const closeProjectEditBtn = editProjectModal.querySelector('.close-modal-btn');
     closeProjectEditBtn.addEventListener('click', () => {
       editProjectModal.style.display = 'none';
@@ -385,9 +450,11 @@
       });
 
       if (!response.ok) {
+        sendToast(`Error editing project status`);
         throw new Error("Failed to mark project as complete");
       } else {
         fetchProjectsData(userProjectsID,{ status: statusCont }, gridContainer);
+        return response;
       }
     } catch (error) {
       console.error("Error adding project:", error);

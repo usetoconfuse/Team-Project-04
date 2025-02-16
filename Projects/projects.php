@@ -351,4 +351,53 @@
     </div>
 </div>
 
+<!--Modal to Delete project in admin pane;-->
+<div id="delete-project-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+        
+        </div>
+        <div class="task-delete-buttons">
+            <a id="delete-project-confirm">    
+                Delete
+            </a>
+            <a class="cancel-delete-btn" id="cancel-delete-btn"><i class="fa fa-xmark"></i>
+                Cancel
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal to Make Active project in admin pane;-->
+<div id="active-project-modal" class="modal">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+        
+        </div>
+        <div class="task-delete-buttons">
+            <a id="active-project-confirm">    
+                Reactivate
+            </a>
+            <a class="cancel-active-btn" id="cancel-delete-btn"><i class="fa fa-xmark"></i>
+                Cancel
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 

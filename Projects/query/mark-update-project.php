@@ -9,16 +9,24 @@ if (isset($projectData['projectID']) && isset($projectData['status'])) {
     $status = $projectData['status'];
 
 
-    if ($status === 'complete') {
+    if ($status === 'Completed') {
         $markStatusSQL = "UPDATE Projects SET Completion_Date = NOW() WHERE Project_ID = ?";
         $stmt = $conn->prepare($markStatusSQL);
         $stmt->bind_param("i", $projectID);
-    } else if ($status === 'archive') {
+    } else if ($status === 'Archived') {
         $markStatusSQL = "UPDATE Projects SET Status = 'Archived' WHERE Project_ID = ?";
         $stmt = $conn->prepare($markStatusSQL);
         $stmt->bind_param("i", $projectID);
-    }
+    } else if ($status === 'Deleted') {
+        $markStatusSQL = "DELETE FROM Projects WHERE Project_ID = ?";
+        $stmt = $conn->prepare($markStatusSQL);
+        $stmt->bind_param("i", $projectID);
+    } else if ($status === 'Active') {
+        $markStatusSQL ="UPDATE Projects SET Status = 'Active', Completion_Date = NULL WHERE Project_ID = ?";
+        $stmt = $conn->prepare($markStatusSQL);
+        $stmt->bind_param("i", $projectID);
 
+    }
 
     if ($stmt->execute()) {
         http_response_code(200);
