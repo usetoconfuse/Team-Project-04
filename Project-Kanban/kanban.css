@@ -997,4 +997,43 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
+/* Styling for leader-project class */
+.leader-project {
+    border: 2px solid #FFD700;
+}
 
+/*Open and Close Project Sections*/
+.leader-switch-buttons {
+    background-color: #F5F5F5;
+    white-space: nowrap;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leader-switch-buttons a {
+    border-radius: 0px;
+    padding: 10px;
+    color: black;
+    transition: all 0.4s ease;
+}
+
+.leader-switch-buttons  a:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.leader-switch-buttons a:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.leader-switch-buttons a:hover {
+    background-color: #9A9A9A;
+}
+
+.leader-switch-buttons a.active {
+    background-color: black;
+    color: white;
+}

@@ -82,6 +82,7 @@ filterProjectsBtn.addEventListener("click", () => {
     filters,
     "#active-project-content #gridContainer"
   );
+
 });
 
 // Add Project Modal Functionality
@@ -114,12 +115,15 @@ async function fetchProjectsData(userID, filters = {}, containerSelector) {
     container.innerHTML = "";
 
     const response = await fetch(url, params);
+    
 
     if (!response.ok) {
       throw new Error("Failed to fetch projects data");
     }
 
+
     const projectData = await response.json();
+    
     if (projectData.length === 0) {
       container.parentElement.querySelector(".search-error-msg").style.display =
         "block";
@@ -131,6 +135,11 @@ async function fetchProjectsData(userID, filters = {}, containerSelector) {
       projectCard.classList.add("project-card");
       projectCard.setAttribute("data-project-id", project.Project_ID);
       projectCard.setAttribute("data-project-title", project.Project_Title);
+      
+
+      //Sawan
+      
+
 
       let projectProgress;
       if (userRole === "Admin") {
@@ -168,11 +177,24 @@ async function fetchProjectsData(userID, filters = {}, containerSelector) {
                           </div>
                       </div>`;
       } else {
-        cardTop = `<div class="project-card-top">         
+        cardTop = `<div class="project-card-top ">         
                         <p>${project.Project_Title}</p>
              
                         <a href="#" class="black-btn" id="view-project-kanban-btn">View</a>
                     </div>`;
+
+        // Check if the global project leader matches the project leader
+      if (project.Project_Leader === userProjectsID) {
+        console.log({project}, project.Project_Leader, userProjectsID);
+        console.log("Global project leader is the same as the project leader.");
+        projectCard.classList.add("leader-project");
+        
+        
+      } else {
+        console.log("Global project leader does NOT match the project leader.");
+        
+      }
+
         cardBottom = `
                       <div class="project-card-bottom">
                           <div class="project-card-task-count">
@@ -229,6 +251,12 @@ async function fetchProjectsData(userID, filters = {}, containerSelector) {
         .addEventListener("click", (e) => {
           e.preventDefault();
 
+          //Sawan Session Storage send flag if leading on the project or not
+          if (project.Project_Leader === userProjectsID) {
+            sessionStorage.setItem("leading-on-project", "true");
+          } else {
+            sessionStorage.setItem("leading-on-project", "false");
+          }
           sessionStorage.setItem("clicked-project-id", project.Project_ID);
           sessionStorage.setItem("clicked-project-status", project.Status);
           sessionStorage.setItem(
