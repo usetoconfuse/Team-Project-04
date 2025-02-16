@@ -491,6 +491,7 @@ nav {
     background-color: #f5f5f5;
     display: flex;
     min-height: 0;
+    min-width: 0;
     flex-grow: 1;
 }
 
@@ -512,7 +513,7 @@ nav {
 
 }
 
-.nav-item-content#overview-content, .nav-item-content#current-project-content, .nav-item-content#personal-content, .nav-item-content#projects-content, .nav-item-content#stats-content {
+.nav-item-content#overview-content, .nav-item-content#current-project-content, .nav-item-content#personal-content, .nav-item-content#projects-content {
     overflow-y: auto;
 }
 

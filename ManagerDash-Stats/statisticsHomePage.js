@@ -26,8 +26,8 @@ mgrStatsPostTypeButtons.forEach(button => {
         for (const subpage of showingTab.children) {
             subpage.style.display = "none";
         }
-        showingTab.querySelector(".statsHome-grid").style.display = "block";
-        showingTab.style.display = "block";
+        showingTab.querySelector(".statsHome-grid").style.display = "flex";
+        showingTab.style.display = "flex";
     });
 });
 
