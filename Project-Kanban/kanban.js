@@ -1,11 +1,15 @@
 const kanbanContainers = document.querySelectorAll('.kanban-board');
-
 // Listen for sessionStorage updates
 let userId;
 let projectID;
 window.addEventListener("storage", function () {
   const selectedProjectID = sessionStorage.getItem('clicked-project-id');
   projectID = selectedProjectID;
+
+  const currentProjectNavItem = this.document.querySelector('#current-project span');
+
+
+  
 
   const navItems = document.querySelectorAll(".nav-item");
   navItems.forEach((item) => item.classList.remove("active"));
@@ -30,7 +34,9 @@ window.addEventListener("storage", function () {
     const userID = kanbanContainer.getAttribute('data-user-id');
     userId = userID;
     getKanbanData(userID, selectedProjectID, {});
-    getProjectName(selectedProjectID)
+    getProjectName(selectedProjectID, currentProjectNavItem);
+    
+    
 
     const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal')
     document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value = 'None';
@@ -181,7 +187,7 @@ function getCurrentFilters() {
 }
 
 
-async function getProjectName(selectedProjectID) {
+async function getProjectName(selectedProjectID, currentProjectNavItem) {
   try {
 
     let url = `Project-Kanban/kanban-projectName-db.php?projectID=${encodeURIComponent(selectedProjectID)}`; 
@@ -198,6 +204,7 @@ async function getProjectName(selectedProjectID) {
     }
     const projectNameData = await response.json();
     document.querySelector("#proj-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
+    currentProjectNavItem.innerHTML = projectNameData[0].Project_Title;
 
 
   } catch (error) {

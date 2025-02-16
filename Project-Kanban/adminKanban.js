@@ -404,7 +404,7 @@ confirmAddTask.onclick = () => {
   
   //Task cannot start or begin after project deadline
   if (taskDueDate > globalProjectDeadline || startDate > globalProjectDeadline) {
-    errorText.innerText = 'Task Due Date or Start Date cannot be greater than Project Deadline';
+    errorText.innerText = `Task Due Date or Start Date cannot be past the project deadline: ${globalProjectDeadline}}`;
     errorText.style.display = 'block';
     return
   }
