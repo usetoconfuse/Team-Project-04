@@ -240,6 +240,8 @@
             e.preventDefault();
 
             sessionStorage.setItem("clicked-project-id", project.Project_ID);
+            sessionStorage.setItem("clicked-project-status", project.Status);
+            sessionStorage.setItem("clicked-project-completion", project.Completion_Date);
 
             const params = new URLSearchParams(window.location.search);
             params.set("page", "current-project");

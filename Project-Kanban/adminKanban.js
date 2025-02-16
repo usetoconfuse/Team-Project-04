@@ -1,9 +1,16 @@
 let globalSelectedProjectID = null;
+let globalSelectedProjectStatus = null;
+let globalSelectedProjectCompletion = null;
 let globalUserID = null;
 let globalProjectDeadline = null;
 window.addEventListener("storage", function () {
     const selectedProjectID = sessionStorage.getItem('clicked-project-id');
+    const selectedProjectStatus = sessionStorage.getItem("clicked-project-status");
+    const selectedProjectCompletion = sessionStorage.getItem("clicked-project-completion");
+
+    globalSelectedProjectStatus = selectedProjectStatus;
     globalSelectedProjectID = selectedProjectID;
+    globalSelectedProjectCompletion = selectedProjectCompletion;
     console.log(selectedProjectID);
     
     const navItems = document.querySelectorAll(".nav-item");
@@ -55,12 +62,10 @@ async function getProjectName(selectedProjectID) {
       if (!response.ok) {
         throw new Error('Failed to fetch projects data');
       }
+      document.querySelector("#admin-kanban-content").setAttribute('data-project-status', "");
       const projectNameData = await response.json();
       document.querySelector("#admin-kanban-content .project-intro .project-txt p").innerHTML = projectNameData[0].Project_Title;
       globalProjectDeadline = projectNameData[0].Due_Date;
-      
-      
-  
       
     } catch (error) {
       console.log("Fetch Issue",error);
@@ -99,6 +104,8 @@ function populateTasksTable(tableData) {
       const row = document.createElement('tr');
 
       let taskStuck = (task.Stuck === '2') ? "Yes" : "No";
+      console.log(globalSelectedProjectStatus);
+      console.log(globalSelectedProjectCompletion);
 
       row.innerHTML = `   <td>${task.Task_ID}</td>
                           <td id="emp-task-title">${task.Name}</td>
@@ -107,10 +114,13 @@ function populateTasksTable(tableData) {
                           <td>${task.Due_Date}</td>
                           <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
                           <td>${task.Assignee_ID}: ${task.assignee_forename} ${task.assignee_surname}</td>
-                          <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>
-                          <td><a class="edit-admin-functionality-btn" data-task-id="${task.Task_ID}">Edit</a></td> 
-                          <td><a class="delete-admin-functionality-btn" data-task-id="${task.Task_ID}">Delete</a></td>   `;
+                          <td>${task.Author_ID}: ${task.assigned_by_forename} ${task.assigned_by_surname}</td>`;
       
+      if (globalSelectedProjectStatus === "Active" && globalSelectedProjectCompletion === "null") {
+        row.innerHTML +=  `<td><a class="edit-admin-functionality-btn" data-task-id="${task.Task_ID}">Edit</a></td> 
+                          <td><a class="delete-admin-functionality-btn" data-task-id="${task.Task_ID}">Delete</a></td> `
+      } 
+
       tableBody.appendChild(row);
   });
 
