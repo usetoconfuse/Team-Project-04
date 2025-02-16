@@ -1,4 +1,5 @@
 <?php
+// API endpoint to get the user data from the session.
 session_start();
 
 echo json_encode([

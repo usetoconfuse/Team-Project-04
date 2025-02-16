@@ -302,67 +302,6 @@
 
 
 
-/* MODAL Styles */
-.modal {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    height: 100%;
-    width: 100%;
-    background:  rgba(0,0,0,0.5);
-}
-
-.modal-box {
-    margin: 10% auto;
-    width: 40%;
-    background: white;
-    color: black;
-    position: relative;
-    animation: openmodal 0.4s;
-    border-radius: 30px;
-}
-
-@keyframes openmodal {
-    from {
-        opacity: 0;
-    } to {
-        opacity: 1;
-    }
-}
-
-/*modal header*/
-.modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 18px;
-
-    padding: 1.2rem 1rem 1rem 1rem;
-    border-radius: 15px 15px 0 0;
-    margin: 0.6rem 1rem 1rem 1rem;
-    border-bottom: 1px solid black;
-}
-
-.modal-header i {
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.close-modal-btn {
-    color: white; 
-    background-color: black;
-    border-radius: 50%;
-    height: 24px;
-    width: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /*modal body*/
 .modal .modal-body {
     padding: 0.2rem 2rem 4rem 2rem;

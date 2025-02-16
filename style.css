@@ -12,6 +12,11 @@ a {
     text-decoration: none;
 }
 
+select {
+    /* Remove default styling in firefox */
+    background-color: #ffffff;
+}
+
 img {
     width: 100%;
 }

@@ -504,7 +504,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #task-user-dropdown {
+.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #kb-edit-post-topic-input, #task-user-dropdown, input[type = 'number'] {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -567,7 +567,7 @@ input[type="file"]::-webkit-file-upload-button {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm  {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn   {
     width: 60%;
     margin: 1rem auto;
     padding: 0.8rem 0.8rem;
@@ -589,22 +589,36 @@ input[type="file"]::-webkit-file-upload-button {
     justify-content: flex-end;
 }
 
-.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm  {
+.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm {
     margin: 1rem 1rem 1rem 1rem;
     width: 30%;
     background-color: #f98a93;
     color: black;
 }
 
+#complete-project-confirm {
+    margin: 1rem 1rem 1rem 1rem;
+    width: 30%;
+    background-color: #89bc8a !important;;
+    color: black !important;;
+}
+
+#archive-project-confirm {
+    margin: 1rem 1rem 1rem 1rem;
+    width: 30%;
+    background-color: #efd179 !important;
+    color: black  !important;
+}
+
 .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm   {
     color: white !important;
 }
 
-.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i, #delete-project-task-confirm i {
+.personal-delete-task i, #delete-personal-task-confirm i, #cancel-delete-task-btn  i, #delete-project-task-confirm i,  #cancel-complete-btn i, #cancel-archive-btn i {
     margin-right: 5px;
 }
 
-#delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm   {
+#delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn     {
     flex: 1;
 } 
 
@@ -861,6 +875,7 @@ input[type="file"]::-webkit-file-upload-button {
         flex-direction: column;
         align-items: flex-start;
     }
+
 
     .project-team {
         margin-left: 8px; 

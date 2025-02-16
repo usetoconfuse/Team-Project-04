@@ -1,12 +1,13 @@
 <?php
+// API endpoint to get posts from the knowledge base table.
 session_start();
 include '../../config/db-setup.php';
 
 $VALID_TYPES = ['Technical', 'Non-Technical'];
 
-$topic = $_GET['topic'] ?? null;
-$type = $_GET['type'] ?? null;
-$query = $_GET['query'] ?? null;
+$topic = isset($_GET['topic']) ? $conn->real_escape_string($_GET['topic']) : null;
+$type = isset($_GET['type']) ? $conn->real_escape_string($_GET['type']) : null;
+$query = isset($_GET['query']) ? $conn->real_escape_string($_GET['query']) : null;
 
 if ($type && !in_array($type, $VALID_TYPES)) {
     echo json_encode(["error" => "Invalid type"]);
@@ -39,18 +40,20 @@ LEFT JOIN
 WHERE 1=1
 ";
 
-if ($topic) {
+if ($topic !== null) {
     $sql .= " AND t.Topic_Name = '$topic'";
 }
-if ($type) {
+if ($type !== null) {
     $sql .= " AND kb.Type = '$type'";
 }
-if ($query) {
+if ($query !== null) {
     $sql .= " AND LOWER(kb.Title) LIKE LOWER('%$query%')";
 }
 if ($_SESSION['role'] !== 'Admin') {
     $sql .= " AND kb.Visibility = 'All Users'";
 }
+
+$sql .= " ORDER BY kb.Date_Created DESC";
 
 $result = mysqli_query($conn, $sql);
 $allDataArray = array();

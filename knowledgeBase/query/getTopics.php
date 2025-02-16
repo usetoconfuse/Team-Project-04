@@ -1,21 +1,30 @@
 <?php
+// API endpoint to get all the topics from the Topics table.
 include '../../config/db-setup.php';
 
-$query = $_GET['query'] ?? null;
+$query = isset($_GET['query']) ? $conn->real_escape_string($_GET['query']) : null;
 
 // select all the topics from the Topics table
 $sql = "
 SELECT
     Topic_Name, 
-    Topic_ID
+    Topic_ID,
+    (
+        SELECT Count(Post_ID) 
+        FROM Post_Topic 
+        WHERE Topic_ID = Topics.Topic_ID
+    ) AS Post_Count
 FROM 
     Topics
 WHERE 1=1
 ";
 
-if ($query) {
+if ($query !== null) {
     $sql .= " AND LOWER(Topic_Name) LIKE LOWER('%$query%')";
 }
+
+$sql .= " 
+ORDER BY Post_Count DESC";
 
 $result = mysqli_query($conn, $sql);
 $allDataArray = array();
