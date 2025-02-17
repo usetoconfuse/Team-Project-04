@@ -109,226 +109,13 @@ function viewSelectedItem(itemType, id) {
 
 // Statistics Home Page
 
-// =============================================================
-
-//Get all projects query and generate project table - do this on page load as well since projects is the default tab
-
-/* async function fetchProjectTable() {
-    try {
-        // Make an HTTP request to the PHP file
-        const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/projectStatsHomePageQuery.php');
-        console.log("1: ", response);
-        
-        // Ensure the response is OK and return the JSON data 
-        if (!response.ok) { 
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        // Convert the response to JSON format
-        const data = await response.json();
-        console.log("2: ", data[0].Forename);
-
-        // Build the new table to display
-        let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
-        projectTable  += `<thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Start Date</th>
-                                        <th>Due Date</th>
-                                        <th>Leader</th>
-                                    </tr>
-                                </thead>`
-        projectTable  += '<tbody>'
-        // Loop through the data and create a new element for each item
-        data.forEach(function(item) {
-           projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
-                                        <td>` + item.Project_Title + `</td>
-                                        <td>` + item.Start_Date + `</td>
-                                        <td>` + item.Due_Date + `</td>
-                                        <td>` + item.Forename + ` ` + item.Surname + `</td>
-                                    </tr>`
-        });     
-        projectTable  += '</tbody>'
-        projectTable  += '</table>';
-
-        // Find the container/table to display the data
-        const container = document.getElementById('statsHomeTableProj');
-        container.innerHTML = projectTable;
-    } catch (error) {
-        console.error('Error:', error); // Log any errors that occur
-    }
-} */
 
 
-//Get all users query and generate user table
-
-// async function fetchUserTable() {
-//     try {
-//         // Make an HTTP request to the PHP file
-//         const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageQuery.php');
-//         console.log("1: ", response);
-        
-//         // Ensure the response is OK and return the JSON data 
-//         if (!response.ok) { 
-//             throw new Error('Network response was not ok ' + response.statusText);
-//         }
-//         // Convert the response to JSON format
-//         const data = await response.json();
-//         console.log("2: ", data[0].Forename);
-
-//         // Build the new table to display
-//         let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table'>"
-//         userTable  += `<thead>
-//                                     <tr>
-//                                         <th>User ID</th>
-//                                         <th>Name</th>
-//                                         <th>Job Position</th>
-//                                     </tr>
-//                                 </thead>`
-//         userTable  += '<tbody>'
-//         // Loop through the data and create a new element for each item
-//         data.forEach(function(item) {
-//            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
-//                                         <td>` + item.User_ID + `</td>
-//                                         <td>` + item.Forename + ` ` + item.Surname + `</td>
-//                                         <td>` + item.User_Type + `</td>
-//                                     </tr>`
-//         });     
-//         userTable  += '</tbody>'
-//         userTable  += '</table>';
-
-//         // Find the container/table to display the data
-//         var container = document.getElementById('statsHomeTableUser');
-//         container.innerHTML = userTable;
-
-//     } catch (error) {
-//         console.error('Error:', error); // Log any errors that occur
-//     }
-// };
-
-
-// async function fetchUserSearch(searchParams) {
-//     try {
-//         // Make an HTTP request to the PHP file
-//         const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
-
-//         // console.log("1: ", response);
-        
-//         // Ensure the response is OK and return the JSON data 
-//         if (!response.ok) { 
-//             throw new Error('Network response was not ok ' + response.statusText);
-//         }
-//         // Convert the response to JSON format
-//         const data = await response.json();
-//         if (data.length > 0) {
-
-
-//             // console.log("2: ", data[0].Forename);
-
-//             // Build the new table to display
-//             let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table userStats-tr'>"
-//             userTable  += `<thead>
-//                                         <tr>
-//                                             <th>User ID</th>
-//                                             <th>Name</th>
-//                                             <th>Job Position</th>
-//                                         </tr>
-//                                     </thead>`
-//             userTable  += '<tbody>'
-//             // Loop through the data and create a new element for each item
-//             data.forEach(function(item) {
-//             userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
-//                                             <td>` + item.User_ID + `</td>
-//                                             <td>` + item.Forename + ` ` + item.Surname + `</td>
-//                                             <td>` + item.User_Type + `</td>
-//                                         </tr>`
-//             });     
-//             userTable  += '</tbody>'
-//             userTable  += '</table>';
-
-//             // Find the container/table to display the data
-//             var container = document.getElementById('statsHomeTableUser');
-//             container.innerHTML = userTable;
-//         } else {
-//             var container = document.getElementById('statsHomeTableUser');
-//             container.innerHTML = 'No matching users';
-//         }
-
-//     } catch (error) {
-//         console.error('Error:', error); // Log any errors that occur
-//     }
-// }
-
-
-async function fetchProjSearch(searchParams) {
-    try {
-        // Make an HTTP request to the PHP file
-        const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/projectStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
-
-        // console.log("1: ", response);
-        
-        // Ensure the response is OK and return the JSON data 
-        if (!response.ok) { 
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        // Convert the response to JSON format
-        const data = await response.json();
-        if (data.length > 0) {
-
-            // Build the new table to display
-            let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
-            projectTable  += `<thead>
-                                        <tr>
-                                            <th>Title</th>      
-                                            <th>Leader</th>
-                                            <th>Members</th>
-                                            <th>Tasks</th>
-                                            <th>Due Date</th>
-                                            <th>Completed</th>
-                                            <th>Overdue</th>
-                                        </tr>
-                                    </thead>`
-            projectTable  += '<tbody>'
-            // Loop through the data and create a new element for each item
-            data.forEach(function(item) {
-            projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
-                                            <td>` + item.Project_Title + `</td>
-                                            <td>` + item.Forename + ` ` + item.Surname + `</td>
-                                            <td>` + item.Members + `</td>
-                                            <td>` + item.Tasks + `</td>
-                                            <td>` + item.Due_Date + `</td>
-                                            <td>` + item.Completed + `</td>
-                                            <td>` + item.Overdue + `</td>
-                                        </tr>`
-            });     
-            projectTable  += '</tbody>'
-            projectTable  += '</table>';
-
-            // Find the container/table to display the data
-            const container = document.getElementById('statsHomeTableProj');
-            container.innerHTML = projectTable;
-        } else {
-            var container = document.getElementById('statsHomeTableProj');
-            container.innerHTML = 'No matching Projects';
-        }
-
-    } catch (error) {
-        console.error('Error:', error); // Log any errors that occur
-    }
-}
+// ======================= FILTER TABLES ============================
 
 // Projects table event handlers
 // Populate project table on load as project is the default tab
 document.getElementById('mgrProjStats').addEventListener('click', fetchProjSearch(""));
-// document.addEventListener('DOMContentLoaded', fetchUserSearch(""));
-// document.getElementById('mgrUserStats').addEventListener('click', fetchUserSearch(""));
-
-
-
-// Update selected posts when the search bar is used USER
-// document.getElementById('searched-user').addEventListener("input", async (e) =>{
-//     selectedQuery = e.target.value.trim();
-//     fetchUserSearch(selectedQuery);
-// });
 
 // Update selected posts when the search bar is used PROJECT
 document.getElementById('searched-proj').addEventListener("input", async (e) =>{
@@ -336,11 +123,63 @@ document.getElementById('searched-proj').addEventListener("input", async (e) =>{
     fetchProjSearch(selectedQuery);
 });
 
+async function fetchProjSearch(searchParams) {
+  try {
+      // Make an HTTP request to the PHP file
+      const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/projectStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
 
+      // console.log("1: ", response);
+      
+      // Ensure the response is OK and return the JSON data 
+      if (!response.ok) { 
+          throw new Error('Network response was not ok ' + response.statusText);
+      }
+      // Convert the response to JSON format
+      const data = await response.json();
+      if (data.length > 0) {
 
+          // Build the new table to display
+          let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
+          projectTable  += `<thead>
+                                      <tr>
+                                          <th>Title</th>      
+                                          <th>Leader</th>
+                                          <th>Members</th>
+                                          <th>Tasks</th>
+                                          <th>Due Date</th>
+                                          <th>Completed</th>
+                                          <th>Overdue</th>
+                                      </tr>
+                                  </thead>`
+          projectTable  += '<tbody>'
+          // Loop through the data and create a new element for each item
+          data.forEach(function(item) {
+          projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
+                                          <td>` + item.Project_Title + `</td>
+                                          <td>` + item.Forename + ` ` + item.Surname + `</td>
+                                          <td>` + item.Members + `</td>
+                                          <td>` + item.Tasks + `</td>
+                                          <td>` + item.Due_Date + `</td>
+                                          <td>` + item.Completed + `</td>
+                                          <td>` + item.Overdue + `</td>
+                                      </tr>`
+          });     
+          projectTable  += '</tbody>'
+          projectTable  += '</table>';
 
+          // Find the container/table to display the data
+          const container = document.getElementById('statsHomeTableProj');
+          container.innerHTML = projectTable;
+      } else {
+          var container = document.getElementById('statsHomeTableProj');
+          container.innerHTML = 'No matching Projects';
+      }
 
-// =======================FILTER FUNC ============================
+  } catch (error) {
+      console.error('Error:', error); // Log any errors that occur
+  }
+}
+
 
 
 async function getUsersHomeData(filters={}) {
@@ -360,7 +199,7 @@ async function getUsersHomeData(filters={}) {
       const response = await fetch(url, params);
   
       if (!response.ok) {
-        throw new Error('Failed to fetch projects data');
+        throw new Error('Failed to fetch users data');
       }
       const data = await response.json();
 
@@ -424,7 +263,7 @@ async function getUsersHomeData(filters={}) {
     } catch (error) {
       console.log("Fetch Issue",error);
     }
-  }
+}
 
 
 
