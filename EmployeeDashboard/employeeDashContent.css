@@ -30,9 +30,11 @@
 
 .emp-item-top {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     margin: 0 0.6rem 0.6rem 0.6rem;
+    gap: 10px;
     font-weight: 500;
     font-size: 1.2rem;
 }
@@ -350,4 +352,12 @@ thead, tbody {
     }
     .emp-projectKanban-bottom table {
         width: fit-content; }
+}
+
+.correct-font-size {
+    font-size: 1rem !important;
+}
+
+.dashboard-search {
+    margin: 0px !important;
 }
