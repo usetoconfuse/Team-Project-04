@@ -28,6 +28,8 @@ if ($_SESSION['role'] !== 'Employee') {
     </link>
     <link rel="stylesheet" href="Projects/projects.css">
     </link>
+      <link rel="stylesheet" href="Project-Kanban/adminKanban.css">
+    </link>
     <link rel="stylesheet" href="EmployeeDashboard/employeeDashContent.css">
     </link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"

@@ -1,4 +1,4 @@
-.edit-admin-functionality-btn, .delete-admin-functionality-btn {
+.edit-admin-functionality-btn, .delete-admin-functionality-btn, #leader-escalate-stuck {
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -8,7 +8,7 @@
     background-color: black;
 }
 
-.delete-admin-functionality-btn {
+.delete-admin-functionality-btn, #leader-escalate-stuck {
     background-color: #f98a93;
 }
 

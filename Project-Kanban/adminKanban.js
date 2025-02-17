@@ -3,11 +3,14 @@ let globalSelectedProjectStatus = null;
 let globalSelectedProjectCompletion = null;
 let globalUserID = null;
 let globalProjectDeadline = null;
+let leadingFuncProject;
 window.addEventListener("storage", function () {
-    console.log("HELLO WORLD thistihn");
+
     const selectedProjectID = sessionStorage.getItem('clicked-project-id');
     const selectedProjectStatus = sessionStorage.getItem("clicked-project-status");
     const selectedProjectCompletion = sessionStorage.getItem("clicked-project-completion");
+    leadingFuncProject = sessionStorage.getItem("leading-on-project");
+  
 
     globalSelectedProjectStatus = selectedProjectStatus;
     globalSelectedProjectID = selectedProjectID;
@@ -105,12 +108,29 @@ async function getAdminProjectName(selectedProjectID) {
 function populateAdminTasksTable(tableData) {
   const tableBody = document.querySelector("#admin-kanban-content .emp-projectKanban-bottom tbody");
   tableBody.innerHTML = "";
+  const headerRow = document.querySelector('#admin-kanban-content .emp-projectKanban-bottom table thead tr');
+  if (!headerRow.querySelector('th.escalate-header')) {
+    const escalateTh = document.createElement('th');
+    escalateTh.textContent = 'Escalate';
+    escalateTh.classList.add('escalate-header');
+    headerRow.appendChild(escalateTh);
+  }
   tableData.forEach(task => {
-      const row = document.createElement('tr');
 
-      let taskStuck = (task.Stuck === '2') ? "Yes" : "No";
+
+
+      const row = document.createElement('tr');
+      let taskStuck;
+      if (document.querySelector('#admin-kanban-content').getAttribute('data-role') === 'Admin') {
+          taskStuck = (task.Stuck === '2') ? "Yes" : "No";
+      } else {
+          taskStuck = (task.Stuck === '2' || task.Stuck === '1') ? "Yes" : "No";
+      }
+
+     
       console.log(globalSelectedProjectStatus);
       console.log(globalSelectedProjectCompletion);
+
 
       row.innerHTML = `   <td>${task.Task_ID}</td>
                           <td id="emp-task-title">${task.Name}</td>
@@ -126,8 +146,23 @@ function populateAdminTasksTable(tableData) {
                           <td><a class="delete-admin-functionality-btn" data-task-id="${task.Task_ID}">Delete</a></td> `
       } 
 
+
+
+      if (leadingFuncProject === "true" && task.Stuck === '1') {
+        row.innerHTML += `<td><a class="leader-escalate-stuck" id="leader-escalate-stuck" data-task-id="${task.Task_ID}">Escalate</a><td>`
+      } 
       tableBody.appendChild(row);
   });
+
+
+    // Event delegation for escalate buttons
+  tableBody.addEventListener('click', (event) => {
+      if (event.target.classList.contains('leader-escalate-stuck')) {
+          const taskID = event.target.getAttribute('data-task-id');
+          openEscalateModal(taskID);
+      }
+  });
+
 
   // Event delegation for edit buttons
   tableBody.addEventListener('click', (event) => {
@@ -146,6 +181,57 @@ function populateAdminTasksTable(tableData) {
           openDeleteModal(taskID, taskName);
       }
   });
+}
+
+function openEscalateModal(taskID) {
+  const escalateModal = document.querySelector('#escalate-project-task-modal');
+  escalateModal.setAttribute('data-task-escalate-id', taskID);
+  escalateModal.style.display = 'flex';
+
+  const escalateTaskConfirm = escalateModal.querySelector('#escalate-project-task-confirm');
+  const newEscalateTaskConfirm = escalateTaskConfirm.cloneNode(true);
+  escalateTaskConfirm.parentNode.replaceChild(newEscalateTaskConfirm, escalateTaskConfirm);
+
+  newEscalateTaskConfirm.addEventListener('click', (e) => {
+      escalateTask(taskID);
+      escalateModal.style.display = 'none';
+  });
+
+  const closeEscalateModal = escalateModal.querySelector('.cancel-escalate-task-btn');
+  const newCloseEscalateModal = closeEscalateModal.cloneNode(true);
+  closeEscalateModal.parentNode.replaceChild(newCloseEscalateModal, closeEscalateModal);
+
+  newCloseEscalateModal.addEventListener('click', () => {
+        escalateModal.style.display = 'none';
+  });
+}
+
+async function escalateTask(taskID) {
+  try {
+    const url = `Project-Kanban/escalate-task-db.php`;
+
+     
+    const data = {
+      Task_ID: taskID
+    };
+
+    const params = { 
+      method: "POST",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, params);
+
+    if (!response.ok) {
+      throw new Error('Failed to escalate task');
+    } else {
+      sendToast(`Task #${taskID} has been escalated as Stuck to Admin`);
+      getAdminProjectTable(globalSelectedProjectID);
+    }
+  } catch (error) {
+    console.log("Fetch Issue", error);
+  }
 }
 
 function openEditModal(task) {
