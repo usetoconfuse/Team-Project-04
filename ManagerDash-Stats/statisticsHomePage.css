@@ -157,7 +157,6 @@ thead, tbody {
     grid-area: filtersHomeProj;
     justify-self: center;
     display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 

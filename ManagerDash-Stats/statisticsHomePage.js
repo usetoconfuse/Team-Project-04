@@ -278,10 +278,13 @@ async function fetchProjSearch(searchParams) {
             let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
             projectTable  += `<thead>
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Start Date</th>
-                                            <th>Due Date</th>
+                                            <th>Title</th>      
                                             <th>Leader</th>
+                                            <th>Members</th>
+                                            <th>Tasks</th>
+                                            <th>Due Date</th>
+                                            <th>Completed</th>
+                                            <th>Overdue</th>
                                         </tr>
                                     </thead>`
             projectTable  += '<tbody>'
@@ -289,9 +292,12 @@ async function fetchProjSearch(searchParams) {
             data.forEach(function(item) {
             projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
                                             <td>` + item.Project_Title + `</td>
-                                            <td>` + item.Start_Date + `</td>
-                                            <td>` + item.Due_Date + `</td>
                                             <td>` + item.Forename + ` ` + item.Surname + `</td>
+                                            <td>` + item.Members + `</td>
+                                            <td>` + item.Tasks + `</td>
+                                            <td>` + item.Due_Date + `</td>
+                                            <td>` + item.Completed + `</td>
+                                            <td>` + item.Overdue + `</td>
                                         </tr>`
             });     
             projectTable  += '</tbody>'

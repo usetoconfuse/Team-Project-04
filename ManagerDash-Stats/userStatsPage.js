@@ -285,7 +285,7 @@ async function getUserStatsTaskData(filters={}) {
                 data.forEach(function(item) {
                     if (item.Stuck === "1") { // Make the "stuck" field readable for user.
                         var stuck = "Yes";
-                        var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
+                        var stuckStyles = "background-color:#ffcdd2;color:#c62828;font-weight:bold"; // RED background for when stuck
                     } else {
                         var stuck = "No";
                         var stuckStyles = "color:black";
