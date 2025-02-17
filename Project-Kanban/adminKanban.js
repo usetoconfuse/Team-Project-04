@@ -4,6 +4,7 @@ let globalSelectedProjectCompletion = null;
 let globalUserID = null;
 let globalProjectDeadline = null;
 window.addEventListener("storage", function () {
+    console.log("HELLO WORLD thistihn");
     const selectedProjectID = sessionStorage.getItem('clicked-project-id');
     const selectedProjectStatus = sessionStorage.getItem("clicked-project-status");
     const selectedProjectCompletion = sessionStorage.getItem("clicked-project-completion");
@@ -32,7 +33,7 @@ window.addEventListener("storage", function () {
     contentArea.classList.add("open");
 
     
-    getProjectName(selectedProjectID);
+    getAdminProjectName(selectedProjectID);
 
     
     const adminKanbanContent = document.querySelector("#admin-kanban-content");
@@ -41,13 +42,13 @@ window.addEventListener("storage", function () {
     globalUserID = adminKanbanContent.getAttribute("data-user-id");
 
     
-    getProjectTable(selectedProjectID, {});
+    getAdminProjectTable(selectedProjectID, {});
     
 });
 
 
 
-async function getProjectName(selectedProjectID) {
+async function getAdminProjectName(selectedProjectID) {
     try {
         
       let url = `Project-Kanban/kanban-projectName-db.php?projectID=${encodeURIComponent(selectedProjectID)}`; 
@@ -72,7 +73,7 @@ async function getProjectName(selectedProjectID) {
     }
 }
 
-  async function getProjectTable(selectedProjectID, filters={}) {
+  async function getAdminProjectTable(selectedProjectID, filters={}) {
     try {
     let url = `Project-Kanban/get-project-table-db.php?projectID=${encodeURIComponent(selectedProjectID)}`; 
 
@@ -91,7 +92,8 @@ async function getProjectName(selectedProjectID) {
     }
     const adminProjectData = await response.json();
     console.log(adminProjectData);
-    populateTasksTable(adminProjectData);
+    console.log("HEREfernufirubifreuibfre");
+    populateAdminTasksTable(adminProjectData);
     
   
     } catch (error) {
@@ -100,8 +102,8 @@ async function getProjectName(selectedProjectID) {
 }
 
 
-function populateTasksTable(tableData) {
-  const tableBody = document.querySelector(".emp-projectKanban-bottom tbody");
+function populateAdminTasksTable(tableData) {
+  const tableBody = document.querySelector("#admin-kanban-content .emp-projectKanban-bottom tbody");
   tableBody.innerHTML = "";
   tableData.forEach(task => {
       const row = document.createElement('tr');
@@ -281,7 +283,7 @@ async function deleteProjectTask(projectTaskID) {
         console.log(response);
     } else {
       sendToast(`Task has been successfully deleted!`);
-      getProjectTable(globalSelectedProjectID);
+      getAdminProjectTable(globalSelectedProjectID);
         
     }
   } catch(error) {
@@ -341,7 +343,7 @@ async function updateProjectTasks(taskName, taskDescription, taskPriority, taskD
     if (!response.ok) {
       console.log(response);
     } else {
-      getProjectTable(globalSelectedProjectID);
+      getAdminProjectTable(globalSelectedProjectID);
     }
 
   } catch (error) {
@@ -353,8 +355,8 @@ async function updateProjectTasks(taskName, taskDescription, taskPriority, taskD
 
 
 //====Back to Projects Page Button
-const backToProjectsBtn = document.querySelector('#admin-kanban-content .project-intro .projects-intro-buttons .all-projects-btn');
-backToProjectsBtn.addEventListener('click', () => {
+const backAdminToProjectsBtn = document.querySelector('#admin-kanban-content .project-intro .projects-intro-buttons .all-projects-btn');
+backAdminToProjectsBtn.addEventListener('click', () => {
   const params = new URLSearchParams(window.location.search);
   params.set("page", "projects");
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
@@ -521,7 +523,7 @@ filterProjectTaskBtn.addEventListener('click', () => {
 
       filterProjectTaskModal.style.display = "none";
       
-      getProjectTable(globalSelectedProjectID, filterData);  
+      getAdminProjectTable(globalSelectedProjectID, filterData);  
   }
 
   function createFiltersMsg(filters) {
@@ -570,7 +572,7 @@ filterProjectTaskBtn.addEventListener('click', () => {
       filterRemoveAdminBtn.style.display = 'none';
     }
 
-    getProjectTable(globalSelectedProjectID, allAdminFilters); 
+    getAdminProjectTable(globalSelectedProjectID, allAdminFilters); 
   })
 
   filterRemoveAdminBtn.addEventListener("click", () => {
@@ -589,7 +591,7 @@ filterProjectTaskBtn.addEventListener('click', () => {
       ".task-dropdown-stuck #stuck-task"
     ).value = "All";
 
-    getProjectTable(globalSelectedProjectID, {});  
+    getAdminProjectTable(globalSelectedProjectID, {});  
   });
 
   function getCurrentFilters() {
@@ -648,7 +650,7 @@ async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueD
       console.log(response);
     } else {
       sendToast(`Task has been successfully added!`);
-      getProjectTable(globalSelectedProjectID);
+      getAdminProjectTable(globalSelectedProjectID);
     }
 
   } catch (error) {
