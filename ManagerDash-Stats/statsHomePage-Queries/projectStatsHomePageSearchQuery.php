@@ -54,6 +54,7 @@
                     Projects.Project_ID) AS big
             ON Projects.Project_ID = big.Project_ID
             WHERE Projects.Project_ID LIKE '%$searchParams%'
+            OR Projects.Project_Title LIKE '%$searchParams%'
             ";
 
 
