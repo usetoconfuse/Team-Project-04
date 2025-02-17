@@ -231,13 +231,16 @@ function openEditModal(task) {
       
       
       updateProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, Task_ID, manHours, startDate);
-      sendToast(`Task "${taskName}" has been successfully updated!`);
+      sendToast(`Task has been successfully updated!`);
       editActionsModal.style.display = 'none';
   };
 
   const closeAdminEditBtn = editActionsModal.querySelector('.close-modal-btn');
   closeAdminEditBtn.onclick = () => {
+      errorText = editActionsModal.querySelector('#error-edit-message');
+      errorText.innerHTML = "";
       editActionsModal.style.display = 'none';
+      
   };
 }
 
@@ -277,7 +280,7 @@ async function deleteProjectTask(projectTaskID) {
     if (!response.ok) {
         console.log(response);
     } else {
-      sendToast(`Task #${taskID} has been successfully deleted!`);
+      sendToast(`Task has been successfully deleted!`);
       getProjectTable(globalSelectedProjectID);
         
     }
@@ -644,7 +647,7 @@ async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueD
     if (!response.ok) {
       console.log(response);
     } else {
-      sendToast(`Task "${taskName}" has been successfully added!`);
+      sendToast(`Task has been successfully added!`);
       getProjectTable(globalSelectedProjectID);
     }
 

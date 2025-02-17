@@ -9,8 +9,8 @@
     <div class="mgrStats-header-section">
         <p class="mgrStats-title">Statistics</>
         <div id="mgrStats-tabBtn">
-            <button class="mgrStats-activeTab" id="mgrProjStats" value="tabGroupProjectStats">Project</button>
-            <button id="mgrUserStats" value="tabGroupUserStats">User</button>
+            <button class="mgrStats-activeTab" id="mgrProjStats" onclick="switchTab('projects')">Project</button>
+            <button id="mgrUserStats" onclick="switchTab('users')">User</button>
         </div>
     </div>
 

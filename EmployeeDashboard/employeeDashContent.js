@@ -1,7 +1,7 @@
 const userID = document.querySelector('#emp-dash-content').getAttribute('data-user-id');
 document.addEventListener('DOMContentLoaded', () => {
     getEmpStats(userID);
-    getEmpTaskTable(userID)
+    getEmpTaskTable(userID, {})
 })
 
 async function getEmpStats(userID) {
@@ -65,9 +65,13 @@ function populateEmpPersonalTasks(empDashData) {
 
 
 
-async function getEmpTaskTable(userID) {
+async function getEmpTaskTable(userID, filters={}) {
+  
     try {
     let url = `EmployeeDashboard/queries/emp-dash-table.php?userID=${encodeURIComponent(userID)}`; 
+    
+    const filterQuery = new URLSearchParams(filters).toString();
+    url += filterQuery ? `&${filterQuery}` : "";
 
     const params = { 
       method: "GET",
@@ -80,6 +84,8 @@ async function getEmpTaskTable(userID) {
       throw new Error('Failed to fetch projects data');
     }
     const empDashTableData = await response.json();
+    console.log('Data::P ', empDashTableData);
+
     populateTasksTable(empDashTableData);
 
 
@@ -133,31 +139,159 @@ searchBar.addEventListener('input', ()=>{
   })
   if (foundTasks === 0) {
     document.querySelector('#emp-dash-content .search-task-error-msg').style.display = 'block';
-  } else {
+} else {
     document.querySelector('#emp-dash-content .search-task-error-msg').style.display = 'none';
   }
 })
 
-//Filters
+//Filter Modal Functionality
+const filterProjectTaskModal = document.querySelector("#emp-dash-content #filter-modal");
+const filterProjectTaskBtn = document.querySelector('#emp-dash-content  .filter-task-btn');
+const closeProjectFilterTaskModal = filterProjectTaskModal.querySelector('#filter-modal .close-modal-btn')
+const filterAppliedAdminMsg = document.querySelector(
+  "#emp-dash-content .filter-applied-msg"
+);
+const filterRemoveAdminBtn = document.querySelector(
+  "#emp-dash-content .remove-filters-btn"
+);
+filterProjectTaskBtn.addEventListener('click', () => {
+    filterProjectTaskModal.style.display = 'flex';
+  })
+  closeProjectFilterTaskModal.addEventListener('click', () => {
+    filterProjectTaskModal.style.display = 'none';
+  })
 
-const filterButton = document.querySelector('#emp-dash-content .emp-projectKanban-container .filter-task-btn');
-const filterEmpModal = document.querySelector('#emp-dash-content #filter-modal');
+  const confirmFilterAdminTask = filterProjectTaskModal.querySelector('#add-filter-btn')
+  confirmFilterAdminTask.onclick = () => {
+    const filterStuck = filterProjectTaskModal.querySelector('#stuck-task').value;
+    const filterPriority = filterProjectTaskModal.querySelector('#priority').value;
+    const filterDate = filterProjectTaskModal.querySelector('#date-task').value;
+    
+      const filterData = { filterPriority, filterDate, filterStuck };
+      
+      if (filterPriority === "All") {
+        delete filterData.filterPriority;
+      }
+      if (filterDate === "All") {
+        delete filterData.filterDate;
+      }
+      if (filterStuck === "All") {
+        delete filterData.filterStuck;
+      }
+      const orderByValue = document.querySelector(
+        "#emp-dash-content .projects-intro-buttons .order-by-dropdown select").value;
 
-//Opening and Closing Filter Modal
-filterButton.addEventListener('click', () => {
-  filterEmpModal.style.display = 'block';
-})
+      if (orderByValue !== "None") {
+        filterData.orderByValue = orderByValue;
+      }
 
-filterEmpModal.querySelector('.close-modal-btn').addEventListener('click', () => {
-  filterEmpModal.style.display = 'none';
-})
+    
+      filterAppliedAdminMsg.style.display = "block";
+      filterAppliedAdminMsg.innerHTML = createFiltersMsgDashboard(filterData);
+      
 
-//Submit Filter Functionality
-filterEmpModal.querySelector('.add-filter-btn').addEventListener('click', () => {
-  const filterPriority = filterEmpModal.querySelector('#priority').value;
-  const filterDate = filterEmpModal.querySelector('#date-task').value;
-  const filterStuck = filterEmpModal.querySelector('#stuck-task').value;
 
-  console.log(filterPriority, filterDate, filterStuck);
+      let filtersLength = Object.keys(filterData).length;
+      if (filtersLength > 0) {
+        filterRemoveAdminBtn.style.display = "flex";
+      } else {
+        filterRemoveAdminBtn.style.display = "none";
+      }
 
-})
+      filterProjectTaskModal.style.display = "none";
+      
+      getEmpTaskTable(userID, filterData);
+  }
+
+  function createFiltersMsgDashboard(filters) {
+    console.log('Create filters running');
+    let applied = [];
+    if (filters.filterPriority && filters.filterPriority !== "All") {
+      applied.push(filters.filterPriority + " Priority");
+    }
+    if (filters.filterDate && filters.filterDate !== "All") {
+      applied.push("Due Date: " + filters.filterDate);
+    }
+    if (filters.filterStuck && filters.filterStuck !== "All") {
+      if (filters.filterStuck === "Yes") {
+        applied.push("Show Stuck Tasks");
+      } else {
+        applied.push("Show Non-Stuck Tasks");
+      }
+    }
+    if (filters.orderByValue && filters.orderByValue !== "None") {
+      applied.push("Order By " + filters.orderByValue);
+    }
+    if (applied.length === 0) {
+      return '';
+    } else {
+      return 'Filters Applied: ' + applied.join(', ');
+    }
+  }
+
+    //Order By Filters
+  const orderByAdminBtn = document.querySelector('#emp-dash-content .projects-intro-buttons .order-by-confirm');
+  orderByAdminBtn.addEventListener('click', () => {
+    const orderByDropdownValue = document.querySelector('#emp-dash-content .projects-intro-buttons .order-by-dropdown select').value;
+    const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
+    
+    
+    const currentAdminFilters = getCurrentFilters();
+    const allAdminFilters = { ...currentAdminFilters, ...orderByParam };
+
+
+    filterAppliedAdminMsg.style.display = 'block';
+    filterAppliedAdminMsg.innerHTML = createFiltersMsg(allAdminFilters);
+
+    let filtersLength = Object.keys(allAdminFilters).length;
+    if (filtersLength > 0) {
+      filterRemoveAdminBtn.style.display = 'flex';
+    } else {
+      filterRemoveAdminBtn.style.display = 'none';
+    }
+
+    getEmpTaskTable(userID, allAdminFilters);
+  })
+
+  filterRemoveAdminBtn.addEventListener("click", () => {
+    filterAppliedAdminMsg.innerHTML = "";
+    filterAppliedAdminMsg.style.display = "none";
+    filterRemoveAdminBtn.style.display = "none";
+    document.querySelector(
+      "#emp-dash-content .projects-intro-buttons .order-by-dropdown select"
+    ).value = "None";
+    filterProjectTaskModal.querySelector(".task-dropdown-priority #priority").value =
+      "All";
+    filterProjectTaskModal.querySelector(
+      ".task-dropdown-date #date-task"
+    ).value = "All";
+    filterProjectTaskModal.querySelector(
+      ".task-dropdown-stuck #stuck-task"
+    ).value = "All";
+
+    getEmpTaskTable(userID, {});
+  });
+
+  function getCurrentFilters() {
+    console.log('Current filter running');
+    const filterProjectTaskModal = document.querySelector(
+      "#emp-dash-content #filter-modal"
+    );
+    const filterStuck = filterProjectTaskModal.querySelector("#stuck-task").value;
+    const filterPriority =
+      filterProjectTaskModal.querySelector("#priority").value;
+    const filterDate = filterProjectTaskModal.querySelector("#date-task").value;
+
+    const filterData = { filterPriority, filterDate, filterStuck };
+
+    if (filterPriority === "All") {
+      delete filterData.filterPriority;
+    }
+    if (filterDate === "All") {
+      delete filterData.filterDate;
+    }
+    if (filterStuck === "All") {
+      delete filterData.filterStuck;
+    }
+    return filterData;
+  }

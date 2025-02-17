@@ -8,60 +8,102 @@
 // =============================================================
 
 // Switch between project and user tabs
-// Clicking project/user tab brings you to that item list
+// Clicking a tab brings you to the list of projects/users
+function switchTab(tabName) {
 
-const mgrStatsPostTypeButtons = document.querySelectorAll('#mgrStats-tabBtn button');
-mgrStatsPostTypeButtons.forEach(button => {
-    button.addEventListener("click", () => {
+  const params = new URLSearchParams(window.location.search);
+  params.set("view", tabName);
+  params.delete("project");
+  params.delete("user");
 
-        mgrStatsPostTypeButtons.forEach(btn => { // Hide all other tabs
-            btn.classList.remove('mgrStats-activeTab')
-            document.getElementById(btn.getAttribute("value")).style.display = "none";
-        });
+  var currentTabId;
+  var currentBtnId;
 
-        button.classList.add('mgrStats-activeTab'); // Show this tab
+  if (tabName == "projects") {
+    currentTabId = "tabGroupProjectStats";
+    currentBtnId = "mgrProjStats";
+  }
+  else if (tabName == "users") {
+    currentTabId = "tabGroupUserStats";
+    currentBtnId = "mgrUserStats";
+  }
+  else {
+    console.log(`Error: tab name ${tabName} does not exist`);
+    return;
+  }
 
-        // Show the tab in list view
-        const showingTab = document.getElementById(button.getAttribute("value"));
-        for (const subpage of showingTab.children) {
-            subpage.style.display = "none";
-        }
-        showingTab.querySelector(".statsHome-grid").style.display = "flex";
-        showingTab.style.display = "flex";
-    });
-});
+  const tabs = document.querySelectorAll('.tabGroup');
+  tabs.forEach(tab => { // Hide all tabs
+    tab.style.display = "none";
+  })
+  
+  const showingTab = document.getElementById(currentTabId);
+  for (const subpage of showingTab.children) {
+      subpage.style.display = "none"; // Hide all subpages
+  }
+
+  const mgrStatsPostTypeButtons = document.querySelectorAll('#mgrStats-tabBtn button');
+  mgrStatsPostTypeButtons.forEach(btn => {
+    btn.classList.remove('mgrStats-activeTab'); // Set all buttons inactive
+  });
+
+  // Show this tab viewing the list subpage
+  showingTab.querySelector(".statsHome-grid").style.display = "flex";
+  showingTab.style.display = "flex";
+
+  const selectedBtn = document.getElementById(currentBtnId);
+  selectedBtn.classList.add('mgrStats-activeTab'); // Set the correct button active
+
+  window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+};
+
+
+// Switch from table to stats view
+// Assumes that the correct tab is already open
+function viewSelectedItem(itemType, id) {
+
+    const params = new URLSearchParams(window.location.search);
+    params.set(itemType, id);
+    
+    var homeGridId;
+    var itemStatsViewId;
+    var populationFun;
+
+    if (itemType == "project") {
+      params.delete("user");
+      homeGridId = "statsHomeGridProject";
+      itemStatsViewId = "projectViewStats";
+      populationFun = () => PopulateProjectStatsPage();
+    }
+    else if (itemType == "user") {
+      params.delete("project");
+      homeGridId = "statsHomeGridUser";
+      itemStatsViewId = "userViewStats";
+      populationFun = () => PopulateUserStatsPage();
+    }
+    else {
+      console.log(`Error: invalid item type ${itemType}`);
+    }
+
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
+    // CHANGE TO JUST REDIRECT TO APPROPRIATE PAGE INSTEAD OF DOING THIS MANUALLY
+    populationFun();
+    document.getElementById(homeGridId).style.display = "none";
+    document.getElementById(itemStatsViewId).style.display = "block";
+}
+
+
+
 
 
 // Statistics Home Page
 
 // =============================================================
 
-// Switch from table to stats view
-
-async function viewSelectedProject(id) {
-    const params = new URLSearchParams(window.location.search);
-    params.set("project", id);
-    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
-
-    await(PopulateProjectStatsPage());
-    document.getElementById("statsHomeGridProject").style.display = "none";
-    document.getElementById("projectViewStats").style.display = "block";
-}
-
-async function viewSelectedUser(id) {
-    const params = new URLSearchParams(window.location.search);
-    params.set("user", id);
-    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
-
-    await(PopulateUserStatsPage());
-    document.getElementById("statsHomeGridUser").style.display = "none";
-    document.getElementById("userViewStats").style.display = "block";
-}
-
-
 //Get all projects query and generate project table - do this on DOM load as well since projects is the default tab
 
-async function fetchProjectTable() {
+/* async function fetchProjectTable() {
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/statsHomePage-Queries/projectStatsHomePageQuery.php');
@@ -88,7 +130,7 @@ async function fetchProjectTable() {
         projectTable  += '<tbody>'
         // Loop through the data and create a new element for each item
         data.forEach(function(item) {
-           projectTable  += `<tr onclick=viewSelectedProject(` + item.Project_ID + `)>
+           projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
                                         <td>` + item.Project_Title + `</td>
                                         <td>` + item.Start_Date + `</td>
                                         <td>` + item.Due_Date + `</td>
@@ -104,7 +146,7 @@ async function fetchProjectTable() {
     } catch (error) {
         console.error('Error:', error); // Log any errors that occur
     }
-}
+} */
 
 
 //Get all users query and generate user table
@@ -135,7 +177,7 @@ async function fetchProjectTable() {
 //         userTable  += '<tbody>'
 //         // Loop through the data and create a new element for each item
 //         data.forEach(function(item) {
-//            userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
+//            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
 //                                         <td>` + item.User_ID + `</td>
 //                                         <td>` + item.Forename + ` ` + item.Surname + `</td>
 //                                         <td>` + item.User_Type + `</td>
@@ -235,7 +277,7 @@ async function fetchProjSearch(searchParams) {
             projectTable  += '<tbody>'
             // Loop through the data and create a new element for each item
             data.forEach(function(item) {
-            projectTable  += `<tr onclick=viewSelectedProject(` + item.Project_ID + `)>
+            projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
                                             <td>` + item.Project_Title + `</td>
                                             <td>` + item.Start_Date + `</td>
                                             <td>` + item.Due_Date + `</td>
@@ -277,19 +319,6 @@ document.getElementById('searched-proj').addEventListener("input", async (e) =>{
     selectedQuery = e.target.value.trim();
     fetchProjSearch(selectedQuery);
 });
-
-/* Redirect to correct sub-page if loading with URL params
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has("project")) {
-        viewSelectedProject(params.get("project"));
-    }
-
-    else if (params.has("user")) {
-        viewSelectedUser(params.get("user"));
-    }
-}); */
-
 
 
 
@@ -350,7 +379,7 @@ async function getUsersHomeData(filters={}) {
                 //         var stuckStyles = "color:black";
                 //     }
                     
-            userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
+            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
                             <td>` + item.User_ID + `</td>
                             <td>` + item.Forename + ` ` + item.Surname + `</td>`;
                       if(item.count_stuck > 0) { 
@@ -406,6 +435,35 @@ async function getUsersHomeData(filters={}) {
 
 
 window.addEventListener("DOMContentLoaded", function () {
+
+    // REDIRECT BASED ON URL PARAMS
+
+    const params = new URLSearchParams(window.location.search);
+    let view = params.get("view");
+    if (view == "projects") {
+      switchTab("projects");
+      let proj = params.get("project");
+      if (proj) {
+        viewSelectedItem("project", proj);
+      }
+    }
+    else if (view == "users") {
+      switchTab("users");
+      let user = params.get("user");
+      if (user) {
+        viewSelectedItem("user", user);
+      }
+    }
+    else {
+      params.set("view", "projects");
+      params.delete("project");
+      params.delete("user");
+    }
+
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
+
+    
 
     const filterUserStatsHomeModal = document.querySelector('#userStatsHome-filterAll #filter-modal')
     // document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value = 'None';

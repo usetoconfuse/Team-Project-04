@@ -59,8 +59,16 @@ var projBurnup = new Chart(burnupCtx);
 // Populate page when a project is selected
 async function PopulateProjectStatsPage() {
 
+    // Hide page until populated
+    document.getElementById("prjStContainer").style.display = "none";
+    document.getElementById("prjStErrorBox").style.display = "none";
+
     // Fetch full project details from ID
-    await FetchProjectData();
+    // Show project not found message and abort if not found
+    if (!await FetchProjectData()) {
+        document.getElementById("prjStErrorBox").style.display = "block";
+        return;
+    }
 
     PopulateProjectStatsHeader();
 
@@ -71,20 +79,25 @@ async function PopulateProjectStatsPage() {
     await PopulatePrevWeekChart();
 
     await PopulateBurnUpChart();
+
+    document.getElementById("prjStContainer").style.display = "block";
 }
 
-
-
-//Fetch user details for project object
+// Fetch user details for project object
 async function FetchProjectData() {
 
-    //Get project ID from URL
+    // Get project ID from URL
     const params = new URLSearchParams(window.location.search);
     const projID = params.get('project');
 
-    //Fetch full project details from ID
+    // Fetch full project details from ID
     const data = await(FetchStatsData(
         `projectStatsDetailsQuery.php?ID=${projID}`));
+
+    // Exit if project not found
+    if (!data[0][0]) {
+        return 0;
+    }
 
     // Populate projDetails object
     projDetails.id = projID;
@@ -95,6 +108,7 @@ async function FetchProjectData() {
     projDetails.completed = data[0][0].Completion_Date;
     projDetails.leader = data[0][0].Project_Leader;
     console.log(projDetails);
+    return 1;
 };
 
 
@@ -110,7 +124,7 @@ function PopulateProjectStatsHeader() {
         <p id="prjStLeader">Leader: `+projDetails.leader+`</p>
     `;
 
-    document.getElementById("prjStHeaderNums").innerHTML = header;
+    document.getElementById("prjStHeaderInfo").innerHTML = header;
 }
 
 
@@ -118,6 +132,8 @@ function PopulateProjectStatsHeader() {
 //====================== MEMBER LIST ========================
 
 async function PopulateMemberList() {
+
+    document.getElementById('prjStContainer');
 
     // LIST DATA
 

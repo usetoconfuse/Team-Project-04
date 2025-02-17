@@ -4,15 +4,18 @@
 <!-- Tab for project statistics -->
 
 <link rel="stylesheet" href="ManagerDash-Stats/projectStatsPage.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
 
+<!-- Error message if project not found -->
+ <h1 id="prjStErrorBox">Project not found</h1>
+
+<!-- Main content -->
 <div id="prjStContainer">
 
     <!-- Header -->
     <div id="prjStHeader">
 
-        <!-- Numerical stats -->
-        <div id="prjStHeaderNums">
+        <!-- Header info -->
+        <div id="prjStHeaderInfo">
         </div>
 
         <!-- Task dial -->
