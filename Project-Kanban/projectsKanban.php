@@ -164,7 +164,7 @@
     </div>
 
        <!--Filter Posts -->
-    <div id="filter-modal" class="modal">
+    <div id="filter-modal" class="modal non-leader-modal">
         <div class="modal-box">
             <!--Header-->
             <div class="modal-header">

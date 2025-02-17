@@ -54,7 +54,7 @@ window.addEventListener("storage", function () {
     
     
 
-    const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal')
+    const filterKanbanModal = document.querySelector('#proj-kanban-content .non-leader-modal')
     document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value = 'None';
     filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
     filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
@@ -112,7 +112,7 @@ window.addEventListener("storage", function () {
       const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
 
 
-      const currentFilters = getCurrentFilters();
+      const currentFilters = getEmpCurrentFilters();
       const allFilters = { ...currentFilters, ...orderByParam};
 
 
@@ -180,7 +180,7 @@ function formatDateDeadline(date) {
   return `${day}-${month}-${year}`;
 }
 
-function getCurrentFilters() {
+function getEmpCurrentFilters() {
   const filterKanbanModal = document.querySelector('#proj-kanban-content #filter-modal');
   const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
   const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
@@ -476,7 +476,7 @@ function generateCard(kanbanData) {
         task.Stuck = newStuck;
         reportModal.style.display = 'none';
 
-        const currentFilters = getCurrentFilters();
+        const currentFilters = getEmpCurrentFilters();
         const kanbanContainer = document.querySelector('#proj-kanban-content')
         const userID = kanbanContainer.getAttribute('data-user-id');
         getKanbanData(userID, projectID, currentFilters);
@@ -548,7 +548,7 @@ function generateCard(kanbanData) {
 
       const orderByDropdownValue = document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
       const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
-      const currentFilters = getCurrentFilters();
+      const currentFilters = getEmpCurrentFilters();
       const allFilters = { ...currentFilters, ...orderByParam};
 
       filterAppliedMsg.style.display = 'block';
@@ -757,11 +757,12 @@ backToProjectsBtn.addEventListener('click', () => {
 
 
 //Filter Modal Functionality
-const filterTaskModal = document.querySelector("#proj-kanban-content #filter-modal");
+const filterTaskModal = document.querySelector("#proj-kanban-content .non-leader-modal");
 const filterTaskBtn = document.querySelector('#proj-kanban-content  .filter-task-btn');
 const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close-modal-btn')
 
 filterTaskBtn.addEventListener('click', () => {
+  console.log("YAY");
   filterTaskModal.style.display = 'flex';
   })
   closeFilterTaskModal.addEventListener('click', () => {
