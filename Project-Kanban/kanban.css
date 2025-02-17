@@ -406,7 +406,7 @@
 
 .modal-box {
     margin: 10% auto;
-    width: 40%;
+    width: 45%;
     background: white;
     color: black;
     position: relative;
@@ -509,7 +509,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 /*styles - dropdowns and date*/
-.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #kb-edit-post-topic-input, #task-user-dropdown, input[type = 'number'] {
+.task-dropdown select, input[type="date"], .move-task-dropdown select, .order-by-dropdown select, #team-leader-dropdown, #kb-new-post-topic-input, #kb-edit-post-topic-input, #task-user-dropdown,input[type = 'number'],#task-project-dropdown {
     width: 100%;
     padding: 0.4rem 0.6rem;
     border: 2px solid #e1e1e1;
@@ -521,6 +521,10 @@ input[type="file"]::-webkit-file-upload-button {
     -moz-appearance: none;
     cursor: pointer;
     height: 40px;
+}
+
+.task-dropdown-project {
+    margin-left: 30px;
 }
 
 .order-by-dropdown select {
