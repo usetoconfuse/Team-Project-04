@@ -15,7 +15,9 @@
     <div id="prjStHeader">
 
         <!-- Header info -->
+        <div id="pjStHeaderInfoContainer">
         <div id="prjStHeaderInfo">
+        </div>
         </div>
 
         <!-- Task dial -->

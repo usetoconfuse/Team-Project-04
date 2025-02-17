@@ -5,7 +5,7 @@
     <section class="project-intro">
         <div class="project-txt">
             <p></p>
-            <p>View all your tasks below.</p>
+    
         </div>
 
         <!--<div class="vertical-bar"></div>

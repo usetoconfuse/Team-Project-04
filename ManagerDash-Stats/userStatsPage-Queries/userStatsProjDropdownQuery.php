@@ -9,9 +9,8 @@
         $userID = htmlspecialchars($_GET['ID']); // Sanitize input
     }
 
-    // $type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
-    // Select the first 20 tasks for the given UserID
+    // Select projects relating a specific user
     $sql = "SELECT DISTINCT Projects.Project_ID, Projects.Project_Title
     FROM Tasks INNER JOIN Projects 
     ON Tasks.Project_ID = Projects.Project_ID 

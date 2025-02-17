@@ -94,6 +94,12 @@
     width: 100%;
 }
 
+.stats-title-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 thead, tbody {
     white-space: nowrap;
 }

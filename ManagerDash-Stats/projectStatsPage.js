@@ -80,7 +80,7 @@ async function PopulateProjectStatsPage() {
 
     await PopulateBurnUpChart();
 
-    document.getElementById("prjStContainer").style.display = "block";
+    document.getElementById("prjStContainer").style.display = "flex";
 }
 
 // Fetch user details for project object

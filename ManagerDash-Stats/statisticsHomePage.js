@@ -54,6 +54,14 @@ function switchTab(tabName) {
   const selectedBtn = document.getElementById(currentBtnId);
   selectedBtn.classList.add('mgrStats-activeTab'); // Set the correct button active
 
+  // Ensure the title of the page is reset
+  const pageHomeTitle = document.querySelector('#stats-title');
+  pageHomeTitle.innerHTML = `Statistics`;
+
+  //Ensure the backbutton isn't visible
+  document.querySelector('#backButton').style.display = 'none';
+
+
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
 
@@ -61,7 +69,6 @@ function switchTab(tabName) {
 // Switch from table to stats view
 // Assumes that the correct tab is already open
 function viewSelectedItem(itemType, id) {
-
     const params = new URLSearchParams(window.location.search);
     params.set(itemType, id);
     
@@ -195,57 +202,57 @@ function viewSelectedItem(itemType, id) {
 // };
 
 
-async function fetchUserSearch(searchParams) {
-    try {
-        // Make an HTTP request to the PHP file
-        const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
+// async function fetchUserSearch(searchParams) {
+//     try {
+//         // Make an HTTP request to the PHP file
+//         const response = await fetch(`ManagerDash-Stats/statsHomePage-Queries/userStatsHomePageSearchQuery.php?searchParams=${searchParams}`);
 
-        // console.log("1: ", response);
+//         // console.log("1: ", response);
         
-        // Ensure the response is OK and return the JSON data 
-        if (!response.ok) { 
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        // Convert the response to JSON format
-        const data = await response.json();
-        if (data.length > 0) {
+//         // Ensure the response is OK and return the JSON data 
+//         if (!response.ok) { 
+//             throw new Error('Network response was not ok ' + response.statusText);
+//         }
+//         // Convert the response to JSON format
+//         const data = await response.json();
+//         if (data.length > 0) {
 
 
-            // console.log("2: ", data[0].Forename);
+//             // console.log("2: ", data[0].Forename);
 
-            // Build the new table to display
-            let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table userStats-tr'>"
-            userTable  += `<thead>
-                                        <tr>
-                                            <th>User ID</th>
-                                            <th>Name</th>
-                                            <th>Job Position</th>
-                                        </tr>
-                                    </thead>`
-            userTable  += '<tbody>'
-            // Loop through the data and create a new element for each item
-            data.forEach(function(item) {
-            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
-                                            <td>` + item.User_ID + `</td>
-                                            <td>` + item.Forename + ` ` + item.Surname + `</td>
-                                            <td>` + item.User_Type + `</td>
-                                        </tr>`
-            });     
-            userTable  += '</tbody>'
-            userTable  += '</table>';
+//             // Build the new table to display
+//             let userTable  = "<table id='userStatsHomeTbl' class='statsHome-table userStats-tr'>"
+//             userTable  += `<thead>
+//                                         <tr>
+//                                             <th>User ID</th>
+//                                             <th>Name</th>
+//                                             <th>Job Position</th>
+//                                         </tr>
+//                                     </thead>`
+//             userTable  += '<tbody>'
+//             // Loop through the data and create a new element for each item
+//             data.forEach(function(item) {
+//             userTable  += `<tr onclick=viewSelectedUser(` + item.User_ID + `)>
+//                                             <td>` + item.User_ID + `</td>
+//                                             <td>` + item.Forename + ` ` + item.Surname + `</td>
+//                                             <td>` + item.User_Type + `</td>
+//                                         </tr>`
+//             });     
+//             userTable  += '</tbody>'
+//             userTable  += '</table>';
 
-            // Find the container/table to display the data
-            var container = document.getElementById('statsHomeTableUser');
-            container.innerHTML = userTable;
-        } else {
-            var container = document.getElementById('statsHomeTableUser');
-            container.innerHTML = 'No matching users';
-        }
+//             // Find the container/table to display the data
+//             var container = document.getElementById('statsHomeTableUser');
+//             container.innerHTML = userTable;
+//         } else {
+//             var container = document.getElementById('statsHomeTableUser');
+//             container.innerHTML = 'No matching users';
+//         }
 
-    } catch (error) {
-        console.error('Error:', error); // Log any errors that occur
-    }
-}
+//     } catch (error) {
+//         console.error('Error:', error); // Log any errors that occur
+//     }
+// }
 
 
 async function fetchProjSearch(searchParams) {
@@ -352,7 +359,7 @@ async function getUsersHomeData(filters={}) {
             
 
             if (data.length > 0) {
-                console.log(data);
+                // console.log(data);
                 // console.log("2: ", data[0].Task_ID);
 
                 // Build the new table to display
@@ -361,31 +368,39 @@ async function getUsersHomeData(filters={}) {
                                     <tr>
                                         <th>User ID</th>
                                         <th>Name</th>
-                                        <th>Num of Stuck</th>
-                                        <th>Num of Overdue</th>
-                                        <th>Num of Completed</th>
-                                        <th>Num of remaining (In Progress, To Do and Overdue)</th>
+                                        <th>Tasks Stuck</th>
+                                        <th>Tasks Overdue</th>
+                                        <th>Tasks Completed</th>
+                                        <th>Tasks Remaining</th>
                                     </tr>
                                 </thead>`
                                 userTable  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
-                //     if (item.Stuck === "1") { // Make the "stuck" field readable for user.
-                //         var stuck = "Yes";
-                //         var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
-                //     } else {
-                //         var stuck = "No";
-                //         var stuckStyles = "color:black";
-                //     }
-                    
-            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
+                    userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
                             <td>` + item.User_ID + `</td>
-                            <td>` + item.Forename + ` ` + item.Surname + `</td>
-                            <td>` + item.count_stuck + `</td>
-                            <td>` + item.count_overdue + `</td>
-                            <td>` + item.count_completed + `</td>
-                            <td>` + item.count_remaining + `</td>
-                            </tr>`
+                            <td>` + item.Forename + ` ` + item.Surname + `</td>`;
+                      if(item.count_stuck > 0) { 
+                        userTable  += `<td style="background-color:#ffcdd2;color:#c62828;">` + item.count_stuck + `</td>`;
+                      } else {
+                        userTable  +=  `<td>` + item.count_stuck + `</td>`;
+                      }
+                      if(item.count_overdue > 0) { 
+                        userTable  += `<td style="background-color:#ffcdd2;color:#c62828;">` + item.count_overdue + `</td>`;
+                      } else {
+                        userTable  +=  `<td>` + item.count_overdue + `</td>`;
+                      }
+                      if(item.count_completed > 0) { 
+                        userTable  += `<td style="background-color:#c8e6c9;color:#388e3c;">` + item.count_completed + `</td>`;
+                      } else {
+                        userTable  +=  `<td>` + item.count_completed + `</td>`;
+                      }
+                      if(item.count_remaining > 0) { 
+                        userTable  += `<td style="background-color:#fff0c2;color:#947c01;">` + item.count_remaining + `</td>`;
+                      } else {
+                        userTable  +=  `<td>` + item.count_remaining + `</td>`;
+                      }
+            userTable += `</tr>`
                     });     
                     userTable  += '</tbody>'
                     userTable  += '</table>';
@@ -423,6 +438,13 @@ async function getUsersHomeData(filters={}) {
 
 
 window.addEventListener("statsLoaded", () => {
+
+    //Get back button from UserStatsPage
+    // Back Button functionality when clicked in userStatsPage.php
+    const backButtonUser = document.getElementById('backButton');
+    backButtonUser.addEventListener("click", () => {
+      switchTab("users");
+    })
 
   // Redirect based on URL params
 
