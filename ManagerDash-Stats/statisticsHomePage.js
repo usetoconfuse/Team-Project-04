@@ -53,8 +53,11 @@ function switchTab(tabName) {
 
   const selectedBtn = document.getElementById(currentBtnId);
   selectedBtn.classList.add('mgrStats-activeTab'); // Set the correct button active
+
+  // Ensure the title of the page is reset
   const pageHomeTitle = document.querySelector('#stats-title');
   pageHomeTitle.innerHTML = `Statistics`;
+
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
 
@@ -433,6 +436,14 @@ async function getUsersHomeData(filters={}) {
 window.addEventListener("DOMContentLoaded", function () {
 
     // REDIRECT BASED ON URL PARAMS
+
+    //Get back button from UserStatsPage
+    // Back Button functionality when clicked in userStatsPage.php
+    const backButtonUser = document.getElementById('backButton');
+    backButtonUser.addEventListener("click", () => {
+      switchTab("users");
+    })
+
 
     const params = new URLSearchParams(window.location.search);
     let view = params.get("view");

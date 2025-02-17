@@ -40,17 +40,7 @@ async function PopulateUserStatsPage() {
 };
 
 
-// Back Button
-// const backButton = document.getElementById('backButton');
-// backButton.addEventListener("click", () => {
 
-//     // const showingTab = document.getElementById(backButton.getAttribute("value"));
-//       const currentPage = document.getElementById('mgrStatsUser-grid-container');
-//       currentPage.style.display = "none";
-//         const newTab = document.getElementById("statsHomeGridUser");
-//         newTab.style.display = "block";
-
-//       })
 //Fetch user details for user object
 async function fetchUserDetails() {
     try {
