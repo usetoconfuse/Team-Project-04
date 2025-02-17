@@ -79,8 +79,8 @@
 <div id="mgrStatsUser-grid-container">
         <!-- <div id="userStats-Flex-Item1"> -->
 
+        <h2>Admin Operations</h2>
         <div id="userStats-buttons" class="mgrStatsUser-grid-item">
-        <h1>User Statistics</h1>
             <div id='userStatsFlexTitle'>
                     <div id="backButton" class="all-projects-btn black-btn">
                         <i class='fa fa-solid fa-arrow-left'></i>
@@ -95,10 +95,12 @@
             </div>
         </div>
 
+        <h2>User Status Graphs</h2>
 
         
             <!-- <canvas id="weeklyManHrsChart" width="400" height="200"></canvas> -->
             <!-- Graph showing how many tasks in each category are assigned to each member -->
+            <div id="userStatsGraphs">
             <div id="userStats-weeklyGraph" class="mgrStatsUser-grid-item">
 
                 <!-- Dropdown for graphs -->
@@ -171,6 +173,7 @@
             <!-- Fetch Data Here -->
                 <!-- </table> -->
         <!-- </div> -->
+            </div>
             </div>
 
 
@@ -274,6 +277,7 @@
 
 
 
+        <h2>User Tasks</h2>
 
 
 

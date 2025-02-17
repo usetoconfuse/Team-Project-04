@@ -460,7 +460,6 @@ function createTaskStatusGraph(currentTaskStatus) {
             }]
         },
         options: {
-            responsive: true,
             plugins: {
                 legend: {           // The legend seems to have broken when I moved all the ChartJS imports into one place. Sorry - Toby
                     display: true, // One way to have each bar as a separate legend item is to make each task category its own dataset.
@@ -623,7 +622,7 @@ function createProjTimeGraph(yAxProj, durArr) {
     },
 options: {
     indexAxis: "y",
-    responsive: true,
+    // responsive: true,
     plugins: {
         title: {
             display: true,
@@ -953,7 +952,6 @@ async function PopulateTaskDialChartUserStats() {
             rotation: -90,
             circumference: 180, 
             cutout: '80%',
-            responsive: true,
             aspectRatio: 2,
     
             plugins: {
