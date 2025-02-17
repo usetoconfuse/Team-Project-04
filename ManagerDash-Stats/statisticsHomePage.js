@@ -371,14 +371,6 @@ async function getUsersHomeData(filters={}) {
                                 userTable  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
-                //     if (item.Stuck === "1") { // Make the "stuck" field readable for user.
-                //         var stuck = "Yes";
-                //         var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
-                //     } else {
-                //         var stuck = "No";
-                //         var stuckStyles = "color:black";
-                //     }
-                    
             userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
                             <td>` + item.User_ID + `</td>
                             <td>` + item.Forename + ` ` + item.Surname + `</td>`;
@@ -397,8 +389,12 @@ async function getUsersHomeData(filters={}) {
                       } else {
                         userTable  +=  `<td>` + item.count_completed + `</td>`;
                       }
-            userTable += `<td>` + item.count_remaining + `</td>
-                          </tr>`
+                      if(item.count_remaining > 0) { 
+                        userTable  += `<td style="background-color:#fff0c2;color:#947c01;">` + item.count_remaining + `</td>`;
+                      } else {
+                        userTable  +=  `<td>` + item.count_remaining + `</td>`;
+                      }
+            userTable += `</tr>`
                     });     
                     userTable  += '</tbody>'
                     userTable  += '</table>';
