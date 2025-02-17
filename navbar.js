@@ -80,9 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav-item');
     const navItemContents = document.querySelectorAll('.nav-item-content');
 
-    function openPage(pageId) {
-        // Reset URL params
-        const params = new URLSearchParams();
+    function openPage(pageId, fromURL = true) {
+        // Preserve params if arriving directly from URL (default)
+        // Reset URL params if we clicked a new page
+        let loc;
+        if (fromURL) loc = window.location.search;
+
+        const params = new URLSearchParams(loc);
+        
         params.set("page", pageId);
         window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
@@ -118,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            openPage(item.id);
+            openPage(item.id, false);
         })
     })
 

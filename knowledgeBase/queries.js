@@ -720,8 +720,9 @@ window.addEventListener("forumsLoaded", async () => {
     user = await getUser();
 
     // Close post if one was open
-    closePost();
-
+    allPostsView.style.removeProperty("display");
+    postView.style.display = "none";
+    
     // Reset filters and topic
     selectedTopic = null;
     selectedType = null;
@@ -733,6 +734,7 @@ window.addEventListener("forumsLoaded", async () => {
 
     const currentPost = new URLSearchParams(window.location.search).get("post");
     if (currentPost) {
+        console.log("Current post found")
         // This runs after the posts have been loaded, so the necessary data is available.
         openPost(currentPost);
     }
