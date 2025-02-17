@@ -64,7 +64,7 @@ async function PopulateProjectStatsPage() {
     document.getElementById("prjStErrorBox").style.display = "none";
 
     // Fetch full project details from ID
-    // Redirect to home page if not found
+    // Show project not found message and abort if not found
     if (!await FetchProjectData()) {
         document.getElementById("prjStErrorBox").style.display = "block";
         return;
