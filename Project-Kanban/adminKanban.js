@@ -451,7 +451,11 @@ projStatsBtn.addEventListener('click', () => {
 
 //====Back to Projects Page Button
 const backAdminToProjectsBtn = document.querySelector('#admin-kanban-content .project-intro .projects-intro-buttons .all-projects-btn');
-backAdminToProjectsBtn.addEventListener('click', () => {
+
+backAdminToProjectsBtn.addEventListener('click', backAdminToProjects);
+window,addEventListener("projectsLoaded", backAdminToProjects);
+
+function backAdminToProjects () {
   const params = new URLSearchParams(window.location.search);
   params.set("page", "projects");
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
@@ -468,7 +472,7 @@ backAdminToProjectsBtn.addEventListener('click', () => {
   navItemContents.forEach(item => item.classList.remove('open'))
   const currentProjectContentArea = document.querySelector('#projects-content')
   currentProjectContentArea.classList.add('open');
-})
+}
 
 
 
