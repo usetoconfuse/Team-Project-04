@@ -483,7 +483,7 @@ async function editProjectEntry(
     }
   } catch (error) {
     console.error("Error adding project:", error);
-    alert("An error occurred. Please try again.");
+    sendToast("An error occurred. Please try again.");
   }
 }
 
@@ -658,7 +658,7 @@ async function markProjectUpdate(
     }
   } catch (error) {
     console.error("Error adding project:", error);
-    alert("An error occurred. Please try again.");
+    sendToast("An error occurred. Please try again.");
   }
 }
 
@@ -822,7 +822,7 @@ submitAddProject.addEventListener("click", async function () {
 
 
   if (!title || !teamLeader || !startDate || !dueDate) {
-    alert("Please fill in all fields.");
+    sendToast("Please fill in all fields.");
     return;
   }
 
@@ -831,13 +831,13 @@ submitAddProject.addEventListener("click", async function () {
 
   // Validation: Start Date should not be in the past
   if (startDate < today) {
-    alert("Start date cannot be in the past.");
+    sendToast("Start date cannot be in the past.");
     return;
   }
 
   // Validation: Due Date should not be earlier than Start Date
   if (dueDate < startDate) {
-    alert("Due date cannot be earlier than the start date.");
+    sendToast("Due date cannot be earlier than the start date.");
     return;
   }
 
@@ -883,7 +883,7 @@ submitAddProject.addEventListener("click", async function () {
     }
   } catch (error) {
     console.error("Error adding project:", error);
-    alert("An error occurred. Please try again.");
+    sendToast("An error occurred. Please try again.");
   }
 });
 

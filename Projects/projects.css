@@ -101,17 +101,18 @@
   justify-content: space-between;
   margin-bottom: 1.2rem;
   flex-wrap: wrap-reverse;
+
 }
 
 .project-card-top p {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .project-card-top a {
   color: white;
   background-color: black;
   padding: 0.6rem 1rem;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 15px;
 }
 
@@ -124,7 +125,7 @@
   align-items: center;
   justify-content: space-between;
   color: #414141;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .project-card-progress-bar {

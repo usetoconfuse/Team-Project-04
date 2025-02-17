@@ -298,8 +298,9 @@ nav {
 }
 
 .menu .intro-txt h1 {
-    font-family: 'DIN Alternate Bold';
-    font-size: 1.5rem;
+    font-family: 'Avenir Next';
+    font-size: 1.3rem;
+    font-weight: normal;
 }
 
 .menu .intro-txt p {
