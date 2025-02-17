@@ -572,11 +572,16 @@ input[type="file"]::-webkit-file-upload-button {
     margin: 0.2rem 2rem 2rem 2rem;
 }
 
-.task-submit-buttons .add-task-btn i, .task-submit-buttons #add-filter-btn i, .task-submit-buttons #add-project-btn i, .report-task-modal .report-task-db i {
+ #escalate-project-task-confirm i {
+    margin-right: 0.4rem;
+
+ }
+
+.task-submit-buttons .add-task-btn i, .task-submit-buttons #add-filter-btn i, .task-submit-buttons #add-project-btn i, .report-task-modal .report-task-db i,  #escalate-project-task-confirm i {
     margin-left: 0.4rem;
 }
 
-.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn, #delete-project-confirm, #cancel-delete-btn, #active-project-confirm   {
+.task-submit-buttons #add-filter-btn, .task-submit-buttons #add-project-btn, .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #cancel-delete-task-btn, #delete-project-task-confirm,  #complete-project-confirm, #cancel-complete-btn, #archive-project-confirm, #cancel-archive-btn, #delete-project-confirm, #cancel-delete-btn, #active-project-confirm, #escalate-project-task-confirm   {
     width: 60%;
     margin: 1rem auto;
     padding: 10px;
@@ -598,7 +603,7 @@ input[type="file"]::-webkit-file-upload-button {
     justify-content: flex-end;
 }
 
-.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm, #delete-project-confirm {
+.report-task-modal .report-task-db, .personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm, #delete-project-confirm, #escalate-project-task-confirm {
     margin: 1rem 1rem 1rem 1rem;
     width: 30%;
     background-color: #f98a93;
@@ -619,7 +624,7 @@ input[type="file"]::-webkit-file-upload-button {
     color: black  !important;
 }
 
-.personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm   {
+.personal-delete-task, #delete-personal-task-confirm, #delete-project-task-confirm, #escalate-project-task-confirm   {
     color: white !important;
 }
 
