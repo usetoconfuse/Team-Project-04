@@ -9,6 +9,10 @@
     <div class="mgrStats-header-section">
         <p id="stats-title" class="mgrStats-title">Statistics</p>
         <div class="stats-title-btn-container">
+        <div id="backButtonProj" class="all-projects-btn black-btn">
+                <i class='fa fa-solid fa-arrow-left'></i>
+                Back
+        </div>
         <div id="backButton" class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
                 Back

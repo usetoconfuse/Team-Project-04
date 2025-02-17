@@ -484,6 +484,7 @@ async function editProjectEntry(
   } catch (error) {
     console.error("Error adding project:", error);
     sendToast("An error occurred. Please try again.");
+    return;
   }
 }
 
@@ -659,6 +660,7 @@ async function markProjectUpdate(
   } catch (error) {
     console.error("Error adding project:", error);
     sendToast("An error occurred. Please try again.");
+    return
   }
 }
 
@@ -880,10 +882,12 @@ submitAddProject.addEventListener("click", async function () {
       );
     } else {
       sendToast("Failed to add new project");
+      return;
     }
   } catch (error) {
     console.error("Error adding project:", error);
     sendToast("An error occurred. Please try again.");
+    return;
   }
 });
 

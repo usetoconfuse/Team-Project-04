@@ -59,6 +59,10 @@ var projBurnup;
 // Populate page when a project is selected
 async function PopulateProjectStatsPage() {
 
+    // show back button
+    document.querySelector('#backButtonProj').style.display = 'block';
+
+
     // Hide page until populated
     document.getElementById("prjStContainer").style.display = "none";
     document.getElementById("prjStErrorBox").style.display = "none";

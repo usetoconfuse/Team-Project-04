@@ -1,5 +1,7 @@
 // Created by Quinn Little 07/02/2025
 // Updated by Toby Tischler 13/02/2025
+// Updated by Quinn Little 17/02/2025
+
 
 
 
@@ -283,7 +285,7 @@ async function getUserStatsTaskData(filters={}) {
                 data.forEach(function(item) {
                     if (item.Stuck === "1") { // Make the "stuck" field readable for user.
                         var stuck = "Yes";
-                        var stuckStyles = "color:red;font-weight:bold"; // RED background for when stuck
+                        var stuckStyles = "background-color:#ffcdd2;color:#c62828;font-weight:bold"; // RED background for when stuck
                     } else {
                         var stuck = "No";
                         var stuckStyles = "color:black";
@@ -487,68 +489,6 @@ function createTaskStatusGraph(currentTaskStatus) {
 
 
 
-//     function calculateProjectDurations(projects) {
-//         // Helper function to calculate duration in days
-//         const calculateDuration = (start, end) => {
-//             const startDate = new Date(start);
-//             const endDate = new Date(end);
-//             const diffInMs = endDate - startDate;
-//             return diffInMs / (1000 * 60 * 60 * 24); // Convert milliseconds to days
-//         };
-    
-//         // Array to store the results
-//         const result = [];
-//         let xValArr = [];
-//             let yValArr = [];
-    
-//         for (let i = 0; i < projects.length; i++) {
-//             const startDate = (projects[i].Start_Date).substring(0,10);
-//             const endDate = (projects[i].Due_Date).substring(0,10);
-    
-//             // Calculate duration of the current project
-//             const duration = calculateDuration(startDate, endDate);
-    
-//             // Determine when the next project starts relative to the previous one
-//             if (i === 0) {
-//                 result.push({
-//                     project: projects[i].Project_Title,
-//                     startDate: startDate,
-//                     endDate: endDate,
-//                     duration: duration,
-//                     sequentialStart: 0 // First project starts at 0
-//                 });
-//             } else {
-//                 const previousEndDate = new Date(projects[i - 1].Due_Date);
-//                 const currentStartDate = new Date(startDate);
-//                 const overlap = (currentStartDate - previousEndDate) / (1000 * 60 * 60 * 24); // Difference in days
-//                 console.log("NANANANA ",overlap );
-//                 result.push({
-//                     project: projects[i].Project_Title,
-//                     startDate: startDate,
-//                     endDate: endDate,
-//                     duration: duration,
-//                     sequentialStart: result[i - 1].sequentialStart + duration + overlap
-//                 });
-
-//             }
-//             console.log("resy:", result);
-
-            
-
-
-//         }
-        
-//         result.forEach(function(item) {
-//             let miniTempArr = []
-//             miniTempArr.push(item.sequentialStart);
-//             miniTempArr.push((item.sequentialStart + item.duration));
-//             xValArr.push(item.project);
-//             yValArr.push(miniTempArr);
-//         });
-//         createProjTimeGraph(xValArr,yValArr);
-    
-//     }    
-
 // fetch data for projTime chart
 async function fetchProjTimeGraph(userID) {
 
@@ -656,64 +596,6 @@ options: {
 }
 
 
-
-// function generateProjTimeGraph(data) {
-//     ctx = document.getElementById('userStats-overlapContainerGraph');
-    
-//     const weekhrsansd = new Chart(ctx, {
-//     type: "scatter",
-//     data: {
-//         labels: data.map(entry => `${(entry.Start_Date).substring(0,10)} - ${(entry.Due_Date).substring(0,10)}`), //yAxProj, // y-AXIS, PROJECTS
-//         datasets: [{
-//             label: "projects",
-//             data: data.map(entry => ({
-//                 x:(entry.Start_Date).substring(0,10),
-//                 y: entry.Project_Title
-//             })),
-//             backgroundColor:"rgba(0,0,255,1.0)",
-//             borderColor: "rgba(0,0,255,0.1)",
-//             borderWidth: 1
-//              // *ARRAY OF DATES FROM EARLIEST START TO LATEST END*========
-//         }]
-//     },
-//     options: {
-//         // indexAxis: 'y',
-//         responsive: true,
-//         scales: {
-//             x: {
-//                 type: 'time',
-//                 time: {
-//                     unit: 'day',
-//                     tooltipFormat: 'yyyy-MM-dd',
-//                     parser: 'yyyy-MM-dd' // Capitalise Month so it isn't seen as minutes.
-//                 },
-//                 title: {
-//                     display: true,
-//                     text: 'Date Range'
-//                 }
-//             },
-//             y: {
-//                 type: 'category',
-//                 labels: [... new Set(data.map(entry => entry.Project_Title))],
-//                 title: {
-//                     display: true,
-//                     text: 'Projects'
-//                 }
-//             }
-//         },
-//         plugins: {
-//             tooltip: {
-//                 callbacks: {
-//                     title: function(tooltipItem) {
-//                         return `${tooltipItem[0].raw.x} - ${tooltipItem[0].raw.y}`;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-//     });
-// }
-//createWeeklyHrsGraph();
 //graph dropdown
 const userGraphDropdown = document.querySelector('#userStats-chooseGraph');
 const weekHrsCont = document.querySelector('#userStats-weekHrsContainer');
@@ -999,7 +881,7 @@ async function PopulateTaskDialChartUserStats() {
 }
 }
 
-
+//==============================================OLD Filters =================================================
 // Filters for the All Tasks Table
 
 // //on showall btn click will load all posts from db
@@ -1319,39 +1201,3 @@ filterTaskBtn.addEventListener('click', () => {
       filterTaskModal.style.display = 'none';
     })
   
-  
-  //Keyword Search
-//   const searchBarProject = document.querySelector('#mgrStatsUser-grid-container .task-search #searched-task');
-  
-//   searchBarProject.addEventListener('input', ()=>{
-//     const searchValue = searchBarProject.value.toLowerCase();
-//     const allTasks = document.querySelectorAll('.kanban-content-project .kanban-card');
-//     console.log(allTasks);
-//     let foundTasks = 0;
-  
-//     allTasks.forEach(task => {
-//       const taskTitle = task.getAttribute('data-task-title').toLowerCase();
-  
-  
-//       if (taskTitle.includes(searchValue)) {
-//         foundTasks++;
-//         task.style.display = 'block';
-//       } else {
-//         task.style.display = 'none';
-//       }
-//     })
-  
-//     const cardCounts = {
-//       "To Do": countBlockTasks("#mgrStatsUser-grid-container #kanban-to-do"),
-//       "In Progress": countBlockTasks("#mgrStatsUser-grid-container #kanban-in-progress"),
-//       "Completed": countBlockTasks("#mgrStatsUser-grid-container #kanban-completed")
-//     };
-//     changeProjectsCount(cardCounts);
-  
-  
-//     if (foundTasks === 0) {
-//       document.querySelector('#mgrStatsUser-grid-container .search-task-error-msg').style.display = 'block';
-//     } else {
-//       document.querySelector('#mgrStatsUser-grid-container .search-task-error-msg').style.display = 'none';
-//     }
-//   })
