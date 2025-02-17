@@ -152,6 +152,12 @@
                     <div class="filter-task-btn black-btn">Filter
                         <i class="fa fa-solid fa-sliders"></i>
                     </div>
+                    <div class="filter-applied-container">
+                        <p class="filter-applied-msg"></p>
+                        <div class="remove-filters-btn">
+                            <i class='fa fa-solid fa-x'></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="task-search-container">
 
