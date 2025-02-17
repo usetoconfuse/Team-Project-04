@@ -28,6 +28,7 @@
                 User_Teams.Project_ID = ?
                 AND Users.User_ID = User_Teams.User_ID
                 AND Users.User_ID = Tasks.Assignee_ID
+                AND Tasks.Project_ID = User_Teams.Project_ID
             GROUP BY
                 Users.User_ID
             ";
