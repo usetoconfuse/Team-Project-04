@@ -21,7 +21,8 @@
 
 .project-txt p:nth-of-type(1) {
     color:black;
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: 500;
 }
 
 
@@ -243,6 +244,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+
 }
 
 .kanban-card-top-details i {
@@ -252,6 +254,7 @@
 
 .kanban-card-top p {
     align-self: flex-start;
+
 }
 
 .kanban-card-top-details p {
@@ -266,8 +269,9 @@
 
 
 .kanban-card-top p {
-    font-size: 16px;
+    font-size: 17px;
     flex-grow: 1;
+
 }
 
 .kanban-card-top .fa-caret-down {
@@ -284,14 +288,14 @@
 
 .kanban-card-description {
     color: #353535;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .kanban-card-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .kanban-card-bottom a {
@@ -428,7 +432,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 19px;
 
     padding: 1.2rem 1rem 1rem 1rem;
     border-radius: 15px 15px 0 0;
@@ -467,7 +471,7 @@ label {
     align-items: flex-start;
     flex-direction: column;
     margin-bottom: 1.4rem;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .task-dropdowns-form {
@@ -527,10 +531,17 @@ input[type="file"]::-webkit-file-upload-button {
     margin-left: 30px;
 }
 
+select {
+        font-size: 14px;
+}
+
 .order-by-dropdown select {
     border-radius: 10.5px 0 0 10.5px;
     border-right: 0px;
+    font-size: 14px;
 }
+
+
 
 .move-task-dropdown select {
     border-radius: 5px 0 0 5px;
