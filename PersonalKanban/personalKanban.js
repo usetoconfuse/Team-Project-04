@@ -292,7 +292,7 @@ async function deletePersonalTask(personalTaskID) {
     } else {
       deleteTaskModal.style.display = 'none';
       
-      sendToast(`🗑️ Personal Task #${personalTaskID} has been successfully deleted!`);
+      sendToast(`Personal Task has been successfully deleted!`);
 
       const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
       const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
@@ -342,19 +342,19 @@ async function updatePersonalTaskStatus(taskID, newStatus) {
       throw new Error('Failed to update task status');
     }
     else{
-      let emoji = '';
+      
       switch (newStatus) {
         case 'To Do':
-          emoji = '📝';
+          
           break;
         case 'In Progress':
-          emoji = '🚧';
+          
           break;
         case 'Completed':
-          emoji = '✅';
+          
           break;
       }
-      sendToast(`${emoji} Task status updated to "${newStatus}"`);
+      sendToast(` Task status updated to "${newStatus}"`);
     }
 
 
@@ -612,7 +612,7 @@ async function addPersonalTask(taskName, taskDescription, taskPriority, taskDueD
       if (!response.ok) {
         throw new Error('Failed to update task status');
       }
-      sendToast('🎉 Task has been successfully added!');
+      sendToast('Task has been successfully added!');
   
     } catch (error) {
       console.log("Error updating the task status", error);

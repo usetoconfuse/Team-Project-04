@@ -630,19 +630,16 @@ async function updateTaskStatus(taskID, newStatus) {
       throw new Error('Failed to update task status');
     }
     else {
-      let emoji = '';
+      
       switch (newStatus) {
         case 'To Do':
-          emoji = '📝';
           break;
         case 'In Progress':
-          emoji = '🚧';
           break;
         case 'Completed':
-          emoji = '✅';
           break;
       }
-      sendToast(`${emoji} Task status updated to "${newStatus}"`);
+      sendToast(`Task status updated to "${newStatus}"`);
     }
 
 
