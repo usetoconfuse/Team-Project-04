@@ -732,8 +732,8 @@ kanbanContainers.forEach(kanbanContainer => {
 
 //====Back to Projects Page
 const backToProjectsBtn = document.querySelector('.project-intro .projects-intro-buttons .all-projects-btn');
-backToProjectsBtn.addEventListener('click', backToProjects);
 
+backToProjectsBtn.addEventListener('click', backToProjects);
 window.addEventListener("projectsLoaded", backToProjects);
 
 function backToProjects () {

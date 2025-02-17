@@ -5,7 +5,13 @@
     <section class="project-intro">
         <div class="project-txt">
             <p></p>
-    
+
+            <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin')): ?>
+                <div class="view-stats-btn black-btn">
+                    <i class="fa fa-solid fa-chart-simple"></i>
+                    Stats
+                </div>
+            <?php endif; ?>
         </div>
 
         <!--<div class="vertical-bar"></div>

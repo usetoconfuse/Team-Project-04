@@ -34,3 +34,25 @@
     background-color: white;
     width: 100%;
 }
+
+#admin-kanban-content .project-txt {
+    display: flex;
+    align-items: center;
+}
+
+#admin-kanban-content .view-stats-btn {
+    padding: 10px;
+    border-radius: 10.5px;
+    color: white;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.6rem;
+    margin-right: auto;
+}
+
+#admin-kanban-content .view-stats-btn i {
+    color: white;
+    margin-right: 0.6rem;
+}

@@ -354,6 +354,15 @@ async function updateProjectTasks(taskName, taskDescription, taskPriority, taskD
 
 
 
+// Stats button links to project stats page
+const projStatsBtn = document.querySelector('#admin-kanban-content .view-stats-btn');
+projStatsBtn.addEventListener('click', () => {
+  window.location.assign(`${window.location.pathname}?page=stats&view=projects&project=${globalSelectedProjectID}`);
+});
+
+
+
+
 //====Back to Projects Page Button
 const backAdminToProjectsBtn = document.querySelector('#admin-kanban-content .project-intro .projects-intro-buttons .all-projects-btn');
 backAdminToProjectsBtn.addEventListener('click', () => {
