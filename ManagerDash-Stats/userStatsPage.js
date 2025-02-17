@@ -552,6 +552,10 @@ function createTaskStatusGraph(currentTaskStatus) {
 // fetch data for projTime chart
 async function fetchProjTimeGraph(userID) {
 
+  // Clear container of the Gantt Chart
+  const ganttContainer = document.querySelector("#userStats-overlapContainer");
+  ganttContainer.innerHTML = '<canvas id="userStats-overlapContainerGraph"></canvas>';
+
     try {
         // Make an HTTP request to the PHP file
         const response = await fetch('ManagerDash-Stats/userStatsPage-Queries/userStatsProjTimeGraphQuery.php?ID=' + userID);
@@ -583,13 +587,22 @@ async function fetchProjTimeGraph(userID) {
   
         } else {
            // createTaskStatusGraph([0,0,0,0]); // I.e. no tasks for that employee
-           if(typeof emptyGantt !== 'undefined' && emptyGantt !== null){
+          // console.log("no data");
+          try {
+            myGanttChart.destroy();
+            console.log("destroyed");
+           } catch (error) {
+            console.log("destroy myGanttChart error: ", error);
+          }
+        
+          try {
             emptyGantt.destroy();
-           } else {
-              var emptyGantt = new Chart(document.getElementById('userStats-overlapContainerGraph'));
-           }
+           } catch (error) {
+            console.log("destroy EmptyChart error: ", error);
+          }
 
-
+          // Error handling for Gantt container when there is no data
+          ganttContainer.innerHTML = '<p>User isn\'t assigned any projects</p>';
         }
       } catch (error) {
           console.error('Error:', error); // Log any errors that occur
@@ -731,10 +744,18 @@ var myGanttChart = new Chart(document.getElementById('userStats-overlapContainer
 // Gantt Chart
 function createGantt(dataset) {
 
-  if(typeof emptyGantt !== 'undefined' && emptyGantt !== null){
-    emptyGantt.destroy();
-  } else if (typeof myGanttChart !== 'undefined' && myGanttChart !== null) {
+
+  try {
     myGanttChart.destroy();
+    console.log("destroyed");
+   } catch (error) {
+    console.log("destroy myGanttChart error: ", error);
+  }
+
+  try {
+    emptyGantt.destroy();
+   } catch (error) {
+    console.log("destroy EmptyChart error: ", error);
   }
     // setup 
     const data = {
