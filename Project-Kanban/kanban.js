@@ -600,8 +600,10 @@ async function reportStuck(taskID, newStatus, reportBtn) {
       throw new Error('Failed to update task status');
     } else {
       if (newStatus === '1' || newStatus === '2') {
+        //endToast("Marked Task as Stuck");
         reportBtn.innerHTML = "Unmark as Stuck";
       } else {
+        //sendToast("Unmarked Task as Stuck");
         reportBtn.innerHTML = "Report as Stuck";
       }
     }
