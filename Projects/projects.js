@@ -944,6 +944,7 @@ const openProjectsFilterBtn = document.querySelector(
   "#project-content .project-filter-container .filter-project-btn"
 );
 
+/*
 openProjectsFilterBtn.addEventListener("click", () => {
   projectsFilterModal.style.display = "block";
 });
@@ -952,7 +953,7 @@ const closeProjectFilterModal = projectsFilterModal.querySelector(
 );
 closeProjectFilterModal.addEventListener("click", () => {
   projectsFilterModal.style.display = "none";
-});
+});*/
 
 //Switch Buttons for different project pages
 const projectItems = document.querySelectorAll(
