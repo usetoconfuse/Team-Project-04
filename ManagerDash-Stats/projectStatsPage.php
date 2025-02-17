@@ -16,8 +16,8 @@
 
         <!-- Header info -->
         <div id="pjStHeaderInfoContainer">
-        <div id="prjStHeaderInfo">
-        </div>
+            <div id="prjStHeaderInfo">
+            </div>
         </div>
 
         <!-- Task dial -->
@@ -84,15 +84,17 @@
                 <canvas id="prjStPrevWeekChart"></canvas>
             </div>
         </div>
-    </div>
-            <!-- Member list -->
-            <div id="prjStMembersCell" class="prjStGridCells">
+
+        <!-- Member list -->
+        <div id="prjStMembersCell" class="prjStGridCells">
             <div id="prjStMembersHeader">
             </div>
 
             <div id="prjStMembersList">
             </div>
         </div>
+        
+    </div>
 </div>
 
 

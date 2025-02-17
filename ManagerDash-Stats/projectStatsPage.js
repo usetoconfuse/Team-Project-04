@@ -39,15 +39,15 @@ const cols = getComputedStyle(col);
 
 // Task dial chart
 const dialCtx = document.getElementById("prjStTaskDialChart").getContext("2d");
-var taskDial = new Chart(dialCtx)
+var taskDial;
 
 // Project prev week contribution breakdown chart
 const prevWeekCtx = document.getElementById("prjStPrevWeekChart").getContext("2d");
-var prevWeek = new Chart(prevWeekCtx);
+var prevWeek;
 
 // Project total hours burnup chart
 const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
-var projBurnup = new Chart(burnupCtx);
+var projBurnup;
 
 
 
@@ -224,8 +224,11 @@ async function PopulateTaskDialChart() {
     document.getElementById("prjStLegendInprog").innerText = dialData[1];
     document.getElementById("prjStLegendTodo").innerText = dialData[2];
 
-    taskDial.destroy();
+    if(taskDial) {
+        taskDial.destroy();
+    }
 
+    const dialCtx = document.getElementById("prjStTaskDialChart").getContext("2d");
     taskDial = new Chart(dialCtx, {
         type: 'doughnut',
 
@@ -291,8 +294,11 @@ async function PopulatePrevWeekChart() {
 
     // DRAW CHART
 
-    prevWeek.destroy();
+    if (prevWeek) {
+        prevWeek.destroy();
+    }
 
+    const prevWeekCtx = document.getElementById("prjStPrevWeekChart").getContext("2d");
     prevWeek = new Chart(prevWeekCtx, {
         type: 'bar',
 
@@ -453,8 +459,11 @@ async function PopulateBurnUpChart() {
     var yMaxCalc = Math.ceil(burnupScope[burnupCompleted.length-1] * 0.12) * 10;
     if (yMaxCalc == 0) yMaxCalc = 10;
 
-    projBurnup.destroy();
+    if (projBurnup) {
+        projBurnup.destroy();
+    }
 
+    const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
     projBurnup = new Chart(burnupCtx, {
         type: "line",
         data: {
