@@ -25,4 +25,4 @@
         echo json_Encode(["success" => false, "message" => "Error, password not updated: " . $conn->error]);
     }
 
-    
+    ?>

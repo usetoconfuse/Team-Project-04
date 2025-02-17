@@ -18,7 +18,7 @@ if (isset($_SESSION['role'])) {
         die("Redirecting user");
     }
 }
-
+// ===========================================================REGISTER USER ============================================================
 //Errors saved in session, and redirects to error or success page+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     //User is registering so currently loaded tab is register
@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     $forename = $_POST['forename'];
     $surname = $_POST['surname'];
 
+    // Below is a regular expression to ensure that the password meets security requirements.
     $password_regex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).{12,}$/";
 
 
@@ -99,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
-
+// =====================================================================Existing User Login =================================================================================
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     //User is logging in so current tab is login
 
@@ -380,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         passwordInput.addEventListener('focusout', () => {
             passwordCriteriaBlock.classList.remove('active');
         })
-
+        // Check password against secruity criteria
         const passwordCriteriaList = document.querySelectorAll('.criteria-item');
         const passwordRegex = [
             { regex: /.{12,}/ },
@@ -408,7 +409,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
         const signUpShowPasswordBtn = document.querySelector('#signup-wrapper .password-label i');
         showPassword(signUpShowPasswordBtn, passwordInput);
-
+        // Allow user to see their password
         function showPassword(showBtn, passInput) {
             showBtn.addEventListener('click', () => {
                 showBtn.classList.toggle('fa-eye');
