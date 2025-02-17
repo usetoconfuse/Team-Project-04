@@ -9,16 +9,17 @@
         $userID = htmlspecialchars($_GET['ID']); // Sanitize input
     }
 
-    // $type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
     $inputted_password ='MakeItAll123!';
     $hashed_PWD = password_hash($inputted_password, PASSWORD_DEFAULT);
 
-    // Select the first 20 tasks for the given UserID
+    // Set user's password
     $sql = "UPDATE Users 
     SET Password = '$hashed_PWD'
     WHERE User_ID = '$userID'";
     
+
+    // Define success and failure responses
     if ($conn->query($sql) === TRUE) {
         echo json_encode(["success" => true, "message" => "Password has been Reset"]);
     } else {
