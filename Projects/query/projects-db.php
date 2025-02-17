@@ -17,7 +17,7 @@ if ($role === 'Employee') {
             AND ((Tasks.Status = 'To Do' OR Tasks.Status = 'In Progress') 
             AND Assignee_ID = $userID AND Tasks.Start_Date <= CURDATE())
             WHERE User_Teams.User_ID = $userID 
-            AND Projects.Start_Date <= CURDATE()";
+            AND Projects.Start_Date <= CURDATE() AND Projects.Completion_Date IS NULL";
 
     if ($status) {
         $sql .= " AND Projects.Status = '$status'";
