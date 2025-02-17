@@ -8,14 +8,18 @@
     <!-- Header -->
     <div class="mgrStats-header-section">
         <p id="stats-title" class="mgrStats-title">Statistics</p>
-        <div id="mgrStats-tabBtn">
-            <div id="backButton" class="all-projects-btn black-btn">
+        <div class="stats-title-btn-container">
+        <div id="backButton" class="all-projects-btn black-btn">
                 <i class='fa fa-solid fa-arrow-left'></i>
                 Back
             </div>
+            <div id="mgrStats-tabBtn">
+            
             <button class="mgrStats-activeTab" id="mgrProjStats" onclick="switchTab('projects')">Project</button>
             <button id="mgrUserStats" onclick="switchTab('users')">User</button>
         </div>
+        </div>
+      
     </div>
 
 

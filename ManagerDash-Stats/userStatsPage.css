@@ -19,20 +19,28 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #userStats-weeklyGraph {
     grid-area: graph;
-    min-width: 0;
+    min-width: 48%;    height: 50dvh;
+ 
+    background-color: #f5f5f5;
+    padding: 30px;
 }
 #userStats-buttons {
     grid-area: buttons;
 }
 #userStats-ganttChart{
     grid-area: ganttChart;
-    min-width: 0;
-    max-width: 700px;
+    min-width: 48%;
+    height: 50dvh;
+
+    background-color: #f5f5f5;
+    padding: 30px;
 }
 
 #userStTaskDialChartBox {
