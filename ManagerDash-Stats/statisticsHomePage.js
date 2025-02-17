@@ -61,6 +61,10 @@ function switchTab(tabName) {
   //Ensure the backbutton isn't visible
   document.querySelector('#backButton').style.display = 'none';
 
+  //Ensure the backbutton isn't visible
+  document.querySelector('#backButtonProj').style.display = 'none';
+  
+
   console.log(params + " from switch")
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
@@ -437,7 +441,18 @@ async function getUsersHomeData(filters={}) {
 
 
 
+
+
+
+
 window.addEventListener("statsLoaded", () => {
+
+      //Get back button from UserStatsPage
+    // Back Button functionality when clicked in userStatsPage.php
+    const backButtonProj = document.getElementById('backButtonProj');
+    backButtonProj.addEventListener("click", () => {
+      switchTab("projects");
+    })
 
     //Get back button from UserStatsPage
     // Back Button functionality when clicked in userStatsPage.php
@@ -594,7 +609,7 @@ window.addEventListener("statsLoaded", () => {
 
 
 
-
+// Adds filter message to screen
 function createFiltersMsgStatsHome(filters) {
   console.log("CLLED RIGHT ONE")
     let applied = [];
@@ -680,34 +695,6 @@ searchBarUserStats.addEventListener('input', ()=>{
 
   getUsersHomeData(allFiltersHome);
 
-//   const allTasks = document.querySelectorAll('.kanban-content-project .kanban-card');
-//   console.log(allTasks);
-//   let foundTasks = 0;
 
-//   allTasks.forEach(task => {
-//     const taskTitle = task.getAttribute('data-task-title').toLowerCase();
-
-
-//     if (taskTitle.includes(searchValue)) {
-//       foundTasks++;
-//       task.style.display = 'block';
-//     } else {
-//       task.style.display = 'none';
-//     }
-//   })
-
-//   const cardCounts = {
-//     "To Do": countBlockTasks("#proj-kanban-content #kanban-to-do"),
-//     "In Progress": countBlockTasks("#proj-kanban-content #kanban-in-progress"),
-//     "Completed": countBlockTasks("#proj-kanban-content #kanban-completed")
-//   };
-//   changeProjectsCount(cardCounts);
-
-
-//   if (foundTasks === 0) {
-//     document.querySelector('#proj-kanban-content .search-task-error-msg').style.display = 'block';
-//   } else {
-//     document.querySelector('#proj-kanban-content .search-task-error-msg').style.display = 'none';
-//   }
 })
 
