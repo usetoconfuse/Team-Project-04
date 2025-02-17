@@ -7,6 +7,9 @@
 
 /* Main header */
 #prjStContainer {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     justify-content: space-between;
@@ -14,6 +17,32 @@
 
 #prjStHeader {
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+/* #prjStHeaderInfo {
+    flex-grow: 1;
+    background-color: var(--light-gray-bg);
+    border-radius: var(--b-radius-lg);
+} */
+
+#prjStTaskDialContainer, #pjStHeaderInfoContainer {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: var(--light-gray-bg);
+    border-radius: var(--b-radius-lg);
+}
+
+#prjStTaskDialDisplay {
+    width: 300px;
 }
 
 
