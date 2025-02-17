@@ -189,6 +189,16 @@ async function fetchProjectsData(userID, filters = {}, containerSelector) {
         console.log("Global project leader is the same as the project leader.");
         projectCard.classList.add("leader-project");
         
+        // Add leading project text or icon to the header
+        cardTop = `<div class="project-card-top">
+    <p>${project.Project_Title}</p>
+    <div class="leading-project-text">
+        <i class="fa fa-user-tie"></i> Leader
+    </div>
+    <div class="project-card-top-btns">
+        <a href="#" class="black-btn" id="view-project-kanban-btn">View</a>
+    </div>
+</div>`;
         
       } else {
         console.log("Global project leader does NOT match the project leader.");
