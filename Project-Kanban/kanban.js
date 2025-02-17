@@ -820,3 +820,41 @@ function countBlockTasks(column) {
 
 }
 
+
+
+const kanbanItems = document.querySelectorAll('#proj-kanban-content .kanban-item');
+const kanbanItemContents = document.querySelectorAll('#proj-kanban-content .kanban-item-content');
+
+function switchKanbanTab(pageId) {
+
+    const kanbanItem = document.getElementById(pageId);
+
+    kanbanItems.forEach(item => item.classList.remove('active'));
+    kanbanItem.classList.add('active');
+
+
+    kanbanItemContents.forEach(item => item.classList.remove('open'))
+    const kanbanItemContent = document.querySelector(`#${kanbanItem.id}-content`)
+
+    if (pageId === 'active-leader') {
+      document.querySelector('#proj-project-intro-buttons .order-by-dropdown').style.display = 'none';
+      document.querySelector('#proj-project-intro-buttons .filter-task-btn ').style.display = 'none';
+      document.querySelector('#proj-search-container').style.display = 'none';
+      document.querySelector('#admin-kanban-content .all-projects-btn').style.display = 'none';
+    } else {
+      document.querySelector('#proj-project-intro-buttons .order-by-dropdown').style.display = 'flex';
+      document.querySelector('#proj-project-intro-buttons .filter-task-btn ').style.display = 'flex';
+      document.querySelector('#proj-search-container').style.display = 'flex';
+      document.querySelector('#admin-kanban-content .all-projects-btn').style.display = 'block';
+    }
+
+    kanbanItemContent.classList.add('open');
+}
+
+
+kanbanItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchKanbanTab(item.id);
+    })
+})
