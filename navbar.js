@@ -151,6 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPage = getPageId();
     if (currentPage) {
         openPage(currentPage);
+    } else {
+        const defaultPage = document.querySelector('.nav-item').id;
+        document.location.search = `?page=${defaultPage}`;
     }
 
     //Show and Hide Password Modal
