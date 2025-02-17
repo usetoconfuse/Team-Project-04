@@ -180,6 +180,11 @@ const renderTopics = (topics) => {
             }
             updatePosts();
         });
+
+        // Clear selected topic on page refresh
+        topicElement.addEventListener('forumsLoaded', () => {
+            topicElement.classList.remove('kb-active');
+        });
     };
 }
 
@@ -584,8 +589,6 @@ const closePost = () => {
     postView.style.display = "none";
 }
 
-const currentPost = new URLSearchParams(window.location.search).get("post");
-
 backBtn.addEventListener("click", () => {
     closePost();
 });
@@ -716,8 +719,19 @@ window.addEventListener("forumsLoaded", async () => {
     // Get the current user, so permissions are known and correct buttons etc can be displayed.
     user = await getUser();
 
+    // Close post if one was open
+    closePost();
+
+    // Reset filters and topic
+    selectedTopic = null;
+    selectedType = null;
+    selectedQuery = null;
+    selectTypeButton('ShowAll')
+
     // Load posts and topics from the server.
     await updatePosts();
+
+    const currentPost = new URLSearchParams(window.location.search).get("post");
     if (currentPost) {
         // This runs after the posts have been loaded, so the necessary data is available.
         openPost(currentPost);
