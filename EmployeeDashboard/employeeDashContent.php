@@ -183,7 +183,7 @@
                             <th>Stuck</th>
                             <th>Project ID/Title</th>
                             <th>Assigned By</th>
-                            <th>More</th>
+          
                         </tr>
                     </thead>
                     <tbody>

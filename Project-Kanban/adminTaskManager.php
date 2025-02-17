@@ -106,6 +106,7 @@
                             <th>Assigned By</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                  
                         </tr>
                     </thead>
                     <tbody>
@@ -202,25 +203,7 @@
     </div>
 
 
-    <!--Report Modal-->
-    <div class="modal report-task-modal" style="display: none;">
-        <div class="modal-box report-task-modal-box">
-            <div class="modal-header">
-                <p id="report-modal-header">Report Task</p>
-                <div class="close-modal-btn">
-                    <i class="fa-solid fa-x"></i>
-                </div>
-            </div>
-            <div class="modal-body">
-                <p id="report-modal-message"></p>
-                <div class="task-submit-buttons">
-                    <a class="report-task-db black-btn"><i class="fa fa-arrow-right"></i></a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+ 
 
     <div class="modal add-task-modal">
         <div class="modal-box">
@@ -326,7 +309,7 @@
     </div>
 
 
-    <div class="modal eadmin-actions-modal" data-task-id="">
+    <div class="modal admin-actions-modal" data-task-id="">
         <div class="modal-box admin-actions-modal-box">
             <div class="modal-header">
                 <p id="admin-actions-modal-header">Actions for Task</p>
@@ -466,6 +449,30 @@
                     Delete
                 </a>
                 <a class="cancel-delete-task-btn" id="cancel-delete-task-btn"><i class="fa fa-xmark"></i>
+                    Cancel
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Modal to delete task in personal board-->
+    <div id="escalate-project-task-modal" class="modal">
+        <div class="modal-box">
+            <!--Header-->
+            <div class="modal-header">
+                Escalate Task
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                Are you sure you want to escalate this task to the Admin?
+            </div>
+            <div class="task-delete-buttons">
+                <a id="escalate-project-task-confirm"> <i class="fa fa-trash"></i>
+                    Escalate
+                </a>
+                <a class="cancel-escalate-task-btn" id="cancel-delete-task-btn"><i class="fa fa-xmark"></i>
                     Cancel
                 </a>
             </div>
