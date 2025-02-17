@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(date, 1000)
     }
     
- 
+
 
     function getPageId() {
         const params = new URLSearchParams(window.location.search);
@@ -78,9 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const navItems = document.querySelectorAll('.nav-item');
+    const navItemContents = document.querySelectorAll('.nav-item-content');
 
     function openPage(pageId) {
-        const params = new URLSearchParams(window.location.search);
+        // Reset URL params
+        const params = new URLSearchParams();
         params.set("page", pageId);
         window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
@@ -94,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const navItemContent = document.querySelector(`#${navItem.id}-content`)
 
         navItemContent.classList.add('open');
+        window.dispatchEvent(new CustomEvent(`${navItem.id}Loaded`, {bubbles: true}));      
 
         if (navItem.id === 'current-project') {
             document.querySelector('.nav-item#projects').classList.add('active');
@@ -106,9 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#content').classList.remove('minimiseContent')
     }
 
+
  
     //====Nav Menu (Desktop)====//
-    const navItemContents = document.querySelectorAll('.nav-item-content')
+
     //Adds Active class to make button black
     //Adds Open to the associated content
     navItems.forEach(item => {

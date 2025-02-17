@@ -99,7 +99,7 @@ thead, tbody {
 }
 
 
-.statsHome-table table  thead {
+.statsHome-table table thead {
     border-bottom: 1px solid black;
 }
 
@@ -115,10 +115,9 @@ thead, tbody {
 .statsHome-table table td {
     padding: 10px;
     font-size: 0.9rem;
-
 }
 
-.statsHome-table table tbody tr {
+.statsHome-table tbody tr {
     border-bottom: 2px solid #F5F5F5;
 }
 
@@ -128,7 +127,7 @@ thead, tbody {
 }
 
 /* HOVER */
-.statsHome-table table tbody tr:hover {
+.statsHome-table tbody tr:hover {
     background-color: #f5f5f5;
     color: black;
     cursor: pointer;

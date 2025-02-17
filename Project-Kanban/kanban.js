@@ -730,9 +730,13 @@ kanbanContainers.forEach(kanbanContainer => {
 })
 
 
-//====Back to Projects Page Button
+//====Back to Projects Page
 const backToProjectsBtn = document.querySelector('.project-intro .projects-intro-buttons .all-projects-btn');
-backToProjectsBtn.addEventListener('click', () => {
+backToProjectsBtn.addEventListener('click', backToProjects);
+
+window.addEventListener("projectsLoaded", backToProjects);
+
+function backToProjects () {
   //Sawan
   const toggleView = document.querySelector('.leader-switch-buttons');
   toggleView.style.display = 'none';
@@ -748,9 +752,7 @@ backToProjectsBtn.addEventListener('click', () => {
   navItemContents.forEach(item => item.classList.remove('open'))
   const currentProjectContentArea = document.querySelector('#projects-content')
   currentProjectContentArea.classList.add('open');
-
-
-})
+}
 
 
 

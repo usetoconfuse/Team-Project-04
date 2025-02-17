@@ -87,7 +87,6 @@ function viewSelectedItem(itemType, id) {
 
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
-    // CHANGE TO JUST REDIRECT TO APPROPRIATE PAGE INSTEAD OF DOING THIS MANUALLY
     populationFun();
     document.getElementById(homeGridId).style.display = "none";
     document.getElementById(itemStatsViewId).style.display = "block";
@@ -101,7 +100,7 @@ function viewSelectedItem(itemType, id) {
 
 // =============================================================
 
-//Get all projects query and generate project table - do this on DOM load as well since projects is the default tab
+//Get all projects query and generate project table - do this on page load as well since projects is the default tab
 
 /* async function fetchProjectTable() {
     try {
@@ -422,36 +421,35 @@ async function getUsersHomeData(filters={}) {
 
 
 
-window.addEventListener("DOMContentLoaded", function () {
 
-    // REDIRECT BASED ON URL PARAMS
+window.addEventListener("statsLoaded", () => {
 
-    const params = new URLSearchParams(window.location.search);
-    let view = params.get("view");
-    if (view == "projects") {
-      switchTab("projects");
-      let proj = params.get("project");
-      if (proj) {
-        viewSelectedItem("project", proj);
-      }
+  // Redirect based on URL params
+
+  const params = new URLSearchParams(window.location.search);
+  let view = params.get("view");
+  if (view == "projects") {
+    switchTab("projects");
+    let proj = params.get("project");
+    if (proj) {
+      viewSelectedItem("project", proj);
     }
-    else if (view == "users") {
-      switchTab("users");
-      let user = params.get("user");
-      if (user) {
-        viewSelectedItem("user", user);
-      }
+  }
+  else if (view == "users") {
+    switchTab("users");
+    let user = params.get("user");
+    if (user) {
+      viewSelectedItem("user", user);
     }
-    else {
-      params.set("view", "projects");
-      params.delete("project");
-      params.delete("user");
-    }
+  }
+  else {
+    params.set("view", "projects");
+    params.delete("project");
+    params.delete("user");
+    switchTab("projects");
+  }
 
-    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
-
-
-    
+  window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
     const filterUserStatsHomeModal = document.querySelector('#userStatsHome-filterAll #filter-modal')
     // document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value = 'None';

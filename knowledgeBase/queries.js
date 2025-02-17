@@ -711,8 +711,8 @@ const editPostMarkdownPreview = document.getElementById("kb-edit-post-content-pr
 const refreshEditPostMarkdownPreview = makeTabbedMarkdownInput(editPostMarkdownInputBtn, editPostMarkdownPreviewBtn, editPostMarkdownInput, editPostMarkdownPreview);
 // #endregion
 
-// #region Code to run on page load
-window.onload = async () => {
+// #region Code to run on tab load
+window.addEventListener("forumsLoaded", async () => {
     // Get the current user, so permissions are known and correct buttons etc can be displayed.
     user = await getUser();
 
@@ -724,5 +724,5 @@ window.onload = async () => {
     }
     await updateTopicsFilter();
     await refreshTopics();
-};
+});
 // #endregion

@@ -2,7 +2,7 @@
 // to get the personal kanban board
 // Send user iD to the personalTaskfetch.php data
 const userIdPersonal = document.querySelector('.kanban-content').getAttribute('data-user-id');
-document.addEventListener('DOMContentLoaded',()=>{
+window.addEventListener('personalLoaded',()=>{
     fetchPersonalData(userIdPersonal, {});
 })
 

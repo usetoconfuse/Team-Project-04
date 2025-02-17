@@ -3,15 +3,15 @@
 
 /*--------------------- Project Statistics CSS ---------------------*/
 
-/* HEADER AND HEADER CONTENT */
-
-/* Main header */
 #prjStContainer {
     height: 100%;
     width: 100%;
     justify-content: space-between;
 }
 
+/* HEADER AND HEADER CONTENT */
+
+/* Main header */
 #prjStHeader {
     display: flex;
 }
@@ -116,6 +116,16 @@
 
 #prjStMembersList table {
     width: 80%;
+    border-collapse: collapse;
+}
+
+#prjStMembersList td {
+    padding: 10px;
+}
+
+#prjStMembersList tbody tr:hover {
+    background-color: var(--medium-gray);
+    cursor: pointer;
 }
 
 #prjStMembersLeaderRow {

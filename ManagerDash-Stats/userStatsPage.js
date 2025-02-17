@@ -1087,7 +1087,7 @@ async function resetPassword() {
 // Listen for sessionStorage updates
 let userId;
 let projectID;
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("statsLoaded", function () {
 
     const filterUserStatsTaskModal = document.querySelector('#mgrStatsUser-grid-container #filter-modal')
     document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = 'None';

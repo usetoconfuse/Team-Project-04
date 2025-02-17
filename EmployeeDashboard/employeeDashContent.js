@@ -1,5 +1,5 @@
 const userID = document.querySelector('#emp-dash-content').getAttribute('data-user-id');
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('overviewLoaded', () => {
     getEmpStats(userID);
     getEmpTaskTable(userID, {})
 })
