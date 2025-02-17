@@ -1,357 +1,351 @@
 /*====Project Information====*/
 #project-content {
-    height: auto;
+  height: auto;
 }
 
 .project-intro {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2rem 2rem 0.6rem 2rem;
-    font-family: 'avenir next';
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 2rem 0.6rem 2rem;
+  font-family: "avenir next";
 }
 
 .project-card-top-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-card-top-left i {
-    margin-right: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 .project-txt p:nth-of-type(1) {
-    color: black;
-    font-size: 22px;
+  color: black;
+  font-size: 22px;
 }
 
 .project-txt p:nth-of-type(2) {
-    color: #9A9A9A;
+  color: #9a9a9a;
 }
-
 
 /*====Project Cards====*/
 
 .search-error-msg {
-    display: none;
-    margin-left: 30px;
-    margin-top: 30px;
-    font-size: 16px;
+  display: none;
+  margin-left: 30px;
+  margin-top: 30px;
+  font-size: 16px;
 }
 
 .project-filter-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.filter-project-btn, .add-project {
-    padding: 10px;
-    border-radius: 10px;
-    color: white;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 30px;
+.filter-project-btn,
+.add-project {
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30px;
 }
 
 .filter-project-btn {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .filter-project-btn i {
-    margin: 0;
-    margin-left: 0.4rem;
+  margin: 0;
+  margin-left: 0.4rem;
 }
 
 .project-buttons-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-gap: 30px;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-gap: 30px;
+  padding: 20px;
 }
 
 .project-card {
-    background-color: #F5F5F5;
-    border: 1px solid transparent;
-    padding: 1.4rem 1.8rem;
-    border-radius: 30px;
-    font-family: 'avenir next';
+  background-color: #f5f5f5;
+  border: 1px solid transparent;
+  padding: 1.4rem 1.8rem;
+  border-radius: 30px;
+  font-family: "avenir next";
 }
 
 /*Fix filler card so it is the right size on mobile too*/
 .filler-project-card {
-    background-color: #F5F5F5;
-    border: 1px solid transparent;
-    padding: 0.8rem 1.2rem;
-    border-radius: 30px;
+  background-color: #f5f5f5;
+  border: 1px solid transparent;
+  padding: 0.8rem 1.2rem;
+  border-radius: 30px;
 }
 
 .project-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.2rem;
-    flex-wrap: wrap-reverse;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap-reverse;
 }
 
 .project-card-top p {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .project-card-top a {
-    color: white;
-    background-color: black;
-    padding: 0.6rem 1rem;
-    font-size: 12px;
-    border-radius: 15px;
+  color: white;
+  background-color: black;
+  padding: 0.6rem 1rem;
+  font-size: 12px;
+  border-radius: 15px;
 }
 
 .project-card-progress {
-    margin-bottom: 1.4rem;
+  margin-bottom: 1.4rem;
 }
 
 .project-card-progress-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #414141;
-    font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #414141;
+  font-size: 13px;
 }
 
 .project-card-progress-bar {
-    height: 8px;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
+  height: 8px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .project-card-progress-bar-inner {
-    height: 8px;
-    border-radius: 10px;
+  height: 8px;
+  border-radius: 10px;
 }
 
 .project-card-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .project-card-team {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .project-user {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: #F5F5F5;
-    border: 1px solid black;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: -12px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  border: 1px solid black;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -12px;
 }
 
 .project-user:nth-child(1) {
-    background-color: rgb(159, 100, 143);
+  background-color: rgb(159, 100, 143);
 }
 
 .project-user:nth-child(2) {
-    z-index: 2;
-    background-color: rgb(100, 100, 159);
+  z-index: 2;
+  background-color: rgb(100, 100, 159);
 }
 .project-user:nth-child(3) {
-    z-index: 3;
-    background-color: rgb(159, 100, 100);
+  z-index: 3;
+  background-color: rgb(159, 100, 100);
 }
 
 .project-user:nth-child(4) {
-    z-index: 4;
-    background-color: rgb(134, 159, 100);
+  z-index: 4;
+  background-color: rgb(134, 159, 100);
 }
 
 .project-user:nth-child(5) {
-    z-index: 5;
+  z-index: 5;
 }
 
-.project-card-due-date, .project-card-task-count {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #7d7d7d;
-    white-space: nowrap;
+.project-card-due-date,
+.project-card-task-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7d7d7d;
+  white-space: nowrap;
 }
 
-.project-card-due-date i, .project-card-task-count i {
-    margin-right: 4px;
+.project-card-due-date i,
+.project-card-task-count i {
+  margin-right: 4px;
 }
-
 
 /*Open and Close Project Sections*/
 .project-switch-buttons {
-    background-color: #F5F5F5;
-    white-space: nowrap;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #f5f5f5;
+  white-space: nowrap;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-switch-buttons a {
-    border-radius: 0px;
-    padding: 10px;
-    color: black;
-    transition: all 0.4s ease;
+  border-radius: 0px;
+  padding: 10px;
+  color: black;
+  transition: all 0.4s ease;
 }
 
-.project-switch-buttons  a:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+.project-switch-buttons a:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .project-switch-buttons a:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .project-switch-buttons a:hover {
-    background-color: #9A9A9A;
+  background-color: #9a9a9a;
 }
 
 .project-switch-buttons a.active {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
-
-#active-project-content, #not-started-project-content, #archive-project-content, #completed-project-content {
-    display: none;
+#active-project-content,
+#not-started-project-content,
+#archive-project-content,
+#completed-project-content {
+  display: none;
 }
 
 .project-item-content.open {
-    display: block !important;
+  display: block !important;
 }
 
 .project-card-top-btns {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 0.3rem;
 }
 
 .project-card-top-btns #edit-project-kanban-btn {
-    margin-right: 0.2rem;
-    background-color: white;
-    border: 1px solid black;
-    color: black;
+  margin-right: 0.2rem;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }
 
 #edit-projects-modal .complete-project-btn {
-    background-color: #89bc8a !important;;
-    color: black !important;;
-
+  background-color: #89bc8a !important;
+  color: black !important;
 }
 
 #edit-projects-modal .archive-project-btn {
-    background-color: #efd179 !important;;
-    color: black!important;;
+  background-color: #efd179 !important;
+  color: black !important;
 }
 
 #edit-projects-modal .delete-project-btn {
-    background-color: #f98a93 !important;;
-    color: black !important;
+  background-color: #f98a93 !important;
+  color: black !important;
 }
 
-#edit-projects-modal .active-project-btn{
-     background-color: #89bc8a !important;
- }
-
+#edit-projects-modal .active-project-btn {
+  background-color: #89bc8a !important;
+}
 
 /*====Responsiveness====*/
 @media (max-width: 1300px) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .filler-project-card {
-        display: none;
-    }
-    #project-content {
-        height: 94vh;
-    }
-
-    
-
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filler-project-card {
+    display: none;
+  }
+  #project-content {
+    height: 94vh;
+  }
 }
 
 @media (max-width: 700px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-    .filler-project-card {
-        display: none;
-    }
-    .project-filter-container {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 20px;
-    }
-    .project-search {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 15px;
-        width: 100%;
-    }
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .filler-project-card {
+    display: none;
+  }
+  .project-filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+  }
+  .project-search {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 15px;
+    width: 100%;
+  }
 }
 
-
-
-
 .project-search {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #F5F5F5;
-    border-radius: 15px;
-    padding-left: 10px;
-    border: 0px;
-    width: 40%;
-    margin-left: 20px;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding-left: 10px;
+  border: 0px;
+  width: 40%;
+  margin-left: 20px;
 }
 
 .project-search input {
-    background-color: transparent;
-    height: 100%;
-    width: 100%;
-    border: none;
-    outline: none;
-    border-radius: var(--line-border-radius);
-    cursor: pointer;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: var(--line-border-radius);
+  cursor: pointer;
 
-    padding: 10px;
-    background-color: var(--bg-colour);
-    color: var(--primary-colour);
-    font-size: 14px;
+  padding: 10px;
+  background-color: var(--bg-colour);
+  color: var(--primary-colour);
+  font-size: 14px;
 }
 
-#project-filter-modal .modal-box{
-    padding-bottom: 0.4rem;
+#project-filter-modal .modal-box {
+  padding-bottom: 0.4rem;
 }
 
 .task-dropdowns-form#project-dropdowns-form {
-    flex-direction: row !important;
+  flex-direction: row !important;
 }
 
 /*
@@ -364,3 +358,6 @@
 
 }*/
 
+.project-buttons-container .add-task-btn {
+  margin-right: 18px; /* Ensures spacing from Add Project button */
+}
