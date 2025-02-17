@@ -288,7 +288,7 @@ async function getUserStatsTaskData(filters={}) {
                         var stuck = "No";
                         var stuckStyles = "color:black";
                     }
-                    tasksTable  += `<tr>
+                    tasksTable  += `<tr onclick="viewSelectedItem('project', ${item.Project_ID})">
                                             <td>` + item.Task_ID + `</td>
                                             <td>` + item.Name + `</td>
                                             <td>` + item.Status + `</td>
@@ -762,7 +762,7 @@ function createGantt(dataset) {
       datasets: [{
         label: 'Project',
         data: dataset,
-        // data: [
+        // data: [ // Test Data
         //   {x: ['2025-02-02', '2025-02-08'], y: 'Task 1'},
         //   {x: ['2025-01-03', '2025-02-09'], y: 'Task 2'},
         //   {x: ['2025-01-04', '2025-02-11'], y: 'Task 3'},
@@ -834,6 +834,10 @@ function createGantt(dataset) {
         indexAxis: 'y',
         scales: {
           x: {
+            title: {
+              display: true,
+              text: `Project Timeline`,
+            },
             position: 'top',
             type: 'time',
             time: {
@@ -841,11 +845,21 @@ function createGantt(dataset) {
             },
             min: '2023-01-01',
             max: '2026-03-01'
+          },
+          y: {
+            title: {
+              display: true,
+              text: `Projects`
+            },
           }
         },
         plugins: {
           legend: {
             display: false
+          },
+          title: {
+            display: true,
+            text: `Gantt Chart for ${userDetails.forename} ${userDetails.surname} (${userDetails.id})`
           }
         }
       },
@@ -935,7 +949,7 @@ async function PopulateTaskDialChartUserStats() {
     if(statusTaskArr[0] === 0 && statusTaskArr[1] ==0 && statusTaskArr[2] === 0) { // Improve readbility for when there are no tasks for a user. (Error handling)
         let userStatsPercentText = document.getElementById('userStatsPercentText');
         userStatsPercentText.innerHTML = "";
-        document.getElementById("userStTaskDialPercentageText").innerText = "No tasks have been set for userID: " + userDetails.id;
+        document.getElementById("userStTaskDialPercentageText").innerText = "No tasks have been set for " + userDetails.forename + " " + userDetails.surname + " (" + userDetails.id + ")";
     } else {
       userStatsPercentText.innerHTML = "Completed";
     }
@@ -974,6 +988,10 @@ async function PopulateTaskDialChartUserStats() {
             plugins: {
                 legend: {
                     display: false
+                },
+                title: { // Chart name - at top of graph
+                    display: true,
+                    text: `Task Distribution for ${userDetails.forename} ${userDetails.surname} (${userDetails.id})`
                 }
             }
         }

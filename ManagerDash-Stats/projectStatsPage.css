@@ -5,9 +5,8 @@
 
 #prjStContainer {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     flex-direction: column;
-    height: 100%;
     width: 100%;
     justify-content: space-between;
 }
@@ -19,16 +18,25 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    gap: 10px;
+    gap: 15px;
     flex-direction: row;
     align-items: stretch;
+    justify-content: start;
 }
 
-/* #prjStHeaderInfo {
-    flex-grow: 1;
-    background-color: var(--light-gray-bg);
-    border-radius: var(--b-radius-lg);
-} */
+#prjStHeaderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+#prjStTitle {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
 
 #prjStTaskDialContainer, #pjStHeaderInfoContainer {
     display: flex;
@@ -36,9 +44,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
     background-color: var(--light-gray-bg);
     border-radius: var(--b-radius-lg);
+}
+
+#pjStHeaderInfoContainer {
+    padding: 40px;
 }
 
 #prjStTaskDialDisplay {
@@ -48,6 +59,7 @@
 
 /* Task dial */
 #prjStTaskDialDisplay {
+    padding: 10px;
     position: relative;
     overflow-y: hidden;
 }
@@ -116,7 +128,11 @@
 
 /* Main grid */
 #prjStGrid {
-    display: grid;
+    display: flex;
+    height: 300px;
+    gap: 15px;
+    width: 100%;
+    flex-direction: row;
     grid-template-areas:
     'burnup prevweek'
     'members members';
@@ -166,7 +182,7 @@
 }
 
 .fa-stack .fa-crown {
-    color: var(--light-gray-bg);
+    color: var(--orange);
 }
 
 .fa-stack.small-stack {
@@ -177,11 +193,17 @@
 
 /* Prev week contributions */
 #prjStPrevWeekCell {
+    width: 50%;
     grid-area: prevweek;
 }
 
 
 /* Burnup chart */
 #prjStBurnupCell {
+    width: 50%;
     grid-area: burnup;
+}
+
+#projectViewStats {
+    overflow-y: auto;
 }

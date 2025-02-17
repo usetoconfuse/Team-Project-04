@@ -107,7 +107,6 @@ async function FetchProjectData() {
     projDetails.created = data[0][0].Creation_Date;
     projDetails.completed = data[0][0].Completion_Date;
     projDetails.leader = data[0][0].Project_Leader;
-    console.log(projDetails);
     return 1;
 };
 
@@ -165,7 +164,7 @@ async function PopulateMemberList() {
                         <i class="fa-solid fa-crown fa-stack-1x"></i>`;
             }
     
-            membersTable  += `<tr>
+            membersTable  += `<tr onclick="viewSelectedItem('user', ${item.User_ID})">
                                 <td${isLeaderTag}>
                                     <span class="fa-stack small-stack">${crown}</span>
                                     ${item.Forename} ${item.Surname}

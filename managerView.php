@@ -82,7 +82,7 @@ if ($_SESSION['role'] !== 'Admin') {
     <section class="nav-content">
         <nav id="navbar">
 
-        
+
 
             <div class="menu">
 
@@ -134,13 +134,6 @@ if ($_SESSION['role'] !== 'Admin') {
                         </a>
                     </li>
 
-                    <li class="nav-item" id="overview">
-                        <a href="#">
-                            <i class="fa fa-solid fa-table-columns fa-lg"></i>
-                            <div class="btn-animate"></div>
-                            <span>Not Using</span>
-                        </a>
-                    </li>
                 </ul>
 
                 <div class="bar"></div>
@@ -162,7 +155,7 @@ if ($_SESSION['role'] !== 'Admin') {
                         </div>
                     </div>
                 </div>
-               
+
 
 
                 <div class="date-item">
@@ -324,7 +317,8 @@ if ($_SESSION['role'] !== 'Admin') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
         integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.1.0/chartjs-plugin-annotation.min.js"
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.1.0/chartjs-plugin-annotation.min.js"
         integrity="sha512-8MntMizyPIYkcjoDkYqgrQOuWOZsp92zlZ9d7M2RCG0s1Zua8H215p2PdsxS7qg/4hLrHrdPsZgVZpXheHYT+Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script

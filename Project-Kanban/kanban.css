@@ -1011,9 +1011,31 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
-/* Styling for leader-project class */
 .leader-project {
     border: 2px solid #FFD700;
+    background-color: #FFF8DC; /* Light golden background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.leading-project-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; /* Space between icon and text */
+    color: #333; /* Dark gray for contrast */
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    
+    
+    backdrop-filter: blur(5px); /* Slight blur effect for a modern touch */
+}
+
+.leading-project-text i {
+    color: #222; /* Dark icon for readability */
+    font-size: 16px;
+    opacity: 0.8;
 }
 
 /*Open and Close Project Sections*/

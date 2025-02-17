@@ -61,37 +61,37 @@ function switchTab(tabName) {
   //Ensure the backbutton isn't visible
   document.querySelector('#backButton').style.display = 'none';
 
-
+  console.log(params + " from switch")
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
 
 
-// Switch from table to stats view
-// Assumes that the correct tab is already open
+// View stats for a specific project/user
 function viewSelectedItem(itemType, id) {
-    const params = new URLSearchParams(window.location.search);
-    params.set(itemType, id);
     
     var homeGridId;
     var itemStatsViewId;
     var populationFun;
 
     if (itemType == "project") {
-      params.delete("user");
+      switchTab("projects");
       homeGridId = "statsHomeGridProject";
       itemStatsViewId = "projectViewStats";
       populationFun = () => PopulateProjectStatsPage();
     }
     else if (itemType == "user") {
-      params.delete("project");
+      switchTab("users");
       homeGridId = "statsHomeGridUser";
       itemStatsViewId = "userViewStats";
       populationFun = () => PopulateUserStatsPage();
     }
     else {
       console.log(`Error: invalid item type ${itemType}`);
+      return;
     }
 
+    const params = new URLSearchParams(window.location.search);
+    params.set(itemType, id);
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 
     populationFun();

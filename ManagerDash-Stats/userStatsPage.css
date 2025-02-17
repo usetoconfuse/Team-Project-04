@@ -35,6 +35,9 @@
     grid-area: buttons;
 }
 #userStats-ganttChart{
+    display: flex;
+    align-content: center;
+    align-items: center;
     grid-area: ganttChart;
     min-width: 48%;
     height: 50dvh;
