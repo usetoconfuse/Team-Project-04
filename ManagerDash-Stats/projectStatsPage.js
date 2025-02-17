@@ -369,7 +369,6 @@ async function PopulateBurnUpChart() {
     // Sets flag to show completion line if completed
     const dueDateObj = new Date(projDetails.due);
     var projEndDate;
-    var showCompletion;
 
     if (projDetails.completed) {
 
@@ -379,8 +378,6 @@ async function PopulateBurnUpChart() {
         else {
             projEndDate = projDetails.due;
         }
-
-        showCompletion = true;
     }
 
     else {
@@ -391,12 +388,9 @@ async function PopulateBurnUpChart() {
         else {
             projEndDate = projDetails.due;
         }
-
-        showCompletion = false;
     } 
 
     console.log("end date " + projEndDate);
-    console.log("show completion " + showCompletion);
 
 
 
@@ -415,7 +409,7 @@ async function PopulateBurnUpChart() {
     // Count weeks from start for x-axis labels and annotation positions
     var weekCounter = 0;
     var dueDateWeek = -1;
-    var completionWeek = -1;
+    var endWeek = -1;
 
     // Arrays to store fetched data in correct format for chart
     const burnupLabels = new Array();
@@ -436,17 +430,26 @@ async function PopulateBurnUpChart() {
             dueDateWeek = weekCounter;
         }
 
-        if (showCompletion
-            && new Date(projDetails.completed) - new Date(item[0].week) < WEEK_MILLIS
-            && completionWeek == -1) {
-            completionWeek = weekCounter;
+        if (new Date(projDetails.completed) - new Date(item[0].week) < WEEK_MILLIS
+            && endWeek == -1) {
+            endWeek = weekCounter;
         }
 
         weekCounter++;
     });
 
+    if (projDetails.completed == null) {
+        endWeek = weekCounter - 1;
+        var endLineLabel = "Today";
+        var endLineCol = cols.getPropertyValue("--dark-purple");
+    }
+    else {
+        var endLineLabel = "Completed";
+        var endLineCol = cols.getPropertyValue("--dark-green");
+    }
+
     console.log("due week: " + dueDateWeek + " " + burnupDates[dueDateWeek]);
-    console.log("complete week: " + completionWeek + " " + burnupDates[completionWeek]);
+    console.log("end week: " + endWeek + " " + burnupDates[endWeek]);
     
     
     // DRAW CHART
@@ -599,22 +602,22 @@ async function PopulateBurnUpChart() {
 
                         completionLine: {
                             type: 'line',
-                            display: showCompletion,
-                            xMin: completionWeek,
-                            xMax: completionWeek,
+                            display: true,
+                            xMin: endWeek,
+                            xMax: endWeek,
                             yMin: 0,
                             yMax: yMaxCalc,
-                            borderColor: cols.getPropertyValue('--dark-green'),
+                            borderColor: endLineCol,
                             borderWidth: 2,
                             z: 1
                         },
 
                         completionLabel: {
                             type: 'label',
-                            display: showCompletion,
-                            content: 'Completed',
+                            display: true,
+                            content: endLineLabel,
                             position: 'center',
-                            xValue: completionWeek,
+                            xValue: endWeek,
                             yValue: yMaxCalc,
                             yAdjust: -30,
                             padding: 0,
@@ -624,7 +627,7 @@ async function PopulateBurnUpChart() {
                                 display: true,
                                 position: 'bottom',
                                 margin: 0,
-                                borderColor: cols.getPropertyValue('--dark-green')
+                                borderColor: endLineCol
                             }
                         }
                     }
