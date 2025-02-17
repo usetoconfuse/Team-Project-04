@@ -520,6 +520,7 @@ function openEditProjectModal(project, statusContainer, containerSelector) {
   //Make Input fields show current project data
   const teamLeaderEditDropdown = editProjectModal.querySelector("#team-leader");
   fetchUsers(teamLeaderEditDropdown);
+
   editProjectModal.querySelector("#task-title").value = project.Project_Title;
   editProjectModal.querySelector("#team-leader-dropdown").value =
     project.Project_Leader;
@@ -749,6 +750,34 @@ async function fetchUsers(dropdown) {
   }
 }
 
+
+//fetch project for dropdown
+// Fetch Users for Team Leader Selection
+async function fetchProjects(dropdown) {
+  try {
+    const response = await fetch("Projects/query/fetch-projects.php");
+    if (!response.ok) throw new Error("Failed to fetch projects");
+
+    const projects = await response.json();
+
+    // Clear existing options
+    dropdown.innerHTML =
+      '<option value="" selected disabled hidden>Choose</option>';
+
+    projects.forEach((project) => {
+      const option = document.createElement("option");
+      option.value = project.Project_ID;
+      option.textContent = `${project.Project_ID} - ${project.Project_Title}`;
+      dropdown.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+  }
+}
+
+
+
+
 const addTaskButton = addProjectModal.querySelector("#add-task-btn");
 const addProjectModalForm = addProjectModal.querySelector('#project-modal-form');
 // Open Add Project Modal & Fetch Users
@@ -822,7 +851,16 @@ submitAddProject.addEventListener("click", async function () {
       addTaskButton.style.display = "block";
       addProjectModalForm.style.display = "none";
       submitAddProject.style.display = "none";
+      addTaskButton.onclick = async() => {
+        addTaskModalProj.style.display = "flex";
+        addTaskModalProj.querySelector(".modal-body").reset();
 
+        const updatedProjDropdown = addTaskModalProj.querySelector('#task-project');
+        await fetchProjects(updatedProjDropdown);
+        const selectedDataList = addTaskModalProj.querySelector('#task-project :last-child');
+        addTaskModalProj.querySelector("#task-project-dropdown").value = selectedDataList.value;
+
+      }
 
 
       fetchProjectsData(
@@ -930,3 +968,147 @@ projectItems.forEach((item) => {
     openProjectContent(item.id);
   });
 });
+
+//Sawan
+
+//Add Task Modal Functionality
+const addTaskBtnProj = document.querySelector("#add-task-proj-btn");
+const addTaskModalProj = document.querySelector("#add-task-modal-proj");
+const closeAddTaskModalProj = addTaskModalProj.querySelector(".close-modal-btn");
+const empDropdown = addTaskModalProj.querySelector('#task-user');
+const projectDropdown = addTaskModalProj.querySelector('#task-project');
+fetchUsers(empDropdown);
+fetchProjects(projectDropdown);
+
+addTaskBtnProj.addEventListener("click", () => {
+  addTaskModalProj.style.display = "flex";
+  
+  
+});
+
+closeAddTaskModalProj.addEventListener("click", () => {
+  addTaskModalProj.style.display = "none";
+});
+
+//====Add Task Modal Functionality
+const confirmAddTaskProj = addTaskModalProj.querySelector('.add-task-btn')
+confirmAddTaskProj.onclick = () => {
+  //Get the values from the form
+  
+  const taskName = addTaskModalProj.querySelector('#task-title').value;
+  const taskDescription = addTaskModalProj.querySelector('#task-description').value;
+  const taskPriority = addTaskModalProj.querySelector('#priority').value;
+  const taskDueDate = addTaskModalProj.querySelector('#date-input').value;
+  const Assignee_ID = addTaskModalProj.querySelector('#task-user-dropdown').value;
+  const authorID = parseInt(userProjectsID);
+  const projectID = addTaskModalProj.querySelector('#task-project-dropdown').value;
+  const manHours = parseInt(addTaskModalProj.querySelector('#man-hours-input').value);
+  const startDate = addTaskModalProj.querySelector('#start-date-input').value;
+
+  const errorText = addTaskModalProj.querySelector('#error-adding-message');
+  console.log(errorText);
+
+  console.log(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID);
+
+  const todays_date = new Date().toISOString().split('T')[0]
+
+  console.log(addTaskModalProj.querySelector('.task-dropdown-start-date'));
+
+  //Validaiton for the form fields
+  if (!taskName || !taskDescription || !taskPriority || !taskDueDate || !Assignee_ID || !manHours || !startDate) {
+    errorText.innerText = "Please fill in all the fields";
+    errorText.style.display = 'block';
+    return
+  }
+  
+  if (manHours <= 0) {
+    errorText.innerText = 'Man Hours has to be greater than 0';
+    errorText.style.display = 'block';
+    return
+  }
+
+  if (startDate > taskDueDate) {
+    errorText.innerText = 'Start Date cannot be after the Due Date of the task';
+    errorText.style.display = 'block';
+    return 
+  }
+
+  //Check project deadline if task due date or start date is greater than project deadline
+  //Sawan
+  
+  /*
+  //Task cannot start or begin after project deadline
+  if (taskDueDate > globalProjectDeadline || startDate > globalProjectDeadline) {
+    errorText.innerText = `Task Due Date or Start Date cannot be past the project deadline: ${globalProjectDeadline}}`;
+    errorText.style.display = 'block';
+    return
+  }
+  */
+  //today's date
+  
+
+  //if task due date is lower than today's date its not possible
+  if (taskDueDate < todays_date) {
+    errorText.innerText = 'Task Due Date cannot be in the past';
+    errorText.style.display = 'block';
+    return
+  }
+
+  if (startDate < todays_date) {
+    errorText.innerText = 'Start date cannot be before today';
+    errorText.style.display = 'block';
+    return
+  }
+
+
+
+  errorText.style.display = 'none';
+  addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID)
+  addTaskModalProj.style.display = 'none';
+  //Pass in task name
+
+
+
+
+}
+
+async function addProjectTasks(taskName, taskDescription, taskPriority, taskDueDate, Assignee_ID, manHours, startDate, authorID, projectID) {
+  console.log('function being run database');
+
+  try {
+    const url = 'Project-Kanban/addTaskProject.php';
+    
+    const data = {
+      Name: taskName,
+      Description: taskDescription,
+      Status: "To Do",
+      Due_Date: taskDueDate,
+      Priority: taskPriority,
+      Author_ID: authorID,
+      Project_ID: projectID,
+      Assignee_ID: Assignee_ID,
+      Man_Hours: manHours,
+      Start_Date: startDate
+    };
+
+    console.log(data);
+
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(url, params);
+    if (!response.ok) {
+      console.log(response);
+    } else {
+      sendToast(`Task has been successfully added!`);
+      getProjectTable(globalSelectedProjectID);
+      console.log('Task has been added');
+    }
+
+  } catch (error) {
+    console.log("Error updating the task status", error);
+  }
+}

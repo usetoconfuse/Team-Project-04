@@ -30,7 +30,12 @@
                     <i class="fa fa-solid fa-sliders"></i>
                 </div>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
+                    <div class="add-task-btn black-btn" id="add-task-proj-btn">
+                        <i class="fa fa-solid fa-plus"></i>
+                        Add Task
+                    </div>
                     <a href="#" class="add-project black-btn">Add Project</a>
+
                 <?php endif; ?>
             </div>
         </div>
@@ -397,6 +402,129 @@
             <a class="cancel-active-btn" id="cancel-delete-btn"><i class="fa fa-xmark"></i>
                 Cancel
             </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal add-task-modal" id="add-task-modal-proj">
+    <div class="modal-box">
+        <!--Header-->
+        <div class="modal-header">
+            <p>Add Task</p>
+            <div class="close-modal-btn">
+                <i class="fa-solid fa-x"></i>
+            </div>
+        </div>
+
+        <div class="task-dropdown task-dropdown-project">
+            <label for="project">Project</label>
+            <div class="task-dropdown-select-options">
+                <div class="task-dropdown-project-icon task-dropdown-icon">
+                    <i class="fa fa-solid fa-folder"></i>
+                </div>
+                <input autocomplete="off" list="task-project" placeholder="Enter Project" id="task-project-dropdown">
+                <datalist name="task-project" id="task-project">
+                    <option value="1">Project 1</option>
+                </datalist>
+            </div>
+        </div>
+
+        <!--Body-->
+        <form class="modal-body">
+            <!--Title and Description-->
+
+
+            <div class="task-title-form">
+                <label for="task-title">Title</label>
+                <input type="text" id="task-title" name="task-title">
+            </div>
+            <div class="task-description-form">
+                <label for="task-description">Description</label>
+                <textarea type="text" id="task-description" name="task-description"></textarea>
+            </div>
+            <!--Dropdowns-->
+            <div class="task-dropdowns-form">
+                <!--Choose User-->
+                <div class="task-dropdown task-dropdown-user">
+                    <label for="user">Employee</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-user-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-user"></i>
+                        </div>
+                        <input autocomplete="off" list="task-user" placeholder="Enter Name" id="task-user-dropdown">
+                        <datalist name="task-user" id="task-user">
+                            <option value=41>John Little</option>
+                            <option value=41>Sandra Larkin</option>
+                            <option value=41>Nick Cage</option>
+                            <option value=41>Sally Smith</option>
+                        </datalist>
+                    </div>
+                </div>
+                <!--Choose Priority-->
+                <div class="task-dropdown task-dropdown-priority">
+                    <label for="priority">Priority</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-priority-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-exclamation"></i>
+                        </div>
+                        <select name="priority" id="priority">
+                            <option value="" selected disabled hidden>Choose Priority</option>
+                            <option value="Low">Low Priority</option>
+                            <option value="Medium">Medium Priority</option>
+                            <option value="High">High Priority</option>
+                        </select>
+                    </div>
+                </div>
+                <!--Choose Due Date-->
+                <div class="task-dropdown task-dropdown-date">
+                    <label for="date">Due Date</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-date-icon task-dropdown-icon">
+                            <i class="fa fa-regular fa-calendar"></i>
+                        </div>
+                        <input type="date" name="date" id="date-input">
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Extra Buttons for inputting man hours and startdate-->
+            <div class="extra-buttons" id="extra-buttons">
+                <div class="task-dropdown task-dropdown-start-date">
+                    <label for="start-date">Start Date</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-date-icon task-dropdown-icon">
+                            <i class="fa fa-regular fa-calendar"></i>
+                        </div>
+                        <input type="date" name="start-date" id="start-date-input">
+                    </div>
+                </div>
+
+
+                <div class="task-dropdown task-dropdown-man-hours">
+                    <label for="man-hours">Man Hours</label>
+                    <div class="task-dropdown-select-options">
+                        <div class="task-dropdown-man-hours-icon task-dropdown-icon">
+                            <i class="fa fa-solid fa-clock"></i>
+                        </div>
+                        <input type="number" name="man-hours" id="man-hours-input" min="1" step="1">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="error-message" id="error-adding-message" style="color: red; display: none;">
+                <p>Error: Something went wrong. Please try again.</p>
+            </div>
+
+
+        </form>
+        <div class="task-submit-buttons">
+            <div class="add-task-btn">
+                Add Task
+                <i class=" fa fa-arrow-right"></i>
+            </div>
         </div>
     </div>
 </div>
