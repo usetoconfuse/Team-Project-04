@@ -936,6 +936,8 @@ async function PopulateTaskDialChartUserStats() {
         let userStatsPercentText = document.getElementById('userStatsPercentText');
         userStatsPercentText.innerHTML = "";
         document.getElementById("userStTaskDialPercentageText").innerText = "No tasks have been set for userID: " + userDetails.id;
+    } else {
+      userStatsPercentText.innerHTML = "Completed";
     }
 
     // Populate chart legend text
