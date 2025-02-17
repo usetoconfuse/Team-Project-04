@@ -53,7 +53,8 @@ function switchTab(tabName) {
 
   const selectedBtn = document.getElementById(currentBtnId);
   selectedBtn.classList.add('mgrStats-activeTab'); // Set the correct button active
-
+  const pageHomeTitle = document.querySelector('#stats-title');
+  pageHomeTitle.innerHTML = `Statistics`;
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
 
@@ -61,7 +62,6 @@ function switchTab(tabName) {
 // Switch from table to stats view
 // Assumes that the correct tab is already open
 function viewSelectedItem(itemType, id) {
-
     const params = new URLSearchParams(window.location.search);
     params.set(itemType, id);
     
@@ -353,7 +353,7 @@ async function getUsersHomeData(filters={}) {
             
 
             if (data.length > 0) {
-                console.log(data);
+                // console.log(data);
                 // console.log("2: ", data[0].Task_ID);
 
                 // Build the new table to display
@@ -362,16 +362,16 @@ async function getUsersHomeData(filters={}) {
                                     <tr>
                                         <th>User ID</th>
                                         <th>Name</th>
-                                        <th>No. Stuck</th>
-                                        <th>No. Overdue</th>
-                                        <th>No. Completed</th>
-                                        <th>No. Remaining</th>
+                                        <th>Tasks Stuck</th>
+                                        <th>Tasks Overdue</th>
+                                        <th>Tasks Completed</th>
+                                        <th>Tasks Remaining</th>
                                     </tr>
                                 </thead>`
                                 userTable  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
-            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
+                    userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
                             <td>` + item.User_ID + `</td>
                             <td>` + item.Forename + ` ` + item.Surname + `</td>`;
                       if(item.count_stuck > 0) { 

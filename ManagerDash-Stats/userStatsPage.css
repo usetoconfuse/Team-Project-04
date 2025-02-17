@@ -17,22 +17,21 @@
 
 #userStatsGraphs {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 #userStats-weeklyGraph {
     grid-area: graph;
-    min-width: 300px;
+    min-width: 0;
 }
 #userStats-buttons {
     grid-area: buttons;
 }
 #userStats-ganttChart{
     grid-area: ganttChart;
-    min-width: 300px;
+    min-width: 0;
     max-width: 700px;
 }
 
@@ -193,6 +192,7 @@
 #userStTaskDialCell {
     position: relative;
     overflow-y: auto;
+    /* width: 50%; */
 }
 
 #userStTaskDialPercentage {

@@ -13,9 +13,12 @@ const userDetails = {};
 
 // Populate page when a user is selected
 async function PopulateUserStatsPage() {
+  const pageTitle = document.querySelector('#stats-title');
+  await(fetchUserDetails());
+  pageTitle.innerHTML = `Statistics for ${userDetails.forename}` + ` ${userDetails.surname}` +` (${userDetails.id})`;
 
     //Fetch full user details from ID
-    await(fetchUserDetails());
+
 
     //Fetch all tasks of a user
     await(getUserStatsTaskData());
