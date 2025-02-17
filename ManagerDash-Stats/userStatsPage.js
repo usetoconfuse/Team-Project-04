@@ -13,9 +13,13 @@ const userDetails = {};
 
 // Populate page when a user is selected
 async function PopulateUserStatsPage() {
+  const pageTitle = document.querySelector('#stats-title');
+  document.querySelector('#backButton').style.display = 'block';
+  await(fetchUserDetails());
+  pageTitle.innerHTML = `Statistics for ${userDetails.forename}` + ` ${userDetails.surname}` +` (${userDetails.id})`;
 
     //Fetch full user details from ID
-    await(fetchUserDetails());
+
 
     //Fetch all tasks of a user
     await(getUserStatsTaskData());
@@ -37,17 +41,7 @@ async function PopulateUserStatsPage() {
 };
 
 
-// Back Button
-// const backButton = document.getElementById('backButton');
-// backButton.addEventListener("click", () => {
 
-//     // const showingTab = document.getElementById(backButton.getAttribute("value"));
-//       const currentPage = document.getElementById('mgrStatsUser-grid-container');
-//       currentPage.style.display = "none";
-//         const newTab = document.getElementById("statsHomeGridUser");
-//         newTab.style.display = "block";
-
-//       })
 //Fetch user details for user object
 async function fetchUserDetails() {
     try {

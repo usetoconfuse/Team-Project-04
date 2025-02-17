@@ -54,6 +54,14 @@ function switchTab(tabName) {
   const selectedBtn = document.getElementById(currentBtnId);
   selectedBtn.classList.add('mgrStats-activeTab'); // Set the correct button active
 
+  // Ensure the title of the page is reset
+  const pageHomeTitle = document.querySelector('#stats-title');
+  pageHomeTitle.innerHTML = `Statistics`;
+
+  //Ensure the backbutton isn't visible
+  document.querySelector('#backButton').style.display = 'none';
+
+
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
 
@@ -61,7 +69,6 @@ function switchTab(tabName) {
 // Switch from table to stats view
 // Assumes that the correct tab is already open
 function viewSelectedItem(itemType, id) {
-
     const params = new URLSearchParams(window.location.search);
     params.set(itemType, id);
     
@@ -353,7 +360,7 @@ async function getUsersHomeData(filters={}) {
             
 
             if (data.length > 0) {
-                console.log(data);
+                // console.log(data);
                 // console.log("2: ", data[0].Task_ID);
 
                 // Build the new table to display
@@ -362,16 +369,16 @@ async function getUsersHomeData(filters={}) {
                                     <tr>
                                         <th>User ID</th>
                                         <th>Name</th>
-                                        <th>No. Stuck</th>
-                                        <th>No. Overdue</th>
-                                        <th>No. Completed</th>
-                                        <th>No. Remaining</th>
+                                        <th>Tasks Stuck</th>
+                                        <th>Tasks Overdue</th>
+                                        <th>Tasks Completed</th>
+                                        <th>Tasks Remaining</th>
                                     </tr>
                                 </thead>`
                                 userTable  += '<tbody>'
                 // Loop through the data and create a new element for each item
                 data.forEach(function(item) {
-            userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
+                    userTable  += `<tr onclick=viewSelectedItem("user",` + item.User_ID + `)>
                             <td>` + item.User_ID + `</td>
                             <td>` + item.Forename + ` ` + item.Surname + `</td>`;
                       if(item.count_stuck > 0) { 
@@ -433,6 +440,14 @@ async function getUsersHomeData(filters={}) {
 window.addEventListener("DOMContentLoaded", function () {
 
     // REDIRECT BASED ON URL PARAMS
+
+    //Get back button from UserStatsPage
+    // Back Button functionality when clicked in userStatsPage.php
+    const backButtonUser = document.getElementById('backButton');
+    backButtonUser.addEventListener("click", () => {
+      switchTab("users");
+    })
+
 
     const params = new URLSearchParams(window.location.search);
     let view = params.get("view");

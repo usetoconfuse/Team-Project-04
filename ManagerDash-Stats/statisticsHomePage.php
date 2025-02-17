@@ -7,11 +7,19 @@
 
     <!-- Header -->
     <div class="mgrStats-header-section">
-        <p class="mgrStats-title">Statistics</>
-        <div id="mgrStats-tabBtn">
+        <p id="stats-title" class="mgrStats-title">Statistics</p>
+        <div class="stats-title-btn-container">
+        <div id="backButton" class="all-projects-btn black-btn">
+                <i class='fa fa-solid fa-arrow-left'></i>
+                Back
+            </div>
+            <div id="mgrStats-tabBtn">
+            
             <button class="mgrStats-activeTab" id="mgrProjStats" onclick="switchTab('projects')">Project</button>
             <button id="mgrUserStats" onclick="switchTab('users')">User</button>
         </div>
+        </div>
+      
     </div>
 
 
@@ -20,7 +28,7 @@
         <!-- Project List Page -->
         <div id="statsHomeGridProject" class="statsHome-grid">
             <div id="statsHomeFiltersProj">
-                <p class="instruction-txt">Click a project for details</>
+                <p class="instruction-txt">Click a project for details</p>
 
                 <div class="stats-listing-search projStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>
@@ -46,7 +54,7 @@
 
         <!-- User List Page -->
         <div id="statsHomeGridUser" class="statsHome-grid">
-            <p class="instruction-txt">Click a user for details</>
+            <p class="instruction-txt">Click a user for details</p>
             <div id="statsHomeFiltersUser">
                 <div class="stats-listing-search userStats-search"> <!-- Filters here -->
                     <i class="fa-solid fa-search"></i>

@@ -146,10 +146,10 @@
                             <option value="Due Last">Due Last</option>
                             <option value="Most Overdue">Most Overdue</option>
                         </select>
-                        <a href="#" class="order-by-confirm black-btn">Order By</a>
+                        <a href="#" class="order-by-confirm black-btn correct-font-size">Order By</a>
                     </div>
 
-                    <div class="filter-task-btn black-btn">Filter
+                    <div class="filter-task-btn black-btn correct-font-size">Filter
                         <i class="fa fa-solid fa-sliders"></i>
                     </div>
                     <div class="filter-applied-container">
@@ -161,9 +161,9 @@
                 </div>
                 <div class="task-search-container">
 
-                    <p class="search-task-error-msg">No Tasks Found</p>
+                    <p class="search-task-error-msg" style="width: 0px; margin: 0px;">No Tasks Found</p>
 
-                    <div class="task-search">
+                    <div class="task-search dashboard-search">
                         <i class="fa fa-solid fa-search"></i>
                         <input type="text" placeholder="Search Tasks" id="searched-task">
                     </div>

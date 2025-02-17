@@ -54,13 +54,24 @@ if (!empty($date)) {
     }
 }
 
+// 0 = not stuck
+// 1 = stuck: raised to team leader
+// 2 = stuck: raised to admin
 if (!empty($stuck)) {
     switch ($stuck) {
         case 'Yes':
-            $projectTaskSQL .= " AND Tasks.Stuck = 2";
+            if ($_SESSION['user_role'] == 'Admin') {
+                $projectTaskSQL .= " AND Tasks.Stuck = 2";
+            } else {
+                $projectTaskSQL .= " AND Tasks.Stuck IN (1, 2)";
+            }
             break;
         case 'No':
-            $projectTaskSQL .= " AND Tasks.Stuck IN (0,1)";
+            if ($_SESSION['user_role'] == 'Admin') {
+                $projectTaskSQL .= " AND Tasks.Stuck IN (0, 1)";
+            } else {
+                $projectTaskSQL .= " AND Tasks.Stuck = 0";
+            }
             break;
         default:
             break;

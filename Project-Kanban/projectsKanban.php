@@ -2,6 +2,11 @@
     data-user-id="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>"
     data-role="<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>">
     <!--Project Information-->
+          <div class="leader-switch-buttons" style="display: none;">
+            <a href="#" id="active-kanban" class="kanban-item active">Kanban Board</a>
+            <a href="#" id="active-leader" class="kanban-item ">Leader Dashboard</a>
+        </div>
+    
     <section class="project-intro">
         <div class="project-txt">
             <p></p>
@@ -9,10 +14,7 @@
         </div>
 
 
-        <div class="leader-switch-buttons" style="display: none;">
-            <a href="#" id="active-kanban" class="project-item active">Kanban Board</a>
-            <a href="#" id="active-leader" class="project-item ">Leader Dashboard</a>
-        </div>
+  
 
         <!--<div class="vertical-bar"></div>
 
@@ -40,7 +42,7 @@
 
         <div class="vertical-bar"></div>-->
 
-        <div class="projects-intro-buttons">
+        <div class="projects-intro-buttons" id="proj-project-intro-buttons">
             <div class="order-by-dropdown">
                 <select>
                     <option value="None" selected>None</option>
@@ -68,7 +70,7 @@
         <div class="kanban-separator"></div>
     </section>
 
-    <div class="task-search-container">
+    <div class="task-search-container" id="proj-search-container">
         <div class="task-search">
             <i class="fa fa-solid fa-search"></i>
             <input type="text" placeholder="Search Tasks" id="searched-task">
@@ -88,7 +90,7 @@
 
 
     <!--Kanban Board-->
-    <section class="kanban-board">
+    <section class="kanban-board kanban-item-content open" id="active-kanban-content">
 
         <!--Kanban Column-->
         <div class="kanban-section">
@@ -136,8 +138,33 @@
     </section>
 
 
-    <!--Filter Posts -->
-    <div id="filter-modal" class="modal">
+     <section class="kanban-item-content" id="active-leader-content">
+        <?php include 'Project-Kanban/adminTaskManager.php'?>
+    </section>
+
+
+ 
+    <!--Report Modal-->
+    <div class="modal report-task-modal" style="display: none;">
+        <div class="modal-box report-task-modal-box">
+            <div class="modal-header">
+                <p id="report-modal-header">Report Task</p>
+                <div class="close-modal-btn">
+                    <i class="fa-solid fa-x"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="report-modal-message"></p>
+                <div class="task-submit-buttons">
+                    <a class="report-task-db black-btn"><i class="fa fa-arrow-right"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+       <!--Filter Posts -->
+    <div id="filter-modal" class="modal non-leader-modal">
         <div class="modal-box">
             <!--Header-->
             <div class="modal-header">
@@ -211,24 +238,6 @@
     </div>
 
 
-    <!--Report Modal-->
-    <div class="modal report-task-modal" style="display: none;">
-        <div class="modal-box report-task-modal-box">
-            <div class="modal-header">
-                <p id="report-modal-header">Report Task</p>
-                <div class="close-modal-btn">
-                    <i class="fa-solid fa-x"></i>
-                </div>
-            </div>
-            <div class="modal-body">
-                <p id="report-modal-message"></p>
-                <div class="task-submit-buttons">
-                    <a class="report-task-db black-btn"><i class="fa fa-arrow-right"></i></a>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="modal add-task-modal">

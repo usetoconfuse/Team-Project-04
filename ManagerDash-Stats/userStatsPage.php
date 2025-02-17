@@ -82,10 +82,6 @@
         <h2>Admin Operations</h2>
         <div id="userStats-buttons" class="mgrStatsUser-grid-item">
             <div id='userStatsFlexTitle'>
-                    <div id="backButton" class="all-projects-btn black-btn">
-                        <i class='fa fa-solid fa-arrow-left'></i>
-                        Back
-                    </div>
                 <div id="resetPassword" class='all-projects-btn black-btn'>
                     Reset Password
                 </div>
