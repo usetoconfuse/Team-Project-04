@@ -351,3 +351,11 @@ thead, tbody {
     .emp-projectKanban-bottom table {
         width: fit-content; }
 }
+
+.correct-font-size {
+    font-size: 1rem !important;
+}
+
+.dashboard-search {
+    margin: 0px !important;
+}
