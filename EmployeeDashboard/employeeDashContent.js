@@ -103,13 +103,13 @@ function populateEmpTasksTable(tableData) {
 
     let taskStuck = (task.Stuck === '1' || task.Stuck === '2') ? "Yes" : "No";
 
-    row.innerHTML = `   <td>${task.Task_ID}</td>
+    row.innerHTML = `   <td id="emp-task-id">${task.Task_ID}</td>
                             <td id="emp-task-title">${task.Name}</td>
                             <td><p class="emp-table-status emp-table-status-${task.Status.toLowerCase().replace(/\s+/g, '-')}">${task.Status}</p></td>
                             <td><p class="emp-table-priority emp-table-priority-${task.Priority.toLowerCase()}">${task.Priority}</p></td>
                             <td>${task.Due_Date}</td>
                             <td><p class="stuck-${taskStuck.toLowerCase()}">${taskStuck}</p></td>
-                            <td>${task.Project_ID}: ${task.Project_Title}</td>
+                            <td id="emp-dash-project-value">${task.Project_ID}: ${task.Project_Title}</td>
                             <td>${task.Forename} ${task.Surname}</td>`
 
     tableBody.appendChild(row);
@@ -122,15 +122,17 @@ function populateEmpTasksTable(tableData) {
 const searchBar = document.querySelector('#emp-dash-content .task-search #searched-task');
 
 searchBar.addEventListener('input', () => {
-  const searchValue = searchBar.value.toLowerCase();
+  const searchValue = searchBar.value.toLowerCase().trim();
   const allTasks = document.querySelectorAll('.emp-projectKanban-bottom tbody tr');
   let foundTasks = 0;
 
   allTasks.forEach(task => {
     const taskTitle = task.querySelector('#emp-task-title').innerHTML.toLowerCase();
+    const projectValueSearch = task.querySelector('#emp-dash-project-value').innerHTML.toLowerCase();
+    const taskIDSearch = task.querySelector('#emp-task-id').innerHTML.toLowerCase();
 
 
-    if (taskTitle.includes(searchValue)) {
+    if (taskTitle.includes(searchValue) || projectValueSearch.includes(searchValue) || taskIDSearch.includes(searchValue)) {
       foundTasks++;
       task.style.display = 'table-row';
     } else {
