@@ -58,6 +58,10 @@ function switchTab(tabName) {
   const pageHomeTitle = document.querySelector('#stats-title');
   pageHomeTitle.innerHTML = `Statistics`;
 
+  //Ensure the backbutton isn't visible
+  document.querySelector('#backButton').style.display = 'none';
+
+
   window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
 };
 
