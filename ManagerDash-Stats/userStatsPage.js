@@ -288,7 +288,7 @@ async function getUserStatsTaskData(filters={}) {
                         var stuck = "No";
                         var stuckStyles = "color:black";
                     }
-                    tasksTable  += `<tr>
+                    tasksTable  += `<tr onclick="viewSelectedItem('project', ${item.Project_ID})">
                                             <td>` + item.Task_ID + `</td>
                                             <td>` + item.Name + `</td>
                                             <td>` + item.Status + `</td>
