@@ -84,16 +84,15 @@
                 <canvas id="prjStPrevWeekChart"></canvas>
             </div>
         </div>
-        
-        <!-- Member list -->
-        <div id="prjStMembersCell" class="prjStGridCells">
+    </div>
+            <!-- Member list -->
+            <div id="prjStMembersCell" class="prjStGridCells">
             <div id="prjStMembersHeader">
             </div>
 
             <div id="prjStMembersList">
             </div>
         </div>
-    </div>
 </div>
 
 
