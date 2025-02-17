@@ -39,15 +39,15 @@ const cols = getComputedStyle(col);
 
 // Task dial chart
 const dialCtx = document.getElementById("prjStTaskDialChart").getContext("2d");
-var taskDial = new Chart();
+var taskDial;
 
 // Project prev week contribution breakdown chart
 const prevWeekCtx = document.getElementById("prjStPrevWeekChart").getContext("2d");
-var prevWeek = new Chart();
+var prevWeek;
 
 // Project total hours burnup chart
 const burnupCtx = document.getElementById("prjStBurnupChart").getContext("2d");
-var projBurnup = new Chart();
+var projBurnup;
 
 
 
