@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="ManagerDash-Stats/projectStatsPage.css" />
 
 <!-- Error message if project not found -->
- <h1 id="prjStErrorBox">Project not found</h1>
+<h1 id="prjStErrorBox">Project not found</h1>
 
 <!-- Main content -->
 <div id="prjStContainer">
@@ -84,16 +84,14 @@
                 <canvas id="prjStPrevWeekChart"></canvas>
             </div>
         </div>
-
-        <!-- Member list -->
-        <div id="prjStMembersCell" class="prjStGridCells">
-            <div id="prjStMembersHeader">
-            </div>
-
-            <div id="prjStMembersList">
-            </div>
+    </div>
+    <!-- Member list -->
+    <div id="prjStMembersCell" class="prjStGridCells">
+        <div id="prjStMembersHeader">
         </div>
-        
+
+        <div id="prjStMembersList">
+        </div>
     </div>
 </div>
 
