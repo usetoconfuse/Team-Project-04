@@ -748,6 +748,9 @@ function backToProjects () {
   currentProjectLink.classList.remove('active');
   document.querySelector('.nav-item#projects').classList.add('active');
 
+  // Switch back to kanban tab in case not leader for another project
+  switchKanbanTab('active-kanban');
+
   const navItemContents = document.querySelectorAll('.nav-item-content')
   navItemContents.forEach(item => item.classList.remove('open'))
   const currentProjectContentArea = document.querySelector('#projects-content')
