@@ -15,7 +15,7 @@
     $queries = ["SELECT COUNT(Task_ID) AS 'Tasks'
     FROM Tasks 
     WHERE Tasks.Assignee_ID = '$userID'
-    AND Tasks.Status = 'To Do'
+    AND Tasks.Status = 'Completed'
     ",
     "SELECT COUNT(Task_ID) AS 'Tasks'
     FROM Tasks 
@@ -25,12 +25,7 @@
     "SELECT COUNT(Task_ID) AS 'Tasks'
     FROM Tasks 
     WHERE Tasks.Assignee_ID = '$userID'
-    AND Tasks.Status = 'Completed'
-    ", 
-    "SELECT COUNT(Task_ID) AS 'Tasks'
-    FROM Tasks 
-    WHERE Tasks.Assignee_ID = '$userID'
-    AND Tasks.Stuck = 1
+    AND Tasks.Status = 'To Do'
     "];
 
 

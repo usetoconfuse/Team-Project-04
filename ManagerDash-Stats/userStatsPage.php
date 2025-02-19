@@ -129,10 +129,10 @@
                                             <div id="userStTaskDialLegend">
                                                 <div class="userStTaskDialLegendItem">
                                                     <div class="userStTaskDialLegendCounter">
-                                                        <i class="fa-solid fa-circle fa-2xs prjStGray"></i>
+                                                        <i class="fa-solid fa-circle fa-2xs prjStG"></i>
                                                         <h3 id="userStLegendDone"></h3>
                                                     </div>
-                                                    <p>To Do</p>
+                                                    <p>Completed</p>
                                                 </div>
 
                                                 <div class="userStTaskDialLegendItem">
@@ -145,10 +145,10 @@
 
                                                 <div class="userStTaskDialLegendItem">
                                                     <div class="userStTaskDialLegendCounter">
-                                                        <i class="fa-solid fa-circle fa-2xs  prjStG"></i>
+                                                        <i class="fa-solid fa-circle fa-2xs  prjStGray"></i>
                                                         <h3 id="userStLegendTodo"></h3>
                                                     </div>
-                                                    <p>Completed</p>
+                                                    <p>To Do</p>
                                                 </div>
                                             </div>
                                         </div>

@@ -794,7 +794,7 @@ async function PopulateTaskDialChartUserStats() {
         // console.log("Test 2: ", (data[0][0]).tasks);
 
         if (data[0][0] != null) {
-            statusTaskArr.push(parseInt(data[0][0].Tasks)); // To Do
+            statusTaskArr.push(parseInt(data[0][0].Tasks)); // Completed
             // console.log("test",data[0]);
         }
         if (data[1][0] != null) {
@@ -802,7 +802,7 @@ async function PopulateTaskDialChartUserStats() {
 
         }
         if (data[2][0] != null) {
-            statusTaskArr.push(parseInt(data[2][0].Tasks)); // Completed
+            statusTaskArr.push(parseInt(data[2][0].Tasks)); // To Do
 
         }
  
@@ -823,7 +823,7 @@ async function PopulateTaskDialChartUserStats() {
 
     // Calculate progress completion percentage
     let totalTasksUserStats = statusTaskArr[0] + statusTaskArr[1] + statusTaskArr[2];
-    let percentageUserStats = Math.round((statusTaskArr[2]*100) / totalTasksUserStats);
+    let percentageUserStats = Math.round((statusTaskArr[0] / totalTasksUserStats) * 100);
     document.getElementById("userStTaskDialPercentageText").innerText = percentageUserStats + "%";
 
     // console.log("RESULTS",statusTaskArr);
@@ -848,15 +848,15 @@ async function PopulateTaskDialChartUserStats() {
         type: 'doughnut',
 
         data: {
-            labels: ['To Do',
+            labels: ['Completed',
                 'In Progress',
-                'Completed'],
+                'To Do'],
             datasets: [{
                 data: statusTaskArr,
                 backgroundColor: [
-                    '#8e8e91',
+                    '#adda9d',
                     '#eab385',
-                    '#adda9d'
+                    '#8e8e91'
                 ]
             }],
         },
