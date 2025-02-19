@@ -18,7 +18,7 @@ async function PopulateUserStatsPage() {
   const pageTitle = document.querySelector('#stats-title');
   document.querySelector('#backButton').style.display = 'block';
   await(fetchUserDetails());
-  pageTitle.innerHTML = `Statistics for ${userDetails.forename}` + ` ${userDetails.surname}` +` (${userDetails.id})`;
+  pageTitle.innerHTML = `Statistics for ${userDetails.forename}` + ` ${userDetails.surname}` +` (ID ${userDetails.id})`;
 
     //Fetch full user details from ID
 
