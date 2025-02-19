@@ -292,6 +292,10 @@ thead, tbody {
     gap: 10px;
 }  
 
+#projectViewStats, #userViewStats {
+    padding-top: 1rem;
+}
+
 #mgrStatsUser-grid-container {
     overflow-y: auto;
 }
