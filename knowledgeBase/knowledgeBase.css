@@ -481,6 +481,10 @@
     list-style: revert;
 }
 
+.kb-markdown-textarea code, .kb-post-content code {
+    font-family: revert;
+}
+
 .kb-markdown-textarea img, .kb-post-content img {
     width: auto;
     max-height: 200px;
