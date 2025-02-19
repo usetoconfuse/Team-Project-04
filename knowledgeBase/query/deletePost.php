@@ -8,7 +8,7 @@ $postID = $conn->real_escape_string($_GET['postId']);
 
 // using data from the Post modal form add a post to the knowledge base table
 $sql = "
-DELETE FROM KnowledgeBase_Posts
+DELETE FROM Knowledgebase_Posts
 WHERE Post_ID = '$postID'
 ";
 
