@@ -292,7 +292,13 @@ async function getUsersHomeData(filters={}) {
 
 window.addEventListener("statsLoaded", () => {
 
-      //Get back button from UserStatsPage
+    // Set font for charts
+    Chart.defaults.font.family = 'Avenir Next';
+    Chart.defaults.font.size = 16;
+    Chart.defaults.color = '#000000';
+
+
+    //Get back button from UserStatsPage
     // Back Button functionality when clicked in userStatsPage.php
     const backButtonProj = document.getElementById('backButtonProj');
     backButtonProj.addEventListener("click", () => {
