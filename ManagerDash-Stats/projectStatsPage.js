@@ -373,9 +373,11 @@ async function PopulateBurnUpChart() {
     // Sets flag to show completion line if completed
     const dueDateObj = new Date(projDetails.due);
     var projEndDate;
+    var completionLineDate;
 
     if (projDetails.completed) {
 
+        completionLineDate = new Date(projDetails.completed);
         if (dueDateObj < new Date(projDetails.completed)) {
             projEndDate = projDetails.completed;
         }
@@ -386,6 +388,7 @@ async function PopulateBurnUpChart() {
 
     else {
 
+        completionLineDate = new Date();
         if (dueDateObj < Date.now()) {
             projEndDate = new Date().toISOString().substring(0, 10);
         }
@@ -434,8 +437,8 @@ async function PopulateBurnUpChart() {
             dueDateWeek = weekCounter;
         }
 
-        if (new Date(projDetails.completed) - new Date(item[0].week) < WEEK_MILLIS
-            && endWeek == -1) {
+        if (completionLineDate - new Date(item[0].week) < WEEK_MILLIS
+        && endWeek == -1) {
             endWeek = weekCounter;
         }
 
@@ -443,7 +446,6 @@ async function PopulateBurnUpChart() {
     });
 
     if (projDetails.completed == null) {
-        endWeek = weekCounter - 1;
         var endLineLabel = "Today";
         var endLineCol = cols.getPropertyValue("--dark-purple");
     }
