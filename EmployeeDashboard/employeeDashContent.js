@@ -238,12 +238,12 @@ orderEmpByAdminBtn.addEventListener('click', () => {
   const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue } : {};
 
 
-  const currentAdminFilters = getEmpCurrentFilters();
+  const currentAdminFilters = getEmpCurrentFiltersDash();
   const allAdminFilters = { ...currentAdminFilters, ...orderByParam };
 
 
   filterEmpAppliedAdminMsg.style.display = 'block';
-  filterEmpAppliedAdminMsg.innerHTML = createFiltersMsg(allAdminFilters);
+  filterEmpAppliedAdminMsg.innerHTML = createEmpFiltersMsgDashboard(allAdminFilters);
 
   let filtersLength = Object.keys(allAdminFilters).length;
   if (filtersLength > 0) {
@@ -274,7 +274,7 @@ filterEmpRemoveAdminBtn.addEventListener("click", () => {
   getEmpTaskTable(userID, {});
 });
 
-function getEmpCurrentFilters() {
+function getEmpCurrentFiltersDash() {
   console.log('Current filter running');
   const filterProjectTaskModal = document.querySelector(
     "#emp-dash-content #filter-modal"
