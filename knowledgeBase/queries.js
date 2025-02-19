@@ -231,7 +231,7 @@ const renderAllPosts = async (posts) => {
 
         if (
             // Allow editing/deletion by the author if the post is not protected...
-            (post.User_ID === user.user_id && post.Is_Protected !== "1") ||
+            (post.User_ID == user.user_id && post.Is_Protected !== "1") ||
             // ...or if the user is an admin.
             user.role === 'Admin'
         ) {
