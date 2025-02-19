@@ -487,3 +487,6 @@
 
 
 </div>
+
+
+<script src="Project-Kanban/adminKanban.js"></script>

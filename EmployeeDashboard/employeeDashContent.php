@@ -139,7 +139,7 @@
                 <div class="projects-intro-buttons">
                     <div class="order-by-dropdown">
                         <select>
-                            <option value="None" selected>None</option>
+                            <option value="None" selected>Choose</option>
                             <option value="Priority High to Low">Priority High to Low</option>
                             <option value="Priority Low to High">Priority Low to High</option>
                             <option value="Due First">Due First</option>

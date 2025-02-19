@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include '../config/db-setup.php';
 
 $projectID = isset($_GET['projectID']) ? intval($_GET['projectID']) : null;
@@ -60,14 +60,14 @@ if (!empty($date)) {
 if (!empty($stuck)) {
     switch ($stuck) {
         case 'Yes':
-            if ($_SESSION['user_role'] == 'Admin') {
+            if ($_SESSION['role'] == 'Admin') {
                 $projectTaskSQL .= " AND Tasks.Stuck = 2";
             } else {
                 $projectTaskSQL .= " AND Tasks.Stuck IN (1, 2)";
             }
             break;
         case 'No':
-            if ($_SESSION['user_role'] == 'Admin') {
+            if ($_SESSION['role'] == 'Admin') {
                 $projectTaskSQL .= " AND Tasks.Stuck IN (0, 1)";
             } else {
                 $projectTaskSQL .= " AND Tasks.Stuck = 0";
