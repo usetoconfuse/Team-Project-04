@@ -477,6 +477,7 @@
 
 .kb-markdown-textarea *, .kb-post-content * {
     padding: revert;
+    margin: revert;
 }
 
 .kb-markdown-textarea img, .kb-post-content img {
