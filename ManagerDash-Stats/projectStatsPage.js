@@ -33,6 +33,12 @@ const projDetails = {};
 const col = document.querySelector(':root');
 const cols = getComputedStyle(col);
 
+// Leader crown icon for team leader
+const leaderCrown = `<span class="fa-stack small-stack">
+                        <i class="fa-solid fa-circle fa-stack-2x"></i>
+                        <i class="fa-solid fa-crown fa-stack-1x"></i>
+                    </span>`;
+
 // CHART INSTANCE LOCATIONS
 // Need to be declared as each chart population function calls destroy()
 // which requires an existing chart instance
@@ -74,6 +80,9 @@ async function PopulateProjectStatsPage() {
         return;
     }
 
+    const pageTitle = document.querySelector('#stats-title');
+    pageTitle.innerHTML = `Statistics for ${projDetails.title}` + ` (ID ${projDetails.id})`;
+
     PopulateProjectStatsHeader();
 
     PopulateMemberList();
@@ -110,7 +119,9 @@ async function FetchProjectData() {
     projDetails.due = data[0][0].Due_Date;
     projDetails.created = data[0][0].Creation_Date;
     projDetails.completed = data[0][0].Completion_Date;
-    projDetails.leader = data[0][0].Project_Leader;
+    projDetails.ledId = data[0][0].Project_Leader;
+    projDetails.ledForename = data[0][0].Forename;
+    projDetails.ledSurname = data[0][0].Surname;
     return 1;
 };
 
@@ -118,13 +129,16 @@ async function FetchProjectData() {
 
 // Project header
 function PopulateProjectStatsHeader() {
+
+    let leaderText = `${projDetails.ledForename} ${projDetails.ledSurname} (${projDetails.ledId})`
+    let completionText = projDetails.completed ? "Complete" : "Incomplete";
+
     const header = `
-        <p id="prjStTitle">`+projDetails.title+`</p>
+        <p id="prjStLeader">Led by `+leaderCrown+leaderText+`</p>
         <p id="prjStStartDate">Started: `+projDetails.start+`</p>
         <p id="prjStDueDate">Due: `+projDetails.due+`</p>
         <p id="prjStCreationDate">Created: `+projDetails.created+`</p>
-        <p id="prjStCompletionDate">Completed: `+projDetails.completed+`</p>
-        <p id="prjStLeader">Leader: `+projDetails.leader+`</p>
+        <p id="prjStCompletionDate">`+completionText+`</p>
     `;
 
     document.getElementById("prjStHeaderInfo").innerHTML = header;
@@ -161,16 +175,14 @@ async function PopulateMemberList() {
             // Add crown icon next to project leader's name
             let isLeaderTag = "";
             let crown = "";
-            if ((item.User_ID) == projDetails.leader) {
-                isLeaderTag = ` id="prjStMembersLeaderRow"`;
-
-                crown = `<i class="fa-solid fa-circle fa-stack-2x"></i>
-                        <i class="fa-solid fa-crown fa-stack-1x"></i>`;
+            if ((item.User_ID) == projDetails.ledId) {
+                isLeaderTag = `id="prjStMembersLeaderRow"`;
+                crown = leaderCrown;
             }
     
-            membersTable  += `<tr onclick="viewSelectedItem('user', ${item.User_ID})">
-                                <td${isLeaderTag}>
-                                    <span class="fa-stack small-stack">${crown}</span>
+            membersTable  += `<tr ${isLeaderTag} onclick="viewSelectedItem('user', ${item.User_ID})">
+                                <td>
+                                    ${crown}
                                     ${item.Forename} ${item.Surname}
                                 </td>
                                 <td>${item.Email}</td>
@@ -184,6 +196,14 @@ async function PopulateMemberList() {
         // Find the container/table to display the data
         var container = document.getElementById('prjStMembersList');
         container.innerHTML = membersTable;
+
+        // Move leader row to the top
+        const leaderRow = document.getElementById('prjStMembersLeaderRow');
+        if (leaderRow) {
+            const memberTableBody = document.querySelector('#prjStMembersList table tbody');
+            const firstRow = memberTableBody.firstChild;
+            memberTableBody.insertBefore(leaderRow, firstRow);
+        }
     }
     else {
         var container = document.getElementById('prjStMembersList');

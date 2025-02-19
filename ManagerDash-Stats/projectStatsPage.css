@@ -166,6 +166,7 @@
 
 #prjStMembersList td {
     padding: 10px;
+    text-align: center;
 }
 
 #prjStMembersList tbody tr:hover {
@@ -173,8 +174,9 @@
     cursor: pointer;
 }
 
-#prjStMembersLeaderRow {
+#prjStMembersLeaderRow td:first-child {
     display: flex;
+    justify-content: center;
 }
 
 .fa-stack .fa-circle {
@@ -188,6 +190,8 @@
 .fa-stack.small-stack {
     font-size: 0.5rem;
     align-self: center;
+    display: inline-block;
+    margin-left: 0.5rem;
 }
 
 

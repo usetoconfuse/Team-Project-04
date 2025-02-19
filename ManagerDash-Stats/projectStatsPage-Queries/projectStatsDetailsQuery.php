@@ -12,11 +12,14 @@
                 Projects.Due_Date,
                 Projects.Creation_Date,
                 Projects.Completion_Date,
-                Projects.Project_Leader
+                Projects.Project_Leader,
+                Users.Forename,
+                Users.Surname
             FROM
-                Projects
+                Projects, Users
             WHERE
                 Project_ID = ?
+                AND Projects.Project_Leader = Users.User_ID
             ";
 
     $stmt = $conn->prepare($sql);
