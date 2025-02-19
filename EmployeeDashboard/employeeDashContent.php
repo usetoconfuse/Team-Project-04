@@ -155,7 +155,7 @@
                   
                 </div>
 
-                             <p class="search-task-error-msg">No Tasks Found</p>
+       
                 <div class="task-search-container">
 
 
@@ -175,6 +175,8 @@
                             <i class='fa fa-solid fa-x'></i>
                         </div>
                     </div>
+
+                    <p class="search-task-error-msg">No Tasks Found</p>
 
                      
 
