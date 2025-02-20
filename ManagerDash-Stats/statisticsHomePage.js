@@ -142,6 +142,7 @@ async function fetchProjSearch(searchParams) {
           let projectTable  = "<table id='projectStatsHomeTbl' class='userStats-tr'>"
           projectTable  += `<thead>
                                       <tr>
+                                          <th>Project ID</th>
                                           <th>Title</th>      
                                           <th>Leader</th>
                                           <th>Members</th>
@@ -160,6 +161,7 @@ async function fetchProjSearch(searchParams) {
             let overdueTextCol = item.Overdue == 'Yes' ? "stats-RedText" : "stats-GreenText";
 
             projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
+                                            <td>` + item.Project_ID + `</td>
                                             <td>` + item.Project_Title + `</td>
                                             <td>` + item.Forename + ` ` + item.Surname + `</td>
                                             <td>` + item.Members + `</td>
