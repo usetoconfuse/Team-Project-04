@@ -12,6 +12,8 @@ if ($_SESSION['role'] !== 'Admin') {
     die("Redirecting user");
 }
 
+$role = $_SESSION['role'] === 'Admin' ? 'Manager' : $_SESSION['role'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +71,7 @@ if ($_SESSION['role'] !== 'Admin') {
                 <div class="user-profile-left">
                     <div class="user-icon"><i class="fa fa-solid fa-user"></i></div>
                     <div class="user-info">
-                        <p><span><?= $_SESSION['user_name']; ?></span> | <?= $_SESSION['role']; ?></p>
+                        <p><span><?= $_SESSION['user_name']; ?></span> | <?= $role; ?></p>
                     </div>
                 </div>
 
