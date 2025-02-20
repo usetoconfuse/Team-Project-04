@@ -154,18 +154,23 @@ async function fetchProjSearch(searchParams) {
           projectTable  += '<tbody>'
           // Loop through the data and create a new element for each item
           data.forEach(function(item) {
-          projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
-                                          <td>` + item.Project_Title + `</td>
-                                          <td>` + item.Forename + ` ` + item.Surname + `</td>
-                                          <td>` + item.Members + `</td>
-                                          <td>` + item.Tasks + `</td>
-                                          <td>` + item.Due_Date + `</td>
-                                          <td>` + item.Completed + `</td>
-                                          <td>` + item.Overdue + `</td>
-                                      </tr>`
-          });     
-          projectTable  += '</tbody>'
-          projectTable  += '</table>';
+            
+            // Colour complete and overdue text
+            let completionTextCol = item.Completed == 'Yes' ? "stats-GreenText" : "stats-YellowText";
+            let overdueTextCol = item.Overdue == 'Yes' ? "stats-RedText" : "stats-GreenText";
+
+            projectTable  += `<tr onclick=viewSelectedItem("project",` + item.Project_ID + `)>
+                                            <td>` + item.Project_Title + `</td>
+                                            <td>` + item.Forename + ` ` + item.Surname + `</td>
+                                            <td>` + item.Members + `</td>
+                                            <td>` + item.Tasks + `</td>
+                                            <td>` + item.Due_Date + `</td>
+                                            <td><p class=${completionTextCol}>` + item.Completed + `</p></td>
+                                            <td><p class=${overdueTextCol}>` + item.Overdue + `</p></td>
+                                        </tr>`
+            });     
+            projectTable  += '</tbody>'
+            projectTable  += '</table>';
 
           // Find the container/table to display the data
           const container = document.getElementById('statsHomeTableProj');

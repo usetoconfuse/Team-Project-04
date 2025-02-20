@@ -11,18 +11,17 @@
 
     //$type = "Non-Technical"; // placeholder , will be fetched from button clicked
 
-    //Select the first 45 projects
    $sql = "SELECT
                 Projects.Project_ID,
                 Projects.Project_Title,
                 Projects.Project_Leader,
                 Projects.Due_Date,
-                IF (Projects.Status = 'Completed', 'Yes', 'No') AS Completed,
+                IF (ISNULL(Projects.Completion_Date), 'No', 'Yes') AS Completed,
                 CASE
-                    WHEN Projects.Status = 'Completed'
+                    WHEN !ISNULL(Projects.Completion_Date)
                     AND DATEDIFF(Projects.Due_Date, Projects.Completion_Date) >= 0
                         THEN 'No'
-                    WHEN Projects.Status != 'Completed'
+                    WHEN ISNULL(Projects.Completion_Date)
                     AND DATEDIFF(Projects.Due_Date, CURRENT_DATE) >= 0
                         THEN 'No'
                     ELSE 'Yes'

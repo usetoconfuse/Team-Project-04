@@ -42,6 +42,31 @@
     color: #9A9A9A;
 }
 
+/* Coloured text */
+.stats-GreenText {
+    background-color: #c8e6c9;
+    color: #388e3c;
+    border-radius: 5px;
+    padding: 0.2rem 0.3rem;
+    text-align: center;
+}
+
+.stats-YellowText {
+    background-color: #fff0c2;
+    color: #947c01;
+    border-radius: 5px;
+    padding: 0.2rem 0.3rem;
+    text-align: center;
+}
+
+.stats-RedText {
+    background-color: #ffcdd2;
+    color: #c62828;
+    border-radius: 5px;
+    padding: 0.2rem 0.3rem;
+    text-align: center;
+}
+
 /* search bar */
 
 

@@ -95,6 +95,8 @@
 
             <!-- Member list -->
             <div id="prjStMembersCell" class="prjStCell">
+                <h4>Tasks by Project Member | <span id="prjStUserViewPrompt">click a member for details</span></h4>
+
                 <div id="prjStMembersList">
                 </div>
             </div>

@@ -122,6 +122,7 @@ async function FetchProjectData() {
     projDetails.ledId = data[0][0].Project_Leader;
     projDetails.ledForename = data[0][0].Forename;
     projDetails.ledSurname = data[0][0].Surname;
+
     return 1;
 };
 
@@ -131,14 +132,41 @@ async function FetchProjectData() {
 function PopulateProjectStatsHeader() {
 
     let leaderText = `${projDetails.ledForename} ${projDetails.ledSurname} (${projDetails.ledId})`
-    let completionText = projDetails.completed ? "Complete" : "Incomplete";
+    let completionTextCol = projDetails.completed ? "stats-GreenText" : "stats-YellowText";
+    let completionText = projDetails.completed ? "Completed" : "Ongoing";
+    
+    let statusTextCol;
+    let statusText;
+
+    if (projDetails.completed) {
+        if (new Date(projDetails.completed) > new Date(projDetails.due)) {
+            statusTextCol = "stats-RedText";
+            statusText = "Overdue";
+        }
+        else {
+            statusTextCol = "stats-GreenText";
+            statusText = "On Schedule";
+        }
+    }
+
+    else {
+        if (new Date() > new Date(projDetails.due)) {
+            statusTextCol = "stats-RedText";
+            statusText = "Overdue";
+        }
+        else {
+            statusTextCol = "stats-YellowText";
+            statusText = "On Schedule";
+        }
+    }
 
     const header = `
-        <p id="prjStLeader">Led by `+leaderCrown+leaderText+`</p>
-        <p id="prjStStartDate">Started: `+projDetails.start+`</p>
-        <p id="prjStDueDate">Due: `+projDetails.due+`</p>
-        <p id="prjStCreationDate">Created: `+projDetails.created+`</p>
-        <p id="prjStCompletionDate">`+completionText+`</p>
+        <p id="prjStCompletion" class=${completionTextCol}><strong>`+completionText+`</strong></p>
+        <p id="prjStStatus" class=${statusTextCol}><strong>`+statusText+`</strong></p>
+        <p id="prjStLeader"><strong>Led by:</strong> `+leaderCrown+leaderText+`</p>
+        <p id="prjStStartDate"><strong>Started:</strong> `+projDetails.start+`</p>
+        <p id="prjStDueDate"><strong>Due:</strong> `+projDetails.due+`</p>
+        <p id="prjStCreationDate"><strong>Created:</strong> `+projDetails.created+`</p>
     `;
 
     document.getElementById("prjStHeader").innerHTML = header;
@@ -159,7 +187,7 @@ async function PopulateMemberList() {
     let membersTable  = "<table class='statsHome-table'>"
     membersTable  += `<thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Member</th>
                                 <th>Tasks</th>
                                 <th>Stuck</th>
                                 <th>Email</th>
@@ -177,14 +205,17 @@ async function PopulateMemberList() {
                 isLeaderTag = `id="prjStMembersLeaderRow"`;
                 crown = leaderCrown;
             }
+
+            // Highlight stuck status
+            let isStuckCol = item.Stuck == 'Yes' ? "stats-RedText" : "stats-GreenText";
     
             membersTable  += `<tr ${isLeaderTag} onclick="viewSelectedItem('user', ${item.User_ID})">
                                 <td>
-                                    ${crown}
                                     ${item.Forename} ${item.Surname}
+                                    ${crown}
                                 </td>
                                 <td>${item.Tasks}</td>
-                                <td>${item.Stuck}</td>
+                                <td><p class=${isStuckCol}>${item.Stuck}</p></td>
                                 <td>${item.Email}</td>
                             </tr>`
         });     
