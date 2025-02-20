@@ -71,14 +71,14 @@
     if ($orderBy !== 'None') {
         if (!empty($orderBy)) {
             switch ($orderBy) {
-                case 'MostStuck':
+                case 'Most Stuck Tasks':
                     $taskSQL .= " ORDER BY count_stuck DESC;";
                     break;
-                case 'MostCompleted':
+                case 'Most Completed Tasks':
                     $taskSQL .= " ORDER BY count_completed DESC;";
                     break;
                 
-                case 'MostOverdue': //Order by  Users with the Highest amount of overdue tasks
+                case 'Most Overdue Tasks': //Order by  Users with the Highest amount of overdue tasks
                     $taskSQL .= " ORDER BY count_overdue DESC;";
                     break;
                 default: 

@@ -1017,8 +1017,8 @@ window.addEventListener("statsLoaded", function () {
   
     
     //Filters
-    const filterAppliedMsg = document.querySelector('#mgrStatsUser-grid-container .filter-applied-msg');
-    const filterRemoveBtn = document.querySelector('#mgrStatsUser-grid-container .remove-filters-btn');
+    const userFilterAppliedMsg = document.querySelector('#mgrStatsUser-grid-container .filter-applied-msg');
+    const userFilterRemoveBtn = document.querySelector('#mgrStatsUser-grid-container .remove-filters-btn');
 
     const applyFilterBtn = filterUserStatsTaskModal.querySelector('#add-filter-btn');
     // console.log(applyFilterBtn);
@@ -1049,13 +1049,13 @@ window.addEventListener("statsLoaded", function () {
         filters.orderByValue = orderByValue;
       } 
 
-      filterAppliedMsg.style.display = 'block';
+      userFilterAppliedMsg.style.display = 'block';
       if (projValue ==="ALL") {
-        filterAppliedMsg.innerHTML = createFiltersMsgUser(filters);
+        userFilterAppliedMsg.innerHTML = createFiltersMsgUser(filters);
         console.log("FILTERS",createFiltersMsgUser(filters))
         console.log("NOT MSG", filters)
       } else {
-        filterAppliedMsg.innerHTML = createFiltersMsgUser(filters, projectName);
+        userFilterAppliedMsg.innerHTML = createFiltersMsgUser(filters, projectName);
         console.log("FILTERS",createFiltersMsgUser(filters))
         console.log("NOT MSG", filters)
       }
@@ -1063,9 +1063,9 @@ window.addEventListener("statsLoaded", function () {
 
       let filtersLength = Object.keys(filters).length;
       if (filtersLength > 0) {
-        filterRemoveBtn.style.display = 'flex';
+        userFilterRemoveBtn.style.display = 'flex';
       } else {
-        filterRemoveBtn.style.display = 'none';
+        userFilterRemoveBtn.style.display = 'none';
       }
 
       filterTaskModal.style.display = 'none';
@@ -1114,14 +1114,14 @@ window.addEventListener("statsLoaded", function () {
       const allFilters = { ...currentFilters, ...orderByParam};
 
 
-      filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsgUser(allFilters);
+      userFilterAppliedMsg.style.display = 'block';
+      userFilterAppliedMsg.innerHTML = createFiltersMsgUser(allFilters);
 
       let filtersLength = Object.keys(allFilters).length;
       if (filtersLength > 0) {
-        filterRemoveBtn.style.display = 'flex';
+        userFilterRemoveBtn.style.display = 'flex';
       } else {
-        filterRemoveBtn.style.display = 'none';
+        userFilterRemoveBtn.style.display = 'none';
       }
 
     //   searchBarProject.value = "";
@@ -1129,11 +1129,16 @@ window.addEventListener("statsLoaded", function () {
       getUserStatsTaskData(allFilters);
     })
 
-    filterRemoveBtn.addEventListener('click', () => {
+    userFilterRemoveBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       console.log("clicked");
-      filterAppliedMsg.innerHTML = "";
-      filterAppliedMsg.style.display = 'none';
-      filterRemoveBtn.style.display = 'none';
+      ResetUserStatsPageFilters();
+    });
+
+    function ResetUserStatsPageFilters() {
+      userFilterAppliedMsg.innerHTML = "";
+      userFilterAppliedMsg.style.display = 'none';
+      userFilterRemoveBtn.style.display = 'none';
       // searchBarProject.value = "";
       document.querySelector('#mgrStatsUser-grid-container .projects-intro-buttons .order-by-dropdown select').value = "None";
       filterUserStatsTaskModal.querySelector('.task-dropdown-priority #priority').value = "All";
@@ -1141,9 +1146,10 @@ window.addEventListener("statsLoaded", function () {
       filterUserStatsTaskModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
 
       getUserStatsTaskData({})
-    })
+    }
 
-
+    // Reset old filters
+    ResetUserStatsPageFilters();
   }
 // }
 );
@@ -1198,8 +1204,8 @@ const closeFilterTaskModal = filterTaskModal.querySelector('#filter-modal .close
 
 filterTaskBtn.addEventListener('click', () => {
     filterTaskModal.style.display = 'flex';
-    })
-    closeFilterTaskModal.addEventListener('click', () => {
-      filterTaskModal.style.display = 'none';
-    })
+})
+closeFilterTaskModal.addEventListener('click', () => {
+    filterTaskModal.style.display = 'none';
+})
   

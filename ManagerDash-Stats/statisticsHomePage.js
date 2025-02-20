@@ -293,7 +293,26 @@ async function getUsersHomeData(filters={}) {
 
 
 
+function getcurrentFiltersHome() {
+  const filterUserStatsHomeModal = document.querySelector('#userStatsHome-filterAll #filter-modal');
+  const priorityValueHome = filterUserStatsHomeModal.querySelector('.task-dropdown-priority #priority').value;
+  const dateValueHome = filterUserStatsHomeModal.querySelector('.task-dropdown-date #date-task').value;
+  const stuckValueHome = filterUserStatsHomeModal.querySelector('.task-dropdown-stuck #stuck-task').value;
+  
+  const filtersHome = {priorityValueHome, dateValueHome, stuckValueHome};
 
+  if (priorityValueHome === "All") {
+    delete filtersHome.priorityValueHome;
+  }
+  if (dateValueHome === "All") {
+    delete filtersHome.dateValueHome;
+  }
+  if (stuckValueHome === "All") {
+    delete filtersHome.stuckValueHome;
+  }
+
+  return filtersHome;
+}
 
 
 
@@ -377,7 +396,7 @@ window.addEventListener("statsLoaded", () => {
       if (stuckValueHome === "All") {
         delete filtersHome.stuckValueHome;
       }
-      const orderByValueHome = document.querySelector('.projects-intro-buttons .order-by-dropdown select').value;
+      const orderByValueHome = document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value;
       if (orderByValueHome !== "None") {
         filtersHome.orderByValueHome = orderByValueHome;
       } 
@@ -401,26 +420,7 @@ window.addEventListener("statsLoaded", () => {
 
 
 
-    function getcurrentFiltersHome() {
-        const filterUserStatsHomeModal = document.querySelector('#userStatsHome-filterAll #filter-modal');
-        const priorityValueHome = filterUserStatsHomeModal.querySelector('.task-dropdown-priority #priority').value;
-        const dateValueHome = filterUserStatsHomeModal.querySelector('.task-dropdown-date #date-task').value;
-        const stuckValueHome = filterUserStatsHomeModal.querySelector('.task-dropdown-stuck #stuck-task').value;
-        
-        const filtersHome = {priorityValueHome, dateValueHome, stuckValueHome};
-      
-        if (priorityValueHome === "All") {
-          delete filtersHome.priorityValueHome;
-        }
-        if (dateValueHome === "All") {
-          delete filtersHome.dateValueHome;
-        }
-        if (stuckValueHome === "All") {
-          delete filtersHome.stuckValueHome;
-        }
-      
-        return filtersHome;
-      }
+    
 
       
     //Order By Filters
@@ -433,12 +433,16 @@ window.addEventListener("statsLoaded", () => {
 
       const currentFiltersHome = getcurrentFiltersHome();
       const allFiltersHome = { ...currentFiltersHome, ...orderByParamHome};
+      console.log("brah557", allFiltersHome);
 
       let filtersLength = Object.keys(allFiltersHome).length;
       if (filtersLength > 0) {
         filterRemoveBtn.style.display = 'flex';
+        filterAppliedMsg.style.display = 'block';
+        filterAppliedMsg.innerHTML = createFiltersMsgStatsHome(allFiltersHome);
       } else {
         filterRemoveBtn.style.display = 'none';
+        filterAppliedMsg.style.display = 'none';
       }
 
       searchBarUserStats.value = "";
@@ -446,8 +450,13 @@ window.addEventListener("statsLoaded", () => {
       getUsersHomeData(allFiltersHome);
     })
 
-    filterRemoveBtn.addEventListener('click', () => {
+    filterRemoveBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       console.log("clicked");
+      ResetStatsHomeUserFilters();
+    });
+
+    function ResetStatsHomeUserFilters() {
       filterAppliedMsg.innerHTML = "";
       filterAppliedMsg.style.display = 'none';
       filterRemoveBtn.style.display = 'none';
@@ -457,10 +466,11 @@ window.addEventListener("statsLoaded", () => {
       filterUserStatsHomeModal.querySelector('.task-dropdown-date #date-task').value = "All";
       filterUserStatsHomeModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
 
-      getUsersHomeData({})
-    })
+      getUsersHomeData({});
+    }
 
-
+    // Reset old filters
+    ResetStatsHomeUserFilters();
   }
 );
 
@@ -472,17 +482,13 @@ function createFiltersMsgStatsHome(filters) {
   console.log("CLLED RIGHT ONE")
     let applied = [];
     if (filters.priorityValueHome && filters.priorityValueHome !== "All") {
-      applied.push(filters.priorityValueHome + " Priority");
+      applied.push("Users with Completed Tasks: " + filters.priorityValueHome);
     }
     if (filters.dateValueHome && filters.dateValueHome !== "All") {
       applied.push("Users with Overdue Tasks: " + filters.dateValueHome)
     }
     if (filters.stuckValueHome && filters.stuckValueHome !== "All") {
-      if (filters.stuckValueHome === "Yes") {
-        applied.push("Show users with Stuck Tasks");
-      } else {
-        applied.push("Show users with Non-Stuck Tasks");
-      }
+      applied.push("Users with Stuck Tasks: " + filters.stuckValueHome)
     }
     if (filters.orderByValueHome && filters.orderByValueHome !== "None") {
       applied.push("Order By " + filters.orderByValueHome)
@@ -534,14 +540,15 @@ const searchBarUserStats = document.querySelector('#searched-user');
 searchBarUserStats.addEventListener('input', ()=>{
   const searchValue = searchBarUserStats.value.toLowerCase();
 
-//   const orderByDropDownValueHome = document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value;
+  const orderByDropDownValueHome = document.querySelector('#userStatsHome-filterAll .projects-intro-buttons .order-by-dropdown select').value;
+  const orderByParamHome = orderByDropDownValueHome !== "None" ? { orderByValueHome: orderByDropDownValueHome} : {};
   const searchValueHome = searchValue !== "None" ? { searchParam: searchValue} : {};
-  console.log("brah", searchValueHome);
+  console.log("brah2", searchValueHome);
 
 
-//   const currentFiltersHome = getcurrentFiltersHome();
-  const allFiltersHome = {...searchValueHome};
-
+  const currentFiltersHome = getcurrentFiltersHome();
+  const allFiltersHome = { ...orderByParamHome, ...currentFiltersHome, ...searchValueHome};
+  console.log("brah3", allFiltersHome);
 
 
   let filtersLength = Object.keys(allFiltersHome).length;
