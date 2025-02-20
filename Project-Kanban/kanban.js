@@ -54,6 +54,10 @@ window.addEventListener("storage", function () {
     
     
 
+  }
+});
+
+
     const filterKanbanModal = document.querySelector('#proj-kanban-content .non-leader-modal')
     document.querySelector('#proj-kanban-content .projects-intro-buttons .order-by-dropdown select').value = 'None';
     filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
@@ -103,7 +107,7 @@ window.addEventListener("storage", function () {
       filterTaskModal.style.display = 'none';
       searchBarProject.value = "";
 
-      getKanbanData(userID, selectedProjectID, filters);
+      getKanbanData(userId, projectID, filters);
     })
 
     //Order By Filters
@@ -129,7 +133,7 @@ window.addEventListener("storage", function () {
 
       searchBarProject.value = "";
 
-      getKanbanData(userID, selectedProjectID, allFilters);
+      getKanbanData(userId, projectID, allFilters);
     })
 
     filterRemoveBtn.addEventListener('click', () => {
@@ -142,10 +146,8 @@ window.addEventListener("storage", function () {
       filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
       filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value = "All";
 
-      getKanbanData(userID, selectedProjectID, {})
+      getKanbanData(userId, projectID, {})
     })
-  }
-});
 
 
 function createFiltersMsg(filters) {
@@ -235,12 +237,16 @@ async function getKanbanData(userID, projectID, filters={}) {
 
     let url = `Project-Kanban/kanban-db.php?userID=${encodeURIComponent(userID)}&projectID=${encodeURIComponent(projectID)}`; 
 
+
     const filterQuery = new URLSearchParams(filters).toString();
     url += filterQuery ? `&${filterQuery}` : '';
+
+        console.log(url);
 
     const params = { 
       method: "GET",
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+       cache: 'no-store' 
     }
 
     const response = await fetch(url, params);
@@ -437,11 +443,7 @@ function generateCard(kanbanData) {
                                                   ${roleBasedReassign}
                                               </div>
 
-                                              <div class="modal-task-attachments">
-                                                  <p class="task-modal-title">Attachments</p>
-                                                  <div class="modal-task-attachments-box"></div>
-                                              </div>
-
+               
                                               
 
                                               <div class="modal-task-btns">
@@ -851,12 +853,14 @@ function switchKanbanTab(pageId) {
       document.querySelector('#proj-search-container').style.display = 'none';
       document.querySelector('#admin-kanban-content .all-projects-btn').style.display = 'none';
       document.querySelector('#admin-kanban-content .project-txt').style.display = 'none';
+      document.querySelector('#proj-kanban-content .filter-applied-container').style.display = "none";
     } else {
       document.querySelector('#proj-project-intro-buttons .order-by-dropdown').style.display = 'flex';
       document.querySelector('#proj-project-intro-buttons .filter-task-btn ').style.display = 'flex';
       document.querySelector('#proj-search-container').style.display = 'flex';
       document.querySelector('#admin-kanban-content .all-projects-btn').style.display = 'block';
       document.querySelector('#admin-kanban-content .project-txt').style.display = 'block';
+      document.querySelector('#proj-kanban-content .filter-applied-container').style.display = "flex";
     }
 
     kanbanItemContent.classList.add('open');

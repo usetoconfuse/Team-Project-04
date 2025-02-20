@@ -8,6 +8,8 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
 
 // Filter Fields
 $date = isset($_GET['dateValue']) ? $_GET['dateValue'] : null;
+$overdue = isset($_GET['overdueValue']) ? $_GET['overdueValue'] : null;
+
 
 if ($role === 'Employee') {
     $sql = "SELECT Projects.Project_ID, Projects.*, COUNT(Tasks.Task_ID) AS Task_Count 
@@ -20,11 +22,19 @@ if ($role === 'Employee') {
             AND Projects.Start_Date <= CURDATE() AND Projects.Completion_Date IS NULL";
 
     if ($status) {
-        $sql .= " AND Projects.Status = '$status'";
+        $sql .= " AND Projects.Status = 'Active'";
     }
 
     if (!empty($date)) {
         $sql .= " AND Projects.Due_Date <= '$date'";
+    }
+
+    if (!empty($overdue)) {
+        if ($overdue === "Yes") {
+            $sql .= " AND Projects.Due_Date < CURDATE()";
+        } elseif ($overdue === "No") {
+            $sql .= " AND Projects.Due_Date >= CURDATE()";
+        }
     }
 
     $sql .= " GROUP BY Projects.Project_ID";
@@ -46,6 +56,15 @@ if ($role === 'Employee') {
     if (!empty($date)) {
         $sql .= " AND Projects.Due_Date <= '$date'";
     }
+
+    if (!empty($overdue)) {
+        if ($overdue === "Yes") {
+            $sql .= " AND Projects.Due_Date < CURDATE()";
+        } elseif ($overdue === "No") {
+            $sql .= " AND Projects.Due_Date >= CURDATE()";
+        }
+    }
+
 }
 
 $result = mysqli_query($conn, $sql);

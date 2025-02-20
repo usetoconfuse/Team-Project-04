@@ -63,18 +63,28 @@ if (userRole === "Admin") {
     });
   });
 }
+
+
+
 const projectsFilterModal = document.querySelector(
   "#project-content #project-filter-modal"
 );
+
 //Filter Projects Functionality
 const filterProjectsBtn = projectsFilterModal.querySelector(".add-filter-btn");
 filterProjectsBtn.addEventListener("click", () => {
   const dateValue = projectsFilterModal.querySelector(
     ".task-dropdown-date #date-task"
   ).value;
-  const filters = { dateValue };
+  const overdueValue = projectsFilterModal.querySelector(
+  ".task-dropdown-overdue #overdue"
+).value;
+  const filters = { dateValue , status : 'Active', overdueValue};
   if (dateValue === "") {
     delete filters.dateValue;
+  }
+  if (overdueValue === "All") {
+    delete filters.overdueValue;
   }
   projectsFilterModal.style.display = "none";
   fetchProjectsData(
@@ -82,8 +92,26 @@ filterProjectsBtn.addEventListener("click", () => {
     filters,
     "#active-project-content #gridContainer"
   );
-
 });
+
+const projectsRemoveFiltersBtn = projectsFilterModal.querySelector('.remove-filter-btn');
+projectsRemoveFiltersBtn.addEventListener('click', () => {
+
+  projectsFilterModal.querySelector(
+    ".task-dropdown-overdue #overdue"
+  ).value = "";
+  projectsFilterModal.querySelector(
+  ".task-dropdown-overdue #overdue"
+).value = "All";
+  projectsFilterModal.style.display = "none";
+  document.querySelector(".search-error-msg").style.display = "none";
+  const filtersRemoved = { status : 'Active'};
+  fetchProjectsData(
+    userProjectsID,
+    filtersRemoved,
+    "#active-project-content #gridContainer"
+  );
+})
 
 // Add Project Modal Functionality
 const addProjectBtn = document.querySelector(".add-project");
@@ -948,7 +976,7 @@ const openProjectsFilterBtn = document.querySelector(
   "#project-content .project-filter-container .filter-project-btn"
 );
 
-/*
+
 openProjectsFilterBtn.addEventListener("click", () => {
   projectsFilterModal.style.display = "block";
 });
@@ -957,7 +985,7 @@ const closeProjectFilterModal = projectsFilterModal.querySelector(
 );
 closeProjectFilterModal.addEventListener("click", () => {
   projectsFilterModal.style.display = "none";
-});*/
+});
 
 //Switch Buttons for different project pages
 const projectItems = document.querySelectorAll(
