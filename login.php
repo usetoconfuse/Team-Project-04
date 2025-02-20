@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
                     <div class="register-container">
 
-                        <p>Don't have an account. <a href="#" class="signup-btn">Register here</a></p>
+                        <p>Don't have an account? <a href="#" class="signup-btn">Register here</a></p>
 
                     </div>
                 </div>
@@ -336,7 +336,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
                     <div class="register-container">
 
-                        <p>Already have an account. <a href="#" class="signup-btn" id="backtologin">Login here</a></p>
+                        <p>Already have an account? <a href="#" class="signup-btn" id="backtologin">Login here</a></p>
 
                     </div>
                 </div>

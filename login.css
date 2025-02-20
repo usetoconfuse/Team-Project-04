@@ -43,6 +43,11 @@ h1,h2,h3,h4{
     display: none;
 }
 
+.signup-btn {
+    display: inline-block;
+    margin-left: 0.3rem;
+}
+
 
 /* Left side */
 /* flex 1 to take up whole left/right section*/
@@ -55,7 +60,7 @@ h1,h2,h3,h4{
 }
 
 #left p{
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 0;
     font-family: "Avenir Next";
 }
@@ -109,11 +114,11 @@ h1,h2,h3,h4{
 
 #signIn form{
     width: 70%;
-    padding-bottom: 1rem;
+    padding-block: 1rem;
 }
 
 #signIn label{
-    font-size: 12.6px;
+    font-size: 14px;
 }
 
 #signIn label span {
@@ -128,7 +133,7 @@ h1,h2,h3,h4{
 }
 
 .password-label i {
-    font-size: 12.6px;
+    font-size: 14px;
 }
 
 
@@ -137,7 +142,7 @@ h1,h2,h3,h4{
     width: 100%;
     border-radius: 10px;
     font-family: "Avenir Next";
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 5px;
     border: 1px solid black;
     appearance: none;
@@ -225,7 +230,7 @@ h1,h2,h3,h4{
 .password-criteria-container .password-criteria-label {
     text-align: left;
     font-weight: 550;
-    font-size: 12.6px !important;
+    font-size: 14px !important;
 
 }
 
@@ -247,7 +252,7 @@ h1,h2,h3,h4{
     margin: 8px 0;
     margin-left: -10px;
     width: 20px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .password-criteria-container .password-criteria .criteria-item.valid::before {
