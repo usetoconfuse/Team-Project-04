@@ -5,63 +5,83 @@
 
 #prjStContainer {
     display: flex;
-    gap: 15px;
     flex-direction: column;
+    gap: 1rem;
     width: 100%;
-    justify-content: space-between;
+    height: 100%;
 }
 
-/* HEADER AND HEADER CONTENT */
-
-/* Main header */
-#prjStHeader {
-    display: flex;
-    flex-wrap: wrap;
+#prjStMainContentWrapper {
     width: 100%;
-    gap: 15px;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: start;
+    height: 100%;
+    overflow-y: auto;
 }
 
-#prjStHeaderInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+#prjStContentGrid {
+    display: grid;
+    grid-template-areas:
+    'dial dial burnup burnup burnup'
+    'prevweek prevweek prevweek members members';
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3fr 2fr;
+    gap: 1rem;
+    aspect-ratio: 1.8;
+}
+
+/* Containers */
+
+.prjStCell {
+    background-color: var(--light-gray-bg);
+    border-radius: var(--b-radius-lg);
+    padding: 1rem;
+}
+
+.prjStChartBox {
     height: 100%;
     width: 100%;
 }
 
-#prjStTitle {
-    font-size: 1.5rem;
-    padding-bottom: 10px;
-    font-weight: bold;
-}
 
-#prjStTaskDialContainer, #pjStHeaderInfoContainer {
+/* Project header */
+
+#prjStHeaderCell {
     display: flex;
-    padding: 10px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--light-gray-bg);
-    border-radius: var(--b-radius-lg);
+    height: 100%;
+    width: 100%;
 }
 
-#pjStHeaderInfoContainer {
-    padding: 40px;
+#prjStHeader {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+    padding-inline: 1rem;
 }
 
-#prjStTaskDialDisplay {
-    width: 300px;
+#prjStLeader {
+    display: flex;
 }
+
 
 
 /* Task dial */
+
+#prjStTaskDialCell {
+    grid-area: dial;
+}
+
 #prjStTaskDialDisplay {
-    padding: 10px;
-    position: relative;
+    height: 100%;
     overflow-y: hidden;
+}
+
+#prjStTaskDialChartBox {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 70%;
 }
 
 #prjStTaskDialPercentage {
@@ -70,22 +90,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    top: 55%;
+    top: 70%;
     left: 50%;
-    transform: translate(-50%, -55%)
-}
-
-#prjStTaskDialChartBox {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 50%;
-    margin-top: 2rem;
+    transform: translate(-50%, -70%)
 }
 
 #prjStTaskDialLegend {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100%;
     padding-top: 1rem;
 }
@@ -123,54 +135,48 @@
 }
 
 
-
-/* GRID AND GRID CONTENT */
-
-/* Main grid */
-#prjStGrid {
-    display: flex;
-    height: 300px;
-    gap: 15px;
-    width: 100%;
-    flex-direction: row;
-    grid-template-areas:
-    'burnup prevweek'
-    'members members';
-    grid-template-columns: 50%;
-    grid-template-rows: max-content;
-    gap: 1rem;
+/* Previous week contributions graph */
+#prjStPrevWeekCell {
+    grid-area: prevweek;
 }
 
-.prjStGridCells {
-    background-color: var(--light-gray-bg);
-    border-radius: var(--b-radius-lg);
-    padding: 1rem;
-}
 
-.prjStGridChartBox {
-    width: 100%;
+/* Burnup chart */
+#prjStBurnupCell {
+    grid-area: burnup;
     height: 100%;
-    padding-inline: 0.5rem;
 }
 
+#prjStBurnupChartBox {
+    height: 100%;
+    width: 100%;
+}
 
 /* Member list */
+
 #prjStMembersCell {
     grid-area: members;
 }
 
+#prjStMembersList {
+    overflow: auto;
+}
+
 #prjStMembersList table {
-    width: 80%;
     border-collapse: collapse;
 }
 
+#prjStMembersList th {
+    padding-inline: 10px;
+}
+
 #prjStMembersList td {
-    padding: 10px;
+    padding-block: 5px;
     text-align: center;
 }
 
 #prjStMembersList tbody tr:hover {
-    background-color: var(--medium-gray);
+    background-color: white;
     cursor: pointer;
 }
 
@@ -194,20 +200,17 @@
     margin-left: 0.5rem;
 }
 
+@media (max-width: 1200px) {
+    #prjStContentGrid {
+        grid-template-areas:
+        'dial members'
+        'burnup burnup'
+        'prevweek prevweek';
+        aspect-ratio: 0.8;
+    }
 
-/* Prev week contributions */
-#prjStPrevWeekCell {
-    width: 50%;
-    grid-area: prevweek;
-}
-
-
-/* Burnup chart */
-#prjStBurnupCell {
-    width: 50%;
-    grid-area: burnup;
-}
-
-#projectViewStats {
-    overflow-y: auto;
+    .prjStCell {
+        width: 80%;
+        align-self: center;
+    }
 }

@@ -141,7 +141,7 @@ function PopulateProjectStatsHeader() {
         <p id="prjStCompletionDate">`+completionText+`</p>
     `;
 
-    document.getElementById("prjStHeaderInfo").innerHTML = header;
+    document.getElementById("prjStHeader").innerHTML = header;
 }
 
 
@@ -149,8 +149,6 @@ function PopulateProjectStatsHeader() {
 //====================== MEMBER LIST ========================
 
 async function PopulateMemberList() {
-
-    document.getElementById('prjStContainer');
 
     // LIST DATA
 
@@ -162,9 +160,9 @@ async function PopulateMemberList() {
     membersTable  += `<thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Email</th>
                                 <th>Tasks</th>
                                 <th>Stuck</th>
+                                <th>Email</th>
                             </tr>
                         </thead>`
     membersTable  += '<tbody>'
@@ -185,9 +183,9 @@ async function PopulateMemberList() {
                                     ${crown}
                                     ${item.Forename} ${item.Surname}
                                 </td>
-                                <td>${item.Email}</td>
                                 <td>${item.Tasks}</td>
                                 <td>${item.Stuck}</td>
+                                <td>${item.Email}</td>
                             </tr>`
         });     
         membersTable  += '</tbody>'
@@ -278,6 +276,13 @@ async function PopulateTaskDialChart() {
             aspectRatio: 2,
     
             plugins: {
+
+                title: {
+                    display: true,
+                    align: 'start',
+                    text: `Task breakdown for ${projDetails.title}`
+                },
+
                 legend: {
                     display: false
                 }
@@ -338,6 +343,7 @@ async function PopulatePrevWeekChart() {
 
         options: {
             responsive: true,
+            maintainAspectRatio: false,
 
             font: {
                 family: 'Avenir Next'
@@ -661,6 +667,4 @@ async function PopulateBurnUpChart() {
             }
         }
     });
-
-    Chart.defaults.font.family = 'Avenir Next';
 }
