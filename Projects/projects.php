@@ -26,9 +26,9 @@
             </div>
 
             <div class="project-buttons-container">
-               <!-- <div class="filter-project-btn black-btn"> Filter
+               <div class="filter-project-btn black-btn"> Filter
                     <i class="fa fa-solid fa-sliders"></i>
-                </div>-->
+                </div>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
                     <div class="add-task-btn black-btn" id="add-task-proj-btn">
                         <i class="fa fa-solid fa-plus"></i>
@@ -41,6 +41,7 @@
         </div>
 
         <p class="search-error-msg">No Projects Found</p>
+      
         <div class="grid-container" id="gridContainer">
             <!-- Project Cards dynamically generated-->
 
@@ -109,22 +110,21 @@
                 <div class="task-dropdowns-form" id="post-dropdowns-form">
 
 
-                    <!--DropDown 1--><!--
-                    <div class="task-dropdown task-dropdown-priority">
-                        <label for="priority">Priority</label>
+                    <!--DropDown 1-->
+                    <div class="task-dropdown task-dropdown-overdue">
+                        <label for="overdue">Show Overdue</label>
                         <div class="task-dropdown-select-options">
                             <div class="task-dropdown-priority-icon task-dropdown-icon">
                                 <i class="fa fa-solid fa-star"></i>
                             </div>
-                            <select name="priority" id="priority">
+                            <select name="overdue" id="overdue">
                                 <option value="All">All</option>
-                                <option value="None">None</option>
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                
                             </select>
                         </div>
-                    </div>-->
+                    </div>
                     <!--DropDown 2-->
                     <div class="task-dropdown task-dropdown-date">
                         <label for="date">Due Date Before</label>
@@ -141,6 +141,10 @@
             <div class="task-submit-buttons">
                 <a class="add-filter-btn" id="add-filter-btn">
                     Filter Projects
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+                 <a class="remove-filter-btn" id="add-filter-btn">
+                    Reset Filters
                     <i class="fa fa-arrow-right"></i>
                 </a>
             </div>
