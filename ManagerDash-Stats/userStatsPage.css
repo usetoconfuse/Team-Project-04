@@ -152,18 +152,28 @@
 #userStats-weekHrsContainer{
     display: block;
 }
+
 #userStats-overlapContainer {
-    width: 400px;
-    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+
 
 #userStats-weekHrsContainerGraph{
     display: block;
 }
 
 
+
 #userStats-overlapContainerGraph {
-    display: none;
+    width: 100% !important;
+    height: 65% !important;
+    
 }
 
 

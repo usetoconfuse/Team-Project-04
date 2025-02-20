@@ -770,7 +770,7 @@ orderByAdminBtn.addEventListener("click", () => {
     orderByDropdownValue !== "None"
       ? { orderByValue: orderByDropdownValue }
       : {};
-
+  
   const currentAdminFilters = getCurrentFilters();
   const allAdminFilters = { ...currentAdminFilters, ...orderByParam };
 

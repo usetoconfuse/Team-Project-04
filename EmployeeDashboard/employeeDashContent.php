@@ -139,7 +139,7 @@
                 <div class="projects-intro-buttons">
                     <div class="order-by-dropdown">
                         <select>
-                            <option value="None" selected>None</option>
+                            <option value="None" selected>Choose</option>
                             <option value="Priority High to Low">Priority High to Low</option>
                             <option value="Priority Low to High">Priority Low to High</option>
                             <option value="Due First">Due First</option>
@@ -152,25 +152,37 @@
                     <div class="filter-task-btn black-btn correct-font-size">Filter
                         <i class="fa fa-solid fa-sliders"></i>
                     </div>
-                    <div class="filter-applied-container">
-                        <p class="filter-applied-msg"></p>
-                        <div class="remove-filters-btn">
-                            <i class='fa fa-solid fa-x'></i>
-                        </div>
-                    </div>
+                  
                 </div>
+
+       
                 <div class="task-search-container">
 
-                    <p class="search-task-error-msg" style="width: 0px; margin: 0px;">No Tasks Found</p>
+
 
                     <div class="task-search dashboard-search">
                         <i class="fa fa-solid fa-search"></i>
                         <input type="text" placeholder="Search Tasks" id="searched-task">
                     </div>
                 </div>
+
+       
             </div>
 
+                    <div class="filter-applied-container" style="margin-top: 10px; margin-bottom: 10px;">
+                        <p class="filter-applied-msg"></p>
+                        <div class="remove-filters-btn">
+                            <i class='fa fa-solid fa-x'></i>
+                        </div>
+                    </div>
+
+                    <p class="search-task-error-msg">No Tasks Found</p>
+
+                     
+
             <div class="emp-projectKanban-bottom">
+
+      
 
                 <table>
                     <thead>
@@ -192,6 +204,8 @@
                 </table>
 
             </div>
+
+
 
 
         </section>

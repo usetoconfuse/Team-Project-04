@@ -73,6 +73,7 @@ window.addEventListener("storage", function () {
       const stuckValue = filterKanbanModal.querySelector('.task-dropdown-stuck #stuck-task').value;
       
       const filters = {priorityValue, dateValue, stuckValue};
+      console.log(filters);
 
       if (priorityValue === "All") {
         delete filters.priorityValue;
