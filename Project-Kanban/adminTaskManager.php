@@ -112,6 +112,9 @@
                             <th>Assigned By</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] !== 'Admin')): ?>
+                            <th>Escalate</th>
+                        <?php endif; ?>
                   
                         </tr>
                     </thead>

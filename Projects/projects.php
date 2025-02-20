@@ -26,14 +26,14 @@
             </div>
 
             <div class="project-buttons-container">
-               <div class="filter-project-btn black-btn"> Filter
+               <a class="filter-project-btn black-btn"> Filter
                     <i class="fa fa-solid fa-sliders"></i>
-                </div>
+        </a>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
-                    <div class="add-task-btn black-btn" id="add-task-proj-btn">
+                    <a class="add-task-btn black-btn" id="add-task-proj-btn">
                         <i class="fa fa-solid fa-plus"></i>
                         Add Task
-                    </div>
+                </a>
                     <a href="#" class="add-project black-btn">Add Project</a>
 
                 <?php endif; ?>

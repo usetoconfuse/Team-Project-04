@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 ul {
     list-style: none;
 }
@@ -82,26 +87,30 @@ img {
 
 /* Scrollbar styling - does not affect Firefox or Internet Explorer */
 
-::-webkit-scrollbar {
-    background-color: transparent;
-    border-radius: 1rem;
-    width: 1.3rem;
-}
 
-::-webkit-scrollbar-track {
-    border-radius: 1rem;
-    background-color: #cdcdcd;
-    border: 0.4rem solid transparent;
-    background-clip: content-box;
-}
+@media (min-width: 600px) {
 
-::-webkit-scrollbar-thumb {
-    background-color: #6d6d6d;
-    border-radius: 1rem;
-    border: 0.4rem solid transparent;
-    background-clip: content-box;
-}
-
-::-webkit-scrollbar-corner {
-    display: none;
+    ::-webkit-scrollbar {
+            background-color: transparent;
+            border-radius: 1rem;
+            width: 1.3rem;
+        }
+    
+        ::-webkit-scrollbar-track {
+            border-radius: 1rem;
+            background-color: #cdcdcd;
+            border: 0.4rem solid transparent;
+            background-clip: content-box;
+        }
+    
+        ::-webkit-scrollbar-thumb {
+            background-color: #6d6d6d;
+            border-radius: 1rem;
+            border: 0.4rem solid transparent;
+            background-clip: content-box;
+        }
+    
+        ::-webkit-scrollbar-corner {
+            display: none;
+        }
 }

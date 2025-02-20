@@ -115,12 +115,6 @@ function populateAdminTasksTable(tableData) {
   const headerRow = document.querySelector(
     "#admin-kanban-content .emp-projectKanban-bottom table thead tr"
   );
-  if (!headerRow.querySelector("th.escalate-header")) {
-    const escalateTh = document.createElement("th");
-    escalateTh.textContent = "Escalate";
-    escalateTh.classList.add("escalate-header");
-    headerRow.appendChild(escalateTh);
-  }
 
   //Populate the table with the data
   tableData.forEach((task) => {

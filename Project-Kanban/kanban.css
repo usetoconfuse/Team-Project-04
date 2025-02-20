@@ -21,7 +21,7 @@
 
 .project-txt p:nth-of-type(1) {
     color:black;
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: 500;
 }
 
@@ -112,6 +112,8 @@
 .projects-intro-buttons {
     display: flex;
     gap: 0.6rem;
+    align-items: center;
+    white-space: nowrap;
 }
 
 #userStatsHome-filterAll {
@@ -265,6 +267,7 @@
 .kanban-card-top .kanban-card-priority {
     align-self: flex-start;
     margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 
@@ -569,10 +572,13 @@ select {
 
 
 
-
+.modal form input[type="text"], .modal form textarea {
+    font-size: 16px;
+}
 /*Focus states*/
 .modal  form input[type="text"]:focus, .modal form textarea:focus, .task-dropdown select:focus {
     border: 2px solid black;
+
 }
 
 .modal form input[type="file"]:focus {
@@ -825,7 +831,7 @@ select {
 
 
 /*====Responsiveness====*/
-@media  (max-width: 1280px) {
+@media  (max-width: 1450px) {
     .project-intro {
         flex-direction: column;
         align-items: flex-start;
@@ -925,6 +931,7 @@ select {
     .project-intro .kanban-separator {
         display: block;
         margin-top: 2.5rem;
+        flex-wrap: wrap;
     }
     
     .kanban-board {
@@ -933,6 +940,35 @@ select {
 
     .modal-box {
         width: 95%;
+    }
+
+    .projects-intro-buttons {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .projects-intro-buttons {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+    .kanban-card-bottom {
+        flex-direction: column-reverse;
+    }
+    .kanban-card-bottom a {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    .modal {
+        overflow-y: auto;
+        min-height: 100%;
+    }
+
+    .modal-task-info, .modal-task-btns {
+        flex-direction: column;
     }
 }
 

@@ -4,7 +4,7 @@
     <!--Project Information-->
     <section class="project-intro personal-kanban-intro">
         <div class="project-txt">
-            <p>Personal To Do</p>
+            <p>Personal Tasks</p>
             <p>Add your personal to do list items here.</p>
         </div>
 
