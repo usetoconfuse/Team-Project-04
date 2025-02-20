@@ -101,8 +101,17 @@
     overflow-y: auto;
 } */
 
+.statsHome-table-wrapper {
+    background-color: var(--light-gray-bg);
+    border-radius: 30px;
+    padding: 2rem 1rem 2rem 2rem;
+    height: 100%;
+    overflow: auto;
+}
+
 .statsHome-table {
     overflow: auto;
+    height: 100%;
     width: 100%;
     /* max-height: 38vh; */
     /* display: grid;
@@ -110,12 +119,39 @@
 }
 
 .statsHome-table table {
-    border-collapse: collapse;
-    background-color: white;
+    border-spacing: 0;
     text-align: left;
-    border-radius: 20px;
     /* min-width: 100%;  */
     width: 100%;
+}
+
+.statsHome-table tbody {
+    background-color: white;
+}
+
+.statsHome-table th {
+    background-color: white;
+    box-shadow: 0px -20px 0px 0px var(--light-gray-bg);
+    border-bottom: 1px solid black;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.statsHome-table th:first-child {
+    border-top-left-radius: 20px;
+}
+
+.statsHome-table th:last-child {
+    border-top-right-radius: 20px;
+}
+
+.statsHome-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 20px;
+}
+
+.statsHome-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 20px;
 }
 
 .stats-title-btn-container {
@@ -128,14 +164,9 @@ thead, tbody {
     white-space: nowrap;
 }
 
-
-.statsHome-table table thead {
-    border-bottom: 1px solid black;
-}
-
 /*PADDING*/
 .statsHome-table table th {
-    padding: 10px;
+    padding: 1rem 1rem;
     letter-spacing: 0.1rem;
     font-size: 0.9rem;
     font-weight: 600;
@@ -145,9 +176,6 @@ thead, tbody {
 .statsHome-table table td {
     padding: 10px;
     font-size: 0.9rem;
-}
-
-.statsHome-table tbody tr {
     border-bottom: 2px solid #F5F5F5;
 }
 

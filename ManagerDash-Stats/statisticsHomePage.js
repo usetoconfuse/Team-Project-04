@@ -139,7 +139,7 @@ async function fetchProjSearch(searchParams) {
       if (data.length > 0) {
 
           // Build the new table to display
-          let projectTable  = "<table id='projectStatsHomeTbl' class='statsHome-table userStats-tr'>"
+          let projectTable  = "<table id='projectStatsHomeTbl' class='userStats-tr'>"
           projectTable  += `<thead>
                                       <tr>
                                           <th>Title</th>      
@@ -217,7 +217,7 @@ async function getUsersHomeData(filters={}) {
                 // console.log("2: ", data[0].Task_ID);
 
                 // Build the new table to display
-                let userTable  = "<table class='statsHome-table'>"
+                let userTable  = "<table>"
                 userTable  += `<thead>
                                     <tr>
                                         <th>User ID</th>

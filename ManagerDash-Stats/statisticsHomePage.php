@@ -39,10 +39,12 @@
                 </div>
             </div>
 
-            <div class="statsHome-table" id="statsHomeTableProj">
-
-                <!--Fetch Project Table Here-->
+            <div class="statsHome-table-wrapper">
+                <div class="statsHome-table" id="statsHomeTableProj">
+                    <!--Fetch Project Table Here-->
+                </div>
             </div>
+
         </div>
 
         <!-- View Project Stats Page -->
@@ -164,8 +166,11 @@
                     <i class='fa fa-solid fa-x'></i>
                 </div>
             </div>
-            <div class="statsHome-table" id="statsHomeTableUser">
-                <!--Fetch User Table Here-->
+
+            <div class="statsHome-table-wrapper">
+                <div class="statsHome-table" id="statsHomeTableUser">
+                    <!--Fetch User Table Here-->
+                </div>
             </div>
         </div>
 

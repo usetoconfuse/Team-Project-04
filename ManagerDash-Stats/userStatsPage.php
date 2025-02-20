@@ -322,15 +322,19 @@
             <button id="userStats-type-stuck-btn" value="stuck">Stuck</button>
 
         </div> -->
-         
-        <div class="statsHome-table">
+        <div class="statsHome-table-wrapper">
+
+            <div class="statsHome-table">
 
        
 
-            <table class="userStats-tr" id="allTaskTable-userStats">
-            
-            </table>
+                <table class="userStats-tr" id="allTaskTable-userStats">
+                
+                </table>
+            </div>
+
         </div>
+        
     </div>
 
 </div>

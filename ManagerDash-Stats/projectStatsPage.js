@@ -184,7 +184,7 @@ async function PopulateMemberList() {
         `projectStatsMembersQuery.php?ID=${projDetails.id}`));
 
     // Build the new table to display
-    let membersTable  = "<table class='statsHome-table'>"
+    let membersTable  = "<table>"
     membersTable  += `<thead>
                             <tr>
                                 <th>Member</th>
