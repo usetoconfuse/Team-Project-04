@@ -550,7 +550,7 @@ async function PopulateBurnUpChart() {
                     fill: false
                 },
                 {
-                    label: "Ideal Delivery",
+                    label: "Ideal Pace",
                     data: [{x: 0, y: 0}, {x: dueDateWeek, y: burnupScope[dueDateWeek]}],
                     borderDash: [10,5],
                     borderColor: 'rgba(0,0,0,0.3)',
