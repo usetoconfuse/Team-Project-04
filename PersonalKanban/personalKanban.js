@@ -2,9 +2,9 @@
 // to get the personal kanban board
 // Send user iD to the personalTaskfetch.php data
 const userIdPersonal = document.querySelector('.kanban-content').getAttribute('data-user-id');
-window.addEventListener('personalLoaded',()=>{
+window.addEventListener('personalLoaded', () => {
     fetchPersonalData(userIdPersonal, {});
-})
+});
 
 
 
@@ -245,14 +245,14 @@ function populatePersonalTasks(tasks) {
        const currentFilters = getCurrentFilterPersonal();
        const allFilters = { ...currentFilters, ...orderByParam};
  
-       filterAppliedMsg.style.display = 'block';
-       filterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
+       personalFilterAppliedMsg.style.display = 'block';
+       personalFilterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
  
        let filtersLength = Object.keys(allFilters).length;
        if (filtersLength > 0) {
-         filterRemoveBtn.style.display = 'flex';
+         personalFilterRemoveBtn.style.display = 'flex';
        } else {
-         filterRemoveBtn.style.display = 'none';
+         personalFilterRemoveBtn.style.display = 'none';
        }
  
        searchBarPersonal.value = "";
@@ -299,14 +299,14 @@ async function deletePersonalTask(personalTaskID) {
       const currentFilters = getCurrentFilterPersonal();
       const allFilters = { ...currentFilters, ...orderByParam};
 
-      filterAppliedMsg.style.display = 'block';
-      filterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
+      personalFilterAppliedMsg.style.display = 'block';
+      personalFilterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
 
       let filtersLength = Object.keys(allFilters).length;
       if (filtersLength > 0) {
-        filterRemoveBtn.style.display = 'flex';
+        personalFilterRemoveBtn.style.display = 'flex';
       } else {
-        filterRemoveBtn.style.display = 'none';
+        personalFilterRemoveBtn.style.display = 'none';
       }
 
       searchBarPersonal.value = "";
@@ -431,21 +431,21 @@ filterTaskBtnPersonal.addEventListener('click', () => {
 
 
 
-  const filterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal')
+  const personalFilterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal')
   document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value = 'None';
-  filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
-  filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
+  personalFilterKanbanModal.querySelector('.task-dropdown-priority #priority').value = 'All';
+  personalFilterKanbanModal.querySelector('.task-dropdown-date #date-task').value = 'All';
     
 
   
 //Filters
-const filterAppliedMsg = document.querySelector('#personal-kanban-content .filter-applied-msg');
-const filterRemoveBtn = document.querySelector(' #personal-kanban-content .remove-filters-btn');
+const personalFilterAppliedMsg = document.querySelector('#personal-kanban-content .filter-applied-msg');
+const personalFilterRemoveBtn = document.querySelector(' #personal-kanban-content .remove-filters-btn');
 
-const applyFilterBtn = filterKanbanModal.querySelector('#add-filter-btn');
-applyFilterBtn.addEventListener('click', () => {
-  const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
-  const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+const personalApplyFilterBtn = personalFilterKanbanModal.querySelector('#add-filter-btn');
+personalApplyFilterBtn.addEventListener('click', () => {
+  const priorityValue = personalFilterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
+  const dateValue = personalFilterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
   
   const filters = {priorityValue,dateValue};
 
@@ -461,13 +461,13 @@ applyFilterBtn.addEventListener('click', () => {
     filters.orderByValue = orderByValue;
   } 
 
-  filterAppliedMsg.style.display = 'block';
-  filterAppliedMsg.innerHTML = createFiltersMsgPersonal(filters);
+  personalFilterAppliedMsg.style.display = 'block';
+  personalFilterAppliedMsg.innerHTML = createFiltersMsgPersonal(filters);
   let filtersLength = Object.keys(filters).length;
   if (filtersLength > 0) {
-    filterRemoveBtn.style.display = 'flex';
+    personalFilterRemoveBtn.style.display = 'flex';
   } else {
-    filterRemoveBtn.style.display = 'none';
+    personalFilterRemoveBtn.style.display = 'none';
   }
 
 
@@ -478,8 +478,8 @@ applyFilterBtn.addEventListener('click', () => {
 })
 
 //Order By Filters
-const orderByBtn = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-confirm');
-orderByBtn.addEventListener('click', () => {
+const personalOrderbyBtn = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-confirm');
+personalOrderbyBtn.addEventListener('click', () => {
   const orderByDropdownValue = document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value;
   const orderByParam = orderByDropdownValue !== "None" ? { orderByValue: orderByDropdownValue} : {};
 
@@ -488,14 +488,14 @@ orderByBtn.addEventListener('click', () => {
   const allFilters = { ...currentFilters, ...orderByParam};
 
 
-  filterAppliedMsg.style.display = 'block';
-  filterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
+  personalFilterAppliedMsg.style.display = 'block';
+  personalFilterAppliedMsg.innerHTML = createFiltersMsgPersonal(allFilters);
 
   let filtersLength = Object.keys(allFilters).length;
   if (filtersLength > 0) {
-    filterRemoveBtn.style.display = 'flex';
+    personalFilterRemoveBtn.style.display = 'flex';
   } else {
-    filterRemoveBtn.style.display = 'none';
+    personalFilterRemoveBtn.style.display = 'none';
   }
 
   searchBarPersonal.value = "";
@@ -503,14 +503,14 @@ orderByBtn.addEventListener('click', () => {
   fetchPersonalData(userIdPersonal, allFilters);
 })
 
-filterRemoveBtn.addEventListener('click', () => {
-  filterAppliedMsg.innerHTML = "";
-  filterAppliedMsg.style.display = 'none';
-  filterRemoveBtn.style.display = 'none';
+personalFilterRemoveBtn.addEventListener('click', () => {
+  personalFilterAppliedMsg.innerHTML = "";
+  personalFilterAppliedMsg.style.display = 'none';
+  personalFilterRemoveBtn.style.display = 'none';
   searchBarPersonal.value = "";
   document.querySelector('#personal-kanban-content .projects-intro-buttons .order-by-dropdown select').value = "None";
-  filterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
-  filterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
+  personalFilterKanbanModal.querySelector('.task-dropdown-priority #priority').value = "All";
+  personalFilterKanbanModal.querySelector('.task-dropdown-date #date-task').value = "All";
 
   fetchPersonalData(userIdPersonal, {});
 })
@@ -518,9 +518,9 @@ filterRemoveBtn.addEventListener('click', () => {
 
 
 function getCurrentFilterPersonal() {
-  const filterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal');
-  const priorityValue = filterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
-  const dateValue = filterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
+  const personalFilterKanbanModal = document.querySelector('#personal-kanban-content #filter-modal');
+  const priorityValue = personalFilterKanbanModal.querySelector('.task-dropdown-priority #priority').value;
+  const dateValue = personalFilterKanbanModal.querySelector('.task-dropdown-date #date-task').value;
   
   const filters = {priorityValue,dateValue};
 
