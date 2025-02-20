@@ -210,10 +210,6 @@
 
 @media (max-width: 1200px) {
 
-    #prjStMainContentWrapper {
-        overflow-y: visible;
-    }
-
     #prjStContentGrid {
         display: flex;
         flex-direction: column;
