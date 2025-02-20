@@ -560,6 +560,7 @@ async function PopulateBurnUpChart() {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
 
             font: {
                 family: 'Avenir Next'

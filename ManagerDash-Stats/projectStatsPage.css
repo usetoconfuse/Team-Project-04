@@ -209,16 +209,28 @@
 
 
 @media (max-width: 1200px) {
+
+    #prjStMainContentWrapper {
+        overflow-y: visible;
+    }
+
     #prjStContentGrid {
-        grid-template-areas:
-        'dial members'
-        'burnup burnup'
-        'prevweek prevweek';
-        aspect-ratio: 0.8;
+        display: flex;
+        flex-direction: column;
+        aspect-ratio: none;
+        width: 100%;
     }
 
     .prjStCell {
-        width: 80%;
+        width: 100%;
         align-self: center;
+    }
+
+    #prjStTaskDialCell {
+        aspect-ratio: 1.5;
+    }
+
+    #prjStBurnupCell {
+        height: 40dvh;
     }
 }
