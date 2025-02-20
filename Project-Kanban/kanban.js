@@ -851,12 +851,14 @@ function switchKanbanTab(pageId) {
       document.querySelector('#proj-search-container').style.display = 'none';
       document.querySelector('#admin-kanban-content .all-projects-btn').style.display = 'none';
       document.querySelector('#admin-kanban-content .project-txt').style.display = 'none';
+      document.querySelector('#proj-kanban-content .filter-applied-container').style.display = "none";
     } else {
       document.querySelector('#proj-project-intro-buttons .order-by-dropdown').style.display = 'flex';
       document.querySelector('#proj-project-intro-buttons .filter-task-btn ').style.display = 'flex';
       document.querySelector('#proj-search-container').style.display = 'flex';
       document.querySelector('#admin-kanban-content .all-projects-btn').style.display = 'block';
       document.querySelector('#admin-kanban-content .project-txt').style.display = 'block';
+      document.querySelector('#proj-kanban-content .filter-applied-container').style.display = "flex";
     }
 
     kanbanItemContent.classList.add('open');
