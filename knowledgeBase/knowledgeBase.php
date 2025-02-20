@@ -257,7 +257,7 @@
                                     <div class="topic-dropdown-topics" id="kb-edit-post-topic-dropdown-elements">
                                         <!-- Topics are dynamically loaded with JS -->
                                     </div>
-                                    <button id="kb-edit-post-topic-add-topic">Edit Topic</button>
+                                    <button id="kb-edit-post-topic-add-topic">Add Topic</button>
                                 </div>
                             </div>
                         </div>
