@@ -211,8 +211,8 @@ async function PopulateMemberList() {
     
             membersTable  += `<tr ${isLeaderTag} onclick="viewSelectedItem('user', ${item.User_ID})">
                                 <td>
-                                    ${item.Forename} ${item.Surname}
-                                    ${crown}
+                                    <p>${item.Forename} ${item.Surname}
+                                    ${crown}</p>
                                 </td>
                                 <td>${item.Tasks}</td>
                                 <td><p class=${isStuckCol}>${item.Stuck}</p></td>

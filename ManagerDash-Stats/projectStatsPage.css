@@ -186,7 +186,7 @@
     font-size: 0.9rem;
 }
 
-#prjStMembersLeaderRow td:first-child {
+#prjStMembersLeaderRow td:first-child p {
     display: flex;
     justify-content: left;
 }

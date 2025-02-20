@@ -101,10 +101,10 @@
     overflow-y: auto;
 } */
 
+
+/* TABLE STYLES */
+
 .statsHome-table-wrapper {
-    background-color: var(--light-gray-bg);
-    border-radius: 30px;
-    padding: 2rem 1rem 2rem 2rem;
     height: 100%;
     overflow: auto;
 }
@@ -131,7 +131,8 @@
 
 .statsHome-table th {
     background-color: white;
-    box-shadow: 0px -20px 0px 0px var(--light-gray-bg);
+    box-shadow: 0px -20px 0px 0px white;
+    border-top: 2px solid #e1e1e1;
     border-bottom: 1px solid black;
     position: sticky;
     top: 0;
@@ -140,10 +141,20 @@
 
 .statsHome-table th:first-child {
     border-top-left-radius: 20px;
+    border-left: 2px solid #e1e1e1;
 }
 
 .statsHome-table th:last-child {
     border-top-right-radius: 20px;
+    border-right: 2px solid #e1e1e1;
+}
+
+.statsHome-table tbody tr td:first-child {
+    border-left: 2px solid #e1e1e1;
+}
+
+.statsHome-table tbody tr td:last-child {
+    border-right: 2px solid #e1e1e1;
 }
 
 .statsHome-table tbody tr:last-child td:first-child {
@@ -152,6 +163,14 @@
 
 .statsHome-table tbody tr:last-child td:last-child {
     border-bottom-right-radius: 20px;
+}
+
+.statsHome-table tbody tr:last-child td {
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.statsHome-table tbody tr:not(:last-child) td {
+    border-bottom: 2px solid #F5F5F5;
 }
 
 .stats-title-btn-container {
@@ -176,7 +195,6 @@ thead, tbody {
 .statsHome-table table td {
     padding: 10px;
     font-size: 0.9rem;
-    border-bottom: 2px solid #F5F5F5;
 }
 
 .statsHome-view {
@@ -210,6 +228,7 @@ thead, tbody {
     justify-self: center;
     display: flex;
     gap: 10px;
+    padding-bottom: 12px;
 }
 
 #statsHomeTableProj {
