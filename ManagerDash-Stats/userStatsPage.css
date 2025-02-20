@@ -26,8 +26,8 @@
 
 #userStats-weeklyGraph {
     grid-area: graph;
-    min-width: 48%;    height: 50dvh;
- 
+    min-width: 48%;
+    height: 50dvh;
     background-color: #f5f5f5;
     padding: 30px;
 }
@@ -169,12 +169,6 @@
 }
 
 
-
-#userStats-overlapContainerGraph {
-    width: 100% !important;
-    height: 65% !important;
-    
-}
 
 
 /* Gantt Chart CSS */

@@ -713,6 +713,8 @@ function createGantt(dataset) {
       type: 'bar',
       data,
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         indexAxis: 'y',
         scales: {
           x: {
