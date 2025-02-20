@@ -437,11 +437,7 @@ function generateCard(kanbanData) {
                                                   ${roleBasedReassign}
                                               </div>
 
-                                              <div class="modal-task-attachments">
-                                                  <p class="task-modal-title">Attachments</p>
-                                                  <div class="modal-task-attachments-box"></div>
-                                              </div>
-
+               
                                               
 
                                               <div class="modal-task-btns">
