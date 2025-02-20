@@ -18,7 +18,7 @@
                 Projects.Due_Date,
                 IF (ISNULL(Projects.Completion_Date), 'No', 'Yes') AS Completed,
                 CASE
-                    WHEN !ISNULL(Projects.Completion_Date)
+                    WHEN NOT ISNULL(Projects.Completion_Date)
                     AND DATEDIFF(Projects.Due_Date, Projects.Completion_Date) >= 0
                         THEN 'No'
                     WHEN ISNULL(Projects.Completion_Date)

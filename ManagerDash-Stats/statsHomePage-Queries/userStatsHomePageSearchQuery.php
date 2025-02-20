@@ -25,16 +25,34 @@
                 AND Users.User_Type <> 'Admin'
             ";
 
-    if (!empty($priority)) { //COMPLETED
-        $taskSQL .= " AND Tasks.Status = 'Completed'";  
+    if (!empty($priority)) { //COMPLETED OR NOT COMPLETED
+        switch ($priority) {
+            case 'Yes':
+                $taskSQL .= " AND Tasks.Status = 'Completed'";
+                break;
+            case 'No':
+                $taskSQL .= " AND NOT Tasks.Status = 'Completed'";
+                break;
+            default:
+                break;
+        }  
     }
 
-    if (!empty($date)) { //OVERDUE
-            $taskSQL .= " AND Tasks.Due_Date < CURDATE()";
+    if (!empty($date)) { //OVERDUE OR NOT OVERDUE
+        switch ($date) {
+            case 'Yes':
+                $taskSQL .= " AND Tasks.Due_Date < CURDATE()";
+                break;
+            case 'No':
+                $taskSQL .= " AND Tasks.Due_Date >= CURDATE()";
+                break;
+            default:
+                break;
         }
+    }
     
 
-    if (!empty($stuck)) { //STUCK
+    if (!empty($stuck)) { //STUCK OR NOT STUCK
         switch ($stuck) {
             case 'Yes':
                 $taskSQL .= " AND Tasks.Stuck IN (1,2)"; //Stuck reported to an Admin/Leader
