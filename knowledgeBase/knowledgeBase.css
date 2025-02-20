@@ -521,3 +521,10 @@
         padding: 10px;
     }
 }
+
+@media (max-width: 500px) {
+.kb-sidebar {
+        margin-top: 60dvh;
+       
+    }
+}
