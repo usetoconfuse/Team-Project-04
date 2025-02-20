@@ -101,3 +101,7 @@ img {
     border: 0.4rem solid transparent;
     background-clip: content-box;
 }
+
+::-webkit-scrollbar-corner {
+    display: none;
+}
