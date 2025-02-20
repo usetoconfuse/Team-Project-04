@@ -275,7 +275,7 @@ const renderAllPosts = async (posts) => {
         </div>
         <div class="kb-post-divider"></div>
         <div class="kb-post-content kb-post-content-shortened">${marked.parse(post.Description)}</div>
-        <div class="kb-flex-row kb-post-buttons">
+        <div class="kb-flex-row kb-post-buttons kb-flex-wrap">
           <button class="read-post-btn black-btn">Read Post</button>
           ${currentUserHtml}
         </div>
