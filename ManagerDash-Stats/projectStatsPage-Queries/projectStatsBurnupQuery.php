@@ -19,7 +19,7 @@
                 ? AS week,
                 SUM(CASE
                         WHEN Tasks.Project_ID = ?
-                        AND DATEDIFF(?, Tasks.Start_Date) >= 0
+                        AND DATEDIFF(?, Tasks.Completion_Date) >= 0
                         AND Tasks.Status = 'Completed'
                             THEN Tasks.Man_Hours
                         ELSE 0
