@@ -368,6 +368,7 @@ function generateCard(kanbanData) {
       roleBasedBtns += `
                             <div class="move-task-dropdown">
                               <select>
+                              <option value="" selected disabled hidden>Choose</option>
                                 <option value="kanban-to-do">To Do</option>
                                 <option value="kanban-in-progress">In Progress</option>
                                 <option value="kanban-completed">Completed</option>

@@ -28,6 +28,7 @@
 
 .project-txt p:nth-of-type(2) {
     color: #9A9A9A;
+    font-size: 17px;
 }
 
 .project-stats {
